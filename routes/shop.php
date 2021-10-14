@@ -69,8 +69,26 @@ Route::get('/baesongji', [
     'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_baesongji',
 ]);
 
+//배송지 등록 입력
+Route::get('/baesongji_process', [
+    'as' => 'ajax_baesongji_regi',
+    'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_baesongji_register',
+]);
+
+//배송지 등록 저장
+Route::post('/baesongji_save', [
+    'as' => 'ajax_baesongji_save',
+    'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_baesongji_save',
+]);
+
 //배송지 수정
 Route::post('/baesongji_process', [
     'as' => 'ajax_baesongji_modi',
     'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_baesongji_modify',
+]);
+
+//배송지 삭제
+Route::post('/baesongji_del', [
+    'as' => 'ajax_baesongji_del',
+    'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_baesongji_delete',
 ]);

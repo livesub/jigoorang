@@ -193,7 +193,7 @@
     <tr>
         <td>
             <table border=1>
-                <!-- 주문하시는 분 입력  -->
+                <!-- 주문하시는 분 입력
                 <tr>
                     <td><h2>주문하시는 분</h2></td>
                 </tr>
@@ -239,7 +239,7 @@
                         <input type="hidden" name="od_addr_jibeon" id="od_addr_jibeon" value="{{ $user_addr_jibeon }}">
                     </td>
                 </tr>
-                <!-- 주문하시는 분 입력 끝 -->
+                주문하시는 분 입력 끝 -->
 
                 <!-- 받으시는 분 입력 시작  -->
                 <tr>
@@ -261,42 +261,44 @@
                     <th scope="row"><label for="ad_subject">배송지명</label></th>
                     <td>
                         <input type="text" name="ad_subject" id="ad_subject" class="frm_input" maxlength="20">
+                        <!--
                         <input type="checkbox" name="ad_default" id="ad_default" value="1">
                         <label for="ad_default">기본배송지로 설정</label>
+                        -->
                     </td>
                 </tr>
                 @endif
 
                 <tr>
                     <th scope="row"><label for="od_b_name">이름<strong class="sound_only"> 필수</strong></label></th>
-                    <td><input type="text" name="od_b_name" id="od_b_name" required class="frm_input required" maxlength="20"></td>
+                    <td><input type="text" name="od_b_name" id="od_b_name" value="{{ $user_name }}" required class="frm_input required" maxlength="20"></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="od_b_tel">전화번호<strong class="sound_only"> 필수</strong></label></th>
-                    <td><input type="text" name="od_b_tel" id="od_b_tel" required class="frm_input required" maxlength="20"></td>
+                    <td><input type="text" name="od_b_tel" id="od_b_tel" value="{{ $user_tel }}" required class="frm_input required" maxlength="20"></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="od_b_hp">핸드폰</label></th>
-                    <td><input type="text" name="od_b_hp" id="od_b_hp" class="frm_input" maxlength="20"></td>
+                    <td><input type="text" name="od_b_hp" value="{{ $user_phone }}" id="od_b_hp" class="frm_input" maxlength="20"></td>
                 </tr>
                 <tr>
                     <th scope="row">주소</th>
                     <td id="sod_frm_addr">
                         <label for="od_b_zip" class="sound_only">우편번호<strong class="sound_only"> 필수</strong></label>
-                        <input type="text" name="od_b_zip" id="od_b_zip" required class="frm_input required" size="8" maxlength="6" placeholder="우편번호">
+                        <input type="text" name="od_b_zip" id="od_b_zip" value="{{ $user_zip }}" required class="frm_input required" size="8" maxlength="6" placeholder="우편번호">
                         <button type="button" class="btn_address" onclick="win_zip('wrap_b','od_b_zip', 'od_b_addr1', 'od_b_addr2', 'od_b_addr3', 'od_b_addr_jibeon', 'btnFoldWrap_b');">주소 검색</button>
 <div id="wrap_b" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
     <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap_b" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" alt="접기 버튼">
 </div>
                         <br>
-                        <input type="text" name="od_b_addr1" id="od_b_addr1" required class="frm_input frm_address required" size="60" placeholder="기본주소">
+                        <input type="text" name="od_b_addr1" id="od_b_addr1" value="{{ $user_addr1 }}" required class="frm_input frm_address required" size="60" placeholder="기본주소">
                         <label for="od_b_addr1" class="sound_only">기본주소<strong> 필수</strong></label><br>
-                        <input type="text" name="od_b_addr2" id="od_b_addr2" class="frm_input frm_address" size="60" placeholder="상세주소">
+                        <input type="text" name="od_b_addr2" id="od_b_addr2" value="{{ $user_addr2 }}" class="frm_input frm_address" size="60" placeholder="상세주소">
                         <label for="od_b_addr2" class="sound_only">상세주소</label>
                         <br>
-                        <input type="text" name="od_b_addr3" id="od_b_addr3" readonly="readonly" class="frm_input frm_address" size="60" placeholder="참고항목">
+                        <input type="text" name="od_b_addr3" id="od_b_addr3" value="{{ $user_addr3 }}" readonly="readonly" class="frm_input frm_address" size="60" placeholder="참고항목">
                         <label for="od_b_addr3" class="sound_only">참고항목</label><br>
-                        <input type="hidden" name="od_b_addr_jibeon" value="">
+                        <input type="hidden" name="od_b_addr_jibeon" id="od_b_addr_jibeon" value="">
                     </td>
                 </tr>
                 <tr>

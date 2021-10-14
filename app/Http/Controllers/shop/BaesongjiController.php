@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;    //인증
+use App\Models\baesongjis;    //배송지 모델 정의
 
 class BaesongjiController extends Controller
 {
@@ -58,7 +59,7 @@ class BaesongjiController extends Controller
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
         $chk        = $request->input('chk');
-        $id         = $request->input('id');
+        $id_ori       = $request->input('id_ori');
         $ad_subject = $request->input('ad_subject_ori');
         $ad_default = $request->input('ad_default_ori');
 
@@ -67,17 +68,25 @@ class BaesongjiController extends Controller
             exit;
         }
 
-        for($i=0; $i<count($chk); $i++)
+        $baesong_cnt = DB::table('baesongjis')->where('user_id',Auth::user()->user_id)->count();
+
+        $id_val = '';
+        $ad_subject_val = '';
+        for($i = 0; $i < $baesong_cnt; $i++)
         {
             $k = isset($chk[$i]) ? (int)$chk[$i] : 0;
-            $id = isset($id[$k]) ? (int)$id[$k] : 0;
-            $ad_subject = isset($ad_subject[$k]) ? $ad_subject[$k] : '';
-
-            //if(!empty($ad_default) && $id === $ad_default) {  //$id === $ad_default 이부분 처리 해야함
-            if(!empty($ad_default)) {
-                $update_result = DB::table('baesongjis')->where([['id', $id], ['user_id',Auth::user()->user_id]])->limit(1)->update(['ad_subject' => $ad_subject, 'ad_default' => 1]);
-            }else{
-                $update_result = DB::table('baesongjis')->where([['id', $id], ['user_id',Auth::user()->user_id]])->limit(1)->update(['ad_subject' => $ad_subject]);
+            if($k == 1){
+                $id_val = $id_ori[$i];
+                $ad_subject_val = $ad_subject[$i];
+/*
+                //if(!empty($ad_default) && $id === $ad_default) {  //$id === $ad_default 이부분 처리 해야함
+                if(!empty($ad_default)) {
+                    $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->limit(1)->update(['ad_subject' => $ad_subject_val, 'ad_default' => 1]);
+                }else{
+                    $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->limit(1)->update(['ad_subject' => $ad_subject_val]);
+                }
+*/
+                $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->limit(1)->update(['ad_subject' => $ad_subject_val]);
             }
         }
 
@@ -85,69 +94,62 @@ class BaesongjiController extends Controller
         exit;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function ajax_baesongji_register(Request $request)
     {
-        //
+        $CustomUtils = new CustomUtils;
+        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
+
+        $view = view('shop.ajax_baesongji_regi',[
+        ]);
+
+        return $view;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function ajax_baesongji_save(Request $request)
     {
-        //
+        $CustomUtils = new CustomUtils;
+        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
+
+        $user_id            = Auth::user()->user_id;
+        $ad_c_subject       = $request->input('ad_c_subject');
+        $od_c_name          = $request->input('od_c_name');
+        $od_c_zip           = $request->input('od_c_zip');
+        $od_c_addr1         = $request->input('od_c_addr1');
+        $od_c_addr2         = $request->input('od_c_addr2');
+        $od_c_addr3         = $request->input('od_c_addr3');
+        $od_c_addr_jibeon   = $request->input('od_c_addr_jibeon');
+        $od_c_tel           = $request->input('od_c_tel');
+        $od_c_hp            = $request->input('od_c_hp');
+
+        $create_result = baesongjis::create([
+            'user_id'       => $user_id,
+            'ad_subject'    => addslashes($ad_c_subject),
+            'ad_name'       => addslashes($od_c_name),
+            'ad_tel'        => addslashes($od_c_tel),
+            'ad_hp'         => $od_c_hp,
+            'ad_zip1'       => $od_c_zip,
+            'ad_addr1'      => addslashes($od_c_addr1),
+            'ad_addr2'      => addslashes($od_c_addr2),
+            'ad_addr3'      => addslashes($od_c_addr3),
+            'ad_jibeon'     => $od_c_addr_jibeon,
+        ])->exists();
+
+        echo "ok";
+        exit;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    public function ajax_baesongji_delete(Request $request)
     {
-        //
+        $CustomUtils = new CustomUtils;
+        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
+
+        $id         = $request->input('num');
+        $user_id    = Auth::user()->user_id;
+
+        DB::table('baesongjis')->where([['id', $id],['user_id',$user_id]])->delete();   //row 삭제(본문)
+
+        echo "ok";
+        exit;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
