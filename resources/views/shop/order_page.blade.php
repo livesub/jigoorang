@@ -344,8 +344,6 @@
 
 <script>
     $("input[name=ad_sel_addr]").on("click", function() {
-//        var addr = $("#addr"+num).val().split(String.fromCharCode(30));
-//        alert(addr);
         $("#od_b_name").val($("#od_name").val());
         $("#od_b_tel").val($("#od_tel").val());
         $("#od_b_hp").val($("#od_hp").val());
@@ -355,49 +353,6 @@
         $("#od_b_addr3").val($("#od_addr3").val());
         $("#od_b_addr_jibeon").val($("#od_addr_jibeon").val());
         $("#ad_subject").val($("#ad_subject").val());
-/*
-        $("#od_b_name").val(addr[0]);
-        $("#od_b_tel").val(addr[1]);
-        $("#od_b_hp").val(addr[2]);
-        $("#od_b_zip").val(addr[3]);
-        $("#od_b_addr1").val(addr[4]);
-        $("#od_b_addr2").val(addr[5]);
-        $("#od_b_addr3").val(addr[6]);
-        $("#od_b_addr_jibeon").val(addr[7]);
-        $("#ad_subject").val(addr[8]);
-
-        var addr = $(this).val().split(String.fromCharCode(30));
-
-        if (addr[0] == "same") {
-            gumae2baesong();
-        } else {
-            if(addr[0] == "new") {
-                for(i=0; i<10; i++) {
-                    addr[i] = "";
-                }
-            }
-
-            var f = document.forderform;
-            f.od_b_name.value        = addr[0];
-            f.od_b_tel.value         = addr[1];
-            f.od_b_hp.value          = addr[2];
-            f.od_b_zip.value         = addr[3] + addr[4];
-            f.od_b_addr1.value       = addr[5];
-            f.od_b_addr2.value       = addr[6];
-            f.od_b_addr3.value       = addr[7];
-            f.od_b_addr_jibeon.value = addr[8];
-            f.ad_subject.value       = addr[9];
-
-            var zip1 = addr[3].replace(/[^0-9]/g, "");
-            var zip2 = addr[4].replace(/[^0-9]/g, "");
-
-            var code = String(zip1) + String(zip2);
-
-            if(zipcode != code) {
-                calculate_sendcost(code);
-            }
-        }
-*/
     });
 </script>
 
