@@ -248,7 +248,7 @@
             <span id="item_point_unit">점</span>
         </td>
     </tr>
-
+<!--
     <tr>
         <td>추가옵션상품 포인트</td>
         <td>상품의 추가옵션상품 구매에 일괄적으로 지급하는 포인트입니다. <br>0으로 설정하시면 구매포인트를 지급하지 않습니다.<br>
@@ -257,7 +257,7 @@
             <input type="text" name="item_supply_point" value="0" id="item_supply_point" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 점
         </td>
     </tr>
-
+-->
     <tr>
         <td>상품품절</td>
         <td>잠시 판매를 중단하거나 재고가 없을 경우에 체크해 놓으면 품절상품으로 표시됩니다.<br>
@@ -295,14 +295,16 @@
                                     <input type="text" name="opt2" value="" id="opt2" size="50">
                                 </td>
                             </tr>
+<!--
                             <tr>
                                 <td>옵션3
                                     <input type="text" name="opt3_subject" value="" id="opt3_subject" size="15">
                                 </td>
-                                <td>옵션1 항목
+                                <td>옵션3 항목
                                     <input type="text" name="opt3" value="" id="opt3" size="50">
                                 </td>
                             </tr>
+-->
                             <tr>
                                 <td colspan="2"><button type="button" id="option_table_create">옵션목록생성</button></td>
                             </tr>
@@ -317,7 +319,7 @@
             </table>
         </td>
     </tr>
-
+<!--
     <tr>
         <td>상품추가옵션</td>
         <td>옵션항목은 콤마(,) 로 구분하여 여러개를 입력할 수 있습니다. <br>스마트폰을 예로 들어 [추가1 : 추가구성상품 , 추가1 항목 : 액정보호필름,케이스,충전기]<br>
@@ -355,12 +357,12 @@
                 </tr>
 
                 <tr id="sit_option_addfrm">
-                    <!-- 추가 옵션 조합 리스트 나오는 곳 -->
+                    추가 옵션 조합 리스트 나오는 곳
                 </tr>
             </table>
         </td>
     </tr>
-
+-->
     <tr>
         <td>배송비 유형</td>
         <td>

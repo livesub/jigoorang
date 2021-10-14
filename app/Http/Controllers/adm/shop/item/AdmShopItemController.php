@@ -310,7 +310,7 @@ class AdmShopItemController extends Controller
                     'item_code'     => $item_code,
                     'sio_price'     => $opt_price[$i],
                     'sio_stock_qty' => $opt_stock_qty[$i],
-                    'sio_noti_qty'  => $opt_noti_qty[$i],
+                    //'sio_noti_qty'  => $opt_noti_qty[$i], //통보 수량 관련
                     'sio_use'       => $opt_use[$i],
                 );
 
@@ -498,7 +498,6 @@ class AdmShopItemController extends Controller
                         <td>옵션명</td>
                         <td>추가금액</td>
                         <td>재고수량</td>
-                        <td>통보수량</td>
                         <td>사용여부</td>
                     </tr>
         ';
@@ -545,10 +544,7 @@ class AdmShopItemController extends Controller
                                 <label for="opt_stock_qty_'.$i.'" class="sound_only"></label>
                                 <input type="text" name="opt_stock_qty[]" value="'.$opt_stock_qty.'" id="opt_stock_qty_'.$i.'" size="5">
                             </td>
-                            <td class="td_num">
-                                <label for="opt_noti_qty_'.$i.'" class="sound_only"></label>
-                                <input type="text" name="opt_noti_qty[]" value="'.$opt_noti_qty.'" id="opt_noti_qty_'.$i.'" size="5">
-                            </td>
+
                             <td class="td_mng">
                                 <label for="opt_use_'.$i.'" class="sound_only"></label>
                                 <select name="opt_use[]" id="opt_use_'.$i.'">
@@ -572,15 +568,12 @@ class AdmShopItemController extends Controller
                             </tr>
                             <tr>
                                 <td colspan="5">
-                                    전체 옵션의 추가금액, 재고/통보수량 및 사용여부를 일괄 적용할 수 있습니다. <br>단, 체크된 수정항목만 일괄 적용됩니다.<br>
+                                    전체 옵션의 추가금액, 재고 및 사용여부를 일괄 적용할 수 있습니다. <br>단, 체크된 수정항목만 일괄 적용됩니다.<br>
                                     추가금액 <input type="checkbox" name="opt_com_price_chk" value="1" id="opt_com_price_chk" class="opt_com_chk">
                                     <input type="text" name="opt_com_price" value="0" id="opt_com_price" class="frm_input" size="5">
 
                                     재고수량 <input type="checkbox" name="opt_com_stock_chk" value="1" id="opt_com_stock_chk" class="opt_com_chk">
                                     <input type="text" name="opt_com_stock" value="0" id="opt_com_stock" class="frm_input" size="5">
-
-                                    통보수량 <input type="checkbox" name="opt_com_noti_chk" value="1" id="opt_com_noti_chk" class="opt_com_chk">
-                                    <input type="text" name="opt_com_noti" value="0" id="opt_com_noti" class="frm_input" size="5">
 
                                     사용여부 <input type="checkbox" name="opt_com_use_chk" value="1" id="opt_com_use_chk" class="opt_com_chk">
                                     <select name="opt_com_use" id="opt_com_use">
@@ -820,7 +813,6 @@ class AdmShopItemController extends Controller
                         <td>옵션명</td>
                         <td>추가금액</td>
                         <td>재고수량</td>
-                        <td>통보수량</td>
                         <td>사용여부</td>
                     </tr>
         ';
@@ -867,10 +859,6 @@ class AdmShopItemController extends Controller
                         <label for="opt_stock_qty_'.$i.'" class="sound_only"></label>
                         <input type="text" name="opt_stock_qty[]" value="'.$opt_stock_qty.'" id="opt_stock_qty_'.$i.'" size="5">
                     </td>
-                    <td class="td_num">
-                        <label for="opt_noti_qty_'.$i.'" class="sound_only"></label>
-                        <input type="text" name="opt_noti_qty[]" value="'.$opt_noti_qty.'" id="opt_noti_qty_'.$i.'" size="5">
-                    </td>
                     <td class="td_mng">
                         <label for="opt_use_'.$i.'" class="sound_only"></label>
                         <select name="opt_use[]" id="opt_use_'.$i.'">
@@ -896,9 +884,6 @@ class AdmShopItemController extends Controller
 
                         재고수량 <input type="checkbox" name="opt_com_stock_chk" value="1" id="opt_com_stock_chk" class="opt_com_chk">
                         <input type="text" name="opt_com_stock" value="0" id="opt_com_stock" class="frm_input" size="5">
-
-                        통보수량 <input type="checkbox" name="opt_com_noti_chk" value="1" id="opt_com_noti_chk" class="opt_com_chk">
-                        <input type="text" name="opt_com_noti" value="0" id="opt_com_noti" class="frm_input" size="5">
 
                         사용여부 <input type="checkbox" name="opt_com_use_chk" value="1" id="opt_com_use_chk" class="opt_com_chk">
                         <select name="opt_com_use" id="opt_com_use">
@@ -1123,7 +1108,7 @@ class AdmShopItemController extends Controller
                     'item_code'     => $item_code,
                     'sio_price'     => $opt_price[$i],
                     'sio_stock_qty' => $opt_stock_qty[$i],
-                    'sio_noti_qty'  => $opt_noti_qty[$i],
+                    //'sio_noti_qty'  => $opt_noti_qty[$i], //통보 수량 관련
                     'sio_use'       => $opt_use[$i],
                 );
 

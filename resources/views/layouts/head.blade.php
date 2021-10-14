@@ -67,6 +67,7 @@
 
 
             @if(auth()->user())
+
                 @if(Auth::user()->user_level <= config('app.ADMIN_LEVEL'))
             <td>
                 &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='{{ route('adm.index') }}'>관리자</a>

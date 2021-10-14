@@ -26,8 +26,10 @@
     <tr>
         <td>한글명</td>
         <td><input type="text" name="sca_name_kr" id="sca_name_kr" value="{{ stripslashes($categorys_info->sca_name_kr) }}"></td>
+<!--
         <td>영문명</td>
         <td><input type="text" name="sca_name_en" id="sca_name_en" value="{{ stripslashes($categorys_info->sca_name_en) }}"></td>
+-->
     </tr>
     <tr>
         <td>출력여부</td>
