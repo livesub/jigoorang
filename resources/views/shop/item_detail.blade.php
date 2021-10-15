@@ -212,12 +212,15 @@
                                 </td>
                             </tr>
 
+                            @if(Auth::user())
                             <tr>
                                 <td>
                                     <button type="button" onclick="fitem_submit('cart');">장바구니</button>
                                     <button type="button" onclick="fitem_submit('buy');">바로구매</button>
                                 </td>
                             </tr>
+                            @endif
+
                         </table>
                     </td>
                 </tr>

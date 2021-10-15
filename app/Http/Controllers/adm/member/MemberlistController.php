@@ -54,7 +54,7 @@ class MemberlistController extends Controller
         $type = 'member';
 
         $page_control = CustomUtils::page_function('users',$pageNum,$writeList,$pageNumList,$type,'','','','');
-        $members = DB::table('users')->orderBy('id', 'desc')->skip($page_control['startNum'])->take($writeList)->get();
+        $members = DB::table('users')->where('user_level','>','1')->orderBy('id', 'desc')->skip($page_control['startNum'])->take($writeList)->get();
 
         $pageList = $page_control['preFirstPage'].$page_control['pre1Page'].$page_control['listPage'].$page_control['next1Page'].$page_control['nextLastPage'];
 
@@ -251,6 +251,7 @@ class MemberlistController extends Controller
                 $user = User::whereUser_id($user_id)->first();  //update 할때 미리 값을 조회 하고 쓰면 update 구문으로 자동 변경
                 $user->user_name = $user_name;
                 $user->user_phone = $user_phone;
+                $user->user_level = $user_level;
                 $result_up = $user->save();
 
                 if(!$result_up)

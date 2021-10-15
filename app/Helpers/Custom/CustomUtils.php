@@ -134,7 +134,12 @@ return $validator;
         $search_cate = "";
 
         if($type == 'member' || $type == 'cate' || $type == 'menu' || $type == 'email' || $type == 'visits' || $type == 'membervisits' || $type == 'shopcate' || $type == 'popup'){
-            $total_cnt = DB::table($table_name)->count();
+            if($type == 'member'){
+                $total_cnt = DB::table($table_name)->where('user_level','>','1')->count();
+            }else{
+                $total_cnt = DB::table($table_name)->count();
+            }
+
         }else if($type == 'items'){
             if($cate != "") $search_sql = " AND a.ca_id = b.ca_id AND a.ca_id LIKE '{$cate}%' AND a.{$keymethod} LIKE '%{$keyword}%' ";
             else $search_sql = " AND a.ca_id = b.ca_id AND a.{$keymethod} LIKE '%{$keyword}%' ";

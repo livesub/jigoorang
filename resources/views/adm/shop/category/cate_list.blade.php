@@ -8,7 +8,7 @@
         <td><h4>쇼핑몰 분류 관리</h4></td>
     </tr>
     <tr>
-        <td>※ 5단계까지 등록 하실수 있습니다.<br>※ 분류 삭제는 하위 카테고리가 없거나, 상품이 없어야 삭제 됩니다.<br>※ 상품과 하위 분류를 먼저 삭제해 주세요.</td>
+        <td>※ 2단계까지 등록 하실수 있습니다.<br>※ 분류 삭제는 하위 카테고리가 없거나, 상품이 없어야 삭제 됩니다.<br>※ 상품과 하위 분류를 먼저 삭제해 주세요.</td>
     </tr>
 </table>
 
@@ -56,14 +56,14 @@
         <td>{!! $disp_ment !!}</td>
         <td>{{ $scate_info->sca_rank }}</td>
         <td>
-            @if($level+2 < 6)
+            @if($level+2 < 3)   <!-- 2단계까지 저장 -->
             <button type="button" onclick="cate_type('{{ $scate_info->sca_id }}','add');">추가</button>
             @endif
 
             <button type="button" onclick="cate_type('{{ $scate_info->sca_id }}','modi');">수정</button>
             @php
                 $de_scate_info = DB::table('shopcategorys')->where('sca_id','like',$scate_info->sca_id.'%')->count();   //하위 카테고리 갯수
-                $de_item_info = DB::table('items')->where('ca_id','like',$scate_info->sca_id.'%')->count();   //상품 갯수
+                $de_item_info = DB::table('shopitems')->where('sca_id','like',$scate_info->sca_id.'%')->count();   //상품 갯수
             @endphp
 
             @if($de_scate_info == 1 && $de_item_info == 0)
@@ -117,7 +117,7 @@
         $("#sca_id").val(sca_id);
 
         if (confirm("상품이 있을 경우 상품 부터 삭제 하세요.\n정말 삭제하시겠습니까?") == true){
-            $("#cate_form").attr("action", "{{ route('adm.cate.cate_delete') }}");
+            $("#cate_form").attr("action", "{{ route('shop.cate.cate_delete') }}");
             $("#cate_form").submit();
         }else{
             return false;

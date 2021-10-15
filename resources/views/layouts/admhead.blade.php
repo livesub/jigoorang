@@ -37,7 +37,7 @@ header('Pragma: public');
                     <tr>
                         <td><a href="{{ route('adm.member.index') }}">회원 관리</a></td>
                     </tr>
-
+                    @if(auth()->user()->user_level < 2) <!-- 총관리자만 보는 메뉴 -->
                     <tr>
                         <td><a href="{{ route('adm.admemail.index') }}">회원 이메일 발송 관리</a></td>
                     </tr>
@@ -92,6 +92,8 @@ header('Pragma: public');
                     <tr>
                         <td><a href="{{ url('adm/clearcache') }}">캐시 파일 일괄 삭제</a></td>
                     </tr>
+                    @endif
+
                     <tr>
                         <td><br><br>쇼핑몰</td>
                     </tr>
