@@ -57,10 +57,7 @@ class AdmShopSettingController extends Controller
         $shop_img_width         = "500%%300%%100";
         $shop_img_height        = "500%%300%%100";
 
-        $member_reg_coupon_use = "";
-        $member_reg_coupon_price = "";
-        $member_reg_coupon_minimum = "";
-        $member_reg_coupon_term = "";
+        $member_reg_point = "";
 
         if(!is_null($setting_info)){
             $id = $setting_info->id;
@@ -80,11 +77,8 @@ class AdmShopSettingController extends Controller
             $company_bank_account   = $setting_info->company_bank_account;
             $company_use_point      = $setting_info->company_use_point;
 
-            //회원 가입 쿠폰
-            $member_reg_coupon_use      = $setting_info->member_reg_coupon_use;
-            $member_reg_coupon_price    = $setting_info->member_reg_coupon_price;
-            $member_reg_coupon_minimum  = $setting_info->member_reg_coupon_minimum;
-            $member_reg_coupon_term     = $setting_info->member_reg_coupon_term;
+            //회원 가입 포인트
+            $member_reg_point      = $setting_info->member_reg_point;
 
             $shop_img_width         = $setting_info->shop_img_width;
             $shop_img_height        = $setting_info->shop_img_height;
@@ -107,11 +101,8 @@ class AdmShopSettingController extends Controller
             'company_bank_account'  => $company_bank_account,
             'company_use_point'     => $company_use_point,
 
-            //회원 가입 쿠폰
-            'member_reg_coupon_use'     => $member_reg_coupon_use,
-            'member_reg_coupon_price'   => $member_reg_coupon_price,
-            'member_reg_coupon_minimum' => $member_reg_coupon_minimum,
-            'member_reg_coupon_term'    => $member_reg_coupon_term,
+            //회원 가입 포인트
+            'member_reg_point'      => $member_reg_point,
 
             'shop_img_width'        => $shop_img_width,
             'shop_img_height'       => $shop_img_height,
@@ -143,11 +134,8 @@ class AdmShopSettingController extends Controller
         $company_bank_account   = $request->input('company_bank_account');
         $company_use_point      = $request->input('company_use_point');
 
-        //회원 가입 쿠폰
-        $member_reg_coupon_use  = $request->input('member_reg_coupon_use');
-        $member_reg_coupon_price = $request->input('member_reg_coupon_price');
-        $member_reg_coupon_minimum = $request->input('member_reg_coupon_minimum');
-        $member_reg_coupon_term = $request->input('member_reg_coupon_term');
+        //회원 가입 포인트
+        $member_reg_point       = $request->input('member_reg_point');
 
         $shop_img_width         = $request->input('shop_img_width');
         $shop_img_height        = $request->input('shop_img_height');
@@ -181,10 +169,7 @@ class AdmShopSettingController extends Controller
             'company_bank_account'  => $company_bank_account,
             'company_use_point'     => (int)$company_use_point,
 
-            'member_reg_coupon_use'     => (int)$member_reg_coupon_use,
-            'member_reg_coupon_price'   => (int)$member_reg_coupon_price,
-            'member_reg_coupon_minimum' => (int)$member_reg_coupon_minimum,
-            'member_reg_coupon_term'    => (int)$member_reg_coupon_term,
+            'member_reg_point'     => (int)$member_reg_point,
 
             'shop_img_width'        => $shop_img_width,
             'shop_img_height'       => $shop_img_height,

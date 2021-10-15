@@ -166,6 +166,7 @@
     @php
         // 배송비 계산
         $send_cost = $CustomUtils->get_sendcost($s_cart_id);
+        $tot_price = $tot_sell_price + $send_cost; // 총계 = 주문상품금액합계 + 배송비
     @endphp
 </table>
 
@@ -309,9 +310,24 @@
             </table>
         </td>
         <td>
-            <table>
+            <table border=1>
                 <tr>
-                    <td>dfbdb</td>
+                    <td>주문</td>
+                    <td>쿠폰할인</td>
+                    <td>배송비</td>
+                </tr>
+                <tr>
+                    <td>{{ number_format($tot_sell_price) }}원</td>
+                    <td id="ct_tot_coupon">0</td>
+                    <td>{{ number_format($send_cost) }}원</td>
+                </tr>
+                <tr>
+                    <td>포인트</td>
+                    <td colspan="2">{{ number_format($tot_point) }}원</td>
+                </tr>
+                <tr>
+                    <td>총계</td>
+                    <td colspan="2" id="ct_tot_price">{{ number_format($tot_price) }}원</td>
                 </tr>
             </table>
         </td>

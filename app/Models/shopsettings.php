@@ -34,10 +34,7 @@ class shopsettings extends Model
         'company_bank_use',
         'company_bank_account',
         'company_use_point',
-        'member_reg_coupon_use',
-        'member_reg_coupon_price',
-        'member_reg_coupon_minimum',
-        'member_reg_coupon_term',
+        'member_reg_point',
         'shop_img_width',
         'shop_img_height',
     ];
