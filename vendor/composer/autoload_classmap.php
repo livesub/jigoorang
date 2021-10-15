@@ -977,6 +977,8 @@ return array(
     'Fideloper\\Proxy\\TrustedProxyServiceProvider' => $vendorDir . '/fideloper/proxy/src/TrustedProxyServiceProvider.php',
     'Fruitcake\\Cors\\CorsServiceProvider' => $vendorDir . '/fruitcake/laravel-cors/src/CorsServiceProvider.php',
     'Fruitcake\\Cors\\HandleCors' => $vendorDir . '/fruitcake/laravel-cors/src/HandleCors.php',
+    'Getsolaris\\LaravelMakeService\\LaravelMakeServiceProvider' => $vendorDir . '/getsolaris/laravel-make-service/src/LaravelMakeServiceProvider.php',
+    'Getsolaris\\LaravelMakeService\\MakeService' => $vendorDir . '/getsolaris/laravel-make-service/src/MakeService.php',
     'GrahamCampbell\\ResultType\\Error' => $vendorDir . '/graham-campbell/result-type/src/Error.php',
     'GrahamCampbell\\ResultType\\Result' => $vendorDir . '/graham-campbell/result-type/src/Result.php',
     'GrahamCampbell\\ResultType\\Success' => $vendorDir . '/graham-campbell/result-type/src/Success.php',

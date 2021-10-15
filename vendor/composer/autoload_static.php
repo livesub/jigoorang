@@ -141,6 +141,7 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
             'GrahamCampbell\\ResultType\\' => 26,
+            'Getsolaris\\LaravelMakeService\\' => 30,
         ),
         'F' => 
         array (
@@ -445,6 +446,10 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
+        ),
+        'Getsolaris\\LaravelMakeService\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/getsolaris/laravel-make-service/src',
         ),
         'Fruitcake\\Cors\\' => 
         array (
@@ -1506,6 +1511,8 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
         'Fideloper\\Proxy\\TrustedProxyServiceProvider' => __DIR__ . '/..' . '/fideloper/proxy/src/TrustedProxyServiceProvider.php',
         'Fruitcake\\Cors\\CorsServiceProvider' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/CorsServiceProvider.php',
         'Fruitcake\\Cors\\HandleCors' => __DIR__ . '/..' . '/fruitcake/laravel-cors/src/HandleCors.php',
+        'Getsolaris\\LaravelMakeService\\LaravelMakeServiceProvider' => __DIR__ . '/..' . '/getsolaris/laravel-make-service/src/LaravelMakeServiceProvider.php',
+        'Getsolaris\\LaravelMakeService\\MakeService' => __DIR__ . '/..' . '/getsolaris/laravel-make-service/src/MakeService.php',
         'GrahamCampbell\\ResultType\\Error' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Error.php',
         'GrahamCampbell\\ResultType\\Result' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Result.php',
         'GrahamCampbell\\ResultType\\Success' => __DIR__ . '/..' . '/graham-campbell/result-type/src/Success.php',

@@ -921,6 +921,63 @@
         ]
     },
     {
+        "name": "getsolaris/laravel-make-service",
+        "version": "v1.0.2",
+        "version_normalized": "1.0.2.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/getsolaris/laravel-make-service-command.git",
+            "reference": "5202ca9f69ab5fc34df4908b571a7eb69b480d5b"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/getsolaris/laravel-make-service-command/zipball/5202ca9f69ab5fc34df4908b571a7eb69b480d5b",
+            "reference": "5202ca9f69ab5fc34df4908b571a7eb69b480d5b",
+            "shasum": ""
+        },
+        "require": {
+            "illuminate/console": "~5.6.34|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
+            "illuminate/support": "~5.6.34|~5.7.0|~5.8.0|^6.0|^7.0|^8.0",
+            "php": "^7.1|^8.0"
+        },
+        "time": "2021-05-30T05:25:01+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Getsolaris\\LaravelMakeService\\LaravelMakeServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Getsolaris\\LaravelMakeService\\": "src/"
+            },
+            "classmap": [
+                "src/"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Mingeun Kim",
+                "email": "mingeun.k.k@gmail.com"
+            }
+        ],
+        "description": "A MVCS pattern create a service command for Laravel 5+",
+        "keywords": [
+            "contract",
+            "laravel",
+            "mvcs",
+            "pattern",
+            "service"
+        ]
+    },
+    {
         "name": "graham-campbell/result-type",
         "version": "v1.0.1",
         "version_normalized": "1.0.1.0",

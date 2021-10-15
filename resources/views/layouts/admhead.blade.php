@@ -105,6 +105,12 @@ header('Pragma: public');
                     <tr>
                         <td><a href="{{ route('shop.item.index') }}">상품 관리</a></td>
                     </tr>
+                    <tr>
+                        <td><br><br>체험단</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{{ route('shop.item.index') }}">체험단 등록</a></td>
+                    </tr>
                 </table>
             </td>
 
