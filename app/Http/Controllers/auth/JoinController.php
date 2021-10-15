@@ -109,8 +109,8 @@ class JoinController extends Controller
         $po_content = date('Y-m-d')." 회원 가입 축하";
         $po_point = $setting_info->member_reg_point;    //지급 포인트 금액
         $po_use_point = 0;  //사용금액
-        $po_type = 1;   //적립금 지금 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>기타등등
-        $po_write_id = 0;   //적립금 지금 유형 글번호
+        $po_type = 1;   //적립금 지급 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>기타등등
+        $po_write_id = 0;   //적립금 지급 유형 글번호
         $item_code = '';    //상품코드
 
         $po_cnt = DB::table('shoppoints')->where([['user_id', $user_id],['po_type',1]])->count(); //신규 회원 가입시 이미 주어진 포인트가 있는지
