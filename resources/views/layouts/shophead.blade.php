@@ -14,7 +14,7 @@
 <html lang='en'>
 <head>
     <meta charset='utf-8'>
-    <title>dev_board</title>
+    <title>지구랭</title>
 </head>
 <body>
 

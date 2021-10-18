@@ -313,12 +313,10 @@
             <table border=1>
                 <tr>
                     <td>주문</td>
-                    <td>쿠폰할인</td>
                     <td>배송비</td>
                 </tr>
                 <tr>
                     <td>{{ number_format($tot_sell_price) }}원</td>
-                    <td id="ct_tot_coupon">0</td>
                     <td>{{ number_format($send_cost) }}원</td>
                 </tr>
                 <tr>
@@ -329,9 +327,14 @@
                     <td>총계</td>
                     <td colspan="2" id="ct_tot_price">{{ number_format($tot_price) }}원</td>
                 </tr>
+                <tr>
+                    <td>추가배송비</td>
+                    <td><strong id="od_send_cost2">0</strong>원<br>(지역에 따라 추가되는 도선료 등의 배송비입니다.)</td>
+                </tr>
             </table>
         </td>
     </tr>
+
 </form>
 </table>
 
@@ -359,6 +362,7 @@
 </script>
 
 <script>
+/*
     $("input[name=ad_sel_addr]").on("click", function() {
         $("#od_b_name").val($("#od_name").val());
         $("#od_b_tel").val($("#od_tel").val());
@@ -370,10 +374,48 @@
         $("#od_b_addr_jibeon").val($("#od_addr_jibeon").val());
         $("#ad_subject").val($("#ad_subject").val());
     });
+*/
 </script>
 
 
 
+<script>
+    var zipcode = "";
 
+    $("#od_b_addr2").focus(function() {
+        var zip = $("#od_b_zip").val().replace(/[^0-9]/g, "");
+        if(zip == "")
+            return false;
+
+        var code = String(zip);
+
+        if(zipcode == code)
+            return false;
+
+        zipcode = code;
+        calculate_sendcost(code);
+    });
+
+    function calculate_sendcost(code)
+    {
+        //산간지역 배송비 계산
+    alert("산간지역 배송비 계산====> "+code);
+/*
+        $.post(
+            "./ordersendcost.php",
+            { zipcode: code },
+            function(data) {
+                $("input[name=od_send_cost2]").val(data);
+                $("#od_send_cost2").text(number_format(String(data)));
+
+                zipcode = code;
+
+                calculate_order_price();
+            }
+        );
+*/
+    }
+
+</script>
 
 @endsection

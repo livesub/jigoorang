@@ -65,7 +65,6 @@
 <script>
     function return_addr(num){
         var addr = $("#addr"+num).val().split(String.fromCharCode(30));
-        //alert(addr);
 
         $("#od_b_name").val(addr[0]);
         $("#od_b_tel").val(addr[1]);
@@ -76,6 +75,8 @@
         $("#od_b_addr3").val(addr[6]);
         $("#od_b_addr_jibeon").val(addr[7]);
         $("#ad_subject").val(addr[8]);
+
+        calculate_sendcost(addr[3]);
     }
 
     function choice_modi(){

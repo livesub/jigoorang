@@ -24,7 +24,10 @@ class CreateShoppointsTable extends Migration
             $table->integer('po_write_id')->default(0)->comment('적립금 지급 유형 글번호');
             $table->string('item_code')->comment('상품코드');
             $table->timestamps();
+            $table->index(['user_id']);
         });
+
+        DB::statement("ALTER TABLE shoppoints comment '포인트 관리'");
     }
 
     /**

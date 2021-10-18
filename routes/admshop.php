@@ -117,5 +117,11 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'as' => 'shop.item.downloadfile',
         'uses' => 'App\Http\Controllers\adm\shop\item\AdmShopItemController@downloadfile',
     ]);
+
+    //추가 배송비 관리
+    Route::get('sendcostlist', [
+        'as' => 'shop.sendcost.index',
+        'uses' => 'App\Http\Controllers\adm\shop\sendcost\SendcostController@index',
+    ]);
 });
 
