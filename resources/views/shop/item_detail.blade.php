@@ -462,14 +462,12 @@ jQuery(function($){
             return false;
         }
 
-        //$("#fitem").submit();//11
-
-        var queryString = $("form[name=fitem]").serialize() ;
+        var form_var = $("form[name=fitem]").serialize() ;
 
         $.ajax({
             type : 'post',
             url : '{{ route('ajax_cart_register') }}',
-            data : queryString,
+            data : form_var,
             dataType : 'text',
             success : function(result){
 //alert(result);

@@ -89,12 +89,12 @@
             return false;
         }
 
-        var queryString = $("#send_form").serialize();
+        var form_var = $("#send_form").serialize();
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
             type : 'post',
             url : '{{ route('shop.sendcost.ajax_regi_sendcost') }}',
-            data : queryString,
+            data : form_var,
             dataType : 'text',
             success : function(result){
                 if(result == "ok"){
@@ -135,12 +135,12 @@
         }
 
         if (confirm("선택 하신 지역을 삭제 하시겠습니까?") == true){    //확인
-            var queryString = $("#send_form").serialize();
+            var form_var = $("#send_form").serialize();
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
                 type : 'post',
                 url : '{{ route('shop.sendcost.ajax_del_sendcost') }}',
-                data : queryString,
+                data : form_var,
                 dataType : 'text',
                 success : function(result){
                     if(result == "ok"){

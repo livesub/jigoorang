@@ -85,12 +85,12 @@
             return false;
         }
 
-        var queryString = $("#forderform").serialize();
+        var form_var = $("#forderform").serialize();
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
             type : 'post',
             url : '{{ route('ajax_baesongji_modi') }}',
-            data : queryString,
+            data : form_var,
             dataType : 'text',
             success : function(result){
                 if(result == "no_mem"){
