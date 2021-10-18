@@ -118,10 +118,22 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'uses' => 'App\Http\Controllers\adm\shop\item\AdmShopItemController@downloadfile',
     ]);
 
-    //추가 배송비 관리
+    //추가 배송비 관리 리스트
     Route::get('sendcostlist', [
         'as' => 'shop.sendcost.index',
         'uses' => 'App\Http\Controllers\adm\shop\sendcost\SendcostController@index',
+    ]);
+
+    //추가 배송비 관리 등록
+    Route::post('sendcostlist', [
+        'as' => 'shop.sendcost.ajax_regi_sendcost',
+        'uses' => 'App\Http\Controllers\adm\shop\sendcost\SendcostController@ajax_regi_sendcost',
+    ]);
+
+    //추가 배송비 관리 선택 삭제
+    Route::post('sendcostdel', [
+        'as' => 'shop.sendcost.ajax_del_sendcost',
+        'uses' => 'App\Http\Controllers\adm\shop\sendcost\SendcostController@ajax_del_sendcost',
     ]);
 });
 

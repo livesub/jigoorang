@@ -15,6 +15,11 @@ namespace App\Http\Controllers\adm\shop\sendcost;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
+use Illuminate\Support\Facades\Auth;    //인증
+use Illuminate\Support\Facades\DB;
+use App\Models\sendcosts;    //추가 배송비 모델 정의
+
 class SendcostController extends Controller
 {
     /**
@@ -22,75 +27,53 @@ class SendcostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-        //
-dd("추가 배송비");
+        $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
+
+        $sendcosts = DB::table('sendcosts')->orderby('id','desc')->get();
+        return view('adm.shop.sendcost.sendcostlist',[
+            'sendcosts' => $sendcosts,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function ajax_regi_sendcost(Request $request)
     {
-        //
+        $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
+
+        $sc_name    = $request->input('sc_name');
+        $sc_zip1    = $request->input('sc_zip1');
+        $sc_zip2    = $request->input('sc_zip2');
+        $sc_price   = $request->input('sc_price');
+
+        //저장 처리
+        $create_result = sendcosts::create([
+            "sc_name"   => $sc_name,
+            "sc_zip1"   => $sc_zip1,
+            "sc_zip2"   => $sc_zip2,
+            "sc_price"  => $sc_price,
+        ]);
+        $create_result->save();
+
+        echo "ok";
+        exit;
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function ajax_del_sendcost(Request $request)
     {
-        //
-    }
+        $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+        $chk    = $request->input('chk');
+        for($i = 0; $i < count($chk); $i++){
+            DB::table('sendcosts')->where('id',$chk[$i])->delete();   //옵션 row 삭제
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        echo "ok";
+        exit;
     }
 }
