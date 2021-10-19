@@ -92,3 +92,9 @@ Route::post('/baesongji_del', [
     'as' => 'ajax_baesongji_del',
     'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_baesongji_delete',
 ]);
+
+//추가 배송비
+Route::post('/ordersendcost', [
+    'as' => 'ajax_ordersendcost',
+    'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_ordersendcost',
+]);

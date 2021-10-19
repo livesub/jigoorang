@@ -203,14 +203,6 @@
             <input type="checkbox" name="item_use" value="1" id="item_use" checked> 예
         </td>
     </tr>
-
-    <tr>
-        <td>쿠폰적용안함</td>
-        <td>설정에 체크하시면 쿠폰 생성 때 상품 검색 결과에 노출되지 않습니다.. <br>
-            <input type="checkbox" name="item_nocoupon" value="1" id="item_nocoupon" > 예
-        </td>
-    </tr>
-
     <tr>
         <td>상품내용</td>
         <td>
@@ -231,33 +223,12 @@
     </tr>
 
     <tr>
-        <td>포인트 유형</td>
-        <td>포인트 유형을 설정할 수 있습니다. <br>비율로 설정했을 경우 설정 기준금액의 %비율로 포인트가 지급됩니다.<br>
-            <select name="item_point_type" id="item_point_type">
-                <option value="0" selected="selected">설정 금액</option>
-                <option value="1">판매가 기준 설정비율</option>
-                <option value="2">구매가 기준 설정비율</option>
-            </select>
+        <td>적립금</td>
+        <td>
+            <input type="text" name="item_point" value="0" id="item_point" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">%
         </td>
     </tr>
 
-    <tr>
-        <td>포인트</td>
-        <td>주문완료후 환경설정에서 설정한 주문완료 설정일 후 회원에게 부여하는 포인트입니다.<br>또, 포인트부여를 '아니오'로 설정한 경우 신용카드, 계좌이체로 주문하는 회원께는 부여하지 않습니다.<br>
-            <input type="text" name="item_point" value="0" id="item_point" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-            <span id="item_point_unit">점</span>
-        </td>
-    </tr>
-<!--
-    <tr>
-        <td>추가옵션상품 포인트</td>
-        <td>상품의 추가옵션상품 구매에 일괄적으로 지급하는 포인트입니다. <br>0으로 설정하시면 구매포인트를 지급하지 않습니다.<br>
-        주문완료후 환경설정에서 설정한 주문완료 설정일 후 회원에게 부여하는 포인트입니다.<br>
-        또, 포인트부여를 '아니오'로 설정한 경우 신용카드, 계좌이체로 주문하는 회원께는 부여하지 않습니다.<br>
-            <input type="text" name="item_supply_point" value="0" id="item_supply_point" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 점
-        </td>
-    </tr>
--->
     <tr>
         <td>상품품절</td>
         <td>잠시 판매를 중단하거나 재고가 없을 경우에 체크해 놓으면 품절상품으로 표시됩니다.<br>
@@ -364,50 +335,9 @@
     </tr>
 -->
     <tr>
-        <td>배송비 유형</td>
+        <td>기본배송비</td>
         <td>
-            <table>
-                <tr>
-                    <td colspan=3>쇼핑몰설정 > 배송비유형 설정보다 개별상품 배송비설정이 우선 적용됩니다. <br>배송비 유형을 선택하면 자동으로 항목이 변환됩니다.<br>
-                        <select name="item_sc_type" id="item_sc_type">
-                            <option value="0">쇼핑몰 기본설정 사용</option>
-                            <option value="1">무료배송</option>
-                            <option value="2">조건부 무료배송</option>
-                            <option value="3">유료배송</option>
-                            <option value="4">수량별 부과</option>
-                        </select>
-                    </td>
-                </tr>
-
-                <tr id="sc_con_method">
-                    <th scope="row"><label for="item_sc_method">배송비 결제</label></th>
-                    <td>
-                        <select name="item_sc_method" id="item_sc_method">
-                            <option value="0">선불</option>
-                            <option value="1">착불</option>
-                            <option value="2">사용자선택</option>
-                        </select>
-                    </td>
-                </tr>
-                <tr id="sc_con_basic">
-                    <th scope="row"><label for="item_sc_price">기본배송비</label></th>
-                    <td>무료배송 이외의 설정에 적용되는 배송비 금액입니다.<br>
-                        <input type="text" name="item_sc_price" value="0" id="item_sc_price" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원
-                    </td>
-                </tr>
-                <tr id="sc_con_minimum">
-                    <th scope="row"><label for="item_sc_minimum">배송비 상세조건</label></th>
-                    <td>
-                        주문금액 <input type="text" name="item_sc_minimum" value="0" id="item_sc_minimum" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 이상 무료 배송
-                    </td>
-                </tr>
-                <tr id="sc_con_qty">
-                    <th scope="row"><label for="item_sc_qty">배송비 상세조건</label></th>
-                    <td>상품의 주문 수량에 따라 배송비가 부과됩니다. 예를 들어 기본배송비가 3,000원 수량을 3으로 설정했을 경우 상품의 주문수량이 5개이면 6,000원 배송비가 부과됩니다.<br>
-                        주문수량 <input type="text" name="item_sc_qty" value="0" id="item_sc_qty" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 마다 배송비 부과
-                    </td>
-                </tr>
-            </table>
+            <input type="text" name="item_sc_price" value="0" id="item_sc_price" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원
         </td>
     </tr>
 
@@ -595,18 +525,6 @@
         htParams : {fOnBeforeUnload : function(){}} // 이페이지 나오기 alert 삭제
     });
 </script>
-
-<script>
-    $(function() {
-        $("#item_point_type").change(function() {
-            if(parseInt($(this).val()) > 0)
-                $("#item_point_unit").text("%");
-            else
-                $("#item_point_unit").text("점");
-        });
-    });
-</script>
-
 
 <script>
     $(function() {  //상품 옵션 관련
@@ -883,49 +801,7 @@
     });
 </script>
 
-<script>
-    $("#sc_con_method").hide();
-    $("#sc_con_basic").hide();
-    $("#sc_con_minimum").hide();
-    $("#sc_con_qty").hide();
 
-    $("#item_sc_type").change(function() {
-        var type = $(this).val();
-
-        switch(type) {
-            case "1":
-                $("#sc_con_method").hide();
-                $("#sc_con_basic").hide();
-                $("#sc_con_minimum").hide();
-                $("#sc_con_qty").hide();
-                break;
-            case "2":
-                $("#sc_con_method").show();
-                $("#sc_con_basic").show();
-                $("#sc_con_minimum").show();
-                $("#sc_con_qty").hide();
-                break;
-            case "3":
-                $("#sc_con_method").show();
-                $("#sc_con_basic").show();
-                $("#sc_con_minimum").hide();
-                $("#sc_con_qty").hide();
-                break;
-            case "4":
-                $("#sc_con_method").show();
-                $("#sc_con_basic").show();
-                $("#sc_con_minimum").hide();
-                $("#sc_con_qty").show();
-                break;
-            default:
-                $("#sc_con_method").hide();
-                $("#sc_con_basic").hide();
-                $("#sc_con_minimum").hide();
-                $("#sc_con_qty").hide();
-                break;
-        }
-    });
-</script>
 
 <script>
     function submitContents(elClickedObj) {
@@ -945,34 +821,12 @@
             return false;
         }
 
-        if($("#item_point_type").val() == "1" || $("#item_point_type").val() == "2"){
-            var point = parseInt($("#item_point").val());
+        var point = parseInt($("#item_point").val());
 
-            if(point > 99) {
-                alert("포인트 비율을 0과 99 사이의 값으로 입력해 주십시오.");
-                $("#item_point").focus();
-                return false;
-            }
-        }
-
-        if(parseInt($("#item_sc_type").val()) > 1){
-            if(!$("#item_sc_price").val() || $("#item_sc_price").val() == "0"){
-                alert("기본배송비를 입력해 주십시오.");
-                $("#item_sc_price").focus();
-                return false;
-            }
-
-            if($("#item_sc_type").val() == "2" && (!$("#item_sc_minimum").val() || $("#item_sc_minimum").val() == "0")){
-                alert("배송비 상세조건의 주문금액을 입력해 주십시오.");
-                $("#item_sc_minimum").focus();
-                return false;
-            }
-
-            if($("#item_sc_type").val() == "4" && (!$("#item_sc_qty").val() || $("#item_sc_qty").val() == "0")){
-                alert("배송비 상세조건의 주문수량을 입력해 주십시오.");
-                $("#item_sc_qty").focus();
-                return false;
-            }
+        if(point > 99) {
+            alert("포인트 비율을 0과 99 사이의 값으로 입력해 주십시오.");
+            $("#item_point").focus();
+            return false;
         }
 
         if( item_content == ""  || item_content == null || item_content == '&nbsp;' || item_content == '<p>&nbsp;</p>')  {

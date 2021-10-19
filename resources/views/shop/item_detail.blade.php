@@ -120,10 +120,12 @@
                 @endif
 
                 @if($use_point == 1)
+                    @if($point != "0")
                 <tr>
-                    <td>포인트</td>
+                    <td>적립금</td>
                     <td>{{ $use_point_disp }}</td>
                 </tr>
+                    @endif
                 @endif
 
                 <tr>

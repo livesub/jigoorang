@@ -1298,24 +1298,10 @@ $um_value='80/0.5/3'
 
         if(!$ct->item_code) return 0;
 
-        if($ct->item_sc_type > 1) {
-            if($ct->item_sc_type == 2) { // 조건부무료
-                if($price >= $ct->item_sc_minimum)
-                    $sendcost = 0;
-                else
-                    $sendcost = $ct->item_sc_price;
-            } else if($ct->item_sc_type == 3) { // 유료배송
-                $sendcost = $ct->item_sc_price;
-            } else { // 수량별 부과
-                if(!$ct->item_sc_qty) $ct->item_sc_qty = 1;
-
-                $q = ceil((int)$qty / (int)$ct->item_sc_qty);
-                $sendcost = (int)$ct->item_sc_price * $q;
-            }
-        } else if($ct->item_sc_type == 1) { // 무료배송
+        if($ct->item_sc_price > 0){
+            $sendcost = $ct->item_sc_price;
+        }else{
             $sendcost = 0;
-        } else {
-            $sendcost = -1;
         }
 
         return $sendcost;
@@ -1347,43 +1333,18 @@ $um_value='80/0.5/3'
         $total_send_cost = 0;
         $diff = 0;
 
-        $scs = DB::table('shopcarts')->select('item_code')->where([['od_id',$cart_id], ['sct_send_cost','0'], ['sct_status','in','(\'쇼핑\', \'주문\', \'입금\', \'준비\', \'배송\', \'완료\')'], ['sct_select',$selected]])->distinct()->get();
+        $scs = DB::table('shopcarts')->select('item_code')->where([['od_id',$cart_id], ['sct_send_cost','0'], ['sct_select',$selected]])->whereRaw('sct_status in (\'쇼핑\', \'주문\', \'입금\', \'준비\', \'배송\', \'완료\')')->distinct()->get();
 
         foreach ($scs as $sc){
-            $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_qty) as qty from shopcarts where item_code = '{$sc->item_code}' and od_id =   '$cart_id' and sct_status IN ( '쇼핑', '주문', '입금', '준비', '배송', '완료' ) and sct_select = '{$selected}' ");
+            $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_qty) as qty from shopcarts where item_code = '{$sc->item_code}' and od_id = '$cart_id' and sct_status IN ( '쇼핑', '주문', '입금', '준비', '배송', '완료' ) and sct_select = '{$selected}' ");
 
             $send_cost = $this->get_item_sendcost($sc->item_code, $sum[0]->price, $sum[0]->qty, $cart_id);
 
             if($send_cost > 0)
                 $total_send_cost += $send_cost;
-
-/*
-배송비 부분 충분히 테스트 해야 함!!
-            if($default['de_send_cost_case'] == '차등' && $send_cost == -1) {
-                $total_price += $sum['price'];
-                $diff++;
-            }
-*/
         }
-
-//        $send_cost = 0;
-/*
-배송비 부분 충분히 테스트 해야 함!!
-        if($default['de_send_cost_case'] == '차등' && $total_price >= 0 && $diff > 0) {
-            // 금액별차등 : 여러단계의 배송비 적용 가능
-            $send_cost_limit = explode(";", $default['de_send_cost_limit']);
-            $send_cost_list  = explode(";", $default['de_send_cost_list']);
-            $send_cost = 0;
-            for ($k=0; $k<count($send_cost_limit); $k++) {
-                // 총판매금액이 배송비 상한가 보다 작다면
-                if ($total_price < preg_replace('/[^0-9]/', '', $send_cost_limit[$k])) {
-                    $send_cost = preg_replace('/[^0-9]/', '', $send_cost_list[$k]);
-                    break;
-                }
-            }
-        }
-*/
-        return ($total_send_cost + $send_cost);
+        //return ($total_send_cost + $send_cost);
+        return $total_send_cost;
     }
 
     // 장바구니 건수 검사

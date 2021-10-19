@@ -105,11 +105,14 @@ class ItemController extends Controller
         $p = 0;
         $big_img_disp = "";
         $small_img = array();
+        $small_img_disp = array();
+        $small_item_img = array();
 
         for($i=1; $i<=10; $i++) {
             $item_img = "item_img".$i;
 
             if($item_info[0]->$item_img == "") continue;
+
             $j++;
             $item_img_cut = explode("@@",$item_info[0]->$item_img);
 
@@ -133,27 +136,12 @@ class ItemController extends Controller
         //포인트 타입에 따른 변경
         $use_point_disp = "";
         if($use_point->company_use_point == 1){ //포인트 사용
-            if($item_info[0]->item_point_type == 2){    //구매가 기준 설정비율
-                $use_point_disp = "구매금액(추가옵션 제외)의 ".$item_info[0]->item_point."%";
-            }else{
-                $item_point = $CustomUtils->get_item_point($item_info[0]);
-                $use_point_disp = number_format($item_point).'점';
-            }
+            $use_point_disp = "구매금액의 ".$item_info[0]->item_point."%";
         }
 
         //배송비 타입에 따른 변경
-        $sc_method_disp = "";
-        if($item_info[0]->item_sc_type == 1) $sc_method_disp = '무료배송';
-        else {
-            if($item_info[0]->item_sc_method == 1) $sc_method_disp = '수령후 지불';
-            else if($item_info[0]->item_sc_method == 2) {
-                //$ct_send_cost_label = '<label for="sct_send_cost">배송비결제</label>';
-                $sc_method_disp = '<select name="sct_send_cost" id="sct_send_cost">
-                                        <option value="0">주문시 결제</option>
-                                        <option value="1">수령후 지불</option>
-                                   </select>';
-            }else $sc_method_disp = '주문시 결제';
-        }
+        $sc_method_disp = '무료배송';
+        if($item_info[0]->item_sc_price > 0) $sc_method_disp = number_format($item_info[0]->item_sc_price).'원';
 
         // 상품품절체크
         $is_soldout = $CustomUtils->is_soldout($item_info[0]->item_code);
@@ -183,7 +171,7 @@ class ItemController extends Controller
             "use_point"         => $use_point->company_use_point,
             "use_point_disp"    => $use_point_disp,
             "sc_method_disp"    => $sc_method_disp,
-
+            "point"             => $item_info[0]->item_point,
             "is_orderable"      => $is_orderable,   //재고가 있는지 파악 여부
             "option_item"       => $option_item,    //선택 옵션
             "supply_item"       => $supply_item,    //추가 옵션

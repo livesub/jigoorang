@@ -20,7 +20,7 @@
         <td>상품명</td>
         <td>총수량</td>
         <td>판매가</td>
-        <td>포인트</td>
+        <td>적립금</td>
         <td>배송비</td>
         <td>소계</td>
     </tr>
@@ -52,26 +52,12 @@
                 $mod_options = '<tr><td><div class="sod_option_btn"><button type="button" class="mod_options">선택사항수정</button></div></td></tr>';
                 $item_name .= '<div class="sod_opt">'.$item_options.'</div>';
             }
+
             // 배송비
-            switch($cart_info->sct_send_cost)
-            {
-                case 1:
-                    $ct_send_cost = '착불';
-                    break;
-                case 2:
-                    $ct_send_cost = '무료';
-                    break;
-                default:
-                    $ct_send_cost = '선불';
-                    break;
-            }
+            $sendcost = $CustomUtils->get_item_sendcost($cart_info->item_code, $sum[0]->price, $sum[0]->qty, $s_cart_id);
 
-            // 조건부무료
-            if($cart_info->item_sc_type == 2) {
-                $sendcost = $CustomUtils->get_item_sendcost($cart_info->item_code, $sum[0]->price, $sum[0]->qty, $s_cart_id);
-
-                if($sendcost == 0) $ct_send_cost = '무료';
-            }
+            if($sendcost == 0) $ct_send_cost = '무료';
+            else $ct_send_cost = number_format($sendcost).'원';
 
             $point      = $sum[0]->point;
             $sell_price = $sum[0]->price;

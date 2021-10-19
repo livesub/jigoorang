@@ -62,61 +62,11 @@
             $point      = $sum[0]->point;
             $sell_price = $sum[0]->price;
 
-            // 쿠폰
-            $cp_button = '';
-
-            if(Auth::user()) {      //회원일때(이부분 쿠폰은 분석을 더 해 봐야 함!!)
-/*
-
-                $cp_count = 0;
-
-                $sql = " select cp_id
-                            from {$g5['g5_shop_coupon_table']}
-                            where mb_id IN ( '{$member['mb_id']}', '전체회원' )
-                              and cp_start <= '".G5_TIME_YMD."'
-                              and cp_end >= '".G5_TIME_YMD."'
-                              and cp_minimum <= '$sell_price'
-                              and (
-                                    ( cp_method = '0' and cp_target = '{$row['it_id']}' )
-                                    OR
-                                    ( cp_method = '1' and ( cp_target IN ( '{$row['ca_id']}', '{$row['ca_id2']}', '{$row['ca_id3']}' ) ) )
-                                  ) ";
-                $res = sql_query($sql);
-
-                for($k=0; $cp=sql_fetch_array($res); $k++) {
-                    if(is_used_coupon($member['mb_id'], $cp['cp_id']))
-                        continue;
-
-                    $cp_count++;
-                }
-
-                if($cp_count) {
-                    $cp_button = '<button type="button" class="cp_btn">쿠폰적용</button>';
-                    $it_cp_count++;
-                }
-*/
-            }
-
             // 배송비
-            switch($cart_info->sct_send_cost)
-            {
-                case 1:
-                    $ct_send_cost = '착불';
-                    break;
-                case 2:
-                    $ct_send_cost = '무료';
-                    break;
-                default:
-                    $ct_send_cost = '선불';
-                    break;
-            }
+            $sendcost = $CustomUtils->get_item_sendcost($cart_info->item_code, $sum[0]->price, $sum[0]->qty, $s_cart_id);
 
-            // 조건부무료
-            if($cart_info->item_sc_type == 2) {
-                $sendcost = $CustomUtils->get_item_sendcost($cart_info->item_code, $sum[0]->price, $sum[0]->qty, $s_cart_id);
-
-                if($sendcost == 0) $ct_send_cost = '무료';
-            }
+            if($sendcost == 0) $ct_send_cost = '무료';
+            else $ct_send_cost = number_format($sendcost).'원';
         @endphp
             <tr>
                 <td>
@@ -132,7 +82,6 @@
                                     <input type="hidden" name="cp_price[{{ $i }}]" value="0">
 
                                     {!! $item_name !!}
-                                    {!! $cp_button !!}
                                 </table>
                             </td>
                         </tr>
@@ -286,7 +235,7 @@
                     <th scope="row">주소</th>
                     <td id="sod_frm_addr">
                         <label for="od_b_zip" class="sound_only">우편번호<strong class="sound_only"> 필수</strong></label>
-                        <input type="text" name="od_b_zip" id="od_b_zip" value="{{ $user_zip }}" required class="frm_input required" size="8" maxlength="6" placeholder="우편번호">
+                        <input type="text" name="od_b_zip" id="od_b_zip" value="{{ $user_zip }}" readonly required class="frm_input required" size="8" maxlength="6" placeholder="우편번호">
                         <button type="button" class="btn_address" onclick="win_zip('wrap_b','od_b_zip', 'od_b_addr1', 'od_b_addr2', 'od_b_addr3', 'od_b_addr_jibeon', 'btnFoldWrap_b');">주소 검색</button>
 <div id="wrap_b" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
     <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap_b" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" alt="접기 버튼">
@@ -330,6 +279,22 @@
                 <tr>
                     <td>추가배송비</td>
                     <td><strong id="od_send_cost2">0</strong>원<br>(지역에 따라 추가되는 도선료 등의 배송비입니다.)</td>
+                </tr>
+                <tr>
+                    <td>총 주문금액</td>
+                    <td><strong id="print_price">{{ number_format($tot_price) }}</strong>원</td>
+                </tr>
+
+                @if(Auth::user() && $CustomUtils->setting_infos()->company_use_point)
+                    @if(Auth::user()->user_point > 0)
+                <tr>
+                    <td>사용포인트</td>
+                    <td><input type="text" name="od_temp_point" value="{{ Auth::user()->user_point }}" id="od_temp_point" size="7" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 점</td>
+                </tr>
+                    @endif
+                @endif
+                <tr>
+                    <td>주문하기</td>
                 </tr>
             </table>
         </td>
@@ -399,23 +364,58 @@
     function calculate_sendcost(code)
     {
         //산간지역 배송비 계산
-    alert("산간지역 배송비 계산====> "+code);
-/*
-        $.post(
-            "./ordersendcost.php",
-            { zipcode: code },
-            function(data) {
-                $("input[name=od_send_cost2]").val(data);
-                $("#od_send_cost2").text(number_format(String(data)));
+        var form_var = $("#forderform").serialize();
 
-                zipcode = code;
-
-                calculate_order_price();
-            }
-        );
-*/
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+            type : 'post',
+            url : '{{ route('ajax_ordersendcost') }}',
+            data : {
+                zipcode : code
+            },
+            dataType : 'text',
+            success : function(data){
+                if(data != "no_sendcost"){
+                    const result = jQuery.parseJSON(data);
+//alert(result.sc_price);
+//return false;
+                    $("input[name=od_send_cost2]").val(result.sc_price);
+                    $("#od_send_cost2").text(numberWithCommas(String(result.sc_price)));
+//                    zipcode = code;
+                    calculate_order_price();
+                }
+            },
+            error: function(result){
+                console.log(result);
+            },
+        });
     }
 
 </script>
+
+<script>
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+</script>
+
+<script>
+    function calculate_order_price()
+    {
+        var sell_price = parseInt($("input[name=od_price]").val());
+        var send_cost = parseInt($("input[name=od_send_cost]").val());
+        var send_cost2 = parseInt($("input[name=od_send_cost2]").val());
+        var tot_price = sell_price + send_cost + send_cost2;
+
+        //$("input[name=good_mny]").val(tot_price);
+        $("#print_price").text(numberWithCommas(String(tot_price)));
+    }
+</script>
+
+
+
+
+
+
 
 @endsection

@@ -152,4 +152,22 @@ class BaesongjiController extends Controller
         exit;
     }
 
+    public function ajax_ordersendcost(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
+
+        $code         = $request->input('zipcode');
+
+        $sendcost = DB::table('sendcosts')->select('id', 'sc_price')->where([['sc_zip1', '<=', $code], ['sc_zip2', '>=', $code]])->first();
+
+        if(is_null($sendcost)){
+            echo "no_sendcost";
+            exit;
+        }else{
+            echo json_encode($sendcost);
+            exit;
+        }
+    }
+
 }
