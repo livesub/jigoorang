@@ -793,23 +793,18 @@ $um_value='80/0.5/3'
     public static function get_item_point($item, $sio_id='', $trunc=10)
     {
         $item_point = 0;
+        $item_price = $item->item_price;
 
-        if($item->item_point_type > 0) {    //판매 기준 설정 비율 일때
-            $item_price = $item->item_price;
-
-            if($item->item_point_type == 2 && $sio_id) {
-                $opts = DB::table('shopitemoptions')->select('sio_id', 'sio_price')->where([['item_code', $item->item_code],['sio_id', $sio_id],['sio_type','0'],['sio_use','1']])->first();
-                if(is_null($opts)){
-                    return false;
-                }else{
-                    if($opts->sio_id != "") $item_price += $opts->sio_price;
-                }
+        if($sio_id){
+            $opts = DB::table('shopitemoptions')->select('sio_id', 'sio_price')->where([['item_code', $item->item_code],['sio_id', $sio_id],['sio_type','0'],['sio_use','1']])->first();
+            if(is_null($opts)){
+                return false;
+            }else{
+                if($opts->sio_id != "") $item_price += $opts->sio_price;
             }
-
-            $item_point = floor(($item_price * ($item->item_point / 100) / $trunc)) * $trunc;
-        } else {
-            $item_point = $item->item_point;
         }
+
+        $item_point = floor(($item_price * ($item->item_point / 100) / $trunc)) * $trunc;
 
         return $item_point;
     }
