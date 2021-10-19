@@ -50,6 +50,30 @@ class socialLoginController extends BaseController
             $user_pw = pack('V*', rand(), rand(), rand(), rand()); //비밀번호 강제 생성
 
             if(empty($user_info)){
+                //네이버 와 카카오톡 관련 분기점이 필요
+                $user_gender = "";  //성별
+                $user_birth = "";   //생년월일
+                $user_phone = "";   //핸드폰번호
+
+                if($provider == "kakao"){
+                    dd($social_info->user['kakao_account']);
+                    $user_kakao = $social_info->user['kakao_account'];
+                    if($user_kakao['gender'] == 'male'){
+                        $user_gender = 'M';
+                    }else{
+                        $user_gender = 'W';
+                    }
+                    
+
+                }else if($provider == "naver"){
+                    //dd($social_info->user['response']);
+                    $user_naver = $social_info->user['response'];
+                    $user_gender = $user_naver['gender'];
+                    $user_phone = str_replace("-", "", $user_naver['mobile']);
+                    $user_birth = $user_naver['birthyear'].str_replace("-", "", $user_naver['birthday']);
+                    //dd($user_birth);
+                }
+
                 $create_result = User::create([
                     'user_id'               => $social_info->email,
                     'user_name'             => $social_info->name,
@@ -58,6 +82,9 @@ class socialLoginController extends BaseController
                     'user_type'             => 'N',
                     'user_platform_type'    => $provider,
                     'password'              => Hash::make($user_pw),
+                    'user_phone'            => $user_phone,
+                    'user_gender'           => $user_gender,
+                    'user_birth'            => $user_birth,
                 ]);
 
                 Auth::login($create_result, $remember = true);

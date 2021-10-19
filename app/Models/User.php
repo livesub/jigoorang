@@ -32,6 +32,8 @@ class User extends Authenticatable
         'password',
         'user_tel',
         'user_phone',
+        'user_birth',
+        'user_gender',
         'user_imagepath',
         'user_ori_imagepath',
         'user_thumb_name',

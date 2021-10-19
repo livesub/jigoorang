@@ -22,17 +22,6 @@
         </span>
     @enderror
 
-
-    <div class='form-group'>
-      <input name='user_name' id='user_name' type='text' class='form-control @error('user_name') is-invalid @enderror' value='{{ old('user_name') }}' placeholder='{{ $user_name }}'>
-    </div>
-    @error('user_name')
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-
-
     <div class='form-group'>
       <input name='user_pw' id='user_pw' type='password' class='form-control @error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder='{{ $user_pw }}'>
     </div>
@@ -47,6 +36,15 @@
       <input name='user_pw_confirmation' id='user_pw_confirmation' type='password' class='form-control @error('user_pw_confirmation') is-invalid @enderror' placeholder='{{ $user_pw_confirmation }}'>
     </div>
     @error('user_pw_confirmation')
+        <span class='invalid-feedback' role='alert'>
+            <strong>{{ $message }}</strong>
+        </span>
+    @enderror
+
+    <div class='form-group'>
+      <input name='user_name' id='user_name' type='text' class='form-control @error('user_name') is-invalid @enderror' value='{{ old('user_name') }}' placeholder='{{ $user_name }}'>
+    </div>
+    @error('user_name')
         <span class='invalid-feedback' role='alert'>
             <strong>{{ $message }}</strong>
         </span>

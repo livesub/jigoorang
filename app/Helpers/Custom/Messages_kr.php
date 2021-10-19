@@ -29,8 +29,8 @@ class Messages_kr extends Controller
         'join'  => [
             'title_join' => '회원가입',
             'submit_join' => '가입 하기',
-            'user_id' => '아이디를 이메일 형식에 맞춰 입력하세요.',
-            'user_name' => '이름을 입력 하세요.',
+            'user_id' => '아이디로 사용할 이메일 주소',
+            'user_name' => '이름을 입력 해주세요.',
             'user_pw' => '비밀번호를 입력 하세요.',
             'user_pw_confirmation' => '비밀번호를 확인 하세요.',
             'user_phone' => '전화번호를 입력 하세요.',
