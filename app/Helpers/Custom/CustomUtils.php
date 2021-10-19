@@ -21,6 +21,8 @@ use App\Helpers\Custom\Messages_kr;    //한글 error 메세지 모음
 use App\Helpers\Custom\Messages_en;    //영어 error 메세지 모음
 use Illuminate\Support\Facades\DB;
 use App\Models\shop_uniqids;    //장바구니 키
+use App\Models\shoppoints;    //포인트 모델 정의
+use App\Models\User;    //회원 모델 정의
 use Illuminate\Support\Facades\Auth;    //인증
 
 class CustomUtils extends Controller
@@ -1414,7 +1416,29 @@ $um_value='80/0.5/3'
         return $str;
     }
 
+    //사용자 포인트 조회
+    public static function user_point_chk($user_id, $po_content, $po_point, $po_use_point, $po_type, $po_write_id, $item_code)
+    {
+        $user_info = DB::table('users')->select('user_point')->where('user_id',$user_id)->first();  //사용자가 현재 가지고 있는 포인트
+
+        //포인트 테이블에 저장
+        $create_result = shoppoints::create([
+            'user_id'       => $user_id,
+            'po_content'    => $po_content,
+            'po_point'      => $po_point,
+            'po_use_point'  => $po_use_point,
+            'po_user_point' => $user_info->user_point,
+            'po_type'       => $po_type,
+            'po_write_id'   => $po_write_id,
+            'item_code'     => $item_code
+        ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
+
+        if($create_result){
+            //회원 테이블 포인트 업뎃
+            $total_point = $user_info->user_point + $po_point;
+            $up_result = DB::table('users')->where('user_id', $user_id)->update(['user_point' => $total_point]);
+        }
+
+        return true;
+    }
 }
-
-
-

@@ -46,7 +46,8 @@ class User extends Authenticatable
         'user_addr1',
         'user_addr2',
         'user_addr3',
-        'user_addr_jibeon'
+        'user_addr_jibeon',
+        'user_point'
     ];
 
     /**

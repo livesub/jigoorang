@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Hash; //비밀번호 함수
 use Illuminate\Support\Str;     //각종 함수(str_random)
 use Illuminate\Support\Facades\Mail;    //메일 class
 use Illuminate\Support\Facades\DB;
-use App\Models\shopcoupons;    //쿠폰 모델 정의
+use App\Models\shoppoints;    //포인트 모델 정의
 
 class JoinController extends Controller
 {
@@ -102,65 +102,23 @@ class JoinController extends Controller
             'user_phone' => $user_phone,
             'user_confirm_code' => $user_confirm_code,
         ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
-/*
-        $tmp_time = date("Y-m-d H:i:s", time());
-        DB::insert('insert into users (user_id, user_name, password, user_phone, user_confirm_code, created_at, updated_at) values (?, ?, ?, ?, ?, ?, ? )', [$user_id, $user_name, Hash::make($user_pw), $user_phone, $user_confirm_code, $tmp_time, $tmp_time]);
-*/
 
-        /** 가입 쿠폰 추가(211007) **/
-        $setting_info = DB::table('shopsettings')->first();
+        /** 가입 포인트 추가(211015) **/
+        $setting_info = CustomUtils::setting_infos();
 
-        //if($setting_info->member_reg_coupon_use && $setting_info->member_reg_coupon_term > 0 && $setting_info->member_reg_coupon_price > 0) {
-        //가입 쿠폰 유효 기간이 없다고 함 나중에 생기면 이거
-        if($setting_info->member_reg_coupon_use && $setting_info->member_reg_coupon_price > 0) {
-            $j = 0;
-            $create_coupon = false;
+        $po_content = date('Y-m-d')." 회원 가입 축하";
+        $po_point = $setting_info->member_reg_point;    //지급 포인트 금액
+        $po_use_point = 0;  //사용금액
+        $po_type = 1;   //적립금 지급 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>기타등등
+        $po_write_id = 0;   //적립금 지급 유형 글번호
+        $item_code = '';    //상품코드
 
-            do {
-                $cp_id = CustomUtils::get_coupon_id();
-                $cp_cnt = DB::table('shopcoupons')->where('cp_id',$cp_id)->count();
+        $po_cnt = DB::table('shoppoints')->where([['user_id', $user_id],['po_type',1]])->count(); //신규 회원 가입시 이미 주어진 포인트가 있는지
 
-                if(!$cp_cnt) {
-                    $create_coupon = true;
-                    break;
-                } else {
-                    if($j > 20)
-                        break;
-                }
-            } while(1);
-
-            if($create_coupon) {
-                $cp_subject = '신규 회원가입 축하 쿠폰';
-                $cp_method = 2;
-                $cp_target = '';
-                $cp_start = date("Y-m-d", time());
-                //$cp_end = date("Y-m-d", (time() + (86400 * ((int)$setting_info->member_reg_coupon_term - 1))));   //가입 쿠폰 유효 기간이 없다고 함 나중에 생기면 이거
-                $cp_end = '';
-
-                $cp_type = 0;
-                $cp_price = $setting_info->member_reg_coupon_price;
-                $cp_trunc = 1;
-                $cp_minimum = $setting_info->member_reg_coupon_minimum;
-                $cp_maximum = 0;
-
-                $create_result = shopcoupons::create([
-                    'cp_id'         => $cp_id,
-                    'cp_subject'    => $cp_subject,
-                    'cp_method'     => $cp_method,
-                    'cp_target'     => $cp_target,
-                    'user_id'       => $user_id,
-                    'cp_start'      => $cp_start,
-                    'cp_end'        => $cp_end,
-                    'cp_type'       => $cp_type,
-                    'cp_price'      => $cp_price,
-                    'cp_minimum'    => $cp_minimum,
-                    'cp_maximum'    => $cp_maximum,
-                ])->exists();
-
-                //if($create_result) set_session('ss_member_reg_coupon', 1);
-            }
+        if($setting_info->member_reg_point > 0 && $po_cnt == 0){
+            CustomUtils::user_point_chk($user_id, $po_content, $po_point, $po_use_point, $po_type, $po_write_id, $item_code);
         }
-        /** 가입 쿠폰 추가(211007) 끝 **/
+        /** 가입 포인트 추가(211015) 끝 **/
 
         $data = array(
             'user_name' => $user_name,

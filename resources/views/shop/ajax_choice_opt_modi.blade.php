@@ -121,11 +121,11 @@ function formcheck(f)
         return false;
     }
 
-    var queryString = $("form[name=foption]").serialize() ;
+    var form_var = $("form[name=foption]").serialize() ;
     $.ajax({
         type : 'post',
         url : '{{ route('ajax_cart_register') }}',
-        data : queryString,
+        data : form_var,
         dataType : 'text',
         success : function(result){
 //alert(result);

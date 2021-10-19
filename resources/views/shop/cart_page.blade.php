@@ -257,11 +257,11 @@ function form_check(act) {
         }
 
         $("#act").val(act);
-        var queryString = $("form[name=frmcartlist]").serialize() ;
+        var form_var = $("form[name=frmcartlist]").serialize() ;
         $.ajax({
             type : 'post',
             url : '{{ route('ajax_cart_register') }}',
-            data : queryString,
+            data : form_var,
             dataType : 'text',
             success : function(result){
 //alert(result);
@@ -297,11 +297,11 @@ function form_check(act) {
         if (confirm("정말 비우시겠습니까?") == true){    //확인
             $("#act").val(act);
 
-            var queryString = $("form[name=frmcartlist]").serialize() ;
+            var form_var = $("form[name=frmcartlist]").serialize() ;
             $.ajax({
                 type : 'post',
                 url : '{{ route('ajax_cart_register') }}',
-                data : queryString,
+                data : form_var,
                 dataType : 'text',
                 success : function(result){
 //alert(result);
@@ -326,11 +326,11 @@ function form_check(act) {
         if (confirm("정말 삭제하시겠습니까?") == true){    //확인
             $("#act").val(act);
 
-            var queryString = $("form[name=frmcartlist]").serialize() ;
+            var form_var = $("form[name=frmcartlist]").serialize() ;
             $.ajax({
                 type : 'post',
                 url : '{{ route('ajax_cart_register') }}',
-                data : queryString,
+                data : form_var,
                 dataType : 'text',
                 success : function(result){
     //alert(result);
