@@ -161,7 +161,6 @@ class ItemController extends Controller
             $supply_item = $CustomUtils->get_item_supply($item_info[0]->item_code, $item_info[0]->item_supply_subject, '');
         }
 
-
         return view('shop.item_detail',[
             "item_info"         => $item_info[0],
             "big_img_disp"      => $big_img_disp,

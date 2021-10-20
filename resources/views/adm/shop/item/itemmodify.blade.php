@@ -281,7 +281,7 @@
 
     <tr>
         <td>적립금</td>
-        <td>
+        <td>적립금 값이 0 일때 적립금이 제공되지 않습니다<br>
             <input type="text" name="item_point" value="{{ $item_info->item_point }}" id="item_point" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">%
         </td>
     </tr>

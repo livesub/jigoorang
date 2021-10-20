@@ -12,6 +12,8 @@
 <table border=1>
 <form name="send_form" id="send_form" method="post" action="">
 {!! csrf_field() !!}
+<input type="hidden" name="act" id="act">
+<input type="hidden" name="num" id="num">
     <tr>
         <td colspan=4>추가 배송비 내역</td>
     </tr>
@@ -20,6 +22,7 @@
         <td>지역명</td>
         <td>우편번호</td>
         <td>추가배송비</td>
+        <td>수정</td>
     </tr>
     @php
         $i = 0;
@@ -30,6 +33,7 @@
         <td>{{ $sendcost->sc_name }}</td>
         <td>{{ $sendcost->sc_zip1 }} ~ {{ $sendcost->sc_zip2 }}</td>
         <td>{{ number_format($sendcost->sc_price) }}원</td>
+        <td><button type="button" onclick="sendcost_modi({{ $sendcost->id }});">수정</button></td>
     </tr>
     @php
         $i++;
@@ -57,7 +61,7 @@
         <td><input type="text" name="sc_price" id="sc_price" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" size="5">원</td>
     </tr>
     <tr>
-        <td><button type="button" onclick="sendcost_regi();">등록</button></td>
+        <td><button type="button" id="btn" onclick="sendcost_regi();">등록</button></td>
     </tr>
 </form>
 </table>
@@ -97,6 +101,8 @@
             data : form_var,
             dataType : 'text',
             success : function(result){
+//alert(result);
+//return false;
                 if(result == "ok"){
                     location.href = "{{ route('shop.sendcost.index') }}";
                 }
@@ -158,7 +164,32 @@
     }
 </script>
 
-
+<script>
+    function sendcost_modi(num){
+        $.ajax({
+            type : 'get',
+            url : '{{ route('shop.sendcost.ajax_modi_sendcost') }}',
+            data : {
+                'num'   : num
+            },
+            dataType : 'text',
+            success : function(result){
+                var json = JSON.parse(result);
+                $("#act").val("modi");
+                $("#num").val(json.id);
+                $("#sc_name").val(json.sc_name);
+                $("#sc_zip1").val(json.sc_zip1);
+                $("#sc_zip2").val(json.sc_zip2);
+                $("#sc_price").val(json.sc_price);
+                $("#send_form").attr("action", "{{ route('shop.sendcost.ajax_regi_sendcost') }}");
+                $("#btn").html('수정');
+            },
+            error: function(result){
+                console.log(result);
+            },
+        });
+    }
+</script>
 
 
 

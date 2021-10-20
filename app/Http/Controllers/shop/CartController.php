@@ -59,12 +59,12 @@ class CartController extends Controller
         if($act == "buy")
         {
             if(!count($post_ct_chk)){
-                echo "no_item";
+                echo json_encode(['message' => 'no_item']);
                 exit;
             }
 
             // 선택필드 초기화
-            $up_result = shopcarts::whereod_id($tmp_cart_id)->first();  //update 할때 미리 값을 조회 하고 쓰면 update 구문으로 자동 변경
+            $up_result = shopcarts::whereod_id($tmp_cart_id)->first();
             $up_result->sct_select = 0;
             $result_up = $up_result->save();
 
@@ -95,9 +95,8 @@ class CartController extends Controller
                             $item_option = $cart_info->item_name;
                             if($cart_info->sio_id) $item_option .= '('.$cart_info->sct_option.')';
 
-                            echo "no_qty";
+                            echo json_encode(['message' => 'no_qty', 'option' => $item_option, 'sum_qty' => number_format($it_stock_qty - $sum_qty)]);
                             exit;
-                            //alert($item_option." 의 재고수량이 부족합니다.\\n\\n현재 재고수량 : " . number_format($it_stock_qty - $sum_qty) . " 개");
                         }
                     }
 
@@ -106,17 +105,17 @@ class CartController extends Controller
             }
 
             if(Auth::user() != ""){     // 회원인 경우
-                echo "mem_order";
+                echo json_encode(['message' => 'mem_order']);
                 exit;
             }else{      // 비회원인 경우
-                echo "no_mem_order";
+                echo json_encode(['message' => 'no_mem_order']);
                 exit;
             }
         }else if ($act == "alldelete"){ // 비우기 이면
             DB::table('shopcarts')->where('od_id',$tmp_cart_id)->delete();   //row 삭제
         }else if ($act == "seldelete"){ // 선택삭제
             if(!count($post_ct_chk)){
-                echo "no_cnt";
+                echo json_encode(['message' => 'no_cnt']);
                 exit;
             }
 
@@ -136,7 +135,7 @@ class CartController extends Controller
             $count = count($post_item_codes);
 
             if ($count < 1){
-                echo "no_carts";
+                echo json_encode(['message' => 'no_carts']);
                 exit;
             }
 
@@ -162,7 +161,7 @@ class CartController extends Controller
 
                 if($opt_count && isset($post_io_types[$item_code][0]) && $post_io_types[$item_code][0] != 0)
                 {
-                    echo "no_option";
+                    echo json_encode(['message' => 'no_option']);
                     exit;
                 }
 
@@ -170,7 +169,7 @@ class CartController extends Controller
                 $item_info = $CustomUtils->get_shop_item($item_code, false);
 
                 if(!$item_info[0]->item_code){
-                    echo "no_items";
+                    echo json_encode(['message' => 'no_items']);
                     exit;
                 }
 
@@ -222,7 +221,7 @@ class CartController extends Controller
 
                         if ($sct_qty + $sum_qty > $it_stock_qty)
                         {
-                            echo "no_qty";
+                            echo json_encode(['message' => 'no_qty1111']);
                             exit;
                         }
                     }
@@ -265,12 +264,12 @@ class CartController extends Controller
                     // 구매가격이 음수인지 체크
                     if($sio_type) {
                         if((int)$sio_price < 0){
-                            echo "negative_price";
+                            echo json_encode(['message' => 'negative_price']);
                             exit;
                         }
                     } else {
                         if((int)$item_info[0]->item_price + (int)$sio_price < 0){
-                            echo "negative_price";
+                            echo json_encode(['message' => 'negative_price']);
                             exit;
                         }
                     }
@@ -282,14 +281,16 @@ class CartController extends Controller
                         // 재고체크
                         $tmp_ct_qty = $sam_opt[0]->sct_qty;
 
-                        if(!$sio_id)
+                        if(!$sio_id){
                             $tmp_it_stock_qty = $CustomUtils->get_item_stock_qty($item_code);
-                        else
+                        }else{
                             $tmp_it_stock_qty = $CustomUtils->get_option_stock_qty($item_code, $sio_id, $sam_opt[0]->sio_type);
+                        }
 
                         if ($tmp_ct_qty + $sct_qty > $tmp_it_stock_qty)
                         {
-                            echo "no_qty";
+                            //echo json_encode(['message' => 'no_qty', 'option' => $sio_value, 'sum_qty' => number_format($tmp_it_stock_qty - $tmp_ct_qty)]);
+                            echo json_encode(['message' => 'no_qty', 'option' => $sio_value, 'sum_qty' => number_format($tmp_it_stock_qty)]);
                             exit;
                         }
 
@@ -369,16 +370,16 @@ class CartController extends Controller
             // 바로 구매일 경우
             if(Auth::user() != ""){
                 //회원
-                echo "yes_mem";
+                echo json_encode(['message' => 'yes_mem']);
                 exit;
             }else{
                 //비회원
-                echo "no_mem";
+                echo json_encode(['message' => 'no_mem']);
                 exit;
             }
         }else{
             //장바구니
-            echo "cart_page";
+            echo json_encode(['message' => 'cart_page']);
             exit;
         }
     }

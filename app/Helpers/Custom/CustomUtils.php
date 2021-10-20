@@ -1070,7 +1070,7 @@ $um_value='80/0.5/3'
         $daegi = 0;
 
         // 재고에서 빼지 않았고 주문인것만
-        $sct_qty = DB::table('shopcarts')->where([['item_code',$item_code], ['sio_id',''], ['sct_stock_use','0'], ['sct_status','in','(\'주문\', \'입금\', \'준비\')']])->sum('sct_qty');
+        $sct_qty = DB::table('shopcarts')->where([['item_code',$item_code], ['sio_id',''], ['sct_stock_use','0']])->whereRaw('sct_status in (\'주문\', \'입금\', \'준비\')')->sum('sct_qty');
         $daegi = (int)$sct_qty;
 
         return $jaego_cnt - $daegi;
@@ -1084,7 +1084,7 @@ $um_value='80/0.5/3'
         $daegi = 0;
 
         // 재고에서 빼지 않았고 주문인것만
-        $sct_qty = DB::table('shopcarts')->where([['item_code',$item_code], ['sio_id',$sio_id], ['sio_type',$type], ['sct_stock_use','0'], ['sct_status','in','(\'주문\', \'입금\', \'준비\')']])->sum('sct_qty');
+        $sct_qty = DB::table('shopcarts')->where([['item_code',$item_code], ['sio_id',$sio_id], ['sct_stock_use','0']])->whereRaw('sct_status in (\'주문\', \'입금\', \'준비\')')->sum('sct_qty');
         $daegi = (int)$sct_qty;
 
         return $jaego_cnt - $daegi;

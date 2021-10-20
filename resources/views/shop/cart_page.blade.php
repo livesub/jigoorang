@@ -20,7 +20,6 @@
         <td>상품명</td>
         <td>총수량</td>
         <td>판매가</td>
-        <td>적립금</td>
         <td>배송비</td>
         <td>소계</td>
     </tr>
@@ -86,7 +85,6 @@
         </td>
         <td>{{ number_format($sum[0]->qty) }}</td>
         <td>{{ number_format($cart_info->sct_price) }}</td>
-        <td>{{ number_format($point) }}</td>
         <td>{{ $ct_send_cost }}</td>
         <td><span id="sell_price_{{ $num }}" class="total_prc">{{ number_format($sell_price) }}</span></td>
     </tr>
@@ -126,8 +124,6 @@
     <tr>
         <td>배송비</td>
         <td><strong>{{ number_format($send_cost)  }}</strong> 원</td>
-        <td>포인트</td>
-        <td><strong>{{ number_format($tot_point)  }}</strong> 점</td>
         <td>총계 가격</td>
         <td><strong>{{ number_format($tot_price) }}</strong> 원</td>
     </tr>
@@ -250,22 +246,23 @@ function form_check(act) {
             data : form_var,
             dataType : 'text',
             success : function(result){
-//alert(result);
-                if(result == "no_item"){
+                var json = JSON.parse(result);
+
+                if(json.message == "no_item"){
                     alert("주문하실 상품을 하나이상 선택해 주십시오.");
                     return false;
                 }
 
-                if(result == "no_qty"){
-                    alert("재고수량이 부족합니다.");
+                if(json.message == "no_qty"){
+                    alert(json.option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.sum_qty + " 개");
                     return false;
                 }
 
-                if(result == "mem_order"){  //회원 주문
+                if(json.message == "mem_order"){  //회원 주문
                     location.href = "{{ route('orderform') }}";
                 }
 
-                if(result == "no_mem_order"){  //비회원 주문
+                if(json.message == "no_mem_order"){  //비회원 주문
                     location.href = "{{ route('login.index','url='.urlencode(route('orderform'))) }}";
                 }
             },
@@ -291,7 +288,9 @@ function form_check(act) {
                 dataType : 'text',
                 success : function(result){
 //alert(result);
-                    if(result == "cart_page"){
+                    var json = JSON.parse(result);
+
+                    if(json.message == "cart_page"){
                         location.href = "{{ route('cartlist') }}";
                     }
                 },

@@ -135,5 +135,13 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'as' => 'shop.sendcost.ajax_del_sendcost',
         'uses' => 'App\Http\Controllers\adm\shop\sendcost\SendcostController@ajax_del_sendcost',
     ]);
+
+    //추가 배송비 관리 수정
+    Route::get('sendcostmodi', [
+        'as' => 'shop.sendcost.ajax_modi_sendcost',
+        'uses' => 'App\Http\Controllers\adm\shop\sendcost\SendcostController@ajax_modi_sendcost',
+    ]);
+
+
 });
 

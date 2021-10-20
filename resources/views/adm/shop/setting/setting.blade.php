@@ -82,6 +82,7 @@
             <textarea name="company_bank_account" id="company_bank_account">{{ $company_bank_account }}</textarea>
         </td>
     </tr>
+
     <tr>
         <td><b>포인트 사용</b></td>
         <td>
@@ -97,7 +98,7 @@
 
 <table border=1>
     <tr>
-        <td><b>회원가입시 포인트</b></td>
+        <td><b>회원가입시 적립금</b></td>
         <td>
             <input type="text" name="member_reg_point" value="{{ $member_reg_point }}" id="member_reg_point" class="frm_input" size="10"> 원
         </td>

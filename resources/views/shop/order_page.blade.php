@@ -20,7 +20,6 @@
         <th scope="col">총수량</th>
         <th scope="col">판매가</th>
         <th scope="col">소계</th>
-        <th scope="col">포인트</th>
         <th scope="col">배송비</th>
     </tr>
     @php
@@ -96,9 +95,6 @@
                 </td>
                 <td>
                     {{ number_format($sell_price) }}
-                </td>
-                <td>
-                    {{ number_format($point) }}
                 </td>
                 <td>
                     {{ $ct_send_cost }}
@@ -269,12 +265,11 @@
                     <td>{{ number_format($send_cost) }}원</td>
                 </tr>
                 <tr>
-                    <td>포인트</td>
-                    <td colspan="2">{{ number_format($tot_point) }}원</td>
-                </tr>
-                <tr>
                     <td>총계</td>
-                    <td colspan="2" id="ct_tot_price">{{ number_format($tot_price) }}원</td>
+                    <td colspan="2" >
+                        <input type="hidden" id="ori_ct_tot_price" value="{{ $tot_price }}">
+                        <span id="ct_tot_price">{{ number_format($tot_price) }}원</span>
+                    </td>
                 </tr>
                 <tr>
                     <td>추가배송비</td>
@@ -288,13 +283,24 @@
                 @if(Auth::user() && $CustomUtils->setting_infos()->company_use_point)
                     @if(Auth::user()->user_point > 0)
                 <tr>
-                    <td>사용포인트</td>
+                    <td>사용적립금</td>
                     <td><input type="text" name="od_temp_point" value="{{ Auth::user()->user_point }}" id="od_temp_point" size="7" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 점</td>
                 </tr>
                     @endif
                 @endif
+
                 <tr>
-                    <td>주문하기</td>
+                    <td>결제수단</td>
+                    <td>
+                        <table border=1>
+                            <tr>
+                                <td><button type="button" onclick="bank();">무통장</button></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button type="button">주문하기</button></td>
                 </tr>
             </table>
         </td>
@@ -383,6 +389,11 @@
                     $("#od_send_cost2").text(numberWithCommas(String(result.sc_price)));
 //                    zipcode = code;
                     calculate_order_price();
+                }else{
+                    var ori_ct_tot_price = $("#ori_ct_tot_price").val();
+                    $("input[name=od_send_cost2]").val(ori_ct_tot_price);
+                    $("#od_send_cost2").text(0);
+                    $("#print_price").text(numberWithCommas(String(ori_ct_tot_price)));
                 }
             },
             error: function(result){
@@ -413,7 +424,11 @@
 </script>
 
 
-
+<script>
+    function bank(){
+        alert("bank");
+    }
+</script>
 
 
 
