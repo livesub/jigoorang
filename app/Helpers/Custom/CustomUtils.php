@@ -790,8 +790,9 @@ $um_value='80/0.5/3'
         }
     }
 
-    public static function get_item_point($item, $sio_id='', $trunc=10)
+    public static function get_item_point($item, $sio_id='', $trunc=1)
     {
+        //$trunc 절사 단위
         $item_point = 0;
         $item_price = $item->item_price;
 
@@ -800,7 +801,9 @@ $um_value='80/0.5/3'
             if(is_null($opts)){
                 return false;
             }else{
-                if($opts->sio_id != "") $item_price += $opts->sio_price;
+                if($opts->sio_id != ""){
+                    $item_price += $opts->sio_price;
+                }
             }
         }
 

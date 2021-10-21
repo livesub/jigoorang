@@ -98,3 +98,15 @@ Route::post('/ordersendcost', [
     'as' => 'ajax_ordersendcost',
     'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_ordersendcost',
 ]);
+
+//무통장 입금(은행명 등 호출)
+Route::get('/orderbank', [
+    'as' => 'ajax_orderbank',
+    'uses' => 'App\Http\Controllers\shop\OrderController@ajax_orderbank',
+]);
+
+//재고체크
+Route::get('/orderstock', [
+    'as' => 'ajax_orderstock',
+    'uses' => 'App\Http\Controllers\shop\OrderController@ajax_orderstock',
+]);

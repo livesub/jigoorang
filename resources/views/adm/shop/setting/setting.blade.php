@@ -13,7 +13,7 @@
 <form name="set_form" id="set_form" method="post" action="{{ route('shop.setting.savesetting') }}">
 {!! csrf_field() !!}
 <input type="hidden" name="id" id="id" value="{{ $id }}">
-
+<input type="hidden" name="company_use_point" value="1">
 <table border=1>
     <tr>
         <td colspan="2"><b>사업자 정보</b></td>
@@ -80,17 +80,6 @@
         <td><b>은행계좌번호</b></td>
         <td>
             <textarea name="company_bank_account" id="company_bank_account">{{ $company_bank_account }}</textarea>
-        </td>
-    </tr>
-
-    <tr>
-        <td><b>포인트 사용</b></td>
-        <td>
-            @php
-                if($company_use_point != "0" || $company_use_point == 1) $use_point_checked = "checked";
-                else $use_point_checked = "";
-            @endphp
-            <input type="checkbox" name="company_use_point" value="1" id="company_use_point" {{ $use_point_checked }}> 사용
         </td>
     </tr>
 </table>
