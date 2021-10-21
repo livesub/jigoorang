@@ -24,6 +24,12 @@ class CreateSendcostsTable extends Migration
         });
 
         DB::statement("ALTER TABLE sendcosts comment '추가 배송비 관리'");
+
+        DB::table('sendcosts')->insert([
+            ['sc_name' => '인천광역시 중구', 'sc_zip1' => '22386', 'sc_zip2' => '22388', 'sc_price' => '5000'],
+            ['sc_name' => '인천광역시 강화군', 'sc_zip1' => '23004', 'sc_zip2' => '23010', 'sc_price' => '5000'],
+            ['sc_name' => '인천광역시 옹진군', 'sc_zip1' => '23101', 'sc_zip2' => '23116', 'sc_price' => '5000'],
+        ]);
     }
 
     /**
