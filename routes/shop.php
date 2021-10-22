@@ -116,3 +116,10 @@ Route::get('/orderstock', [
     'as' => 'ajax_orderstock',
     'uses' => 'App\Http\Controllers\shop\OrderController@ajax_orderstock',
 ]);
+
+//결제 하기
+Route::post('/orderpayment', [
+    'as' => 'orderpayment',
+    'uses' => 'App\Http\Controllers\shop\OrderController@orderpayment',
+]);
+

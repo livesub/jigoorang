@@ -15,7 +15,7 @@
 </table>
 
 
-<form name="forderform" id="forderform" method="post" action="" autocomplete="off">
+<form name="forderform" id="forderform" method="post" action="{{ route('orderpayment') }}" autocomplete="off">
 {!! csrf_field() !!}
 <table border=1>
     <tr>
@@ -598,7 +598,8 @@
             }
         }
         @endif
-
+/*
+    차후 결제 방법 추가!!!!
         if($("#pay_type").val() == ""){
             alert('결제 수단을 선택 하세요.');
             return false;
@@ -619,7 +620,8 @@
                 break;
             }
         }
-
+*/
+        $("#forderform").submit();
     }
 </script>
 

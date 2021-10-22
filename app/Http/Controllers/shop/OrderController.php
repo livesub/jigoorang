@@ -277,4 +277,28 @@ class OrderController extends Controller
         exit;
     }
 
+    //결제 하기
+    public function orderpayment(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
+
+        // 장바구니가 비어있는가?
+        if($CustomUtils->get_session("ss_direct")){
+            $tmp_cart_id = $CustomUtils->get_session('ss_cart_direct');
+        }else{
+            $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
+        }
+
+        //$sw_direct  = $request->input('sw_direct');     //장바구니 0, 바로구매 1
+
+        if ($CustomUtils->get_cart_count($tmp_cart_id) == 0) {    // 장바구니에 담기
+            $CustomUtils->add_order_post_log($request->input(), '장바구니가 비어 있습니다.');
+            return redirect()->route('cartlist')->with('alert_messages', '장바구니가 비어 있습니다.\\n\\n이미 주문하셨거나 장바구니에 담긴 상품이 없는 경우입니다.');
+            exit;
+        }
+echo "order 만들어야 함!!!!";
+exit;
+
+    }
 }

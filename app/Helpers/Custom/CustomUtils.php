@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\DB;
 use App\Models\shop_uniqids;    //장바구니 키
 use App\Models\shoppoints;    //포인트 모델 정의
 use App\Models\User;    //회원 모델 정의
+use App\Models\wishs;    //wish 모델 정의
 use Illuminate\Support\Facades\Auth;    //인증
 
 class CustomUtils extends Controller
@@ -1400,4 +1401,34 @@ $um_value='80/0.5/3'
 
         return true;
     }
+
+    // 주문요청기록 로그를 남깁니다.
+    public function add_order_post_log($request, $msg='', $code='error'){
+
+        if( empty($request) ) return;
+
+        $post_data = base64_encode(serialize($request));
+        $od_id = $this->get_session('ss_order_id');
+
+        if( $code === 'delete' ){
+            DB::table('shoppostlogs')->where([['oid', $od_id], ['user_id', Auth::user()->user_id],['ol_code','!=', 'error']])->orwhere('created_at','<', date('Y-m-d H:i:s', strtotime('-15 day', time())))->delete();
+            return;
+        }
+
+        $create_result = shoppostlogs::create([
+            'oid'       => $od_id,
+            'user_id'   => Auth::user()->user_id,
+            'post_data' => $item_code,
+            'ol_code'   => $code,
+            'ol_msg'    => addslashes($msg),
+            'ol_ip'     => $_SERVER['REMOTE_ADDR'],
+        ]);
+        $create_result->save();
+
+        if($create_result){
+            DB::table('shoppostlogs')->where('created_at', '<', date('Y-m-d H:i:s', strtotime('-15 day', time())))->delete();
+        }
+    }
+
+
 }
