@@ -85,8 +85,8 @@
     function file_down(id)
     {
         $("#id").val(id);
-        $("#item_form").attr("action", "{{ route('shop.cate.scate_downloadfile') }}");
-        $("#item_form").submit();
+        $("#cate_modi_form").attr("action", "{{ route('shop.cate.scate_downloadfile') }}");
+        $("#cate_modi_form").submit();
     }
 </script>
 
