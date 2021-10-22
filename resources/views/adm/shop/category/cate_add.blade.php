@@ -18,7 +18,7 @@
 </table>
 
 <table border=1>
-<form name="cate_add_form" id="cate_add_form" method="post" action="{{ route('shop.cate.cate_add_save') }}">
+<form name="cate_add_form" id="cate_add_form" method="post" action="{{ route('shop.cate.cate_add_save') }}" enctype='multipart/form-data'>
 {!! csrf_field() !!}
 <input type="hidden" name="mk_sca_id" id="mk_sca_id" value="{{ $mk_sca_id }}">
 <input type="hidden" name="page" id="page" value="{{ $page }}">
@@ -39,6 +39,16 @@
         <td>출력순서</td>
         <td><input type="text" name="sca_rank" id="sca_rank" maxlength="3" size="3"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><br>※ 숫자만 입력 하세요. 숫자가 높을 수록 먼저 출력 됩니다. </td>
     </tr>
+    <tr>
+        <td>이미지</td>
+        <td>
+            <input type="file" name="sca_img" id="sca_img">
+            @error('sca_img')
+                <strong>{{ $message }}</strong>
+            @enderror
+        </td>
+    </tr>
+
     <tr>
         <td colspan="6"><button type="button" onclick="add_cate();">카테고리 추가</button></td>
     </tr>

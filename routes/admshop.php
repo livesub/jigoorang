@@ -37,6 +37,12 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'uses' => 'App\Http\Controllers\adm\shop\category\AdmShopCategoryController@cate_add',
     ]);
 
+    Route::post('scate_downloadfile', [  //카테고리 이미지 다운로드
+        'as' => 'shop.cate.scate_downloadfile',
+        'uses' => 'App\Http\Controllers\adm\shop\item\AdmShopCategoryController@downloadfile',
+    ]);
+
+
     Route::post('scate_add_save', [      //카테고리 추가
         'as' => 'shop.cate.cate_add_save',
         'uses' => 'App\Http\Controllers\adm\shop\category\AdmShopCategoryController@cate_add_save',

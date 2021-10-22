@@ -76,7 +76,7 @@
 
 <table>
     <tr>
-        <td><button type="button" onclick="location.href='{{ route('shop.cate.create') }}'">카테고리 등록</button></td>
+        <td><button type="button" onclick="location.href='{{ route('shop.cate.create') }}'">1단계 카테고리 등록</button></td>
     </tr>
 </table>
 

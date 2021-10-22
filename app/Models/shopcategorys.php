@@ -26,6 +26,8 @@ class shopcategorys extends Model
         'sca_name_en',
         'sca_display',
         'sca_rank',
+        'sca_img_ori_file_name',
+        'sca_img',
     ];
 
     protected $hidden = [

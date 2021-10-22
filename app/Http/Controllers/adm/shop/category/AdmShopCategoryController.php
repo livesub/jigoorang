@@ -9,6 +9,7 @@ use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
 use Illuminate\Support\Facades\Auth;    //인증
 use Illuminate\Support\Facades\DB;
 use App\Models\shopcategorys;    //카테고리 모델 정의
+use Validator;  //체크
 
 class AdmShopCategoryController extends Controller
 {
@@ -27,8 +28,8 @@ class AdmShopCategoryController extends Controller
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
         $pageNum     = $request->input('page');
-        $writeList   = 10;  //10갯씩 뿌리기
-        $pageNumList = 10; // 한 페이지당 표시될 글 갯수
+        $writeList   = 15;  //15갯씩 뿌리기
+        $pageNumList = 15; // 한 페이지당 표시될 글 갯수
         $type = 'shopcate';
 
         $page_control = CustomUtils::page_function('shopcategorys',$pageNum,$writeList,$pageNumList,$type,'','','','');
@@ -158,6 +159,13 @@ class AdmShopCategoryController extends Controller
 
         $sublen = strlen($subid);
 
+        //첨부 파일 저장소
+        $target_path = "data/shopcate";
+        if (!is_dir($target_path)) {
+            @mkdir($target_path, 0755);
+            @chmod($target_path, 0755);
+        }
+
         return view('adm.shop.category.cate_add',[
             'mk_sca_id'         => $subid,
             'page'              => $page,
@@ -182,17 +190,65 @@ class AdmShopCategoryController extends Controller
         $sca_name_en     = $request->input('sca_name_en');
         $sca_display     = $request->input('sca_display');
         $sca_rank        = $request->input('sca_rank');
-        $page           = $request->input('page');
+        $page            = $request->input('page');
 
         if($sca_rank == "") $sca_rank = 0;
 
-        $create_result = shopcategorys::create([
+        //DB 저장 배열 만들기
+        $data = array(
             'sca_id'      => $sca_id,
             'sca_name_kr' => addslashes($sca_name_kr),
             'sca_name_en' => addslashes($sca_name_en),
             'sca_display' => $sca_display,
             'sca_rank'    => $sca_rank,
-        ])->exists();
+        );
+
+        //이미지 첨부
+        $fileExtension = 'jpeg,jpg,png,gif,bmp,GIF,PNG,JPG,JPEG,BMP';  //이미지 일때 확장자 파악(이미지일 경우 썸네일 하기 위해)
+        $upload_max_filesize = ini_get('upload_max_filesize');  //서버 설정 파일 용량 제한
+        $upload_max_filesize = substr($upload_max_filesize, 0, -1); //2M (뒤에 M자르기)
+
+        $path = 'data/shopcate';     //첨부물 저장 경로
+
+        if($request->hasFile('sca_img'))
+        {
+            $thumb_name = "";
+            $item_img = $request->file('sca_img');
+            $file_type = $item_img->getClientOriginalExtension();    //이미지 확장자 구함
+            $file_size = $item_img->getSize();  //첨부 파일 사이즈 구함
+
+            //서버 php.ini 설정에 따른 첨부 용량 확인(php.ini에서 바꾸기)
+            $max_size_mb = $upload_max_filesize * 1024;   //라라벨은 kb 단위라 함
+
+            //첨부 파일 용량 예외처리
+            Validator::validate($request->all(), [
+                'sca_img'  => ['max:'.$max_size_mb, 'mimes:'.$fileExtension]
+            ], ['max' => $upload_max_filesize."MB 까지만 저장 가능 합니다.", 'mimes' => $fileExtension.' 파일만 등록됩니다.']);
+
+            $attachment_result = CustomUtils::attachment_save($item_img,$path); //위의 패스로 이미지 저장됨
+            if(!$attachment_result[0])
+            {
+                return redirect()->route('shop.cate.cate_add')->with('alert_messages', $Messages::$file_chk['file_chk']['file_false']);
+                exit;
+            }else{
+                //썸네일 만들기
+                for($k = 0; $k < 2; $k++){
+                    $resize_width_file_tmp = explode("%%","500%%100");
+                    $resize_height_file_tmp = explode("%%","500%%100");
+
+                    $thumb_width = $resize_width_file_tmp[$k];
+                    $thumb_height = $resize_height_file_tmp[$k];
+
+                    $is_create = false;
+                    $thumb_name .= "@@".CustomUtils::thumbnail($attachment_result[1], $path, $path, $thumb_width, $thumb_height, $is_create, $is_crop=false, $crop_mode='center', $is_sharpen=false, $um_value='80/0.5/3');
+                }
+
+                $data['sca_img_ori_file_name'] = $attachment_result[2];  //배열에 추가 함
+                $data['sca_img'] = $attachment_result[1].$thumb_name;  //배열에 추가 함
+            }
+        }
+
+        $create_result = shopcategorys::create($data)->exists();
 
         if($create_result) return redirect()->route('shop.cate.index','&page='.$page)->with('alert_messages', $Messages::$category['insert']['in_ok']);
         else return redirect()->route('shop.cate.index')->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);  //치명적인 에러가 있을시 alert로 뿌리기 위해
@@ -278,5 +334,26 @@ class AdmShopCategoryController extends Controller
         }else{
             return redirect()->route('shop.cate.index','page='.$page)->with('alert_messages', $Messages::$category['del']['del_chk']);
         }
+    }
+
+    public function downloadfile(Request $request)
+    {
+        $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
+dd("aaaaaaaaaaaaaa");
+        $id         = $request->input('id');
+        $ca_id      = $request->input('ca_id');
+        $file_num   = $request->input('file_num');
+
+        $item_ori_file = "item_ori_img$file_num";
+        $item_img = "item_img$file_num";
+
+        $item_info = DB::table('shopitems')->select($item_ori_file, $item_img)->where([['id', $id], ['sca_id',$ca_id]])->first();    //게시물 정보 추출
+
+        $file_cut = explode("@@",$item_info->$item_img);
+        $path = 'data/shopitem';     //첨부물 저장 경로
+
+        $down_file = public_path($path.'/'.$file_cut[0]);
+
+        return response()->download($down_file, $item_info->$item_ori_file);
     }
 }
