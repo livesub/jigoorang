@@ -20,7 +20,7 @@ class CreateSendcostsTable extends Migration
             $table->char('sc_zip2')->length(5)->comment('우편번호 끝');
             $table->integer('sc_price')->default(0)->comment('추가배송비');
             $table->timestamps();
-            $table->index(['sc_zip1']);
+            $table->index(['sc_zip1','sc_zip2']);
         });
 
         DB::statement("ALTER TABLE sendcosts comment '추가 배송비 관리'");

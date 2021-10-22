@@ -210,6 +210,8 @@
                                 <td>
                                     <button type="button" onclick="fitem_submit('cart');">장바구니</button>
                                     <button type="button" onclick="fitem_submit('buy');">바로구매</button>
+                                    <span onclick="item_wish('{{ $item_info->item_code }}');">위시리스트(하트)</span>
+                                    <span>쇼셜 링크 작업 해야함</span>
                                 </td>
                             </tr>
                             @endif
@@ -260,9 +262,6 @@
     // 바로구매, 장바구니 폼 전송
     function fitem_submit(type)
     {
-        //$("#fitem").attr("action", "{{ route('ajax_cart_register') }}");
-        //$("#fitem").attr('target', "");
-
         if (type == "cart") {   //장바구니
             $("#sw_direct").val(0);
         } else { // 바로구매
@@ -371,7 +370,30 @@
     }
 </script>
 
-
+<script>
+    // wish 상품보관
+    function item_wish(item_code)
+    {
+        $.ajax({
+            type: 'get',
+            url: '{{ route('ajax_wish') }}',
+            dataType: 'text',
+            data: {
+                'item_code' : item_code,
+            },
+            success: function(result) {
+//alert(result);
+//return false;
+                if(result == "no_item"){
+                    alert('해당 상품이 존재 하지 않습니다.');
+                    return false;
+                }
+            },error: function(result) {
+                console.log(result);
+            }
+        });
+    }
+</script>
 
 
 

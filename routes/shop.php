@@ -39,6 +39,12 @@ Route::get('/sitemdetail_option', [
     'uses' => 'App\Http\Controllers\shop\ItemController@ajax_option_change',
 ]);
 
+//wish 처리
+Route::get('/sitemdetail_wish', [
+    'as' => 'ajax_wish',
+    'uses' => 'App\Http\Controllers\shop\ShopWishController@ajax_wish',
+]);
+
 //장바구니, 바로구매 처리
 Route::post('/cartprocess', [
     'as' => 'ajax_cart_register',

@@ -414,7 +414,7 @@ class Messages_kr extends Controller
     //쇼핑몰 관련
     //팝업 관련
     static $shop = [
-        'no_data' => '자료가 없습니다.',
+        'no_data' => '해당 상품이 존재 하지 않습니다.',
         'now_no_item' => '현재 판매가능한 상품이 아닙니다.',
         'in_ok' => '저장 되었습니다.',
         'no_resize' => '상품 등록 전에 환경 설정 > 이미지 리사이징 설정을 입력 저장 하세요.',
