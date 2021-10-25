@@ -277,6 +277,28 @@ class OrderController extends Controller
         exit;
     }
 
+    //결제 검증 하기
+    public function ajax_ordercomfirm(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
+
+        $result = ["code"=>200, "message"=>"success"];
+
+        //아임포트 관리자 페이지의 시스템설정->내정보->REST API 키 값을 입력한다.
+        $imp_key = "REST API 키";
+        //아임포트 관리자 페이지의 시스템설정->내정보->REST API Secret 값을 입력한다.
+        $imp_secret = "REST API Secret";
+        //결제 모듈을 호출한 페이지에서 ajax로 넘겨받은 imp_uid값을 저장한다.
+        $imp_uid = $request->input('imp_uid');
+        //결제 모듈을 호출한 페이지에서 ajax로 넘겨받은 merchant_uid값을 저장한다.
+        $merchant_uid = $request->input('merchant_uid');
+
+        var_dump("ordercomfirm");
+        exit;
+    }
+
+
     //결제 하기
     public function orderpayment(Request $request)
     {
@@ -297,7 +319,10 @@ class OrderController extends Controller
             return redirect()->route('cartlist')->with('alert_messages', '장바구니가 비어 있습니다.\\n\\n이미 주문하셨거나 장바구니에 담긴 상품이 없는 경우입니다.');
             exit;
         }
-echo "order 만들어야 함!!!!";
+
+        $od_temp_point  = $request->input('od_temp_point');
+
+echo "KKK====> ".$od_temp_point;
 exit;
 
     }

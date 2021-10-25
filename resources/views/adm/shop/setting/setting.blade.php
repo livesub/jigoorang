@@ -14,6 +14,8 @@
 {!! csrf_field() !!}
 <input type="hidden" name="id" id="id" value="{{ $id }}">
 <input type="hidden" name="company_use_point" value="1">
+<input type="hidden" name="company_bank_use" value="0">
+
 <table border=1>
     <tr>
         <td colspan="2"><b>사업자 정보</b></td>
@@ -55,34 +57,6 @@
     </tr>
 </table>
 
-<table border=1>
-    <tr>
-        <td colspan="2"><b>결제설정</b></td>
-    </tr>
-    <tr>
-        <td><b>무통장입금사용</b></td>
-        <td>
-            주문시 무통장으로 입금을 가능하게 할것인지를 설정합니다.<br>사용할 경우 은행계좌번호를 반드시 입력하여 주십시오.<br>
-
-            <select id="company_bank_use" name="company_bank_use">
-            @php
-                $bank_use0 = "";
-                $bank_use1 = "";
-                if($company_bank_use == "" || $company_bank_use == 0) $bank_use0 = "selected";
-                else $bank_use1 = "selected";
-            @endphp
-                <option value="0" {{ $bank_use0 }}>사용안함</option>
-                <option value="1" {{ $bank_use1 }}>사용</option>
-            </select>
-        </td>
-    </tr>
-    <tr>
-        <td><b>은행계좌번호</b></td>
-        <td>
-            <textarea name="company_bank_account" id="company_bank_account">{{ $company_bank_account }}</textarea>
-        </td>
-    </tr>
-</table>
 
 
 <table border=1>
@@ -92,9 +66,33 @@
             <input type="text" name="member_reg_point" value="{{ $member_reg_point }}" id="member_reg_point" class="frm_input" size="10"> 원
         </td>
     </tr>
-
 </table>
 
+<table border=1>
+    <tr>
+        <td><b>아임포트</b></td>
+    </tr>
+    <tr>
+        <td>가맹점 식별코드</td>
+        <td>
+            <input type="text" name="franchisee_code" value="" id="franchisee_code">
+        </td>
+    </tr>
+    <tr>
+        <td>REST API 키</td>
+        <td>
+            <input type="text" name="franchisee_rest_api" value="" id="franchisee_rest_api">
+        </td>
+    </tr>
+    <tr>
+        <td>REST API secret</td>
+        <td>
+            <input type="text" name="franchisee_rest_api_secret" value="" id="franchisee_rest_api_secret">
+        </td>
+    </tr>
+</table>
+
+@if(Auth::user()->user_level < 3)
 <table border=1>
     <tr>
         <td colspan="2"><b>이미지 리사이징 설정</b></td>
@@ -113,6 +111,10 @@
             <br>(리사이징될 파일 높이 - '%%'구분자사용)<br>예) 500%%300%%100
         </td>
     </tr>
+</table>
+@endif
+
+<table>
     <tr>
         <td><button type="button" onclick="set_save();">저장</button></td>
     </tr>

@@ -29,8 +29,11 @@ class CreateShopsettingsTable extends Migration
             $table->tinyInteger('company_bank_use')->length(1)->default(1)->comment('무통장입금사용:0=>사용안함,1=>사용함');
             $table->text('company_bank_account')->nullable()->comment('은행계좌번호');
             $table->tinyInteger('company_use_point')->length(1)->default(1)->comment('포인트 사용');
-
             $table->integer('member_reg_point')->default(0)->comment('신규가입 포인트 금액');
+
+            $table->string('franchisee_code')->nullable()->comment('가맹점 식별코드');
+            $table->string('franchisee_rest_api')->nullable()->comment('REST API 키');
+            $table->string('franchisee_rest_api_secret')->nullable()->comment('REST API secret');
 
             $table->string('shop_img_width')->nullable()->comment('이미지리사이징-넓이');
             $table->string('shop_img_height')->nullable()->comment('이미지리사이징-높이');

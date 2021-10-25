@@ -117,6 +117,12 @@ Route::get('/orderstock', [
     'uses' => 'App\Http\Controllers\shop\OrderController@ajax_orderstock',
 ]);
 
+//결제 검증 하기
+Route::post('/ordercomfirm', [
+    'as' => 'ajax_ordercomfirm',
+    'uses' => 'App\Http\Controllers\shop\OrderController@ajax_ordercomfirm',
+]);
+
 //결제 하기
 Route::post('/orderpayment', [
     'as' => 'orderpayment',

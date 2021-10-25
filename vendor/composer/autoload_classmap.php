@@ -82,6 +82,7 @@ return array(
     'App\\Models\\shopcategorys' => $baseDir . '/app/Models/shopcategorys.php',
     'App\\Models\\shopitemoptions' => $baseDir . '/app/Models/shopitemoptions.php',
     'App\\Models\\shopitems' => $baseDir . '/app/Models/shopitems.php',
+    'App\\Models\\shoporders' => $baseDir . '/app/Models/shoporders.php',
     'App\\Models\\shoppoints' => $baseDir . '/app/Models/shoppoints.php',
     'App\\Models\\shoppostlogs' => $baseDir . '/app/Models/shoppostlogs.php',
     'App\\Models\\shopsettings' => $baseDir . '/app/Models/shopsettings.php',

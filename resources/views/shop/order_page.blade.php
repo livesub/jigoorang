@@ -29,7 +29,7 @@
         $tot_point = 0;
         $tot_sell_price = 0;
 
-        $goods = $goods_it_id = "";
+        $goods = "";
         $goods_count = -1;
 
         $good_info = '';
@@ -53,6 +53,7 @@
                 $goods = preg_replace("/\'|\"|\||\,|\&|\;/", "", $cart_info->item_name);
                 $goods_item_code = $cart_info->item_code;
             }
+
             $goods_count++;
             $image = $CustomUtils->get_item_image($cart_info->item_code, 3);
             $item_name = '<b>' . stripslashes($cart_info->item_name) . '</b>';
@@ -60,6 +61,8 @@
             if($item_options) {
                 $item_name .= '<div class="sod_opt">'.$item_options.'</div>';
             }
+
+            if ($goods_count) $goods .= ' 외 '.$goods_count.'건';
 
             $point      = $sum[0]->point;
             $sell_price = $sum[0]->price;
@@ -126,7 +129,8 @@
 <input type="hidden" name="od_send_cost" id="od_send_cost" value="{{ $send_cost }}">
 <input type="hidden" name="od_send_cost2" id="od_send_cost2" value="0">
 <input type="hidden" name="od_goods_name" id="od_goods_name" value="{{ $goods }}">
-<input type="hidden" name="pay_type" id="pay_type">
+<input type="hidden" name="method" id="method">
+<input type="hidden" name="pg" id="pg">
 <input type="hidden" name="user_point" id="user_point" value="{{ Auth::user()->user_point }}">
 
 @php
@@ -297,17 +301,13 @@
                     <td>
                         <table border=1>
                             <tr>
-                                @if($setting_info->company_bank_use == 1 && $setting_info->company_bank_account)
-                                <td><button type="button" onclick="bank();">무통장</button></td>
-                                @endif
-                                <td><button type="button" onclick="requestPay();">카드(아임포트)</button></td>
+                                <td><button type="button" onclick="pay_type('html5_inicis','card');">신용카드</button></td>
+                                <td><button type="button" onclick="pay_type('html5_inicis','phone');">휴개폰결제</button></td>
+                                <td><button type="button" onclick="pay_type('html5_inicis','trans');">실시간계좌이체</button></td>
+                                <td><button type="button" onclick="pay_type('kakaopay','card');">카카오페이</button></td>
+                                <td><button type="button" onclick="pay_type('naverpay','card');">네이버페이</button></td>
                             </tr>
                         </table>
-                    </td>
-                </tr>
-                <tr id="disp_bank" style="display:none">
-                    <td colspan=2>
-                        <div  id="show_bank"></div>
                     </td>
                 </tr>
                 <tr>
@@ -380,8 +380,6 @@
     function calculate_sendcost(code)
     {
         //산간지역 배송비 계산
-        var form_var = $("#forderform").serialize();
-
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
             type : 'post',
@@ -435,52 +433,9 @@
 </script>
 
 <script>
-    function bank(){
-        $.ajax({
-            type : 'get',
-            url : '{{ route('ajax_orderbank') }}',
-            data : {
-            },
-            dataType : 'text',
-            success : function(result){
-                $("#disp_bank").show();
-                $("#show_bank").html(result);
-                $("[name=od_deposit_name]").val('{{ Auth::user()->user_name }}');
-                $("#pay_type").val("bank");
-            },
-            error: function(result){
-                console.log(result);
-            },
-        });
-    }
-</script>
-
-<script>
-    var IMP = window.IMP; // 생략 가능
-    IMP.init("imp00000000"); // 예: imp00000000
-
-    function requestPay() {
-      // IMP.request_pay(param, callback) 결제창 호출
-        IMP.request_pay({ // param
-            pg: "html5_inicis",
-            pay_method: "card",
-            merchant_uid: "ORD20180131-0000011",
-            name: "노르웨이 회전 의자",
-            amount: 64900,
-            buyer_email: "gildong@gmail.com",
-            buyer_name: "홍길동",
-            buyer_tel: "010-4242-4242",
-            buyer_addr: "서울특별시 강남구 신사동",
-            buyer_postcode: "01181"
-        }, function (rsp) { // callback
-            if (rsp.success) {
-                alert('성공');
-                // 결제 성공 시 로직,
-            } else {
-                alert('실패');
-                // 결제 실패 시 로직,
-            }
-        });
+    function pay_type(pg, method){
+        $("#pg").val(pg);
+        $("#method").val(method);
     }
 </script>
 
@@ -523,6 +478,16 @@
     }
 
     function forderform_check(){
+
+
+
+
+return false;
+
+
+
+
+
         // 재고체크
         var stock_msg = order_stock_check();
 
@@ -598,30 +563,75 @@
             }
         }
         @endif
-/*
-    차후 결제 방법 추가!!!!
-        if($("#pay_type").val() == ""){
+
+        //결제 수단 선택
+        if($("#pg").val() == "" || $("#method").val() == ""){
             alert('결제 수단을 선택 하세요.');
             return false;
-        }else{
-            switch ($("#pay_type").val()) {
-                case 'bank':
-                    if($("#od_bank_account").val() == ""){
-                        alert("계좌번호를 선택하세요.");
-                        $("#od_bank_account").focus();
-                        return false;
-                    }
-
-                    if($.trim($("#od_deposit_name").val()) == ""){
-                        alert("입금자명을 입력하세요.");
-                        $("#od_deposit_name").focus();
-                        return false;
-                    }
-                break;
-            }
         }
+
+        //결제 모듈 호출
+        requestPay($("#pg").val(), $("#method").val(), total_price, od_temp_point);
+    }
+</script>
+
+<script>
+    function requestPay(pg, method, price, point) {
+        var tot_pay = price - point;
+        var IMP = window.IMP; // 생략 가능
+        IMP.init("imp62273646"); // 예: imp00000000
+      // IMP.request_pay(param, callback) 결제창 호출
+        IMP.request_pay({ // param
+            pg: pg,
+            pay_method: method,
+            merchant_uid: "{{ $s_cart_id }}",
+            name: "{{ $goods }}",
+            amount: tot_pay,
+            buyer_email: "{{ Auth::user()->user_id }}",
+            buyer_name: "{{ Auth::user()->user_name }}",
+            buyer_tel: "{{ Auth::user()->user_tel }}",
+            buyer_addr: "{{ Auth::user()->user_addr1 }}",
+            buyer_postcode: "{{ Auth::user()->user_zip }}",
+        }, function (rsp) { // callback
+            if (rsp.success) {
+                // 결제 성공 시 로직,
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+                    type : 'post',
+                    url : '{{ route('ajax_ordercomfirm') }}',
+                    data : {
+                        'imp_uid': rsp.imp_uid,
+                        'merchant_uid': rsp.merchant_uid
+                    },
+                    dataType : 'text',
+                    success : function(data){
+        alert(data);
+                    },
+                    error: function(result){
+                        console.log(result);
+                    },
+                });
+/*
+                alert('성공');
+
+
+
+                var msg = '결제가 완료되었습니다.';
+                msg += '고유ID : ' + rsp.imp_uid;
+                msg += '상점 거래ID : ' + rsp.merchant_uid;
+                msg += '결제 금액 : ' + rsp.paid_amount;
+                msg += '카드 승인번호 : ' + rsp.apply_num;
+
+                alert(msg);
+
+
+                //$("#forderform").submit();
 */
-        $("#forderform").submit();
+            } else {
+                // 결제 실패 시 로직,
+                alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+            }
+        });
     }
 </script>
 
