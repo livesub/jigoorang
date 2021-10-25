@@ -213,9 +213,9 @@ class AdmShopCategoryController extends Controller
         if($request->hasFile('sca_img'))
         {
             $thumb_name = "";
-            $item_img = $request->file('sca_img');
-            $file_type = $item_img->getClientOriginalExtension();    //이미지 확장자 구함
-            $file_size = $item_img->getSize();  //첨부 파일 사이즈 구함
+            $sca_img = $request->file('sca_img');
+            $file_type = $sca_img->getClientOriginalExtension();    //이미지 확장자 구함
+            $file_size = $sca_img->getSize();  //첨부 파일 사이즈 구함
 
             //서버 php.ini 설정에 따른 첨부 용량 확인(php.ini에서 바꾸기)
             $max_size_mb = $upload_max_filesize * 1024;   //라라벨은 kb 단위라 함
@@ -225,7 +225,7 @@ class AdmShopCategoryController extends Controller
                 'sca_img'  => ['max:'.$max_size_mb, 'mimes:'.$fileExtension]
             ], ['max' => $upload_max_filesize."MB 까지만 저장 가능 합니다.", 'mimes' => $fileExtension.' 파일만 등록됩니다.']);
 
-            $attachment_result = CustomUtils::attachment_save($item_img,$path); //위의 패스로 이미지 저장됨
+            $attachment_result = CustomUtils::attachment_save($sca_img,$path); //위의 패스로 이미지 저장됨
             if(!$attachment_result[0])
             {
                 return redirect()->route('shop.cate.cate_add')->with('alert_messages', $Messages::$file_chk['file_chk']['file_false']);
@@ -305,6 +305,89 @@ class AdmShopCategoryController extends Controller
         if($sca_rank == "") $data['sca_rank'] = 0;
         else $data['sca_rank'] = $sca_rank;
 
+        $cate_info = DB::table('shopcategorys')->where([['id', $id], ['sca_id',$sca_id]])->first();
+
+        //첨부 이미지 처리
+        $fileExtension = 'jpeg,jpg,png,gif,bmp,GIF,PNG,JPG,JPEG,BMP';  //이미지 일때 확장자 파악(이미지일 경우 썸네일 하기 위해)
+        $upload_max_filesize = ini_get('upload_max_filesize');  //서버 설정 파일 용량 제한
+        $upload_max_filesize = substr($upload_max_filesize, 0, -1); //2M (뒤에 M자르기)
+
+        $path = 'data/shopcate';     //첨부물 저장 경로
+        $file_chk = $request->input('file_chk'); //수정,삭제,새로등록 체크 파악
+
+        if($file_chk == 1){ //체크된 것
+            if($request->hasFile('sca_img'))    //첨부가 있음
+            {
+                $thumb_name = "";
+                $sca_img = $request->file('sca_img');
+                $file_type = $sca_img->getClientOriginalExtension();    //이미지 확장자 구함
+                $file_size = $sca_img->getSize();  //첨부 파일 사이즈 구함
+
+                //서버 php.ini 설정에 따른 첨부 용량 확인(php.ini에서 바꾸기)
+                $max_size_mb = $upload_max_filesize * 1024;   //라라벨은 kb 단위라 함
+
+                //첨부 파일 용량 예외처리
+                Validator::validate($request->all(), [
+                    'sca_img'  => ['max:'.$max_size_mb, 'mimes:'.$fileExtension]
+                ], ['max' => $upload_max_filesize."MB 까지만 저장 가능 합니다.", 'mimes' => $fileExtension.' 파일만 등록됩니다.']);
+
+                $attachment_result = CustomUtils::attachment_save($sca_img,$path); //위의 패스로 이미지 저장됨
+
+                if(!$attachment_result[0])
+                {
+                    return redirect()->back()->with('alert_messages', $Messages::$file_chk['file_chk']['file_false']);
+                    exit;
+                }else{
+                    //썸네일 만들기
+                    for($k = 0; $k < 2; $k++){
+                        $resize_width_file_tmp = explode("%%",'500%%100');
+                        $resize_height_file_tmp = explode("%%",'500%%100');
+
+                        $thumb_width = $resize_width_file_tmp[$k];
+                        $thumb_height = $resize_height_file_tmp[$k];
+
+                        $is_create = false;
+                        $thumb_name .= "@@".CustomUtils::thumbnail($attachment_result[1], $path, $path, $thumb_width, $thumb_height, $is_create, $is_crop=false, $crop_mode='center', $is_sharpen=false, $um_value='80/0.5/3');
+                    }
+
+                    $data['sca_img_ori_file_name'] = $attachment_result[2];  //배열에 추가 함
+                    $data['sca_img'] = $attachment_result[1].$thumb_name;  //배열에 추가 함
+
+                    //기존 첨부 파일 삭제
+                    $sca_img_tmp = 'sca_img';
+
+                    if($cate_info->$sca_img_tmp != ""){   //기존 첨부가 있는지 파악 - 있다면 기존 파일 전체 삭제후 재 등록
+                        $file_cnt1 = explode('@@',$cate_info->$sca_img_tmp);
+                        for($j = 0; $j < count($file_cnt1); $j++){
+                            $img_path = "";
+                            $img_path = $path.'/'.$file_cnt1[$j];
+                            if (file_exists($img_path)) {
+                                @unlink($img_path); //이미지 삭제
+                            }
+                        }
+                    }
+                }
+            }else{
+                //체크는 되었으나 첨부파일이 없을때 기존 첨부 파일 삭제
+                //기존 첨부 파일 삭제
+                $sca_img_tmp = 'sca_img';
+
+                if($cate_info->$sca_img_tmp != ""){   //기존 첨부가 있는지 파악 - 있다면 기존 파일 전체 삭제후 재 등록
+                    $file_cnt1 = explode('@@',$cate_info->$sca_img_tmp);
+                    for($j = 0; $j < count($file_cnt1); $j++){
+                        $img_path = "";
+                        $img_path = $path.'/'.$file_cnt1[$j];
+                        if (file_exists($img_path)) {
+                            @unlink($img_path); //이미지 삭제
+                        }
+                    }
+                }
+
+                $data['sca_img_ori_file_name'] = "";  //배열에 추가 함
+                $data['sca_img'] = "";  //배열에 추가 함
+            }
+        }
+
         //$update_result = DB::table('shopcategorys')->where([['id', $id],['sca_id',$sca_id]])->limit(1)->update($data);
         $update_result = Shopcategorys::find($id)->update($data);
 
@@ -324,8 +407,26 @@ class AdmShopCategoryController extends Controller
         $de_cate_info = DB::table('shopcategorys')->where('sca_id','like',$sca_id.'%')->count();   //하위 카테고리 갯수
         $de_item_info = DB::table('shopitems')->where('sca_id','like',$sca_id.'%')->count();   //상품 갯수
 
+        $path = 'data/shopcate';     //첨부물 저장 경로
+
         if($de_cate_info == 1 && $de_item_info == 0){
+            //이미지가 있는지 파악
+            $cate_info = DB::table('shopcategorys')->where([['id', $id], ['sca_id',$sca_id]])->first();
+
+            if($cate_info->sca_img != ""){
+                $file_cnt = explode('@@',$cate_info->sca_img);
+
+                for($j = 0; $j < count($file_cnt); $j++){
+                    $img_path = "";
+                    $img_path = $path.'/'.$file_cnt[$j];
+                    if (file_exists($img_path)) {
+                        @unlink($img_path); //이미지 삭제
+                    }
+                }
+            }
+
             $cate_del = DB::table('shopcategorys')->where([['id',$id],['sca_id',$sca_id]])->delete();   //row 삭제
+
             if($cate_del){
                 return redirect()->route('shop.cate.index')->with('alert_messages', $Messages::$category['cate_del']['cate_del_ok']);
             }else{
@@ -339,21 +440,29 @@ class AdmShopCategoryController extends Controller
     public function downloadfile(Request $request)
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
-dd("aaaaaaaaaaaaaa");
+
         $id         = $request->input('id');
-        $ca_id      = $request->input('ca_id');
-        $file_num   = $request->input('file_num');
 
-        $item_ori_file = "item_ori_img$file_num";
-        $item_img = "item_img$file_num";
+        $cate_info = DB::table('shopcategorys')->select('sca_img_ori_file_name', 'sca_img')->where('id', $id)->first();
 
-        $item_info = DB::table('shopitems')->select($item_ori_file, $item_img)->where([['id', $id], ['sca_id',$ca_id]])->first();    //게시물 정보 추출
-
-        $file_cut = explode("@@",$item_info->$item_img);
-        $path = 'data/shopitem';     //첨부물 저장 경로
+        $file_cut = explode("@@",$cate_info->sca_img);
+        $path = 'data/shopcate';     //첨부물 저장 경로
 
         $down_file = public_path($path.'/'.$file_cut[0]);
 
-        return response()->download($down_file, $item_info->$item_ori_file);
+        return response()->download($down_file, $cate_info->sca_img_ori_file_name);
+    }
+
+    public function ajax_rank_choice(Request $request)
+    {
+        $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
+
+        $id                 = $request->input('id');
+        $sca_rank_dispaly   = $request->input('sca_rank_dispaly');
+
+        $update_result = Shopcategorys::find($id)->update(['sca_rank_dispaly' => $sca_rank_dispaly]);
+
+        echo "ok";
+        exit;
     }
 }

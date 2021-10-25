@@ -32,7 +32,7 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'uses' => 'App\Http\Controllers\adm\shop\category\AdmShopCategoryController@createsave',
     ]);
 
-    Route::post('scate_add', [       //카테고리 추가 페이지
+    Route::get('scate_add', [       //카테고리 추가 페이지
         'as' => 'shop.cate.cate_add',
         'uses' => 'App\Http\Controllers\adm\shop\category\AdmShopCategoryController@cate_add',
     ]);
@@ -48,20 +48,26 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'uses' => 'App\Http\Controllers\adm\shop\category\AdmShopCategoryController@cate_add_save',
     ]);
 
-    Route::post('scate_modi', [      //카테고리 수정
+    Route::get('scate_modi', [      //카테고리 수정
         'as' => 'shop.cate.cate_modi',
         'uses' => 'App\Http\Controllers\adm\shop\category\AdmShopCategoryController@cate_modi',
     ]);
 
-    Route::post('scate_modi_save', [     //카테고리 등록
+    Route::post('scate_modi_save', [     //카테고리 수정
         'as' => 'shop.cate.cate_modi_save',
         'uses' => 'App\Http\Controllers\adm\shop\category\AdmShopCategoryController@cate_modi_save',
     ]);
 
-    Route::post('scate_delete', [    //카테고리 삭제
+    Route::get('scate_delete', [    //카테고리 삭제
         'as' => 'shop.cate.cate_delete',
         'uses' => 'App\Http\Controllers\adm\shop\category\AdmShopCategoryController@cate_delete',
     ]);
+
+    Route::get('scate_rank_choice', [    //랭킹 출력 유무
+        'as' => 'shop.cate.ajax_rank_choice',
+        'uses' => 'App\Http\Controllers\adm\shop\category\AdmShopCategoryController@ajax_rank_choice',
+    ]);
+
 
 /*** 상품 관리 */
     Route::get('sitem_list', [    //상품 관리 리스트
