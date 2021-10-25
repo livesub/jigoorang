@@ -137,6 +137,11 @@ class AdmShopSettingController extends Controller
         //회원 가입 포인트
         $member_reg_point       = $request->input('member_reg_point');
 
+        //아임 포트 설정
+        $franchisee_code        = $request->input('franchisee_code');
+        $franchisee_rest_api    = $request->input('franchisee_rest_api');
+        $franchisee_rest_api_secret = $request->input('franchisee_rest_api_secret');
+
         $shop_img_width         = $request->input('shop_img_width');
         $shop_img_height        = $request->input('shop_img_height');
 
@@ -169,7 +174,10 @@ class AdmShopSettingController extends Controller
             'company_bank_account'  => $company_bank_account,
             'company_use_point'     => (int)$company_use_point,
 
-            'member_reg_point'     => (int)$member_reg_point,
+            'member_reg_point'      => (int)$member_reg_point,
+            'franchisee_code'       => $franchisee_code,
+            'franchisee_rest_api'   => $franchisee_rest_api,
+            'franchisee_rest_api_secret' => $franchisee_rest_api_secret,
 
             'shop_img_width'        => $shop_img_width,
             'shop_img_height'       => $shop_img_height,
