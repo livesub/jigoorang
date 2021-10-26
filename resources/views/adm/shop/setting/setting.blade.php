@@ -68,30 +68,6 @@
     </tr>
 </table>
 
-<table border=1>
-    <tr>
-        <td><b>아임포트</b></td>
-    </tr>
-    <tr>
-        <td>가맹점 식별코드</td>
-        <td>
-            <input type="text" name="franchisee_code" value="" id="franchisee_code">
-        </td>
-    </tr>
-    <tr>
-        <td>REST API 키</td>
-        <td>
-            <input type="text" name="franchisee_rest_api" value="" id="franchisee_rest_api">
-        </td>
-    </tr>
-    <tr>
-        <td>REST API secret</td>
-        <td>
-            <input type="text" name="franchisee_rest_api_secret" value="" id="franchisee_rest_api_secret">
-        </td>
-    </tr>
-</table>
-
 @if(Auth::user()->user_level < 3)
 <table border=1>
     <tr>

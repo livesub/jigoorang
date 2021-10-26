@@ -281,10 +281,158 @@ class OrderController extends Controller
     public function ajax_ordercomfirm(Request $request)
     {
         $CustomUtils = new CustomUtils;
-        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
-        $result = ["code"=>200, "message"=>"success"];
+        $imp_uid        = $request->input('imp_uid');
+        $merchant_uid   = $request->input('merchant_uid');
+        $amount         = $request->input('amount');
 
+        $result = ["HTTP_STATUS"=>200, "reason"=>"성공"];
+
+        // 장바구니가 비어있는가
+        if($CustomUtils->get_session("ss_direct")){
+            $tmp_cart_id = $CustomUtils->get_session('ss_cart_direct');
+        }else{
+            $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
+        }
+
+        if ($CustomUtils->get_cart_count($tmp_cart_id) == 0) {    // 장바구니에 담기
+            $CustomUtils->add_order_post_log($request->input(), '장바구니가 비어 있습니다.');
+            $result = ["HTTP_STATUS"=>500, "reason"=>"장바구니가 비어 있습니다."];
+        }
+
+        // 장바구니 상품 재고 검사
+        $qty_chks = DB::table('shopcarts')->where([['od_id',$tmp_cart_id], ['sct_select', '1']])->get();
+
+        $i = 0;
+        $error = '';
+        $error1 = '';
+
+        foreach($qty_chks as $qty_chk){
+            // 상품에 대한 현재고수량
+            if($qty_chk->sio_id) {
+                $it_stock_qty = (int)$CustomUtils->get_option_stock_qty($qty_chk->item_code, $qty_chk->sio_id, $qty_chk->sio_type);
+            } else {
+                $it_stock_qty = (int)$CustomUtils->get_item_stock_qty($qty_chk->item_code);
+            }
+
+            // 장바구니 수량이 재고수량보다 많다면 오류
+            if ($qty_chk->sct_qty > $it_stock_qty){
+                $error .= $qty_chk->sct_option." 의 재고수량이 부족합니다. 현재고수량 : $it_stock_qty 개\n\n";
+                $result = ["HTTP_STATUS"=>500, "reason"=>$error];
+            }
+            $i++;
+        }
+
+        if($i == 0) {
+            $CustomUtils->add_order_post_log($request->input(), '장바구니가 비어 있습니다.');
+            $result = ["HTTP_STATUS"=>500, "reason"=>"장바구니가 비어 있습니다."];
+        }
+
+        if ($error != "")
+        {
+            $error1 = "다른 고객님께서 먼저 주문하신 경우입니다. 불편을 끼쳐 죄송합니다.";
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+        }
+
+        $i_price        = (int)$request->input('od_price');
+        $i_send_cost    = (int)$request->input('od_send_cost');
+        $i_send_cost2   = (int)$request->input('od_send_cost2');
+        $i_temp_point   = (int)$request->input('od_temp_point');
+        $tot_price      = $i_price + $i_send_cost + $i_send_cost2;
+
+        // 주문금액이 상이함
+        $price = DB::select(" select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as od_price, COUNT(distinct item_code) as cart_count from shopcarts where od_id = '$tmp_cart_id' and sct_select = '1' ");
+
+        $tot_ct_price = $price[0]->od_price;
+        $cart_count = $price[0]->cart_count;
+        $tot_od_price = $tot_ct_price;
+
+        if($i_price != $tot_od_price){
+            $error1 = '주문금액이 변경 되었습니다.';
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+        }
+
+        // 배송비가 상이함
+        $send_cost = $CustomUtils->get_sendcost($tmp_cart_id);
+        if($i_send_cost != $send_cost){
+            $error1 = '배송비가 변경 되었습니다.';
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+        }
+
+        // 추가배송비가 상이함
+        $od_b_zip   = preg_replace('/[^0-9]/', '', $request->input('od_b_zip'));
+        $sendcost_info = DB::table('sendcosts')->select('id', 'sc_price')->where([['sc_zip1', '<=', $od_b_zip], ['sc_zip2', '>=', $od_b_zip]])->first();
+
+        if($i_send_cost2 != (int)$sendcost_info->sc_price){
+            $error1 = '추가배송비가 변경 되었습니다.';
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+        }
+
+        // 결제포인트가 상이함
+        if($i_temp_point > Auth::user()->user_point){
+            $error1 = '보유 적립금 보다 많이 결제할 수 없습니다.';
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+        }
+
+        if($i_temp_point > $tot_price){
+            $error1 = '주문금액 보다 많이 적립금을 결제할 수 없습니다.';
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+        }
+
+        return response()->json($result);
+        exit;
+
+
+/*
+
+        // 결제포인트가 상이함
+        // 회원이면서 포인트사용이면
+        $temp_point = 0;
+        if ($is_member && $config['cf_use_point'])
+        {
+            if($member['mb_point'] >= $default['de_settle_min_point']) {
+                $temp_point = (int)$default['de_settle_max_point'];
+
+                if($temp_point > (int)$tot_od_price)
+                    $temp_point = (int)$tot_od_price;
+
+                if($temp_point > (int)$member['mb_point'])
+                    $temp_point = (int)$member['mb_point'];
+
+                $point_unit = (int)$default['de_settle_point_unit'];
+                $temp_point = (int)((int)($temp_point / $point_unit) * $point_unit);
+            }
+        }
+
+        if (($i_temp_point > (int)$temp_point || $i_temp_point < 0) && $config['cf_use_point']) {
+            if(function_exists('add_order_post_log')) add_order_post_log('포인트 최종 계산 Error....');
+            die("Error....");
+        }
+
+        if ($od_temp_point)
+        {
+            if ($member['mb_point'] < $od_temp_point) {
+                if(function_exists('add_order_post_log')) add_order_post_log('회원님의 포인트가 부족하여 포인트로 결제 할 수 없습니다.');
+                alert('회원님의 포인트가 부족하여 포인트로 결제 할 수 없습니다.');
+            }
+        }
+*/
+
+
+
+
+
+
+
+        //return response()->json($result);
+
+/*
         //아임포트 관리자 페이지의 시스템설정->내정보->REST API 키 값을 입력한다.
         $imp_key = "REST API 키";
         //아임포트 관리자 페이지의 시스템설정->내정보->REST API Secret 값을 입력한다.
@@ -294,9 +442,27 @@ class OrderController extends Controller
         //결제 모듈을 호출한 페이지에서 ajax로 넘겨받은 merchant_uid값을 저장한다.
         $merchant_uid = $request->input('merchant_uid');
 
-        var_dump("ordercomfirm");
+        return response()->json($result);
+
+//        var_dump("ordercomfirm");
         exit;
+*/
     }
+
+    public function ajax_orderpaycancel(Request $request)
+    {
+        //결제시 상품 변동등 문제가 있을시 결제 취소를 하기 위함
+        $merchant_uid  = $request->input('merchant_uid');
+        $cancel_request_amount  = $request->input('cancel_request_amount');
+        $reason  = $request->input('reason');
+        $refund_holder  = $request->input('refund_holder');
+        $refund_bank  = $request->input('refund_bank');
+        $refund_account  = $request->input('refund_account');
+
+        require_once '../../vendor/autoload.php';
+echo $cancel_request_amount;
+    }
+
 
 
     //결제 하기

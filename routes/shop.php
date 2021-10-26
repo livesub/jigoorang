@@ -123,6 +123,12 @@ Route::post('/ordercomfirm', [
     'uses' => 'App\Http\Controllers\shop\OrderController@ajax_ordercomfirm',
 ]);
 
+//결제 취소
+Route::post('/orderpaycancel', [
+    'as' => 'ajax_orderpaycancel',
+    'uses' => 'App\Http\Controllers\shop\OrderController@ajax_orderpaycancel',
+]);
+
 //결제 하기
 Route::post('/orderpayment', [
     'as' => 'orderpayment',

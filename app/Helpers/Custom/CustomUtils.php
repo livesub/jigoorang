@@ -24,6 +24,7 @@ use App\Models\shop_uniqids;    //장바구니 키
 use App\Models\shoppoints;    //포인트 모델 정의
 use App\Models\User;    //회원 모델 정의
 use App\Models\wishs;    //wish 모델 정의
+use App\Models\shoppostlogs;    //주문시 오류 로그 모델 정의
 use Illuminate\Support\Facades\Auth;    //인증
 
 class CustomUtils extends Controller
@@ -1418,7 +1419,7 @@ $um_value='80/0.5/3'
         $create_result = shoppostlogs::create([
             'oid'       => $od_id,
             'user_id'   => Auth::user()->user_id,
-            'post_data' => $item_code,
+            'post_data' => $post_data,
             'ol_code'   => $code,
             'ol_msg'    => addslashes($msg),
             'ol_ip'     => $_SERVER['REMOTE_ADDR'],

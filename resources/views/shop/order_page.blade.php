@@ -8,6 +8,7 @@
 <!-- iamport.payment.js -->
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 
+
 <table border=1>
     <tr>
         <td><h4>주문서 작성</h4></td>
@@ -478,16 +479,6 @@
     }
 
     function forderform_check(){
-
-
-
-
-return false;
-
-
-
-
-
         // 재고체크
         var stock_msg = order_stock_check();
 
@@ -570,6 +561,31 @@ return false;
             return false;
         }
 
+
+                var kk = total_price - od_temp_point;
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+                    url : '{{ route('ajax_ordercomfirm') }}',
+                    method: "POST",
+                    data: {
+                        'amount' : kk,
+                        'merchant_uid' : '{{ $s_cart_id }}',
+                        'od_price' : $("#od_price").val(),
+                        'od_send_cost' : $("#od_send_cost").val(),
+                        'od_send_cost2' : $("#od_send_cost2").val(),
+                        'od_temp_point' : $("#od_temp_point").val(),
+                        'od_b_zip' : $("#od_b_zip").val(),
+                    }
+                }).done(function (data) {
+alert(data.HTTP_STATUS);
+                });
+
+
+return false;
+
+
+
+
         //결제 모듈 호출
         requestPay($("#pg").val(), $("#method").val(), total_price, od_temp_point);
     }
@@ -578,13 +594,15 @@ return false;
 <script>
     function requestPay(pg, method, price, point) {
         var tot_pay = price - point;
+        var merchant_uid = "{{ $s_cart_id }}";
+
         var IMP = window.IMP; // 생략 가능
         IMP.init("imp62273646"); // 예: imp00000000
       // IMP.request_pay(param, callback) 결제창 호출
         IMP.request_pay({ // param
             pg: pg,
             pay_method: method,
-            merchant_uid: "{{ $s_cart_id }}",
+            merchant_uid: merchant_uid,
             name: "{{ $goods }}",
             amount: tot_pay,
             buyer_email: "{{ Auth::user()->user_id }}",
@@ -592,30 +610,35 @@ return false;
             buyer_tel: "{{ Auth::user()->user_tel }}",
             buyer_addr: "{{ Auth::user()->user_addr1 }}",
             buyer_postcode: "{{ Auth::user()->user_zip }}",
+            confirm_url : '{{ route('ajax_ordercomfirm') }}',
         }, function (rsp) { // callback
             if (rsp.success) {
+
+
+/*
                 // 결제 성공 시 로직,
                 $.ajax({
                     headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-                    type : 'post',
                     url : '{{ route('ajax_ordercomfirm') }}',
-                    data : {
-                        'imp_uid': rsp.imp_uid,
-                        'merchant_uid': rsp.merchant_uid
-                    },
-                    dataType : 'text',
-                    success : function(data){
-        alert(data);
-                    },
-                    error: function(result){
-                        console.log(result);
-                    },
+                    method: "POST",
+                    data: {
+                        'imp_uid' : rsp.imp_uid,
+                        'merchant_uid' : rsp.merchant_uid
+                    }
+                }).done(function (data) {
+                // 가맹점 서버 결제 API 성공시 로직
+                        if(data.code!=200){
+//cancelPay();
+
+alert("결제실패");
+                                //결제실패(웹서버측 실패)
+                            }else{
+                                //결제성공(웹서버측 성공)
+alert("ok");
+                            }
                 });
+*/
 /*
-                alert('성공');
-
-
-
                 var msg = '결제가 완료되었습니다.';
                 msg += '고유ID : ' + rsp.imp_uid;
                 msg += '상점 거래ID : ' + rsp.merchant_uid;
@@ -629,11 +652,43 @@ return false;
 */
             } else {
                 // 결제 실패 시 로직,
-                alert("결제에 실패하였습니다. 에러 내용: " +  rsp.error_msg);
+                alert("결제에 실패하였습니다.\n내용: " +  rsp.error_msg);
             }
         });
     }
 </script>
+
+<!-- 환불 처리 -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+    function cancelPay(merchant_uid, tot_pay) {
+
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+            url : '{{ route('ajax_orderpaycancel') }}',
+            type : 'post',
+            contentType : "application/json",
+            data    : JSON.stringify({
+                "merchant_uid" : merchant_uid, // 예: ORD20180131-0000011
+                "cancel_request_amount" : tot_pay, // 환불금액
+                "reason" : "상품 변동", // 환불사유
+                "refund_holder" : "{{ Auth::user()->user_name }}", // [가상계좌 환불시 필수입력] 환불 수령계좌 예금주
+                "refund_bank" : "", // [가상계좌 환불시 필수입력] 환불 수령계좌 은행코드(예: KG이니시스의 경우 신한은행은 88번)
+                "refund_account" : "", // [가상계좌 환불시 필수입력] 환불 수령계좌 번호
+            }),
+            dataType : "text",
+        }).done(function(result) { // 환불 성공시 로직
+alert("aasd==> "+result);
+            alert("환불 성공");
+        }).fail(function(error) { // 환불 실패시 로직
+            alert("환불 실패");
+        });
+    }
+
+</script>
+
+
+
 
 
 
