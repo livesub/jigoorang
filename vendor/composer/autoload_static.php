@@ -612,6 +612,7 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
         'App\\Models\\shopitemoptions' => __DIR__ . '/../..' . '/app/Models/shopitemoptions.php',
         'App\\Models\\shopitems' => __DIR__ . '/../..' . '/app/Models/shopitems.php',
         'App\\Models\\shoporders' => __DIR__ . '/../..' . '/app/Models/shoporders.php',
+        'App\\Models\\shopordertemps' => __DIR__ . '/../..' . '/app/Models/shopordertemps.php',
         'App\\Models\\shoppoints' => __DIR__ . '/../..' . '/app/Models/shoppoints.php',
         'App\\Models\\shoppostlogs' => __DIR__ . '/../..' . '/app/Models/shoppostlogs.php',
         'App\\Models\\shopsettings' => __DIR__ . '/../..' . '/app/Models/shopsettings.php',

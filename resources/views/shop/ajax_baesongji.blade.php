@@ -39,10 +39,10 @@
                         <input type="hidden" id="addr{{ $i }}" value="{{ $addr }}">
                         <button type="button" onclick="return_addr('{{ $i }}');">선택</button>
                         <button type="button" onclick="del_addr('{{ $baesongji->id }}');">삭제</button>
-<!--
-                        <input type="radio" name="ad_default_ori" value="{{ $baesongji->id }}" id="ad_default{{ $i }}" {{ $checked }}>
+
+                        <input type="radio" name="ad_default_ori" id="ad_default{{ $i }}" {{ $checked }} onclick="ad_default_chk('{{ $baesongji->id }}')">
                         <label for="ad_default_ori" class="default_lb mng_btn">기본배송지</label>
--->
+
                     </td>
                 </tr>
                     @php
@@ -155,5 +155,25 @@
         }else{   //취소
             return false;
         }
+    }
+
+    function ad_default_chk(num){
+        $.ajax({
+            type : 'get',
+            url : '{{ route('ajax_baesongji_change') }}',
+            data : {
+                'id'    : num,
+            },
+            dataType : 'text',
+            success : function(result){
+                if(result == "ok"){
+                    baesongji();
+                }
+            },
+            error: function(result){
+                console.log(result);
+            },
+        });
+
     }
 </script>

@@ -25,6 +25,7 @@ use App\Models\shoppoints;    //포인트 모델 정의
 use App\Models\User;    //회원 모델 정의
 use App\Models\wishs;    //wish 모델 정의
 use App\Models\shoppostlogs;    //주문시 오류 로그 모델 정의
+use App\Models\baesongjis;    //배송지 모델 정의
 use Illuminate\Support\Facades\Auth;    //인증
 
 class CustomUtils extends Controller
@@ -1431,5 +1432,121 @@ $um_value='80/0.5/3'
         }
     }
 
+    //배송지 처리(배송지 테이블에)
+    //ad_default = 기본 배송지 체크여부, ad_subject = 배송지명, ad_name = 이름, ad_tel = 전화번호, ad_hp = 핸드폰, ad_zip1 = 우편번호,
+    //ad_addr1 = 주소, ad_addr2 = 상세주소, ad_addr3 = 참고항목, ad_jibeon = 지번(지번인지 도로명인지)
+    public static function baesongji_process($ad_default, $ad_subject, $ad_name, $ad_tel, $ad_hp, $ad_zip1, $ad_addr1, $ad_addr2, $ad_addr3, $ad_jibeon){
+
+        //기본 배송지 체크
+        $baesongji_first_chk = DB::table('baesongjis')->where('user_id', Auth::user()->user_id)->count();
+        if($baesongji_first_chk == 0){
+            $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
+                'user_zip'          => (int)$ad_zip1,
+                'user_addr1'        => addslashes($ad_addr1),
+                'user_addr2'        => addslashes($ad_addr2),
+                'user_addr3'        => addslashes($ad_addr3),
+                'user_addr_jibeon'  => $ad_jibeon,
+            ]);
+
+            $create_result = baesongjis::create([
+                'user_id'       => Auth::user()->user_id,
+                'ad_subject'    => addslashes($ad_subject),
+                'ad_default'    => (int)$ad_default,
+                'ad_name'       => addslashes($ad_name),
+                'ad_tel'        => addslashes($ad_tel),
+                'ad_hp'         => addslashes($ad_hp),
+                'ad_zip1'       => (int)$ad_zip1,
+                'ad_addr1'      => addslashes($ad_addr1),
+                'ad_addr2'      => addslashes($ad_addr2),
+                'ad_addr3'      => addslashes($ad_addr3),
+                'ad_jibeon'     => $ad_jibeon,
+            ])->exists();
+
+        }else{
+            $baesongji_chk = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['ad_zip1', $ad_zip1], ['ad_addr1', $ad_addr1]])->count();
+
+            if(!is_null($ad_default)){
+                //기본 배송지 체크시
+                if($baesongji_chk == 0){
+                    //같은 주소가 없을때
+                    $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
+                        'user_zip'          => (int)$ad_zip1,
+                        'user_addr1'        => addslashes($ad_addr1),
+                        'user_addr2'        => addslashes($ad_addr2),
+                        'user_addr3'        => addslashes($ad_addr3),
+                        'user_addr_jibeon'  => $ad_jibeon,
+                    ]);
+
+                    //기본 배송지 컬럼(ad_default) 전부 0으로 만듦
+                    $update_default = DB::table('baesongjis')->where('user_id', Auth::user()->user_id)->update(['ad_default' => 0]);
+
+                    $create_result = baesongjis::create([
+                        'user_id'       => Auth::user()->user_id,
+                        'ad_subject'    => addslashes($ad_subject),
+                        'ad_default'    => (int)$ad_default,
+                        'ad_name'       => addslashes($ad_name),
+                        'ad_tel'        => addslashes($ad_tel),
+                        'ad_hp'         => addslashes($ad_hp),
+                        'ad_zip1'       => (int)$ad_zip1,
+                        'ad_addr1'      => addslashes($ad_addr1),
+                        'ad_addr2'      => addslashes($ad_addr2),
+                        'ad_addr3'      => addslashes($ad_addr3),
+                        'ad_jibeon'     => $ad_jibeon,
+                    ])->exists();
+                }else{
+                    //같은 주소가 있을때
+                    $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
+                        'user_zip'          => (int)$ad_zip1,
+                        'user_addr1'        => addslashes($ad_addr1),
+                        'user_addr2'        => addslashes($ad_addr2),
+                        'user_addr3'        => addslashes($ad_addr3),
+                        'user_addr_jibeon'  => $ad_jibeon,
+                    ]);
+
+                    //기본 배송지 컬럼(ad_default) 전부 0으로 만듦
+                    $update_default = DB::table('baesongjis')->where('user_id', Auth::user()->user_id)->update(['ad_default' => 0]);
+
+                    $update_result = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['ad_zip1', $ad_zip1], ['ad_addr1', $ad_addr1]])->update([
+                        'ad_subject'    => addslashes($ad_subject),
+                        'ad_default'    => (int)$ad_default,
+                        'ad_name'       => addslashes($ad_name),
+                        'ad_tel'        => addslashes($ad_tel),
+                        'ad_hp'         => addslashes($ad_hp),
+                        'ad_addr2'      => addslashes($ad_addr2),
+                        'ad_addr3'      => addslashes($ad_addr3),
+                        'ad_jibeon'     => $ad_jibeon,
+                    ]);
+                }
+            }else{
+                //기본 배송지 미체크시
+                if($baesongji_chk == 0){
+                    $create_result = baesongjis::create([
+                        'user_id'       => Auth::user()->user_id,
+                        'ad_subject'    => addslashes($ad_subject),
+                        'ad_default'    => 0,
+                        'ad_name'       => addslashes($ad_name),
+                        'ad_tel'        => addslashes($ad_tel),
+                        'ad_hp'         => addslashes($ad_hp),
+                        'ad_zip1'       => (int)$ad_zip1,
+                        'ad_addr1'      => addslashes($ad_addr1),
+                        'ad_addr2'      => addslashes($ad_addr2),
+                        'ad_addr3'      => addslashes($ad_addr3),
+                        'ad_jibeon'     => $ad_jibeon,
+                    ])->exists();
+                }else{
+                    $update_result = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['ad_zip1', $ad_zip1], ['ad_addr1', $ad_addr1]])->update([
+                        'ad_subject'    => addslashes($ad_subject),
+                        'ad_default'    => 0,
+                        'ad_name'       => addslashes($ad_name),
+                        'ad_tel'        => addslashes($ad_tel),
+                        'ad_hp'         => addslashes($ad_hp),
+                        'ad_addr2'      => addslashes($ad_addr2),
+                        'ad_addr3'      => addslashes($ad_addr3),
+                        'ad_jibeon'     => $ad_jibeon,
+                    ]);
+                }
+            }
+        }
+    }
 
 }

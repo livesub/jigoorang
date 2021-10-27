@@ -93,6 +93,12 @@ Route::post('/baesongji_process', [
     'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_baesongji_modify',
 ]);
 
+//기본 배송지 변경
+Route::get('/baesongji_change', [
+    'as' => 'ajax_baesongji_change',
+    'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_baesongji_change',
+]);
+
 //배송지 삭제
 Route::post('/baesongji_del', [
     'as' => 'ajax_baesongji_del',
@@ -115,6 +121,12 @@ Route::get('/orderbank', [
 Route::get('/orderstock', [
     'as' => 'ajax_orderstock',
     'uses' => 'App\Http\Controllers\shop\OrderController@ajax_orderstock',
+]);
+
+//결제 전 검증을 위한 임시 테이블 저장
+Route::post('/ordertemp', [
+    'as' => 'ajax_ordertemp',
+    'uses' => 'App\Http\Controllers\shop\OrderController@ajax_ordertemp',
 ]);
 
 //결제 검증 하기

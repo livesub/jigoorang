@@ -134,16 +134,6 @@
 <input type="hidden" name="pg" id="pg">
 <input type="hidden" name="user_point" id="user_point" value="{{ Auth::user()->user_point }}">
 
-@php
-/* pg 사 연결
-        // 결제대행사별 코드 include (결제대행사 정보 필드)
-        require_once(G5_SHOP_PATH.'/'.$default['de_pg_service'].'/orderform.2.php');
-
-        if($is_kakaopay_use) {
-            require_once(G5_SHOP_PATH.'/kakaopay/orderform.2.php');
-        }
-*/
-@endphp
     <tr>
         <td>
             <table border=1>
@@ -215,10 +205,8 @@
                     <th scope="row"><label for="ad_subject">배송지명</label></th>
                     <td>
                         <input type="text" name="ad_subject" id="ad_subject" class="frm_input" maxlength="20">
-                        <!--
                         <input type="checkbox" name="ad_default" id="ad_default" value="1">
                         <label for="ad_default">기본배송지로 설정</label>
-                        -->
                     </td>
                 </tr>
                 @endif
@@ -561,7 +549,15 @@
             return false;
         }
 
+        //결제전 검증 수단으로 temp 테이블에 저장
+        order_temp(total_price);
 
+$("#forderform").submit();  //테스트로 함
+
+
+
+/*
+confirm_url 테스트 구문 나중에 삭제
                 var kk = total_price - od_temp_point;
                 $.ajax({
                     headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
@@ -570,11 +566,6 @@
                     data: {
                         'amount' : kk,
                         'merchant_uid' : '{{ $s_cart_id }}',
-                        'od_price' : $("#od_price").val(),
-                        'od_send_cost' : $("#od_send_cost").val(),
-                        'od_send_cost2' : $("#od_send_cost2").val(),
-                        'od_temp_point' : $("#od_temp_point").val(),
-                        'od_b_zip' : $("#od_b_zip").val(),
                     }
                 }).done(function (data) {
 alert(data.HTTP_STATUS);
@@ -582,7 +573,7 @@ alert(data.HTTP_STATUS);
 
 
 return false;
-
+*/
 
 
 
@@ -613,7 +604,7 @@ return false;
             confirm_url : '{{ route('ajax_ordercomfirm') }}',
         }, function (rsp) { // callback
             if (rsp.success) {
-
+//cancelPay(merchant_uid, tot_pay);
 
 /*
                 // 결제 성공 시 로직,
@@ -665,7 +656,8 @@ alert("ok");
 
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-            url : '{{ route('ajax_orderpaycancel') }}',
+            //url : '{{ route('ajax_orderpaycancel') }}',
+            url : 'https://api.iamport.kr/payments/cancel',
             type : 'post',
             contentType : "application/json",
             data    : JSON.stringify({
@@ -687,7 +679,31 @@ alert("aasd==> "+result);
 
 </script>
 
-
+<script>
+    //결제전 검증 수단으로 temp 테이블에 저장
+    function order_temp(total_price){
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+            url : '{{ route('ajax_ordertemp') }}',
+            method: "POST",
+            data: {
+                'od_id'             : '{{ $s_cart_id }}',
+                'od_cart_price'     : $("#od_price").val(),
+                'od_send_cost'      : $("#od_send_cost").val(),
+                'od_send_cost2'     : $("#od_send_cost2").val(),
+                'od_receipt_price'  : total_price,
+                'od_temp_point'     : $("#od_temp_point").val(),
+                'od_b_zip'          : $("#od_b_zip").val(),
+            },
+            success : function(data){
+//alert(data);
+            },
+            error: function(result){
+                console.log(result);
+            },
+        });
+    }
+</script>
 
 
 

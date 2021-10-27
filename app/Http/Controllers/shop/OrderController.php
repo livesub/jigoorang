@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;    //인증
+use App\Models\shopordertemps;    //장바구니 키
 
 class OrderController extends Controller
 {
@@ -284,7 +285,7 @@ class OrderController extends Controller
 
         $imp_uid        = $request->input('imp_uid');
         $merchant_uid   = $request->input('merchant_uid');
-        $amount         = $request->input('amount');
+        $amount         = (int)$request->input('amount');    //카드사 결제 금액
 
         $result = ["HTTP_STATUS"=>200, "reason"=>"성공"];
 
@@ -301,7 +302,7 @@ class OrderController extends Controller
         }
 
         // 장바구니 상품 재고 검사
-        $qty_chks = DB::table('shopcarts')->where([['od_id',$tmp_cart_id], ['sct_select', '1']])->get();
+        $qty_chks = DB::table('shopcarts')->where([['od_id', $tmp_cart_id], ['sct_select', '1']])->get();
 
         $i = 0;
         $error = '';
@@ -335,11 +336,14 @@ class OrderController extends Controller
             $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
         }
 
-        $i_price        = (int)$request->input('od_price');
-        $i_send_cost    = (int)$request->input('od_send_cost');
-        $i_send_cost2   = (int)$request->input('od_send_cost2');
-        $i_temp_point   = (int)$request->input('od_temp_point');
+        $ordertemp = DB::table('shopordertemps')->where([['od_id',$tmp_cart_id], ['user_id', Auth::user()->user_id]])->first();
+
+        $i_price        = (int)$ordertemp->od_cart_price;
+        $i_send_cost    = (int)$ordertemp->od_send_cost;
+        $i_send_cost2   = (int)$ordertemp->od_send_cost2;
+        $i_temp_point   = (int)$ordertemp->od_receipt_point;
         $tot_price      = $i_price + $i_send_cost + $i_send_cost2;
+        $tot_payment    = $tot_price - $i_temp_point;   //실제 결제 금액
 
         // 주문금액이 상이함
         $price = DB::select(" select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as od_price, COUNT(distinct item_code) as cart_count from shopcarts where od_id = '$tmp_cart_id' and sct_select = '1' ");
@@ -363,7 +367,7 @@ class OrderController extends Controller
         }
 
         // 추가배송비가 상이함
-        $od_b_zip   = preg_replace('/[^0-9]/', '', $request->input('od_b_zip'));
+        $od_b_zip   = preg_replace('/[^0-9]/', '', $ordertemp->ad_zip1);
         $sendcost_info = DB::table('sendcosts')->select('id', 'sc_price')->where([['sc_zip1', '<=', $od_b_zip], ['sc_zip2', '>=', $od_b_zip]])->first();
 
         if($i_send_cost2 != (int)$sendcost_info->sc_price){
@@ -385,73 +389,59 @@ class OrderController extends Controller
             $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
         }
 
+        //카드사에서 전달받은 결제금액과 서버에 저장 된 결제 금액이 다를때 체크
+        if($tot_payment != $amount){
+            $error1 = '주문금액이 변경 되었습니다.';
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+        }
+
         return response()->json($result);
         exit;
+    }
 
+    public function ajax_ordertemp(Request $request)
+    {
+        //결제전 검증을 위한 임시 테이블 저장
+        $od_id              = $request->input('od_id');
+        $od_cart_price      = $request->input('od_cart_price');
+        $od_send_cost       = $request->input('od_send_cost');
+        $od_send_cost2      = $request->input('od_send_cost2');
+        $od_receipt_price   = $request->input('od_receipt_price');
+        $od_temp_point      = $request->input('od_temp_point');
+        $od_b_zip           = $request->input('od_b_zip');
 
-/*
+        $ordertemp_cnt = DB::table('shopordertemps')->where([['od_id',$od_id], ['user_id', Auth::user()->user_id]])->count();
 
-        // 결제포인트가 상이함
-        // 회원이면서 포인트사용이면
-        $temp_point = 0;
-        if ($is_member && $config['cf_use_point'])
-        {
-            if($member['mb_point'] >= $default['de_settle_min_point']) {
-                $temp_point = (int)$default['de_settle_max_point'];
-
-                if($temp_point > (int)$tot_od_price)
-                    $temp_point = (int)$tot_od_price;
-
-                if($temp_point > (int)$member['mb_point'])
-                    $temp_point = (int)$member['mb_point'];
-
-                $point_unit = (int)$default['de_settle_point_unit'];
-                $temp_point = (int)((int)($temp_point / $point_unit) * $point_unit);
-            }
+        if($ordertemp_cnt == 0){
+            $create_result = shopordertemps::create([
+                'od_id'             => $od_id,
+                'user_id'           => Auth::user()->user_id,
+                'od_cart_price'     => $od_cart_price,
+                'od_send_cost'      => $od_send_cost,
+                'od_send_cost2'     => $od_send_cost2,
+                'od_receipt_price'  => $od_receipt_price,
+                'od_receipt_point'  => $od_temp_point,
+                'ad_zip1'           => $od_b_zip,
+                'od_ip'             => $_SERVER["REMOTE_ADDR"],
+            ])->exists();
+        }else{
+            $update_result = DB::table('shopordertemps')->where([['od_id', $od_id], ['user_id', Auth::user()->user_id]])->update([
+                'od_cart_price'     => $od_cart_price,
+                'od_send_cost'      => $od_send_cost,
+                'od_send_cost2'     => $od_send_cost2,
+                'od_receipt_price'  => $od_receipt_price,
+                'od_receipt_point'  => $od_temp_point,
+                'ad_zip1'           => $od_b_zip,
+                'od_ip'             => $_SERVER["REMOTE_ADDR"],
+            ]);
         }
-
-        if (($i_temp_point > (int)$temp_point || $i_temp_point < 0) && $config['cf_use_point']) {
-            if(function_exists('add_order_post_log')) add_order_post_log('포인트 최종 계산 Error....');
-            die("Error....");
-        }
-
-        if ($od_temp_point)
-        {
-            if ($member['mb_point'] < $od_temp_point) {
-                if(function_exists('add_order_post_log')) add_order_post_log('회원님의 포인트가 부족하여 포인트로 결제 할 수 없습니다.');
-                alert('회원님의 포인트가 부족하여 포인트로 결제 할 수 없습니다.');
-            }
-        }
-*/
-
-
-
-
-
-
-
-        //return response()->json($result);
-
-/*
-        //아임포트 관리자 페이지의 시스템설정->내정보->REST API 키 값을 입력한다.
-        $imp_key = "REST API 키";
-        //아임포트 관리자 페이지의 시스템설정->내정보->REST API Secret 값을 입력한다.
-        $imp_secret = "REST API Secret";
-        //결제 모듈을 호출한 페이지에서 ajax로 넘겨받은 imp_uid값을 저장한다.
-        $imp_uid = $request->input('imp_uid');
-        //결제 모듈을 호출한 페이지에서 ajax로 넘겨받은 merchant_uid값을 저장한다.
-        $merchant_uid = $request->input('merchant_uid');
-
-        return response()->json($result);
-
-//        var_dump("ordercomfirm");
-        exit;
-*/
     }
 
     public function ajax_orderpaycancel(Request $request)
     {
         //결제시 상품 변동등 문제가 있을시 결제 취소를 하기 위함
+        //confirm_url 로 대체 됨 나중에 삭제
         $merchant_uid  = $request->input('merchant_uid');
         $cancel_request_amount  = $request->input('cancel_request_amount');
         $reason  = $request->input('reason');
@@ -462,8 +452,6 @@ class OrderController extends Controller
         require_once '../../vendor/autoload.php';
 echo $cancel_request_amount;
     }
-
-
 
     //결제 하기
     public function orderpayment(Request $request)
@@ -485,6 +473,28 @@ echo $cancel_request_amount;
             return redirect()->route('cartlist')->with('alert_messages', '장바구니가 비어 있습니다.\\n\\n이미 주문하셨거나 장바구니에 담긴 상품이 없는 경우입니다.');
             exit;
         }
+
+        //기본 배송지 처리
+        $ad_default = $request->input('ad_default'); //기본 배송지 체크여부
+        $ad_subject = $request->input('ad_subject'); //배송지명
+        $od_b_name = $request->input('od_b_name');  //이름
+        $od_b_tel = $request->input('od_b_tel');    //전화번호
+        $od_b_hp = $request->input('od_b_hp');  //핸드폰
+        $od_b_zip = $request->input('od_b_zip');    //우편번호
+        $od_b_addr1 = $request->input('od_b_addr1');    //주소
+        $od_b_addr2 = $request->input('od_b_addr2');    //상세주소
+        $od_b_addr3 = $request->input('od_b_addr3');    //참고항목
+        $od_b_addr_jibeon = $request->input('od_b_addr_jibeon');    //지번(지번인지 도로명인지)
+
+        $CustomUtils->baesongji_process($ad_default, $ad_subject, $od_b_name, $od_b_tel, $od_b_hp, $od_b_zip, $od_b_addr1, $od_b_addr2, $od_b_addr3, $od_b_addr_jibeon);
+
+
+
+
+        echo "KKK====> ".$ad_default;
+        exit;
+
+
 
         $od_temp_point  = $request->input('od_temp_point');
 
