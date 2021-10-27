@@ -246,6 +246,8 @@ function form_check(act) {
             data : form_var,
             dataType : 'text',
             success : function(result){
+alert(result);
+return false;
                 var json = JSON.parse(result);
 
                 if(json.message == "no_item"){
@@ -267,7 +269,8 @@ function form_check(act) {
                 }
             },
             error: function(result){
-                console.log(result);
+                var json = JSON.parse(result);
+                console.log(json.result);
             },
         });
 
@@ -295,7 +298,8 @@ function form_check(act) {
                     }
                 },
                 error: function(result){
-                    console.log(result);
+                    var json = JSON.parse(result);
+                    console.log(json.result);
                 },
             });
         }
@@ -318,18 +322,21 @@ function form_check(act) {
                 data : form_var,
                 dataType : 'text',
                 success : function(result){
+                    var json = JSON.parse(result);
     //alert(result);
-                    if(result == "no_cnt"){
+    //return false;
+                    if(json.message == "no_cnt"){
                         alert("삭제하실 상품을 하나이상 선택해 주십시오.");
                         return false;
                     }
 
-                    if(result == "cart_page"){
+                    if(json.message == "cart_page"){
                         location.href = "{{ route('cartlist') }}";
                     }
                 },
                 error: function(result){
-                    console.log(result);
+                    var json = JSON.parse(result);
+                    console.log(json.result);
                 },
             });
         }else{

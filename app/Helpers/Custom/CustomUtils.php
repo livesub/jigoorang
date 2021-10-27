@@ -1117,10 +1117,12 @@ $um_value='80/0.5/3'
                 $this->set_session('ss_cart_id', $tmp_cart_id);
             }
         }
-
-        if(Auth::user() && $tmp_cart_id){
+/*
+이부분 오류
+        if(Auth::user()->user_id && $tmp_cart_id){
             $up_result = DB::table('shopcarts')->where([['user_id', Auth::user()->user_id], ['sct_direct','0'], ['sct_status','쇼핑']])->update(['od_id' => $tmp_cart_id]);
         }
+*/
     }
 
     public static function get_uniqid()
@@ -1536,7 +1538,7 @@ $um_value='80/0.5/3'
                 }else{
                     $update_result = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['ad_zip1', $ad_zip1], ['ad_addr1', $ad_addr1]])->update([
                         'ad_subject'    => addslashes($ad_subject),
-                        'ad_default'    => 0,
+                        //'ad_default'    => 0,
                         'ad_name'       => addslashes($ad_name),
                         'ad_tel'        => addslashes($ad_tel),
                         'ad_hp'         => addslashes($ad_hp),

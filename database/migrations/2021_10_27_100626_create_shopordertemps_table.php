@@ -15,7 +15,8 @@ class CreateShopordertempsTable extends Migration
     {
         Schema::create('shopordertemps', function (Blueprint $table) {
             $table->id()->comment('순번');
-            $table->bigInteger('od_id')->comment('장바구니 unique 키 = 주문서번호');
+            $table->bigInteger('order_id')->comment('주문서번호');
+            $table->bigInteger('od_id')->comment('장바구니 unique 키');
             $table->string('user_id')->comment('아이디');
             $table->integer('od_cart_price')->default(0)->comment('주문상품 총금액');
             $table->integer('od_send_cost')->default(0)->comment('배송비');
@@ -25,7 +26,7 @@ class CreateShopordertempsTable extends Migration
             $table->char('ad_zip1')->length(5)->comment('받으시는 분 우편번호');
             $table->string('od_ip')->comment('주문자IP');
             $table->timestamps();
-            $table->index(['od_id','user_id']);
+            $table->index(['order_id','od_id','user_id']);
         });
 
         DB::statement("ALTER TABLE shopordertemps comment '결제전주문검증'");

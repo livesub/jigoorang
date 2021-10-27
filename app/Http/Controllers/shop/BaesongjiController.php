@@ -136,7 +136,7 @@ class BaesongjiController extends Controller
         $id         = $request->input('num');
         $user_id    = Auth::user()->user_id;
 
-        DB::table('baesongjis')->where([['id', $id],['user_id',$user_id]])->delete();   //row 삭제(본문)
+        DB::table('baesongjis')->where([['id', $id],['user_id',$user_id]])->delete();   //row 삭제
 
         echo "ok";
         exit;
@@ -180,7 +180,7 @@ class BaesongjiController extends Controller
         //기본 배송지 컬럼(ad_default) 전부 0으로 만듦
         $update_default = DB::table('baesongjis')->where('user_id', Auth::user()->user_id)->update(['ad_default' => 0]);
 
-        $update_result = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['id', $id]])->update(['ad_default'    => 1]);
+        $update_result = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['id', $id]])->update(['ad_default'=> 1]);
 
         echo "ok";
         exit;

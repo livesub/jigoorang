@@ -37,7 +37,8 @@ class OrderController extends Controller
     {
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
-
+        echo "AAAAAAAAAAAAA";
+        exit;
         $sw_direct  = $request->input('sw_direct');     //장바구니 0, 바로구매 1
 
         $CustomUtils->set_session("ss_direct", $sw_direct);
@@ -62,10 +63,9 @@ class OrderController extends Controller
         $od_id = $CustomUtils->get_uniqid();
         $CustomUtils->set_session('ss_order_id', $od_id);
         $s_cart_id = $tmp_cart_id;
-/*
-        if($default['de_pg_service'] == 'inicis' || $default['de_inicis_lpay_use'] || $default['de_inicis_kakaopay_use'])
-            set_session('ss_order_inicis_id', $od_id);
-*/
+
+        $order_id = $CustomUtils->get_session('ss_order_id');   //실제 주문번호
+
         $tot_price = 0;
         $tot_point = 0;
         $tot_sell_price = 0;
@@ -78,7 +78,7 @@ class OrderController extends Controller
             ->leftjoin('shopitems as b', function($join) {
                     $join->on('a.item_code', '=', 'b.item_code');
                 })
-            ->where([['a.od_id',$s_cart_id], ['a.sct_select','1']])
+            ->where([['a.od_id',$tmp_cart_id], ['a.sct_select','1']])
             ->groupBy('a.item_code')
             ->orderBy('a.id')
             ->get();
@@ -103,12 +103,13 @@ class OrderController extends Controller
             if(Auth::user()->user_addr3 != "") $user_addr3 = Auth::user()->user_addr3;
             if(Auth::user()->user_addr_jibeon != "") $user_addr_jibeon = Auth::user()->user_addr_jibeon;
 
+/*
             // 기본배송지
             $default_baesongji = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['ad_default','1']])->first();
 
             $sep = chr(30);
             $val1 = "";
-/*
+
             // 주문자와 동일
             $addr_list .= '<input type="radio" name="ad_sel_addr" value="same" id="ad_sel_addr_same">'.PHP_EOL;
             $addr_list .= '<label for="ad_sel_addr_same">주문자와 동일</label>'.PHP_EOL;
@@ -155,6 +156,7 @@ class OrderController extends Controller
             'user_addr2'    => $user_addr2,
             'user_addr3'    => $user_addr3,
             'user_addr_jibeon'  => $user_addr_jibeon,
+            'order_id'      => $order_id,
             'addr_list'     => $addr_list, //주문자 동일, 최근 배송지 히든 처리
         ]);
     }
@@ -347,6 +349,8 @@ class OrderController extends Controller
 
         // 주문금액이 상이함
         $price = DB::select(" select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as od_price, COUNT(distinct item_code) as cart_count from shopcarts where od_id = '$tmp_cart_id' and sct_select = '1' ");
+var_dump($tmp_cart_id);
+exit;
 
         $tot_ct_price = $price[0]->od_price;
         $cart_count = $price[0]->cart_count;
@@ -403,6 +407,7 @@ class OrderController extends Controller
     public function ajax_ordertemp(Request $request)
     {
         //결제전 검증을 위한 임시 테이블 저장
+        $order_id           = $request->input('order_id');
         $od_id              = $request->input('od_id');
         $od_cart_price      = $request->input('od_cart_price');
         $od_send_cost       = $request->input('od_send_cost');
@@ -415,6 +420,7 @@ class OrderController extends Controller
 
         if($ordertemp_cnt == 0){
             $create_result = shopordertemps::create([
+                'order_id'          => $order_id,
                 'od_id'             => $od_id,
                 'user_id'           => Auth::user()->user_id,
                 'od_cart_price'     => $od_cart_price,
@@ -427,6 +433,7 @@ class OrderController extends Controller
             ])->exists();
         }else{
             $update_result = DB::table('shopordertemps')->where([['od_id', $od_id], ['user_id', Auth::user()->user_id]])->update([
+                'order_id'          => $order_id,
                 'od_cart_price'     => $od_cart_price,
                 'od_send_cost'      => $od_send_cost,
                 'od_send_cost2'     => $od_send_cost2,
@@ -487,11 +494,84 @@ echo $cancel_request_amount;
         $od_b_addr_jibeon = $request->input('od_b_addr_jibeon');    //지번(지번인지 도로명인지)
 
         $CustomUtils->baesongji_process($ad_default, $ad_subject, $od_b_name, $od_b_tel, $od_b_hp, $od_b_zip, $od_b_addr1, $od_b_addr2, $od_b_addr3, $od_b_addr_jibeon);
+        //기본 배송지 처리 끝
+
+        //결제 방법
+        $pg = $request->input('pg');
+        $method = $request->input('method');
+
+        $order_id = $CustomUtils->get_session('ss_order_id');
 
 
 
 
-        echo "KKK====> ".$ad_default;
+/*
+// 주문서에 입력
+$sql = " insert {$g5['g5_shop_order_table']}
+            set od_id             = '$od_id',
+                mb_id             = '{$member['mb_id']}',
+                od_pwd            = '$od_pwd',
+                od_name           = '$od_name',
+                od_email          = '$od_email',
+                od_tel            = '$od_tel',
+                od_hp             = '$od_hp',
+                od_zip1           = '$od_zip1',
+                od_zip2           = '$od_zip2',
+                od_addr1          = '$od_addr1',
+                od_addr2          = '$od_addr2',
+                od_addr3          = '$od_addr3',
+                od_addr_jibeon    = '$od_addr_jibeon',
+                od_b_name         = '$od_b_name',
+                od_b_tel          = '$od_b_tel',
+                od_b_hp           = '$od_b_hp',
+                od_b_zip1         = '$od_b_zip1',
+                od_b_zip2         = '$od_b_zip2',
+                od_b_addr1        = '$od_b_addr1',
+                od_b_addr2        = '$od_b_addr2',
+                od_b_addr3        = '$od_b_addr3',
+                od_b_addr_jibeon  = '$od_b_addr_jibeon',
+                od_deposit_name   = '$od_deposit_name',
+                od_memo           = '$od_memo',
+                od_cart_count     = '$cart_count',
+                od_cart_price     = '$tot_ct_price',
+                od_cart_coupon    = '$tot_it_cp_price',
+                od_send_cost      = '$od_send_cost',
+                od_send_coupon    = '$tot_sc_cp_price',
+                od_send_cost2     = '$od_send_cost2',
+                od_coupon         = '$tot_od_cp_price',
+                od_receipt_price  = '$od_receipt_price',
+                od_receipt_point  = '$od_receipt_point',
+                od_bank_account   = '$od_bank_account',
+                od_receipt_time   = '$od_receipt_time',
+                od_misu           = '$od_misu',
+                od_pg             = '$od_pg',
+                od_tno            = '$od_tno',
+                od_app_no         = '$od_app_no',
+                od_escrow         = '$od_escrow',
+                od_tax_flag       = '$od_tax_flag',
+                od_tax_mny        = '$od_tax_mny',
+                od_vat_mny        = '$od_vat_mny',
+                od_free_mny       = '$od_free_mny',
+                od_status         = '$od_status',
+                od_shop_memo      = '',
+                od_hope_date      = '$od_hope_date',
+                od_time           = '".G5_TIME_YMDHIS."',
+                od_ip             = '$REMOTE_ADDR',
+                od_settle_case    = '$od_settle_case',
+                od_other_pay_type = '$od_other_pay_type',
+                od_test           = '{$default['de_card_test']}'
+                ";
+$result = sql_query($sql, false);
+*/
+
+
+
+
+
+
+
+
+        echo "KKK====> 작업중!!!!!!!!!! ";
         exit;
 
 

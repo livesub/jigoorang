@@ -89,7 +89,7 @@ class CartController extends Controller
                         // 재고 구함
                         $sct_qty = $cart_info->sct_qty;
 
-                        if(!$cart_info->sio_id) $it_stock_qty = $CustomUtils->get_it_stock_qty($item_code);
+                        if(!$cart_info->sio_id) $it_stock_qty = $CustomUtils->get_item_stock_qty($item_code);
                         else $it_stock_qty = $CustomUtils->get_option_stock_qty($item_code, $cart_info->sio_id, $cart_info->sio_type);
 
                         if ($sct_qty + $sum_qty > $it_stock_qty)
@@ -101,7 +101,8 @@ class CartController extends Controller
                             exit;
                         }
                     }
-
+echo "SSSSSSSSSSS";
+exit;
                     $update_result = DB::table('shopcarts')->where([['od_id', $tmp_cart_id], ['item_code',$item_code]])->limit(1)->update(['sct_select' => '1','sct_select_time' => date("Y-m-d H:i:s", time())]);
                 }
             }

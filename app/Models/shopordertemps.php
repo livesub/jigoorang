@@ -10,6 +10,7 @@ class shopordertemps extends Model
     use HasFactory;
 
     protected $fillable = [
+        'order_id',
         'od_id',
         'user_id',
         'od_cart_price',

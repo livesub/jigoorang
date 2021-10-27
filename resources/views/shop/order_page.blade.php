@@ -552,12 +552,11 @@
         //결제전 검증 수단으로 temp 테이블에 저장
         order_temp(total_price);
 
-$("#forderform").submit();  //테스트로 함
+//$("#forderform").submit();  //테스트로 함
 
 
 
-/*
-confirm_url 테스트 구문 나중에 삭제
+
                 var kk = total_price - od_temp_point;
                 $.ajax({
                     headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
@@ -565,15 +564,15 @@ confirm_url 테스트 구문 나중에 삭제
                     method: "POST",
                     data: {
                         'amount' : kk,
-                        'merchant_uid' : '{{ $s_cart_id }}',
+                        'merchant_uid' : '{{ $order_id }}',
                     }
                 }).done(function (data) {
-alert(data.HTTP_STATUS);
+alert(data);
                 });
 
 
 return false;
-*/
+
 
 
 
@@ -585,7 +584,7 @@ return false;
 <script>
     function requestPay(pg, method, price, point) {
         var tot_pay = price - point;
-        var merchant_uid = "{{ $s_cart_id }}";
+        var merchant_uid = "{{ $order_id }}";
 
         var IMP = window.IMP; // 생략 가능
         IMP.init("imp62273646"); // 예: imp00000000
@@ -644,6 +643,7 @@ alert("ok");
             } else {
                 // 결제 실패 시 로직,
                 alert("결제에 실패하였습니다.\n내용: " +  rsp.error_msg);
+                location.reload();
             }
         });
     }
@@ -687,6 +687,7 @@ alert("aasd==> "+result);
             url : '{{ route('ajax_ordertemp') }}',
             method: "POST",
             data: {
+                'order_id'          : '{{ $order_id }}',
                 'od_id'             : '{{ $s_cart_id }}',
                 'od_cart_price'     : $("#od_price").val(),
                 'od_send_cost'      : $("#od_send_cost").val(),
