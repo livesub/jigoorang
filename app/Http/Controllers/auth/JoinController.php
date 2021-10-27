@@ -24,7 +24,8 @@ use Illuminate\Support\Str;     //각종 함수(str_random)
 use Illuminate\Support\Facades\Mail;    //메일 class
 use Illuminate\Support\Facades\DB;
 use App\Models\shoppoints;    //포인트 모델 정의
-
+//Request class 적용 request값의 예외처리에 대한 정의
+use App\Http\Requests\UserRequest;
 class JoinController extends Controller
 {
     public function __construct()
@@ -58,7 +59,9 @@ class JoinController extends Controller
      /**************************************************************************/
      /* $user_pw 을 사용 하면 로그인이 되지 않으므로 칼럼명을 password 로 바꾼다 */
      /**************************************************************************/
-     public function store(Request $request)
+     
+     //vaildator를 App\Http\Requests\UserRequest 에 위임
+     public function store(UserRequest $request)
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
@@ -67,20 +70,22 @@ class JoinController extends Controller
         $user_id = trim($request->get('user_id'));
         $user_name = trim($request->get('user_name'));
         $user_pw = trim($request->get('user_pw'));
-        $user_pw_confirmation = trim($request->get('user_pw_confirmation'));
+        //$user_pw_confirmation = trim($request->get('user_pw_confirmation'));
         //$user_email = $request->get('user_email');
         $user_phone = trim($request->get('user_phone'));
-        $user_confirm_code = str::random(60);  //사용자 이메일 확인을 위해서..
+        $user_gender = trim($request->user_gender);
+        $user_birth = trim(str_replace("-", "", $request->user_birth));
+        //$user_confirm_code = str::random(60);  //사용자 이메일 확인을 위해서..
 
         //trans('messages.join_Validator')) class 컨트롤러에서 표현 할때
         //예외처리
-        Validator::validate($request->all(), [
-            'user_id'  => ['required', 'string', 'regex:/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/', 'max:200', 'unique:users'],
-            'user_name'  => ['required', 'string'],
-            'user_pw'  => ['required', 'string', 'min:6', 'max:16', 'confirmed'],
-            'user_pw_confirmation'  => ['required', 'string', 'min:6', 'max:16', 'same:user_pw'],
-            'user_phone'  => ['required', 'max:20']
-        ], $Messages::$validate['join']);
+        // Validator::validate($request->all(), [
+        //     'user_id'  => ['required', 'string', 'regex:/[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}/', 'max:200', 'unique:users'],
+        //     'user_name'  => ['required', 'string'],
+        //     'user_pw'  => ['required', 'string', 'min:6', 'max:16', 'confirmed'],
+        //     'user_pw_confirmation'  => ['required', 'string', 'min:6', 'max:16', 'same:user_pw'],
+        //     'user_phone'  => ['required', 'max:20']
+        // ], $Messages::$validate['join']);
 
 /******************************************************* */
 /* model 형식으로 DB 처리 프로그램 할때 사용               */
@@ -99,10 +104,19 @@ class JoinController extends Controller
             'user_id' => $user_id,
             'user_name' => $user_name,
             'password' => Hash::make($user_pw),
+            'user_activated' => 1,
             'user_phone' => $user_phone,
-            'user_confirm_code' => $user_confirm_code,
+            'user_gender' => $user_gender,
+            'user_birth' => $user_birth,
+            
         ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
+        //'user_confirm_code' => $user_confirm_code,
 
+        //가입 시 cookie 삭제
+        if($_COOKIE["num"] != "" || $_COOKIE["cetification"] != ""){
+            setcookie("num", "", 0, "/");
+            setcookie("certification", "", 0, "/");
+        }
         /** 가입 포인트 추가(211015) **/
         $setting_info = CustomUtils::setting_infos();
 
@@ -120,23 +134,23 @@ class JoinController extends Controller
         }
         /** 가입 포인트 추가(211015) 끝 **/
 
-        $data = array(
-            'user_name' => $user_name,
-            'user_confirm_code' => $user_confirm_code,
-            'name_welcome' => $Messages::$email_certificate['email_certificate']['name_welcome'],
-            'join_open' => $Messages::$email_certificate['email_certificate']['join_open'],
-        );
+        // $data = array(
+        //     'user_name' => $user_name,
+        //     'user_confirm_code' => $user_confirm_code,
+        //     'name_welcome' => $Messages::$email_certificate['email_certificate']['name_welcome'],
+        //     'join_open' => $Messages::$email_certificate['email_certificate']['join_open'],
+        // );
 
-        $subject = sprintf('[%s] '.$Messages::$join_confirm_ment['confirm']['join_confirm'], $user_name);
+        // $subject = sprintf('[%s] '.$Messages::$join_confirm_ment['confirm']['join_confirm'], $user_name);
 
 
         //이메일 함수 이용 발송
-        $email_send_value = CustomUtils::email_send("auth.confirm_email",$user_name, $user_id, $subject, $data);
+        //$email_send_value = CustomUtils::email_send("auth.confirm_email",$user_name, $user_id, $subject, $data);
 
-        if(!$email_send_value)
-        {
+        //if(!$email_send_value)
+        //{
             //이메일 발송 실패 시에 뭘 할건지 나중에 생각해야함
-        }
+        //}
 
         if($create_result) return redirect()->route('main.index')->with('alert_messages', $Messages::$join_confirm_ment['confirm']['join_success']);
         else return redirect()->route('main.index')->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);  //치명적인 에러가 있을시 alert로 뿌리기 위해

@@ -61,6 +61,10 @@
         {!! trans($ask_forgot, ['url' => route('pwchange.index')]) !!}
       </p>
 
+      <p class='text-center'>
+        <a href="{{ route('findIdPwView')}}">@lang('auth.findIdPw')</a>
+      </p>
+
     </div>
 
     <div>

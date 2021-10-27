@@ -81,7 +81,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'kr',
 
     /*
     |--------------------------------------------------------------------------
@@ -243,4 +243,8 @@ return [
     'thumb_width' => env('THUMB_WITH'),
     'thumb_height' => env('THUMB_HEIGHT'),
 
+    //알리고 관련
+    'aligo_app_key' => env('ALIGO_APP_KEY'),
+    'aligo_id' => env('ALIGO_ID'),
+    'aligo_number' => env('ALIGO_FROM_NUMBER'),
 ];

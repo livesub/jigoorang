@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
-
+use App\Http\Controllers\auth\findIdPwController;
+use App\Http\Controllers\exp\expController;
+use App\Http\Controllers\sms\aligoSmsController;
+use App\Http\Controllers\auth\socialLoginController;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -258,6 +261,47 @@ Route::get('social/callback/{provider}', [
     'uses' => 'App\Http\Controllers\auth\socialLoginController@callback',
 ]);
 
+//소셜로그인 인증 후 저장 라우트
+Route::post('social_save_member', [socialLoginController::class, 'save_member'])->name('social_save_member');
+
+//아이디 및 비밀번호 찾기 관련
+Route::get('/findIdPWView', [findIdPwController::class, 'findIdPwView'])->name('findIdPwView');
+
+//아이디 찾기 ajax 라우트
+Route::post('/findId', [findIdPwController::class, 'findId'])->name('findId');
+
+//비밀번호 링크 ajax 라우트
+Route::post('/sendPwChange', [findIdPwController::class, 'sendPwChangeLink'])->name('sendPwChangeLinkView');
+
+//시간이 제한된 라우트 제작
+Route::get('/sendPwChange/{code}', function (Request $request, $code) {
+    if(!$request->hasValidSignature()){
+        //기간이 지났을 경우의 처리 또는 없거나
+        //abort(401);
+        return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
+    }else{
+        //제대로 확인이 되었을 경우 확인
+        return view('auth.pwchange_sign', compact('code'));
+    }
+})->name('sendPwChangeLinkPro');
+
+Route::post('/resetPw', [findIdPwController::class, 'update_pw_service'])->name('resetPw');
+
+//체험단 관련 라우트 그룹
+Route::middleware('auth')->prefix('exp')->group(function(){
+    
+    //체험단 리스트 관련 라우트
+    Route::get('/list', [expController::class, 'index'])->name('exp.list');
+});
+
+//문자인증 관련 테스트 라우트
+Route::get('/test_certification', [aligoSmsController::class, 'test_certification'])->name('test_certification');
+
+//문자 인증 관련 라우트
+Route::post('/certification_send', [aligoSmsController::class, 'auth_certification'])->name('auth_certification');
+
+//문자내역관련 테스트 라우트
+Route::get('/get_list_from_id', [aligoSmsController::class, 'get_sms_list'])->name('get_sms_list');
 
 /*** 관리자 페이지 접근 ***/
 //route에서 관리자 분리
@@ -270,3 +314,9 @@ Route::prefix('adm/shop')->group(base_path('routes/admshop.php'));
 
 /*** 프론트 쇼핑몰 접근 ***/
 Route::prefix('shop')->group(base_path('routes/shop.php'));
+
+//대체 라우트 지정(설정된 라우트가 없을 경우 해당 메시지를 alert으로 보여주고 메인으로 이동)
+//위치를 제일 마지막에 두어야 모든 라우트에 대해 반응가능
+Route::fallback(function () {
+    return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
+});

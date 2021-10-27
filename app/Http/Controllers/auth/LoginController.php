@@ -89,16 +89,16 @@ class LoginController extends Controller
         }
 
         //이메일 인증이 안됬으면 로그아웃 시킴
-        if(!auth()->user()->user_activated)
-        {
-            auth()->logout();
-            if (preg_match("/orderform/", $url)){   //장바구니로 왔는데 로그인 실패시 계속 로그인 페이지에 남기
-                return redirect()->route('login.index','url='.urlencode(route('orderform')))->with('alert_messages', $Messages::$login_chk['login_chk']['email_chk']);
-            }else{
-                return redirect()->route('main.index')->with('alert_messages', $Messages::$login_chk['login_chk']['email_chk']);
-            }
-            exit;
-        }
+        // if(!auth()->user()->user_activated)
+        // {
+        //     auth()->logout();
+        //     if (preg_match("/orderform/", $url)){   //장바구니로 왔는데 로그인 실패시 계속 로그인 페이지에 남기
+        //         return redirect()->route('login.index','url='.urlencode(route('orderform')))->with('alert_messages', $Messages::$login_chk['login_chk']['email_chk']);
+        //     }else{
+        //         return redirect()->route('main.index')->with('alert_messages', $Messages::$login_chk['login_chk']['email_chk']);
+        //     }
+        //     exit;
+        // }
 
         //회원 로그인 통계처리
         $statistics = new StatisticsController();

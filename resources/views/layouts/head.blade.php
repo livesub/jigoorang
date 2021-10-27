@@ -15,9 +15,10 @@
 <head>
     <meta charset='utf-8'>
     <title>지구랭</title>
+    
 </head>
 <body>
-
+<script src="{{ mix('js/common.js') }}"></script>
 <script src='//code.jquery.com/jquery-3.3.1.min.js'></script>
 
 <script>
@@ -75,7 +76,7 @@
                 @endif
             @endif
             <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="{{ route('index') }}">쇼핑몰</a></td>
-            <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="{{ route('index') }}">체험단</a></td>
+            <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="{{ route('exp.list') }}">체험단</a></td>
         </tr>
     </table>
 
