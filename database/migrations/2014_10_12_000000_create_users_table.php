@@ -19,6 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('password')->comment('비밀번호');    //$user_pw 을 사용 하면 로그인이 되지 않으므로 칼럼명을 password 로 바꾼다
             $table->string('user_name')->comment('이름');
             $table->string('user_tel')->comment('집 전화번호');
+            $table->string('user_birth', 10)->comment('생년월일');
+            $table->enum('user_gender', ['M', 'W'])->comment('성별');
             $table->string('user_phone')->comment('휴대 전화번호');
             $table->string('user_birth', 10)->comment('생년월일');
             $table->enum('user_gender', ['M', 'W'])->comment('성별');

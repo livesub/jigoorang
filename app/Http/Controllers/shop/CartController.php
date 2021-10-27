@@ -30,6 +30,7 @@ class CartController extends Controller
     public function __construct()
     {
         session_start();
+        $this->middleware('auth'); //회원만 들어 오기
     }
 
     public function ajax_cart_register(Request $request)
@@ -59,12 +60,12 @@ class CartController extends Controller
         if($act == "buy")
         {
             if(!count($post_ct_chk)){
-                echo "no_item";
+                echo json_encode(['message' => 'no_item']);
                 exit;
             }
 
             // 선택필드 초기화
-            $up_result = shopcarts::whereod_id($tmp_cart_id)->first();  //update 할때 미리 값을 조회 하고 쓰면 update 구문으로 자동 변경
+            $up_result = shopcarts::whereod_id($tmp_cart_id)->first();
             $up_result->sct_select = 0;
             $result_up = $up_result->save();
 
@@ -81,7 +82,8 @@ class CartController extends Controller
                     $cart_infos = DB::table('shopcarts')->where([['od_id', $tmp_cart_id], ['item_code',$item_code]])->get();
 
                     foreach($cart_infos as $cart_info){
-                        $sum_qty = DB::table('shopcarts')->where([['od_id','<>',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$cart_info->sio_id], ['sio_type',$cart_info->sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty');
+                        //$sum_qty = DB::table('shopcarts')->where([['od_id','<>',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$cart_info->sio_id], ['sio_type',$cart_info->sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty');    //<-- 장바구니에 있으면 수량을 가지고 있어 다른 사람이 주문 하지 못함
+                        $sum_qty = DB::table('shopcarts')->where([['od_id',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$cart_info->sio_id], ['sio_type',$cart_info->sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty');   //주문된 것만 수량 차감
                         //$sum_qty = $sum['cnt'];
 
                         // 재고 구함
@@ -95,9 +97,8 @@ class CartController extends Controller
                             $item_option = $cart_info->item_name;
                             if($cart_info->sio_id) $item_option .= '('.$cart_info->sct_option.')';
 
-                            echo "no_qty";
+                            echo json_encode(['message' => 'no_qty', 'option' => $item_option, 'sum_qty' => number_format($it_stock_qty - $sum_qty)]);
                             exit;
-                            //alert($item_option." 의 재고수량이 부족합니다.\\n\\n현재 재고수량 : " . number_format($it_stock_qty - $sum_qty) . " 개");
                         }
                     }
 
@@ -106,17 +107,17 @@ class CartController extends Controller
             }
 
             if(Auth::user() != ""){     // 회원인 경우
-                echo "mem_order";
+                echo json_encode(['message' => 'mem_order']);
                 exit;
             }else{      // 비회원인 경우
-                echo "no_mem_order";
+                echo json_encode(['message' => 'no_mem_order']);
                 exit;
             }
         }else if ($act == "alldelete"){ // 비우기 이면
             DB::table('shopcarts')->where('od_id',$tmp_cart_id)->delete();   //row 삭제
         }else if ($act == "seldelete"){ // 선택삭제
             if(!count($post_ct_chk)){
-                echo "no_cnt";
+                echo json_encode(['message' => 'no_cnt']);
                 exit;
             }
 
@@ -136,7 +137,7 @@ class CartController extends Controller
             $count = count($post_item_codes);
 
             if ($count < 1){
-                echo "no_carts";
+                echo json_encode(['message' => 'no_carts']);
                 exit;
             }
 
@@ -162,7 +163,7 @@ class CartController extends Controller
 
                 if($opt_count && isset($post_io_types[$item_code][0]) && $post_io_types[$item_code][0] != 0)
                 {
-                    echo "no_option";
+                    echo json_encode(['message' => 'no_option']);
                     exit;
                 }
 
@@ -170,7 +171,7 @@ class CartController extends Controller
                 $item_info = $CustomUtils->get_shop_item($item_code, false);
 
                 if(!$item_info[0]->item_code){
-                    echo "no_items";
+                    echo json_encode(['message' => 'no_items']);
                     exit;
                 }
 
@@ -210,7 +211,8 @@ class CartController extends Controller
                         $sio_value = isset($sio_value[$item_code][$k]) ? $sio_value[$item_code][$k] : '';
                         $sct_qty = $request->input('ct_qty');
 
-                        $sum_qty = DB::table('shopcarts')->where([['od_id','<>',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$sio_id], ['sio_type',$sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty');
+                        //$sum_qty = DB::table('shopcarts')->where([['od_id','<>',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$sio_id], ['sio_type',$sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty');  //<-- 장바구니에 있으면 수량을 가지고 있어 다른 사람이 주문 하지 못함
+                        $sum_qty = DB::table('shopcarts')->where([['od_id',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$sio_id], ['sio_type',$sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty'); //주문된 것만 수량 차감
 
                         // 재고 구함
                         $sct_qty = isset($sct_qty[$item_code][$k]) ? (int) $sct_qty[$item_code][$k] : 0;
@@ -222,7 +224,7 @@ class CartController extends Controller
 
                         if ($sct_qty + $sum_qty > $it_stock_qty)
                         {
-                            echo "no_qty";
+                            echo json_encode(['message' => 'no_qty1111']);
                             exit;
                         }
                     }
@@ -265,12 +267,12 @@ class CartController extends Controller
                     // 구매가격이 음수인지 체크
                     if($sio_type) {
                         if((int)$sio_price < 0){
-                            echo "negative_price";
+                            echo json_encode(['message' => 'negative_price']);
                             exit;
                         }
                     } else {
                         if((int)$item_info[0]->item_price + (int)$sio_price < 0){
-                            echo "negative_price";
+                            echo json_encode(['message' => 'negative_price']);
                             exit;
                         }
                     }
@@ -282,14 +284,16 @@ class CartController extends Controller
                         // 재고체크
                         $tmp_ct_qty = $sam_opt[0]->sct_qty;
 
-                        if(!$sio_id)
+                        if(!$sio_id){
                             $tmp_it_stock_qty = $CustomUtils->get_item_stock_qty($item_code);
-                        else
+                        }else{
                             $tmp_it_stock_qty = $CustomUtils->get_option_stock_qty($item_code, $sio_id, $sam_opt[0]->sio_type);
+                        }
 
                         if ($tmp_ct_qty + $sct_qty > $tmp_it_stock_qty)
                         {
-                            echo "no_qty";
+                            //echo json_encode(['message' => 'no_qty', 'option' => $sio_value, 'sum_qty' => number_format($tmp_it_stock_qty - $tmp_ct_qty)]);
+                            echo json_encode(['message' => 'no_qty', 'option' => $sio_value, 'sum_qty' => number_format($tmp_it_stock_qty)]);
                             exit;
                         }
 
@@ -336,11 +340,11 @@ class CartController extends Controller
                         'user_id'           => $user_id,
                         'item_code'         => $item_info[0]->item_code,
                         'item_name'         => addslashes($item_info[0]->item_name),
-                        'item_sc_type'      => (int)$item_info[0]->item_sc_type,
-                        'item_sc_method'    => (int)$item_info[0]->item_sc_method,
+                        //'item_sc_type'      => (int)$item_info[0]->item_sc_type,
+                        //'item_sc_method'    => (int)$item_info[0]->item_sc_method,
                         'item_sc_price'     => (int)$item_info[0]->item_sc_price,
-                        'item_sc_minimum'   => (int)$item_info[0]->item_sc_minimum,
-                        'item_sc_qty'       => (int)$item_info[0]->item_sc_qty,
+                        //'item_sc_minimum'   => (int)$item_info[0]->item_sc_minimum,
+                        //'item_sc_qty'       => (int)$item_info[0]->item_sc_qty,
                         'sct_status'        => '쇼핑',
                         'sct_history'       => '',
                         'sct_price'         => (int)$item_info[0]->item_price,
@@ -369,16 +373,16 @@ class CartController extends Controller
             // 바로 구매일 경우
             if(Auth::user() != ""){
                 //회원
-                echo "yes_mem";
+                echo json_encode(['message' => 'yes_mem']);
                 exit;
             }else{
                 //비회원
-                echo "no_mem";
+                echo json_encode(['message' => 'no_mem']);
                 exit;
             }
         }else{
             //장바구니
-            echo "cart_page";
+            echo json_encode(['message' => 'cart_page']);
             exit;
         }
     }
@@ -468,69 +472,4 @@ class CartController extends Controller
         return $view;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

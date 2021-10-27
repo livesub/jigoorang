@@ -18,7 +18,7 @@
 </table>
 
 <table border=1>
-<form name="cate_modi_form" id="cate_modi_form" method="post" action="{{ route('shop.cate.cate_modi_save') }}">
+<form name="cate_modi_form" id="cate_modi_form" method="post" action="{{ route('shop.cate.cate_modi_save') }}" enctype='multipart/form-data'>
 {!! csrf_field() !!}
 <input type="hidden" name="id" id="id" value="{{ $categorys_info->id }}">
 <input type="hidden" name="sca_id" id="sca_id" value="{{ $categorys_info->sca_id }}">
@@ -52,6 +52,18 @@
         <td><input type="text" name="sca_rank" id="sca_rank" maxlength="3" size="3" value="{{ $categorys_info->sca_rank }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><br>※ 숫자만 입력 하세요. 숫자가 높을 수록 먼저 출력 됩니다. </td>
     </tr>
     <tr>
+        <td>이미지</td>
+        <td>
+            <input type="file" name="sca_img" id="sca_img">
+            @error('sca_img')
+                <strong>{{ $message }}</strong>
+            @enderror
+
+            <br><a href="javascript:file_down('{{ $categorys_info->id }}');">{{ $categorys_info->sca_img_ori_file_name }}</a><br>
+            <input type='checkbox' name="file_chk" id="file_chk" value='1'>수정,삭제,새로 등록시 체크 하세요.
+        </td>
+    </tr>
+    <tr>
         <td colspan="6"><button type="button" onclick="add_cate();">카테고리 수정</button></td>
     </tr>
 </form>
@@ -65,6 +77,15 @@
             return false;
         }
 
+        $("#cate_modi_form").submit();
+    }
+</script>
+
+<script>
+    function file_down(id)
+    {
+        $("#id").val(id);
+        $("#cate_modi_form").attr("action", "{{ route('shop.cate.scate_downloadfile') }}");
         $("#cate_modi_form").submit();
     }
 </script>

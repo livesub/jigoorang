@@ -39,6 +39,12 @@ Route::get('/sitemdetail_option', [
     'uses' => 'App\Http\Controllers\shop\ItemController@ajax_option_change',
 ]);
 
+//wish 처리
+Route::get('/sitemdetail_wish', [
+    'as' => 'ajax_wish',
+    'uses' => 'App\Http\Controllers\shop\ShopWishController@ajax_wish',
+]);
+
 //장바구니, 바로구매 처리
 Route::post('/cartprocess', [
     'as' => 'ajax_cart_register',
@@ -92,3 +98,40 @@ Route::post('/baesongji_del', [
     'as' => 'ajax_baesongji_del',
     'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_baesongji_delete',
 ]);
+
+//추가 배송비
+Route::post('/ordersendcost', [
+    'as' => 'ajax_ordersendcost',
+    'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_ordersendcost',
+]);
+
+//무통장 입금(은행명 등 호출)
+Route::get('/orderbank', [
+    'as' => 'ajax_orderbank',
+    'uses' => 'App\Http\Controllers\shop\OrderController@ajax_orderbank',
+]);
+
+//재고체크
+Route::get('/orderstock', [
+    'as' => 'ajax_orderstock',
+    'uses' => 'App\Http\Controllers\shop\OrderController@ajax_orderstock',
+]);
+
+//결제 검증 하기
+Route::post('/ordercomfirm', [
+    'as' => 'ajax_ordercomfirm',
+    'uses' => 'App\Http\Controllers\shop\OrderController@ajax_ordercomfirm',
+]);
+
+//결제 취소
+Route::post('/orderpaycancel', [
+    'as' => 'ajax_orderpaycancel',
+    'uses' => 'App\Http\Controllers\shop\OrderController@ajax_orderpaycancel',
+]);
+
+//결제 하기
+Route::post('/orderpayment', [
+    'as' => 'orderpayment',
+    'uses' => 'App\Http\Controllers\shop\OrderController@orderpayment',
+]);
+

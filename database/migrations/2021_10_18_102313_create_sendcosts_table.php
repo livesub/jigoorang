@@ -20,10 +20,16 @@ class CreateSendcostsTable extends Migration
             $table->char('sc_zip2')->length(5)->comment('우편번호 끝');
             $table->integer('sc_price')->default(0)->comment('추가배송비');
             $table->timestamps();
-            $table->index(['sc_zip1']);
+            $table->index(['sc_zip1','sc_zip2']);
         });
 
         DB::statement("ALTER TABLE sendcosts comment '추가 배송비 관리'");
+
+        DB::table('sendcosts')->insert([
+            ['sc_name' => '인천광역시 중구', 'sc_zip1' => '22386', 'sc_zip2' => '22388', 'sc_price' => '5000'],
+            ['sc_name' => '인천광역시 강화군', 'sc_zip1' => '23004', 'sc_zip2' => '23010', 'sc_price' => '5000'],
+            ['sc_name' => '인천광역시 옹진군', 'sc_zip1' => '23101', 'sc_zip2' => '23116', 'sc_price' => '5000'],
+        ]);
     }
 
     /**

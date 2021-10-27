@@ -21,6 +21,7 @@
         <td>단계</td>
         <td>출력여부</td>
         <td>출력순위</td>
+        <td>랭킹 출력</td>
         <td>추가/수정/삭제</td>
     </tr>
 
@@ -45,6 +46,10 @@
                 $disp_ment = "<font color='red'>비출력</font>";
                 $tr_bg = " bgcolor='red' ";
             }
+
+            //랭킹 츌력 여부
+            if($scate_info->sca_rank_dispaly == 'Y') $rank_checked = 'checked';
+            else $rank_checked = '';
         @endphp
 
     <tr {{ $tr_bg }}>
@@ -55,6 +60,11 @@
         <td>{{ $level+1 }}단계</td>
         <td>{!! $disp_ment !!}</td>
         <td>{{ $scate_info->sca_rank }}</td>
+        <td>
+            @if($level+1 == 2)   <!-- 2단계에서만 랭킹 등록 -->
+            <input type="checkbox" name="sca_rank_dispaly{{ $scate_info->id }}" id="sca_rank_dispaly{{ $scate_info->id }}" onclick="rank_type('{{ $scate_info->id }}')" {{ $rank_checked }}>
+            @endif
+        </td>
         <td>
             @if($level+2 < 3)   <!-- 2단계까지 저장 -->
             <button type="button" onclick="cate_type('{{ $scate_info->sca_id }}','add');">추가</button>
@@ -67,7 +77,8 @@
             @endphp
 
             @if($de_scate_info == 1 && $de_item_info == 0)
-                <button type="button" onclick="cate_del('{{ $scate_info->id }}','{{ $scate_info->sca_id }}');">삭제</button></td>
+                <button type="button" onclick="cate_del('{{ $scate_info->id }}','{{ $scate_info->sca_id }}');">삭제</button>
+        </td>
             @endif
     </tr>
     @endforeach
@@ -76,7 +87,7 @@
 
 <table>
     <tr>
-        <td><button type="button" onclick="location.href='{{ route('shop.cate.create') }}'">카테고리 등록</button></td>
+        <td><button type="button" onclick="location.href='{{ route('shop.cate.create') }}'">1단계 카테고리 등록</button></td>
     </tr>
 </table>
 
@@ -91,8 +102,7 @@
 </table>
 
 
-<form name="cate_form" id="cate_form" method="post" action="">
-{!! csrf_field() !!}
+<form name="cate_form" id="cate_form" method="get" action="">
     <input type="hidden" name="id" id="id">
     <input type="hidden" name="sca_id" id="sca_id">
     <input type="hidden" name="page" id="page" value="{{ $pageNum }}">
@@ -124,6 +134,36 @@
         }
     }
 </script>
+
+<script>
+    function rank_type(id){
+        var sca_rank_dispaly = '';
+        if($('#sca_rank_dispaly'+id).is(':checked') === true)
+        {
+            sca_rank_dispaly = 'Y';
+        }else{
+            sca_rank_dispaly = 'N';
+        }
+
+        $.ajax({
+            type : 'get',
+            url : '{{ route('shop.cate.ajax_rank_choice') }}',
+            data : {
+                'id'                : id,
+                'sca_rank_dispaly'  : sca_rank_dispaly,
+            },
+            dataType : 'text',
+            success : function(result){
+//alert(result);
+            },
+            error: function(result){
+                console.log(result);
+            },
+        });
+
+    }
+</script>
+
 
 
 

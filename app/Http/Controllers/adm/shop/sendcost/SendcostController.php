@@ -50,15 +50,23 @@ class SendcostController extends Controller
         $sc_zip1    = $request->input('sc_zip1');
         $sc_zip2    = $request->input('sc_zip2');
         $sc_price   = $request->input('sc_price');
+        $act        = $request->input('act');
+        $id        = $request->input('num');
 
-        //저장 처리
-        $create_result = sendcosts::create([
+        $data = array(
             "sc_name"   => $sc_name,
             "sc_zip1"   => $sc_zip1,
             "sc_zip2"   => $sc_zip2,
             "sc_price"  => $sc_price,
-        ]);
-        $create_result->save();
+        );
+
+        if($act != "modi"){
+            //저장 처리
+            $create_result = sendcosts::create($data);
+            $create_result->save();
+        }else{
+            $update_result = DB::table('sendcosts')->where('id', $id)->limit(1)->update($data);
+        }
 
         echo "ok";
         exit;
@@ -76,4 +84,16 @@ class SendcostController extends Controller
         echo "ok";
         exit;
     }
+
+    public function ajax_modi_sendcost(Request $request)
+    {
+        $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
+        $id    = $request->input('num');
+
+        $sendcosts = DB::table('sendcosts')->where('id',$id)->first();
+
+        echo json_encode($sendcosts);
+        exit;
+    }
+
 }

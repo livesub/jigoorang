@@ -29,6 +29,7 @@ class OrderController extends Controller
     public function __construct()
     {
         session_start();
+        $this->middleware('auth'); //회원만 들어 오기
     }
 
     public function orderform(Request $request)
@@ -138,11 +139,13 @@ class OrderController extends Controller
             //$addr_list .= '<label for="ad_sel_addr_same">주문자와 동일</label>'.PHP_EOL;
         }
 
+        $setting_info = DB::table('shopsettings')->first();
+
         return view('shop.order_page',[
             's_cart_id'     => $s_cart_id,
             'cart_infos'    => $cart_infos,
             'CustomUtils'   => $CustomUtils,
-
+            'setting_info'  => $setting_info,
             'user_name'     => $user_name,
             'user_tel'      => $user_tel,
             'user_phone'    => $user_phone,
@@ -152,8 +155,341 @@ class OrderController extends Controller
             'user_addr3'    => $user_addr3,
             'user_addr_jibeon'  => $user_addr_jibeon,
             'addr_list'     => $addr_list, //주문자 동일, 최근 배송지 히든 처리
-        ],$Messages::$blade_ment['login']);
+        ]);
+    }
+
+    //무통장 은행명 찾기
+    public function ajax_orderbank(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
+
+        $setting_info = DB::table('shopsettings')->first();
+
+        $str = '';
+        $bank_account = '';
+
+        // 은행계좌를 배열로 만든후
+        $str = explode("\n", trim($setting_info->company_bank_account));
+
+        $bank_account = '<label for="od_bank_account" class="sound_only">입금할 계좌</label>';
+
+        if (count($str) <= 1)
+        {
+            $bank_account .= '<input type="hidden" name="od_bank_account" value="'.$str[0].'">'.$str[0].PHP_EOL;
+        }
+        else
+        {
+            $bank_account .= '<select name="od_bank_account" id="od_bank_account">'.PHP_EOL;
+            $bank_account .= '<option value="">선택하십시오.</option>';
+            for ($i=0; $i<count($str); $i++)
+            {
+                //$str[$i] = str_replace("\r", "", $str[$i]);
+                $str[$i] = trim($str[$i]);
+                $bank_account .= '<option value="'.$str[$i].'">'.$str[$i].'</option>'.PHP_EOL;
+            }
+            $bank_account .= '</select>'.PHP_EOL;
+        }
+
+        $bank_account .= '<br><label for="od_deposit_name">입금자명</label> ';
+        $bank_account .= '<input type="text" name="od_deposit_name" id="od_deposit_name" size="10" maxlength="20">';
+        echo $bank_account;
+    }
+
+    //재고체크
+    public function ajax_orderstock(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
+
+        if($CustomUtils->get_session('ss_direct')){
+            $tmp_cart_id = $CustomUtils->get_session('ss_cart_direct');
+        }else{
+            $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
+        }
+
+        if($CustomUtils->get_cart_count($tmp_cart_id) == 0){    // 장바구니에 담기
+            echo json_encode(['messge' => 'no_cart']);
+            exit;
+        }
+
+        //구매전 상품 내용 변경이 있는지 체크
+        $item_chk = $CustomUtils->before_check_cart_price($tmp_cart_id);
+
+        if(!$item_chk){     //변동 사항이 있을때
+            echo json_encode(['messge' => 'variance_chk']);
+            exit;
+        }
+
+        // 재고체크
+        $qty_chks = DB::table('shopcarts')->where([['od_id',$tmp_cart_id], ['sct_select', '1'], ['sct_status', '쇼핑']])->get();
+
+        foreach($qty_chks as $qty_chk){
+            $ct_qty = $qty_chk->sct_qty;
+
+            // 해당 상품이 품절 또는 판매중지 상태인지 체크합니다.
+            $item_chks = DB::table('shopitems')->select('item_soldout', 'item_use', 'sca_id')->where('item_code', $qty_chk->item_code)->first();
+
+            $category_str = '';
+            $soldout_txt = '';
+            $it_stock_qty = 0;
+
+            // 분류에서 판매가능한지 체크합니다.
+            if($item_chks->item_use && $item_chks->sca_id ){
+                $cate_chks = DB::table('shopcategorys')->select('sca_display')->where('sca_id', $item_chks->sca_id)->get();
+
+                foreach($cate_chks as $cate_chk){
+                    if($cate_chk->sca_display != 'Y'){
+                        $item_chks->item_use = false;
+                        $category_str = '분류에서 ';
+                    }
+                }
+            }
+
+            if($item_chks->item_soldout || !$item_chks->item_use){
+                $soldout_txt = $item_chks->item_soldout ? '품절' : $category_str.'판매중지';
+                $item_option = $qty_chk->item_name;
+
+                if($qty_chk->item_code) $item_option .= '('.$qty_chk->sct_option.')';
+
+                echo json_encode(['message' => 'soldout', 'item_option' => $item_option, 'txt' => $soldout_txt]);
+                exit;
+            }
+
+            if(!$qty_chk->sio_id){
+                $it_stock_qty = $CustomUtils->get_item_stock_qty($qty_chk->item_code);
+            }else{
+                $it_stock_qty = $CustomUtils->get_option_stock_qty($qty_chk->item_code, $qty_chk->sio_id, $qty_chk->sio_type);
+            }
+
+            if ($ct_qty > $it_stock_qty)
+            {
+                $item_option = $qty_chk->item_name;
+                if($qty_chk->sio_id) $item_option .= '('.$qty_chk->sct_option.')';
+
+                echo json_encode(['message' => 'qty_lack', 'item_option' => $item_option, 'txt' => number_format($it_stock_qty)]);
+                exit;
+            }
+        }
+
+        echo json_encode(['message' => 'ok']);
+        die("");
+        exit;
+    }
+
+    //결제 검증 하기
+    public function ajax_ordercomfirm(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+
+        $imp_uid        = $request->input('imp_uid');
+        $merchant_uid   = $request->input('merchant_uid');
+        $amount         = $request->input('amount');
+
+        $result = ["HTTP_STATUS"=>200, "reason"=>"성공"];
+
+        // 장바구니가 비어있는가
+        if($CustomUtils->get_session("ss_direct")){
+            $tmp_cart_id = $CustomUtils->get_session('ss_cart_direct');
+        }else{
+            $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
+        }
+
+        if ($CustomUtils->get_cart_count($tmp_cart_id) == 0) {    // 장바구니에 담기
+            $CustomUtils->add_order_post_log($request->input(), '장바구니가 비어 있습니다.');
+            $result = ["HTTP_STATUS"=>500, "reason"=>"장바구니가 비어 있습니다."];
+        }
+
+        // 장바구니 상품 재고 검사
+        $qty_chks = DB::table('shopcarts')->where([['od_id',$tmp_cart_id], ['sct_select', '1']])->get();
+
+        $i = 0;
+        $error = '';
+        $error1 = '';
+
+        foreach($qty_chks as $qty_chk){
+            // 상품에 대한 현재고수량
+            if($qty_chk->sio_id) {
+                $it_stock_qty = (int)$CustomUtils->get_option_stock_qty($qty_chk->item_code, $qty_chk->sio_id, $qty_chk->sio_type);
+            } else {
+                $it_stock_qty = (int)$CustomUtils->get_item_stock_qty($qty_chk->item_code);
+            }
+
+            // 장바구니 수량이 재고수량보다 많다면 오류
+            if ($qty_chk->sct_qty > $it_stock_qty){
+                $error .= $qty_chk->sct_option." 의 재고수량이 부족합니다. 현재고수량 : $it_stock_qty 개\n\n";
+                $result = ["HTTP_STATUS"=>500, "reason"=>$error];
+            }
+            $i++;
+        }
+
+        if($i == 0) {
+            $CustomUtils->add_order_post_log($request->input(), '장바구니가 비어 있습니다.');
+            $result = ["HTTP_STATUS"=>500, "reason"=>"장바구니가 비어 있습니다."];
+        }
+
+        if ($error != "")
+        {
+            $error1 = "다른 고객님께서 먼저 주문하신 경우입니다. 불편을 끼쳐 죄송합니다.";
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+        }
+
+        $i_price        = (int)$request->input('od_price');
+        $i_send_cost    = (int)$request->input('od_send_cost');
+        $i_send_cost2   = (int)$request->input('od_send_cost2');
+        $i_temp_point   = (int)$request->input('od_temp_point');
+        $tot_price      = $i_price + $i_send_cost + $i_send_cost2;
+
+        // 주문금액이 상이함
+        $price = DB::select(" select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as od_price, COUNT(distinct item_code) as cart_count from shopcarts where od_id = '$tmp_cart_id' and sct_select = '1' ");
+
+        $tot_ct_price = $price[0]->od_price;
+        $cart_count = $price[0]->cart_count;
+        $tot_od_price = $tot_ct_price;
+
+        if($i_price != $tot_od_price){
+            $error1 = '주문금액이 변경 되었습니다.';
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+        }
+
+        // 배송비가 상이함
+        $send_cost = $CustomUtils->get_sendcost($tmp_cart_id);
+        if($i_send_cost != $send_cost){
+            $error1 = '배송비가 변경 되었습니다.';
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+        }
+
+        // 추가배송비가 상이함
+        $od_b_zip   = preg_replace('/[^0-9]/', '', $request->input('od_b_zip'));
+        $sendcost_info = DB::table('sendcosts')->select('id', 'sc_price')->where([['sc_zip1', '<=', $od_b_zip], ['sc_zip2', '>=', $od_b_zip]])->first();
+
+        if($i_send_cost2 != (int)$sendcost_info->sc_price){
+            $error1 = '추가배송비가 변경 되었습니다.';
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+        }
+
+        // 결제포인트가 상이함
+        if($i_temp_point > Auth::user()->user_point){
+            $error1 = '보유 적립금 보다 많이 결제할 수 없습니다.';
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+        }
+
+        if($i_temp_point > $tot_price){
+            $error1 = '주문금액 보다 많이 적립금을 결제할 수 없습니다.';
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+        }
+
+        return response()->json($result);
+        exit;
+
+
+/*
+
+        // 결제포인트가 상이함
+        // 회원이면서 포인트사용이면
+        $temp_point = 0;
+        if ($is_member && $config['cf_use_point'])
+        {
+            if($member['mb_point'] >= $default['de_settle_min_point']) {
+                $temp_point = (int)$default['de_settle_max_point'];
+
+                if($temp_point > (int)$tot_od_price)
+                    $temp_point = (int)$tot_od_price;
+
+                if($temp_point > (int)$member['mb_point'])
+                    $temp_point = (int)$member['mb_point'];
+
+                $point_unit = (int)$default['de_settle_point_unit'];
+                $temp_point = (int)((int)($temp_point / $point_unit) * $point_unit);
+            }
+        }
+
+        if (($i_temp_point > (int)$temp_point || $i_temp_point < 0) && $config['cf_use_point']) {
+            if(function_exists('add_order_post_log')) add_order_post_log('포인트 최종 계산 Error....');
+            die("Error....");
+        }
+
+        if ($od_temp_point)
+        {
+            if ($member['mb_point'] < $od_temp_point) {
+                if(function_exists('add_order_post_log')) add_order_post_log('회원님의 포인트가 부족하여 포인트로 결제 할 수 없습니다.');
+                alert('회원님의 포인트가 부족하여 포인트로 결제 할 수 없습니다.');
+            }
+        }
+*/
+
+
+
+
+
+
+
+        //return response()->json($result);
+
+/*
+        //아임포트 관리자 페이지의 시스템설정->내정보->REST API 키 값을 입력한다.
+        $imp_key = "REST API 키";
+        //아임포트 관리자 페이지의 시스템설정->내정보->REST API Secret 값을 입력한다.
+        $imp_secret = "REST API Secret";
+        //결제 모듈을 호출한 페이지에서 ajax로 넘겨받은 imp_uid값을 저장한다.
+        $imp_uid = $request->input('imp_uid');
+        //결제 모듈을 호출한 페이지에서 ajax로 넘겨받은 merchant_uid값을 저장한다.
+        $merchant_uid = $request->input('merchant_uid');
+
+        return response()->json($result);
+
+//        var_dump("ordercomfirm");
+        exit;
+*/
+    }
+
+    public function ajax_orderpaycancel(Request $request)
+    {
+        //결제시 상품 변동등 문제가 있을시 결제 취소를 하기 위함
+        $merchant_uid  = $request->input('merchant_uid');
+        $cancel_request_amount  = $request->input('cancel_request_amount');
+        $reason  = $request->input('reason');
+        $refund_holder  = $request->input('refund_holder');
+        $refund_bank  = $request->input('refund_bank');
+        $refund_account  = $request->input('refund_account');
+
+        require_once '../../vendor/autoload.php';
+echo $cancel_request_amount;
     }
 
 
+
+    //결제 하기
+    public function orderpayment(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
+
+        // 장바구니가 비어있는가?
+        if($CustomUtils->get_session("ss_direct")){
+            $tmp_cart_id = $CustomUtils->get_session('ss_cart_direct');
+        }else{
+            $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
+        }
+
+        //$sw_direct  = $request->input('sw_direct');     //장바구니 0, 바로구매 1
+
+        if ($CustomUtils->get_cart_count($tmp_cart_id) == 0) {    // 장바구니에 담기
+            $CustomUtils->add_order_post_log($request->input(), '장바구니가 비어 있습니다.');
+            return redirect()->route('cartlist')->with('alert_messages', '장바구니가 비어 있습니다.\\n\\n이미 주문하셨거나 장바구니에 담긴 상품이 없는 경우입니다.');
+            exit;
+        }
+
+        $od_temp_point  = $request->input('od_temp_point');
+
+echo "KKK====> ".$od_temp_point;
+exit;
+
+    }
 }

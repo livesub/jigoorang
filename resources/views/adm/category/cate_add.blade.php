@@ -35,7 +35,7 @@
             <input type="radio" name="ca_display" id="ca_display_no" value="N">출력안함
         </td>
         <td>출력순서</td>
-        <td><input type="text" name="ca_rank" id="ca_rank" maxlength="3" size="3"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><br>※ 숫자만 입력 하세요. 숫자가 높을 수록 먼저 출력 됩니다. </td>
+        <td><input type="text" name="ca_rank" id="ca_rank" maxlength="3" size="3" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><br>※ 숫자만 입력 하세요. 숫자가 높을 수록 먼저 출력 됩니다. </td>
     </tr>
     <tr>
         <td colspan="6"><button type="button" onclick="add_cate();">카테고리 추가</button></td>

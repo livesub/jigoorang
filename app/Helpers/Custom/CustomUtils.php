@@ -23,6 +23,8 @@ use Illuminate\Support\Facades\DB;
 use App\Models\shop_uniqids;    //장바구니 키
 use App\Models\shoppoints;    //포인트 모델 정의
 use App\Models\User;    //회원 모델 정의
+use App\Models\wishs;    //wish 모델 정의
+use App\Models\shoppostlogs;    //주문시 오류 로그 모델 정의
 use Illuminate\Support\Facades\Auth;    //인증
 
 class CustomUtils extends Controller
@@ -790,26 +792,24 @@ $um_value='80/0.5/3'
         }
     }
 
-    public static function get_item_point($item, $sio_id='', $trunc=10)
+    public static function get_item_point($item, $sio_id='', $trunc=1)
     {
+        //$trunc 절사 단위
         $item_point = 0;
+        $item_price = $item->item_price;
 
-        if($item->item_point_type > 0) {    //판매 기준 설정 비율 일때
-            $item_price = $item->item_price;
-
-            if($item->item_point_type == 2 && $sio_id) {
-                $opts = DB::table('shopitemoptions')->select('sio_id', 'sio_price')->where([['item_code', $item->item_code],['sio_id', $sio_id],['sio_type','0'],['sio_use','1']])->first();
-                if(is_null($opts)){
-                    return false;
-                }else{
-                    if($opts->sio_id != "") $item_price += $opts->sio_price;
+        if($sio_id){
+            $opts = DB::table('shopitemoptions')->select('sio_id', 'sio_price')->where([['item_code', $item->item_code],['sio_id', $sio_id],['sio_type','0'],['sio_use','1']])->first();
+            if(is_null($opts)){
+                return false;
+            }else{
+                if($opts->sio_id != ""){
+                    $item_price += $opts->sio_price;
                 }
             }
-
-            $item_point = floor(($item_price * ($item->item_point / 100) / $trunc)) * $trunc;
-        } else {
-            $item_point = $item->item_point;
         }
+
+        $item_point = floor(($item_price * ($item->item_point / 100) / $trunc)) * $trunc;
 
         return $item_point;
     }
@@ -1075,7 +1075,7 @@ $um_value='80/0.5/3'
         $daegi = 0;
 
         // 재고에서 빼지 않았고 주문인것만
-        $sct_qty = DB::table('shopcarts')->where([['item_code',$item_code], ['sio_id',''], ['sct_stock_use','0'], ['sct_status','in','(\'주문\', \'입금\', \'준비\')']])->sum('sct_qty');
+        $sct_qty = DB::table('shopcarts')->where([['item_code',$item_code], ['sio_id',''], ['sct_stock_use','0']])->whereRaw('sct_status in (\'주문\', \'입금\', \'준비\')')->sum('sct_qty');
         $daegi = (int)$sct_qty;
 
         return $jaego_cnt - $daegi;
@@ -1089,7 +1089,7 @@ $um_value='80/0.5/3'
         $daegi = 0;
 
         // 재고에서 빼지 않았고 주문인것만
-        $sct_qty = DB::table('shopcarts')->where([['item_code',$item_code], ['sio_id',$sio_id], ['sio_type',$type], ['sct_stock_use','0'], ['sct_status','in','(\'주문\', \'입금\', \'준비\')']])->sum('sct_qty');
+        $sct_qty = DB::table('shopcarts')->where([['item_code',$item_code], ['sio_id',$sio_id], ['sct_stock_use','0']])->whereRaw('sct_status in (\'주문\', \'입금\', \'준비\')')->sum('sct_qty');
         $daegi = (int)$sct_qty;
 
         return $jaego_cnt - $daegi;
@@ -1298,24 +1298,10 @@ $um_value='80/0.5/3'
 
         if(!$ct->item_code) return 0;
 
-        if($ct->item_sc_type > 1) {
-            if($ct->item_sc_type == 2) { // 조건부무료
-                if($price >= $ct->item_sc_minimum)
-                    $sendcost = 0;
-                else
-                    $sendcost = $ct->item_sc_price;
-            } else if($ct->item_sc_type == 3) { // 유료배송
-                $sendcost = $ct->item_sc_price;
-            } else { // 수량별 부과
-                if(!$ct->item_sc_qty) $ct->item_sc_qty = 1;
-
-                $q = ceil((int)$qty / (int)$ct->item_sc_qty);
-                $sendcost = (int)$ct->item_sc_price * $q;
-            }
-        } else if($ct->item_sc_type == 1) { // 무료배송
+        if($ct->item_sc_price > 0){
+            $sendcost = $ct->item_sc_price;
+        }else{
             $sendcost = 0;
-        } else {
-            $sendcost = -1;
         }
 
         return $sendcost;
@@ -1347,43 +1333,18 @@ $um_value='80/0.5/3'
         $total_send_cost = 0;
         $diff = 0;
 
-        $scs = DB::table('shopcarts')->select('item_code')->where([['od_id',$cart_id], ['sct_send_cost','0'], ['sct_status','in','(\'쇼핑\', \'주문\', \'입금\', \'준비\', \'배송\', \'완료\')'], ['sct_select',$selected]])->distinct()->get();
+        $scs = DB::table('shopcarts')->select('item_code')->where([['od_id',$cart_id], ['sct_send_cost','0'], ['sct_select',$selected]])->whereRaw('sct_status in (\'쇼핑\', \'주문\', \'입금\', \'준비\', \'배송\', \'완료\')')->distinct()->get();
 
         foreach ($scs as $sc){
-            $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_qty) as qty from shopcarts where item_code = '{$sc->item_code}' and od_id =   '$cart_id' and sct_status IN ( '쇼핑', '주문', '입금', '준비', '배송', '완료' ) and sct_select = '{$selected}' ");
+            $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_qty) as qty from shopcarts where item_code = '{$sc->item_code}' and od_id = '$cart_id' and sct_status IN ( '쇼핑', '주문', '입금', '준비', '배송', '완료' ) and sct_select = '{$selected}' ");
 
             $send_cost = $this->get_item_sendcost($sc->item_code, $sum[0]->price, $sum[0]->qty, $cart_id);
 
             if($send_cost > 0)
                 $total_send_cost += $send_cost;
-
-/*
-배송비 부분 충분히 테스트 해야 함!!
-            if($default['de_send_cost_case'] == '차등' && $send_cost == -1) {
-                $total_price += $sum['price'];
-                $diff++;
-            }
-*/
         }
-
-//        $send_cost = 0;
-/*
-배송비 부분 충분히 테스트 해야 함!!
-        if($default['de_send_cost_case'] == '차등' && $total_price >= 0 && $diff > 0) {
-            // 금액별차등 : 여러단계의 배송비 적용 가능
-            $send_cost_limit = explode(";", $default['de_send_cost_limit']);
-            $send_cost_list  = explode(";", $default['de_send_cost_list']);
-            $send_cost = 0;
-            for ($k=0; $k<count($send_cost_limit); $k++) {
-                // 총판매금액이 배송비 상한가 보다 작다면
-                if ($total_price < preg_replace('/[^0-9]/', '', $send_cost_limit[$k])) {
-                    $send_cost = preg_replace('/[^0-9]/', '', $send_cost_list[$k]);
-                    break;
-                }
-            }
-        }
-*/
-        return ($total_send_cost + $send_cost);
+        //return ($total_send_cost + $send_cost);
+        return $total_send_cost;
     }
 
     // 장바구니 건수 검사
@@ -1441,4 +1402,34 @@ $um_value='80/0.5/3'
 
         return true;
     }
+
+    // 주문요청기록 로그를 남깁니다.
+    public function add_order_post_log($request, $msg='', $code='error'){
+
+        if( empty($request) ) return;
+
+        $post_data = base64_encode(serialize($request));
+        $od_id = $this->get_session('ss_order_id');
+
+        if( $code === 'delete' ){
+            DB::table('shoppostlogs')->where([['oid', $od_id], ['user_id', Auth::user()->user_id],['ol_code','!=', 'error']])->orwhere('created_at','<', date('Y-m-d H:i:s', strtotime('-15 day', time())))->delete();
+            return;
+        }
+
+        $create_result = shoppostlogs::create([
+            'oid'       => $od_id,
+            'user_id'   => Auth::user()->user_id,
+            'post_data' => $post_data,
+            'ol_code'   => $code,
+            'ol_msg'    => addslashes($msg),
+            'ol_ip'     => $_SERVER['REMOTE_ADDR'],
+        ]);
+        $create_result->save();
+
+        if($create_result){
+            DB::table('shoppostlogs')->where('created_at', '<', date('Y-m-d H:i:s', strtotime('-15 day', time())))->delete();
+        }
+    }
+
+
 }
