@@ -37,8 +37,7 @@ class OrderController extends Controller
     {
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
-        echo "AAAAAAAAAAAAA";
-        exit;
+
         $sw_direct  = $request->input('sw_direct');     //장바구니 0, 바로구매 1
 
         $CustomUtils->set_session("ss_direct", $sw_direct);
@@ -283,6 +282,30 @@ class OrderController extends Controller
     //결제 검증 하기
     public function ajax_ordercomfirm(Request $request)
     {
+        //header("Content-Type: application/json");
+        //$merchant_uid   = $request->input('merchant_uid');
+        //$aa = json_encode(['reason' => '재고수량부족'], JSON_UNESCAPED_UNICODE );
+//        $aa = json_encode(['reason' => '재고수량부족'], JSON_PRETTY_PRINT);
+
+
+return json_encode(['reason' => 'test'], JSON_PRETTY_PRINT);
+
+
+
+exit;
+echo $merchant_uid;
+exit;
+
+//$jsonInput  = file_get_contents('php://input');
+//$decodedInput = json_encode($jsonInput);
+//echo $decodedInput;
+//exit;
+//$result = ["HTTP_STATUS"=>500, "reason"=>"결제 안됨 test."];
+//return response()->json_encode(['reason' => "결제 안됨 test."]);
+//return json_encode(['reason' => "결제 안됨 test."]);
+return response()->json(['success' => '1','data' => $output, 'ca_id' => $ca_id], 200, [], JSON_PRETTY_PRINT);
+exit;
+
         $CustomUtils = new CustomUtils;
 
         $imp_uid        = $request->input('imp_uid');
@@ -349,8 +372,6 @@ class OrderController extends Controller
 
         // 주문금액이 상이함
         $price = DB::select(" select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as od_price, COUNT(distinct item_code) as cart_count from shopcarts where od_id = '$tmp_cart_id' and sct_select = '1' ");
-var_dump($tmp_cart_id);
-exit;
 
         $tot_ct_price = $price[0]->od_price;
         $cart_count = $price[0]->cart_count;
@@ -399,7 +420,7 @@ exit;
             $CustomUtils->add_order_post_log($request->input(), $error1);
             $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
         }
-
+$result = ["HTTP_STATUS"=>200, "reason"=>"결제 안됨 test."];
         return response()->json($result);
         exit;
     }

@@ -137,54 +137,6 @@
     <tr>
         <td>
             <table border=1>
-                <!-- 주문하시는 분 입력
-                <tr>
-                    <td><h2>주문하시는 분</h2></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="od_name">이름<strong class="sound_only"> 필수</strong></label></th>
-                    <td><input type="text" name="od_name" value="{{ $user_name }}" id="od_name" required class="frm_input required" maxlength="20"></td>
-                </tr>
-
-                @if(!Auth::user())
-                <tr>
-                    <th scope="row"><label for="od_pwd">비밀번호</label></th>
-                    <td>
-                        <span class="frm_info">영,숫자 3~20자 (주문서 조회시 필요)</span>
-                        <input type="password" name="od_pwd" id="od_pwd" required class="frm_input required" maxlength="20">
-                    </td>
-                </tr>
-                @endif
-                <tr>
-                    <th scope="row"><label for="od_tel">전화번호<strong class="sound_only"> 필수</strong></label></th>
-                    <td><input type="text" name="od_tel" value="{{ $user_tel }}" id="od_tel" required class="frm_input required" maxlength="20"></td>
-                </tr>
-                <tr>
-                    <th scope="row"><label for="od_hp">핸드폰</label></th>
-                    <td><input type="text" name="od_hp" value="{{ $user_phone }}" id="od_hp" class="frm_input" maxlength="20"></td>
-                </tr>
-                <tr>
-                    <th scope="row">주소</th>
-                    <td>
-                        <label for="od_zip" class="sound_only">우편번호<strong class="sound_only"> 필수</strong></label>
-                        <input type="text" name="od_zip" value="{{ $user_zip }}" id="od_zip" required class="frm_input required" size="8" maxlength="6" placeholder="우편번호">
-                        <button type="button" class="btn_address" onclick="win_zip('wrap','od_zip', 'od_addr1', 'od_addr2', 'od_addr3', 'od_addr_jibeon','btnFoldWrap');">주소 검색</button>
-<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
-    <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" alt="접기 버튼">
-</div>
-                        <br>
-                        <input type="text" name="od_addr1" value="{{ $user_addr1 }}" id="od_addr1" required class="frm_input frm_address required" size="60" placeholder="기본주소">
-                        <label for="od_addr1" class="sound_only">기본주소<strong class="sound_only"> 필수</strong></label><br>
-                        <input type="text" name="od_addr2" value="{{ $user_addr2 }}" id="od_addr2" class="frm_input frm_address" size="60" placeholder="상세주소">
-                        <label for="od_addr2" class="sound_only">상세주소</label>
-                        <br>
-                        <input type="text" name="od_addr3" value="{{ $user_addr3 }}" id="od_addr3" class="frm_input frm_address" size="60" readonly="readonly" placeholder="참고항목">
-                        <label for="od_addr3" class="sound_only">참고항목</label><br>
-                        <input type="hidden" name="od_addr_jibeon" id="od_addr_jibeon" value="{{ $user_addr_jibeon }}">
-                    </td>
-                </tr>
-                주문하시는 분 입력 끝 -->
-
                 <!-- 받으시는 분 입력 시작  -->
                 <tr>
                     <td><h2>받으시는 분</h2></td>
@@ -330,24 +282,6 @@
         });
     }
 </script>
-
-<script>
-/*
-    $("input[name=ad_sel_addr]").on("click", function() {
-        $("#od_b_name").val($("#od_name").val());
-        $("#od_b_tel").val($("#od_tel").val());
-        $("#od_b_hp").val($("#od_hp").val());
-        $("#od_b_zip").val($("#od_zip").val());
-        $("#od_b_addr1").val($("#od_addr1").val());
-        $("#od_b_addr2").val($("#od_addr2").val());
-        $("#od_b_addr3").val($("#od_addr3").val());
-        $("#od_b_addr_jibeon").val($("#od_addr_jibeon").val());
-        $("#ad_subject").val($("#ad_subject").val());
-    });
-*/
-</script>
-
-
 
 <script>
     var zipcode = "";
@@ -558,21 +492,45 @@
 
 
                 var kk = total_price - od_temp_point;
+
+
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+            url : '{{ route('ajax_ordercomfirm') }}',
+            type: "POST",
+            contentType : "application/json",
+            data: {
+                        'amount' : kk,
+                        'merchant_uid' : '{{ $order_id }}',
+            },
+            success : function(data){
+alert(data);
+            },
+            error: function(result){
+                console.log(result);
+            },
+        });
+
+
+/*
                 $.ajax({
                     headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
                     url : '{{ route('ajax_ordercomfirm') }}',
-                    method: "POST",
+                    type: "POST",
+                    contentType : "application/json",
                     data: {
                         'amount' : kk,
                         'merchant_uid' : '{{ $order_id }}',
                     }
                 }).done(function (data) {
-alert(data);
+alert(data.reason);
+//                    var data1 = JSON.parse(data);
+//alert(data1.success);
                 });
 
 
 return false;
-
+*/
 
 
 
@@ -600,9 +558,10 @@ return false;
             buyer_tel: "{{ Auth::user()->user_tel }}",
             buyer_addr: "{{ Auth::user()->user_addr1 }}",
             buyer_postcode: "{{ Auth::user()->user_zip }}",
-            confirm_url : '{{ route('ajax_ordercomfirm') }}',
+            confirm_url : 'http://localhost:8000/shop/ordercomfirm',
         }, function (rsp) { // callback
             if (rsp.success) {
+aledrt("성공");
 //cancelPay(merchant_uid, tot_pay);
 
 /*

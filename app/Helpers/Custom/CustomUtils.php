@@ -1254,8 +1254,14 @@ $um_value='80/0.5/3'
                         $data[$column] = $value;  //배열에 추가 함
                     }
 
-                    $update_result = DB::table('shopcarts')->where([['item_code', $item[0]->item_code], ['od_id',$s_cart_id], ['id',$cart_info->id]])->limit(1)->update($data);
+                    $update_result = DB::table('shopcarts')->where([['item_code', $item[0]->item_code], ['od_id',$s_cart_id], ['id',$cart_info->id]])->update($data);
                 }
+            }
+
+            //배송비 변경 되었을때(211028 추가)
+            $baesong_price = DB::table('shopitems')->select('item_sc_price')->where('item_code',$item_code)->first();
+            if($cart_info->item_sc_price != $baesong_price->item_sc_price){
+                return false;
             }
         }
 

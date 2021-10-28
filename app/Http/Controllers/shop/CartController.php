@@ -101,9 +101,8 @@ class CartController extends Controller
                             exit;
                         }
                     }
-echo "SSSSSSSSSSS";
-exit;
-                    $update_result = DB::table('shopcarts')->where([['od_id', $tmp_cart_id], ['item_code',$item_code]])->limit(1)->update(['sct_select' => '1','sct_select_time' => date("Y-m-d H:i:s", time())]);
+
+                    $update_result = DB::table('shopcarts')->where([['od_id', $tmp_cart_id], ['item_code',$item_code]])->update(['sct_select' => '1','sct_select_time' => date("Y-m-d H:i:s", time())]);
                 }
             }
 
