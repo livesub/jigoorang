@@ -284,43 +284,14 @@ class OrderController extends Controller
     public function ajax_ordercomfirm(Request $request)
     {
         //header("Content-Type: application/json");
-
-        $merchant_uid   = json_decode($request->input('merchant_uid'));
-//echo "DDDD===> ".$merchant_uid;
-return response()->json(['reason' => $merchant_uid], 200, [], JSON_PRETTY_PRINT);
-exit;
-
-$aa = json_encode(['reason' => 'test'], JSON_PRETTY_PRINT);
-return response()->json(['reason' => $aa], 200, [], JSON_PRETTY_PRINT);
-//return response()->json(['reason' => 'test'], 500);
-
-//$aa = json_encode(['reason' => 'test'], JSON_PRETTY_PRINT);
-//return response()->json(['reason' => 'trdb'], 500, [], JSON_PRETTY_PRINT);
-//return json_encode(['reason' => 'test'], JSON_PRETTY_PRINT);
-//return json(['reason' => 'test'], 500, [], JSON_PRETTY_PRINT);
-//return response()->json(['reason' => 'test'], 500, [], JSON_PRETTY_PRINT);
-
-exit;
-echo $merchant_uid;
-exit;
-
-//$jsonInput  = file_get_contents('php://input');
-//$decodedInput = json_encode($jsonInput);
-//echo $decodedInput;
-//exit;
-//$result = ["HTTP_STATUS"=>500, "reason"=>"결제 안됨 test."];
-//return response()->json_encode(['reason' => "결제 안됨 test."]);
-//return json_encode(['reason' => "결제 안됨 test."]);
-return response()->json(['success' => '1','data' => $output, 'ca_id' => $ca_id], 200, [], JSON_PRETTY_PRINT);
-exit;
-
         $CustomUtils = new CustomUtils;
 
         $imp_uid        = $request->input('imp_uid');
         $merchant_uid   = $request->input('merchant_uid');
         $amount         = (int)$request->input('amount');    //카드사 결제 금액
 
-        $result = ["HTTP_STATUS"=>200, "reason"=>"성공"];
+        $result = json_encode(['reason' => ''], JSON_PRETTY_PRINT);
+        $http_status = 200; //성공시 200
 
         // 장바구니가 비어있는가
         if($CustomUtils->get_session("ss_direct")){
@@ -331,7 +302,9 @@ exit;
 
         if ($CustomUtils->get_cart_count($tmp_cart_id) == 0) {    // 장바구니에 담기
             $CustomUtils->add_order_post_log($request->input(), '장바구니가 비어 있습니다.');
-            $result = ["HTTP_STATUS"=>500, "reason"=>"장바구니가 비어 있습니다."];
+            //$result = json_encode(['reason' => '장바구니가 비어 있습니다.'], JSON_PRETTY_PRINT);
+            $result = json_encode(['reason' => '장바구니가 비어 있습니다.'], JSON_UNESCAPED_UNICODE);
+            $http_status = 201;
         }
 
         // 장바구니 상품 재고 검사
@@ -352,21 +325,27 @@ exit;
             // 장바구니 수량이 재고수량보다 많다면 오류
             if ($qty_chk->sct_qty > $it_stock_qty){
                 $error .= $qty_chk->sct_option." 의 재고수량이 부족합니다. 현재고수량 : $it_stock_qty 개\n\n";
-                $result = ["HTTP_STATUS"=>500, "reason"=>$error];
+                //$result = json_encode(['reason' => $error], JSON_PRETTY_PRINT);
+                $result = json_encode(['reason' => $error], JSON_UNESCAPED_UNICODE);
+                $http_status = 201;
             }
             $i++;
         }
 
         if($i == 0) {
             $CustomUtils->add_order_post_log($request->input(), '장바구니가 비어 있습니다.');
-            $result = ["HTTP_STATUS"=>500, "reason"=>"장바구니가 비어 있습니다."];
+            //$result = json_encode(['reason' => '장바구니가 비어 있습니다.'], JSON_PRETTY_PRINT);
+            $result = json_encode(['reason' => '장바구니가 비어 있습니다.'], JSON_UNESCAPED_UNICODE);
+            $http_status = 201;
         }
 
         if ($error != "")
         {
             $error1 = "다른 고객님께서 먼저 주문하신 경우입니다. 불편을 끼쳐 죄송합니다.";
             $CustomUtils->add_order_post_log($request->input(), $error1);
-            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+            //$result = json_encode(['reason' => $error1], JSON_PRETTY_PRINT);
+            $result = json_encode(['reason' => $error1], JSON_UNESCAPED_UNICODE);
+            $http_status = 201;
         }
 
         $ordertemp = DB::table('shopordertemps')->where([['od_id',$tmp_cart_id], ['user_id', Auth::user()->user_id]])->first();
@@ -388,7 +367,9 @@ exit;
         if($i_price != $tot_od_price){
             $error1 = '주문금액이 변경 되었습니다.';
             $CustomUtils->add_order_post_log($request->input(), $error1);
-            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+            //$result = json_encode(['reason' => $error1], JSON_PRETTY_PRINT);
+            $result = json_encode(['reason' => $error1], JSON_UNESCAPED_UNICODE);
+            $http_status = 201;
         }
 
         // 배송비가 상이함
@@ -396,7 +377,9 @@ exit;
         if($i_send_cost != $send_cost){
             $error1 = '배송비가 변경 되었습니다.';
             $CustomUtils->add_order_post_log($request->input(), $error1);
-            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+            //$result = json_encode(['reason' => $error1], JSON_PRETTY_PRINT);
+            $result = json_encode(['reason' => $error1], JSON_UNESCAPED_UNICODE);
+            $http_status = 201;
         }
 
         // 추가배송비가 상이함
@@ -406,30 +389,38 @@ exit;
         if($i_send_cost2 != (int)$sendcost_info->sc_price){
             $error1 = '추가배송비가 변경 되었습니다.';
             $CustomUtils->add_order_post_log($request->input(), $error1);
-            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+            //$result = json_encode(['reason' => $error1], JSON_PRETTY_PRINT);
+            $result = json_encode(['reason' => $error1], JSON_UNESCAPED_UNICODE);
+            $http_status = 201;
         }
 
         // 결제포인트가 상이함
         if($i_temp_point > Auth::user()->user_point){
             $error1 = '보유 적립금 보다 많이 결제할 수 없습니다.';
             $CustomUtils->add_order_post_log($request->input(), $error1);
-            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+            //$result = json_encode(['reason' => $error1], JSON_PRETTY_PRINT);
+            $result = json_encode(['reason' => $error1], JSON_UNESCAPED_UNICODE);
+            $http_status = 201;
         }
 
         if($i_temp_point > $tot_price){
             $error1 = '주문금액 보다 많이 적립금을 결제할 수 없습니다.';
             $CustomUtils->add_order_post_log($request->input(), $error1);
-            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+            //$result = json_encode(['reason' => $error1], JSON_PRETTY_PRINT);
+            $result = json_encode(['reason' => $error1], JSON_UNESCAPED_UNICODE);
+            $http_status = 201;
         }
 
         //카드사에서 전달받은 결제금액과 서버에 저장 된 결제 금액이 다를때 체크
         if($tot_payment != $amount){
             $error1 = '주문금액이 변경 되었습니다.';
             $CustomUtils->add_order_post_log($request->input(), $error1);
-            $result = ["HTTP_STATUS"=>500, "reason"=>$error1];
+            //$result = json_encode(['reason' => $error1], JSON_PRETTY_PRINT);
+            $result = json_encode(['reason' => $error1], JSON_UNESCAPED_UNICODE);
+            $http_status = 201;
         }
-$result = ["HTTP_STATUS"=>200, "reason"=>"결제 안됨 test."];
-        return response()->json($result);
+
+        return response()->json(['reason' => $result], $http_status, [], JSON_PRETTY_PRINT);
         exit;
     }
 

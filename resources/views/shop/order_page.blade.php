@@ -18,6 +18,16 @@
 
 <form name="forderform" id="forderform" method="post" action="{{ route('orderpayment') }}" autocomplete="off">
 {!! csrf_field() !!}
+<input type="hidden" name="od_price" id="od_price" value="{{ $tot_sell_price }}">
+<input type="hidden" name="org_od_price" id="org_od_price" value="{{ $tot_sell_price }}">
+<input type="hidden" name="od_send_cost" id="od_send_cost" value="{{ $send_cost }}">
+<input type="hidden" name="od_send_cost2" id="od_send_cost2" value="0">
+<input type="hidden" name="od_goods_name" id="od_goods_name" value="{{ $goods }}">
+<input type="hidden" name="method" id="method">
+<input type="hidden" name="pg" id="pg">
+<input type="hidden" name="user_point" id="user_point" value="{{ Auth::user()->user_point }}">
+<input type="hidden" name="imp_uid" id="imp_uid">
+
 <table border=1>
     <tr>
         <th scope="col">상품명</th>
@@ -125,15 +135,6 @@
 
 
 <table border=1>
-<input type="hidden" name="od_price" id="od_price" value="{{ $tot_sell_price }}">
-<input type="hidden" name="org_od_price" id="org_od_price" value="{{ $tot_sell_price }}">
-<input type="hidden" name="od_send_cost" id="od_send_cost" value="{{ $send_cost }}">
-<input type="hidden" name="od_send_cost2" id="od_send_cost2" value="0">
-<input type="hidden" name="od_goods_name" id="od_goods_name" value="{{ $goods }}">
-<input type="hidden" name="method" id="method">
-<input type="hidden" name="pg" id="pg">
-<input type="hidden" name="user_point" id="user_point" value="{{ Auth::user()->user_point }}">
-
     <tr>
         <td>
             <table border=1>
@@ -497,15 +498,16 @@
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
             url : '{{ route('ajax_ordercomfirm') }}',
-            type: "POST",
+            type: "post",
             contentType : "application/json",
             data: {
                         'amount' : kk,
                         'merchant_uid' : '{{ $order_id }}',
             },
             success : function(result){
-                //var data = JSON.parse(result);
 alert(result.reason);
+                //var data = JSON.parse(result);
+//alert(result.reason);
 //return false;
             },
             error: function(result){
@@ -514,25 +516,6 @@ alert(result.reason);
         });
 
 return false;
-/*
-                $.ajax({
-                    headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-                    url : '{{ route('ajax_ordercomfirm') }}',
-                    type: "POST",
-                    contentType : "application/json",
-                    data: {
-                        'amount' : kk,
-                        'merchant_uid' : '{{ $order_id }}',
-                    }
-                }).done(function (data) {
-alert(data.reason);
-//                    var data1 = JSON.parse(data);
-//alert(data1.success);
-                });
-
-
-return false;
-*/
 
 
 
@@ -560,9 +543,10 @@ return false;
             buyer_tel: "{{ Auth::user()->user_tel }}",
             buyer_addr: "{{ Auth::user()->user_addr1 }}",
             buyer_postcode: "{{ Auth::user()->user_zip }}",
-            confirm_url : 'http://localhost:8000/shop/ordercomfirm',
+            //confirm_url : 'http://localhost:8000/shop/ordercomfirm', //실제 서버에서 동작 함 나중에 바꿔 줘야함
         }, function (rsp) { // callback
             if (rsp.success) {
+                $("#imp_uid").val(rsp.imp_uid); //카드사에서 전달 받는 값
 aledrt("성공");
 //cancelPay(merchant_uid, tot_pay);
 
@@ -617,8 +601,7 @@ alert("ok");
 
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-            //url : '{{ route('ajax_orderpaycancel') }}',
-            url : 'https://api.iamport.kr/payments/cancel',
+            url : '{{ route('ajax_orderpaycancel') }}',
             type : 'post',
             contentType : "application/json",
             data    : JSON.stringify({
