@@ -19,6 +19,7 @@ use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;    //인증
 use App\Models\shopordertemps;    //장바구니 키
+use Iamport;
 
 class OrderController extends Controller
 {
@@ -283,14 +284,21 @@ class OrderController extends Controller
     public function ajax_ordercomfirm(Request $request)
     {
         //header("Content-Type: application/json");
-        //$merchant_uid   = $request->input('merchant_uid');
-        //$aa = json_encode(['reason' => '재고수량부족'], JSON_UNESCAPED_UNICODE );
-//        $aa = json_encode(['reason' => '재고수량부족'], JSON_PRETTY_PRINT);
 
+        $merchant_uid   = json_decode($request->input('merchant_uid'));
+//echo "DDDD===> ".$merchant_uid;
+return response()->json(['reason' => $merchant_uid], 200, [], JSON_PRETTY_PRINT);
+exit;
 
-return json_encode(['reason' => 'test'], JSON_PRETTY_PRINT);
+$aa = json_encode(['reason' => 'test'], JSON_PRETTY_PRINT);
+return response()->json(['reason' => $aa], 200, [], JSON_PRETTY_PRINT);
+//return response()->json(['reason' => 'test'], 500);
 
-
+//$aa = json_encode(['reason' => 'test'], JSON_PRETTY_PRINT);
+//return response()->json(['reason' => 'trdb'], 500, [], JSON_PRETTY_PRINT);
+//return json_encode(['reason' => 'test'], JSON_PRETTY_PRINT);
+//return json(['reason' => 'test'], 500, [], JSON_PRETTY_PRINT);
+//return response()->json(['reason' => 'test'], 500, [], JSON_PRETTY_PRINT);
 
 exit;
 echo $merchant_uid;
@@ -477,7 +485,10 @@ $result = ["HTTP_STATUS"=>200, "reason"=>"결제 안됨 test."];
         $refund_bank  = $request->input('refund_bank');
         $refund_account  = $request->input('refund_account');
 
-        require_once '../../vendor/autoload.php';
+        $aa = Iamport::cancelPayment('imp_370953301637','93299','test');
+dd($aa);
+exit;
+        //require_once '../../vendor/autoload.php';
 echo $cancel_request_amount;
     }
 

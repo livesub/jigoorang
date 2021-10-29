@@ -4,8 +4,67 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c4cb84457ef94ce5e83e14e6f41d07a",
+    "content-hash": "39fe6af47ae8dbf85e0083015b6b104f",
     "packages": [
+        {
+            "name": "allivcorp/iamport",
+            "version": "v1.0.5",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/allivcorp/Iamport.git",
+                "reference": "3aab97eadea3dd77738fe1c3ff934b3339a8d11e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/allivcorp/Iamport/zipball/3aab97eadea3dd77738fe1c3ff934b3339a8d11e",
+                "reference": "3aab97eadea3dd77738fe1c3ff934b3339a8d11e",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "require-dev": {
+                "illuminate/support": "^5.6",
+                "phpunit/phpunit": "^7.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Alliv\\Iamport\\IamportServiceProvider"
+                    ],
+                    "aliases": {
+                        "Iamport": "Alliv\\Iamport\\Facades\\IamportFacade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Alliv\\Iamport\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Daeyeol Ryu",
+                    "email": "dy.ryu@alliv.co.kr"
+                },
+                {
+                    "name": "Jinman Lee",
+                    "email": "jinman.lee@alliv.co.kr"
+                }
+            ],
+            "description": "I'mport; REST API module for Laravel",
+            "homepage": "https://github.com/allivcorp/iamport",
+            "keywords": [
+                "iamport",
+                "laravel"
+            ],
+            "time": "2018-03-26T18:13:13+00:00"
+        },
         {
             "name": "asm89/stack-cors",
             "version": "v2.0.3",

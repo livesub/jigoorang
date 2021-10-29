@@ -178,6 +178,7 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
         array (
             'Asm89\\Stack\\' => 12,
             'App\\' => 4,
+            'Alliv\\Iamport\\' => 14,
         ),
     );
 
@@ -522,6 +523,10 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'Alliv\\Iamport\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/allivcorp/iamport/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -535,6 +540,14 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
     );
 
     public static $classMap = array (
+        'Alliv\\Iamport\\ApiClient' => __DIR__ . '/..' . '/allivcorp/iamport/src/ApiClient.php',
+        'Alliv\\Iamport\\Exceptions\\AuthException' => __DIR__ . '/..' . '/allivcorp/iamport/src/Exceptions/AuthException.php',
+        'Alliv\\Iamport\\Exceptions\\RequestException' => __DIR__ . '/..' . '/allivcorp/iamport/src/Exceptions/RequestException.php',
+        'Alliv\\Iamport\\Facades\\IamportFacade' => __DIR__ . '/..' . '/allivcorp/iamport/src/Facades/IamportFacade.php',
+        'Alliv\\Iamport\\Iamport' => __DIR__ . '/..' . '/allivcorp/iamport/src/Iamport.php',
+        'Alliv\\Iamport\\IamportServiceProvider' => __DIR__ . '/..' . '/allivcorp/iamport/src/IamportServiceProvider.php',
+        'Alliv\\Iamport\\Payment' => __DIR__ . '/..' . '/allivcorp/iamport/src/Payment.php',
+        'Alliv\\Iamport\\Result' => __DIR__ . '/..' . '/allivcorp/iamport/src/Result.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Helpers\\Custom\\CustomUtils' => __DIR__ . '/../..' . '/app/Helpers/Custom/CustomUtils.php',

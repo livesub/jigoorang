@@ -503,15 +503,17 @@
                         'amount' : kk,
                         'merchant_uid' : '{{ $order_id }}',
             },
-            success : function(data){
-alert(data);
+            success : function(result){
+                //var data = JSON.parse(result);
+alert(result.reason);
+//return false;
             },
             error: function(result){
                 console.log(result);
             },
         });
 
-
+return false;
 /*
                 $.ajax({
                     headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},

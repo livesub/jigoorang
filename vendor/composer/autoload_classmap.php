@@ -6,6 +6,14 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Alliv\\Iamport\\ApiClient' => $vendorDir . '/allivcorp/iamport/src/ApiClient.php',
+    'Alliv\\Iamport\\Exceptions\\AuthException' => $vendorDir . '/allivcorp/iamport/src/Exceptions/AuthException.php',
+    'Alliv\\Iamport\\Exceptions\\RequestException' => $vendorDir . '/allivcorp/iamport/src/Exceptions/RequestException.php',
+    'Alliv\\Iamport\\Facades\\IamportFacade' => $vendorDir . '/allivcorp/iamport/src/Facades/IamportFacade.php',
+    'Alliv\\Iamport\\Iamport' => $vendorDir . '/allivcorp/iamport/src/Iamport.php',
+    'Alliv\\Iamport\\IamportServiceProvider' => $vendorDir . '/allivcorp/iamport/src/IamportServiceProvider.php',
+    'Alliv\\Iamport\\Payment' => $vendorDir . '/allivcorp/iamport/src/Payment.php',
+    'Alliv\\Iamport\\Result' => $vendorDir . '/allivcorp/iamport/src/Result.php',
     'App\\Console\\Kernel' => $baseDir . '/app/Console/Kernel.php',
     'App\\Exceptions\\Handler' => $baseDir . '/app/Exceptions/Handler.php',
     'App\\Helpers\\Custom\\CustomUtils' => $baseDir . '/app/Helpers/Custom/CustomUtils.php',
