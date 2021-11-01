@@ -15,7 +15,7 @@ class CreateShopcartsTable extends Migration
     {
         Schema::create('shopcarts', function (Blueprint $table) {
             $table->id()->comment('순번');
-            $table->bigInteger('od_id')->comment('장바구니 unique 키');
+            $table->bigInteger('od_id')->comment('장바구니 unique 키 = 주문 완료후 주문번호로 업뎃');
             $table->string('user_id')->comment('아이디');
             $table->string('item_code')->comment('상품코드');
             $table->string('item_name')->comment('상품명');

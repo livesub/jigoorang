@@ -1348,7 +1348,7 @@ $um_value='80/0.5/3'
         $total_send_cost = 0;
         $diff = 0;
 
-        $scs = DB::table('shopcarts')->select('item_code')->where([['od_id',$cart_id], ['sct_send_cost','0'], ['sct_select',$selected]])->whereRaw('sct_status in (\'쇼핑\', \'주문\', \'입금\', \'준비\', \'배송\', \'완료\')')->distinct()->get();
+        $scs = DB::table('shopcarts')->select('item_code')->where([['od_id',$cart_id], ['sct_send_cost','0'], ['sct_select',$selected]])->whereRaw('sct_status in (\'쇼핑\', \'주문\', \'입금\', \'준비\', \'배송\', \'완료\')')->distinct('item_code')->get();
 
         foreach ($scs as $sc){
             $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_qty) as qty from shopcarts where item_code = '{$sc->item_code}' and od_id = '$cart_id' and sct_status IN ( '쇼핑', '주문', '입금', '준비', '배송', '완료' ) and sct_select = '{$selected}' ");
@@ -1392,8 +1392,8 @@ $um_value='80/0.5/3'
         return $str;
     }
 
-    //사용자 포인트 조회
-    public static function user_point_chk($user_id, $po_content, $po_point, $po_use_point, $po_type, $po_write_id, $item_code)
+    //회원 가입시 주어지는 포인트
+    public static function user_point_chk($user_id, $po_content, $po_point, $po_use_point, $po_type, $po_write_id, $order_id)
     {
         $user_info = DB::table('users')->select('user_point')->where('user_id',$user_id)->first();  //사용자가 현재 가지고 있는 포인트
 
@@ -1406,7 +1406,7 @@ $um_value='80/0.5/3'
             'po_user_point' => $user_info->user_point,
             'po_type'       => $po_type,
             'po_write_id'   => $po_write_id,
-            'item_code'     => $item_code
+            'order_id'      => $order_id
         ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
 
         if($create_result){
@@ -1562,5 +1562,78 @@ $um_value='80/0.5/3'
             }
         }
     }
+
+    // 사용포인트 처리
+    public function insert_point($user_id, $point, $content='', $po_type, $po_write_id=0)
+    {
+        //$po_type = 적립금 지금 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>상품구입
+        //po_write_id = 적립금 지급 유형 글번호(구매평 글번호)
+
+        // 포인트가 없다면 업데이트 할 필요 없음
+        if ($point == 0) { return 0; }
+
+        // 회원아이디가 없다면 업데이트 할 필요 없음
+        if ($user_id == '') { return 0; }
+
+        $user_info = DB::table('users')->select('user_id')->where('user_id', $user_id)->first();  //사용자가 현재 가지고 있는 포인트
+
+        if(!$user_info){ return 0; }
+
+        $user_point = $this->get_point_sum($user_id);
+
+        $po_user_point = $user_point + $point;
+
+        //포인트 테이블에 저장
+        $create_result = shoppoints::create([
+            'user_id'       => $user_id,
+            'po_content'    => $po_content,
+            'po_point'      => $po_user_point,
+            'po_use_point'  => $point,
+            'po_user_point' => $user_point,
+            'po_type'       => $po_type,
+            'po_write_id'   => $po_write_id,
+            'item_code'     => $item_code
+        ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
+
+
+dd($po_user_point);
+/*
+
+        $sql = " insert into {$g5['point_table']}
+                    set mb_id = '$mb_id',
+                        po_datetime = '".G5_TIME_YMDHIS."',
+                        po_content = '".addslashes($content)."',
+                        po_point = '$point',
+                        po_use_point = '0',
+                        po_mb_point = '$po_mb_point',
+                        po_expired = '$po_expired',
+                        po_expire_date = '$po_expire_date',
+                        po_rel_table = '$rel_table',
+                        po_rel_id = '$rel_id',
+                        po_rel_action = '$rel_action' ";
+        sql_query($sql);
+
+        // 포인트를 사용한 경우 포인트 내역에 사용금액 기록
+        if($point < 0) {
+            insert_use_point($mb_id, $point);
+        }
+
+        // 포인트 UPDATE
+        $sql = " update {$g5['member_table']} set mb_point = '$po_mb_point' where mb_id = '$mb_id' ";
+        sql_query($sql);
+
+        return 1;
+*/
+    }
+
+    // 포인트 내역 합계
+    public static function get_point_sum($user_id)
+    {
+        // 포인트합
+        $sum = shoppoints::where('user_id', $user_id)->sum('po_point');
+        return $sum;
+    }
+
+
 
 }

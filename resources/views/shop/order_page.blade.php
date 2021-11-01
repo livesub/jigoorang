@@ -123,18 +123,21 @@
 
 <table border=1>
 <input type="hidden" name="order_id" id="order_id" value="{{ $order_id }}"> <!-- 주문번호 -->
+<input type="hidden" name="od_id" id="od_id" value="{{ $s_cart_id }}"> <!-- 장바구니번호 -->
 <input type="hidden" name="de_send_cost" id="de_send_cost" value="{{ $de_send_cost }}"> <!-- 기본배송비 -->
 <input type="hidden" name="od_send_cost" id="od_send_cost" value="{{ $send_cost }}">  <!-- 각 상품 배송비 -->
 <input type="hidden" name="od_send_cost2" id="od_send_cost2" value="0"> <!-- 추가배송비 -->
 <input type="hidden" name="od_price" id="od_price" value="{{ $tot_sell_price }}">  <!-- 주문금액 -->
 <input type="hidden" name="org_od_price" id="org_od_price" value="{{ $tot_sell_price }}"> <!-- original 주문금액 -->
 <input type="hidden" name="od_goods_name" id="od_goods_name" value="{{ $goods }}">  <!-- 상품명 -->
+<input type="hidden" name="cart_count" id="cart_count" value="{{ $cart_count }}">  <!-- 장바구니 상품 개수 -->
 
 <input type="hidden" name="method" id="method">
 <input type="hidden" name="pg" id="pg">
 <input type="hidden" name="user_point" id="user_point" value="{{ Auth::user()->user_point }}">
 <input type="hidden" name="imp_uid" id="imp_uid">
 <input type="hidden" name="apply_num" id="apply_num">   <!-- 카드 승인 번호 -->
+<input type="hidden" name="paid_amount" id="paid_amount">   <!-- 카드사에서 전달 받는 값(총 결제 금액) -->
 
     <tr>
         <td>
@@ -552,9 +555,10 @@ return false;
             if (rsp.success) {
                 $("#imp_uid").val(rsp.imp_uid); //카드사에서 전달 받는 값(아임포트 코드)
                 $("#apply_num").val(rsp.apply_num); //카드사에서 전달 받는 값(카드 승인번호)
-
+                $("#paid_amount").val(rsp.paid_amount); //카드사에서 전달 받는 값(총 결제 금액)
 aledrt("성공");
-                $("#forderform").submit();  //테스트로 함
+//                $("#forderform").submit();  //테스트로 함
+
 /*
 예제
                 var msg = '결제가 완료되었습니다.';

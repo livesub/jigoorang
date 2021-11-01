@@ -147,3 +147,8 @@ Route::post('/orderpayment', [
     'uses' => 'App\Http\Controllers\shop\OrderController@orderpayment',
 ]);
 
+//주문상세내역
+Route::get('/orderview', [
+    'as' => 'orderview',
+    'uses' => 'App\Http\Controllers\shop\OrderController@orderview',
+]);

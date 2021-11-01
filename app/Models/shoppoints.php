@@ -27,7 +27,7 @@ class shoppoints extends Model
         'po_user_point',
         'po_type',
         'po_write_id',
-        'item_code',
+        'order_id',
     ];
 
     protected $hidden = [

@@ -18,7 +18,8 @@ use Illuminate\Http\Request;
 use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;    //인증
-use App\Models\shopordertemps;    //장바구니 키
+use App\Models\shopordertemps;    //결제 검증을 위한 임시 테이블
+use App\Models\shoporders;  //주문서
 use Iamport;
 
 class OrderController extends Controller
@@ -143,6 +144,8 @@ class OrderController extends Controller
 
         $setting_info = DB::table('shopsettings')->select('de_send_cost')->first(); //기본 배송비 구하기
 
+        $cart_count = DB::table('shopcarts')->select('item_code')->where([['od_id',$tmp_cart_id], ['sct_select','1']])->distinct('item_code')->count(); //장바구니 상품 개수
+
         return view('shop.order_page',[
             's_cart_id'     => $s_cart_id,
             'cart_infos'    => $cart_infos,
@@ -159,7 +162,8 @@ class OrderController extends Controller
             'order_id'      => $order_id,
             'addr_list'     => $addr_list, //주문자 동일, 최근 배송지 히든 처리
             'tot_sell_price' => $tot_sell_price,
-            'send_cost'  => 0,
+            'send_cost'     => 0,
+            'cart_count'    => $cart_count,
         ]);
     }
 
@@ -509,112 +513,134 @@ echo $cancel_request_amount;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
         //기본 배송지 처리
-        $ad_default = $request->input('ad_default'); //기본 배송지 체크여부
-        $ad_subject = $request->input('ad_subject'); //배송지명
-        $od_b_name = $request->input('od_b_name');  //이름
-        $od_b_tel = $request->input('od_b_tel');    //전화번호
-        $od_b_hp = $request->input('od_b_hp');  //핸드폰
-        $od_b_zip = $request->input('od_b_zip');    //우편번호
-        $od_b_addr1 = $request->input('od_b_addr1');    //주소
-        $od_b_addr2 = $request->input('od_b_addr2');    //상세주소
-        $od_b_addr3 = $request->input('od_b_addr3');    //참고항목
-        $od_b_addr_jibeon = $request->input('od_b_addr_jibeon');    //지번(지번인지 도로명인지)
+        $ad_default         = $request->input('ad_default'); //기본 배송지 체크여부
+        $ad_subject         = $request->input('ad_subject'); //배송지명
+        $od_b_name          = $request->input('od_b_name');  //이름
+        $od_b_tel           = $request->input('od_b_tel');    //전화번호
+        $od_b_hp            = $request->input('od_b_hp');  //핸드폰
+        $od_b_zip           = $request->input('od_b_zip');    //우편번호
+        $od_b_addr1         = $request->input('od_b_addr1');    //주소
+        $od_b_addr2         = $request->input('od_b_addr2');    //상세주소
+        $od_b_addr3         = $request->input('od_b_addr3');    //참고항목
+        $od_b_addr_jibeon   = $request->input('od_b_addr_jibeon');    //지번(지번인지 도로명인지)
 
         $CustomUtils->baesongji_process($ad_default, $ad_subject, $od_b_name, $od_b_tel, $od_b_hp, $od_b_zip, $od_b_addr1, $od_b_addr2, $od_b_addr3, $od_b_addr_jibeon);
         //기본 배송지 처리 끝
 
         //변수 받기
         $order_id = $request->input('order_id');
+        $od_id = $request->input('od_id');
+        $od_deposit_name = Auth::user()->user_name;
+        $ad_name = $request->input('od_b_name');
+        $ad_tel = $request->input('od_b_tel');
+        $ad_hp = $request->input('od_b_hp');
+        $ad_zip1 = $request->input('od_b_zip');
+        $ad_addr1 = $request->input('od_b_addr1');
+        $ad_addr2 = $request->input('od_b_addr2');
+        $ad_addr3 = $request->input('od_b_addr3');
+        $ad_jibeon = $request->input('od_b_addr_jibeon');
+        $od_memo = $request->input('od_memo');
+        $od_cart_count = $request->input('cart_count');
 
-dd($order_id);
-        //결제 방법
-        $pg = $request->input('pg');
-        $method = $request->input('method');
+
+$CustomUtils->insert_point(Auth::user()->user_id, (-1) * 10, "주문번호 $order_id 결제", 7); //끝에 변수는 (적립금 지금 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>상품구입)
+dd("KKKKKK");
 
 
 
+        $ordertemp = DB::table('shopordertemps')->where([['order_id', $order_id], ['od_id', $od_id], ['user_id', Auth::user()->user_id]])->first();
 
-dd($method);
-        $order_id = $CustomUtils->get_session('ss_order_id');
+        //예외 처리
+        if(!$ordertemp){
+            return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.');
+            exit;
+        }
+
+        $od_cart_price      = $ordertemp->od_cart_price;
+        $de_send_cost       = $ordertemp->de_send_cost;
+        $od_send_cost       = $ordertemp->od_send_cost;
+        $od_send_cost2      = $ordertemp->od_send_cost2;
+        $od_receipt_price   = $ordertemp->od_receipt_price;
+        $od_receipt_point   = $ordertemp->od_receipt_point;
+        $od_receipt_time    = date('Y-m-d H:i:s', time());
+        $od_status          = '입금';
+        $od_pg              = $request->input('pg');
+        $od_settle_case     = $request->input('method');
+        $imp_uid            = $request->input('imp_uid');
+        $imp_apply_num      = $request->input('apply_num');
+        $imp_paid_amount    = $request->input('paid_amount');  //카드사에서 받은 최종 결제 금액
+
+        //예외 처리(카드사에서 보내온 결제 금액과 order에 저장 되는 결제금액이 같은가?)
+        $tot_price          = $od_receipt_price - $od_receipt_point;
+        if($imp_paid_amount != $tot_price){
+            return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.');
+            exit;
+        }else{
+            $create_result = shoporders::create([
+                'order_id'          => $order_id,
+                'od_id'             => $od_id,
+                'user_id'           => Auth::user()->user_id,
+                'od_deposit_name'   => $od_deposit_name,
+                'ad_name'           => $ad_name,
+                'ad_tel'            => $ad_tel,
+                'ad_hp'             => $ad_hp,
+                'ad_zip1'           => $ad_zip1,
+                'ad_addr1'          => $ad_addr1,
+                'ad_addr2'          => $ad_addr2,
+                'ad_addr3'          => $ad_addr3,
+                'ad_jibeon'         => $ad_jibeon,
+                'od_memo'           => $od_memo,
+                'od_cart_count'     => (int)$od_cart_count,
+                'od_cart_price'     => (int)$od_cart_price,
+                'de_send_cost'      => (int)$de_send_cost,
+                'od_send_cost'      => (int)$od_send_cost,
+                'od_send_cost2'     => (int)$od_send_cost2,
+                'od_receipt_price'  => (int)$od_receipt_price,
+                'od_receipt_point'  => (int)$od_receipt_point,
+                'od_receipt_time'   => $od_receipt_time,
+                'od_shop_memo'      => $od_shop_memo,
+                'od_status'         => $od_status,
+                'od_settle_case'    => $od_settle_case,
+                'od_pg'             => $od_pg,
+                'imp_uid'           => $imp_uid,
+                'imp_apply_num'     => $imp_apply_num,
+                'od_ip'             => $_SERVER["REMOTE_ADDR"],
+            ])->exists();
+
+            if($create_result){
+                $update_result = DB::table('shopcarts')->where([['od_id', $od_id], ['user_id', Auth::user()->user_id], ['sct_select','1']])->update([
+                    'sct_status'    => $od_status,
+                    'od_id'         => $order_id,
+                ]);
+
+                //포인트를 사용했다면 테이블에 사용을 추가
+                if ($i_temp_point > 0){
+                    $CustomUtils->insert_point(Auth::user()->user_id, (-1) * $i_temp_point, "주문번호 $order_id 결제");
+                }
 
 
 
 
 /*
-// 주문서에 입력
-$sql = " insert {$g5['g5_shop_order_table']}
-            set od_id             = '$od_id',
-                mb_id             = '{$member['mb_id']}',
-                od_pwd            = '$od_pwd',
-                od_name           = '$od_name',
-                od_email          = '$od_email',
-                od_tel            = '$od_tel',
-                od_hp             = '$od_hp',
-                od_zip1           = '$od_zip1',
-                od_zip2           = '$od_zip2',
-                od_addr1          = '$od_addr1',
-                od_addr2          = '$od_addr2',
-                od_addr3          = '$od_addr3',
-                od_addr_jibeon    = '$od_addr_jibeon',
-                od_b_name         = '$od_b_name',
-                od_b_tel          = '$od_b_tel',
-                od_b_hp           = '$od_b_hp',
-                od_b_zip1         = '$od_b_zip1',
-                od_b_zip2         = '$od_b_zip2',
-                od_b_addr1        = '$od_b_addr1',
-                od_b_addr2        = '$od_b_addr2',
-                od_b_addr3        = '$od_b_addr3',
-                od_b_addr_jibeon  = '$od_b_addr_jibeon',
-                od_deposit_name   = '$od_deposit_name',
-                od_memo           = '$od_memo',
-                od_cart_count     = '$cart_count',
-                od_cart_price     = '$tot_ct_price',
-                od_cart_coupon    = '$tot_it_cp_price',
-                od_send_cost      = '$od_send_cost',
-                od_send_coupon    = '$tot_sc_cp_price',
-                od_send_cost2     = '$od_send_cost2',
-                od_coupon         = '$tot_od_cp_price',
-                od_receipt_price  = '$od_receipt_price',
-                od_receipt_point  = '$od_receipt_point',
-                od_bank_account   = '$od_bank_account',
-                od_receipt_time   = '$od_receipt_time',
-                od_misu           = '$od_misu',
-                od_pg             = '$od_pg',
-                od_tno            = '$od_tno',
-                od_app_no         = '$od_app_no',
-                od_escrow         = '$od_escrow',
-                od_tax_flag       = '$od_tax_flag',
-                od_tax_mny        = '$od_tax_mny',
-                od_vat_mny        = '$od_vat_mny',
-                od_free_mny       = '$od_free_mny',
-                od_status         = '$od_status',
-                od_shop_memo      = '',
-                od_hope_date      = '$od_hope_date',
-                od_time           = '".G5_TIME_YMDHIS."',
-                od_ip             = '$REMOTE_ADDR',
-                od_settle_case    = '$od_settle_case',
-                od_other_pay_type = '$od_other_pay_type',
-                od_test           = '{$default['de_card_test']}'
-                ";
-$result = sql_query($sql, false);
+                $sql = "update {$g5['g5_shop_cart_table']}
+                set od_id = '$od_id',
+                    ct_status = '$cart_status'
+                    $sql_card_point
+              where od_id = '$tmp_cart_id'
+                and ct_select = '1' ";
+     $result = sql_query($sql, false);
 */
 
 
-
-
-
-
-
-
-        echo "KKK====> 작업중!!!!!!!!!! ";
-        exit;
-
-
-
-        $od_temp_point  = $request->input('od_temp_point');
-
-echo "KKK====> ".$od_temp_point;
-exit;
-
+                return redirect()->route('orderview');
+                exit;
+            }
+        }
     }
+
+    public function orderview(Request $request){
+        dd("주문 완료후 내역 볼떄");
+    }
+
+
 }
