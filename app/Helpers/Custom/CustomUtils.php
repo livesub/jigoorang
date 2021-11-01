@@ -1258,9 +1258,15 @@ $um_value='80/0.5/3'
                 }
             }
 
-            //배송비 변경 되었을때(211028 추가)
+            //각 상품 배송비 변경 되었을때(211028 추가)
             $baesong_price = DB::table('shopitems')->select('item_sc_price')->where('item_code',$item_code)->first();
             if($cart_info->item_sc_price != $baesong_price->item_sc_price){
+                return false;
+            }
+
+            //기본 배송비가 변경 되었을때(211101 추가)
+            $setting_info = DB::table('shopsettings')->select('de_send_cost')->first(); //기본 배송비 구하기
+            if($cart_info->de_send_cost != $setting_info->de_send_cost){
                 return false;
             }
         }

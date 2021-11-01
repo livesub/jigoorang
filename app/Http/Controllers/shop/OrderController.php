@@ -55,7 +55,7 @@ class OrderController extends Controller
         }
 
         if(!$CustomUtils->before_check_cart_price($tmp_cart_id)){
-            return redirect()->route('cartlist')->with('alert_messages', '장바구니 금액에 변동사항이 있습니다.\n장바구니를 다시 확인해 주세요.');
+            return redirect()->route('cartlist')->with('alert_messages', '장바구니 금액에 변동사항이 있습니다.\n상품을 삭제 후 다시 담아 주세요.');
             exit;
         }
 
@@ -141,13 +141,13 @@ class OrderController extends Controller
             //$addr_list .= '<label for="ad_sel_addr_same">주문자와 동일</label>'.PHP_EOL;
         }
 
-        $setting_info = DB::table('shopsettings')->first();
+        $setting_info = DB::table('shopsettings')->select('de_send_cost')->first(); //기본 배송비 구하기
 
         return view('shop.order_page',[
             's_cart_id'     => $s_cart_id,
             'cart_infos'    => $cart_infos,
             'CustomUtils'   => $CustomUtils,
-            'setting_info'  => $setting_info,
+            'de_send_cost'  => $setting_info->de_send_cost,
             'user_name'     => $user_name,
             'user_tel'      => $user_tel,
             'user_phone'    => $user_phone,
@@ -158,6 +158,8 @@ class OrderController extends Controller
             'user_addr_jibeon'  => $user_addr_jibeon,
             'order_id'      => $order_id,
             'addr_list'     => $addr_list, //주문자 동일, 최근 배송지 히든 처리
+            'tot_sell_price' => $tot_sell_price,
+            'send_cost'  => 0,
         ]);
     }
 
@@ -286,9 +288,12 @@ class OrderController extends Controller
         //header("Content-Type: application/json");
         $CustomUtils = new CustomUtils;
 
-        $imp_uid        = $request->input('imp_uid');
-        $merchant_uid   = $request->input('merchant_uid');
-        $amount         = (int)$request->input('amount');    //카드사 결제 금액
+        $data = file_get_contents('php://input');
+        parse_str($data, $output);
+
+        $imp_uid        = $output['imp_uid'];
+        $merchant_uid   = $output['merchant_uid'];
+        $amount         = (int)$output['amount'];    //카드사 결제 금액
 
         $result = json_encode(['reason' => ''], JSON_PRETTY_PRINT);
         $http_status = 200; //성공시 200
@@ -351,10 +356,11 @@ class OrderController extends Controller
         $ordertemp = DB::table('shopordertemps')->where([['od_id',$tmp_cart_id], ['user_id', Auth::user()->user_id]])->first();
 
         $i_price        = (int)$ordertemp->od_cart_price;
-        $i_send_cost    = (int)$ordertemp->od_send_cost;
+        $i_de_send_cost = (int)$ordertemp->de_send_cost; //기본 배송비
+        $i_send_cost    = (int)$ordertemp->od_send_cost;    //각 상품 배송비
         $i_send_cost2   = (int)$ordertemp->od_send_cost2;
         $i_temp_point   = (int)$ordertemp->od_receipt_point;
-        $tot_price      = $i_price + $i_send_cost + $i_send_cost2;
+        $tot_price      = $i_price + $i_de_send_cost + $i_send_cost + $i_send_cost2;
         $tot_payment    = $tot_price - $i_temp_point;   //실제 결제 금액
 
         // 주문금액이 상이함
@@ -372,7 +378,17 @@ class OrderController extends Controller
             $http_status = 201;
         }
 
-        // 배송비가 상이함
+        //기본 배송비 상이함
+        $setting_info = DB::table('shopsettings')->select('de_send_cost')->first(); //기본 배송비 구하기
+        if($setting_info->de_send_cost != $ordertemp->de_send_cost){
+            $error1 = '기본 배송비가 변경 되었습니다.';
+            $CustomUtils->add_order_post_log($request->input(), $error1);
+            //$result = json_encode(['reason' => $error1], JSON_PRETTY_PRINT);
+            $result = json_encode(['reason' => $error1], JSON_UNESCAPED_UNICODE);
+            $http_status = 201;
+        }
+
+        //각 상품 배송비가 상이함
         $send_cost = $CustomUtils->get_sendcost($tmp_cart_id);
         if($i_send_cost != $send_cost){
             $error1 = '배송비가 변경 되었습니다.';
@@ -430,7 +446,8 @@ class OrderController extends Controller
         $order_id           = $request->input('order_id');
         $od_id              = $request->input('od_id');
         $od_cart_price      = $request->input('od_cart_price');
-        $od_send_cost       = $request->input('od_send_cost');
+        $de_send_cost       = $request->input('de_send_cost');  //기본 배송비
+        $od_send_cost       = $request->input('od_send_cost');  //각 상품 배송비
         $od_send_cost2      = $request->input('od_send_cost2');
         $od_receipt_price   = $request->input('od_receipt_price');
         $od_temp_point      = $request->input('od_temp_point');
@@ -444,6 +461,7 @@ class OrderController extends Controller
                 'od_id'             => $od_id,
                 'user_id'           => Auth::user()->user_id,
                 'od_cart_price'     => $od_cart_price,
+                'de_send_cost'      => $de_send_cost,
                 'od_send_cost'      => $od_send_cost,
                 'od_send_cost2'     => $od_send_cost2,
                 'od_receipt_price'  => $od_receipt_price,
@@ -455,6 +473,7 @@ class OrderController extends Controller
             $update_result = DB::table('shopordertemps')->where([['od_id', $od_id], ['user_id', Auth::user()->user_id]])->update([
                 'order_id'          => $order_id,
                 'od_cart_price'     => $od_cart_price,
+                'de_send_cost'      => $de_send_cost,
                 'od_send_cost'      => $od_send_cost,
                 'od_send_cost2'     => $od_send_cost2,
                 'od_receipt_price'  => $od_receipt_price,
@@ -476,8 +495,8 @@ class OrderController extends Controller
         $refund_bank  = $request->input('refund_bank');
         $refund_account  = $request->input('refund_account');
 
-        $aa = Iamport::cancelPayment('imp_370953301637','93299','test');
-dd($aa);
+//        $aa = Iamport::cancelPayment('imp_370953301637','93299','test');
+//dd($aa);
 exit;
         //require_once '../../vendor/autoload.php';
 echo $cancel_request_amount;
@@ -488,21 +507,6 @@ echo $cancel_request_amount;
     {
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
-
-        // 장바구니가 비어있는가?
-        if($CustomUtils->get_session("ss_direct")){
-            $tmp_cart_id = $CustomUtils->get_session('ss_cart_direct');
-        }else{
-            $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
-        }
-
-        //$sw_direct  = $request->input('sw_direct');     //장바구니 0, 바로구매 1
-
-        if ($CustomUtils->get_cart_count($tmp_cart_id) == 0) {    // 장바구니에 담기
-            $CustomUtils->add_order_post_log($request->input(), '장바구니가 비어 있습니다.');
-            return redirect()->route('cartlist')->with('alert_messages', '장바구니가 비어 있습니다.\\n\\n이미 주문하셨거나 장바구니에 담긴 상품이 없는 경우입니다.');
-            exit;
-        }
 
         //기본 배송지 처리
         $ad_default = $request->input('ad_default'); //기본 배송지 체크여부
@@ -519,10 +523,18 @@ echo $cancel_request_amount;
         $CustomUtils->baesongji_process($ad_default, $ad_subject, $od_b_name, $od_b_tel, $od_b_hp, $od_b_zip, $od_b_addr1, $od_b_addr2, $od_b_addr3, $od_b_addr_jibeon);
         //기본 배송지 처리 끝
 
+        //변수 받기
+        $order_id = $request->input('order_id');
+
+dd($order_id);
         //결제 방법
         $pg = $request->input('pg');
         $method = $request->input('method');
 
+
+
+
+dd($method);
         $order_id = $CustomUtils->get_session('ss_order_id');
 
 

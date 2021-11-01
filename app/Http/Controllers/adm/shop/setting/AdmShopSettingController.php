@@ -78,7 +78,9 @@ class AdmShopSettingController extends Controller
             $company_use_point      = $setting_info->company_use_point;
 
             //회원 가입 포인트
-            $member_reg_point      = $setting_info->member_reg_point;
+            $member_reg_point       = $setting_info->member_reg_point;
+            //기본배송비
+            $de_send_cost           = $setting_info->de_send_cost;
 
             $shop_img_width         = $setting_info->shop_img_width;
             $shop_img_height        = $setting_info->shop_img_height;
@@ -103,6 +105,8 @@ class AdmShopSettingController extends Controller
 
             //회원 가입 포인트
             'member_reg_point'      => $member_reg_point,
+            //기본배송비
+            'de_send_cost'          => $de_send_cost,
 
             'shop_img_width'        => $shop_img_width,
             'shop_img_height'       => $shop_img_height,
@@ -136,6 +140,8 @@ class AdmShopSettingController extends Controller
 
         //회원 가입 포인트
         $member_reg_point       = $request->input('member_reg_point');
+        //기본배송비
+        $de_send_cost           = $request->input('de_send_cost');
 
         //아임 포트 설정
         $franchisee_code        = $request->input('franchisee_code');
@@ -175,6 +181,8 @@ class AdmShopSettingController extends Controller
             'company_use_point'     => (int)$company_use_point,
 
             'member_reg_point'      => (int)$member_reg_point,
+            'de_send_cost'          => (int)$de_send_cost,
+
             'franchisee_code'       => $franchisee_code,
             'franchisee_rest_api'   => $franchisee_rest_api,
             'franchisee_rest_api_secret' => $franchisee_rest_api_secret,

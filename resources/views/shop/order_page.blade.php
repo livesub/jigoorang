@@ -18,16 +18,6 @@
 
 <form name="forderform" id="forderform" method="post" action="{{ route('orderpayment') }}" autocomplete="off">
 {!! csrf_field() !!}
-<input type="hidden" name="od_price" id="od_price" value="{{ $tot_sell_price }}">
-<input type="hidden" name="org_od_price" id="org_od_price" value="{{ $tot_sell_price }}">
-<input type="hidden" name="od_send_cost" id="od_send_cost" value="{{ $send_cost }}">
-<input type="hidden" name="od_send_cost2" id="od_send_cost2" value="0">
-<input type="hidden" name="od_goods_name" id="od_goods_name" value="{{ $goods }}">
-<input type="hidden" name="method" id="method">
-<input type="hidden" name="pg" id="pg">
-<input type="hidden" name="user_point" id="user_point" value="{{ Auth::user()->user_point }}">
-<input type="hidden" name="imp_uid" id="imp_uid">
-
 <table border=1>
     <tr>
         <th scope="col">상품명</th>
@@ -47,9 +37,6 @@
         $it_send_cost = 0;
         $it_cp_count = 0;
 
-        $comm_tax_mny = 0; // 과세금액
-        $comm_vat_mny = 0; // 부가세
-        $comm_free_mny = 0; // 면세금액
         $tot_tax_mny = 0;
     @endphp
     @foreach($cart_infos as $cart_info)
@@ -128,13 +115,27 @@
     @php
         // 배송비 계산
         $send_cost = $CustomUtils->get_sendcost($s_cart_id);
-        $tot_price = $tot_sell_price + $send_cost; // 총계 = 주문상품금액합계 + 배송비
+        $tot_price = $tot_sell_price + $de_send_cost + $send_cost; // 총계 = 주문상품금액합계 + 기본 배송비 + 배송비
     @endphp
 </table>
 
 
 
 <table border=1>
+<input type="hidden" name="order_id" id="order_id" value="{{ $order_id }}"> <!-- 주문번호 -->
+<input type="hidden" name="de_send_cost" id="de_send_cost" value="{{ $de_send_cost }}"> <!-- 기본배송비 -->
+<input type="hidden" name="od_send_cost" id="od_send_cost" value="{{ $send_cost }}">  <!-- 각 상품 배송비 -->
+<input type="hidden" name="od_send_cost2" id="od_send_cost2" value="0"> <!-- 추가배송비 -->
+<input type="hidden" name="od_price" id="od_price" value="{{ $tot_sell_price }}">  <!-- 주문금액 -->
+<input type="hidden" name="org_od_price" id="org_od_price" value="{{ $tot_sell_price }}"> <!-- original 주문금액 -->
+<input type="hidden" name="od_goods_name" id="od_goods_name" value="{{ $goods }}">  <!-- 상품명 -->
+
+<input type="hidden" name="method" id="method">
+<input type="hidden" name="pg" id="pg">
+<input type="hidden" name="user_point" id="user_point" value="{{ Auth::user()->user_point }}">
+<input type="hidden" name="imp_uid" id="imp_uid">
+<input type="hidden" name="apply_num" id="apply_num">   <!-- 카드 승인 번호 -->
+
     <tr>
         <td>
             <table border=1>
@@ -207,11 +208,11 @@
             <table border=1>
                 <tr>
                     <td>주문</td>
-                    <td>배송비</td>
+                    <td>기본 배송비 + 상품별 배송비</td>
                 </tr>
                 <tr>
                     <td>{{ number_format($tot_sell_price) }}원</td>
-                    <td>{{ number_format($send_cost) }}원</td>
+                    <td>{{ number_format($de_send_cost) }}원 + {{ number_format($send_cost) }}원</td>
                 </tr>
                 <tr>
                     <td>총계</td>
@@ -317,6 +318,7 @@
                     const result = jQuery.parseJSON(data);
 //alert(result.sc_price);
 //return false;
+
                     $("input[name=od_send_cost2]").val(result.sc_price);
                     $("#od_send_cost3").text(numberWithCommas(String(result.sc_price)));
 
@@ -346,11 +348,11 @@
 <script>
     function calculate_order_price()
     {
+        var de_send_cost = parseInt($("input[name=de_send_cost]").val());
         var sell_price = parseInt($("input[name=od_price]").val());
         var send_cost = parseInt($("input[name=od_send_cost]").val());
         var send_cost2 = parseInt($("input[name=od_send_cost2]").val());
-        var tot_price = sell_price + send_cost + send_cost2;
-
+        var tot_price = sell_price + de_send_cost + send_cost + send_cost2; //주문금액 + 기본 배송비 + 각상품 배송비 + 추가 배송비
         //$("input[name=good_mny]").val(tot_price);
         $("#print_price").text(numberWithCommas(String(tot_price)));
     }
@@ -452,13 +454,14 @@
 
         @if(Auth::user()->user_point > 0)
         var od_price = parseInt($("#od_price").val());
+        var de_send_cost = parseInt($("#de_send_cost").val());
         var send_cost = parseInt($("#od_send_cost").val());
         var send_cost2 = parseInt($("#od_send_cost2").val());
         var od_temp_point = parseInt($("#od_temp_point").val());
         var user_point = parseInt($("#user_point").val());
 
-        //배송비에도 사용 가능 하기에 총금액을 구함(주문금액 + 기본 배송비 + 추가 배송비)
-        var total_price = od_price + send_cost + send_cost2;
+        //배송비에도 사용 가능 하기에 총금액을 구함(주문금액 + 기본 배송비 + 각 상품 배송비 + 추가 배송비)
+        var total_price = od_price + de_send_cost + send_cost + send_cost2;
 
         if($.trim($("#od_temp_point").val() != "")){    //적립금 사용
             //총결제액 보다 많이 사용 할수 없음
@@ -487,13 +490,12 @@
         //결제전 검증 수단으로 temp 테이블에 저장
         order_temp(total_price);
 
-//$("#forderform").submit();  //테스트로 함
+$("#forderform").submit();  //테스트로 함
 
 
-
-
+/*
+confirm_url 테스트 ajax 나주엥 지워야 함@@@
                 var kk = total_price - od_temp_point;
-
 
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
@@ -501,11 +503,13 @@
             type: "post",
             contentType : "application/json",
             data: {
+                        'imp_uid' : 'aa',
                         'amount' : kk,
                         'merchant_uid' : '{{ $order_id }}',
             },
             success : function(result){
 alert(result.reason);
+//alert(result.reason);
                 //var data = JSON.parse(result);
 //alert(result.reason);
 //return false;
@@ -516,7 +520,7 @@ alert(result.reason);
         });
 
 return false;
-
+*/
 
 
         //결제 모듈 호출
@@ -546,44 +550,18 @@ return false;
             //confirm_url : 'http://localhost:8000/shop/ordercomfirm', //실제 서버에서 동작 함 나중에 바꿔 줘야함
         }, function (rsp) { // callback
             if (rsp.success) {
-                $("#imp_uid").val(rsp.imp_uid); //카드사에서 전달 받는 값
+                $("#imp_uid").val(rsp.imp_uid); //카드사에서 전달 받는 값(아임포트 코드)
+                $("#apply_num").val(rsp.apply_num); //카드사에서 전달 받는 값(카드 승인번호)
+
 aledrt("성공");
-//cancelPay(merchant_uid, tot_pay);
-
+                $("#forderform").submit();  //테스트로 함
 /*
-                // 결제 성공 시 로직,
-                $.ajax({
-                    headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-                    url : '{{ route('ajax_ordercomfirm') }}',
-                    method: "POST",
-                    data: {
-                        'imp_uid' : rsp.imp_uid,
-                        'merchant_uid' : rsp.merchant_uid
-                    }
-                }).done(function (data) {
-                // 가맹점 서버 결제 API 성공시 로직
-                        if(data.code!=200){
-//cancelPay();
-
-alert("결제실패");
-                                //결제실패(웹서버측 실패)
-                            }else{
-                                //결제성공(웹서버측 성공)
-alert("ok");
-                            }
-                });
-*/
-/*
+예제
                 var msg = '결제가 완료되었습니다.';
                 msg += '고유ID : ' + rsp.imp_uid;
                 msg += '상점 거래ID : ' + rsp.merchant_uid;
                 msg += '결제 금액 : ' + rsp.paid_amount;
                 msg += '카드 승인번호 : ' + rsp.apply_num;
-
-                alert(msg);
-
-
-                //$("#forderform").submit();
 */
             } else {
                 // 결제 실패 시 로직,
@@ -634,7 +612,8 @@ alert("aasd==> "+result);
                 'order_id'          : '{{ $order_id }}',
                 'od_id'             : '{{ $s_cart_id }}',
                 'od_cart_price'     : $("#od_price").val(),
-                'od_send_cost'      : $("#od_send_cost").val(),
+                'de_send_cost'      : $("#de_send_cost").val(), //기본 배송비
+                'od_send_cost'      : $("#od_send_cost").val(), //각 상품 배송비
                 'od_send_cost2'     : $("#od_send_cost2").val(),
                 'od_receipt_price'  : total_price,
                 'od_temp_point'     : $("#od_temp_point").val(),

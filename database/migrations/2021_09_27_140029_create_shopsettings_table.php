@@ -30,6 +30,7 @@ class CreateShopsettingsTable extends Migration
             $table->text('company_bank_account')->nullable()->comment('은행계좌번호');
             $table->tinyInteger('company_use_point')->length(1)->default(1)->comment('포인트 사용');
             $table->integer('member_reg_point')->default(0)->comment('신규가입 포인트 금액');
+            $table->integer('de_send_cost')->default(0)->comment('기본배송비');
 
             $table->string('franchisee_code')->nullable()->comment('가맹점 식별코드');
             $table->string('franchisee_rest_api')->nullable()->comment('REST API 키');

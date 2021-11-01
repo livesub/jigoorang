@@ -334,6 +334,8 @@ class CartController extends Controller
                         $user_id = "";
                     }
 
+                    $setting_info = DB::table('shopsettings')->select('de_send_cost')->first(); //기본 배송비 구하기
+
                     //DB 저장 배열 만들기
                     $data = array(
                         'od_id'             => $tmp_cart_id,
@@ -342,6 +344,7 @@ class CartController extends Controller
                         'item_name'         => addslashes($item_info[0]->item_name),
                         //'item_sc_type'      => (int)$item_info[0]->item_sc_type,
                         //'item_sc_method'    => (int)$item_info[0]->item_sc_method,
+                        'de_send_cost'      => $setting_info->de_send_cost, //기본 배송비
                         'item_sc_price'     => (int)$item_info[0]->item_sc_price,
                         //'item_sc_minimum'   => (int)$item_info[0]->item_sc_minimum,
                         //'item_sc_qty'       => (int)$item_info[0]->item_sc_qty,

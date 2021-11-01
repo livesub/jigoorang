@@ -35,6 +35,7 @@ class shopsettings extends Model
         'company_bank_account',
         'company_use_point',
         'member_reg_point',
+        'de_send_cost',
         'franchisee_code',
         'franchisee_rest_api',
         'franchisee_rest_api_secret',
