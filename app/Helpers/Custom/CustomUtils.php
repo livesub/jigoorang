@@ -1564,11 +1564,11 @@ $um_value='80/0.5/3'
     }
 
     // 사용포인트 처리
-    public function insert_point($user_id, $point, $content='', $po_type, $po_write_id=0)
+    public function insert_point($user_id, $point, $content='', $po_type, $po_write_id=0, $order_id=0)
     {
         //$po_type = 적립금 지금 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>상품구입
         //po_write_id = 적립금 지급 유형 글번호(구매평 글번호)
-
+dd($order_id);
         // 포인트가 없다면 업데이트 할 필요 없음
         if ($point == 0) { return 0; }
 
@@ -1592,9 +1592,13 @@ $um_value='80/0.5/3'
             'po_user_point' => $user_point,
             'po_type'       => $po_type,
             'po_write_id'   => $po_write_id,
-            'item_code'     => $item_code
+            'order_id'      => $order_id
         ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
 
+        // 포인트를 사용한 경우 포인트 내역에 사용금액 기록
+        if($point < 0) {
+            //insert_use_point($mb_id, $point);
+        }
 
 dd($po_user_point);
 /*

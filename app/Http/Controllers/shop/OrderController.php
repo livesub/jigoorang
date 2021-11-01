@@ -543,7 +543,7 @@ echo $cancel_request_amount;
         $od_cart_count = $request->input('cart_count');
 
 
-$CustomUtils->insert_point(Auth::user()->user_id, (-1) * 10, "주문번호 $order_id 결제", 7); //끝에 변수는 (적립금 지금 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>상품구입)
+$CustomUtils->insert_point(Auth::user()->user_id, (-1) * 10, "주문번호 $order_id 결제", 7, '', $order_id); //끝에 변수는 (적립금 지금 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>상품구입)
 dd("KKKKKK");
 
 
@@ -615,7 +615,7 @@ dd("KKKKKK");
 
                 //포인트를 사용했다면 테이블에 사용을 추가
                 if ($i_temp_point > 0){
-                    $CustomUtils->insert_point(Auth::user()->user_id, (-1) * $i_temp_point, "주문번호 $order_id 결제");
+                    $CustomUtils->insert_point(Auth::user()->user_id, (-1) * $i_temp_point, "주문번호 $order_id 결제", '', '', $order_id);
                 }
 
 
