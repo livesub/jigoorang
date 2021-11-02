@@ -427,7 +427,7 @@ class AdmemailController extends Controller
                 }
             }
 
-            //$update_result = DB::table('emails')->where('id', $request->input('email_id'))->limit(1)->update($data);
+            //$update_result = DB::table('emails')->where('id', $request->input('email_id'))->update($data);
             $update_result = Emails::find($request->input('email_id'))->update($data);
         }
 

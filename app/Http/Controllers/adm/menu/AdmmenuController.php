@@ -372,7 +372,7 @@ class AdmmenuController extends Controller
             'menu_content'    => $menu_content,
         );
 
-        //$update_result = DB::table('menuses')->where([['id', $id],['menu_id',$menu_id]])->limit(1)->update($data);
+        //$update_result = DB::table('menuses')->where([['id', $id],['menu_id',$menu_id]])->update($data);
         $update_result = Menuses::find($id)->update($data);
 
         if($update_result) return redirect()->route('adm.menu.index','&page='.$page)->with('alert_messages', $Messages::$menu['update']['up_ok']);

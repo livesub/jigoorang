@@ -346,7 +346,12 @@
                 }
 
                 if(json.message == "no_qty"){
-                    alert(json.option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.sum_qty + " 개");
+                    alert(json.option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.sum_qty + " 개 이며\n\n이미 장바구니에 담겨 있습니다. ");
+                    return false;
+                }
+
+                if(json.message == "no_qty2"){
+                    alert(json.option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.sum_qty + " 개 이며\n\n이미 장바구니에 담겨 있습니다. ");
                     return false;
                 }
 

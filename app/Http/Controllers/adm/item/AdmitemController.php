@@ -535,7 +535,7 @@ class AdmitemController extends Controller
             }
         }
 
-        //$update_result = DB::table('items')->where('id', $id)->limit(1)->update($data);
+        //$update_result = DB::table('items')->where('id', $id)->update($data);
         $update_result = Items::find($id)->update($data);
 
         if($update_result) return redirect(route('adm.item.index'))->with('alert_messages', $Messages::$item['update']['up_ok']);

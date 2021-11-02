@@ -81,12 +81,12 @@ class BaesongjiController extends Controller
 /*
                 //if(!empty($ad_default) && $id === $ad_default) {  //$id === $ad_default 이부분 처리 해야함
                 if(!empty($ad_default)) {
-                    $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->limit(1)->update(['ad_subject' => $ad_subject_val, 'ad_default' => 1]);
+                    $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->update(['ad_subject' => $ad_subject_val, 'ad_default' => 1]);
                 }else{
-                    $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->limit(1)->update(['ad_subject' => $ad_subject_val]);
+                    $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->update(['ad_subject' => $ad_subject_val]);
                 }
 */
-                $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->limit(1)->update(['ad_subject' => $ad_subject_val]);
+                $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->update(['ad_subject' => $ad_subject_val]);
             }
         }
 

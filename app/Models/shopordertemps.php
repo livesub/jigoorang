@@ -29,6 +29,7 @@ class shopordertemps extends Model
         'od_send_cost2',
         'od_receipt_price',
         'od_receipt_point',
+        'tot_item_point',
         'ad_zip1',
         'od_ip',
     ];

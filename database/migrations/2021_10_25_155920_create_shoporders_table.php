@@ -25,7 +25,7 @@ class CreateShopordersTable extends Migration
             $table->char('ad_zip1')->length(5)->comment('받으시는 분 우편번호');
             $table->string('ad_addr1')->comment('받으시는 분 기본주소');
             $table->string('ad_addr2')->comment('받으시는 분 상세주소');
-            $table->string('ad_addr3')->comment('받으시는 분 주소 참고 항목');
+            $table->string('ad_addr3')->nullable()->comment('받으시는 분 주소 참고 항목');
             $table->string('ad_jibeon')->comment('받으시는 분 지번주소');
             $table->text('od_memo')->comment('전하실말씀');
             $table->integer('od_cart_count')->default(0)->comment('장바구니 상품 개수');
@@ -38,7 +38,7 @@ class CreateShopordersTable extends Migration
             $table->integer('od_receipt_point')->default(0)->comment('결제 포인트');
             $table->integer('od_refund_price')->default(0)->comment('반품, 품절 금액');
             $table->string('od_receipt_time')->comment('결제일시');
-            $table->text('od_shop_memo')->comment('상점메모');
+            $table->text('od_shop_memo')->nullable()->comment('상점메모');
             $table->string('od_status')->comment('주문상태');
             $table->string('od_settle_case')->comment('결제방식');
             $table->string('od_pg')->comment('간편결제 방식');

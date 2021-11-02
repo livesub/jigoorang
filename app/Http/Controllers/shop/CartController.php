@@ -135,7 +135,6 @@ class CartController extends Controller
             }
         }else{ // 장바구니에 담기
             $count = count($post_item_codes);
-
             if ($count < 1){
                 echo json_encode(['message' => 'no_carts']);
                 exit;
@@ -224,7 +223,7 @@ class CartController extends Controller
 
                         if ($sct_qty + $sum_qty > $it_stock_qty)
                         {
-                            echo json_encode(['message' => 'no_qty1111']);
+                            echo json_encode(['message' => 'no_qty', 'option' => $sio_value, 'sum_qty' => number_format($it_stock_qty)]);
                             exit;
                         }
                     }
@@ -278,9 +277,10 @@ class CartController extends Controller
                     }
 
                     // 동일옵션의 상품이 있으면 수량 더함
-                    $sam_opt = DB::table('shopcarts')->select('id','sio_type','sct_qty')->where([['od_id',$tmp_cart_id],['item_code',$item_code],['sio_id',$sio_id],['sct_status','쇼핑']])->get();
+                    $sam_opt = DB::table('shopcarts')->select('id','sio_type','sct_qty')->where([['od_id',$tmp_cart_id],['item_code',$item_code],['sio_id',$sio_id],['sct_status','쇼핑'],['sct_direct','0']])->get();
 
                     if(isset($sam_opt[0]->id) && $sam_opt[0]->id) {
+
                         // 재고체크
                         $tmp_ct_qty = $sam_opt[0]->sct_qty;
 
@@ -406,16 +406,21 @@ class CartController extends Controller
 
         // $s_cart_id 로 현재 장바구니 자료 쿼리
         $cart_infos = DB::table('shopcarts as a')
-            ->select('a.id', 'a.item_code', 'a.item_name', 'a.sct_price', 'a.sct_point', 'a.sct_qty', 'a.sct_status', 'a.sct_send_cost', 'a.item_sc_type', 'b.sca_id')
+            ->select('a.id', 'a.od_id', 'a.item_code', 'a.item_name', 'a.sct_price', 'a.sct_point', 'a.sct_qty', 'a.sct_status', 'a.sct_send_cost', 'a.item_sc_type', 'b.sca_id')
             ->leftjoin('shopitems as b', function($join) {
                     $join->on('a.item_code', '=', 'b.item_code');
                 })
-            ->where('a.od_id',$s_cart_id)
+            //->where('a.od_id',$s_cart_id)
+            ->where([['a.user_id', Auth::user()->user_id], ['a.sct_status','쇼핑'], ['a.sct_direct','0']])  //장바구니 사라짐 문제
             ->groupBy('a.item_code')
             ->orderBy('a.id')
             ->get();
 
         if(count($cart_infos) > 0){
+            //장바구니 사라짐 문제 때문에 다시 세션 구움
+            $CustomUtils->set_session('ss_cart_id', $cart_infos[0]->od_id);
+            $s_cart_id = $CustomUtils->get_session('ss_cart_id');
+
             // 선택필드 초기화
             $up_result = shopcarts::whereod_id($s_cart_id)->first();  //update 할때 미리 값을 조회 하고 쓰면 update 구문으로 자동 변경
             $up_result->sct_select = 0;

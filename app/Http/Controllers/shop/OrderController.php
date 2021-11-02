@@ -449,13 +449,14 @@ class OrderController extends Controller
         //결제전 검증을 위한 임시 테이블 저장
         $order_id           = $request->input('order_id');
         $od_id              = $request->input('od_id');
-        $od_cart_price      = $request->input('od_cart_price');
-        $de_send_cost       = $request->input('de_send_cost');  //기본 배송비
-        $od_send_cost       = $request->input('od_send_cost');  //각 상품 배송비
-        $od_send_cost2      = $request->input('od_send_cost2');
-        $od_receipt_price   = $request->input('od_receipt_price');
-        $od_temp_point      = $request->input('od_temp_point');
-        $od_b_zip           = $request->input('od_b_zip');
+        $od_cart_price      = (int)$request->input('od_cart_price');
+        $de_send_cost       = (int)$request->input('de_send_cost');  //기본 배송비
+        $od_send_cost       = (int)$request->input('od_send_cost');  //각 상품 배송비
+        $od_send_cost2      = (int)$request->input('od_send_cost2');
+        $od_receipt_price   = (int)$request->input('od_receipt_price');
+        $od_temp_point      = (int)$request->input('od_temp_point');
+        $od_b_zip           = (int)$request->input('od_b_zip');
+        $tot_item_point     = (int)$request->input('tot_item_point');
 
         $ordertemp_cnt = DB::table('shopordertemps')->where([['od_id',$od_id], ['user_id', Auth::user()->user_id]])->count();
 
@@ -470,6 +471,7 @@ class OrderController extends Controller
                 'od_send_cost2'     => $od_send_cost2,
                 'od_receipt_price'  => $od_receipt_price,
                 'od_receipt_point'  => $od_temp_point,
+                'tot_item_point'    => $tot_item_point,
                 'ad_zip1'           => $od_b_zip,
                 'od_ip'             => $_SERVER["REMOTE_ADDR"],
             ])->exists();
@@ -482,6 +484,7 @@ class OrderController extends Controller
                 'od_send_cost2'     => $od_send_cost2,
                 'od_receipt_price'  => $od_receipt_price,
                 'od_receipt_point'  => $od_temp_point,
+                'tot_item_point'    => $tot_item_point,
                 'ad_zip1'           => $od_b_zip,
                 'od_ip'             => $_SERVER["REMOTE_ADDR"],
             ]);
@@ -542,17 +545,11 @@ echo $cancel_request_amount;
         $od_memo = $request->input('od_memo');
         $od_cart_count = $request->input('cart_count');
 
-
-$CustomUtils->insert_point(Auth::user()->user_id, (-1) * 10, "주문번호 $order_id 결제", 7, '', $order_id); //끝에 변수는 (적립금 지금 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>상품구입)
-dd("KKKKKK");
-
-
-
         $ordertemp = DB::table('shopordertemps')->where([['order_id', $order_id], ['od_id', $od_id], ['user_id', Auth::user()->user_id]])->first();
 
         //예외 처리
         if(!$ordertemp){
-            return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.');
+            return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.-2');
             exit;
         }
 
@@ -562,18 +559,25 @@ dd("KKKKKK");
         $od_send_cost2      = $ordertemp->od_send_cost2;
         $od_receipt_price   = $ordertemp->od_receipt_price;
         $od_receipt_point   = $ordertemp->od_receipt_point;
+        $tot_item_point     = $ordertemp->tot_item_point;
         $od_receipt_time    = date('Y-m-d H:i:s', time());
         $od_status          = '입금';
         $od_pg              = $request->input('pg');
         $od_settle_case     = $request->input('method');
         $imp_uid            = $request->input('imp_uid');
-        $imp_apply_num      = $request->input('apply_num');
+        $imp_apply_num      = $request->input('apply_num'); //카드사에서 전달 받는 값(카드 승인번호)
         $imp_paid_amount    = $request->input('paid_amount');  //카드사에서 받은 최종 결제 금액
+        $od_shop_memo       = '';
+
+//데스트 위함
+$imp_paid_amount = 8256;
+$imp_uid = 'imp_1212';
+$imp_apply_num= '12345678';
 
         //예외 처리(카드사에서 보내온 결제 금액과 order에 저장 되는 결제금액이 같은가?)
         $tot_price          = $od_receipt_price - $od_receipt_point;
         if($imp_paid_amount != $tot_price){
-            return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.');
+            return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.-1');
             exit;
         }else{
             $create_result = shoporders::create([
@@ -613,24 +617,19 @@ dd("KKKKKK");
                     'od_id'         => $order_id,
                 ]);
 
+                //구매 완료시 상품 재고 정리
+                $CustomUtils->item_qty($order_id, 'minus');
+
                 //포인트를 사용했다면 테이블에 사용을 추가
-                if ($i_temp_point > 0){
-                    $CustomUtils->insert_point(Auth::user()->user_id, (-1) * $i_temp_point, "주문번호 $order_id 결제", '', '', $order_id);
+                if ($od_receipt_point > 0){
+                    $CustomUtils->insert_point(Auth::user()->user_id, (-1) * $od_receipt_point, "주문번호 $order_id 결제 사용", 7, '', $order_id);
                 }
 
-
-
-
-/*
-                $sql = "update {$g5['g5_shop_cart_table']}
-                set od_id = '$od_id',
-                    ct_status = '$cart_status'
-                    $sql_card_point
-              where od_id = '$tmp_cart_id'
-                and ct_select = '1' ";
-     $result = sql_query($sql, false);
-*/
-
+                //상품 구매 포인트가 있다면
+                if($tot_item_point > 0){
+                    //상품 구매 포인트
+                    $CustomUtils->insert_point(Auth::user()->user_id, $tot_item_point, "주문번호 $order_id 구매 포인트", 8, '', $order_id);
+                }
 
                 return redirect()->route('orderview');
                 exit;

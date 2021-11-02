@@ -20,7 +20,7 @@ class CreateShoppointsTable extends Migration
             $table->integer('po_point')->default(0)->comment('적립금액');
             $table->integer('po_use_point')->default(0)->comment('사용금액');
             $table->integer('po_user_point')->default(0)->comment('적립전 회원 포인트');
-            $table->tinyInteger('po_type')->length(2)->default(1)->comment('적립금 지금 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>상품구입');
+            $table->tinyInteger('po_type')->length(2)->default(1)->comment('적립금 지금 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>사용,8=>적립');
             $table->integer('po_write_id')->default(0)->comment('적립금 지급 유형 글번호');
             $table->string('order_id')->comment('주문번호');
             $table->timestamps();

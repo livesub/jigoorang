@@ -811,7 +811,6 @@ $um_value='80/0.5/3'
         }
 
         $item_point = floor(($item_price * ($item->item_point / 100) / $trunc)) * $trunc;
-
         return $item_point;
     }
 
@@ -819,7 +818,7 @@ $um_value='80/0.5/3'
     public static function get_item_options($item_code, $subject, $is_div='', $is_first_option_title='')
     {
         if(!$item_code || !$subject) return false;
-        $opts = DB::table('shopitemoptions')->where([['sio_type', 0],['item_code', $item_code],['sio_use','1'],['sio_use','1']])->orderby('id', 'asc')->get();
+        $opts = DB::table('shopitemoptions')->where([['sio_type', 0],['item_code', $item_code],['sio_use','1']])->orderby('id', 'asc')->get();
 
         if(count($opts) == 0) return false;
 
@@ -1074,12 +1073,14 @@ $um_value='80/0.5/3'
         $jaego = DB::table('shopitems')->select('item_stock_qty')->where('item_code',$item_code)->get();
         $jaego_cnt = (int)$jaego[0]->item_stock_qty;
         $daegi = 0;
-
+/*
         // 재고에서 빼지 않았고 주문인것만
         $sct_qty = DB::table('shopcarts')->where([['item_code',$item_code], ['sio_id',''], ['sct_stock_use','0']])->whereRaw('sct_status in (\'주문\', \'입금\', \'준비\')')->sum('sct_qty');
         $daegi = (int)$sct_qty;
 
         return $jaego_cnt - $daegi;
+*/
+        return $jaego_cnt;
     }
 
     // 옵션의 재고 (창고재고수량 - 주문대기수량)
@@ -1088,12 +1089,15 @@ $um_value='80/0.5/3'
         $jaego = DB::table('shopitemoptions')->select('sio_stock_qty')->where([['item_code',$item_code],['sio_id',$sio_id],['sio_type',$type],['sio_use','1']])->get();
         $jaego_cnt = (int)$jaego[0]->sio_stock_qty;
         $daegi = 0;
-
-        // 재고에서 빼지 않았고 주문인것만
+/*
+        // 재고에서 빼지 않았고 주문인것만(주문완료 과정에서 재고 +,- 해주는 것으로 변경)
         $sct_qty = DB::table('shopcarts')->where([['item_code',$item_code], ['sio_id',$sio_id], ['sct_stock_use','0']])->whereRaw('sct_status in (\'주문\', \'입금\', \'준비\')')->sum('sct_qty');
         $daegi = (int)$sct_qty;
 
         return $jaego_cnt - $daegi;
+*/
+        //주문된 순간 재고 +,- 한다
+        return $jaego_cnt;
     }
 
     //장바구니 키 생성
@@ -1407,7 +1411,7 @@ $um_value='80/0.5/3'
             'po_type'       => $po_type,
             'po_write_id'   => $po_write_id,
             'order_id'      => $order_id
-        ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
+        ])->exists();
 
         if($create_result){
             //회원 테이블 포인트 업뎃
@@ -1563,19 +1567,19 @@ $um_value='80/0.5/3'
         }
     }
 
-    // 사용포인트 처리
+    //포인트 처리
     public function insert_point($user_id, $point, $content='', $po_type, $po_write_id=0, $order_id=0)
     {
-        //$po_type = 적립금 지금 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>상품구입
+        //$po_type = 적립금 지금 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>사용,8=>적립
         //po_write_id = 적립금 지급 유형 글번호(구매평 글번호)
-dd($order_id);
+
         // 포인트가 없다면 업데이트 할 필요 없음
         if ($point == 0) { return 0; }
 
         // 회원아이디가 없다면 업데이트 할 필요 없음
         if ($user_id == '') { return 0; }
 
-        $user_info = DB::table('users')->select('user_id')->where('user_id', $user_id)->first();  //사용자가 현재 가지고 있는 포인트
+        $user_info = DB::table('users')->select('user_id')->where('user_id', $user_id)->first(); //회원인지 검색
 
         if(!$user_info){ return 0; }
 
@@ -1586,48 +1590,20 @@ dd($order_id);
         //포인트 테이블에 저장
         $create_result = shoppoints::create([
             'user_id'       => $user_id,
-            'po_content'    => $po_content,
-            'po_point'      => $po_user_point,
-            'po_use_point'  => $point,
+            'po_content'    => $content,
+            'po_point'      => $point,
+            'po_use_point'  => 0,
             'po_user_point' => $user_point,
             'po_type'       => $po_type,
             'po_write_id'   => $po_write_id,
             'order_id'      => $order_id
-        ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
+        ])->exists();
 
-        // 포인트를 사용한 경우 포인트 내역에 사용금액 기록
-        if($point < 0) {
-            //insert_use_point($mb_id, $point);
+        if($create_result){
+            //회원 테이블 포인트 업뎃
+            $user_point = $this->get_point_sum($user_id);
+            $up_result = DB::table('users')->where('user_id', $user_id)->update(['user_point' => $user_point]);
         }
-
-dd($po_user_point);
-/*
-
-        $sql = " insert into {$g5['point_table']}
-                    set mb_id = '$mb_id',
-                        po_datetime = '".G5_TIME_YMDHIS."',
-                        po_content = '".addslashes($content)."',
-                        po_point = '$point',
-                        po_use_point = '0',
-                        po_mb_point = '$po_mb_point',
-                        po_expired = '$po_expired',
-                        po_expire_date = '$po_expire_date',
-                        po_rel_table = '$rel_table',
-                        po_rel_id = '$rel_id',
-                        po_rel_action = '$rel_action' ";
-        sql_query($sql);
-
-        // 포인트를 사용한 경우 포인트 내역에 사용금액 기록
-        if($point < 0) {
-            insert_use_point($mb_id, $point);
-        }
-
-        // 포인트 UPDATE
-        $sql = " update {$g5['member_table']} set mb_point = '$po_mb_point' where mb_id = '$mb_id' ";
-        sql_query($sql);
-
-        return 1;
-*/
     }
 
     // 포인트 내역 합계
@@ -1638,6 +1614,36 @@ dd($po_user_point);
         return $sum;
     }
 
+    //구매 상품 재고 정리
+    public static function item_qty($order_id, $type)
+    {
+        $cart_infos = DB::table('shopcarts')->where('od_id', $order_id)->get();
 
+        foreach($cart_infos as $cart_info){
+            if($cart_info->sio_id != ""){
+                //옵션 상품일때
+                $itemoptions_info = DB::table('shopitemoptions')->where([['item_code', $cart_info->item_code], ['sio_id', $cart_info->sio_id]])->first();
+
+                if($type == 'minus'){
+                    $qty = (int)$itemoptions_info->sio_stock_qty - (int)$cart_info->sct_qty;
+                }else{
+                    $qty = (int)$itemoptions_info->sio_stock_qty + (int)$cart_info->sct_qty;
+                }
+
+                $up_result = DB::table('shopitemoptions')->where([['item_code', $cart_info->item_code], ['sio_id', $cart_info->sio_id]])->update(['sio_stock_qty' => $qty]);
+            }else{
+                //옵션 상품 아닐때
+                $item_info = DB::table('shopitems')->where('item_code', $cart_info->item_code)->first();
+
+                if($type == 'minus'){
+                    $qty = (int)$item_info->item_stock_qty - (int)$cart_info->sct_qty;;
+                }else{
+                    $qty = (int)$item_info->item_stock_qty + (int)$cart_info->sct_qty;;
+                }
+
+                $up_result = DB::table('shopitems')->where('item_code', $cart_info->item_code)->update(['item_stock_qty' => $qty]);
+            }
+        }
+    }
 
 }

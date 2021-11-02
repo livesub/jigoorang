@@ -36,8 +36,6 @@
         $good_info = '';
         $it_send_cost = 0;
         $it_cp_count = 0;
-
-        $tot_tax_mny = 0;
     @endphp
     @foreach($cart_infos as $cart_info)
         @php
@@ -107,7 +105,7 @@
             </tr>
         @php
             $i++;
-            $tot_point      += $point;
+            $tot_point      += $point;  //각 상품의 포인트 합
             $tot_sell_price += $sell_price;
         @endphp
     @endforeach
@@ -385,21 +383,27 @@
 //return false;
                 if(json.message == "no_cart"){
                     msg = "장바구니가 비어 있습니다.\n\n이미 주문하셨거나 장바구니에 담긴 상품이 없는 경우입니다.";
+                    alert(msg);
+                    location.href = "{{ route('cartlist') }}";
                 }
 
                 if(json.message == "variance_chk"){
                     msg = "장바구니 금액에 변동사항이 있습니다.\n장바구니를 다시 확인해 주세요.";
+                    alert(msg);
+                    location.href = "{{ route('cartlist') }}";
                 }
 
                 if(json.message == "soldout"){
                     msg = json.item_option + " 상품이 " + json.txt + " 되었습니다.\n\n장바구니에서 해당 상품을 삭제후 다시 주문해 주세요.";
+                    alert(msg);
+                    location.href = "{{ route('cartlist') }}";
                 }
 
                 if(json.message == "qty_lack"){
                     msg = json.item_option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.txt + " 개";
+                    alert(msg);
+                    location.href = "{{ route('cartlist') }}";
                 }
-
-                result = msg;
             }
         });
 
@@ -622,6 +626,7 @@ alert("aasd==> "+result);
                 'od_receipt_price'  : total_price,
                 'od_temp_point'     : $("#od_temp_point").val(),
                 'od_b_zip'          : $("#od_b_zip").val(),
+                'tot_item_point'    : '{{ $tot_point }}',
             },
             success : function(data){
 //alert(data);

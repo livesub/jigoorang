@@ -388,7 +388,7 @@ class AdmShopCategoryController extends Controller
             }
         }
 
-        //$update_result = DB::table('shopcategorys')->where([['id', $id],['sca_id',$sca_id]])->limit(1)->update($data);
+        //$update_result = DB::table('shopcategorys')->where([['id', $id],['sca_id',$sca_id]])->update($data);
         $update_result = Shopcategorys::find($id)->update($data);
 
         if($update_result) return redirect()->route('shop.cate.index','&page='.$page)->with('alert_messages', $Messages::$category['update']['up_ok']);
