@@ -47,15 +47,15 @@
                     </td>
                     <td>{{ $cart->sct_qty }}개</td>
                     <td>{{ $cart->sct_price + $cart->sio_price }}</td>
-                    <td><button type="button" onclick="pay_cancel('{{ $order->imp_uid }}', '{{ $order->order_id }}', '868')">취소</button></td>
+                    <td><button type="button" onclick="pay_cancel('{{ $order->imp_uid }}', '{{ $order->order_id }}', '868')">부분취소</button></td>
                 </tr>
             </table>
         </td>
     </tr>
+    @endforeach
     <tr>
         <td><br><br><br></td>
     </tr>
-    @endforeach
 @endforeach
 </table>
 
