@@ -136,6 +136,11 @@
 <input type="hidden" name="imp_uid" id="imp_uid">
 <input type="hidden" name="apply_num" id="apply_num">   <!-- 카드 승인 번호 -->
 <input type="hidden" name="paid_amount" id="paid_amount">   <!-- 카드사에서 전달 받는 값(총 결제 금액) -->
+<input type="hidden" name="imp_merchant_uid" id="imp_merchant_uid">   <!-- 주문번호 -->
+<input type="hidden" name="pg_provider" id="pg_provider">   <!-- 결제승인/시도된 PG사 -->
+
+<input type="hidden" name="imp_card_name" id="imp_card_name">   <!-- 카드사에서 전달 받는 값(카드사명칭)) -->
+<input type="hidden" name="imp_card_quota" id="imp_card_quota">   <!-- 카드사에서 전달 받는 값(할부개월수)) -->
 
     <tr>
         <td>
@@ -497,11 +502,11 @@
         //결제전 검증 수단으로 temp 테이블에 저장
         order_temp(total_price);
 
-$("#forderform").submit();  //테스트로 함
+//$("#forderform").submit();  //테스트로 함
 
 
 /*
-confirm_url 테스트 ajax 나주엥 지워야 함@@@
+//confirm_url 테스트 ajax 나주엥 지워야 함@@@
                 var kk = total_price - od_temp_point;
 
         $.ajax({
@@ -554,23 +559,18 @@ return false;
             buyer_tel: "{{ Auth::user()->user_tel }}",
             buyer_addr: "{{ Auth::user()->user_addr1 }}",
             buyer_postcode: "{{ Auth::user()->user_zip }}",
-            //confirm_url : 'http://localhost:8000/shop/ordercomfirm', //실제 서버에서 동작 함 나중에 바꿔 줘야함
+            //confirm_url : '{{ route('ajax_ordercomfirm') }}', //실제 서버에서 동작 함 나중에 바꿔 줘야함
         }, function (rsp) { // callback
             if (rsp.success) {
                 $("#imp_uid").val(rsp.imp_uid); //카드사에서 전달 받는 값(아임포트 코드)
                 $("#apply_num").val(rsp.apply_num); //카드사에서 전달 받는 값(카드 승인번호)
                 $("#paid_amount").val(rsp.paid_amount); //카드사에서 전달 받는 값(총 결제 금액)
-aledrt("성공");
-//                $("#forderform").submit();  //테스트로 함
-
-/*
-예제
-                var msg = '결제가 완료되었습니다.';
-                msg += '고유ID : ' + rsp.imp_uid;
-                msg += '상점 거래ID : ' + rsp.merchant_uid;
-                msg += '결제 금액 : ' + rsp.paid_amount;
-                msg += '카드 승인번호 : ' + rsp.apply_num;
-*/
+                $("#imp_merchant_uid").val(rsp.merchant_uid); //카드사에서 다시 전달 받은 주문번호
+                $("#imp_provider").val(rsp.pg_provider); //카드사에서 전달 받는 값(결제승인/시도된 PG사)
+                $("#imp_card_name").val(rsp.card_name); //카드사에서 전달 받는 값(카드사명칭))
+                $("#imp_card_quota").val(rsp.card_quota); //카드사에서 전달 받는 값(할부개월수))
+//alert("성공");
+                $("#forderform").submit();
             } else {
                 // 결제 실패 시 로직,
                 alert("결제에 실패하였습니다.\n내용: " +  rsp.error_msg);
@@ -578,35 +578,6 @@ aledrt("성공");
             }
         });
     }
-</script>
-
-<!-- 환불 처리 -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-<script>
-    function cancelPay(merchant_uid, tot_pay) {
-
-        $.ajax({
-            headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-            url : '{{ route('ajax_orderpaycancel') }}',
-            type : 'post',
-            contentType : "application/json",
-            data    : JSON.stringify({
-                "merchant_uid" : merchant_uid, // 예: ORD20180131-0000011
-                "cancel_request_amount" : tot_pay, // 환불금액
-                "reason" : "상품 변동", // 환불사유
-                "refund_holder" : "{{ Auth::user()->user_name }}", // [가상계좌 환불시 필수입력] 환불 수령계좌 예금주
-                "refund_bank" : "", // [가상계좌 환불시 필수입력] 환불 수령계좌 은행코드(예: KG이니시스의 경우 신한은행은 88번)
-                "refund_account" : "", // [가상계좌 환불시 필수입력] 환불 수령계좌 번호
-            }),
-            dataType : "text",
-        }).done(function(result) { // 환불 성공시 로직
-alert("aasd==> "+result);
-            alert("환불 성공");
-        }).fail(function(error) { // 환불 실패시 로직
-            alert("환불 실패");
-        });
-    }
-
 </script>
 
 <script>

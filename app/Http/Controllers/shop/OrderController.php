@@ -325,7 +325,7 @@ class OrderController extends Controller
 
         foreach($qty_chks as $qty_chk){
             // 상품에 대한 현재고수량
-            if($qty_chk->sio_id) {
+            if($qty_chk->sio_id) {  //옵션 상품
                 $it_stock_qty = (int)$CustomUtils->get_option_stock_qty($qty_chk->item_code, $qty_chk->sio_id, $qty_chk->sio_type);
             } else {
                 $it_stock_qty = (int)$CustomUtils->get_item_stock_qty($qty_chk->item_code);
@@ -493,20 +493,35 @@ class OrderController extends Controller
 
     public function ajax_orderpaycancel(Request $request)
     {
-        //결제시 상품 변동등 문제가 있을시 결제 취소를 하기 위함
-        //confirm_url 로 대체 됨 나중에 삭제
-        $merchant_uid  = $request->input('merchant_uid');
-        $cancel_request_amount  = $request->input('cancel_request_amount');
-        $reason  = $request->input('reason');
-        $refund_holder  = $request->input('refund_holder');
-        $refund_bank  = $request->input('refund_bank');
-        $refund_account  = $request->input('refund_account');
+        $CustomUtils = new CustomUtils;
 
-//        $aa = Iamport::cancelPayment('imp_370953301637','93299','test');
-//dd($aa);
-exit;
-        //require_once '../../vendor/autoload.php';
-echo $cancel_request_amount;
+        //결제 취소
+        $imp_uid                = $request->input('imp_uid');
+        $merchant_uid           = $request->input('merchant_uid');  //order 테이블의 order_id 값
+        $cancel_request_amount  = $request->input('cancel_request_amount');
+        $reason                 = $request->input('reason');
+        $refund_holder          = $request->input('refund_holder');
+        $refund_bank            = $request->input('refund_bank');
+        $refund_account         = $request->input('refund_account');
+
+        $order_id               = $merchant_uid;
+
+        $refund_chk = $CustomUtils->payrefund_chk(Auth::user()->user_id, $order_id, $cancel_request_amount);
+        if($refund_chk == true){
+            $cancel_result = Iamport::cancelPayment($imp_uid, $cancel_request_amount, $reason); //실제 취소 이루어 지는 부분
+
+            if($cancel_result->success == true){
+                $refund_update = $CustomUtils->payrefund_update(Auth::user()->user_id, $order_id, $cancel_request_amount);
+                echo "ok";
+                exit;
+            }else{
+                echo "error";
+                exit;
+            }
+        }else{
+            echo "end";
+            exit;
+        }
     }
 
     //결제 하기
@@ -567,13 +582,18 @@ echo $cancel_request_amount;
         $imp_uid            = $request->input('imp_uid');
         $imp_apply_num      = $request->input('apply_num'); //카드사에서 전달 받는 값(카드 승인번호)
         $imp_paid_amount    = $request->input('paid_amount');  //카드사에서 받은 최종 결제 금액
+        $imp_merchant_uid   = $request->input('imp_merchant_uid');
+        $pg_provider        = $request->input('pg_provider');   //결제승인/시도된 PG사
         $od_shop_memo       = '';
+        $imp_card_name      = $request->input('imp_card_name');   //카드사에서 전달 받는 값(카드사명칭)
+        $imp_card_quota     = $request->input('imp_card_quota');   //카드사에서 전달 받는 값(할부개월수)
 
+/*
 //데스트 위함
-$imp_paid_amount = 8256;
+$imp_paid_amount = 7500;
 $imp_uid = 'imp_1212';
 $imp_apply_num= '12345678';
-
+*/
         //예외 처리(카드사에서 보내온 결제 금액과 order에 저장 되는 결제금액이 같은가?)
         $tot_price          = $od_receipt_price - $od_receipt_point;
         if($imp_paid_amount != $tot_price){
@@ -608,6 +628,8 @@ $imp_apply_num= '12345678';
                 'od_pg'             => $od_pg,
                 'imp_uid'           => $imp_uid,
                 'imp_apply_num'     => $imp_apply_num,
+                'imp_card_name'     => $imp_card_name,
+                'imp_card_quota'    => $imp_card_quota,
                 'od_ip'             => $_SERVER["REMOTE_ADDR"],
             ])->exists();
 
@@ -638,7 +660,16 @@ $imp_apply_num= '12345678';
     }
 
     public function orderview(Request $request){
-        dd("주문 완료후 내역 볼떄");
+        //r관리자 배송 상태에 따라 추가 변경 해 줘야 함@!!!!
+        $CustomUtils = new CustomUtils;
+        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
+
+        $orders = DB::table('shoporders')->where([['user_id',Auth::user()->user_id],['od_status', '입금']])->orderby('id', 'desc')->get();
+
+        return view('shop.orderview',[
+            'orders'        => $orders,
+            'CustomUtils'   => $CustomUtils,
+        ]);
     }
 
 

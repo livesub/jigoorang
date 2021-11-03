@@ -83,21 +83,20 @@ class CartController extends Controller
 
                     foreach($cart_infos as $cart_info){
                         //$sum_qty = DB::table('shopcarts')->where([['od_id','<>',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$cart_info->sio_id], ['sio_type',$cart_info->sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty');    //<-- 장바구니에 있으면 수량을 가지고 있어 다른 사람이 주문 하지 못함
-                        $sum_qty = DB::table('shopcarts')->where([['od_id',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$cart_info->sio_id], ['sio_type',$cart_info->sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty');   //주문된 것만 수량 차감
+                        //$sum_qty = DB::table('shopcarts')->where([['od_id',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$cart_info->sio_id], ['sio_type',$cart_info->sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty');   //주문된 것만 수량 차감
                         //$sum_qty = $sum['cnt'];
 
                         // 재고 구함
-                        $sct_qty = $cart_info->sct_qty;
+                        $sct_qty = $cart_info->sct_qty; //주문수량
 
                         if(!$cart_info->sio_id) $it_stock_qty = $CustomUtils->get_item_stock_qty($item_code);
                         else $it_stock_qty = $CustomUtils->get_option_stock_qty($item_code, $cart_info->sio_id, $cart_info->sio_type);
 
-                        if ($sct_qty + $sum_qty > $it_stock_qty)
+                        if ($sct_qty > $it_stock_qty)
                         {
                             $item_option = $cart_info->item_name;
                             if($cart_info->sio_id) $item_option .= '('.$cart_info->sct_option.')';
-
-                            echo json_encode(['message' => 'no_qty', 'option' => $item_option, 'sum_qty' => number_format($it_stock_qty - $sum_qty)]);
+                            echo json_encode(['message' => 'no_qty', 'option' => $item_option, 'sum_qty' => number_format($it_stock_qty)]);
                             exit;
                         }
                     }
@@ -211,9 +210,9 @@ class CartController extends Controller
                         $sct_qty = $request->input('ct_qty');
 
                         //$sum_qty = DB::table('shopcarts')->where([['od_id','<>',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$sio_id], ['sio_type',$sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty');  //<-- 장바구니에 있으면 수량을 가지고 있어 다른 사람이 주문 하지 못함
-                        $sum_qty = DB::table('shopcarts')->where([['od_id',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$sio_id], ['sio_type',$sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty'); //주문된 것만 수량 차감
+                        //$sum_qty = DB::table('shopcarts')->where([['od_id',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$sio_id], ['sio_type',$sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty'); //주문된 것만 수량 차감
 
-                        // 재고 구함
+                        //주문 수량
                         $sct_qty = isset($sct_qty[$item_code][$k]) ? (int) $sct_qty[$item_code][$k] : 0;
 
                         if(!$sio_id)
@@ -221,8 +220,7 @@ class CartController extends Controller
                         else
                             $it_stock_qty = $CustomUtils->get_option_stock_qty($item_code, $sio_id, $sio_type);
 
-                        if ($sct_qty + $sum_qty > $it_stock_qty)
-                        {
+                        if($sct_qty > $it_stock_qty){
                             echo json_encode(['message' => 'no_qty', 'option' => $sio_value, 'sum_qty' => number_format($it_stock_qty)]);
                             exit;
                         }
@@ -261,7 +259,7 @@ class CartController extends Controller
                     if($sio_id && !$opt_list[$sio_type][$sio_id]['use']) continue;
 
                     $sio_price = isset($opt_list[$sio_type][$sio_id]['price']) ? $opt_list[$sio_type][$sio_id]['price'] : 0;
-                    $sct_qty = isset($sct_qty[$item_code][$k]) ? (int) $sct_qty[$item_code][$k] : 0;
+                    $sct_qty = isset($sct_qty[$item_code][$k]) ? (int) $sct_qty[$item_code][$k] : 0;    //주문수량
 
                     // 구매가격이 음수인지 체크
                     if($sio_type) {
@@ -282,7 +280,7 @@ class CartController extends Controller
                     if(isset($sam_opt[0]->id) && $sam_opt[0]->id) {
 
                         // 재고체크
-                        $tmp_ct_qty = $sam_opt[0]->sct_qty;
+                        $tmp_ct_qty = $sam_opt[0]->sct_qty; //현재 담겨 있는 상품 수량
 
                         if(!$sio_id){
                             $tmp_it_stock_qty = $CustomUtils->get_item_stock_qty($item_code);

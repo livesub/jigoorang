@@ -50,6 +50,8 @@ class shoporders extends Model
         'od_tno',
         'imp_uid',
         'imp_apply_num',
+        'imp_card_name',
+        'imp_card_quota',
         'od_delivery_company',
         'od_invoice',
         'od_ip',

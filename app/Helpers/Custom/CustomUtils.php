@@ -1646,4 +1646,40 @@ $um_value='80/0.5/3'
         }
     }
 
+    //환불 금액 체크
+    public static function payrefund_chk($user_id, $order_id, $cancel_request_amount)
+    {
+        $order_info = DB::table('shoporders')->where([['user_id',$user_id], ['order_id', $order_id]])->first();
+        $tot_price = (int)$order_info->od_receipt_price - (int)$order_info->od_receipt_point;   //카드사 결제 금액(결제금액 - 포인트 사용)
+
+        if($tot_price <= $cancel_request_amount){
+            //카드사 결제 금액 보다 환불 금액이 크거나 같을때
+            return false;
+        }else{
+            if($tot_price <= $order_info->od_refund_price){
+                //카드사 결제 금액 보다 환불된 금액이 크거나 같을때
+                return false;
+            }else{
+                $hap = $order_info->od_refund_price + $cancel_request_amount;
+                if($tot_price < $hap){
+                    //카드사 결제 금액 보다 기존 환불금액(부분환불) + 새로운 환불금액과 클때
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        }
+    }
+
+    //환불 금액 업데이트
+    public static function payrefund_update($user_id, $order_id, $cancel_request_amount)
+    {
+        $order_info = DB::table('shoporders')->where([['user_id',$user_id], ['order_id', $order_id]])->first();
+
+        $hap = $cancel_request_amount + $order_info->od_refund_price;
+
+        $update_result = DB::table('shoporders')->where([['user_id',$user_id], ['order_id', $order_id]])->update([
+            'od_refund_price'    => $hap,
+        ]);
+    }
 }

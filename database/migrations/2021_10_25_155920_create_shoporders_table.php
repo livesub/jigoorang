@@ -45,8 +45,10 @@ class CreateShopordersTable extends Migration
             $table->string('od_tno')->comment('거래번호');
             $table->string('imp_uid')->comment('아임포트 코드');
             $table->string('imp_apply_num')->comment('아임포트 승인번호');
-            $table->string('od_delivery_company')->comment('배송회사');
-            $table->string('od_invoice')->comment('운송장번호');
+            $table->string('imp_card_name')->nullable()->comment('카드사에서 전달 받는 값(카드사명칭)');
+            $table->string('imp_card_quota')->nullable()->comment('카드사에서 전달 받는 값(할부개월수)');
+            $table->string('od_delivery_company')->nullable()->comment('배송회사');
+            $table->string('od_invoice')->nullable()->comment('운송장번호');
             $table->string('od_ip')->comment('주문자IP');
             $table->timestamps();
             $table->index(['order_id','od_id','user_id']);

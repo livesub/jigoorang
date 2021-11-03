@@ -249,7 +249,7 @@ function form_check(act) {
 //alert(result);
 //return false;
                 var json = JSON.parse(result);
-
+//alert(json.message);
                 if(json.message == "no_item"){
                     alert("주문하실 상품을 하나이상 선택해 주십시오.");
                     return false;
@@ -267,6 +267,8 @@ function form_check(act) {
                 if(json.message == "no_mem_order"){  //비회원 주문
                     location.href = "{{ route('login.index','url='.urlencode(route('orderform'))) }}";
                 }
+
+//return false;
             },
             error: function(result){
                 var json = JSON.parse(result);
