@@ -547,19 +547,19 @@ class OrderController extends Controller
         //기본 배송지 처리 끝
 
         //변수 받기
-        $order_id = $request->input('order_id');
-        $od_id = $request->input('od_id');
-        $od_deposit_name = Auth::user()->user_name;
-        $ad_name = $request->input('od_b_name');
-        $ad_tel = $request->input('od_b_tel');
-        $ad_hp = $request->input('od_b_hp');
-        $ad_zip1 = $request->input('od_b_zip');
-        $ad_addr1 = $request->input('od_b_addr1');
-        $ad_addr2 = $request->input('od_b_addr2');
-        $ad_addr3 = $request->input('od_b_addr3');
-        $ad_jibeon = $request->input('od_b_addr_jibeon');
-        $od_memo = $request->input('od_memo');
-        $od_cart_count = $request->input('cart_count');
+        $order_id           = $request->input('order_id');
+        $od_id              = $request->input('od_id');
+        $od_deposit_name    = Auth::user()->user_name;
+        $ad_name            = $request->input('od_b_name');
+        $ad_tel             = $request->input('od_b_tel');
+        $ad_hp              = $request->input('od_b_hp');
+        $ad_zip1            = $request->input('od_b_zip');
+        $ad_addr1           = $request->input('od_b_addr1');
+        $ad_addr2           = $request->input('od_b_addr2');
+        $ad_addr3           = $request->input('od_b_addr3');
+        $ad_jibeon          = $request->input('od_b_addr_jibeon');
+        $od_memo            = $request->input('od_memo');
+        $od_cart_count      = $request->input('cart_count');
 
         $ordertemp = DB::table('shopordertemps')->where([['order_id', $order_id], ['od_id', $od_id], ['user_id', Auth::user()->user_id]])->first();
 
