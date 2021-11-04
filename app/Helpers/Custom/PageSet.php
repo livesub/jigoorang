@@ -45,12 +45,7 @@ class PageSet extends Controller
             {
                 $this->tails.="$key=$val&";
             }
-/*
-			while(list($key,$val) = each($arr))
-				$this->tails.="$key=$val&";
-*/
 		}
-
 	}
 
 	public function getPageList() {
@@ -66,7 +61,6 @@ class PageSet extends Controller
                 }else{
                     $pShowPage = "<strong>$dPage / $this->totalPage</strong>";
                 }
-
 			}
 			else
 			{
@@ -76,7 +70,6 @@ class PageSet extends Controller
 				}
 				else
 				{
-
 					$pShowPage .= "<a href='$_SERVER[PHP_SELF]?$this->tails&page=$dPage'>$dPage </a>";
 				}
 			}
@@ -209,5 +202,4 @@ class PageSet extends Controller
 		}
 		return $pShowPage;
 	}
-
 }
