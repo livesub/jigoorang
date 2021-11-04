@@ -698,7 +698,7 @@ $imp_apply_num= '12345678';
         $preFirstPage   = $PageSet->preFirst("처음");
         $nextLastPage   = $PageSet->nextLast("마지막");
         $listPage       = $PageSet->getPageList();
-        $pnPage         = $prevPage.$listPage." ".$nextPage;
+        $pnPage         = $prevPage.$listPage.$nextPage;
 
         return view('shop.orderview',[
             'orders'        => $order_rows,
