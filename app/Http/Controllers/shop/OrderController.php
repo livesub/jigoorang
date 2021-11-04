@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
+use App\Helpers\Custom\PageSet; //페이지 함수
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;    //인증
 use App\Models\shopordertemps;    //결제 검증을 위한 임시 테이블
@@ -664,11 +665,45 @@ $imp_apply_num= '12345678';
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
-        $orders = DB::table('shoporders')->where([['user_id',Auth::user()->user_id],['od_status', '입금']])->orderby('id', 'desc')->get();
+        $page       = $request->input('page');
+        $pageScale  = 1;  //한페이지당 라인수
+        $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
+
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
+
+        $orders = DB::table('shoporders')->where([['user_id',Auth::user()->user_id],['od_status', '입금']]);
+        $total_record = 0;
+        $total_record = $orders->count(); //총 게시물 수
+        $total_page = ceil($total_record / $pageScale);
+        $total_page = $total_page == 0 ? 1 : $total_page;
+
+        $order_rows = $orders->orderby('id', 'desc')->offset($start_num)->limit($pageScale)->get();
+
+        $tailarr = array();
+        //$tailarr['AA'] = 'AA';
+        //$tailarr['bb'] = 'bb';
+
+        $PageSet = new PageSet;
+        $showPage = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
+        $prevPage = $PageSet->getPrevPage("이전");
+        $nextPage = $PageSet->getNextPage("다음");
+        $pre10Page = $PageSet->pre10("이전10");
+        $next10Page = $PageSet->next10("다음10");
+        $preFirstPage = $PageSet->preFirst("처음");
+        $nextLastPage = $PageSet->nextLast("마지막");
+        $listPage = $PageSet->getPageList();
+        $pnPage = $prevPage.$listPage." ".$nextPage;
 
         return view('shop.orderview',[
-            'orders'        => $orders,
+            'orders'        => $order_rows,
             'CustomUtils'   => $CustomUtils,
+            'pnPage'        => $pnPage,
         ]);
     }
 

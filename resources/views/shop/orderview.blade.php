@@ -15,6 +15,13 @@
 @foreach($orders as $order)
     @php
         $carts = DB::table('shopcarts')->where([['user_id',Auth::user()->user_id],['od_id', $order->order_id]])->get();
+        $cancel_ment = '';
+        if(count($carts) > 1){
+            $cancel_ment = '부분 취소';
+        }else{
+            $cancel_ment = '취소';
+        }
+
     @endphp
     <tr>
         <td><b>주문번호 : {{ $order->order_id }}</b></td>
@@ -47,7 +54,7 @@
                     </td>
                     <td>{{ $cart->sct_qty }}개</td>
                     <td>{{ $cart->sct_price + $cart->sio_price }}</td>
-                    <td><button type="button" onclick="pay_cancel('{{ $order->imp_uid }}', '{{ $order->order_id }}', '868')">부분취소</button></td>
+                    <td><button type="button" onclick="pay_cancel('{{ $order->imp_uid }}', '{{ $order->order_id }}', '868')">{{ $cancel_ment }}</button></td>
                 </tr>
             </table>
         </td>
@@ -57,6 +64,9 @@
         <td><br><br><br></td>
     </tr>
 @endforeach
+    <tr>
+        <td>{!! $pnPage !!}</td>
+    </tr>
 </table>
 
 
