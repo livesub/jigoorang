@@ -678,27 +678,27 @@ $imp_apply_num= '12345678';
         }
 
         $orders = DB::table('shoporders')->where([['user_id',Auth::user()->user_id],['od_status', '입금']]);
-        $total_record = 0;
-        $total_record = $orders->count(); //총 게시물 수
-        $total_page = ceil($total_record / $pageScale);
-        $total_page = $total_page == 0 ? 1 : $total_page;
+        $total_record   = 0;
+        $total_record   = $orders->count(); //총 게시물 수
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
 
         $order_rows = $orders->orderby('id', 'desc')->offset($start_num)->limit($pageScale)->get();
 
         $tailarr = array();
-        //$tailarr['AA'] = 'AA';
+        //$tailarr['AA'] = 'AA';    //고정된 전달 파라메터가 있을때 사용
         //$tailarr['bb'] = 'bb';
 
-        $PageSet = new PageSet;
-        $showPage = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
-        $prevPage = $PageSet->getPrevPage("이전");
-        $nextPage = $PageSet->getNextPage("다음");
-        $pre10Page = $PageSet->pre10("이전10");
-        $next10Page = $PageSet->next10("다음10");
-        $preFirstPage = $PageSet->preFirst("처음");
-        $nextLastPage = $PageSet->nextLast("마지막");
-        $listPage = $PageSet->getPageList();
-        $pnPage = $prevPage.$listPage." ".$nextPage;
+        $PageSet        = new PageSet;
+        $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
+        $prevPage       = $PageSet->getPrevPage("이전");
+        $nextPage       = $PageSet->getNextPage("다음");
+        $pre10Page      = $PageSet->pre10("이전10");
+        $next10Page     = $PageSet->next10("다음10");
+        $preFirstPage   = $PageSet->preFirst("처음");
+        $nextLastPage   = $PageSet->nextLast("마지막");
+        $listPage       = $PageSet->getPageList();
+        $pnPage         = $prevPage.$listPage." ".$nextPage;
 
         return view('shop.orderview',[
             'orders'        => $order_rows,
