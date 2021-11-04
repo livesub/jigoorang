@@ -253,8 +253,8 @@
                                 <td><button type="button" onclick="pay_type('html5_inicis','card');">신용카드</button></td>
                                 <td><button type="button" onclick="pay_type('html5_inicis','phone');">휴개폰결제</button></td>
                                 <td><button type="button" onclick="pay_type('html5_inicis','trans');">실시간계좌이체</button></td>
-                                <td><button type="button" onclick="pay_type('kakaopay','card');">카카오페이</button></td>
-                                <td><button type="button" onclick="pay_type('naverpay','card');">네이버페이</button></td>
+                                <td><button type="button" onclick="pay_type('kakaopay','kakaopay');">카카오페이</button></td>
+                                <td><button type="button" onclick="pay_type('naverpay','naverpay');">네이버페이</button></td>
                             </tr>
                         </table>
                     </td>

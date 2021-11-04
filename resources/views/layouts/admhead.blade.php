@@ -111,6 +111,10 @@ header('Pragma: public');
                     <tr>
                         <td><a href="{{ route('shop.sendcost.index') }}">추가 배송비 관리</a></td>
                     </tr>
+
+                    <tr>
+                        <td><a href="{{ route('orderlist') }}">주문 관리</a></td>
+                    </tr>
                 </table>
             </td>
 

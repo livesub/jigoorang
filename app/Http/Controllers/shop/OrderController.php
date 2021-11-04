@@ -678,6 +678,7 @@ $imp_apply_num= '12345678';
         }
 
         $orders = DB::table('shoporders')->where([['user_id',Auth::user()->user_id],['od_status', '입금']]);
+
         $total_record   = 0;
         $total_record   = $orders->count(); //총 게시물 수
         $total_page     = ceil($total_record / $pageScale);

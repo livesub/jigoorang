@@ -1682,4 +1682,17 @@ $um_value='80/0.5/3'
             'od_refund_price'    => $hap,
         ]);
     }
+
+    // 한글 요일
+    public static function get_yoil($date, $full=0)
+    {
+        $arr_yoil = array ('일', '월', '화', '수', '목', '금', '토');
+
+        $yoil = date("w", strtotime($date));
+        $str = $arr_yoil[$yoil];
+        if ($full) {
+            $str .= '요일';
+        }
+        return $str;
+    }
 }
