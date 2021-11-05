@@ -74,7 +74,7 @@ class AdmShopItemController extends Controller
 
         $page_control = CustomUtils::page_function('shopitems',$pageNum,$writeList,$pageNumList,$type,$tb_name,$ca_id,$item_search,$keyword);
 
-        $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where 1 {$search_sql} order by a.id DESC, a.item_rank ASC limit {$page_control['startNum']}, {$writeList} ");
+        $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_del = 'N' {$search_sql} order by a.id DESC, a.item_rank ASC limit {$page_control['startNum']}, {$writeList} ");
 
         $pageList = $page_control['preFirstPage'].$page_control['pre1Page'].$page_control['listPage'].$page_control['next1Page'].$page_control['nextLastPage'];
 
@@ -698,6 +698,17 @@ class AdmShopItemController extends Controller
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
+        //장바구니나 주문서 등 때문에 삭제 되지 않고 플러그만 바뀌게 변경
+        for ($i = 0; $i < count($request->input('chk_id')); $i++) {
+            //먼저 상품을 검사하여 파일이 있는지 파악 하고 같이 삭제 함
+            $item_info = DB::table('shopitems')->where('id', $request->input('chk_id')[$i])->first();
+
+            $update_result = DB::table('shopitems')->where('item_code', $item_info->item_code)->update([
+                'item_del'          => 'Y',
+            ]);
+        }
+
+/*
         $path = 'data/shopitem';     //첨부물 저장 경로
         $editor_path = $path."/editor";     //스마트 에디터 첨부 저장 경로
 
@@ -726,7 +737,7 @@ class AdmShopItemController extends Controller
             DB::table('shopitemoptions')->where('item_code',$item_info->item_code)->delete();   //옵션 row 삭제
             DB::table('shopitems')->where('id',$request->input('chk_id')[$i])->delete();   //row 삭제
         }
-
+*/
         return redirect()->route('shop.item.index')->with('alert_messages', $Messages::$item['del']['del_ok']);
     }
 

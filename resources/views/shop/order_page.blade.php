@@ -521,10 +521,7 @@
             },
             success : function(result){
 alert(result.reason);
-//alert(result.reason);
-                //var data = JSON.parse(result);
-//alert(result.reason);
-//return false;
+return false;
             },
             error: function(result){
                 console.log(result);

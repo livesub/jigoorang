@@ -332,6 +332,17 @@ class OrderController extends Controller
                 $it_stock_qty = (int)$CustomUtils->get_item_stock_qty($qty_chk->item_code);
             }
 
+            //삭제되거나 비출력된 상품인지 파악
+            $item_chk = DB::table('shopitems')->where('item_code', $qty_chk->item_code)->first();
+
+            if($item_chk->item_display == 'N' || $item_chk->item_del == 'Y')
+            {
+                $error .= $qty_chk->sct_option." 은 판매 중단된 상품입니다.";
+                //$result = json_encode(['reason' => $error], JSON_PRETTY_PRINT);
+                $result = json_encode(['reason' => $error], JSON_UNESCAPED_UNICODE);
+                $http_status = 201;
+            }
+
             // 장바구니 수량이 재고수량보다 많다면 오류
             if ($qty_chk->sct_qty > $it_stock_qty){
                 $error .= $qty_chk->sct_option." 의 재고수량이 부족합니다. 현재고수량 : $it_stock_qty 개\n\n";

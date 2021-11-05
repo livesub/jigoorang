@@ -206,6 +206,7 @@
                             </tr>
 
                             @if(Auth::user())
+                                @if($item_info->item_del == 'N')
                             <tr>
                                 <td>
                                     <button type="button" onclick="fitem_submit('cart');">장바구니</button>
@@ -214,6 +215,7 @@
                                     <span>쇼셜 링크 작업 해야함</span>
                                 </td>
                             </tr>
+                                @endif
                             @endif
 
                         </table>

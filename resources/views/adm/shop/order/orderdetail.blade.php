@@ -42,8 +42,8 @@
         @foreach($carts as $cart)
             @php
             $image = $CustomUtils->get_item_image($cart->item_code, 3);
-            $carts = DB::table('shopcarts')->select('id', 'od_id', 'item_code', 'item_name')->where([['od_id', $order_info->order_id],['item_code', $cart->item_code]])->orderBy('sio_type')->orderBy('id')->get();
-dd($carts);
+            $opts = DB::table('shopcarts')->select('id', 'od_id', 'item_code', 'item_name')->where([['od_id', $order_info->order_id],['item_code', $cart->item_code]])->orderBy('sio_type')->orderBy('id')->get();
+dd($opts);
 /*
             // 상품의 옵션정보
             $sql = " select ct_id, it_id, ct_price, ct_point, ct_qty, ct_option, ct_status, cp_price, ct_stock_use, ct_point_use, ct_send_cost, io_type, io_price

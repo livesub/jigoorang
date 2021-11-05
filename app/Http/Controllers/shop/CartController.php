@@ -86,6 +86,15 @@ class CartController extends Controller
                         //$sum_qty = DB::table('shopcarts')->where([['od_id',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$cart_info->sio_id], ['sio_type',$cart_info->sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty');   //주문된 것만 수량 차감
                         //$sum_qty = $sum['cnt'];
 
+                        //삭제되거나 비출력된 상품인지 파악
+                        $item_chk = DB::table('shopitems')->where('item_code', $item_code)->first();
+
+                        if($item_chk->item_display == 'N' || $item_chk->item_del == 'Y')
+                        {
+                            echo json_encode(['message' => 'discontinued', 'option' => $item_chk->item_name]);
+                            exit;
+                        }
+
                         // 재고 구함
                         $sct_qty = $cart_info->sct_qty; //주문수량
 

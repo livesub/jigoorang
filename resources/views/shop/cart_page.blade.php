@@ -250,6 +250,12 @@ function form_check(act) {
 //return false;
                 var json = JSON.parse(result);
 //alert(json.message);
+
+                if(json.message == "discontinued"){
+                    alert(json.option + " 상품은 판매 중단 되었습니다.");
+                    return false;
+                }
+
                 if(json.message == "no_item"){
                     alert("주문하실 상품을 하나이상 선택해 주십시오.");
                     return false;
