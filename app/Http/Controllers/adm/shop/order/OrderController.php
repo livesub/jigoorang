@@ -187,6 +187,7 @@ class OrderController extends Controller
             'CustomUtils'   => $CustomUtils,
             'order_info'    => $order_info,
             'carts'         => $carts,
+            'page_move'     => $page_move,
         ]);
 
     }

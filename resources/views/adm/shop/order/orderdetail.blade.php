@@ -17,6 +17,13 @@
     </tr>
 </table>
 <table border=1>
+    <form name="frmorderform" method="post" action="">
+    {!! csrf_field() !!}
+    <input type="hidden" name="od_id" value="{{ $order_info->order_id }}">
+    <input type="hidden" name="mb_id" value="{{ $order_info->user_id }}">
+    <input type="hidden" name="od_email" value="{{ $order_info->user_id }}">
+    <input type="hidden" name="page_move" value="{!! $page_move !!}">
+    <input type="hidden" name="pg_cancel" value="0">
         <tr>
             <th scope="col">상품명</th>
             <th scope="col">
@@ -27,11 +34,7 @@
             <th scope="col">수량</th>
             <th scope="col">판매가</th>
             <th scope="col">소계</th>
-            <th scope="col">쿠폰</th>
             <th scope="col">포인트</th>
-            <th scope="col">배송비</th>
-            <th scope="col">포인트반영</th>
-            <th scope="col">재고반영</th>
         </tr>
 
         @php
@@ -42,40 +45,73 @@
         @foreach($carts as $cart)
             @php
             $image = $CustomUtils->get_item_image($cart->item_code, 3);
-            $opts = DB::table('shopcarts')->select('id', 'od_id', 'item_code', 'item_name')->where([['od_id', $order_info->order_id],['item_code', $cart->item_code]])->orderBy('sio_type')->orderBy('id')->get();
-dd($opts);
-/*
-            // 상품의 옵션정보
-            $sql = " select ct_id, it_id, ct_price, ct_point, ct_qty, ct_option, ct_status, cp_price, ct_stock_use, ct_point_use, ct_send_cost, io_type, io_price
-                        from {$g5['g5_shop_cart_table']}
-                        where od_id = '{$od['od_id']}'
-                          and it_id = '{$row['it_id']}'
-                        order by io_type asc, ct_id asc ";
-            $res = sql_query($sql);
-            $rowspan = sql_num_rows($res);
-*/
+            $opts = DB::table('shopcarts')->where([['od_id', $order_info->order_id],['item_code', $cart->item_code]])->orderBy('sio_type')->orderBy('id')->get();
+            $rowspan = count($opts);
+            $k = 0;
             @endphp
+
+            @foreach($opts as $opt)
+                @php
+                    if($opt->sio_type) $opt_price = $opt->sio_price;
+                    else $opt_price = $opt->sct_price + $opt->sio_price;
+                    // 소계
+                    $ct_price['stotal'] = $opt_price * $opt->sct_qty;
+                    $ct_point['stotal'] = $opt->sct_point * $opt->sct_qty;
+                    $ct_baesong['baesong'] = $opt->sct_point * $opt->sct_qty;
+                @endphp
         <tr>
-            <td><img src="{{ asset($image) }}"> {{ stripslashes($cart->item_name) }}</td>
-            <td>
+
+                @if($k == 0)
+            <td rowspan="{{ $rowspan }}"><img src="{{ asset($image) }}"> {{ stripslashes($cart->item_name) }}</td>
+            <td rowspan="{{ $rowspan }}">
                 <input type="checkbox" id="sit_sel_{{ $i }}" name="it_sel[]">
             </td>
+                @endif
+
             <td>
                 <input type="checkbox" name="ct_chk[{{ $chk_cnt }}]" id="ct_chk_{{ $chk_cnt }}" value="{{ $chk_cnt }}">
                 <input type="hidden" name="ct_id[{{ $chk_cnt }}]" value="{{ $cart->id }}">
-                <?php echo get_text($opt['ct_option']); ?>
+                {{ $opt->sct_option }}
             </td>
+            <td>{{ $opt->sct_status }}</td>
+            <td>
+                {{ $opt->sct_qty }}
+            </td>
+            <td>{{ number_format($opt_price) }}</td>
+            <td>{{ number_format($ct_price['stotal']) }}</td>
+            <td>{{ number_format($ct_point['stotal']) }} 점</td>
         </tr>
-            @php
-            $i++;
-            $chk_cnt++;
-            @endphp
+                @php
+                $i++;
+                $chk_cnt++;
+                $k++;
+                @endphp
+            @endforeach
         @endforeach
+</table>
+
+<table border=1>
+    <tr>
+        <td>
+            <input type="hidden" name="chk_cnt" value="{{ $chk_cnt }}">
+            <strong>주문 및 장바구니 상태 변경</strong>
+            <button type="button" onclick="status_change('준비')">준비</button>
+            <button type="button" onclick="status_change('배송')">배송</button>
+            <button type="button" onclick="status_change('완료')">배송완료</button>
+            <button type="button" onclick="status_change('취소')">취소</button>
+            <button type="button" onclick="status_change('반품')">반품</button>
+        </td>
+    </tr>
+</form>
 </table>
 
 
 
-
+<script>
+    function status_change(status){
+alert(status);
+    }
+</script>
 
 
 
