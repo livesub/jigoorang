@@ -25,10 +25,10 @@ class CreateBannersTable extends Migration
             $table->string('b_mobile_ori_img')->nullable()->comment('mobile 이미지파일이름');
             $table->enum('b_type', ['1', '2'])->length(2)->default('1')->comment('분류 : 1=>상단,2=>하단');
             $table->timestamps();
-
-
-
+            $table->index(['b_display','b_type']);
         });
+
+        DB::statement("ALTER TABLE banners comment '배너관리'");
     }
 
     /**
