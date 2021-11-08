@@ -43,7 +43,7 @@ class MainController extends Controller
             $admin_id = config('app.ADMIN_ID');
             $admin_pw = config('app.ADMIN_PW');
             $admin_name = config('app.ADMIN_NAME');
-            $admin_level = config('app.ADMIN_LEVEL');
+            $admin_level = 1;
 
             $create_result = User::create([
                 'user_id' => $admin_id,

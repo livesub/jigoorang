@@ -162,8 +162,8 @@ class BannerController extends Controller
                 exit;
             }else{
                 for($k = 0; $k < 2; $k++){
-                    $resize_width_file_tmp = explode("%%","300%%100");
-                    $resize_height_file_tmp = explode("%%","300%%100");
+                    $resize_width_file_tmp = explode("%%","700%%100");
+                    $resize_height_file_tmp = explode("%%","150%%100");
 
                     $thumb_width = $resize_width_file_tmp[$k];
                     $thumb_height = $resize_height_file_tmp[$k];
@@ -200,8 +200,8 @@ class BannerController extends Controller
                 exit;
             }else{
                 for($k = 0; $k < 2; $k++){
-                    $resize_width_file_tmp = explode("%%","300%%100");
-                    $resize_height_file_tmp = explode("%%","300%%100");
+                    $resize_width_file_tmp = explode("%%","700%%100");
+                    $resize_height_file_tmp = explode("%%","150%%100");
 
                     $thumb_width = $resize_width_file_tmp[$k];
                     $thumb_height = $resize_height_file_tmp[$k];
@@ -355,8 +355,8 @@ class BannerController extends Controller
                     exit;
                 }else{
                     for($k = 0; $k < 2; $k++){
-                        $resize_width_file_tmp = explode("%%","300%%100");
-                        $resize_height_file_tmp = explode("%%","300%%100");
+                        $resize_width_file_tmp = explode("%%","700%%100");
+                        $resize_height_file_tmp = explode("%%","150%%100");
 
                         $thumb_width = $resize_width_file_tmp[$k];
                         $thumb_height = $resize_height_file_tmp[$k];
@@ -408,8 +408,8 @@ class BannerController extends Controller
                     exit;
                 }else{
                     for($k = 0; $k < 2; $k++){
-                        $resize_width_file_tmp = explode("%%","300%%100");
-                        $resize_height_file_tmp = explode("%%","300%%100");
+                        $resize_width_file_tmp = explode("%%","700%%100");
+                        $resize_height_file_tmp = explode("%%","150%%100");
 
                         $thumb_width = $resize_width_file_tmp[$k];
                         $thumb_height = $resize_height_file_tmp[$k];
