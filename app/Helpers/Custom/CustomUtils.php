@@ -1695,4 +1695,10 @@ $um_value='80/0.5/3'
         }
         return $str;
     }
+
+    public static function is_mobile()
+    {
+        $mobile_agent = 'phone|samsung|lgtel|mobile|[^A]skt|nokia|blackberry|BB10|android|sony';
+        return preg_match('/'.$mobile_agent.'/i', $_SERVER['HTTP_USER_AGENT']);
+    }
 }
