@@ -232,6 +232,9 @@
                 <tr>
                     <td>상품정보</td>
                 </tr>
+                <tr>
+                    <td>{!! $item_info->item_content !!}</td>
+                </tr>
             </table>
         </td>
     </tr>

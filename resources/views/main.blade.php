@@ -5,6 +5,9 @@
 
 
 <table>
+  <tr>
+    <td>상단배너</td>
+  </tr>
 @foreach($topbanner_infos as $topbanner_info)
   @php
     //이미지 처리
@@ -35,9 +38,6 @@
     }
   @endphp
   <tr>
-    <td>상단배너</td>
-  </tr>
-  <tr>
     <td>
       <a href="{{ $topbanner_info->b_link }}" target="{{ $target }}"><img src="{{ $top_img }}"></a>
     </td>
@@ -49,6 +49,9 @@
 
 
 <table>
+  <tr>
+    <td>하단배너</td>
+  </tr>
 @foreach($bottombanner_infos as $bottombanner_info)
   @php
     //이미지 처리
@@ -78,9 +81,6 @@
       // pc에서 작동
     }
   @endphp
-  <tr>
-    <td>하단배너</td>
-  </tr>
   <tr>
     <td>
       <a href="{{ $bottombanner_info->b_link }}" target="{{ $bott_target }}"><img src="{{ $bott_top_img }}"></a>

@@ -59,9 +59,9 @@
         <td>상품코드</td>
         <td>상품명</td>
         <td>출력순서</td>
+        <td>{{ $de_ment_change }}등록여부</td>
         <td>관리</td>
     </tr>
-
 
     @foreach($item_infos as $item_info)
         @php
@@ -97,6 +97,12 @@
                 $item_img_cut = explode("@@",$item_info->item_img1);
                 $item_img_disp = "/data/shopitem/".$item_img_cut[3];
             }
+
+            //기획전 등록 여부
+            $item_special_ment = "";
+            if($item_info->item_special == "1") {
+                $item_special_ment = "등록";
+            }
         @endphp
     <tr>
         <td><input type="checkbox" name="chk_id[]" value="{{ $item_info->id }}" id="chk_id_{{ $item_info->id }}" class="selec_chk"></td>
@@ -106,6 +112,7 @@
         <td>{{ $item_info->item_code }}</td>
         <td>{{ stripslashes($item_info->item_name) }}</td>
         <td>{{ $item_info->item_rank }}</td>
+        <td>{{ $item_special_ment }}</td>
         <td>
             <button type="button" onclick="item_modi('{{ $item_info->id }}','{{ $item_info->sca_id }}');">수정</button>
         </td>

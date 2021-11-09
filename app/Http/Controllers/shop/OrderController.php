@@ -599,6 +599,7 @@ class OrderController extends Controller
         $od_shop_memo       = '';
         $imp_card_name      = $request->input('imp_card_name');   //카드사에서 전달 받는 값(카드사명칭)
         $imp_card_quota     = $request->input('imp_card_quota');   //카드사에서 전달 받는 값(할부개월수)
+        $imp_card_number    = $request->input('imp_card_number');   //카드사에서 전달 받는 값(카드번호)
 
 /*
 //데스트 위함
@@ -642,6 +643,7 @@ $imp_apply_num= '12345678';
                 'imp_apply_num'     => $imp_apply_num,
                 'imp_card_name'     => $imp_card_name,
                 'imp_card_quota'    => $imp_card_quota,
+                'imp_card_number'   => $imp_card_number,
                 'od_ip'             => $_SERVER["REMOTE_ADDR"],
             ])->exists();
 
