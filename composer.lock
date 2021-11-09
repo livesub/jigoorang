@@ -4,49 +4,43 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "eb59250670d640957468804ca9c37404",
+    "content-hash": "39fe6af47ae8dbf85e0083015b6b104f",
     "packages": [
         {
-            "name": "ashallendesign/short-url",
-            "version": "v5.2.0",
+            "name": "allivcorp/iamport",
+            "version": "v1.0.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/ash-jc-allen/short-url.git",
-                "reference": "04ac76a9c045bff6ed22d09d1bd883e53a640cda"
+                "url": "https://github.com/allivcorp/Iamport.git",
+                "reference": "3aab97eadea3dd77738fe1c3ff934b3339a8d11e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ash-jc-allen/short-url/zipball/04ac76a9c045bff6ed22d09d1bd883e53a640cda",
-                "reference": "04ac76a9c045bff6ed22d09d1bd883e53a640cda",
+                "url": "https://api.github.com/repos/allivcorp/Iamport/zipball/3aab97eadea3dd77738fe1c3ff934b3339a8d11e",
+                "reference": "3aab97eadea3dd77738fe1c3ff934b3339a8d11e",
                 "shasum": ""
             },
             "require": {
-                "hashids/hashids": "^4.0",
-                "illuminate/container": "^6.0|^7.0|^8.0",
-                "illuminate/database": "^6.0|^7.0|^8.0",
-                "jenssegers/agent": "^2.6",
-                "nesbot/carbon": "~2.0",
-                "php": "^7.2|^8.0"
+                "php": ">=7.1.0"
             },
             "require-dev": {
-                "mockery/mockery": "^1.0",
-                "orchestra/testbench": "^4.0|^5.0|^6.0",
-                "phpunit/phpunit": "^8.2"
+                "illuminate/support": "^5.6",
+                "phpunit/phpunit": "^7.0"
             },
             "type": "library",
             "extra": {
                 "laravel": {
                     "providers": [
-                        "AshAllenDesign\\ShortURL\\Providers\\ShortURLProvider"
+                        "Alliv\\Iamport\\IamportServiceProvider"
                     ],
                     "aliases": {
-                        "ShortURL": "AshAllenDesign\\ShortURL\\Facades\\ShortURL"
+                        "Iamport": "Alliv\\Iamport\\Facades\\IamportFacade"
                     }
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "AshAllenDesign\\ShortURL\\": "src/"
+                    "Alliv\\Iamport\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -55,26 +49,21 @@
             ],
             "authors": [
                 {
-                    "name": "Ash Allen",
-                    "email": "mail@ashallendesign.co.uk"
-                }
-            ],
-            "description": "A Laravel package for creating shortened URLs for your web apps.",
-            "homepage": "https://github.com/ash-jc-allen/short-url",
-            "keywords": [
-                "URL-Shortener",
-                "ashallendesign",
-                "laravel",
-                "laravel-package",
-                "short-urls"
-            ],
-            "funding": [
+                    "name": "Daeyeol Ryu",
+                    "email": "dy.ryu@alliv.co.kr"
+                },
                 {
-                    "url": "https://github.com/ash-jc-allen",
-                    "type": "github"
+                    "name": "Jinman Lee",
+                    "email": "jinman.lee@alliv.co.kr"
                 }
             ],
-            "time": "2021-09-21T09:55:31+00:00"
+            "description": "I'mport; REST API module for Laravel",
+            "homepage": "https://github.com/allivcorp/iamport",
+            "keywords": [
+                "iamport",
+                "laravel"
+            ],
+            "time": "2018-03-26T18:13:13+00:00"
         },
         {
             "name": "asm89/stack-cors",

@@ -206,6 +206,7 @@
                             </tr>
 
                             @if(Auth::user())
+                                @if($item_info->item_del == 'N')
                             <tr>
                                 <td>
                                     <button type="button" onclick="fitem_submit('cart');">장바구니</button>
@@ -214,6 +215,7 @@
                                     <span>쇼셜 링크 작업 해야함</span>
                                 </td>
                             </tr>
+                                @endif
                             @endif
 
                         </table>
@@ -346,7 +348,12 @@
                 }
 
                 if(json.message == "no_qty"){
-                    alert(json.option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.sum_qty + " 개");
+                    alert(json.option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.sum_qty + " 개 이며\n\n이미 장바구니에 담겨 있습니다. ");
+                    return false;
+                }
+
+                if(json.message == "no_qty2"){
+                    alert(json.option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.sum_qty + " 개 이며\n\n이미 장바구니에 담겨 있습니다. ");
                     return false;
                 }
 

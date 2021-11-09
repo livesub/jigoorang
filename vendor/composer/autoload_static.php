@@ -189,6 +189,7 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
             'Asm89\\Stack\\' => 12,
             'AshAllenDesign\\ShortURL\\' => 24,
             'App\\' => 4,
+            'Alliv\\Iamport\\' => 14,
         ),
     );
 
@@ -553,6 +554,10 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
         array (
             0 => __DIR__ . '/../..' . '/app',
         ),
+        'Alliv\\Iamport\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/allivcorp/iamport/src',
+        ),
     );
 
     public static $prefixesPsr0 = array (
@@ -573,11 +578,20 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
     );
 
     public static $classMap = array (
+        'Alliv\\Iamport\\ApiClient' => __DIR__ . '/..' . '/allivcorp/iamport/src/ApiClient.php',
+        'Alliv\\Iamport\\Exceptions\\AuthException' => __DIR__ . '/..' . '/allivcorp/iamport/src/Exceptions/AuthException.php',
+        'Alliv\\Iamport\\Exceptions\\RequestException' => __DIR__ . '/..' . '/allivcorp/iamport/src/Exceptions/RequestException.php',
+        'Alliv\\Iamport\\Facades\\IamportFacade' => __DIR__ . '/..' . '/allivcorp/iamport/src/Facades/IamportFacade.php',
+        'Alliv\\Iamport\\Iamport' => __DIR__ . '/..' . '/allivcorp/iamport/src/Iamport.php',
+        'Alliv\\Iamport\\IamportServiceProvider' => __DIR__ . '/..' . '/allivcorp/iamport/src/IamportServiceProvider.php',
+        'Alliv\\Iamport\\Payment' => __DIR__ . '/..' . '/allivcorp/iamport/src/Payment.php',
+        'Alliv\\Iamport\\Result' => __DIR__ . '/..' . '/allivcorp/iamport/src/Result.php',
         'App\\Console\\Kernel' => __DIR__ . '/../..' . '/app/Console/Kernel.php',
         'App\\Exceptions\\Handler' => __DIR__ . '/../..' . '/app/Exceptions/Handler.php',
         'App\\Helpers\\Custom\\CustomUtils' => __DIR__ . '/../..' . '/app/Helpers/Custom/CustomUtils.php',
         'App\\Helpers\\Custom\\Messages_en' => __DIR__ . '/../..' . '/app/Helpers/Custom/Messages_en.php',
         'App\\Helpers\\Custom\\Messages_kr' => __DIR__ . '/../..' . '/app/Helpers/Custom/Messages_kr.php',
+        'App\\Helpers\\Custom\\PageSet' => __DIR__ . '/../..' . '/app/Helpers/Custom/PageSet.php',
         'App\\Helpers\\Custom\\UserAgent' => __DIR__ . '/../..' . '/app/Helpers/Custom/UserAgent.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\FiledownController' => __DIR__ . '/../..' . '/app/Http/Controllers/FiledownController.php',
@@ -587,6 +601,7 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
         'App\\Http\\Controllers\\adm\\AdmloginController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/AdmloginController.php',
         'App\\Http\\Controllers\\adm\\admboard\\AdmboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/admboard/AdmboardController.php',
         'App\\Http\\Controllers\\adm\\admemail\\AdmemailController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/admemail/AdmemailController.php',
+        'App\\Http\\Controllers\\adm\\banner\\BannerController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/banner/BannerController.php',
         'App\\Http\\Controllers\\adm\\boardmanage\\BoardmanageController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/boardmanage/BoardmanageController.php',
         'App\\Http\\Controllers\\adm\\cate\\AdmcateController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/cate/AdmcateController.php',
         'App\\Http\\Controllers\\adm\\editor\\AdmeditorController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/editor/AdmeditorController.php',
@@ -597,6 +612,7 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
         'App\\Http\\Controllers\\adm\\session_del\\SessionDelController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/session_del/SessionDelController.php',
         'App\\Http\\Controllers\\adm\\shop\\category\\AdmShopCategoryController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/shop/category/AdmShopCategoryController.php',
         'App\\Http\\Controllers\\adm\\shop\\item\\AdmShopItemController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/shop/item/AdmShopItemController.php',
+        'App\\Http\\Controllers\\adm\\shop\\order\\OrderController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/shop/order/OrderController.php',
         'App\\Http\\Controllers\\adm\\shop\\sendcost\\SendcostController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/shop/sendcost/SendcostController.php',
         'App\\Http\\Controllers\\adm\\shop\\setting\\AdmShopSettingController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/shop/setting/AdmShopSettingController.php',
         'App\\Http\\Controllers\\adm\\visits\\VisitsController' => __DIR__ . '/../..' . '/app/Http/Controllers/adm/visits/VisitsController.php',
@@ -638,6 +654,7 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
         'App\\Http\\Requests\\UserRequest' => __DIR__ . '/../..' . '/app/Http/Requests/UserRequest.php',
         'App\\Models\\User' => __DIR__ . '/../..' . '/app/Models/User.php',
         'App\\Models\\baesongjis' => __DIR__ . '/../..' . '/app/Models/baesongjis.php',
+        'App\\Models\\banners' => __DIR__ . '/../..' . '/app/Models/banners.php',
         'App\\Models\\board_datas_comment_table' => __DIR__ . '/../..' . '/app/Models/board_datas_comment_table.php',
         'App\\Models\\board_datas_table' => __DIR__ . '/../..' . '/app/Models/board_datas_table.php',
         'App\\Models\\boardmanager' => __DIR__ . '/../..' . '/app/Models/boardmanager.php',
@@ -655,6 +672,7 @@ class ComposerStaticInit82b906a9f158bd2a4d40a5413f751764
         'App\\Models\\shopitemoptions' => __DIR__ . '/../..' . '/app/Models/shopitemoptions.php',
         'App\\Models\\shopitems' => __DIR__ . '/../..' . '/app/Models/shopitems.php',
         'App\\Models\\shoporders' => __DIR__ . '/../..' . '/app/Models/shoporders.php',
+        'App\\Models\\shopordertemps' => __DIR__ . '/../..' . '/app/Models/shopordertemps.php',
         'App\\Models\\shoppoints' => __DIR__ . '/../..' . '/app/Models/shoppoints.php',
         'App\\Models\\shoppostlogs' => __DIR__ . '/../..' . '/app/Models/shoppostlogs.php',
         'App\\Models\\shopsettings' => __DIR__ . '/../..' . '/app/Models/shopsettings.php',

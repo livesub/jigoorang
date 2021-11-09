@@ -50,7 +50,7 @@ class ItemController extends Controller
 
         if($ca_id == ""){
             $cate_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr', 'sca_name_en')->where('sca_display','Y')->whereRaw('length(sca_id) = 2')->orderby('sca_rank', 'DESC')->get();
-            $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id  {$search_sql} order by a.item_rank DESC limit {$page_control['startNum']}, {$writeList} ");
+            $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id  {$search_sql} order by a.item_rank DESC limit {$page_control['startNum']}, {$writeList} ");
 
         }else{
             $down_cate = DB::table('shopcategorys')->where('sca_id','like',$ca_id.'%')->count();   //하위 카테고리 갯수
@@ -61,7 +61,7 @@ class ItemController extends Controller
                 $cate_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr', 'sca_name_en')->where('sca_display','Y')->where('sca_id','=',$ca_id )->whereRaw('length(sca_id) = '.$length)->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'DESC')->get();
             }
 
-            $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id AND a.sca_id like '{$ca_id}%' {$search_sql} order by a.item_rank DESC limit {$page_control['startNum']}, {$writeList} ");
+            $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id AND a.sca_id like '{$ca_id}%' {$search_sql} order by a.item_rank DESC limit {$page_control['startNum']}, {$writeList} ");
         }
 
         $pageList = $page_control['preFirstPage'].$page_control['pre1Page'].$page_control['listPage'].$page_control['next1Page'].$page_control['nextLastPage'];

@@ -164,7 +164,7 @@ class PopupController extends Controller
             'pop_display'       => $request->input('pop_display'),
         );
 
-        //$update_result = DB::table('popups')->where('id', $id)->limit(1)->update($data);
+        //$update_result = DB::table('popups')->where('id', $id)->update($data);
         $update_result = Popups::find($id)->update($data);
 
         if($update_result) return redirect()->route('adm.popup.index','&page='.$page)->with('alert_messages', $Messages::$popup['up_ok']);

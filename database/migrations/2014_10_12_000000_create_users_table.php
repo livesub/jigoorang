@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('user_tel')->comment('집 전화번호');
             $table->string('user_birth', 10)->comment('생년월일');
             $table->enum('user_gender', ['M', 'W'])->comment('성별');
+            $table->enum('user_promotion_agree', ['N', 'Y'])->comment('프로모션 관련 동의 사항');
             $table->string('user_phone')->comment('휴대 전화번호');
             $table->string('user_birth', 10)->comment('생년월일');
             $table->enum('user_gender', ['M', 'W'])->comment('성별');

@@ -33,6 +33,7 @@ class MainController extends Controller
 
     public function index()
     {
+        $CustomUtils = new CustomUtils;
         //초기 관리자 아이디가 없으면 관리자 아이디 생성 해 주게..
         //레벨이 3이하인 사람이 한명이라도 있는 지 파악
         $user_cnt = DB::table('users')->where('user_level', '<=', 3)->count();
@@ -53,7 +54,17 @@ class MainController extends Controller
             ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
         }
 
+        //상단 배너 관리
+        $topbanner_infos = DB::table('banners')->where([['b_display', 'Y'], ['b_type', 1]])->get();
+
+        //하단 배너 관리
+        $bottombanner_infos = DB::table('banners')->where([['b_display', 'Y'], ['b_type', 2]])->get();
+
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
-        return view('main',$Messages::$main['main']);
+        return view('main',[
+            'topbanner_infos'       => $topbanner_infos,
+            'bottombanner_infos'    => $bottombanner_infos,
+            'CustomUtils'           => $CustomUtils,
+        ],$Messages::$main['main']);
     }
 }

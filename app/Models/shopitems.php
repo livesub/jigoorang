@@ -10,7 +10,6 @@
 #
 ###########################################################################-->
 
-
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -75,6 +74,7 @@ class shopitems extends Model
         'item_soldout',
         'item_stock_qty',
         'item_tel_inq',
+        'item_del',
     ];
 
     protected $hidden = [

@@ -25,6 +25,7 @@ use App\Models\shoppoints;    //포인트 모델 정의
 use App\Models\User;    //회원 모델 정의
 use App\Models\wishs;    //wish 모델 정의
 use App\Models\shoppostlogs;    //주문시 오류 로그 모델 정의
+use App\Models\baesongjis;    //배송지 모델 정의
 use Illuminate\Support\Facades\Auth;    //인증
 
 class CustomUtils extends Controller
@@ -162,7 +163,7 @@ return $validator;
             $cateinfo .= "&item_search=".$keymethod;
             $cateinfo .= "&keyword=".$keyword;
 
-            $total_tmp = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where 1 {$search_sql} ");
+            $total_tmp = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' {$search_sql} ");
             $total_cnt = $total_tmp[0]->cnt;
         }else if($type == 'f_shopitems'){ //프론트 쇼핑몰 상품 리스트
             if($cate != "") $search_sql = " AND a.sca_id = b.sca_id AND a.sca_id LIKE '{$cate}%' AND a.{$keymethod} LIKE '%{$keyword}%' ";
@@ -172,7 +173,7 @@ return $validator;
             $cateinfo .= "&item_search=".$keymethod;
             $cateinfo .= "&keyword=".$keyword;
 
-            $total_tmp = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where 1 {$search_sql} and a.item_display = 'Y' and a.item_use = 1 and b.sca_display = 'Y' ");
+            $total_tmp = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' {$search_sql} and a.item_display = 'Y' and a.item_use = 1 and b.sca_display = 'Y' ");
             $total_cnt = $total_tmp[0]->cnt;
         }else if($type == 'email_send'){
             //이메일 발송 리스트 일때
@@ -810,7 +811,6 @@ $um_value='80/0.5/3'
         }
 
         $item_point = floor(($item_price * ($item->item_point / 100) / $trunc)) * $trunc;
-
         return $item_point;
     }
 
@@ -818,7 +818,7 @@ $um_value='80/0.5/3'
     public static function get_item_options($item_code, $subject, $is_div='', $is_first_option_title='')
     {
         if(!$item_code || !$subject) return false;
-        $opts = DB::table('shopitemoptions')->where([['sio_type', 0],['item_code', $item_code],['sio_use','1'],['sio_use','1']])->orderby('id', 'asc')->get();
+        $opts = DB::table('shopitemoptions')->where([['sio_type', 0],['item_code', $item_code],['sio_use','1']])->orderby('id', 'asc')->get();
 
         if(count($opts) == 0) return false;
 
@@ -1073,12 +1073,14 @@ $um_value='80/0.5/3'
         $jaego = DB::table('shopitems')->select('item_stock_qty')->where('item_code',$item_code)->get();
         $jaego_cnt = (int)$jaego[0]->item_stock_qty;
         $daegi = 0;
-
+/*
         // 재고에서 빼지 않았고 주문인것만
         $sct_qty = DB::table('shopcarts')->where([['item_code',$item_code], ['sio_id',''], ['sct_stock_use','0']])->whereRaw('sct_status in (\'주문\', \'입금\', \'준비\')')->sum('sct_qty');
         $daegi = (int)$sct_qty;
 
         return $jaego_cnt - $daegi;
+*/
+        return $jaego_cnt;
     }
 
     // 옵션의 재고 (창고재고수량 - 주문대기수량)
@@ -1087,12 +1089,15 @@ $um_value='80/0.5/3'
         $jaego = DB::table('shopitemoptions')->select('sio_stock_qty')->where([['item_code',$item_code],['sio_id',$sio_id],['sio_type',$type],['sio_use','1']])->get();
         $jaego_cnt = (int)$jaego[0]->sio_stock_qty;
         $daegi = 0;
-
-        // 재고에서 빼지 않았고 주문인것만
+/*
+        // 재고에서 빼지 않았고 주문인것만(주문완료 과정에서 재고 +,- 해주는 것으로 변경)
         $sct_qty = DB::table('shopcarts')->where([['item_code',$item_code], ['sio_id',$sio_id], ['sct_stock_use','0']])->whereRaw('sct_status in (\'주문\', \'입금\', \'준비\')')->sum('sct_qty');
         $daegi = (int)$sct_qty;
 
         return $jaego_cnt - $daegi;
+*/
+        //주문된 순간 재고 +,- 한다
+        return $jaego_cnt;
     }
 
     //장바구니 키 생성
@@ -1116,10 +1121,12 @@ $um_value='80/0.5/3'
                 $this->set_session('ss_cart_id', $tmp_cart_id);
             }
         }
-
-        if(Auth::user() && $tmp_cart_id){
+/*
+이부분 오류
+        if(Auth::user()->user_id && $tmp_cart_id){
             $up_result = DB::table('shopcarts')->where([['user_id', Auth::user()->user_id], ['sct_direct','0'], ['sct_status','쇼핑']])->update(['od_id' => $tmp_cart_id]);
         }
+*/
     }
 
     public static function get_uniqid()
@@ -1251,8 +1258,20 @@ $um_value='80/0.5/3'
                         $data[$column] = $value;  //배열에 추가 함
                     }
 
-                    $update_result = DB::table('shopcarts')->where([['item_code', $item[0]->item_code], ['od_id',$s_cart_id], ['id',$cart_info->id]])->limit(1)->update($data);
+                    $update_result = DB::table('shopcarts')->where([['item_code', $item[0]->item_code], ['od_id',$s_cart_id], ['id',$cart_info->id]])->update($data);
                 }
+            }
+
+            //각 상품 배송비 변경 되었을때(211028 추가)
+            $baesong_price = DB::table('shopitems')->select('item_sc_price')->where('item_code',$item_code)->first();
+            if($cart_info->item_sc_price != $baesong_price->item_sc_price){
+                return false;
+            }
+
+            //기본 배송비가 변경 되었을때(211101 추가)
+            $setting_info = DB::table('shopsettings')->select('de_send_cost')->first(); //기본 배송비 구하기
+            if($cart_info->de_send_cost != $setting_info->de_send_cost){
+                return false;
             }
         }
 
@@ -1333,7 +1352,7 @@ $um_value='80/0.5/3'
         $total_send_cost = 0;
         $diff = 0;
 
-        $scs = DB::table('shopcarts')->select('item_code')->where([['od_id',$cart_id], ['sct_send_cost','0'], ['sct_select',$selected]])->whereRaw('sct_status in (\'쇼핑\', \'주문\', \'입금\', \'준비\', \'배송\', \'완료\')')->distinct()->get();
+        $scs = DB::table('shopcarts')->select('item_code')->where([['od_id',$cart_id], ['sct_send_cost','0'], ['sct_select',$selected]])->whereRaw('sct_status in (\'쇼핑\', \'주문\', \'입금\', \'준비\', \'배송\', \'완료\')')->distinct('item_code')->get();
 
         foreach ($scs as $sc){
             $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_qty) as qty from shopcarts where item_code = '{$sc->item_code}' and od_id = '$cart_id' and sct_status IN ( '쇼핑', '주문', '입금', '준비', '배송', '완료' ) and sct_select = '{$selected}' ");
@@ -1377,8 +1396,8 @@ $um_value='80/0.5/3'
         return $str;
     }
 
-    //사용자 포인트 조회
-    public static function user_point_chk($user_id, $po_content, $po_point, $po_use_point, $po_type, $po_write_id, $item_code)
+    //회원 가입시 주어지는 포인트
+    public static function user_point_chk($user_id, $po_content, $po_point, $po_use_point, $po_type, $po_write_id, $order_id)
     {
         $user_info = DB::table('users')->select('user_point')->where('user_id',$user_id)->first();  //사용자가 현재 가지고 있는 포인트
 
@@ -1391,8 +1410,8 @@ $um_value='80/0.5/3'
             'po_user_point' => $user_info->user_point,
             'po_type'       => $po_type,
             'po_write_id'   => $po_write_id,
-            'item_code'     => $item_code
-        ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
+            'order_id'      => $order_id
+        ])->exists();
 
         if($create_result){
             //회원 테이블 포인트 업뎃
@@ -1431,5 +1450,255 @@ $um_value='80/0.5/3'
         }
     }
 
+    //배송지 처리(배송지 테이블에)
+    //ad_default = 기본 배송지 체크여부, ad_subject = 배송지명, ad_name = 이름, ad_tel = 전화번호, ad_hp = 핸드폰, ad_zip1 = 우편번호,
+    //ad_addr1 = 주소, ad_addr2 = 상세주소, ad_addr3 = 참고항목, ad_jibeon = 지번(지번인지 도로명인지)
+    public static function baesongji_process($ad_default, $ad_subject, $ad_name, $ad_tel, $ad_hp, $ad_zip1, $ad_addr1, $ad_addr2, $ad_addr3, $ad_jibeon){
 
+        //기본 배송지 체크
+        $baesongji_first_chk = DB::table('baesongjis')->where('user_id', Auth::user()->user_id)->count();
+        if($baesongji_first_chk == 0){
+            $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
+                'user_zip'          => (int)$ad_zip1,
+                'user_addr1'        => addslashes($ad_addr1),
+                'user_addr2'        => addslashes($ad_addr2),
+                'user_addr3'        => addslashes($ad_addr3),
+                'user_addr_jibeon'  => $ad_jibeon,
+            ]);
+
+            $create_result = baesongjis::create([
+                'user_id'       => Auth::user()->user_id,
+                'ad_subject'    => addslashes($ad_subject),
+                'ad_default'    => (int)$ad_default,
+                'ad_name'       => addslashes($ad_name),
+                'ad_tel'        => addslashes($ad_tel),
+                'ad_hp'         => addslashes($ad_hp),
+                'ad_zip1'       => (int)$ad_zip1,
+                'ad_addr1'      => addslashes($ad_addr1),
+                'ad_addr2'      => addslashes($ad_addr2),
+                'ad_addr3'      => addslashes($ad_addr3),
+                'ad_jibeon'     => $ad_jibeon,
+            ])->exists();
+
+        }else{
+            $baesongji_chk = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['ad_zip1', $ad_zip1], ['ad_addr1', $ad_addr1]])->count();
+
+            if(!is_null($ad_default)){
+                //기본 배송지 체크시
+                if($baesongji_chk == 0){
+                    //같은 주소가 없을때
+                    $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
+                        'user_zip'          => (int)$ad_zip1,
+                        'user_addr1'        => addslashes($ad_addr1),
+                        'user_addr2'        => addslashes($ad_addr2),
+                        'user_addr3'        => addslashes($ad_addr3),
+                        'user_addr_jibeon'  => $ad_jibeon,
+                    ]);
+
+                    //기본 배송지 컬럼(ad_default) 전부 0으로 만듦
+                    $update_default = DB::table('baesongjis')->where('user_id', Auth::user()->user_id)->update(['ad_default' => 0]);
+
+                    $create_result = baesongjis::create([
+                        'user_id'       => Auth::user()->user_id,
+                        'ad_subject'    => addslashes($ad_subject),
+                        'ad_default'    => (int)$ad_default,
+                        'ad_name'       => addslashes($ad_name),
+                        'ad_tel'        => addslashes($ad_tel),
+                        'ad_hp'         => addslashes($ad_hp),
+                        'ad_zip1'       => (int)$ad_zip1,
+                        'ad_addr1'      => addslashes($ad_addr1),
+                        'ad_addr2'      => addslashes($ad_addr2),
+                        'ad_addr3'      => addslashes($ad_addr3),
+                        'ad_jibeon'     => $ad_jibeon,
+                    ])->exists();
+                }else{
+                    //같은 주소가 있을때
+                    $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
+                        'user_zip'          => (int)$ad_zip1,
+                        'user_addr1'        => addslashes($ad_addr1),
+                        'user_addr2'        => addslashes($ad_addr2),
+                        'user_addr3'        => addslashes($ad_addr3),
+                        'user_addr_jibeon'  => $ad_jibeon,
+                    ]);
+
+                    //기본 배송지 컬럼(ad_default) 전부 0으로 만듦
+                    $update_default = DB::table('baesongjis')->where('user_id', Auth::user()->user_id)->update(['ad_default' => 0]);
+
+                    $update_result = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['ad_zip1', $ad_zip1], ['ad_addr1', $ad_addr1]])->update([
+                        'ad_subject'    => addslashes($ad_subject),
+                        'ad_default'    => (int)$ad_default,
+                        'ad_name'       => addslashes($ad_name),
+                        'ad_tel'        => addslashes($ad_tel),
+                        'ad_hp'         => addslashes($ad_hp),
+                        'ad_addr2'      => addslashes($ad_addr2),
+                        'ad_addr3'      => addslashes($ad_addr3),
+                        'ad_jibeon'     => $ad_jibeon,
+                    ]);
+                }
+            }else{
+                //기본 배송지 미체크시
+                if($baesongji_chk == 0){
+                    $create_result = baesongjis::create([
+                        'user_id'       => Auth::user()->user_id,
+                        'ad_subject'    => addslashes($ad_subject),
+                        'ad_default'    => 0,
+                        'ad_name'       => addslashes($ad_name),
+                        'ad_tel'        => addslashes($ad_tel),
+                        'ad_hp'         => addslashes($ad_hp),
+                        'ad_zip1'       => (int)$ad_zip1,
+                        'ad_addr1'      => addslashes($ad_addr1),
+                        'ad_addr2'      => addslashes($ad_addr2),
+                        'ad_addr3'      => addslashes($ad_addr3),
+                        'ad_jibeon'     => $ad_jibeon,
+                    ])->exists();
+                }else{
+                    $update_result = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['ad_zip1', $ad_zip1], ['ad_addr1', $ad_addr1]])->update([
+                        'ad_subject'    => addslashes($ad_subject),
+                        //'ad_default'    => 0,
+                        'ad_name'       => addslashes($ad_name),
+                        'ad_tel'        => addslashes($ad_tel),
+                        'ad_hp'         => addslashes($ad_hp),
+                        'ad_addr2'      => addslashes($ad_addr2),
+                        'ad_addr3'      => addslashes($ad_addr3),
+                        'ad_jibeon'     => $ad_jibeon,
+                    ]);
+                }
+            }
+        }
+    }
+
+    //포인트 처리
+    public function insert_point($user_id, $point, $content='', $po_type, $po_write_id=0, $order_id=0)
+    {
+        //$po_type = 적립금 지금 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>사용,8=>적립
+        //po_write_id = 적립금 지급 유형 글번호(구매평 글번호)
+
+        // 포인트가 없다면 업데이트 할 필요 없음
+        if ($point == 0) { return 0; }
+
+        // 회원아이디가 없다면 업데이트 할 필요 없음
+        if ($user_id == '') { return 0; }
+
+        $user_info = DB::table('users')->select('user_id')->where('user_id', $user_id)->first(); //회원인지 검색
+
+        if(!$user_info){ return 0; }
+
+        $user_point = $this->get_point_sum($user_id);
+
+        $po_user_point = $user_point + $point;
+
+        //포인트 테이블에 저장
+        $create_result = shoppoints::create([
+            'user_id'       => $user_id,
+            'po_content'    => $content,
+            'po_point'      => $point,
+            'po_use_point'  => 0,
+            'po_user_point' => $user_point,
+            'po_type'       => $po_type,
+            'po_write_id'   => $po_write_id,
+            'order_id'      => $order_id
+        ])->exists();
+
+        if($create_result){
+            //회원 테이블 포인트 업뎃
+            $user_point = $this->get_point_sum($user_id);
+            $up_result = DB::table('users')->where('user_id', $user_id)->update(['user_point' => $user_point]);
+        }
+    }
+
+    // 포인트 내역 합계
+    public static function get_point_sum($user_id)
+    {
+        // 포인트합
+        $sum = shoppoints::where('user_id', $user_id)->sum('po_point');
+        return $sum;
+    }
+
+    //구매 상품 재고 정리
+    public static function item_qty($order_id, $type)
+    {
+        $cart_infos = DB::table('shopcarts')->where('od_id', $order_id)->get();
+
+        foreach($cart_infos as $cart_info){
+            if($cart_info->sio_id != ""){
+                //옵션 상품일때
+                $itemoptions_info = DB::table('shopitemoptions')->where([['item_code', $cart_info->item_code], ['sio_id', $cart_info->sio_id]])->first();
+
+                if($type == 'minus'){
+                    $qty = (int)$itemoptions_info->sio_stock_qty - (int)$cart_info->sct_qty;
+                }else{
+                    $qty = (int)$itemoptions_info->sio_stock_qty + (int)$cart_info->sct_qty;
+                }
+
+                $up_result = DB::table('shopitemoptions')->where([['item_code', $cart_info->item_code], ['sio_id', $cart_info->sio_id]])->update(['sio_stock_qty' => $qty]);
+            }else{
+                //옵션 상품 아닐때
+                $item_info = DB::table('shopitems')->where('item_code', $cart_info->item_code)->first();
+
+                if($type == 'minus'){
+                    $qty = (int)$item_info->item_stock_qty - (int)$cart_info->sct_qty;;
+                }else{
+                    $qty = (int)$item_info->item_stock_qty + (int)$cart_info->sct_qty;;
+                }
+
+                $up_result = DB::table('shopitems')->where('item_code', $cart_info->item_code)->update(['item_stock_qty' => $qty]);
+            }
+        }
+    }
+
+    //환불 금액 체크
+    public static function payrefund_chk($user_id, $order_id, $cancel_request_amount)
+    {
+        $order_info = DB::table('shoporders')->where([['user_id',$user_id], ['order_id', $order_id]])->first();
+        $tot_price = (int)$order_info->od_receipt_price - (int)$order_info->od_receipt_point;   //카드사 결제 금액(결제금액 - 포인트 사용)
+
+        if($tot_price <= $cancel_request_amount){
+            //카드사 결제 금액 보다 환불 금액이 크거나 같을때
+            return false;
+        }else{
+            if($tot_price <= $order_info->od_refund_price){
+                //카드사 결제 금액 보다 환불된 금액이 크거나 같을때
+                return false;
+            }else{
+                $hap = $order_info->od_refund_price + $cancel_request_amount;
+                if($tot_price < $hap){
+                    //카드사 결제 금액 보다 기존 환불금액(부분환불) + 새로운 환불금액과 클때
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+        }
+    }
+
+    //환불 금액 업데이트
+    public static function payrefund_update($user_id, $order_id, $cancel_request_amount)
+    {
+        $order_info = DB::table('shoporders')->where([['user_id',$user_id], ['order_id', $order_id]])->first();
+
+        $hap = $cancel_request_amount + $order_info->od_refund_price;
+
+        $update_result = DB::table('shoporders')->where([['user_id',$user_id], ['order_id', $order_id]])->update([
+            'od_refund_price'    => $hap,
+        ]);
+    }
+
+    // 한글 요일
+    public static function get_yoil($date, $full=0)
+    {
+        $arr_yoil = array ('일', '월', '화', '수', '목', '금', '토');
+
+        $yoil = date("w", strtotime($date));
+        $str = $arr_yoil[$yoil];
+        if ($full) {
+            $str .= '요일';
+        }
+        return $str;
+    }
+
+    public static function is_mobile()
+    {
+        $mobile_agent = 'phone|samsung|lgtel|mobile|[^A]skt|nokia|blackberry|BB10|android|sony';
+        return preg_match('/'.$mobile_agent.'/i', $_SERVER['HTTP_USER_AGENT']);
+    }
 }

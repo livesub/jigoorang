@@ -161,7 +161,7 @@
             return false;
         }
 
-        if (confirm("선택 하신 상품을 삭제 하시겠습니까?") == true){    //확인
+        if (confirm("선택 하신 상품을 삭제 하시겠습니까?\n삭제된 상품은 복구 되지 않습니다.") == true){    //확인
             f.submit();
         }else{
             return;

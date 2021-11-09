@@ -414,4 +414,35 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         $exitCode = Artisan::call('cache:clear');
         return redirect()->route('adm.member.index')->with('alert_messages', '삭제 되었습니다.');
     });
+
+    //배너 관리 list
+    Route::get('banner/{type}', [
+        'as' => 'adm.banner.index',
+        'uses' => 'App\Http\Controllers\adm\banner\BannerController@index',
+    ]);
+
+    Route::get('bannercreate/{type}', [
+        'as' => 'adm.banner.create',
+        'uses' => 'App\Http\Controllers\adm\banner\BannerController@create',
+    ]);
+
+    Route::post('bannercreatesave', [
+        'as' => 'adm.banner.createsave',
+        'uses' => 'App\Http\Controllers\adm\banner\BannerController@createsave',
+    ]);
+
+    Route::post('bannerdelete', [  //배너 선택 삭제
+        'as' => 'adm.banner.choice_del',
+        'uses' => 'App\Http\Controllers\adm\banner\BannerController@choice_del',
+    ]);
+
+    Route::post('bannermodify', [  //배너 수정
+        'as' => 'adm.banner.modify',
+        'uses' => 'App\Http\Controllers\adm\banner\BannerController@modify',
+    ]);
+
+    Route::post('bannermodifysave', [  //배너 수정 처리
+        'as' => 'adm.banner.modifysave',
+        'uses' => 'App\Http\Controllers\adm\banner\BannerController@modifysave',
+    ]);
 });

@@ -128,8 +128,10 @@ function formcheck(f)
         data : form_var,
         dataType : 'text',
         success : function(result){
-//alert(result);
-            if(result == "cart_page"){
+            var json = JSON.parse(result);
+//alert(json.message);
+//return false;
+            if(json.message == "cart_page"){
                 location.href = "{{ route('cartlist') }}";
             }
         },
@@ -137,10 +139,5 @@ function formcheck(f)
             console.log(result);
         },
     });
-
-
-
-
-    //return true;
 }
 </script>

@@ -154,6 +154,15 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'uses' => 'App\Http\Controllers\adm\shop\sendcost\SendcostController@ajax_modi_sendcost',
     ]);
 
+/*** 주문 관리 */
+    Route::get('orderlist', [
+        'as' => 'orderlist',
+        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@index',
+    ]);
 
+    Route::get('orderdetail', [
+        'as' => 'orderdetail',
+        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@orderdetail',
+    ]);
 });
 

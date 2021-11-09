@@ -7,7 +7,11 @@
     </tr>
     <tr>
         <td>배송지명</td>
-        <td><input type="text" name="ad_c_subject" id="ad_c_subject"></td>
+        <td>
+            <input type="text" name="ad_c_subject" id="ad_c_subject">
+            <input type="checkbox" name="ad_default" id="ad_default" value="1">
+            <label for="ad_default">기본배송지로 설정</label>
+        </td>
     </tr>
     <tr>
         <td>이름</td>
@@ -90,8 +94,6 @@
             data : form_var,
             dataType : 'text',
             success : function(result){
-//alert(result);
-//return false;
                 if(result == "ok"){
                     baesongji();
                 }

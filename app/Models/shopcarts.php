@@ -26,6 +26,7 @@ class shopcarts extends Model
         'item_name',
         'item_sc_type',
         'item_sc_method',
+        'de_send_cost',
         'item_sc_price',
         'item_sc_minimum',
         'item_sc_qty',

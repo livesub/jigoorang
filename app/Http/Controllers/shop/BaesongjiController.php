@@ -81,12 +81,12 @@ class BaesongjiController extends Controller
 /*
                 //if(!empty($ad_default) && $id === $ad_default) {  //$id === $ad_default 이부분 처리 해야함
                 if(!empty($ad_default)) {
-                    $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->limit(1)->update(['ad_subject' => $ad_subject_val, 'ad_default' => 1]);
+                    $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->update(['ad_subject' => $ad_subject_val, 'ad_default' => 1]);
                 }else{
-                    $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->limit(1)->update(['ad_subject' => $ad_subject_val]);
+                    $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->update(['ad_subject' => $ad_subject_val]);
                 }
 */
-                $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->limit(1)->update(['ad_subject' => $ad_subject_val]);
+                $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->update(['ad_subject' => $ad_subject_val]);
             }
         }
 
@@ -120,19 +120,9 @@ class BaesongjiController extends Controller
         $od_c_addr_jibeon   = $request->input('od_c_addr_jibeon');
         $od_c_tel           = $request->input('od_c_tel');
         $od_c_hp            = $request->input('od_c_hp');
+        $ad_default         = $request->input('ad_default');
 
-        $create_result = baesongjis::create([
-            'user_id'       => $user_id,
-            'ad_subject'    => addslashes($ad_c_subject),
-            'ad_name'       => addslashes($od_c_name),
-            'ad_tel'        => addslashes($od_c_tel),
-            'ad_hp'         => $od_c_hp,
-            'ad_zip1'       => $od_c_zip,
-            'ad_addr1'      => addslashes($od_c_addr1),
-            'ad_addr2'      => addslashes($od_c_addr2),
-            'ad_addr3'      => addslashes($od_c_addr3),
-            'ad_jibeon'     => $od_c_addr_jibeon,
-        ])->exists();
+        $CustomUtils->baesongji_process($ad_default, $ad_c_subject, $od_c_name, $od_c_tel, $od_c_hp, $od_c_zip, $od_c_addr1, $od_c_addr2, $od_c_addr3, $od_c_addr_jibeon);
 
         echo "ok";
         exit;
@@ -146,7 +136,7 @@ class BaesongjiController extends Controller
         $id         = $request->input('num');
         $user_id    = Auth::user()->user_id;
 
-        DB::table('baesongjis')->where([['id', $id],['user_id',$user_id]])->delete();   //row 삭제(본문)
+        DB::table('baesongjis')->where([['id', $id],['user_id',$user_id]])->delete();   //row 삭제
 
         echo "ok";
         exit;
@@ -168,6 +158,32 @@ class BaesongjiController extends Controller
             echo json_encode($sendcost);
             exit;
         }
+    }
+
+    public function ajax_baesongji_change(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
+
+        $id         = $request->input('id');
+
+        $baesongji_info = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['id', $id]])->first();
+
+        $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
+            'user_zip'          => $baesongji_info->ad_zip1,
+            'user_addr1'        => $baesongji_info->ad_addr1,
+            'user_addr2'        => $baesongji_info->ad_addr2,
+            'user_addr3'        => $baesongji_info->ad_addr3,
+            'user_addr_jibeon'  => $baesongji_info->ad_jibeon,
+        ]);
+
+        //기본 배송지 컬럼(ad_default) 전부 0으로 만듦
+        $update_default = DB::table('baesongjis')->where('user_id', Auth::user()->user_id)->update(['ad_default' => 0]);
+
+        $update_result = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['id', $id]])->update(['ad_default'=> 1]);
+
+        echo "ok";
+        exit;
     }
 
 }

@@ -67,6 +67,7 @@ class CreateShopitemsTable extends Migration
             $table->string('item_ori_img9')->nullable()->comment('상품 원본파일이름9');
             $table->text('item_img10')->nullable()->comment('상품 변경파일이름10(원본@@썸네일1@@썸네일2..)');
             $table->string('item_ori_img10')->nullable()->comment('상품 원본파일이름10');
+            $table->enum('item_del', ['N', 'Y'])->length(2)->default('N')->comment('상품삭제:Y=>삭제');
             $table->timestamps();
             $table->index(['sca_id','item_code']);
         });

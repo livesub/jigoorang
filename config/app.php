@@ -178,6 +178,9 @@ return [
 
         //소셜 로그인 추가(210901)
         \SocialiteProviders\Manager\ServiceProvider::class,
+
+        //아임포트 추가(211029)
+        Alliv\Iamport\IamportServiceProvider::class,
     ],
 
     /*
@@ -231,6 +234,8 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
+        //아임포트 추가(211029)
+        'Iamport' => Alliv\Iamport\Facades\IamportFacade::class,
     ],
 
     /*** env에 정의 된 값 쎄팅 */

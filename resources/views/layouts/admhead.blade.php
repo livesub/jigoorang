@@ -37,6 +37,12 @@ header('Pragma: public');
                     <tr>
                         <td><a href="{{ route('adm.member.index') }}">회원 관리</a></td>
                     </tr>
+                    <tr>
+                        <td><a href="{{ route('adm.banner.index', 1) }}">상단 배너 이미지 관리</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="{{ route('adm.banner.index', 2) }}">하단 배너 이미지 관리</a></td>
+                    </tr>
                     @if(auth()->user()->user_level < 2) <!-- 총관리자만 보는 메뉴 -->
                     <tr>
                         <td><a href="{{ route('adm.admemail.index') }}">회원 이메일 발송 관리</a></td>
@@ -115,6 +121,10 @@ header('Pragma: public');
 
                     <tr>
                         <td><a href="{{ route('shop.sendcost.index') }}">추가 배송비 관리</a></td>
+                    </tr>
+
+                    <tr>
+                        <td><a href="{{ route('orderlist') }}">주문 관리</a></td>
                     </tr>
                 </table>
             </td>

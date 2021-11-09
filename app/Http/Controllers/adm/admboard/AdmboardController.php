@@ -596,7 +596,7 @@ class AdmboardController extends Controller
                 $data['bdt_ori_file_name'.$p] = '';  //배열에 추가 함
                 $data['bdt_file'.$p] = '';  //배열에 추가 함
             }
-            $update_result = DB::table('board_datas_tables')->where('id', $b_id)->limit(1)->update($data);
+            $update_result = DB::table('board_datas_tables')->where('id', $b_id)->update($data);
         }else{
             DB::table('board_datas_tables')->where('id',$b_id)->delete();   //row 삭제
         }
@@ -667,7 +667,7 @@ class AdmboardController extends Controller
                     $data['bdt_ori_file_name'.$p] = '';  //배열에 추가 함
                     $data['bdt_file'.$p] = '';  //배열에 추가 함
                 }
-                $update_result = DB::table('board_datas_tables')->where('id', $request->input('chk_id')[$i])->limit(1)->update($data);
+                $update_result = DB::table('board_datas_tables')->where('id', $request->input('chk_id')[$i])->update($data);
 
             }else{
                 DB::table('board_datas_tables')->where('id',$request->input('chk_id')[$i])->delete();   //row 삭제
@@ -1225,7 +1225,7 @@ class AdmboardController extends Controller
             }
         }
         $id = $request->input('b_id');
-        //$update_result = DB::table('board_datas_tables')->where('id', $request->input('b_id'))->limit(1)->update($data);
+        //$update_result = DB::table('board_datas_tables')->where('id', $request->input('b_id'))->update($data);
         $update_result = Board_datas_table::find($request->input('b_id'))->update($data);
 
         if($update_result) return redirect('adm/admboard/list/'.$tb_name)->with('alert_messages', $Messages::$board['b_ment']['b_save']);
@@ -1425,7 +1425,7 @@ class AdmboardController extends Controller
                 'bdct_memo' => '삭제된 글입니다.',
                 'bdct_del' => 'Y',
             );
-            $update_result = DB::table('board_datas_comment_tables')->where('id', $c_id)->limit(1)->update($data);
+            $update_result = DB::table('board_datas_comment_tables')->where('id', $c_id)->update($data);
         }else{
             $result_del = DB::table('board_datas_comment_tables')->where('id',$c_id)->delete();   //row 삭제
 

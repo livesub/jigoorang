@@ -68,6 +68,16 @@
     </tr>
 </table>
 
+
+<table border=1>
+    <tr>
+        <td><b>기본배송비</b></td>
+        <td>
+            <input type="text" name="de_send_cost" value="{{ $de_send_cost }}" id="de_send_cost" class="frm_input" size="10"> 원
+        </td>
+    </tr>
+</table>
+
 @if(Auth::user()->user_level < 3)
 <table border=1>
     <tr>

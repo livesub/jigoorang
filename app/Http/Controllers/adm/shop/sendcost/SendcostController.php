@@ -65,7 +65,7 @@ class SendcostController extends Controller
             $create_result = sendcosts::create($data);
             $create_result->save();
         }else{
-            $update_result = DB::table('sendcosts')->where('id', $id)->limit(1)->update($data);
+            $update_result = DB::table('sendcosts')->where('id', $id)->update($data);
         }
 
         echo "ok";

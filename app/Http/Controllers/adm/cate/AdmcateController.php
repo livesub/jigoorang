@@ -305,7 +305,7 @@ class AdmcateController extends Controller
         if($ca_rank == "") $data['ca_rank'] = 0;
         else $data['ca_rank'] = $ca_rank;
 
-        //$update_result = DB::table('categorys')->where([['id', $id],['ca_id',$ca_id]])->limit(1)->update($data);
+        //$update_result = DB::table('categorys')->where([['id', $id],['ca_id',$ca_id]])->update($data);
         $update_result = Categorys::find($id)->update($data);
 
         if($update_result) return redirect()->route('adm.cate.index','&page='.$page)->with('alert_messages', $Messages::$category['update']['up_ok']);

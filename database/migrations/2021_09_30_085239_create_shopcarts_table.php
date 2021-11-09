@@ -15,13 +15,14 @@ class CreateShopcartsTable extends Migration
     {
         Schema::create('shopcarts', function (Blueprint $table) {
             $table->id()->comment('순번');
-            $table->bigInteger('od_id')->comment('장바구니 unique 키');
+            $table->bigInteger('od_id')->comment('장바구니 unique 키 = 주문 완료후 주문번호로 업뎃');
             $table->string('user_id')->comment('아이디');
             $table->string('item_code')->comment('상품코드');
             $table->string('item_name')->comment('상품명');
             $table->tinyInteger('item_sc_type')->length(1)->default(0)->comment('배송비 유형');
             $table->tinyInteger('item_sc_method')->length(1)->default(0)->comment('배송비결제 타입');
-            $table->integer('item_sc_price')->default(0)->comment('기본배송비');
+            $table->integer('de_send_cost')->default(0)->comment('기본 배송비');
+            $table->integer('item_sc_price')->default(0)->comment('각 상품 배송비');
             $table->integer('item_sc_minimum')->default(0)->comment('배송비 상세조건:주문금액');
             $table->integer('item_sc_qty')->default(0)->comment('배송비 상세조건:주문수량');
             $table->string('sct_status')->comment('장바구니 상태');
