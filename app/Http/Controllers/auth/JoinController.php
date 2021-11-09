@@ -28,10 +28,11 @@ use App\Models\shoppoints;    //포인트 모델 정의
 use App\Http\Requests\UserRequest;
 class JoinController extends Controller
 {
-    public function __construct()
+    public function __construct(User $user)
     {
         //로그인 된 상태에선 이 페이지 못열게
         $this->middleware('guest', ['except' => 'destroy']);
+        $this->user = $user;
     }
 
     /**
@@ -39,12 +40,23 @@ class JoinController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index(Request $request, $agree)
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
         $url = $request->input('url');
 
         return view('auth.join',[
+            'url'   => $url,
+            'agree' => $agree,
+        ],$Messages::$blade_ment['join']);
+    }
+
+    public function index_agree_view(Request $request)
+    {
+        $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
+        $url = $request->input('url');
+
+        return view('auth.join_agree',[
             'url'   => $url,
         ],$Messages::$blade_ment['join']);
     }
@@ -63,6 +75,7 @@ class JoinController extends Controller
      //vaildator를 App\Http\Requests\UserRequest 에 위임
      public function store(UserRequest $request)
     {
+        //dd($request);
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
         $url = trim($request->get('url'));
@@ -113,10 +126,10 @@ class JoinController extends Controller
         //'user_confirm_code' => $user_confirm_code,
 
         //가입 시 cookie 삭제
-        if($_COOKIE["num"] != "" || $_COOKIE["cetification"] != ""){
-            setcookie("num", "", 0, "/");
-            setcookie("certification", "", 0, "/");
-        }
+        // if($_COOKIE[$request->cookie1] != "" || $_COOKIE[$request->cookie2] != ""){
+        //     setcookie($request->cookie1, "", 0, "/");
+        //     setcookie($request->cookie2, "", 0, "/");
+        // }
         /** 가입 포인트 추가(211015) **/
         $setting_info = CustomUtils::setting_infos();
 
@@ -221,5 +234,45 @@ class JoinController extends Controller
 
         return redirect()->route('join.create')->with('alert_messages', $Messages::$email_certificate['email_certificate']['email_confirm_success']);
         exit;
+    }
+
+    //이메일 중복체크 관련 함수
+    public function email_certification(Request $request){
+        //dd($email);
+        $result = $this->user->get_email_check($request->user_id);
+        
+
+        if($result == "" || $result == null || empty($result)){
+            //비어있을 경우 true
+            $result = "true";
+            return response()->json(array($result),200);
+            //return true;
+        }else{
+            //중복일 경우 false
+            $result = "false";
+            return response()->json(array($result),200);
+            //return false;
+        }
+
+        //return response()->json(array($result),200);
+        //return $result;
+    }
+
+    //이메일 중복체크 관련 함수 test
+    public function email_certification_test($email){
+        //dd($email);
+        $result = $this->user->get_email_check($email);
+        
+        if($result == "" || $result == null || empty($result)){
+            //비어있을 경우 true
+            $result = "true";
+            return response()->json(array($result),200);
+        }else{
+            //중복일 경우 false
+            $result = "false";
+            return response()->json(array($result),200);
+        }
+        //return response()->json(array($result),200);
+        //return $result;
     }
 }

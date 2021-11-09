@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Services\findIdPwService;
 use App\Http\Requests\ChangePwRequest;
+use App\Models\ShortLink;
 
 class findIdPwController extends Controller
 {
@@ -43,6 +44,8 @@ class findIdPwController extends Controller
 
         $result = $this->findIdPwService->send_pw_link($user_phone);
 
+        //비밀번호 재설정 링크 문자로 전송
+
         return response()->json(array($result),200,[],JSON_UNESCAPED_UNICODE);
     }
 
@@ -57,8 +60,41 @@ class findIdPwController extends Controller
 
         }else{
 
-            return redirect()->route('main.index')->with('alert_messages', __('auth.success_change_pw'));
+            return redirect()->route('main.index')->with('alert_messages', __('auth.failed_change_pw'));
             
         }
+    }
+
+    //비밀번호 변경 단축 URL 관련
+    public function shortenLink($code)
+    {
+        $find = ShortLink::where('code', $code)->first();
+
+        if(!empty($find)){
+
+            return redirect($find->link);
+
+        }else{
+
+            $this->findIdPwService->delete_short_url_time_out();
+
+            return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
+        }
+   
+    }
+
+    //단축 url 삭제관련
+    public function delete_short_url(){
+        
+        $this->findIdPwService->delete_short_url_time_out();
+
+        //return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
+        return view('auth.failed_time_limit');
+    }
+
+    //제한시간이 지난 경우의 페이지 이동 관련
+    public function move_time_limit_page(){
+        
+        return view('auth.failed_time_limit');
     }
 }

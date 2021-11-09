@@ -19,6 +19,9 @@
 </head>
 <body>
 <script src="{{ mix('js/common.js') }}"></script>
+<!-- 암호화 복호화를 위한 js 추가 -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha256.js"></script>
 <script src='//code.jquery.com/jquery-3.3.1.min.js'></script>
 
 <script>
@@ -60,7 +63,7 @@
         <tr>
             <td>
             @if(!auth()->user())
-                <a href='{{ route('login.index') }}'>LOGIN</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='{{ route('join.create') }}'>REGISTER</a>
+                <a href='{{ route('login.index') }}'>LOGIN</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='{{ route('join.create_agree') }}'>REGISTER</a>
             @else
                 <a href='{{ route('mypage.index') }}'>MYPAGE</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='{{ route('logout.destroy') }}'>LOGOUT</a>
             @endif
@@ -105,6 +108,6 @@
         alert('{!! Session::get('alert_messages') !!}');
     </script>
     @endif
-
+    @yield('script')
 </body>
 </html>

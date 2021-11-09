@@ -15,7 +15,11 @@
 
 
     <div class='form-group'>
-      <input name='user_id' id='user_id' type='email' class='form-control @error('user_id') is-invalid @enderror' value='{{ old('user_id') }}' placeholder='{{ $user_id }}' autofocus>
+      @if(isset($_COOKIE['id_remember']) && $_COOKIE['id_remember'] != "")
+        <input name='user_id' id='user_id' type='email' class='form-control @error('user_id') is-invalid @enderror' value="{{ $_COOKIE['id_remember'] }}" placeholder='{{ $user_id }}' autofocus>
+      @else
+        <input name='user_id' id='user_id' type='email' class='form-control @error('user_id') is-invalid @enderror' value="{{ old('user_id') }}" placeholder='{{ $user_id }}' autofocus>
+      @endif
     </div>
     @error('user_id')
         <span class='invalid-feedback' role='alert'>
@@ -47,6 +51,21 @@
     </div>
 
     <div class='form-group'>
+      <div class='checkbox'>
+        <label for="id_remember">
+          @if(isset($_COOKIE['id_remember']))
+            <input type='checkbox' name='id_remember' value="{{ old('id_remember', 1) }}" checked>
+          @else
+            <input type='checkbox' name='id_remember' value="{{ old('id_remember', 1) }}">
+          @endif
+          <span class='text-danger'>
+              아이디 기억하기
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class='form-group'>
       <button class='btn btn-primary btn-lg btn-block' type='submit'>
         {{ $submit_login }}
       </button>
@@ -68,9 +87,9 @@
     </div>
 
     <div>
-      <p class='text-center'>
+      <!-- <p class='text-center'>
         <button type="button" onclick="location.href='{{ route('social.login','google') }}'">구글 로그인</button>
-      </p>
+      </p> -->
 
       <p class='text-center'>
         <button type="button" onclick="location.href='{{ route('social.login','kakao') }}'">카카오 로그인</button>
@@ -80,9 +99,9 @@
         <button type="button" onclick="location.href='{{ route('social.login','naver') }}'">네이버 로그인</button>
       </p>
 
-      <p class='text-center'>
+      <!-- <p class='text-center'>
         <button type="button" onclick="location.href='{{ route('social.login','facebook') }}'">페이스북 로그인</button>
-      </p>
+      </p> -->
     </div>
 </form>
 

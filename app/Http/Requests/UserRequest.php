@@ -27,11 +27,11 @@ class UserRequest extends FormRequest
             //유효성 검사 항목들 및 조건을 정의한다.
             'user_id' => ['required','email', 'unique:App\Models\User,user_id'],
             //pw 정규식 패턴 추가 최소 8자 이상 한개의 문자,한개의 숫자, 한개의 특수문자 포함
-            'user_pw' => ['required', 'confirmed', 'regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/'],
+            'user_pw' => ['required', 'confirmed', 'regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/'],
             'user_name' => ['required', 'alpha'],
-            'user_phone' => ['required', 'numeric', 'unique:App\Models\User,user_phone'],
+            'user_phone' => ['required', 'numeric', 'unique:App\Models\User,user_phone', 'regex:/^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/'],
             'phone_certificate' => ['required', 'confirmed'],
-            'user_birth' => ['required', 'date'],
+            'user_birth' => ['required', 'regex:/([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))/'],
             'user_gender' => ['required',],
         ];
     }
@@ -54,7 +54,7 @@ class UserRequest extends FormRequest
 
         return [
             //attribute 에 보여줄 값을 정의한다.
-            'user_id' => '아이디로 사용할 이메일',
+            'user_id' => '이메일',
             'user_pw' => '비밀번호',
             'user_name' => '이름',
             'user_phone' => '휴대폰번호',

@@ -74,4 +74,13 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'user_activated' => 'boolean'
     ];
+
+    //해당 이메일을 가진 user의 정보를 리턴
+    public function get_email_check($user_id){
+
+        //$user_info = $this->where('user_id', '=' ,$user_id)->get();
+        $user_info = $this->whereUser_id($user_id)->first();
+
+        return $user_info;
+    }
 }

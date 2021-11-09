@@ -10,7 +10,13 @@
 	}
 
 	$filename = rawurldecode($headers['file_name']);
-	$filename_ext = strtolower(array_pop(explode('.',$filename)));
+	//나누기
+	$filename_ext1 = explode('.',$filename);
+	$filename_ext2 = array_pop($filename_ext1);
+	$filename_ext = strtolower($filename_ext2);
+	//$filename_ext = strtolower(array_pop(explode('.',$filename)));
+	
+
 	$allow_file = array("jpg","jpeg", "png", "bmp", "gif");
 
 	if(!in_array($filename_ext, $allow_file)) {

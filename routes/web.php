@@ -5,6 +5,7 @@ use App\Http\Controllers\auth\findIdPwController;
 use App\Http\Controllers\exp\expController;
 use App\Http\Controllers\sms\aligoSmsController;
 use App\Http\Controllers\auth\socialLoginController;
+use App\Http\Controllers\auth\JoinController;
 use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -55,9 +56,14 @@ Route::get('{locale}', function ($locale) {
 
 /* 사용자 등록 */
 Route::get('auth/join', [
+    'as' => 'join.create_agree',  //form 같은 곳에서 {{ route('join.store') }}  쓰기 위해
+    'uses' => 'App\Http\Controllers\auth\JoinController@index_agree_view',
+]);
+
+Route::get('auth/join/{agree}', [
     'as' => 'join.create',  //form 같은 곳에서 {{ route('join.store') }}  쓰기 위해
     'uses' => 'App\Http\Controllers\auth\JoinController@index',
-]);
+])->where('agree', '[YN]');
 
 Route::post('auth/join', [
     'as' => 'join.store',
@@ -276,9 +282,10 @@ Route::post('/sendPwChange', [findIdPwController::class, 'sendPwChangeLink'])->n
 //시간이 제한된 라우트 제작
 Route::get('/sendPwChange/{code}', function (Request $request, $code) {
     if(!$request->hasValidSignature()){
-        //기간이 지났을 경우의 처리 또는 없거나
+        //기간이 지났을 경우의 처리 또는 없거나 -> 잉여 단축url 삭제
         //abort(401);
-        return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
+        return redirect()->route('short_url_delete');
+        //return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
     }else{
         //제대로 확인이 되었을 경우 확인
         return view('auth.pwchange_sign', compact('code'));
@@ -286,13 +293,6 @@ Route::get('/sendPwChange/{code}', function (Request $request, $code) {
 })->name('sendPwChangeLinkPro');
 
 Route::post('/resetPw', [findIdPwController::class, 'update_pw_service'])->name('resetPw');
-
-//체험단 관련 라우트 그룹
-Route::middleware('auth')->prefix('exp')->group(function(){
-    
-    //체험단 리스트 관련 라우트
-    Route::get('/list', [expController::class, 'index'])->name('exp.list');
-});
 
 //문자인증 관련 테스트 라우트
 Route::get('/test_certification', [aligoSmsController::class, 'test_certification'])->name('test_certification');
@@ -302,6 +302,22 @@ Route::post('/certification_send', [aligoSmsController::class, 'auth_certificati
 
 //문자내역관련 테스트 라우트
 Route::get('/get_list_from_id', [aligoSmsController::class, 'get_sms_list'])->name('get_sms_list');
+
+//체험단 관련 라우트 그룹
+Route::prefix('exp')->group(base_path('routes/exp.php'));
+
+//단축 URL관련
+Route::get('/short_url/{code}', [findIdPwController::class, 'shortenLink'])->name('short_url');
+
+//단축 URL삭제 관련
+Route::get('/short_url/delete/success', [findIdPwController::class, 'delete_short_url'])->name('short_url_delete');
+
+//이메일 중복 확인 관련 테스트 라우트
+Route::get('/test/email/{email}', [JoinController::class, 'email_certification_test'])->name('test_email');
+Route::post('/check/email', [JoinController::class, 'email_certification'])->name('check_email');
+
+//제한시간 지났을 경우 페이지 라우트
+Route::get('/pwChange/failed_time_limit', [findIdPwController::class, 'move_time_limit_page'])->name('failed_time_limit');
 
 /*** 관리자 페이지 접근 ***/
 //route에서 관리자 분리
@@ -315,8 +331,13 @@ Route::prefix('adm/shop')->group(base_path('routes/admshop.php'));
 /*** 프론트 쇼핑몰 접근 ***/
 Route::prefix('shop')->group(base_path('routes/shop.php'));
 
+//관리자 페이지 체험다 관련 라우트
+Route::prefix('adm/exp')->group(base_path('routes/admExp.php'));
+
 //대체 라우트 지정(설정된 라우트가 없을 경우 해당 메시지를 alert으로 보여주고 메인으로 이동)
 //위치를 제일 마지막에 두어야 모든 라우트에 대해 반응가능
 Route::fallback(function () {
-    return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
+
+    //return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
+    return redirect()->route('short_url_delete');
 });

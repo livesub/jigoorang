@@ -32,9 +32,10 @@
                 dataType: 'json',
                 data: { user_phone : user_phone_for_id },
                 success: function(result) {
-                    if(result != null && result != "" && result !="kakao" && result != "naver"){
-                        alert('아이디는 '+result+'입니다');
-                        console.log(result);
+                    if(result != "" && result != null && result[0].result_code != null && result[0].result_code != "" && result !="kakao" && result != "naver"){
+                        //alert('아이디는 '+result+'입니다');
+                        alert("{{ __('auth.success_found_phone') }}");
+                        console.log(result[0]);
                     }else if(result != null && result != "" && (result !="kakao" || result != "naver")){
                         alert('고객님은'+result+'를 이용하여 로그인 하실 수 있습니다.')
                     }else{
@@ -66,8 +67,9 @@
                 dataType: 'json',
                 data: { user_phone : user_phone_for_pw },
                 success: function(result) {
-                    if(result != null && result != "" && result !="kakao" && result != "naver"){
-                        alert('아이디는 '+result+'입니다');
+                    if(result != "" && result != null && result[0].result_code != null && result[0].result_code != "" && result !="kakao" && result != "naver"){
+                        //alert('아이디는 '+result+'입니다');
+                        alert('비밀번호 재설정 링크가 발송되었습니다. \n문자를 확인해주세요');
                         console.log(result);
                     }else if(result != null && result != "" && (result !="kakao" || result != "naver")){
                         alert('고객님은'+result+'를 이용하여 로그인 하실 수 있습니다.')

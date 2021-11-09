@@ -111,7 +111,7 @@ header('Pragma: public');
                         <td><br><br>체험단</td>
                     </tr>
                     <tr>
-                        <td><a href="{{ route('shop.item.index') }}">체험단 등록</a></td>
+                        <td><a href="{{ route('adm_exp_index') }}">체험단 등록</a></td>
 
                     <tr>
                         <td><a href="{{ route('shop.sendcost.index') }}">추가 배송비 관리</a></td>

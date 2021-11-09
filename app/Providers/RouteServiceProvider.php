@@ -64,6 +64,18 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('shop')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/shop.php'));
+            
+            //체험단 관련
+            Route::prefix('exp')
+                ->middleware('exp')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/exp.php'));
+
+            //관리자 체험단 관련
+            Route::prefix('adm/exp')
+                ->middleware('admExp')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/admExp.php'));
         });
     }
 
