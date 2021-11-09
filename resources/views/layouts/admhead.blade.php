@@ -107,25 +107,26 @@ header('Pragma: public');
                         <td><a href="{{ route('shop.setting.index') }}">환경 설정</a></td>
                     </tr>
                     <tr>
+                        <td><a href="{{ route('shop.sendcost.index') }}">추가 배송비 관리</a></td>
+                    </tr>
+                    <tr>
                         <td><a href="{{ route('shop.cate.index') }}">분류 관리</a></td>
                     </tr>
-
                     <tr>
                         <td><a href="{{ route('shop.item.index') }}">상품 관리</a></td>
                     </tr>
+                    <tr>
+                        <td><a href="{{ route('orderlist') }}">주문 관리</a></td>
+                    </tr>
+
+
                     <tr>
                         <td><br><br>체험단</td>
                     </tr>
                     <tr>
                         <td><a href="{{ route('adm_exp_index') }}">체험단 등록</a></td>
-
-                    <tr>
-                        <td><a href="{{ route('shop.sendcost.index') }}">추가 배송비 관리</a></td>
                     </tr>
 
-                    <tr>
-                        <td><a href="{{ route('orderlist') }}">주문 관리</a></td>
-                    </tr>
                 </table>
             </td>
 
