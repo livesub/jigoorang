@@ -133,7 +133,7 @@
         <td><input type="text" name="item_name" id="item_name" value="{{ old('item_name') }}"></td>
     </tr>
     <tr>
-        <td>기본설명</td>
+        <td>상품소개문구</td>
         <td><input type="text" name="item_basic" id="item_basic" value="{{ old('item_basic') }}"></td>
     </tr>
     <tr>
@@ -152,23 +152,26 @@
         <td>
             <span class="frm_info">메인화면에 유형별로 출력할때 사용합니다.<br>이곳에 체크하게되면 상품리스트에서 유형별로 정렬할때 체크된 상품이 가장 먼저 출력됩니다.</span><br>
             <input type="checkbox" name="item_type1" value="1"  id="item_type1">
-            <label for="item_type1">히트 </label>
+            <label for="item_type1">NEW </label>
             <input type="checkbox" name="item_type2" value="1"  id="item_type2">
-            <label for="item_type2">신상품 </label>
+            <label for="item_type2">BIG SALE </label>
             <input type="checkbox" name="item_type3" value="1"  id="item_type3">
-            <label for="item_type3">인기 </label>
-            <input type="checkbox" name="item_type4" value="1"  id="item_type4">
-            <label for="item_type4">할인 </label>
+            <label for="item_type3">HOT </label>
         </td>
     </tr>
-
     <tr>
-        <td>제조사</td>
+        <td>타이틀 표시<br>({{ $de_ment_change }})</td>
+        <td>
+            <input type="checkbox" name="item_special" value="1" id="item_special" >
+        </td>
+    </tr>
+    <tr>
+        <td>제조사(브랜드)</td>
         <td>입력하지 않으면 상품상세페이지에 출력하지 않습니다. <br>
             <input type="text" name="item_manufacture" id="item_manufacture" value="{{ old('item_manufacture') }}">
         </td>
     </tr>
-
+<!--
     <tr>
         <td>원산지</td>
         <td>입력하지 않으면 상품상세페이지에 출력하지 않습니다. <br>
@@ -196,7 +199,7 @@
             <input type="checkbox" name="item_tel_inq" value="1" id="item_tel_inq" > 예
         </td>
     </tr>
-
+-->
     <tr>
         <td>판매가능</td>
         <td>잠시 판매를 중단하거나 재고가 없을 경우에 체크를 해제해 놓으면 출력되지 않으며, 주문도 받지 않습니다. <br>
@@ -522,7 +525,13 @@
         elPlaceHolder: "item_content",
         sSkinURI: "/smarteditor2/SmartEditor2Skin.html",
         fCreator: "createSEditor2",
-        htParams : {fOnBeforeUnload : function(){}} // 이페이지 나오기 alert 삭제
+        htParams : {
+            bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+            bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+            //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+        }, //boolean
     });
 </script>
 

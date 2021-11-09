@@ -78,6 +78,8 @@ class AdmShopItemController extends Controller
 
         $pageList = $page_control['preFirstPage'].$page_control['pre1Page'].$page_control['listPage'].$page_control['next1Page'].$page_control['nextLastPage'];
 
+        $setting_info = CustomUtils::setting_infos();
+
         return view('adm.shop.item.itemlist',[
             'ca_id'             => $ca_id,
             'item_infos'        => $item_infos,
@@ -88,6 +90,7 @@ class AdmShopItemController extends Controller
             'item_search'       => $item_search,
             'keyword'           => $keyword,
             'search_selectboxs' => $search_selectboxs,
+            'de_ment_change'    => stripslashes($setting_info->de_ment_change),
         ]);
     }
 
@@ -136,6 +139,8 @@ class AdmShopItemController extends Controller
             @chmod($target_path, 0755);
         }
 
+        $setting_info = CustomUtils::setting_infos();
+
         return view('adm.shop.item.itemcreate',[
             'item_code'         => "sitem_".time(),
             'ca_id'             => $ca_id,
@@ -144,6 +149,7 @@ class AdmShopItemController extends Controller
             'three_step_infos'  => $three_step_infos,
             'four_step_infos'   => $four_step_infos,
             'five_step_infos'   => $five_step_infos,
+            'de_ment_change'    => stripslashes($setting_info->de_ment_change),
         ]);
     }
 
@@ -236,6 +242,7 @@ class AdmShopItemController extends Controller
         $item_type2             = (int)$request->input('item_type2');
         $item_type3             = (int)$request->input('item_type3');
         $item_type4             = (int)$request->input('item_type4');
+        $item_special           = (int)$request->input('item_special');
         $item_content           = $request->input('item_content');
         $item_cust_price        = (int)$request->input('item_cust_price');
         $item_price             = (int)$request->input('item_price');
@@ -380,6 +387,7 @@ class AdmShopItemController extends Controller
             'item_type2'            => $item_type2,
             'item_type3'            => $item_type3,
             'item_type4'            => $item_type4,
+            'item_special'          => $item_special,
             'item_content'          => $item_content,
             'item_cust_price'       => $item_cust_price,
             'item_price'            => $item_price,
@@ -789,6 +797,8 @@ class AdmShopItemController extends Controller
         $five_str_cut = substr($item_info->sca_id,0,10);
         $five_step_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr', 'sca_name_en')->where([['sca_display','Y'],['sca_id','like',$four_str_cut.'%']])->whereRaw('length(sca_id) = 10')->orderby('sca_id', 'ASC')->get();
 
+        $setting_info = CustomUtils::setting_infos();
+
         return view('adm.shop.item.itemmodify',[
             'one_step_infos'    => $one_step_infos,
             'two_step_infos'    => $two_step_infos,
@@ -802,6 +812,7 @@ class AdmShopItemController extends Controller
             'three_str_cut'     => $three_str_cut,
             'four_str_cut'      => $four_str_cut,
             'five_str_cut'      => $five_str_cut,
+            'de_ment_change'    => stripslashes($setting_info->de_ment_change),
         ]);
     }
 
@@ -1044,6 +1055,7 @@ class AdmShopItemController extends Controller
         $item_type2             = (int)$request->input('item_type2');
         $item_type3             = (int)$request->input('item_type3');
         $item_type4             = (int)$request->input('item_type4');
+        $item_special           = (int)$request->input('item_special');
         $item_content           = $request->input('item_content');
         $item_cust_price        = (int)$request->input('item_cust_price');
         $item_price             = (int)$request->input('item_price');
@@ -1191,6 +1203,7 @@ class AdmShopItemController extends Controller
             'item_type2'            => $item_type2,
             'item_type3'            => $item_type3,
             'item_type4'            => $item_type4,
+            'item_special'          => $item_special,
             'item_content'          => $item_content,
             'item_cust_price'       => $item_cust_price,
             'item_price'            => $item_price,

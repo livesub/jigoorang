@@ -64,6 +64,7 @@ class shopitems extends Model
         'item_type2',
         'item_type3',
         'item_type4',
+        'item_special',
         'item_cust_price',
         'item_price',
         'item_point_type',

@@ -25,10 +25,11 @@ class CreateShopitemsTable extends Migration
             $table->string('item_model')->nullable()->comment('모델');
             $table->text('item_option_subject')->nullable()->comment('상품선택옵션 콤마로 저장');
             $table->text('item_supply_subject')->nullable()->comment('상품추가옵션 콤마로 저장');
-            $table->tinyInteger('item_type1')->length(1)->default(0)->comment('상품유형:히트');
-            $table->tinyInteger('item_type2')->length(1)->default(0)->comment('상품유형:신상품');
-            $table->tinyInteger('item_type3')->length(1)->default(0)->comment('상품유형:인기');
-            $table->tinyInteger('item_type4')->length(1)->default(0)->comment('상품유형:할인');
+            $table->tinyInteger('item_type1')->length(1)->default(0)->comment('상품유형:NEW');
+            $table->tinyInteger('item_type2')->length(1)->default(0)->comment('상품유형:BIG SALE');
+            $table->tinyInteger('item_type3')->length(1)->default(0)->comment('상품유형:HOT');
+            $table->tinyInteger('item_type4')->length(1)->default(0)->comment('상품유형:여분');
+            $table->tinyInteger('item_special')->length(1)->default(0)->comment('기획전표시');
             $table->text('item_content')->comment('상품내용');
             $table->integer('item_cust_price')->default(0)->comment('시중가격');
             $table->integer('item_price')->default(0)->comment('판매가격');

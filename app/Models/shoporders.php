@@ -52,6 +52,7 @@ class shoporders extends Model
         'imp_apply_num',
         'imp_card_name',
         'imp_card_quota',
+        'imp_card_number',
         'od_delivery_company',
         'od_invoice',
         'od_ip',

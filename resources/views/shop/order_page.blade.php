@@ -141,6 +141,7 @@
 
 <input type="hidden" name="imp_card_name" id="imp_card_name">   <!-- 카드사에서 전달 받는 값(카드사명칭)) -->
 <input type="hidden" name="imp_card_quota" id="imp_card_quota">   <!-- 카드사에서 전달 받는 값(할부개월수)) -->
+<input type="hidden" name="imp_card_number" id="imp_card_number">   <!-- 카드사에서 전달 받는 값(카드번호) -->
 
     <tr>
         <td>
@@ -566,6 +567,7 @@ return false;
                 $("#imp_provider").val(rsp.pg_provider); //카드사에서 전달 받는 값(결제승인/시도된 PG사)
                 $("#imp_card_name").val(rsp.card_name); //카드사에서 전달 받는 값(카드사명칭))
                 $("#imp_card_quota").val(rsp.card_quota); //카드사에서 전달 받는 값(할부개월수))
+                $("#imp_card_number").val(rsp.card_number); //카드사에서 전달 받는 값(카드번호)
 //alert("성공");
                 $("#forderform").submit();
             } else {

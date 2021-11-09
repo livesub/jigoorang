@@ -78,6 +78,15 @@
     </tr>
 </table>
 
+<table border=1>
+    <tr>
+        <td><b>타이틀변경</b></td>
+        <td>
+            <input type="text" name="de_ment_change" value="{{ $de_ment_change }}" id="de_ment_change">
+        </td>
+    </tr>
+</table>
+
 @if(Auth::user()->user_level < 3)
 <table border=1>
     <tr>
