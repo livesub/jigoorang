@@ -140,7 +140,7 @@ class ItemController extends Controller
         }
 
         //배송비 타입에 따른 변경
-        $sc_method_disp = '무료배송';
+        $sc_method_disp = '무료';
         if($item_info[0]->item_sc_price > 0) $sc_method_disp = number_format($item_info[0]->item_sc_price).'원';
 
         // 상품품절체크
@@ -168,6 +168,7 @@ class ItemController extends Controller
             "small_item_img"    => $small_item_img,
             "CustomUtils"       => $CustomUtils,
             "use_point"         => $use_point->company_use_point,
+            "de_send_cost"      => $use_point->de_send_cost,
             "use_point_disp"    => $use_point_disp,
             "sc_method_disp"    => $sc_method_disp,
             "point"             => $item_info[0]->item_point,

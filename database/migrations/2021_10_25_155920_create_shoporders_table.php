@@ -27,7 +27,7 @@ class CreateShopordersTable extends Migration
             $table->string('ad_addr2')->comment('받으시는 분 상세주소');
             $table->string('ad_addr3')->nullable()->comment('받으시는 분 주소 참고 항목');
             $table->string('ad_jibeon')->comment('받으시는 분 지번주소');
-            $table->text('od_memo')->comment('전하실말씀');
+            $table->text('od_memo')->nullable()->comment('전하실말씀');
             $table->integer('od_cart_count')->default(0)->comment('장바구니 상품 개수');
             $table->integer('od_cart_price')->default(0)->comment('주문상품 총금액');
             $table->integer('de_send_cost')->default(0)->comment('기본 배송비');

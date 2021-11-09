@@ -20,7 +20,7 @@
         <td>상품명</td>
         <td>총수량</td>
         <td>판매가</td>
-        <td>배송비</td>
+        <td>상품별배송비</td>
         <td>소계</td>
     </tr>
 
@@ -28,6 +28,7 @@
         $tot_point = 0;
         $tot_sell_price = 0;
         $send_cost = 0;
+        $tot_send_cost = 0;
     @endphp
 
     @foreach($cart_infos as $cart_info)
@@ -60,7 +61,7 @@
 
             $point      = $sum[0]->point;
             $sell_price = $sum[0]->price;
-
+            $tmp_sendcost = $sendcost;
         @endphp
     <tr>
         <td><input type="checkbox" name="ct_chk[{{ $num }}]" value="1" id="ct_chk_{{ $num }}" checked="checked"></td>
@@ -92,11 +93,13 @@
             $num++;
             $tot_point      += $point;
             $tot_sell_price += $sell_price;
+            $tot_send_cost  += $tmp_sendcost;
         @endphp
 
     @endforeach
 
     @php
+
         if ($num == 0) {
             echo '<tr><td colspan="7" class="empty_table">장바구니에 담긴 상품이 없습니다.</td></tr>';
         } else {
@@ -116,14 +119,24 @@
 @endif
 
 @php
-    $tot_price = $tot_sell_price + $send_cost; // 총계 = 주문상품금액합계 + 배송비
+    $tot_price = $tot_sell_price + $de_send_cost + $tot_send_cost; // 총계 = 주문상품금액합계 + 기본배송비 + 상품별배송비
 @endphp
 
-@if ($tot_price > 0 || $send_cost > 0)
+@if ($tot_price > 0 || $tot_send_cost > 0 || $de_send_cost > 0)
 <table border=1>
     <tr>
-        <td>배송비</td>
-        <td><strong>{{ number_format($send_cost)  }}</strong> 원</td>
+        <td>주문금액</td>
+        <td><strong>{{ number_format($tot_sell_price) }} </strong> 원</td>
+        @if($de_send_cost > 0)
+        <td>기본배송비</td>
+        <td><strong>{{ number_format($de_send_cost)  }}</strong> 원</td>
+        @endif
+
+        @if($tot_send_cost > 0)
+        <td>상품별배송비</td>
+        <td><strong>{{ number_format($tot_send_cost)  }}</strong> 원</td>
+        @endif
+
         <td>총계 가격</td>
         <td><strong>{{ number_format($tot_price) }}</strong> 원</td>
     </tr>

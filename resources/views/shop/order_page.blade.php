@@ -23,8 +23,8 @@
         <th scope="col">상품명</th>
         <th scope="col">총수량</th>
         <th scope="col">판매가</th>
-        <th scope="col">소계</th>
-        <th scope="col">배송비</th>
+        <th scope="col">주문금액</th>
+        <th scope="col">상품별 배송비</th>
     </tr>
     @php
         $tot_point = 0;
@@ -44,8 +44,6 @@
 
             if (!$goods)
             {
-                //$goods = addslashes($row[it_name]);
-                //$goods = get_text($row[it_name]);
                 $goods = preg_replace("/\'|\"|\||\,|\&|\;/", "", $cart_info->item_name);
                 $goods_item_code = $cart_info->item_code;
             }
@@ -214,7 +212,7 @@
         <td>
             <table border=1>
                 <tr>
-                    <td>주문</td>
+                    <td>주문금액</td>
                     <td>기본 배송비 + 상품별 배송비</td>
                 </tr>
                 <tr>
@@ -417,6 +415,7 @@
     }
 
     function forderform_check(){
+
         // 재고체크
         var stock_msg = order_stock_check();
 
@@ -465,17 +464,18 @@
             return false;
         }
 
-        @if(Auth::user()->user_point > 0)
+        var od_temp_point = 0;
         var od_price = parseInt($("#od_price").val());
         var de_send_cost = parseInt($("#de_send_cost").val());
         var send_cost = parseInt($("#od_send_cost").val());
         var send_cost2 = parseInt($("#od_send_cost2").val());
-        var od_temp_point = parseInt($("#od_temp_point").val());
         var user_point = parseInt($("#user_point").val());
 
         //배송비에도 사용 가능 하기에 총금액을 구함(주문금액 + 기본 배송비 + 각 상품 배송비 + 추가 배송비)
         var total_price = od_price + de_send_cost + send_cost + send_cost2;
 
+        @if(Auth::user()->user_point > 0)
+        od_temp_point = parseInt($("#od_temp_point").val());
         if($.trim($("#od_temp_point").val() != "")){    //적립금 사용
             //총결제액 보다 많이 사용 할수 없음
             if(total_price < od_temp_point){
@@ -532,14 +532,13 @@ return false;
 return false;
 */
 
-
         //결제 모듈 호출
         requestPay($("#pg").val(), $("#method").val(), total_price, od_temp_point);
     }
 </script>
 
 <script>
-    function requestPay(pg, method, price, point) {
+    function requestPay(pg, method, price, point=0) {
         var tot_pay = price - point;
         var merchant_uid = "{{ $order_id }}";
 

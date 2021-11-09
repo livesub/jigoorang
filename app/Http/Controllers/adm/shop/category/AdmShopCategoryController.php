@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
+use App\Helpers\Custom\PageSet; //페이지 함수
 use Illuminate\Support\Facades\Auth;    //인증
 use Illuminate\Support\Facades\DB;
 use App\Models\shopcategorys;    //카테고리 모델 정의
@@ -27,23 +28,48 @@ class AdmShopCategoryController extends Controller
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
-        $pageNum     = $request->input('page');
-        $writeList   = 15;  //15갯씩 뿌리기
-        $pageNumList = 15; // 한 페이지당 표시될 글 갯수
-        $type = 'shopcate';
+        $page     = $request->input('page');
+        $pageScale  = 15;  //한페이지당 라인수
+        $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
-        $page_control = CustomUtils::page_function('shopcategorys',$pageNum,$writeList,$pageNumList,$type,'','','','');
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
 
-        $scate_infos = DB::table('shopcategorys')->orderby('sca_id', 'ASC')->skip($page_control['startNum'])->take($writeList)->get();   //정보 읽기
+        $scate_infos = DB::table('shopcategorys');
 
-        $pageList = $page_control['preFirstPage'].$page_control['pre1Page'].$page_control['listPage'].$page_control['next1Page'].$page_control['nextLastPage'];
+        $total_record   = 0;
+        $total_record   = $scate_infos->count(); //총 게시물 수
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
+
+        $scate_rows = $scate_infos->orderby('sca_id', 'ASC')->offset($start_num)->limit($pageScale)->get();
+
+        $virtual_num = $total_record - $pageScale * ($page - 1);
+        $tailarr = array();
+        //$tailarr['AA'] = 'AA';    //고정된 전달 파라메터가 있을때 사용
+
+        $PageSet        = new PageSet;
+        $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
+        $prevPage       = $PageSet->getPrevPage("이전");
+        $nextPage       = $PageSet->getNextPage("다음");
+        $pre10Page      = $PageSet->pre10("이전10");
+        $next10Page     = $PageSet->next10("다음10");
+        $preFirstPage   = $PageSet->preFirst("처음");
+        $nextLastPage   = $PageSet->nextLast("마지막");
+        $listPage       = $PageSet->getPageList();
+        $pnPage         = $prevPage.$listPage.$nextPage;
 
         return view('adm.shop.category.cate_list',[
-            'virtual_num'       => $page_control['virtual_num'],
-            'totalCount'        => $page_control['totalCount'],
-            "scate_infos"       => $scate_infos,
-            'pageNum'           => $page_control['pageNum'],
-            'pageList'          => $pageList,
+            'virtual_num'       => $virtual_num,
+            'totalCount'        => $total_record,
+            "scate_infos"       => $scate_rows,
+            'pnPage'            => $pnPage,
+            'page'              => $page,
         ],$Messages::$mypage['mypage']);
     }
 

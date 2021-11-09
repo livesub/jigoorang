@@ -30,7 +30,7 @@
         </td>
         <td>
             <select name="item_search" id="item_search">
-                @php
+                @php        //if($item_search == "") $item_search = "item_name";
                     if($item_search == "item_name" || $item_search == "") $item_name_selected = "selected";
                     else $item_name_selected = "";
 
@@ -128,7 +128,7 @@
 <table>
     <tr>
         <td>
-           {!! $pageList !!}
+           {!! $pnPage !!}
         </td>
     </tr>
 </table>
@@ -180,6 +180,9 @@
 <form name="item_modi_form" id="item_modi_form" method="get" action="{{ route('shop.item.modify') }}">
     <input type="hidden" name="id" id="id">
     <input type="hidden" name="sca_id" id="sca_id">
+    <input type="hidden" name="page" id="page" value="{{ $page }}">
+    <input type="hidden" name="item_search" id="item_search" value="{{ $item_search }}">
+    <input type="hidden" name="keyword" id="keyword" value="{{ $keyword }}">
 </form>
 
 <script>

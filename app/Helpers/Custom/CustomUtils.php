@@ -1022,8 +1022,7 @@ $um_value='80/0.5/3'
         // 상품에 선택옵션 있으면..
         $option_cnt = DB::table('shopitemoptions')->where([['item_code',$item_code],['sio_type','0']])->count();
 
-        if($option_cnt < 0) {   //테스트
-        //if($option_cnt > 0) {     //정상
+        if($option_cnt > 0) {     //정상
             $option_gets = DB::table('shopitemoptions')->select('sio_id', 'sio_type', 'sio_stock_qty')->where([['item_code',$item_code],['sio_type','0'],['sio_use','1']])->get();
 
             $k = 0;
@@ -1337,8 +1336,12 @@ $um_value='80/0.5/3'
             if($i == 0) $str .= '<ul>'.PHP_EOL;
             $price_plus = '';
 
-            if($item_option->sio_price >= 0) $price_plus = '+';
-            $str .= '<tr><td>옵션 : '.$item_option->sct_option.' '.$item_option->sct_qty.'개 ('.$price_plus.$this->display_price($item_option->sio_price).')</td></tr>'.PHP_EOL;
+            if($item_option->sio_price > 0) {
+                $price_plus = '+';
+                $str .= '<tr><td>옵션 : '.$item_option->sct_option.' '.$item_option->sct_qty.'개 ('.$price_plus.$this->display_price($item_option->sio_price).')</td></tr>'.PHP_EOL;
+            }else{
+                $str .= '<tr><td>'.$item_option->sct_option.' '.$item_option->sct_qty.'개'.'</td></tr>'.PHP_EOL;
+            }
         }
 
         return $str;

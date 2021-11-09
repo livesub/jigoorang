@@ -23,6 +23,9 @@
 <input type="hidden" name="last_choice_ca_id" id="last_choice_ca_id" value="{{ $item_info->sca_id }}">
 <input type="hidden" name="item_code" id="item_code" value="{{ $item_info->item_code }}">
 <input type="hidden" name="file_num" id="file_num">
+<input type="hidden" name="page" id="page" value="{{ $page }}">
+<input type="hidden" name="item_search" id="item_search" value="{{ $item_search }}">
+<input type="hidden" name="keyword" id="keyword" value="{{ $keyword }}">
 
 <table border=1 width="900px;">
     <tr>
@@ -256,7 +259,7 @@
             <input type="checkbox" name="item_tel_inq" value="1" id="item_tel_inq" {{ $item_tel_inq_checked }}> 예
         </td>
     </tr>
--->
+
     <tr>
         <td>판매가능</td>
         <td>잠시 판매를 중단하거나 재고가 없을 경우에 체크를 해제해 놓으면 출력되지 않으며, 주문도 받지 않습니다. <br>
@@ -267,6 +270,7 @@
             <input type="checkbox" name="item_use" value="1" id="item_use" {{ $item_use_checked }}> 예
         </td>
     </tr>
+-->
     <tr>
         <td>상품내용</td>
         <td>
@@ -792,7 +796,7 @@
     </tr>
 -->
     <tr>
-        <td>기본배송비</td>
+        <td>상품 추가 배송비</td>
         <td>
             <input type="text" name="item_sc_price" value="{{ $item_info->item_sc_price }}" id="item_sc_price" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원
         </td>

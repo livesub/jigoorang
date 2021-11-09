@@ -199,13 +199,14 @@
             <input type="checkbox" name="item_tel_inq" value="1" id="item_tel_inq" > 예
         </td>
     </tr>
--->
+
     <tr>
         <td>판매가능</td>
         <td>잠시 판매를 중단하거나 재고가 없을 경우에 체크를 해제해 놓으면 출력되지 않으며, 주문도 받지 않습니다. <br>
             <input type="checkbox" name="item_use" value="1" id="item_use" checked> 예
         </td>
     </tr>
+-->
     <tr>
         <td>상품내용</td>
         <td>
@@ -338,7 +339,7 @@
     </tr>
 -->
     <tr>
-        <td>기본배송비</td>
+        <td>상품 추가 배송비</td>
         <td>
             <input type="text" name="item_sc_price" value="0" id="item_sc_price" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원
         </td>

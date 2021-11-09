@@ -96,7 +96,7 @@
 <table>
     <tr>
         <td>
-           {!! $pageList !!}
+           {!! $pnPage !!}
         </td>
     </tr>
 </table>
@@ -105,7 +105,7 @@
 <form name="cate_form" id="cate_form" method="get" action="">
     <input type="hidden" name="id" id="id">
     <input type="hidden" name="sca_id" id="sca_id">
-    <input type="hidden" name="page" id="page" value="{{ $pageNum }}">
+    <input type="hidden" name="page" id="page" value="{{ $page }}">
 </form>
 
 <script>
