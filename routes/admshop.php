@@ -164,5 +164,10 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'as' => 'orderdetail',
         'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@orderdetail',
     ]);
+
+    Route::post('orderprocess', [
+        'as' => 'orderprocess',
+        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@orderprocess',
+    ]);
 });
 

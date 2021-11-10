@@ -191,69 +191,71 @@ class OrderController extends Controller
         ]);
 
     }
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+
+    public function orderprocess(Request $request)
     {
-        //
+        $CustomUtils = new CustomUtils;
+
+        $ct_chk     = $request->input('ct_chk');
+        $sct_status = $request->input('sct_status');
+
+        if($ct_chk == '' || $sct_status == ''){
+            return redirect()->back()->with('alert_messages', '처리할 자료를 하나 이상 선택해 주십시오.');
+            exit;
+        }
+
+        $order_id   = $request->input('order_id');
+        $user_id    = $request->input('user_id');
+        $od_email   = $request->input('od_email');
+        $page_move  = $request->input('page_move');
+
+        $it_sel     = $request->input('it_sel');
+        $ct_id      = $request->input('ct_id');
+        $ct_chk     = $request->input('ct_chk');
+
+
+dd($it_sel);
+        $order_info = DB::table('shoporders')->select('order_id')->where('order_id', $order_id)->first();
+        if(is_null($order_info)){
+            return redirect()->back()->with('alert_messages', '해당 주문번호로 주문서가 존재하지 않습니다.');
+            exit;
+        }
+
+        $arr_it_id = array();
+
+        for ($i = 0; $i < count($ct_id); $i++)
+        {
+            if($ct_chk[$i] == '') continue;
+            if($ct_id[$i] == '') continue;
+
+            $cart_info = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $ct_id]])->first();
+
+            if(is_null($cart_info)) continue;
+
+
+
+
+
+dd("FFFFFFFFF");
+        }
+
+
+
+
+
+
+
+
+
+        $status_normal = array('주문','입금','준비','배송','완료');
+        $status_cancel = array('취소','반품','품절');
+
+
+dd($ct_chk);
+
+
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

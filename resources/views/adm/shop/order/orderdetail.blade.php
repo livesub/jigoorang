@@ -17,17 +17,18 @@
     </tr>
 </table>
 <table border=1>
-    <form name="frmorderform" method="post" action="">
+    <form name="orderdetailform" id="orderdetailform" method="post" action="{{ route('orderprocess') }}">
     {!! csrf_field() !!}
-    <input type="hidden" name="od_id" value="{{ $order_info->order_id }}">
-    <input type="hidden" name="mb_id" value="{{ $order_info->user_id }}">
+    <input type="hidden" name="order_id" value="{{ $order_info->order_id }}">
+    <input type="hidden" name="user_id" value="{{ $order_info->user_id }}">
     <input type="hidden" name="od_email" value="{{ $order_info->user_id }}">
     <input type="hidden" name="page_move" value="{!! $page_move !!}">
     <input type="hidden" name="pg_cancel" value="0">
+    <input type="hidden" name="sct_status" id="sct_status">
         <tr>
             <th scope="col">상품명</th>
             <th scope="col">
-                <input type="checkbox" id="sit_select_all">
+                <input type="checkbox" id="sit_select_all"  onclick="selectAll(this)">
             </th>
             <th scope="col">옵션항목</th>
             <th scope="col">상태</th>
@@ -64,18 +65,20 @@
                 @if($k == 0)
             <td rowspan="{{ $rowspan }}"><img src="{{ asset($image) }}"> {{ stripslashes($cart->item_name) }}</td>
             <td rowspan="{{ $rowspan }}">
-                <input type="checkbox" id="sit_sel_{{ $i }}" name="it_sel[]">
+                <input type="checkbox" id="sit_sel_{{ $i }}" name="it_sel[]" value="{{ $cart->item_code }}">
+                <input type="hidden" name="item_code[]" value="{{ $cart->item_code }}">
             </td>
                 @endif
 
             <td>
-                <input type="checkbox" name="ct_chk[{{ $chk_cnt }}]" id="ct_chk_{{ $chk_cnt }}" value="{{ $chk_cnt }}">
+                <input type="checkbox" name="ct_chk[{{ $chk_cnt }}]" id="ct_chk_{{ $chk_cnt }}" value="{{ $chk_cnt }}" class="sct_sel_{{ $i }}"><!-- class 꼭 필요!! -->
                 <input type="hidden" name="ct_id[{{ $chk_cnt }}]" value="{{ $cart->id }}">
                 {{ $opt->sct_option }}
             </td>
             <td>{{ $opt->sct_status }}</td>
             <td>
-                {{ $opt->sct_qty }}
+                <input type="text" name="sct_qty[{{ $chk_cnt }}]" id="sct_qty_{{ $chk_cnt }}" value="{{ $opt->sct_qty }}" size="5">
+
             </td>
             <td>{{ number_format($opt_price) }}</td>
             <td>{{ number_format($ct_price['stotal']) }}</td>
@@ -93,7 +96,7 @@
 <table border=1>
     <tr>
         <td>
-            <input type="hidden" name="chk_cnt" value="{{ $chk_cnt }}">
+            <input type="hidden" name="chk_cnt" id="chk_cnt" value="{{ $chk_cnt }}">
             <strong>주문 및 장바구니 상태 변경</strong>
             <button type="button" onclick="status_change('준비')">준비</button>
             <button type="button" onclick="status_change('배송')">배송</button>
@@ -107,9 +110,118 @@
 
 
 
+
+
+<script>
+function selectAll(selectAll)  {
+    const checkboxes
+        = document.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach((checkbox) => {
+        checkbox.checked = selectAll.checked
+    })
+}
+
+</script>
+
+
+<script>
+$(function() {
+    // 전체 옵션선택
+    $("#sit_select_all").click(function() {
+        if($(this).is(":checked")) {
+            $("input[name='it_sel[]']").attr("checked", true);
+            $("input[name^=ct_chk]").attr("checked", true);
+        } else {
+            $("input[name='it_sel[]']").attr("checked", false);
+            $("input[name^=ct_chk]").attr("checked", false);
+        }
+    });
+
+    // 상품의 옵션선택
+    $("input[name='it_sel[]']").click(function() {
+        var cls = $(this).attr("id").replace("sit_", "sct_");
+        var $chk = $("input[name^=ct_chk]."+cls);
+        if($(this).is(":checked"))
+        {
+            $chk.attr("checked", true);
+        }else{
+            $chk.attr("checked", false);
+        }
+    });
+/*
+    // 개인결제추가
+    $("#personalpay_add").on("click", function() {
+        var href = this.href;
+        window.open(href, "personalpaywin", "left=100, top=100, width=700, height=560, scrollbars=yes");
+        return false;
+    });
+
+    // 부분취소창
+    $("#orderpartcancel").on("click", function() {
+        var href = this.href;
+        window.open(href, "partcancelwin", "left=100, top=100, width=600, height=350, scrollbars=yes");
+        return false;
+    });
+*/
+});
+</script>
+
+
+
 <script>
     function status_change(status){
-alert(status);
+        var msg = '';
+        if(status == "취소"){
+            msg = status + '시 자동 환불 처리 되어 복구 할수 없습니다.';
+        }else{
+            msg = status + '상태를 선택하셨습니다.';
+        }
+
+        var check = false;
+        for (i=0; i<$("#chk_cnt").val(); i++) {
+            if($('#ct_chk_'+i).is(':checked') == true){
+                check = true;
+            }
+        }
+
+        if (check == false) {
+            alert("처리할 자료를 하나 이상 선택해 주십시오.");
+            return false;
+        }
+
+        if (confirm(msg + "\n\n선택하신대로 처리하시겠습니까?")) {
+            //return true;
+            $("#sct_status").val(status);
+            $("#orderdetailform").submit();
+        } else {
+            return false;
+        }
+
+/*
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+                    type: 'post',
+                    url: '{{ route('shop.cate.ajax_select') }}',
+                    dataType: 'text',
+                    data: {
+                        'ca_id'   : $('#caa_id').val(),
+                        'length'  : $('#caa_id').val().length,
+                    },
+                    success: function(result) {
+                        var data = JSON.parse(result);
+
+
+                    },error: function(result) {
+                        console.log(result);
+                    }
+                });
+*/
+
+
+
+
+
+
     }
 </script>
 

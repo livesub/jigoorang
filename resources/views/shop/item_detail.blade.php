@@ -81,11 +81,14 @@
                 </tr>
                 @else
                 <!-- 전화문의가 아닐 경우 -->
+                    @php
+                        $discount = 0;
+                        $discount_rate = 0;
+                        $disp_discount_rate = 0;
+                    @endphp
+
                     @if($item_info->item_cust_price != "0")
                         @php
-                            $discount = 0;
-                            $discount_rate = 0;
-                            $disp_discount_rate = 0;
                             if($item_info->item_cust_price > 0){
                                 //시중가격 값이 있을때 할인율 계산
                                 $discount = (int)$item_info->item_cust_price - (int)$item_info->item_price; //할인액
@@ -220,7 +223,7 @@
                                                     <button type="button" class="sit_qty_minus"><i class="fa fa-minus" aria-hidden="true"></i><span class="sound_only">감소</span></button>
                                                     <input type="text" name="ct_qty[{{ $item_info->item_code }}][]" value="1" id="ct_qty_11" class="num_input" size="5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                                                     <button type="button" class="sit_qty_plus"><i class="fa fa-plus" aria-hidden="true"></i><span class="sound_only">증가</span></button>
-                                                    <span class="sit_opt_prc">+0원</span>
+                                                    <span class="sit_opt_prc"></span>
                                                 </div>
                                             </li>
                                         </ul>

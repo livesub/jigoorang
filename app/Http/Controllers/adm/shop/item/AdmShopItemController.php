@@ -1095,7 +1095,8 @@ class AdmShopItemController extends Controller
         $item_point_type        = (int)$request->input('item_point_type');
         $item_point             = (int)$request->input('item_point');
         $item_supply_point      = (int)$request->input('item_supply_point');
-        $item_use               = (int)$request->input('item_use');
+        //$item_use               = (int)$request->input('item_use');
+        $item_use               = 1;
         $item_nocoupon          = (int)$request->input('item_nocoupon');
         $item_soldout           = (int)$request->input('item_soldout');
         $item_stock_qty         = $request->input('item_stock_qty');
