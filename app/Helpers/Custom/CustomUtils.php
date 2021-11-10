@@ -765,13 +765,13 @@ $um_value='80/0.5/3'
         $icon = "<tr><td>";
 
         if ($item->item_type1 != 0)
-            $icon .= '<span class="shop_icon shop_icon_1">히트</span>';
+            $icon .= '<span class="shop_icon shop_icon_1">NEW</span>';
 
         if ($item->item_type2 != 0)
-            $icon .= '<span class="shop_icon shop_icon_2">신상품</span>';
+            $icon .= '<span class="shop_icon shop_icon_2">BIG SALE</span>';
 
         if ($item->item_type3 != 0)
-            $icon .= '<span class="shop_icon shop_icon_3">인기</span>';
+            $icon .= '<span class="shop_icon shop_icon_3">HOT</span>';
 
         if ($item->item_type4 != 0)
             $icon .= '<span class="shop_icon shop_icon_4">할인</span>';
