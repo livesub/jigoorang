@@ -57,7 +57,8 @@ class AdmShopSettingController extends Controller
         $shop_img_width         = "500%%300%%100";
         $shop_img_height        = "500%%300%%100";
         $de_send_cost           = '';
-        $de_ment_change         = '기획전';
+        $de_ment_change         = '기획전1';
+        $de_ment_change2        = '기획전2';
         $member_reg_point = "";
 
         if(!is_null($setting_info)){
@@ -82,8 +83,10 @@ class AdmShopSettingController extends Controller
             $member_reg_point       = $setting_info->member_reg_point;
             //기본배송비
             $de_send_cost           = $setting_info->de_send_cost;
-            //기획전 멘트 변경
+            //기획전1 멘트 변경
             $de_ment_change         = stripslashes($setting_info->de_ment_change);
+            //기획전1 멘트 변경
+            $de_ment_change2        = stripslashes($setting_info->de_ment_change2);
 
             $shop_img_width         = $setting_info->shop_img_width;
             $shop_img_height        = $setting_info->shop_img_height;
@@ -110,8 +113,10 @@ class AdmShopSettingController extends Controller
             'member_reg_point'      => $member_reg_point,
             //기본배송비
             'de_send_cost'          => $de_send_cost,
-            //기획전 멘트 변경
+            //기획전1 멘트 변경
             'de_ment_change'        => $de_ment_change,
+            //기획전2 멘트 변경
+            'de_ment_change2'        => $de_ment_change2,
 
             'shop_img_width'        => $shop_img_width,
             'shop_img_height'       => $shop_img_height,
@@ -147,9 +152,10 @@ class AdmShopSettingController extends Controller
         $member_reg_point       = $request->input('member_reg_point');
         //기본배송비
         $de_send_cost           = $request->input('de_send_cost');
-        //기획전 멘트 변경
+        //기획전1 멘트 변경
         $de_ment_change         = $request->input('de_ment_change');
-
+        //기획전2 멘트 변경
+        $de_ment_change2        = $request->input('de_ment_change2');
         $shop_img_width         = $request->input('shop_img_width');
         $shop_img_height        = $request->input('shop_img_height');
 
@@ -185,6 +191,7 @@ class AdmShopSettingController extends Controller
             'member_reg_point'      => (int)$member_reg_point,
             'de_send_cost'          => (int)$de_send_cost,
             'de_ment_change'        => addslashes($de_ment_change),
+            'de_ment_change2'       => addslashes($de_ment_change2),
             'shop_img_width'        => $shop_img_width,
             'shop_img_height'       => $shop_img_height,
         );

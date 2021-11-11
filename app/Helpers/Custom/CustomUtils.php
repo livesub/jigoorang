@@ -785,7 +785,7 @@ $um_value='80/0.5/3'
     {
         $icon = "<tr><td>";
 
-        switch($item_info->item_type1) {
+        switch($item->item_type1) {
             case 1:
                 $icon = '<span class="shop_icon shop_icon_1">NEW</span>';
                 break;

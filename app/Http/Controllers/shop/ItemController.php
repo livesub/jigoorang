@@ -122,6 +122,10 @@ class ItemController extends Controller
             exit;
         }
 
+        if($item_info[0]->item_del == 'Y'){
+            return redirect()->back()->with('alert_messages', "판매 중지된 상품입니다.");
+            exit;
+        }
         //예외처리(카테고리 비출력, 상품 비출력, 판매 가능 여부)
         if($item_info[0]->sca_display == 'N' || $item_info[0]->item_display == 'N' || $item_info[0]->item_use == '0'){
             return redirect()->back()->with('alert_messages', $Messages::$shop['now_no_item']);
