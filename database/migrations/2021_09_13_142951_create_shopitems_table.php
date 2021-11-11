@@ -29,8 +29,14 @@ class CreateShopitemsTable extends Migration
             $table->tinyInteger('item_type2')->length(1)->default(0)->comment('상품유형:BIG SALE');
             $table->tinyInteger('item_type3')->length(1)->default(0)->comment('상품유형:HOT');
             $table->tinyInteger('item_type4')->length(1)->default(0)->comment('상품유형:여분');
-            $table->tinyInteger('item_special')->length(1)->default(0)->comment('기획전표시');
+            $table->tinyInteger('item_special')->length(1)->default(0)->comment('기획전1표시');
+            $table->tinyInteger('item_special2')->length(1)->default(0)->comment('기획전2표시');
+            $table->tinyInteger('item_new_arrival')->length(1)->default(0)->comment('new arrival');
             $table->text('item_content')->comment('상품내용');
+            $table->text('item_content2')->comment('상품추가내용');
+            $table->text('item_content3')->comment('상품추가내용');
+            $table->text('item_content4')->comment('상품추가내용');
+            $table->text('item_content4')->comment('상품추가내용');
             $table->integer('item_cust_price')->default(0)->comment('시중가격');
             $table->integer('item_price')->default(0)->comment('판매가격');
             $table->tinyInteger('item_point_type')->length(1)->default(0)->comment('포인트 유형');

@@ -759,8 +759,8 @@ $um_value='80/0.5/3'
         return $price;
     }
 
-    // 상품이미지에 유형 아이콘 출력
-    public static function item_icon($item)
+    // 상품이미지에 유형 아이콘 출력(211111 라디오 버튼으로 바뀜)
+    public static function old_item_icon($item)
     {
         $icon = "<tr><td>";
 
@@ -776,6 +776,31 @@ $um_value='80/0.5/3'
         if ($item->item_type4 != 0)
             $icon .= '<span class="shop_icon shop_icon_4">할인</span>';
         $icon .= "</td></tr>";
+
+        return $icon;
+    }
+
+    // 상품이미지에 유형 아이콘 출력
+    public static function item_icon($item)
+    {
+        $icon = "<tr><td>";
+
+        switch($item_info->item_type1) {
+            case 1:
+                $icon = '<span class="shop_icon shop_icon_1">NEW</span>';
+                break;
+            case 2:
+                $icon = '<span class="shop_icon shop_icon_2">SALE</span>';
+                break;
+            case 3:
+                $icon = '<span class="shop_icon shop_icon_3">BIG SALE</span>';
+                break;
+            case 4:
+                $icon = '<span class="shop_icon shop_icon_4">HOT</span>';
+                break;
+            default:
+                break;
+        }
 
         return $icon;
     }

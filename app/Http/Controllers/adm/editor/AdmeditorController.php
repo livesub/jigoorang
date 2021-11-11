@@ -190,8 +190,21 @@ class AdmeditorController extends Controller
                 $sitem_like = DB::table('shopitems')->where('item_content', 'LIKE', "%{$files_sitem[$j_sitem]}%")->count();
 
                 if($sitem_like == 0){   //db 에 저장된 이미지가 아닌것만 배열로 만든다.
-                    $editor_no_regi_img_sitem[$k_sitem] = $files_sitem[$j_sitem];
-                    $k_sitem++;
+                    //상품에 스마트 에디터가 추가 되어 추가됨
+                    $sitem_like2 = DB::table('shopitems')->where('item_content2', 'LIKE', "%{$files_sitem[$j_sitem]}%")->count();
+                    if($sitem_like2 == 0){
+                        $sitem_like3 = DB::table('shopitems')->where('item_content3', 'LIKE', "%{$files_sitem[$j_sitem]}%")->count();
+                        if($sitem_like3 == 0){
+                            $sitem_like4 = DB::table('shopitems')->where('item_content4', 'LIKE', "%{$files_sitem[$j_sitem]}%")->count();
+                            if($sitem_like4 == 0){
+                                $sitem_like5 = DB::table('shopitems')->where('item_content5', 'LIKE', "%{$files_sitem[$j_sitem]}%")->count();
+                                if($sitem_like5 == 0){
+                                    $editor_no_regi_img_sitem[$k_sitem] = $files_sitem[$j_sitem];
+                                    $k_sitem++;
+                                }
+                            }
+                        }
+                    }
                 }
 
                 for($p_sitem = 0; $p_sitem < count($editor_no_regi_img_sitem); $p_sitem++){ //저장 되지 않은 이미지들 돌리며 삭제

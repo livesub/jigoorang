@@ -191,34 +191,62 @@
         <td>
             <span class="frm_info">메인화면에 유형별로 출력할때 사용합니다.<br>이곳에 체크하게되면 상품리스트에서 유형별로 정렬할때 체크된 상품이 가장 먼저 출력됩니다.</span><br>
             @php
-                if($item_info->item_type1 == 1) $item_type1_checked = "checked";
-                else $item_type1_checked = "";
+                $item_type1_checked = '';
+                $item_type2_checked = '';
+                $item_type3_checked = '';
+                $item_type4_checked = '';
 
-                if($item_info->item_type2 == 1) $item_type2_checked = "checked";
-                else $item_type2_checked = "";
-
-                if($item_info->item_type3 == 1) $item_type3_checked = "checked";
-                else $item_type3_checked = "";
-
-                if($item_info->item_type4 == 1) $item_type4_checked = "checked";
-                else $item_type4_checked = "";
+                switch($item_info->item_type1) {
+                    case 1:
+                        $item_type1_checked = "checked";
+                        break;
+                    case 2:
+                        $item_type2_checked = "checked";
+                        break;
+                    case 3:
+                        $item_type3_checked = "checked";
+                        break;
+                    case 4:
+                        $item_type4_checked = "checked";
+                        break;
+                    default:
+                        break;
+                }
             @endphp
-            <input type="checkbox" name="item_type1" value="1"  id="item_type1" {{ $item_type1_checked }}>
-            <label for="item_type1">NEW </label>
-            <input type="checkbox" name="item_type2" value="1"  id="item_type2" {{ $item_type2_checked }}>
-            <label for="item_type2">BIG SALE </label>
-            <input type="checkbox" name="item_type3" value="1"  id="item_type3" {{ $item_type3_checked }}>
-            <label for="item_type3">HOT </label>
+            <input type="radio" name="item_type1" value="1"  id="item_type1" {{ $item_type1_checked }}>NEW
+            <input type="radio" name="item_type1" value="2"  id="item_type2" {{ $item_type2_checked }}>SALE
+            <input type="radio" name="item_type1" value="3"  id="item_type3" {{ $item_type3_checked }}>BIG SALE
+            <input type="radio" name="item_type1" value="4"  id="item_type4" {{ $item_type4_checked }}>HOT
+            <button type="button" onclick="redio_release()">해제</button>
+
+        </td>
+    </tr>
+
+        @php
+            $item_special_checked = "";
+            $item_special2_checked = '';
+            $item_new_arrival_checked = '';
+
+            if($item_info->item_special == 1) $item_special_checked = "checked";
+            if($item_info->item_special2 == 1) $item_special2_checked = "checked";
+            if($item_info->item_new_arrival == 1) $item_new_arrival_checked = "checked";
+        @endphp
+    <tr>
+        <td>기획전1</td>
+        <td>
+            <input type="checkbox" name="item_special" value="1" id="item_special" {{ $item_special_checked }}>
         </td>
     </tr>
     <tr>
-        @php
-            $item_special_checked = "";
-            if($item_info->item_special == 1) $item_special_checked = "checked";
-        @endphp
-        <td>타이틀 표시<br>({{ $de_ment_change }})</td>
+        <td>기획전2</td>
         <td>
-            <input type="checkbox" name="item_special" value="1" id="item_special" {{ $item_special_checked }}>
+            <input type="checkbox" name="item_special2" value="1" id="item_special2" {{ $item_special2_checked }}>
+        </td>
+    </tr>
+    <tr>
+        <td>New Arrival</td>
+        <td>
+            <input type="checkbox" name="item_new_arrival" value="1" id="item_new_arrival" {{ $item_new_arrival_checked }}>
         </td>
     </tr>
     <tr>
@@ -275,6 +303,34 @@
         <td>상품내용</td>
         <td>
             <textarea type="text" name="item_content" id="item_content" style="width:100%">{{ $item_info->item_content }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>성분1</td>
+        <td>
+            <textarea type="text" name="item_content2" id="item_content2" style="width:100%">{{ $item_info->item_content2 }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>성분2</td>
+        <td>
+            <textarea type="text" name="item_content3" id="item_content3" style="width:100%">{{ $item_info->item_content3 }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>성분3</td>
+        <td>
+            <textarea type="text" name="item_content4" id="item_content4" style="width:100%">{{ $item_info->item_content4 }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>성분4</td>
+        <td>
+            <textarea type="text" name="item_content5" id="item_content5" style="width:100%">{{ $item_info->item_content5 }}</textarea>
         </td>
     </tr>
 
@@ -829,6 +885,12 @@
 
 
 <script>
+    function redio_release(){
+        $("input:radio[name='item_type1']").prop("checked", false);
+    }
+</script>
+
+<script>
 	$(document).ready(function() {
         $(document).on("click", "#caa_id", function() {
 			var cate_is = $('#caa_id').val();
@@ -998,6 +1060,66 @@
             //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
         }, //boolean
     });
+
+    var oEditors2 = [];
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors2,
+        elPlaceHolder: "item_content2",
+        sSkinURI: "/smarteditor2/SmartEditor2Skin.html",
+        fCreator: "createSEditor2",
+        htParams : {
+            bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+            bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+            //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+        }, //boolean
+    });
+
+    var oEditors3 = [];
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors3,
+        elPlaceHolder: "item_content3",
+        sSkinURI: "/smarteditor2/SmartEditor2Skin.html",
+        fCreator: "createSEditor2",
+        htParams : {
+            bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+            bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+            //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+        }, //boolean
+    });
+
+    var oEditors4 = [];
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors4,
+        elPlaceHolder: "item_content4",
+        sSkinURI: "/smarteditor2/SmartEditor2Skin.html",
+        fCreator: "createSEditor2",
+        htParams : {
+            bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+            bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+            //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+        }, //boolean
+    });
+
+    var oEditors5 = [];
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors5,
+        elPlaceHolder: "item_content5",
+        sSkinURI: "/smarteditor2/SmartEditor2Skin.html",
+        fCreator: "createSEditor2",
+        htParams : {
+            bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+            bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+            //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+        }, //boolean
+    });
 </script>
 
 <script>
@@ -1014,6 +1136,10 @@
 <script>
     function submitContents(elClickedObj) {
         oEditors.getById["item_content"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+        oEditors2.getById["item_content2"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+        oEditors3.getById["item_content3"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+        oEditors4.getById["item_content4"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+        oEditors5.getById["item_content5"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
         // 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("item_content").value를 이용해서 처리하면 됩니다.
         var item_content = $("#item_content").val();
 
