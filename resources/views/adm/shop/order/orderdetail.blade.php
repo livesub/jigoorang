@@ -16,6 +16,7 @@
         <td>결제금액 : {{ number_format(((int)$order_info->od_cart_price + (int)$order_info->de_send_cost + (int)$order_info->od_send_cost + (int)$order_info->od_send_cost2) - (int)$order_info->od_receipt_point) }}</strong>원</td>
     </tr>
 </table>
+
 <table border=1>
     <form name="orderdetailform" id="orderdetailform" method="post" action="{{ route('orderprocess') }}">
     {!! csrf_field() !!}
@@ -28,7 +29,8 @@
         <tr>
             <th scope="col">상품명</th>
             <th scope="col">
-                <input type="checkbox" id="sit_select_all"  onclick="selectAll(this)">
+                <input type="checkbox" id="sit_select_all" class="category-1">
+                <!-- <input type="checkbox" id="sit_select_all"  onclick="selectAll(this)"> -->
             </th>
             <th scope="col">옵션항목</th>
             <th scope="col">상태</th>
@@ -41,14 +43,16 @@
         @php
             $i = 0;
             $chk_cnt = 0;
+            $chk_box = 0;
+            $chk_box2 = 0;
         @endphp
 
         @foreach($carts as $cart)
             @php
-            $image = $CustomUtils->get_item_image($cart->item_code, 3);
-            $opts = DB::table('shopcarts')->where([['od_id', $order_info->order_id],['item_code', $cart->item_code]])->orderBy('sio_type')->orderBy('id')->get();
-            $rowspan = count($opts);
-            $k = 0;
+                $image = $CustomUtils->get_item_image($cart->item_code, 3);
+                $opts = DB::table('shopcarts')->where([['od_id', $order_info->order_id],['item_code', $cart->item_code]])->orderBy('sio_type')->orderBy('id')->get();
+                $rowspan = count($opts);
+                $k = 0;
             @endphp
 
             @foreach($opts as $opt)
@@ -65,13 +69,13 @@
                 @if($k == 0)
             <td rowspan="{{ $rowspan }}"><img src="{{ asset($image) }}"> {{ stripslashes($cart->item_name) }}</td>
             <td rowspan="{{ $rowspan }}">
-                <input type="checkbox" id="sit_sel_{{ $i }}" name="it_sel[]" value="{{ $cart->item_code }}">
+                <input type="checkbox" id="sit_sel_{{ $i }}" name="it_sel[]" value="{{ $cart->item_code }}" class="category-1-{{ $chk_box }}">
                 <input type="hidden" name="item_code[]" value="{{ $cart->item_code }}">
             </td>
                 @endif
 
             <td>
-                <input type="checkbox" name="ct_chk[{{ $chk_cnt }}]" id="ct_chk_{{ $chk_cnt }}" value="{{ $chk_cnt }}" class="sct_sel_{{ $i }}"><!-- class 꼭 필요!! -->
+                <input type="checkbox" name="ct_chk[{{ $chk_cnt }}]" id="ct_chk_{{ $chk_cnt }}" value="{{ $chk_cnt }}" class="category-1-{{ $chk_box }}-{{ sprintf('%02d',$chk_box2) }}">
                 <input type="hidden" name="ct_id[{{ $chk_cnt }}]" value="{{ $cart->id }}">
                 {{ $opt->sct_option }}
             </td>
@@ -85,11 +89,16 @@
             <td>{{ number_format($ct_point['stotal']) }} 점</td>
         </tr>
                 @php
-                $i++;
-                $chk_cnt++;
-                $k++;
+                    $i++;
+                    $chk_cnt++;
+                    $k++;
+                    $chk_box2++;
                 @endphp
             @endforeach
+            @php
+                $chk_box++;
+                $chk_box2 = 0;
+            @endphp
         @endforeach
 </table>
 
@@ -110,9 +119,83 @@
 
 
 
+<script>
+    $("[class^='category-']").on('change', function()
+    {
+        $this_checkbox = $(this);
+        var class_name = $this_checkbox.attr('class');
+        var checked = $('[class="'+class_name+'"]').is(":checked");
+
+        $("[class^='"+class_name+"']").prop('checked', checked );   // 하위요소 전부 체크or해제
+        checkbox_checked(class_name, checked);
+    });
+
+    function checkbox_checked(class_name, checked )
+    {
+        if( class_name.indexOf('-') == -1) return;
+
+        var parent_class_name = class_name.substr(0, class_name.lastIndexOf('-') );
+        var friend_class = class_name.substr(0, (class_name.lastIndexOf('-') + 1) );
+
+        if( checked )//체크일경우
+        {
+            var i=0;
+            //var node = $('input:checkbox:regex(class,'+ friend_class + '[0-9]$)');
+            var node = $("[class^='"+friend_class+"']");
+
+            if( node.length == node.filter(":checked").length )
+                $('.' + parent_class_name ).prop('checked', true );
+        }
+        else //해제일경우
+        {
+            $("[class^='"+class_name+"']").each( function(index, item)
+            {
+                var parent_class_name = class_name.substr(0, class_name.lastIndexOf('-') );//상위단원 class가져오기
+                child_checked = $(this).is(':checked');
+                if( !child_checked && parent_class_name != 'category')//하위단원을 체크 해제했을경우 상위단원 체크 해제 부분
+                {
+                    $('.'+parent_class_name).prop('checked', child_checked );
+                    return false;
+                }
+            });
+        }
+        checkbox_checked(parent_class_name, checked )
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script>
+/*
 function selectAll(selectAll)  {
     const checkboxes
         = document.querySelectorAll('input[type="checkbox"]');
@@ -120,12 +203,23 @@ function selectAll(selectAll)  {
         checkbox.checked = selectAll.checked
     })
 }
-
+*/
 </script>
 
 
 <script>
+/*
 $(function() {
+    $("#sit_select_all").click(function() {
+    const checkboxes
+        = document.getElementsByName('animal');
+
+    checkboxes.forEach((checkbox) => {
+        checkbox.checked = selectAll.checked;
+    })
+
+    });
+
     // 전체 옵션선택
     $("#sit_select_all").click(function() {
         if($(this).is(":checked")) {
@@ -148,6 +242,7 @@ $(function() {
             $chk.attr("checked", false);
         }
     });
+*/
 /*
     // 개인결제추가
     $("#personalpay_add").on("click", function() {
@@ -162,8 +257,9 @@ $(function() {
         window.open(href, "partcancelwin", "left=100, top=100, width=600, height=350, scrollbars=yes");
         return false;
     });
-*/
+
 });
+*/
 </script>
 
 
