@@ -71,7 +71,7 @@ class JoinController extends Controller
      /**************************************************************************/
      /* $user_pw 을 사용 하면 로그인이 되지 않으므로 칼럼명을 password 로 바꾼다 */
      /**************************************************************************/
-     
+
      //vaildator를 App\Http\Requests\UserRequest 에 위임
      public function store(UserRequest $request)
     {
@@ -121,7 +121,7 @@ class JoinController extends Controller
             'user_phone' => $user_phone,
             'user_gender' => $user_gender,
             'user_birth' => $user_birth,
-            
+
         ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
         //'user_confirm_code' => $user_confirm_code,
 
@@ -133,7 +133,7 @@ class JoinController extends Controller
         /** 가입 포인트 추가(211015) **/
         $setting_info = CustomUtils::setting_infos();
 
-        $po_content = date('Y-m-d')." 회원 가입 축하";
+        $po_content = "회원 가입 적립";
         $po_point = $setting_info->member_reg_point;    //지급 포인트 금액
         $po_use_point = 0;  //사용금액
         $po_type = 1;   //적립금 지급 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>상품구입
@@ -240,7 +240,7 @@ class JoinController extends Controller
     public function email_certification(Request $request){
         //dd($email);
         $result = $this->user->get_email_check($request->user_id);
-        
+
 
         if($result == "" || $result == null || empty($result)){
             //비어있을 경우 true
@@ -262,7 +262,7 @@ class JoinController extends Controller
     public function email_certification_test($email){
         //dd($email);
         $result = $this->user->get_email_check($email);
-        
+
         if($result == "" || $result == null || empty($result)){
             //비어있을 경우 true
             $result = "true";

@@ -234,28 +234,28 @@
 
 
     <tr>
-        <td>성분1</td>
+        <td>성분</td>
         <td>
             <textarea type="text" name="item_content2" id="item_content2" style="width:100%">{{ old('item_content2') }}</textarea>
         </td>
     </tr>
 
     <tr>
-        <td>성분2</td>
+        <td>포장</td>
         <td>
             <textarea type="text" name="item_content3" id="item_content3" style="width:100%">{{ old('item_content3') }}</textarea>
         </td>
     </tr>
 
     <tr>
-        <td>성분3</td>
+        <td>분리배출</td>
         <td>
             <textarea type="text" name="item_content4" id="item_content4" style="width:100%">{{ old('item_content4') }}</textarea>
         </td>
     </tr>
 
     <tr>
-        <td>성분4</td>
+        <td>사회적 가치</td>
         <td>
             <textarea type="text" name="item_content5" id="item_content5" style="width:100%">{{ old('item_content5') }}</textarea>
         </td>

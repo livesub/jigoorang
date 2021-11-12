@@ -56,10 +56,11 @@ class AdmShopSettingController extends Controller
         $company_use_point      = "";
         $shop_img_width         = "500%%300%%100";
         $shop_img_height        = "500%%300%%100";
-        $de_send_cost           = '';
+        $de_send_cost           = '2500';
+        $de_send_cost_free      = '30000';
         $de_ment_change         = '기획전1';
         $de_ment_change2        = '기획전2';
-        $member_reg_point = "";
+        $member_reg_point       = "3000";
 
         if(!is_null($setting_info)){
             $id = $setting_info->id;
@@ -83,6 +84,8 @@ class AdmShopSettingController extends Controller
             $member_reg_point       = $setting_info->member_reg_point;
             //기본배송비
             $de_send_cost           = $setting_info->de_send_cost;
+            //기본 배송비 무료 정책
+            $de_send_cost_free      = $setting_info->de_send_cost_free;
             //기획전1 멘트 변경
             $de_ment_change         = stripslashes($setting_info->de_ment_change);
             //기획전1 멘트 변경
@@ -113,10 +116,12 @@ class AdmShopSettingController extends Controller
             'member_reg_point'      => $member_reg_point,
             //기본배송비
             'de_send_cost'          => $de_send_cost,
+            //기본 배송비 무료 정책
+            'de_send_cost_free'     => $de_send_cost_free,
             //기획전1 멘트 변경
             'de_ment_change'        => $de_ment_change,
             //기획전2 멘트 변경
-            'de_ment_change2'        => $de_ment_change2,
+            'de_ment_change2'       => $de_ment_change2,
 
             'shop_img_width'        => $shop_img_width,
             'shop_img_height'       => $shop_img_height,
@@ -152,6 +157,8 @@ class AdmShopSettingController extends Controller
         $member_reg_point       = $request->input('member_reg_point');
         //기본배송비
         $de_send_cost           = $request->input('de_send_cost');
+        //기본 배송비 무료 정책
+        $de_send_cost_free      = $request->input('de_send_cost_free');
         //기획전1 멘트 변경
         $de_ment_change         = $request->input('de_ment_change');
         //기획전2 멘트 변경
@@ -190,6 +197,8 @@ class AdmShopSettingController extends Controller
 
             'member_reg_point'      => (int)$member_reg_point,
             'de_send_cost'          => (int)$de_send_cost,
+            //기본 배송비 무료 정책
+            'de_send_cost_free'     => (int)$de_send_cost_free,
             'de_ment_change'        => addslashes($de_ment_change),
             'de_ment_change2'       => addslashes($de_ment_change2),
             'shop_img_width'        => $shop_img_width,

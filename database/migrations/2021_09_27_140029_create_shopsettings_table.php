@@ -31,6 +31,7 @@ class CreateShopsettingsTable extends Migration
             $table->tinyInteger('company_use_point')->length(1)->default(1)->comment('포인트 사용');
             $table->integer('member_reg_point')->default(0)->comment('신규가입 포인트 금액');
             $table->integer('de_send_cost')->default(0)->comment('기본배송비');
+            $table->integer('de_send_cost_free')->default(0)->comment('기본배송비 무료정책');
             $table->string('de_ment_change')->nullable()->comment('기획전1 멘트 변경');
             $table->string('de_ment_change2')->nullable()->comment('기획전2 멘트 변경');
             $table->string('shop_img_width')->nullable()->comment('이미지리사이징-넓이');

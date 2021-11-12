@@ -214,7 +214,7 @@ class OrderController extends Controller
         $ct_chk     = $request->input('ct_chk');
 
 
-dd($ct_chk);
+dd($it_sel);
         $order_info = DB::table('shoporders')->select('order_id')->where('order_id', $order_id)->first();
         if(is_null($order_info)){
             return redirect()->back()->with('alert_messages', '해당 주문번호로 주문서가 존재하지 않습니다.');

@@ -80,6 +80,15 @@
 
 <table border=1>
     <tr>
+        <td><b>배송비 무료 정책</b></td>
+        <td>
+            주문 금액 <input type="text" name="de_send_cost_free" value="{{ $de_send_cost_free }}" id="de_send_cost_free" class="frm_input" size="10"> 원 이상시 기본 배송비 무료
+        </td>
+    </tr>
+</table>
+
+<table border=1>
+    <tr>
         <td><b>기획전1 변경</b></td>
         <td>
             <input type="text" name="de_ment_change" value="{{ $de_ment_change }}" id="de_ment_change">

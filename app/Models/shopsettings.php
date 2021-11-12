@@ -36,6 +36,7 @@ class shopsettings extends Model
         'company_use_point',
         'member_reg_point',
         'de_send_cost',
+        'de_send_cost_free',
         'de_ment_change',
         'de_ment_change2',
         'shop_img_width',

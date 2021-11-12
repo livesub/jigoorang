@@ -437,11 +437,12 @@ class CartController extends Controller
         $setting_info = CustomUtils::setting_infos();
 
         return view('shop.cart_page',[
-            'num'           => 0,
-            's_cart_id'     => $s_cart_id,
-            'cart_infos'    => $cart_infos,
-            'CustomUtils'   => $CustomUtils,
-            'de_send_cost'  => $setting_info->de_send_cost,
+            'num'               => 0,
+            's_cart_id'         => $s_cart_id,
+            'cart_infos'        => $cart_infos,
+            'CustomUtils'       => $CustomUtils,
+            'de_send_cost'      => $setting_info->de_send_cost,
+            'de_send_cost_free' => $setting_info->de_send_cost_free,
         ]);
     }
 

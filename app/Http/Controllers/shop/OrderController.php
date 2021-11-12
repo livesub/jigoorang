@@ -143,28 +143,29 @@ class OrderController extends Controller
             //$addr_list .= '<label for="ad_sel_addr_same">주문자와 동일</label>'.PHP_EOL;
         }
 
-        $setting_info = DB::table('shopsettings')->select('de_send_cost')->first(); //기본 배송비 구하기
+        $setting_info = DB::table('shopsettings')->select('de_send_cost','de_send_cost_free')->first(); //기본 배송비 구하기
 
         $cart_count = DB::table('shopcarts')->select('item_code')->where([['od_id',$tmp_cart_id], ['sct_select','1']])->distinct('item_code')->count(); //장바구니 상품 개수
 
         return view('shop.order_page',[
-            's_cart_id'     => $s_cart_id,
-            'cart_infos'    => $cart_infos,
-            'CustomUtils'   => $CustomUtils,
-            'de_send_cost'  => $setting_info->de_send_cost,
-            'user_name'     => $user_name,
-            'user_tel'      => $user_tel,
-            'user_phone'    => $user_phone,
-            'user_zip'      => $user_zip,
-            'user_addr1'    => $user_addr1,
-            'user_addr2'    => $user_addr2,
-            'user_addr3'    => $user_addr3,
+            's_cart_id'         => $s_cart_id,
+            'cart_infos'        => $cart_infos,
+            'CustomUtils'       => $CustomUtils,
+            'de_send_cost'      => $setting_info->de_send_cost,
+            'de_send_cost_free' => $setting_info->de_send_cost_free,
+            'user_name'         => $user_name,
+            'user_tel'          => $user_tel,
+            'user_phone'        => $user_phone,
+            'user_zip'          => $user_zip,
+            'user_addr1'        => $user_addr1,
+            'user_addr2'        => $user_addr2,
+            'user_addr3'        => $user_addr3,
             'user_addr_jibeon'  => $user_addr_jibeon,
-            'order_id'      => $order_id,
-            'addr_list'     => $addr_list, //주문자 동일, 최근 배송지 히든 처리
-            'tot_sell_price' => $tot_sell_price,
-            'send_cost'     => 0,
-            'cart_count'    => $cart_count,
+            'order_id'          => $order_id,
+            'addr_list'         => $addr_list, //주문자 동일, 최근 배송지 히든 처리
+            'tot_sell_price'    => $tot_sell_price,
+            'send_cost'         => 0,
+            'cart_count'        => $cart_count,
         ]);
     }
 
@@ -463,6 +464,7 @@ class OrderController extends Controller
         $od_id              = $request->input('od_id');
         $od_cart_price      = (int)$request->input('od_cart_price');
         $de_send_cost       = (int)$request->input('de_send_cost');  //기본 배송비
+        $de_send_cost_free  = (int)$request->input('de_send_cost_free');  //기본 배송비 무료 정책 추가
         $od_send_cost       = (int)$request->input('od_send_cost');  //각 상품 배송비
         $od_send_cost2      = (int)$request->input('od_send_cost2');
         $od_receipt_price   = (int)$request->input('od_receipt_price');
@@ -472,6 +474,15 @@ class OrderController extends Controller
 
         $ordertemp_cnt = DB::table('shopordertemps')->where([['od_id',$od_id], ['user_id', Auth::user()->user_id]])->count();
 
+        //주문금액 배송비 무료 정책 추가(211112)
+        //무료 배송이 됐을 경우 기본 배송비는 0, de_send_cost_free 값저장
+        //무료 배송이 안됐을 경우 기본 배송비는 쎄팅, de_send_cost_free 0
+        if($od_cart_price >= $de_send_cost_free){
+            $de_send_cost = 0;
+        }else{
+            $de_send_cost_free = 0;
+        }
+
         if($ordertemp_cnt == 0){
             $create_result = shopordertemps::create([
                 'order_id'          => $order_id,
@@ -479,6 +490,7 @@ class OrderController extends Controller
                 'user_id'           => Auth::user()->user_id,
                 'od_cart_price'     => $od_cart_price,
                 'de_send_cost'      => $de_send_cost,
+                'de_send_cost_free' => $de_send_cost_free,
                 'od_send_cost'      => $od_send_cost,
                 'od_send_cost2'     => $od_send_cost2,
                 'od_receipt_price'  => $od_receipt_price,
@@ -492,6 +504,7 @@ class OrderController extends Controller
                 'order_id'          => $order_id,
                 'od_cart_price'     => $od_cart_price,
                 'de_send_cost'      => $de_send_cost,
+                'de_send_cost_free' => $de_send_cost_free,
                 'od_send_cost'      => $od_send_cost,
                 'od_send_cost2'     => $od_send_cost2,
                 'od_receipt_price'  => $od_receipt_price,
@@ -582,6 +595,7 @@ class OrderController extends Controller
 
         $od_cart_price      = $ordertemp->od_cart_price;
         $de_send_cost       = $ordertemp->de_send_cost;
+        $de_send_cost_free  = $ordertemp->de_send_cost_free;
         $od_send_cost       = $ordertemp->od_send_cost;
         $od_send_cost2      = $ordertemp->od_send_cost2;
         $od_receipt_price   = $ordertemp->od_receipt_price;
@@ -600,6 +614,15 @@ class OrderController extends Controller
         $imp_card_name      = $request->input('imp_card_name');   //카드사에서 전달 받는 값(카드사명칭)
         $imp_card_quota     = $request->input('imp_card_quota');   //카드사에서 전달 받는 값(할부개월수)
         $imp_card_number    = $request->input('imp_card_number');   //카드사에서 전달 받는 값(카드번호)
+
+        //주문금액 배송비 무료 정책 추가(211112)
+        //무료 배송이 됐을 경우 기본 배송비는 0, de_send_cost_free 값저장
+        //무료 배송이 안됐을 경우 기본 배송비는 쎄팅, de_send_cost_free 0
+        if($od_cart_price >= $de_send_cost_free){
+            $de_send_cost = 0;
+        }else{
+            $de_send_cost_free = 0;
+        }
 
 /*
 //데스트 위함
@@ -630,6 +653,7 @@ $imp_apply_num= '12345678';
                 'od_cart_count'     => (int)$od_cart_count,
                 'od_cart_price'     => (int)$od_cart_price,
                 'de_send_cost'      => (int)$de_send_cost,
+                'de_send_cost_free' => (int)$de_send_cost_free,
                 'od_send_cost'      => (int)$od_send_cost,
                 'od_send_cost2'     => (int)$od_send_cost2,
                 'od_receipt_price'  => (int)$od_receipt_price,
@@ -658,13 +682,13 @@ $imp_apply_num= '12345678';
 
                 //포인트를 사용했다면 테이블에 사용을 추가
                 if ($od_receipt_point > 0){
-                    $CustomUtils->insert_point(Auth::user()->user_id, (-1) * $od_receipt_point, "주문번호 $order_id 결제 사용", 7, '', $order_id);
+                    $CustomUtils->insert_point(Auth::user()->user_id, (-1) * $od_receipt_point, "상품 구매", 7, '', $order_id);
                 }
 
                 //상품 구매 포인트가 있다면
                 if($tot_item_point > 0){
                     //상품 구매 포인트
-                    $CustomUtils->insert_point(Auth::user()->user_id, $tot_item_point, "주문번호 $order_id 구매 포인트", 8, '', $order_id);
+                    $CustomUtils->insert_point(Auth::user()->user_id, $tot_item_point, "구매 적립", 8, '', $order_id);
                 }
 
                 return redirect()->route('orderview');

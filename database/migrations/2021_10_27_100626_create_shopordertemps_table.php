@@ -20,6 +20,7 @@ class CreateShopordertempsTable extends Migration
             $table->string('user_id')->comment('아이디');
             $table->integer('od_cart_price')->default(0)->comment('주문상품 총금액');
             $table->integer('de_send_cost')->default(0)->comment('기본 배송비');
+            $table->integer('de_send_cost_free')->default(0)->comment('기본 배송비 무료 정책');
             $table->integer('od_send_cost')->default(0)->comment('각 상품 배송비');
             $table->integer('od_send_cost2')->default(0)->comment('추가배송비');
             $table->integer('od_receipt_price')->default(0)->comment('결제금액');
