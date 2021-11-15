@@ -56,6 +56,8 @@ class shoporders extends Model
         'imp_card_number',
         'od_delivery_company',
         'od_invoice',
+        'od_misu',
+        'od_mod_history',
         'od_ip',
     ];
 

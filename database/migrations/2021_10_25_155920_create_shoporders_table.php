@@ -51,6 +51,8 @@ class CreateShopordersTable extends Migration
             $table->string('imp_card_number')->nullable()->comment('카드사에서 전달 받는 값(카드번호)');
             $table->string('od_delivery_company')->nullable()->comment('배송회사');
             $table->string('od_invoice')->nullable()->comment('운송장번호');
+            $table->integer('od_misu')->default(0)->comment('미수금');
+            $table->text('od_mod_history')->nullable()->comment('상태변경 히스토리');
             $table->string('od_ip')->comment('주문자IP');
             $table->timestamps();
             $table->index(['order_id','od_id','user_id']);

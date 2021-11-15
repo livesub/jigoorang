@@ -1664,9 +1664,9 @@ $um_value='80/0.5/3'
                 $item_info = DB::table('shopitems')->where('item_code', $cart_info->item_code)->first();
 
                 if($type == 'minus'){
-                    $qty = (int)$item_info->item_stock_qty - (int)$cart_info->sct_qty;;
+                    $qty = (int)$item_info->item_stock_qty - (int)$cart_info->sct_qty;
                 }else{
-                    $qty = (int)$item_info->item_stock_qty + (int)$cart_info->sct_qty;;
+                    $qty = (int)$item_info->item_stock_qty + (int)$cart_info->sct_qty;
                 }
 
                 $up_result = DB::table('shopitems')->where('item_code', $cart_info->item_code)->update(['item_stock_qty' => $qty]);

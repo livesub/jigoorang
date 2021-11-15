@@ -62,6 +62,7 @@
             $point      = $sum[0]->point;
             $sell_price = $sum[0]->price;
             $tmp_sendcost = $sendcost;
+
         @endphp
     <tr>
         <td><input type="checkbox" name="ct_chk[{{ $num }}]" value="1" id="ct_chk_{{ $num }}" checked="checked"></td>

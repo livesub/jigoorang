@@ -18,7 +18,7 @@
 </table>
 
 <table border=1>
-    <form name="orderdetailform" id="orderdetailform" method="post" action="{{ route('orderprocess') }}">
+    <form name="orderdetailform" id="orderdetailform" method="post" action="{{ route('ajax_orderprocess') }}">
     {!! csrf_field() !!}
     <input type="hidden" name="order_id" value="{{ $order_info->order_id }}">
     <input type="hidden" name="user_id" value="{{ $order_info->user_id }}">
@@ -37,7 +37,7 @@
             <th scope="col">수량</th>
             <th scope="col">판매가</th>
             <th scope="col">소계</th>
-            <th scope="col">포인트</th>
+            <th scope="col">적립포인트</th>
         </tr>
 
         @php
@@ -76,7 +76,7 @@
 
             <td>
                 <input type="checkbox" name="ct_chk[{{ $chk_cnt }}]" id="ct_chk_{{ $chk_cnt }}" value="{{ $chk_cnt }}" class="category-1-{{ $chk_box }}-{{ sprintf('%02d',$chk_box2) }}">
-                <input type="hidden" name="ct_id[{{ $chk_cnt }}]" value="{{ $cart->id }}">
+                <input type="hidden" name="ct_id[{{ $chk_cnt }}]" value="{{ $opt->id }}">
                 {{ $opt->sct_option }}
             </td>
             <td>{{ $opt->sct_status }}</td>
@@ -107,6 +107,7 @@
         <td>
             <input type="hidden" name="chk_cnt" id="chk_cnt" value="{{ $chk_cnt }}">
             <strong>주문 및 장바구니 상태 변경</strong>
+            <button type="button" onclick="status_change('입금')">입금</button>
             <button type="button" onclick="status_change('준비')">준비</button>
             <button type="button" onclick="status_change('배송')">배송</button>
             <button type="button" onclick="status_change('완료')">배송완료</button>
@@ -163,107 +164,6 @@
     }
 </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<script>
-/*
-function selectAll(selectAll)  {
-    const checkboxes
-        = document.querySelectorAll('input[type="checkbox"]');
-    checkboxes.forEach((checkbox) => {
-        checkbox.checked = selectAll.checked
-    })
-}
-*/
-</script>
-
-
-<script>
-/*
-$(function() {
-    $("#sit_select_all").click(function() {
-    const checkboxes
-        = document.getElementsByName('animal');
-
-    checkboxes.forEach((checkbox) => {
-        checkbox.checked = selectAll.checked;
-    })
-
-    });
-
-    // 전체 옵션선택
-    $("#sit_select_all").click(function() {
-        if($(this).is(":checked")) {
-            $("input[name='it_sel[]']").attr("checked", true);
-            $("input[name^=ct_chk]").attr("checked", true);
-        } else {
-            $("input[name='it_sel[]']").attr("checked", false);
-            $("input[name^=ct_chk]").attr("checked", false);
-        }
-    });
-
-    // 상품의 옵션선택
-    $("input[name='it_sel[]']").click(function() {
-        var cls = $(this).attr("id").replace("sit_", "sct_");
-        var $chk = $("input[name^=ct_chk]."+cls);
-        if($(this).is(":checked"))
-        {
-            $chk.attr("checked", true);
-        }else{
-            $chk.attr("checked", false);
-        }
-    });
-*/
-/*
-    // 개인결제추가
-    $("#personalpay_add").on("click", function() {
-        var href = this.href;
-        window.open(href, "personalpaywin", "left=100, top=100, width=700, height=560, scrollbars=yes");
-        return false;
-    });
-
-    // 부분취소창
-    $("#orderpartcancel").on("click", function() {
-        var href = this.href;
-        window.open(href, "partcancelwin", "left=100, top=100, width=600, height=350, scrollbars=yes");
-        return false;
-    });
-
-});
-*/
-</script>
-
-
-
 <script>
     function status_change(status){
         var msg = '';
@@ -288,38 +188,96 @@ $(function() {
         if (confirm(msg + "\n\n선택하신대로 처리하시겠습니까?")) {
             //return true;
             $("#sct_status").val(status);
-            $("#orderdetailform").submit();
+            //$("#orderdetailform").submit();
+
+            var form_var = $("#orderdetailform").serialize();
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+                type: 'post',
+                url: '{{ route('ajax_orderprocess') }}',
+                dataType: 'text',
+                data: form_var,
+                success: function(result) {
+                    var data = JSON.parse(result);
+//alert(data.custom_data);
+//return false;
+                    if(data.message == 'no_order'){
+                        alert('해당 주문번호로 주문서가 존재하지 않습니다.');
+                        location.href = "{!! route('orderlist', $page_move) !!}"
+                        return false;
+                    }
+
+                    if(data.message == 'qty_big'){
+                        alert('주문 수량 보다 크게 입력 할수 없습니다.');
+                        return false;
+                    }
+
+                    if(data.message == 'pay_cancel'){
+                        pay_cancel('{{ $order_info->imp_uid }}', '{{ $order_info->order_id }}', data.amount, data.custom_data);
+                    }
+
+                },error: function(result) {
+                    console.log(result);
+                }
+            });
         } else {
             return false;
         }
 
-/*
-                $.ajax({
-                    headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-                    type: 'post',
-                    url: '{{ route('shop.cate.ajax_select') }}',
-                    dataType: 'text',
-                    data: {
-                        'ca_id'   : $('#caa_id').val(),
-                        'length'  : $('#caa_id').val().length,
-                    },
-                    success: function(result) {
-                        var data = JSON.parse(result);
-
-
-                    },error: function(result) {
-                        console.log(result);
-                    }
-                });
-*/
-
-
-
-
-
-
     }
 </script>
+
+<!-- 환불 처리 -->
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+    function pay_cancel(imp_uid, order_id, amount, custom_data){
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+            url : '{{ route('ajax_admorderpaycancel') }}',
+            type : 'post',
+            contentType : "application/json",
+            data    : JSON.stringify({
+                "imp_uid"               : imp_uid,
+                "merchant_uid"          : order_id, // 예: ORD20180131-0000011
+                "cancel_request_amount" : amount, // 환불금액
+                "reason"                : "부분 환불", // 환불사유
+                "custom_data"           : custom_data,  //필요 데이터
+                "refund_holder"         : "{{ $order_info->od_deposit_name }}", // [가상계좌 환불시 필수입력] 환불 수령계좌 예금주
+                "refund_bank"           : "", // [가상계좌 환불시 필수입력] 환불 수령계좌 은행코드(예: KG이니시스의 경우 신한은행은 88번)
+                "refund_account"        : "", // [가상계좌 환불시 필수입력] 환불 수령계좌 번호
+            }),
+            dataType : "text",
+        }).done(function(result) { // 환불 성공시 로직
+alert(result);
+return false;
+            if(result == "ok"){
+                alert("취소 처리 되었습니다.");
+                location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
+            }
+
+            if(result == "error"){
+                alert("주문 상품 취소가 실패 하였습니다. 관리자에게 문의 하세요.");
+                //location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
+            }
+
+        }).fail(function(error) { // 환불 실패시 로직
+            alert("주문 상품 취소가 실패 하였습니다. 관리자에게 문의 하세요.");
+            //location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
 
 
 

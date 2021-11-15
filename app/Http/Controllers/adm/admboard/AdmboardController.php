@@ -368,7 +368,7 @@ class AdmboardController extends Controller
         $result_pw      = $request->input('pw');  //비밀글 비번 찾기를 통해 온 결과 값(secretpw 함수)
         $cate           = $request->input('cate');
         $page           = $request->input('page');
-        $mode          = $request->input('mode');
+        $mode           = $request->input('mode');
         $keymethod      = $request->input('keymethod');
         $keyword        = $request->input('keyword');
 
