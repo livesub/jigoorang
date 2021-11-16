@@ -23,8 +23,8 @@
         <th scope="col">상품명</th>
         <th scope="col">총수량</th>
         <th scope="col">판매가</th>
-        <th scope="col">소계</th>
-        <th scope="col">배송비</th>
+        <th scope="col">주문금액</th>
+        <th scope="col">상품별 배송비</th>
     </tr>
     @php
         $tot_point = 0;
@@ -44,8 +44,6 @@
 
             if (!$goods)
             {
-                //$goods = addslashes($row[it_name]);
-                //$goods = get_text($row[it_name]);
                 $goods = preg_replace("/\'|\"|\||\,|\&|\;/", "", $cart_info->item_name);
                 $goods_item_code = $cart_info->item_code;
             }
@@ -113,7 +111,12 @@
     @php
         // 배송비 계산
         $send_cost = $CustomUtils->get_sendcost($s_cart_id);
-        $tot_price = $tot_sell_price + $de_send_cost + $send_cost; // 총계 = 주문상품금액합계 + 기본 배송비 + 배송비
+
+        if($tot_sell_price >= $de_send_cost_free){   //주문 금액 배송비 무료 정책 추가
+            $tot_price = $tot_sell_price + $send_cost; // 총계 = 주문상품금액합계 + 배송비
+        }else{
+            $tot_price = $tot_sell_price + $de_send_cost + $send_cost; // 총계 = 주문상품금액합계 + 기본 배송비 + 배송비
+        }
     @endphp
 </table>
 
@@ -123,6 +126,7 @@
 <input type="hidden" name="order_id" id="order_id" value="{{ $order_id }}"> <!-- 주문번호 -->
 <input type="hidden" name="od_id" id="od_id" value="{{ $s_cart_id }}"> <!-- 장바구니번호 -->
 <input type="hidden" name="de_send_cost" id="de_send_cost" value="{{ $de_send_cost }}"> <!-- 기본배송비 -->
+<input type="hidden" name="de_send_cost_free" id="de_send_cost_free" value="{{ $de_send_cost_free }}"> <!-- 기본배송비 무료정책 -->
 <input type="hidden" name="od_send_cost" id="od_send_cost" value="{{ $send_cost }}">  <!-- 각 상품 배송비 -->
 <input type="hidden" name="od_send_cost2" id="od_send_cost2" value="0"> <!-- 추가배송비 -->
 <input type="hidden" name="od_price" id="od_price" value="{{ $tot_sell_price }}">  <!-- 주문금액 -->
@@ -213,13 +217,20 @@
         </td>
         <td>
             <table border=1>
+            @php
+                if($tot_sell_price >= $de_send_cost_free){
+                    $free_type = '무료';
+                }else{
+                    $free_type = number_format($de_send_cost).' 원';
+                }
+            @endphp
                 <tr>
-                    <td>주문</td>
+                    <td>주문금액</td>
                     <td>기본 배송비 + 상품별 배송비</td>
                 </tr>
                 <tr>
                     <td>{{ number_format($tot_sell_price) }}원</td>
-                    <td>{{ number_format($de_send_cost) }}원 + {{ number_format($send_cost) }}원</td>
+                    <td>{{ $free_type }} + {{ number_format($send_cost) }}원</td>
                 </tr>
                 <tr>
                     <td>총계</td>
@@ -356,11 +367,17 @@
     function calculate_order_price()
     {
         var de_send_cost = parseInt($("input[name=de_send_cost]").val());
+        var de_send_cost_free = parseInt($("input[name=de_send_cost_free]").val());
         var sell_price = parseInt($("input[name=od_price]").val());
         var send_cost = parseInt($("input[name=od_send_cost]").val());
         var send_cost2 = parseInt($("input[name=od_send_cost2]").val());
-        var tot_price = sell_price + de_send_cost + send_cost + send_cost2; //주문금액 + 기본 배송비 + 각상품 배송비 + 추가 배송비
-        //$("input[name=good_mny]").val(tot_price);
+
+        if(sell_price >= de_send_cost_free){ //주문금액 무료 정책 추가
+            var tot_price = sell_price + send_cost + send_cost2; //주문금액 + 각상품 배송비 + 추가 배송비
+        }else{
+            var tot_price = sell_price + de_send_cost + send_cost + send_cost2; //주문금액 + 기본 배송비 + 각상품 배송비 + 추가 배송비
+        }
+
         $("#print_price").text(numberWithCommas(String(tot_price)));
     }
 </script>
@@ -417,6 +434,7 @@
     }
 
     function forderform_check(){
+
         // 재고체크
         var stock_msg = order_stock_check();
 
@@ -465,17 +483,24 @@
             return false;
         }
 
-        @if(Auth::user()->user_point > 0)
+        var od_temp_point = 0;
         var od_price = parseInt($("#od_price").val());
         var de_send_cost = parseInt($("#de_send_cost").val());
+        var de_send_cost_free = parseInt($("#de_send_cost_free").val());
         var send_cost = parseInt($("#od_send_cost").val());
         var send_cost2 = parseInt($("#od_send_cost2").val());
-        var od_temp_point = parseInt($("#od_temp_point").val());
         var user_point = parseInt($("#user_point").val());
 
-        //배송비에도 사용 가능 하기에 총금액을 구함(주문금액 + 기본 배송비 + 각 상품 배송비 + 추가 배송비)
-        var total_price = od_price + de_send_cost + send_cost + send_cost2;
+        //포인트가 배송비에도 사용 가능 하기에 총금액을 구함(주문금액 + 기본 배송비 + 각 상품 배송비 + 추가 배송비)
+        //배송비 무료 정책 추가
+        if(od_price >= de_send_cost_free){
+            var total_price = od_price + send_cost + send_cost2;
+        }else{
+            var total_price = od_price + de_send_cost + send_cost + send_cost2;
+        }
 
+        @if(Auth::user()->user_point > 0)
+        od_temp_point = parseInt($("#od_temp_point").val());
         if($.trim($("#od_temp_point").val() != "")){    //적립금 사용
             //총결제액 보다 많이 사용 할수 없음
             if(total_price < od_temp_point){
@@ -532,14 +557,13 @@ return false;
 return false;
 */
 
-
         //결제 모듈 호출
         requestPay($("#pg").val(), $("#method").val(), total_price, od_temp_point);
     }
 </script>
 
 <script>
-    function requestPay(pg, method, price, point) {
+    function requestPay(pg, method, price, point=0) {
         var tot_pay = price - point;
         var merchant_uid = "{{ $order_id }}";
 
@@ -591,6 +615,7 @@ return false;
                 'od_id'             : '{{ $s_cart_id }}',
                 'od_cart_price'     : $("#od_price").val(),
                 'de_send_cost'      : $("#de_send_cost").val(), //기본 배송비
+                'de_send_cost_free' : $("#de_send_cost_free").val(), //기본 배송비 무료정책
                 'od_send_cost'      : $("#od_send_cost").val(), //각 상품 배송비
                 'od_send_cost2'     : $("#od_send_cost2").val(),
                 'od_receipt_price'  : total_price,

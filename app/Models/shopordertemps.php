@@ -25,6 +25,7 @@ class shopordertemps extends Model
         'user_id',
         'od_cart_price',
         'de_send_cost',
+        'de_send_cost_free',
         'od_send_cost',
         'od_send_cost2',
         'od_receipt_price',

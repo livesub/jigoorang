@@ -164,5 +164,17 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'as' => 'orderdetail',
         'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@orderdetail',
     ]);
+
+    Route::post('orderprocess', [
+        'as' => 'ajax_orderprocess',
+        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@ajax_orderprocess',
+    ]);
+
+    //주문 취소
+    Route::post('admorderpaycancel', [
+        'as' => 'ajax_admorderpaycancel',
+        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@ajax_admorderpaycancel',
+    ]);
+
 });
 

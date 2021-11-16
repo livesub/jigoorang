@@ -30,7 +30,7 @@
         </td>
         <td>
             <select name="item_search" id="item_search">
-                @php
+                @php        //if($item_search == "") $item_search = "item_name";
                     if($item_search == "item_name" || $item_search == "") $item_name_selected = "selected";
                     else $item_name_selected = "";
 
@@ -59,7 +59,10 @@
         <td>상품코드</td>
         <td>상품명</td>
         <td>출력순서</td>
-        <td>{{ $de_ment_change }}등록여부</td>
+        <td>상품유형</td>
+        <td>기획전1<br>등록여부</td>
+        <td>기획전2<br>등록여부</td>
+        <td>New Arrival</td>
         <td>관리</td>
     </tr>
 
@@ -98,10 +101,39 @@
                 $item_img_disp = "/data/shopitem/".$item_img_cut[3];
             }
 
-            //기획전 등록 여부
+            //상품유형 등록 여부
+            $item_type1_ment = '';
+            switch($item_info->item_type1) {
+                case 1:
+                    $item_type1_ment = 'NEW';
+                    break;
+                case 2:
+                    $item_type1_ment = 'SALE';
+                    break;
+                case 3:
+                    $item_type1_ment = 'BIG SALE';
+                    break;
+                case 4:
+                    $item_type1_ment = 'HOT';
+                    break;
+                default:
+                    break;
+            }
+
+            //기획전1 등록 여부
             $item_special_ment = "";
             if($item_info->item_special == "1") {
                 $item_special_ment = "등록";
+            }
+            //기획전2 등록 여부
+            $item_special_ment2 = "";
+            if($item_info->item_special2 == "1") {
+                $item_special_ment2 = "등록";
+            }
+            //new_arrival
+            $item_new_arrival_ment = "";
+            if($item_info->item_new_arrival == "1") {
+                $item_new_arrival_ment = "등록";
             }
         @endphp
     <tr>
@@ -112,13 +144,15 @@
         <td>{{ $item_info->item_code }}</td>
         <td>{{ stripslashes($item_info->item_name) }}</td>
         <td>{{ $item_info->item_rank }}</td>
+        <td>{{ $item_type1_ment }}</td>
         <td>{{ $item_special_ment }}</td>
+        <td>{{ $item_special_ment2 }}</td>
+        <td>{{ $item_new_arrival_ment }}</td>
         <td>
             <button type="button" onclick="item_modi('{{ $item_info->id }}','{{ $item_info->sca_id }}');">수정</button>
         </td>
     </tr>
     @endforeach
-
 
 </form>
 </table>
@@ -128,7 +162,7 @@
 <table>
     <tr>
         <td>
-           {!! $pageList !!}
+           {!! $pnPage !!}
         </td>
     </tr>
 </table>
@@ -180,6 +214,9 @@
 <form name="item_modi_form" id="item_modi_form" method="get" action="{{ route('shop.item.modify') }}">
     <input type="hidden" name="id" id="id">
     <input type="hidden" name="sca_id" id="sca_id">
+    <input type="hidden" name="page" id="page" value="{{ $page }}">
+    <input type="hidden" name="item_search" id="item_search" value="{{ $item_search }}">
+    <input type="hidden" name="keyword" id="keyword" value="{{ $keyword }}">
 </form>
 
 <script>

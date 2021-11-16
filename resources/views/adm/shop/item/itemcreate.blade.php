@@ -151,18 +151,36 @@
         <td>상품 유형</td>
         <td>
             <span class="frm_info">메인화면에 유형별로 출력할때 사용합니다.<br>이곳에 체크하게되면 상품리스트에서 유형별로 정렬할때 체크된 상품이 가장 먼저 출력됩니다.</span><br>
-            <input type="checkbox" name="item_type1" value="1"  id="item_type1">
-            <label for="item_type1">NEW </label>
+            <input type="radio" name="item_type1" value="1"  id="item_type1">NEW
+            <input type="radio" name="item_type1" value="2"  id="item_type2">SALE
+            <input type="radio" name="item_type1" value="3"  id="item_type3">BIG SALE
+            <input type="radio" name="item_type1" value="4"  id="item_type4">HOT
+            <button type="button" onclick="redio_release()">해제</button>
+<!--
             <input type="checkbox" name="item_type2" value="1"  id="item_type2">
             <label for="item_type2">BIG SALE </label>
             <input type="checkbox" name="item_type3" value="1"  id="item_type3">
             <label for="item_type3">HOT </label>
+-->
         </td>
     </tr>
     <tr>
-        <td>타이틀 표시<br>({{ $de_ment_change }})</td>
+        <td>기획전1</td>
         <td>
             <input type="checkbox" name="item_special" value="1" id="item_special" >
+        </td>
+    </tr>
+    <tr>
+        <td>기획전2</td>
+        <td>
+            <input type="checkbox" name="item_special2" value="1" id="item_special2" >
+        </td>
+    </tr>
+
+    <tr>
+        <td>New Arrival</td>
+        <td>
+            <input type="checkbox" name="item_new_arrival" value="1" id="item_new_arrival" >
         </td>
     </tr>
     <tr>
@@ -199,17 +217,47 @@
             <input type="checkbox" name="item_tel_inq" value="1" id="item_tel_inq" > 예
         </td>
     </tr>
--->
+
     <tr>
         <td>판매가능</td>
         <td>잠시 판매를 중단하거나 재고가 없을 경우에 체크를 해제해 놓으면 출력되지 않으며, 주문도 받지 않습니다. <br>
             <input type="checkbox" name="item_use" value="1" id="item_use" checked> 예
         </td>
     </tr>
+-->
     <tr>
         <td>상품내용</td>
         <td>
             <textarea type="text" name="item_content" id="item_content" style="width:100%">{{ old('item_content') }}</textarea>
+        </td>
+    </tr>
+
+
+    <tr>
+        <td>성분</td>
+        <td>
+            <textarea type="text" name="item_content2" id="item_content2" style="width:100%">{{ old('item_content2') }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>포장</td>
+        <td>
+            <textarea type="text" name="item_content3" id="item_content3" style="width:100%">{{ old('item_content3') }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>분리배출</td>
+        <td>
+            <textarea type="text" name="item_content4" id="item_content4" style="width:100%">{{ old('item_content4') }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>사회적 가치</td>
+        <td>
+            <textarea type="text" name="item_content5" id="item_content5" style="width:100%">{{ old('item_content5') }}</textarea>
         </td>
     </tr>
 
@@ -338,7 +386,7 @@
     </tr>
 -->
     <tr>
-        <td>기본배송비</td>
+        <td>상품 추가 배송비</td>
         <td>
             <input type="text" name="item_sc_price" value="0" id="item_sc_price" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원
         </td>
@@ -364,6 +412,12 @@
 
 </table>
 </form>
+
+<script>
+    function redio_release(){
+        $("input:radio[name='item_type1']").prop("checked", false);
+    }
+</script>
 
 <script>
 	$(document).ready(function() {
@@ -523,6 +577,66 @@
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: oEditors,
         elPlaceHolder: "item_content",
+        sSkinURI: "/smarteditor2/SmartEditor2Skin.html",
+        fCreator: "createSEditor2",
+        htParams : {
+            bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+            bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+            //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+        }, //boolean
+    });
+
+    var oEditors2 = [];
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors2,
+        elPlaceHolder: "item_content2",
+        sSkinURI: "/smarteditor2/SmartEditor2Skin.html",
+        fCreator: "createSEditor2",
+        htParams : {
+            bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+            bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+            //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+        }, //boolean
+    });
+
+    var oEditors3 = [];
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors3,
+        elPlaceHolder: "item_content3",
+        sSkinURI: "/smarteditor2/SmartEditor2Skin.html",
+        fCreator: "createSEditor2",
+        htParams : {
+            bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+            bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+            //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+        }, //boolean
+    });
+
+    var oEditors4 = [];
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors4,
+        elPlaceHolder: "item_content4",
+        sSkinURI: "/smarteditor2/SmartEditor2Skin.html",
+        fCreator: "createSEditor2",
+        htParams : {
+            bUseToolbar : true,				// 툴바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseVerticalResizer : true,		// 입력창 크기 조절바 사용 여부 (true:사용/ false:사용하지 않음)
+            bUseModeChanger : true,			// 모드 탭(Editor | HTML | TEXT) 사용 여부 (true:사용/ false:사용하지 않음)
+            bSkipXssFilter : true,		// client-side xss filter 무시 여부 (true:사용하지 않음 / 그외:사용)
+            //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
+        }, //boolean
+    });
+
+    var oEditors5 = [];
+    nhn.husky.EZCreator.createInIFrame({
+        oAppRef: oEditors5,
+        elPlaceHolder: "item_content5",
         sSkinURI: "/smarteditor2/SmartEditor2Skin.html",
         fCreator: "createSEditor2",
         htParams : {
@@ -815,6 +929,10 @@
 <script>
     function submitContents(elClickedObj) {
         oEditors.getById["item_content"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+        oEditors2.getById["item_content2"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+        oEditors3.getById["item_content3"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+        oEditors4.getById["item_content4"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+        oEditors5.getById["item_content5"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
         // 에디터의 내용에 대한 값 검증은 이곳에서 document.getElementById("item_content").value를 이용해서 처리하면 됩니다.
         var item_content = $("#item_content").val();
 

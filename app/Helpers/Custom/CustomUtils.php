@@ -759,23 +759,48 @@ $um_value='80/0.5/3'
         return $price;
     }
 
+    // 상품이미지에 유형 아이콘 출력(211111 라디오 버튼으로 바뀜)
+    public static function old_item_icon($item)
+    {
+        $icon = "<tr><td>";
+
+        if ($item->item_type1 != 0)
+            $icon .= '<span class="shop_icon shop_icon_1">NEW</span>';
+
+        if ($item->item_type2 != 0)
+            $icon .= '<span class="shop_icon shop_icon_2">BIG SALE</span>';
+
+        if ($item->item_type3 != 0)
+            $icon .= '<span class="shop_icon shop_icon_3">HOT</span>';
+
+        if ($item->item_type4 != 0)
+            $icon .= '<span class="shop_icon shop_icon_4">할인</span>';
+        $icon .= "</td></tr>";
+
+        return $icon;
+    }
+
     // 상품이미지에 유형 아이콘 출력
     public static function item_icon($item)
     {
         $icon = "<tr><td>";
 
-        if ($item->item_type1 != 0)
-            $icon .= '<span class="shop_icon shop_icon_1">히트</span>';
-
-        if ($item->item_type2 != 0)
-            $icon .= '<span class="shop_icon shop_icon_2">신상품</span>';
-
-        if ($item->item_type3 != 0)
-            $icon .= '<span class="shop_icon shop_icon_3">인기</span>';
-
-        if ($item->item_type4 != 0)
-            $icon .= '<span class="shop_icon shop_icon_4">할인</span>';
-        $icon .= "</td></tr>";
+        switch($item->item_type1) {
+            case 1:
+                $icon = '<span class="shop_icon shop_icon_1">NEW</span>';
+                break;
+            case 2:
+                $icon = '<span class="shop_icon shop_icon_2">SALE</span>';
+                break;
+            case 3:
+                $icon = '<span class="shop_icon shop_icon_3">BIG SALE</span>';
+                break;
+            case 4:
+                $icon = '<span class="shop_icon shop_icon_4">HOT</span>';
+                break;
+            default:
+                break;
+        }
 
         return $icon;
     }
@@ -1022,8 +1047,7 @@ $um_value='80/0.5/3'
         // 상품에 선택옵션 있으면..
         $option_cnt = DB::table('shopitemoptions')->where([['item_code',$item_code],['sio_type','0']])->count();
 
-        if($option_cnt < 0) {   //테스트
-        //if($option_cnt > 0) {     //정상
+        if($option_cnt > 0) {     //정상
             $option_gets = DB::table('shopitemoptions')->select('sio_id', 'sio_type', 'sio_stock_qty')->where([['item_code',$item_code],['sio_type','0'],['sio_use','1']])->get();
 
             $k = 0;
@@ -1337,8 +1361,12 @@ $um_value='80/0.5/3'
             if($i == 0) $str .= '<ul>'.PHP_EOL;
             $price_plus = '';
 
-            if($item_option->sio_price >= 0) $price_plus = '+';
-            $str .= '<tr><td>옵션 : '.$item_option->sct_option.' '.$item_option->sct_qty.'개 ('.$price_plus.$this->display_price($item_option->sio_price).')</td></tr>'.PHP_EOL;
+            if($item_option->sio_price > 0) {
+                $price_plus = '+';
+                $str .= '<tr><td>옵션 : '.$item_option->sct_option.' '.$item_option->sct_qty.'개 ('.$price_plus.$this->display_price($item_option->sio_price).')</td></tr>'.PHP_EOL;
+            }else{
+                $str .= '<tr><td>'.$item_option->sct_option.' '.$item_option->sct_qty.'개'.'</td></tr>'.PHP_EOL;
+            }
         }
 
         return $str;
@@ -1636,9 +1664,9 @@ $um_value='80/0.5/3'
                 $item_info = DB::table('shopitems')->where('item_code', $cart_info->item_code)->first();
 
                 if($type == 'minus'){
-                    $qty = (int)$item_info->item_stock_qty - (int)$cart_info->sct_qty;;
+                    $qty = (int)$item_info->item_stock_qty - (int)$cart_info->sct_qty;
                 }else{
-                    $qty = (int)$item_info->item_stock_qty + (int)$cart_info->sct_qty;;
+                    $qty = (int)$item_info->item_stock_qty + (int)$cart_info->sct_qty;
                 }
 
                 $up_result = DB::table('shopitems')->where('item_code', $cart_info->item_code)->update(['item_stock_qty' => $qty]);

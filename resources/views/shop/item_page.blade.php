@@ -13,7 +13,7 @@
 <table border="1">
 <form name="search_form" id="search_form" method="get" action="{{ route('sitem') }}">
 <input type="hidden" name="ca_id" id="ca_id" value="{{ $ca_id }}">
-<input type="hidden" name="page" id="page" value="{{ $pageNum }}">
+<input type="hidden" name="page" id="page" value="{{ $page }}">
 
     <tr>
         <td>
@@ -123,7 +123,7 @@
 <table>
     <tr>
         <td>
-           {!! $pageList !!}
+           {!! $pnPage !!}
         </td>
     </tr>
 </table>

@@ -27,10 +27,11 @@ class CreateShopordersTable extends Migration
             $table->string('ad_addr2')->comment('받으시는 분 상세주소');
             $table->string('ad_addr3')->nullable()->comment('받으시는 분 주소 참고 항목');
             $table->string('ad_jibeon')->comment('받으시는 분 지번주소');
-            $table->text('od_memo')->comment('전하실말씀');
+            $table->text('od_memo')->nullable()->comment('전하실말씀');
             $table->integer('od_cart_count')->default(0)->comment('장바구니 상품 개수');
             $table->integer('od_cart_price')->default(0)->comment('주문상품 총금액');
             $table->integer('de_send_cost')->default(0)->comment('기본 배송비');
+            $table->integer('de_send_cost_free')->default(0)->comment('기본 배송비 무료 정책');
             $table->integer('od_send_cost')->default(0)->comment('각 상품 배송비');
             $table->integer('od_send_cost2')->default(0)->comment('추가배송비');
             $table->integer('od_receipt_price')->default(0)->comment('결제금액');
@@ -50,6 +51,8 @@ class CreateShopordersTable extends Migration
             $table->string('imp_card_number')->nullable()->comment('카드사에서 전달 받는 값(카드번호)');
             $table->string('od_delivery_company')->nullable()->comment('배송회사');
             $table->string('od_invoice')->nullable()->comment('운송장번호');
+            $table->integer('od_misu')->default(0)->comment('미수금');
+            $table->text('od_mod_history')->nullable()->comment('상태변경 히스토리');
             $table->string('od_ip')->comment('주문자IP');
             $table->timestamps();
             $table->index(['order_id','od_id','user_id']);

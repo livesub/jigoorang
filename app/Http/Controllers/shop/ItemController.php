@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
+use App\Helpers\Custom\PageSet; //페이지 함수
 use Illuminate\Support\Facades\DB;
 
 class ItemController extends Controller
@@ -28,30 +29,36 @@ class ItemController extends Controller
         $length         = strlen($ca_id);
 
         //pgae 관련
-        $pageNum     = $request->input('page');
-        $writeList   = 15;  //페이지당 글수
-        $pageNumList = 15; //블럭당 페이지수
+        $page       = $request->input('page');
+        $pageScale  = 10;  //한페이지당 라인수
+        $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
+
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
 
         //검색 처리
         $keymethod      = $request->input('keymethod');
         $keyword        = $request->input('keyword');
-        if($keymethod == "") $keymethod = "item_name";
-
-        $tb_name = "items";
-        $type = 'f_shopitems';
-        $cate = "";
 
         $search_sql = "";
         if($keymethod != "" && $keyword != ""){
             $search_sql = " AND a.{$keymethod} LIKE '%{$keyword}%' ";
         }
 
-        $page_control = CustomUtils::page_function('shopitems',$pageNum,$writeList,$pageNumList,$type,$tb_name,$ca_id,$keymethod,$keyword);
+        $search_sql = "";
+        if($keymethod != "" && $keyword != ""){
+            $search_sql = " AND a.{$keymethod} LIKE '%{$keyword}%' ";
+        }
 
         if($ca_id == ""){
             $cate_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr', 'sca_name_en')->where('sca_display','Y')->whereRaw('length(sca_id) = 2')->orderby('sca_rank', 'DESC')->get();
-            $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id  {$search_sql} order by a.item_rank DESC limit {$page_control['startNum']}, {$writeList} ");
 
+            $total_count = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id AND b.sca_display = 'Y' {$search_sql} ");
         }else{
             $down_cate = DB::table('shopcategorys')->where('sca_id','like',$ca_id.'%')->count();   //하위 카테고리 갯수
             if($down_cate != 1){
@@ -61,22 +68,43 @@ class ItemController extends Controller
                 $cate_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr', 'sca_name_en')->where('sca_display','Y')->where('sca_id','=',$ca_id )->whereRaw('length(sca_id) = '.$length)->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'DESC')->get();
             }
 
-            $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id AND a.sca_id like '{$ca_id}%' {$search_sql} order by a.item_rank DESC limit {$page_control['startNum']}, {$writeList} ");
+            $total_count = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id AND b.sca_display = 'Y' AND a.sca_id like '{$ca_id}%' {$search_sql} ");
         }
 
-        $pageList = $page_control['preFirstPage'].$page_control['pre1Page'].$page_control['listPage'].$page_control['next1Page'].$page_control['nextLastPage'];
+        $total_record   = 0;
+        $total_record   = $total_count[0]->cnt; //총 게시물 수
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
+
+        $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id AND b.sca_display = 'Y'  AND a.sca_id like '{$ca_id}%' {$search_sql} order by a.item_rank DESC limit {$start_num}, {$pageScale} ");
+
+        $virtual_num = $total_record - $pageScale * ($page - 1);
+
+        $tailarr = array();
+        $tailarr['ca_id'] = $ca_id;    //고정된 전달 파라메터가 있을때 사용
+        $tailarr['keymethod'] = $keymethod;
+        $tailarr['keyword'] = $keyword;
+
+        $PageSet        = new PageSet;
+        $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
+        $prevPage       = $PageSet->getPrevPage("이전");
+        $nextPage       = $PageSet->getNextPage("다음");
+        $pre10Page      = $PageSet->pre10("이전10");
+        $next10Page     = $PageSet->next10("다음10");
+        $preFirstPage   = $PageSet->preFirst("처음");
+        $nextLastPage   = $PageSet->nextLast("마지막");
+        $listPage       = $PageSet->getPageList();
+        $pnPage         = $prevPage.$listPage.$nextPage;
 
         $CustomUtils = new CustomUtils();
         return view('shop.item_page',[
             'ca_id'         => $ca_id,
             'cate_infos'    => $cate_infos,
             'item_infos'    => $item_infos,
-            'pageList'      => $pageList,
+            'page'          => $page,
+            'pnPage'        => $pnPage,
             'keymethod'     => $keymethod,
             'keyword'       => $keyword,
-            'totalCount'    => $page_control['totalCount'],
-            'pageNum'       => $page_control['pageNum'],
-            'pageList'      => $pageList,
             'CustomUtils'   => $CustomUtils,
         ]);
     }
@@ -94,6 +122,10 @@ class ItemController extends Controller
             exit;
         }
 
+        if($item_info[0]->item_del == 'Y'){
+            return redirect()->back()->with('alert_messages', "판매 중지된 상품입니다.");
+            exit;
+        }
         //예외처리(카테고리 비출력, 상품 비출력, 판매 가능 여부)
         if($item_info[0]->sca_display == 'N' || $item_info[0]->item_display == 'N' || $item_info[0]->item_use == '0'){
             return redirect()->back()->with('alert_messages', $Messages::$shop['now_no_item']);
@@ -140,7 +172,7 @@ class ItemController extends Controller
         }
 
         //배송비 타입에 따른 변경
-        $sc_method_disp = '무료배송';
+        $sc_method_disp = '무료';
         if($item_info[0]->item_sc_price > 0) $sc_method_disp = number_format($item_info[0]->item_sc_price).'원';
 
         // 상품품절체크
@@ -168,6 +200,7 @@ class ItemController extends Controller
             "small_item_img"    => $small_item_img,
             "CustomUtils"       => $CustomUtils,
             "use_point"         => $use_point->company_use_point,
+            "de_send_cost"      => $use_point->de_send_cost,
             "use_point_disp"    => $use_point_disp,
             "sc_method_disp"    => $sc_method_disp,
             "point"             => $item_info[0]->item_point,

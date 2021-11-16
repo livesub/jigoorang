@@ -6,6 +6,12 @@
 <script src="{{ asset('/js/shop_js/shop_override.js') }}"></script>
 
 <table border="1">
+    @if($is_orderable == false)
+    <tr>
+        <td>본상품은 품절 되었습니다.</td>
+    </tr>
+    @endif
+
     <tr>
         <td>
             <table border=1>
@@ -75,17 +81,37 @@
                 </tr>
                 @else
                 <!-- 전화문의가 아닐 경우 -->
+                    @php
+                        $discount = 0;
+                        $discount_rate = 0;
+                        $disp_discount_rate = 0;
+                    @endphp
+
                     @if($item_info->item_cust_price != "0")
+                        @php
+                            if($item_info->item_cust_price > 0){
+                                //시중가격 값이 있을때 할인율 계산
+                                $discount = (int)$item_info->item_cust_price - (int)$item_info->item_price; //할인액
+                                $discount_rate = ($discount / (int)$item_info->item_cust_price) * 100;  //할인율
+                                $disp_discount_rate = round($discount_rate);    //반올림
+                            }
+                            //시중 가격이 0이 아니거나 시중가격과 판매가격이 다를때 시중가격표시
+                        @endphp
+                        @if($item_info->item_cust_price > 0 || $item_info->item_cust_price != $item_info->item_price)
                 <tr>
                     <td>시중가격</td>
                     <td>{{ $CustomUtils->display_price($item_info->item_cust_price) }}</td>
                 </tr>
+                        @endif
                     @endif
 
                 <tr>
                     <td>판매가격</td>
                     <td>
 	                    <strong>{{ $CustomUtils->display_price($item_info->item_price) }}</strong>
+                        @if($disp_discount_rate != 0)
+                        ({{ $disp_discount_rate }}% 할인)
+                        @endif
 	                    <input type="hidden" id="item_price" value="{{ $item_info->item_price }}">
                     </td>
                 </tr>
@@ -95,6 +121,13 @@
                 <tr>
                     <td>제조사</td>
                     <td>{{ $item_info->item_manufacture }}</td>
+                </tr>
+                @endif
+
+                @if($item_info->item_point != "0")
+                <tr>
+                    <td>적립금</td>
+                    <td>{{ $item_info->item_point }}%</td>
                 </tr>
                 @endif
 
@@ -119,8 +152,14 @@
                 </tr>
                 @endif
 
+                @if($de_send_cost > 0)
                 <tr>
-                    <td>배송비결제</td>
+                    <td>기본배송비</td>
+                    <td>{{ number_format($de_send_cost) }} 원</td>
+                </tr>
+                @endif
+                <tr>
+                    <td>상품별배송비</td>
                     <td>{!! $sc_method_disp !!}</td>
                 </tr>
 
@@ -184,7 +223,7 @@
                                                     <button type="button" class="sit_qty_minus"><i class="fa fa-minus" aria-hidden="true"></i><span class="sound_only">감소</span></button>
                                                     <input type="text" name="ct_qty[{{ $item_info->item_code }}][]" value="1" id="ct_qty_11" class="num_input" size="5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                                                     <button type="button" class="sit_qty_plus"><i class="fa fa-plus" aria-hidden="true"></i><span class="sound_only">증가</span></button>
-                                                    <span class="sit_opt_prc">+0원</span>
+                                                    <span class="sit_opt_prc"></span>
                                                 </div>
                                             </li>
                                         </ul>

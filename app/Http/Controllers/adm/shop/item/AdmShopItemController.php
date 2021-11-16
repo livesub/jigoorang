@@ -16,6 +16,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
+use App\Helpers\Custom\PageSet; //페이지 함수
 use Illuminate\Support\Facades\Auth;    //인증
 use Illuminate\Support\Facades\DB;
 use App\Models\shopcategorys;    //카테고리 모델 정의
@@ -40,23 +41,25 @@ class AdmShopItemController extends Controller
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
-        $pageNum     = $request->input('page');
-        $writeList   = 20;  //페이지당 글수
-        $pageNumList = 20; //블럭당 페이지수
+        $page       = $request->input('page');
+        $pageScale  = 15;  //한페이지당 라인수
+        $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
-        $tb_name = "shopitems";
-        $type = 'shopitems';
-        $cate = "";
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
 
         //검색 selectbox 만들기
-        $search_selectboxs = DB::table('shopcategorys')->orderby('sca_id','ASC')->orderby('sca_rank','DESC')->get();
+        $search_selectboxs = DB::table('shopcategorys')->where('sca_display', 'Y')->orderby('sca_id','ASC')->orderby('sca_rank','DESC')->get();
 
         //검색 처리
         $ca_id          = $request->input('ca_id');
         $item_search    = $request->input('item_search');
         $keyword        = $request->input('keyword');
-
-        if($item_search == "") $item_search = "item_name";
 
         $search_caid_sql = "";
         if(!is_null($ca_id)){
@@ -72,21 +75,42 @@ class AdmShopItemController extends Controller
             $search_sql = " AND a.sca_id = b.sca_id {$search_caid_sql} ";
         }
 
-        $page_control = CustomUtils::page_function('shopitems',$pageNum,$writeList,$pageNumList,$type,$tb_name,$ca_id,$item_search,$keyword);
+        $total_tmp = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' {$search_sql} ");
+        $total_cnt = $total_tmp[0]->cnt;
 
-        $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_del = 'N' {$search_sql} order by a.id DESC, a.item_rank ASC limit {$page_control['startNum']}, {$writeList} ");
+        $total_record   = 0;
+        $total_record   = $total_cnt; //총 게시물 수
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
 
-        $pageList = $page_control['preFirstPage'].$page_control['pre1Page'].$page_control['listPage'].$page_control['next1Page'].$page_control['nextLastPage'];
+        $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' {$search_sql} order by a.id DESC, a.item_rank ASC limit {$start_num}, {$pageScale} ");
+
+        $virtual_num = $total_record - $pageScale * ($page - 1);
+
+        $tailarr = array();
+        $tailarr['ca_id'] = $ca_id;    //고정된 전달 파라메터가 있을때 사용
+        $tailarr['item_search'] = $item_search;
+        $tailarr['keyword'] = $keyword;
+
+        $PageSet        = new PageSet;
+        $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
+        $prevPage       = $PageSet->getPrevPage("이전");
+        $nextPage       = $PageSet->getNextPage("다음");
+        $pre10Page      = $PageSet->pre10("이전10");
+        $next10Page     = $PageSet->next10("다음10");
+        $preFirstPage   = $PageSet->preFirst("처음");
+        $nextLastPage   = $PageSet->nextLast("마지막");
+        $listPage       = $PageSet->getPageList();
+        $pnPage         = $prevPage.$listPage.$nextPage;
 
         $setting_info = CustomUtils::setting_infos();
 
         return view('adm.shop.item.itemlist',[
             'ca_id'             => $ca_id,
             'item_infos'        => $item_infos,
-            'virtual_num'       => $page_control['virtual_num'],
-            'totalCount'        => $page_control['totalCount'],
-            'pageNum'           => $page_control['pageNum'],
-            'pageList'          => $pageList,
+            'page'              => $page,
+            'virtual_num'       => $virtual_num,
+            'pnPage'            => $pnPage,
             'item_search'       => $item_search,
             'keyword'           => $keyword,
             'search_selectboxs' => $search_selectboxs,
@@ -243,7 +267,13 @@ class AdmShopItemController extends Controller
         $item_type3             = (int)$request->input('item_type3');
         $item_type4             = (int)$request->input('item_type4');
         $item_special           = (int)$request->input('item_special');
+        $item_special2          = (int)$request->input('item_special2');    //기획전2
+        $item_new_arrival       = (int)$request->input('item_new_arrival');    //new_arrival
         $item_content           = $request->input('item_content');
+        $item_content2          = $request->input('item_content2');
+        $item_content3          = $request->input('item_content3');
+        $item_content4          = $request->input('item_content4');
+        $item_content5          = $request->input('item_content5');
         $item_cust_price        = (int)$request->input('item_cust_price');
         $item_price             = (int)$request->input('item_price');
         $item_point_type        = (int)$request->input('item_point_type');
@@ -388,7 +418,13 @@ class AdmShopItemController extends Controller
             'item_type3'            => $item_type3,
             'item_type4'            => $item_type4,
             'item_special'          => $item_special,
+            'item_special2'         => $item_special2,
+            'item_new_arrival'      => $item_new_arrival,
             'item_content'          => $item_content,
+            'item_content2'         => $item_content2,
+            'item_content3'         => $item_content3,
+            'item_content4'         => $item_content4,
+            'item_content5'         => $item_content5,
             'item_cust_price'       => $item_cust_price,
             'item_price'            => $item_price,
             //'item_point_type'       => $item_point_type,
@@ -753,8 +789,11 @@ class AdmShopItemController extends Controller
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
-        $id     = $request->input('id');
-        $ca_id  = $request->input('sca_id');
+        $id             = $request->input('id');
+        $page           = $request->input('page');
+        $ca_id          = $request->input('sca_id');
+        $item_search    = $request->input('item_search');
+        $keyword        = $request->input('keyword');
 
         if($id == "" && $ca_id == ""){
             return redirect()->back()->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);
@@ -813,6 +852,9 @@ class AdmShopItemController extends Controller
             'four_str_cut'      => $four_str_cut,
             'five_str_cut'      => $five_str_cut,
             'de_ment_change'    => stripslashes($setting_info->de_ment_change),
+            'item_search'       => $item_search,
+            'keyword'           => $keyword,
+            'page'              => $page,
         ]);
     }
 
@@ -1041,7 +1083,10 @@ class AdmShopItemController extends Controller
         }
 
         $id                     = $request->input('id');
+        $page                   = $request->input('page');
         $ca_id                  = $request->input('ca_id');
+        $item_search            = $request->input('item_search');
+        $keyword                = $request->input('keyword');
         $item_code              = $request->input('item_code');
         $item_name              = addslashes($request->input('item_name'));
         $item_basic             = $request->input('item_basic');
@@ -1056,13 +1101,20 @@ class AdmShopItemController extends Controller
         $item_type3             = (int)$request->input('item_type3');
         $item_type4             = (int)$request->input('item_type4');
         $item_special           = (int)$request->input('item_special');
+        $item_special2          = (int)$request->input('item_special2');
+        $item_new_arrival       = (int)$request->input('item_new_arrival');
         $item_content           = $request->input('item_content');
+        $item_content2          = $request->input('item_content2');
+        $item_content3          = $request->input('item_content3');
+        $item_content4          = $request->input('item_content4');
+        $item_content5          = $request->input('item_content5');
         $item_cust_price        = (int)$request->input('item_cust_price');
         $item_price             = (int)$request->input('item_price');
         $item_point_type        = (int)$request->input('item_point_type');
         $item_point             = (int)$request->input('item_point');
         $item_supply_point      = (int)$request->input('item_supply_point');
-        $item_use               = (int)$request->input('item_use');
+        //$item_use               = (int)$request->input('item_use');
+        $item_use               = 1;
         $item_nocoupon          = (int)$request->input('item_nocoupon');
         $item_soldout           = (int)$request->input('item_soldout');
         $item_stock_qty         = $request->input('item_stock_qty');
@@ -1078,7 +1130,7 @@ class AdmShopItemController extends Controller
         $last_choice_ca_id      = $request->input('last_choice_ca_id');
 
         if(is_null($id) || is_null($ca_id) || is_null($item_code) || is_null($item_name)){
-            return redirect(route('shop.item.index'))->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);  //치명적인 에러가 있을시
+            return redirect(route('shop.item.index', 'page='.$page.'&ca_id='.$ca_id.'&item_search='.$item_search.'&keyword='.$keyword))->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);  //치명적인 에러가 있을시
             exit;
         }
 
@@ -1204,7 +1256,13 @@ class AdmShopItemController extends Controller
             'item_type3'            => $item_type3,
             'item_type4'            => $item_type4,
             'item_special'          => $item_special,
+            'item_special2'         => $item_special2,
+            'item_new_arrival'      => $item_new_arrival,
             'item_content'          => $item_content,
+            'item_content2'         => $item_content2,
+            'item_content3'         => $item_content3,
+            'item_content4'         => $item_content4,
+            'item_content5'         => $item_content5,
             'item_cust_price'       => $item_cust_price,
             'item_price'            => $item_price,
             //'item_point_type'       => $item_point_type,
@@ -1313,8 +1371,8 @@ class AdmShopItemController extends Controller
         //$update_result = DB::table('shopitems')->where([['id', $id], ['item_code',$item_code]])->update($data);
         $update_result = Shopitems::find($id)->update($data);
 
-        if($update_result) return redirect(route('shop.item.index'))->with('alert_messages', $Messages::$item['update']['up_ok']);
-        else return redirect(route('shop.item.index'))->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);  //치명적인 에러가 있을시
+        if($update_result) return redirect(route('shop.item.index', 'page='.$page.'&ca_id='.$ca_id.'&item_search='.$item_search.'&keyword='.$keyword))->with('alert_messages', $Messages::$item['update']['up_ok']);
+        else return redirect(route('shop.item.index', 'page='.$page.'&ca_id='.$ca_id.'&item_search='.$item_search.'&keyword='.$keyword))->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);  //치명적인 에러가 있을시
     }
 
     public function downloadfile(Request $request)

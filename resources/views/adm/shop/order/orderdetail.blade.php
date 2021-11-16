@@ -16,38 +16,43 @@
         <td>결제금액 : {{ number_format(((int)$order_info->od_cart_price + (int)$order_info->de_send_cost + (int)$order_info->od_send_cost + (int)$order_info->od_send_cost2) - (int)$order_info->od_receipt_point) }}</strong>원</td>
     </tr>
 </table>
+
 <table border=1>
-    <form name="frmorderform" method="post" action="">
+    <form name="orderdetailform" id="orderdetailform" method="post" action="{{ route('ajax_orderprocess') }}">
     {!! csrf_field() !!}
-    <input type="hidden" name="od_id" value="{{ $order_info->order_id }}">
-    <input type="hidden" name="mb_id" value="{{ $order_info->user_id }}">
+    <input type="hidden" name="order_id" value="{{ $order_info->order_id }}">
+    <input type="hidden" name="user_id" value="{{ $order_info->user_id }}">
     <input type="hidden" name="od_email" value="{{ $order_info->user_id }}">
     <input type="hidden" name="page_move" value="{!! $page_move !!}">
     <input type="hidden" name="pg_cancel" value="0">
+    <input type="hidden" name="sct_status" id="sct_status">
         <tr>
             <th scope="col">상품명</th>
             <th scope="col">
-                <input type="checkbox" id="sit_select_all">
+                <input type="checkbox" id="sit_select_all" class="category-1">
+                <!-- <input type="checkbox" id="sit_select_all"  onclick="selectAll(this)"> -->
             </th>
             <th scope="col">옵션항목</th>
             <th scope="col">상태</th>
             <th scope="col">수량</th>
             <th scope="col">판매가</th>
             <th scope="col">소계</th>
-            <th scope="col">포인트</th>
+            <th scope="col">적립포인트</th>
         </tr>
 
         @php
             $i = 0;
             $chk_cnt = 0;
+            $chk_box = 0;
+            $chk_box2 = 0;
         @endphp
 
         @foreach($carts as $cart)
             @php
-            $image = $CustomUtils->get_item_image($cart->item_code, 3);
-            $opts = DB::table('shopcarts')->where([['od_id', $order_info->order_id],['item_code', $cart->item_code]])->orderBy('sio_type')->orderBy('id')->get();
-            $rowspan = count($opts);
-            $k = 0;
+                $image = $CustomUtils->get_item_image($cart->item_code, 3);
+                $opts = DB::table('shopcarts')->where([['od_id', $order_info->order_id],['item_code', $cart->item_code]])->orderBy('sio_type')->orderBy('id')->get();
+                $rowspan = count($opts);
+                $k = 0;
             @endphp
 
             @foreach($opts as $opt)
@@ -64,37 +69,45 @@
                 @if($k == 0)
             <td rowspan="{{ $rowspan }}"><img src="{{ asset($image) }}"> {{ stripslashes($cart->item_name) }}</td>
             <td rowspan="{{ $rowspan }}">
-                <input type="checkbox" id="sit_sel_{{ $i }}" name="it_sel[]">
+                <input type="checkbox" id="sit_sel_{{ $i }}" name="it_sel[]" value="{{ $cart->item_code }}" class="category-1-{{ $chk_box }}">
+                <input type="hidden" name="item_code[]" value="{{ $cart->item_code }}">
             </td>
                 @endif
 
             <td>
-                <input type="checkbox" name="ct_chk[{{ $chk_cnt }}]" id="ct_chk_{{ $chk_cnt }}" value="{{ $chk_cnt }}">
-                <input type="hidden" name="ct_id[{{ $chk_cnt }}]" value="{{ $cart->id }}">
+                <input type="checkbox" name="ct_chk[{{ $chk_cnt }}]" id="ct_chk_{{ $chk_cnt }}" value="{{ $chk_cnt }}" class="category-1-{{ $chk_box }}-{{ sprintf('%02d',$chk_box2) }}">
+                <input type="hidden" name="ct_id[{{ $chk_cnt }}]" value="{{ $opt->id }}">
                 {{ $opt->sct_option }}
             </td>
             <td>{{ $opt->sct_status }}</td>
             <td>
-                {{ $opt->sct_qty }}
+                <input type="text" name="sct_qty[{{ $chk_cnt }}]" id="sct_qty_{{ $chk_cnt }}" value="{{ $opt->sct_qty }}" size="5">
+
             </td>
             <td>{{ number_format($opt_price) }}</td>
             <td>{{ number_format($ct_price['stotal']) }}</td>
             <td>{{ number_format($ct_point['stotal']) }} 점</td>
         </tr>
                 @php
-                $i++;
-                $chk_cnt++;
-                $k++;
+                    $i++;
+                    $chk_cnt++;
+                    $k++;
+                    $chk_box2++;
                 @endphp
             @endforeach
+            @php
+                $chk_box++;
+                $chk_box2 = 0;
+            @endphp
         @endforeach
 </table>
 
 <table border=1>
     <tr>
         <td>
-            <input type="hidden" name="chk_cnt" value="{{ $chk_cnt }}">
+            <input type="hidden" name="chk_cnt" id="chk_cnt" value="{{ $chk_cnt }}">
             <strong>주문 및 장바구니 상태 변경</strong>
+            <button type="button" onclick="status_change('입금')">입금</button>
             <button type="button" onclick="status_change('준비')">준비</button>
             <button type="button" onclick="status_change('배송')">배송</button>
             <button type="button" onclick="status_change('완료')">배송완료</button>
@@ -108,10 +121,163 @@
 
 
 <script>
-    function status_change(status){
-alert(status);
+    $("[class^='category-']").on('change', function()
+    {
+        $this_checkbox = $(this);
+        var class_name = $this_checkbox.attr('class');
+        var checked = $('[class="'+class_name+'"]').is(":checked");
+
+        $("[class^='"+class_name+"']").prop('checked', checked );   // 하위요소 전부 체크or해제
+        checkbox_checked(class_name, checked);
+    });
+
+    function checkbox_checked(class_name, checked )
+    {
+        if( class_name.indexOf('-') == -1) return;
+
+        var parent_class_name = class_name.substr(0, class_name.lastIndexOf('-') );
+        var friend_class = class_name.substr(0, (class_name.lastIndexOf('-') + 1) );
+
+        if( checked )//체크일경우
+        {
+            var i=0;
+            //var node = $('input:checkbox:regex(class,'+ friend_class + '[0-9]$)');
+            var node = $("[class^='"+friend_class+"']");
+
+            if( node.length == node.filter(":checked").length )
+                $('.' + parent_class_name ).prop('checked', true );
+        }
+        else //해제일경우
+        {
+            $("[class^='"+class_name+"']").each( function(index, item)
+            {
+                var parent_class_name = class_name.substr(0, class_name.lastIndexOf('-') );//상위단원 class가져오기
+                child_checked = $(this).is(':checked');
+                if( !child_checked && parent_class_name != 'category')//하위단원을 체크 해제했을경우 상위단원 체크 해제 부분
+                {
+                    $('.'+parent_class_name).prop('checked', child_checked );
+                    return false;
+                }
+            });
+        }
+        checkbox_checked(parent_class_name, checked )
     }
 </script>
+
+<script>
+    function status_change(status){
+        var msg = '';
+        if(status == "취소"){
+            msg = status + '시 자동 환불 처리 되어 복구 할수 없습니다.';
+        }else{
+            msg = status + '상태를 선택하셨습니다.';
+        }
+
+        var check = false;
+        for (i=0; i<$("#chk_cnt").val(); i++) {
+            if($('#ct_chk_'+i).is(':checked') == true){
+                check = true;
+            }
+        }
+
+        if (check == false) {
+            alert("처리할 자료를 하나 이상 선택해 주십시오.");
+            return false;
+        }
+
+        if (confirm(msg + "\n\n선택하신대로 처리하시겠습니까?")) {
+            //return true;
+            $("#sct_status").val(status);
+            //$("#orderdetailform").submit();
+
+            var form_var = $("#orderdetailform").serialize();
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+                type: 'post',
+                url: '{{ route('ajax_orderprocess') }}',
+                dataType: 'text',
+                data: form_var,
+                success: function(result) {
+                    var data = JSON.parse(result);
+//alert(data.custom_data);
+//return false;
+                    if(data.message == 'no_order'){
+                        alert('해당 주문번호로 주문서가 존재하지 않습니다.');
+                        location.href = "{!! route('orderlist', $page_move) !!}"
+                        return false;
+                    }
+
+                    if(data.message == 'qty_big'){
+                        alert('주문 수량 보다 크게 입력 할수 없습니다.');
+                        return false;
+                    }
+
+                    if(data.message == 'pay_cancel'){
+                        pay_cancel('{{ $order_info->imp_uid }}', '{{ $order_info->order_id }}', data.amount, data.custom_data);
+                    }
+
+                },error: function(result) {
+                    console.log(result);
+                }
+            });
+        } else {
+            return false;
+        }
+
+    }
+</script>
+
+<!-- 환불 처리 -->
+<!-- iamport.payment.js -->
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+    function pay_cancel(imp_uid, order_id, amount, custom_data){
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+            url : '{{ route('ajax_admorderpaycancel') }}',
+            type : 'post',
+            contentType : "application/json",
+            data    : JSON.stringify({
+                "imp_uid"               : imp_uid,
+                "merchant_uid"          : order_id, // 예: ORD20180131-0000011
+                "cancel_request_amount" : amount, // 환불금액
+                "reason"                : "부분 환불", // 환불사유
+                "custom_data"           : custom_data,  //필요 데이터
+                "refund_holder"         : "{{ $order_info->od_deposit_name }}", // [가상계좌 환불시 필수입력] 환불 수령계좌 예금주
+                "refund_bank"           : "", // [가상계좌 환불시 필수입력] 환불 수령계좌 은행코드(예: KG이니시스의 경우 신한은행은 88번)
+                "refund_account"        : "", // [가상계좌 환불시 필수입력] 환불 수령계좌 번호
+            }),
+            dataType : "text",
+        }).done(function(result) { // 환불 성공시 로직
+alert(result);
+return false;
+            if(result == "ok"){
+                alert("취소 처리 되었습니다.");
+                location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
+            }
+
+            if(result == "error"){
+                alert("주문 상품 취소가 실패 하였습니다. 관리자에게 문의 하세요.");
+                //location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
+            }
+
+        }).fail(function(error) { // 환불 실패시 로직
+            alert("주문 상품 취소가 실패 하였습니다. 관리자에게 문의 하세요.");
+            //location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
 
 
 

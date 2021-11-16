@@ -66,11 +66,11 @@ class PageSet extends Controller
 			{
 				if($this->perinfo)
 				{
-					$pShowPage .= "<a href='$_SERVER[PHP_SELF]?$this->perinfo&page=$dPage&$this->tails'>$dPage</a>";
+					$pShowPage .= "<a href='?$this->perinfo&page=$dPage&$this->tails'>$dPage</a>";
 				}
 				else
 				{
-					$pShowPage .= "<a href='$_SERVER[PHP_SELF]?$this->tails&page=$dPage'>$dPage </a>";
+					$pShowPage .= "<a href='?$this->tails&page=$dPage'>$dPage </a>";
 				}
 			}
 
@@ -86,7 +86,7 @@ class PageSet extends Controller
 		$firstPage = $this->firstPage - 9;
 		//이전페이지 블럭..
 		if($this->block > 1) {
-			$pShowPage = "<a href='$_SERVER[PHP_SELF]?$this->perinfo&$this->tails&page=$firstPage'>$img</a>";
+			$pShowPage = "<a href='?$this->perinfo&$this->tails&page=$firstPage'>$img</a>";
 		} else {
 			//$pShowPage = "[이전 $this->blockScale]&nbsp;";
 			$pShowPage = $img;
@@ -100,7 +100,7 @@ class PageSet extends Controller
 		if($this->block < $this->totalBlock) {
 			$mPage = $this->lastPage + 1;
 			//$pShowPage .= "&nbsp;<a href='$_SERVER[PHP_SELF]?$this->perinfo&page=$mPage&$this->tails'>[다음 $this->blockScale]</a>";
-			$pShowPage .= "&nbsp;<a href='$_SERVER[PHP_SELF]?$this->perinfo&$this->tails&page=$mPage'>$img</a>";
+			$pShowPage .= "&nbsp;<a href='?$this->perinfo&$this->tails&page=$mPage'>$img</a>";
 		} else {
 			//$pShowPage .= "&nbsp;[다음 $this->blockScale]";
 			$pShowPage .= $img;
@@ -114,7 +114,7 @@ class PageSet extends Controller
 		$firstPage = $this->firstPage - 4;
 		//이전페이지 블럭..
 		if($this->block > 1) {
-			$pShowPage = "<a href='$_SERVER[PHP_SELF]?$this->perinfo&$this->tails&page=$firstPage'>$img</a>";
+			$pShowPage = "<a href='?$this->perinfo&$this->tails&page=$firstPage'>$img</a>";
 		} else {
 			//$pShowPage = "[이전 $this->blockScale]&nbsp;";
 			$pShowPage = $img;
@@ -128,7 +128,7 @@ class PageSet extends Controller
 		if($this->block < $this->totalBlock) {
 			$mPage = $this->lastPage + 1;
 			//$pShowPage .= "&nbsp;<a href='$_SERVER[PHP_SELF]?$this->perinfo&page=$mPage&$this->tails'>[다음 $this->blockScale]</a>";
-			$pShowPage .= "&nbsp;<a href='$_SERVER[PHP_SELF]?$this->perinfo&$this->tails&page=$mPage'>$img</a>";
+			$pShowPage .= "&nbsp;<a href='?$this->perinfo&$this->tails&page=$mPage'>$img</a>";
 		} else {
 			//$pShowPage .= "&nbsp;[다음 $this->blockScale]";
 			$pShowPage .= $img;
@@ -141,7 +141,7 @@ class PageSet extends Controller
 		$firstPage = 1;
 		//첫페이지 블럭..
 		if($this->block > 1) {
-			$pShowPage = "<a href='$_SERVER[PHP_SELF]?$this->perinfo&page=$firstPage&$this->tails'>$img</a>";
+			$pShowPage = "<a href='?$this->perinfo&page=$firstPage&$this->tails'>$img</a>";
 		} else {
 			//$pShowPage = "[이전 $this->blockScale]&nbsp;";
 			$pShowPage = $img;
@@ -155,7 +155,7 @@ class PageSet extends Controller
 		if($this->block < $this->totalBlock) {
 			$mPage = $this->totalPage;
 			//$pShowPage .= "&nbsp;<a href='$_SERVER[PHP_SELF]?$this->perinfo&page=$mPage&$this->tails'>[다음 $this->blockScale]</a>";
-			$pShowPage .= "&nbsp;<a href='$_SERVER[PHP_SELF]?$this->perinfo&page=$mPage&$this->tails'>$img</a>";
+			$pShowPage .= "&nbsp;<a href='?$this->perinfo&page=$mPage&$this->tails'>$img</a>";
 		} else {
 			//$pShowPage .= "&nbsp;[다음 $this->blockScale]";
 			$pShowPage .= $img;
@@ -171,11 +171,11 @@ class PageSet extends Controller
 			$ppage = $this->page - 1;
 			if($this->perinfo)
 			{
-				$pShowPage .= "<a href='$_SERVER[PHP_SELF]?$this->perinfo&page=$ppage&$this->tails'>$text</a>";
+				$pShowPage .= "<a href='?$this->perinfo&page=$ppage&$this->tails'>$text</a>";
 			}
 			else
 			{
-				$pShowPage .= "<a href='$_SERVER[PHP_SELF]?$this->tails&page=$ppage'>$text</a>";
+				$pShowPage .= "<a href='?$this->tails&page=$ppage'>$text</a>";
 			}
 		}
 		else
@@ -192,10 +192,10 @@ class PageSet extends Controller
 		{
 			$npage = $this->page + 1;
 			if($this->perinfo){
-			$pShowPage .= "<a href='$_SERVER[PHP_SELF]?$this->perinfo&page=$npage&$this->tails'>$text</a>";
+			$pShowPage .= "<a href='?$this->perinfo&page=$npage&$this->tails'>$text</a>";
 			}else{
 
-			$pShowPage .= "<a href='$_SERVER[PHP_SELF]?$this->tails&page=$npage'>$text</a>";
+			$pShowPage .= "<a href='?$this->tails&page=$npage'>$text</a>";
 			}
 		} else {
 			$pShowPage .= "$text";

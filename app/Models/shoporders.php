@@ -36,6 +36,7 @@ class shoporders extends Model
         'od_cart_count',
         'od_cart_price',
         'de_send_cost',
+        'de_send_cost_free',
         'od_send_cost',
         'od_send_cost2',
         'od_receipt_price',
@@ -55,6 +56,8 @@ class shoporders extends Model
         'imp_card_number',
         'od_delivery_company',
         'od_invoice',
+        'od_misu',
+        'od_mod_history',
         'od_ip',
     ];
 
