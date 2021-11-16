@@ -6,12 +6,12 @@
 <!-- smarteditor2 사용 -->
 체험단 신청 뷰입니다.
 <table border=1 width="900px;">
-    <form method="post" action="{{ route('adm_exp_view_save') }}" enctype='multipart/form-data' onsubmit="return check_submit()">
+    <form method="post" action="{{ route('adm_exp_view_modi', $result_expList->id) }}" enctype='multipart/form-data' onsubmit="return check_submit()">
         {!! csrf_field() !!}
         <tr>
             <td>제목</td>
             <td>
-                <input type="text" id="exp_title" name="exp_title" value="{{ old('exp_title') }}">
+                <input type="text" id="exp_title" name="exp_title" value="{{ $result_expList->title }}">
                 @error('exp_title')
                     <span class='invalid-feedback' role='alert'>
                         <strong>{{ $message }}</strong>
@@ -24,9 +24,9 @@
             <td>상품 설정</td>
             <td>
                 <button type="button" onclick="open_pop()">상품 검색</button>
-                <h5>선택하신 상품명 : <span id="exp_item_show_name"></span></h5>
-                <input type="hidden" id="exp_item_code" name="exp_item_code" value="{{ old('exp_item_code') }}">
-                <input type="hidden" id="exp_item_name" name="exp_item_name" value="{{ old('exp_item_name') }}">
+                <h5>선택하신 상품명 : <span id="exp_item_show_name">{{ $result_expList->item_name }}</span></h5>
+                <input type="hidden" id="exp_item_code" name="exp_item_code" value="{{ $result_expList->item_id }}">
+                <input type="hidden" id="exp_item_name" name="exp_item_name" value="{{ $result_expList->item_name }}">
                 @error('exp_item_code')
                 <span class='invalid-feedback' role='alert'>
                     <strong>{{ $message }}</strong>
@@ -36,32 +36,35 @@
         </tr>
         <tr>
             <td>체험단 인원</td>
-            <td><input type="number" id="exp_limit_personnel" name="exp_limit_personnel" value="{{ old('exp_limit_personnel') }}" min="0"></td>
+            <td><input type="number" id="exp_limit_personnel" name="exp_limit_personnel" value="{{ $result_expList->exp_limit_personnel }}"></td>
         </tr>
         <tr>
             <td>모집기간</td>
-            <td><input type="date" id="exp_date_start" name="exp_date_start" value="{{ old('exp_date_start') }}"> ~ <input type="date" id="exp_date_end" name="exp_date_end" value="{{ old('exp_date_end') }}"></td>
+            <td><input type="date" id="exp_date_start" name="exp_date_start" value="{{ $result_expList->exp_date_start }}"> ~ <input type="date" id="exp_date_end" name="exp_date_end" value="{{ $result_expList->exp_date_end }}"></td>
         </tr>
         <tr>
             <td>평가 가능 기간</td>
-            <td><input type="date" id="exp_review_start" name="exp_review_start" value="{{ old('exp_review_start') }}"> ~ <input type="date" id="exp_review_end" name="exp_review_end" value="{{ old('exp_review_end') }}"></td>
+            <td><input type="date" id="exp_review_start" name="exp_review_start" value="{{ $result_expList->exp_review_start }}"> ~ <input type="date" id="exp_review_end" name="exp_review_end" value="{{ $result_expList->exp_review_end }}"></td>
         </tr>
         <tr>
             <td>당첨자 발표일</td>
-            <td><input type="date" id="exp_release_date" name="exp_release_date" value="{{ old('exp_release_date') }}"></td>
+            <td><input type="date" id="exp_release_date" name="exp_release_date" value="{{ $result_expList->exp_release_date }}"></td>
         </tr>
         <tr>
             <td>메인 이미지</td>
-            <td><input type="file" id="exp_main_image" name="exp_main_image"></td>
+            <td>
+                <input type="file" id="exp_main_image" name="exp_main_image">
+                현재 메인 이미지 파일 : {{ $result_expList->main_image_name }}
+            </td>
         </tr>
         <tr>
             <td>상품내용</td>
             <td>
-                <textarea type="text" name="exp_content" id="exp_content" style="width:100%">{{ old('exp_content') }}</textarea>
+                <textarea type="text" name="exp_content" id="exp_content" style="width:100%">{{ $result_expList->exp_content }}</textarea>
             </td>
         </tr>
         <tr>
-            <td><button type="submit">등록</button></td>
+            <td><button type="submit">수정</button></td>
         </tr>
     </form>
 </table>
@@ -154,17 +157,15 @@
             return false;
         }
 
-        if(exp_main_image == "" || exp_main_image == null){
-            alert('메인 이미지를 선택해주세요');
-            return false;
-        }
+        // if(exp_main_image == "" || exp_main_image == null){
+        //     alert('메인 이미지를 선택해주세요');
+        //     return false;
+        // }
         
         if(exp_content == ""  || exp_content == null || exp_content == '&nbsp;' || exp_content == '<p>&nbsp;</p>'){
             alert('상세내용을 입력해주세요');
             return false;
         }
-
-        
 
         return true;
     }
@@ -173,6 +174,5 @@
     function open_pop(){
         window.open("{{ route('adm_exp_popup_for_search_item') }}",'cp','width=600, height=600, scrollbars=yes');
     }
-
 </script>
 @endsection

@@ -118,6 +118,9 @@ header('Pragma: public');
                     <tr>
                         <td><a href="{{ route('orderlist') }}">주문 관리</a></td>
                     </tr>
+                    <tr>
+                        <td><a href="{{ route('admRating.index') }}">정량 평가 관리</a></td>
+                    </tr>
 
 
                     <tr>

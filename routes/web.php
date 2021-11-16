@@ -331,8 +331,11 @@ Route::prefix('adm/shop')->group(base_path('routes/admshop.php'));
 /*** 프론트 쇼핑몰 접근 ***/
 Route::prefix('shop')->group(base_path('routes/shop.php'));
 
-//관리자 페이지 체험다 관련 라우트
+//관리자 페이지 체험단 관련 라우트
 Route::prefix('adm/exp')->group(base_path('routes/admExp.php'));
+
+//관리자 페이지 정량 평가 라우트
+Route::prefix('adm/rating')->group(base_path('routes/admRatingItem.php'));
 
 //대체 라우트 지정(설정된 라우트가 없을 경우 해당 메시지를 alert으로 보여주고 메인으로 이동)
 //위치를 제일 마지막에 두어야 모든 라우트에 대해 반응가능

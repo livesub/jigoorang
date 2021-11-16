@@ -93,7 +93,6 @@ return array(
     'Carbon\\' => array($vendorDir . '/nesbot/carbon/src/Carbon'),
     'Brick\\Math\\' => array($vendorDir . '/brick/math/src'),
     'Asm89\\Stack\\' => array($vendorDir . '/asm89/stack-cors/src'),
-    'AshAllenDesign\\ShortURL\\' => array($vendorDir . '/ashallendesign/short-url/src'),
     'App\\' => array($baseDir . '/app'),
     'Alliv\\Iamport\\' => array($vendorDir . '/allivcorp/iamport/src'),
 );
