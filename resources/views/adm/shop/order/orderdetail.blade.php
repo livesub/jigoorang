@@ -75,13 +75,17 @@
                 @endif
 
             <td>
+                @if($opt->sct_status == '취소')
+                <input type="checkbox" name="ct_chk[{{ $chk_cnt }}]" id="ct_chk_{{ $chk_cnt }}" value="{{ $chk_cnt }}" class="category-1-{{ $chk_box }}-{{ sprintf('%02d',$chk_box2) }}" checked disabled="disabled">
+                @else
                 <input type="checkbox" name="ct_chk[{{ $chk_cnt }}]" id="ct_chk_{{ $chk_cnt }}" value="{{ $chk_cnt }}" class="category-1-{{ $chk_box }}-{{ sprintf('%02d',$chk_box2) }}">
+                @endif
                 <input type="hidden" name="ct_id[{{ $chk_cnt }}]" value="{{ $opt->id }}">
                 {{ $opt->sct_option }}
             </td>
             <td>{{ $opt->sct_status }}</td>
             <td>
-                <input type="text" name="sct_qty[{{ $chk_cnt }}]" id="sct_qty_{{ $chk_cnt }}" value="{{ $opt->sct_qty }}" size="5">
+                <input type="text" name="sct_qty[{{ $chk_cnt }}]" id="sct_qty_{{ $chk_cnt }}" value="{{ $opt->sct_qty }}" size="5" onKeyup="this.value=this.value.replace(/[^1-9]/g,'');">
 
             </td>
             <td>{{ number_format($opt_price) }}</td>
@@ -111,6 +115,7 @@
             <button type="button" onclick="status_change('준비')">준비</button>
             <button type="button" onclick="status_change('배송')">배송</button>
             <button type="button" onclick="status_change('완료')">배송완료</button>
+            <button type="button" onclick="status_change('입력수량취소')">입력수량취소</button>
             <button type="button" onclick="status_change('취소')">취소</button>
             <button type="button" onclick="status_change('반품')">반품</button>
         </td>
@@ -118,6 +123,14 @@
 </form>
 </table>
 
+<table border=1>
+    <tr>
+        <td>주문 수량변경 및 주문 전체취소 처리 내역</td>
+    </tr>
+    <tr>
+        <td>{!! nl2br($order_info->od_mod_history) !!}</td>
+    </tr>
+</table>
 
 
 <script>
@@ -167,7 +180,7 @@
 <script>
     function status_change(status){
         var msg = '';
-        if(status == "취소"){
+        if(status == "취소" || status == "입력수량취소"){
             msg = status + '시 자동 환불 처리 되어 복구 할수 없습니다.';
         }else{
             msg = status + '상태를 선택하셨습니다.';
@@ -177,6 +190,12 @@
         for (i=0; i<$("#chk_cnt").val(); i++) {
             if($('#ct_chk_'+i).is(':checked') == true){
                 check = true;
+            }
+
+            if($("#sct_qty_"+i).val() == ""){
+                alert("수량을 입력 하세요.");
+                $("#sct_qty_"+i).focus();
+                return false;
             }
         }
 
@@ -198,9 +217,22 @@
                 dataType: 'text',
                 data: form_var,
                 success: function(result) {
+//alert(result);
+//return false;
                     var data = JSON.parse(result);
 //alert(data.custom_data);
 //return false;
+                    if(data.message == 'no_number'){
+                        alert('수량을 입력 하세요.');
+                        return false;
+                    }
+
+                    if(data.message == 'all_cancel'){
+                        alert('전체 주문 취소 상태 입니다.');
+                        location.href = "{!! route('orderlist', $page_move) !!}"
+                        return false;
+                    }
+
                     if(data.message == 'no_order'){
                         alert('해당 주문번호로 주문서가 존재하지 않습니다.');
                         location.href = "{!! route('orderlist', $page_move) !!}"
@@ -209,6 +241,12 @@
 
                     if(data.message == 'qty_big'){
                         alert('주문 수량 보다 크게 입력 할수 없습니다.');
+                        location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
+                        return false;
+                    }
+
+                    if(data.message == 'no_qty'){
+                        alert("처리할 수량을 변경해 주십시오.");
                         return false;
                     }
 
@@ -250,8 +288,8 @@
             }),
             dataType : "text",
         }).done(function(result) { // 환불 성공시 로직
-alert(result);
-return false;
+//alert(result);
+//return false;
             if(result == "ok"){
                 alert("취소 처리 되었습니다.");
                 location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
