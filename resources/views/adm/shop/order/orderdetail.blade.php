@@ -18,7 +18,7 @@
 </table>
 
 <table border=1>
-    <form name="orderdetailform" id="orderdetailform" method="post" action="{{ route('ajax_orderprocess') }}">
+    <form name="orderdetailform" id="orderdetailform" method="post" action="">
     {!! csrf_field() !!}
     <input type="hidden" name="order_id" value="{{ $order_info->order_id }}">
     <input type="hidden" name="user_id" value="{{ $order_info->user_id }}">
@@ -85,7 +85,6 @@
             <td>{{ $opt->sct_status }}</td>
             <td>
                 <input type="text" name="sct_qty[{{ $chk_cnt }}]" id="sct_qty_{{ $chk_cnt }}" value="{{ $opt->sct_qty }}" size="5" onKeyup="this.value=this.value.replace(/[^1-9]/g,'');">
-
             </td>
             <td>{{ number_format($opt_price) }}</td>
             <td>{{ number_format($ct_price['stotal']) }}</td>
@@ -203,6 +202,15 @@
             return false;
         }
 
+        switch (status) {
+            case '입력수량취소':
+                var route_link = '{{ route('ajax_orderqtyprocess') }}';
+                break;
+            case '취소':
+                var route_link = '{{ route('ajax_orderitemprocess') }}';
+                break;
+        }
+
         if (confirm(msg + "\n\n선택하신대로 처리하시겠습니까?")) {
             //return true;
             $("#sct_status").val(status);
@@ -212,7 +220,7 @@
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
                 type: 'post',
-                url: '{{ route('ajax_orderprocess') }}',
+                url: route_link,
                 dataType: 'text',
                 data: form_var,
                 success: function(result) {

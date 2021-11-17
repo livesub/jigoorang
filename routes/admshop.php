@@ -165,10 +165,18 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@orderdetail',
     ]);
 
-    Route::post('orderprocess', [
-        'as' => 'ajax_orderprocess',
-        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@ajax_orderprocess',
+    //입력수량 취소
+    Route::post('orderqtyprocess', [
+        'as' => 'ajax_orderqtyprocess',
+        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@ajax_orderqtyprocess',
     ]);
+
+    //상품 취소
+    Route::post('orderitemprocess', [
+        'as' => 'ajax_orderitemprocess',
+        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@ajax_orderitemprocess',
+    ]);
+
 
     //주문 취소
     Route::post('admorderpaycancel', [

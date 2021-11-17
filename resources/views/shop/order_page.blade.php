@@ -252,7 +252,7 @@
                 @if(Auth::user()->user_point > 0)
                 <tr>
                     <td>사용가능적립금</td>
-                    <td><input type="text" name="od_temp_point" value="{{ Auth::user()->user_point }}" id="od_temp_point" size="7" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 점</td>
+                    <td><input type="text" name="od_temp_point" value="{{ Auth::user()->user_point }}" id="od_temp_point" size="7" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 점<br>(최소 결제 금액은 1,000원 입니다.)</td>
                 </tr>
                 @endif
 
@@ -516,6 +516,15 @@
                 $("#od_temp_point").focus();
                 return false;
             }
+
+            //최소 결제 금액(1000원)
+            var min_price = total_price - od_temp_point;
+
+            if(min_price < 1000){
+                alert("최소 결제 금액은 1,000원 입니다.");
+                $("#od_temp_point").focus();
+                return false;
+            }
         }
         @endif
 
@@ -575,7 +584,7 @@ return false;
             pay_method: method,
             merchant_uid: merchant_uid,
             name: "{{ $goods }}",
-            amount: 0,
+            amount: tot_pay,
             buyer_email: "{{ Auth::user()->user_id }}",
             buyer_name: "{{ Auth::user()->user_name }}",
             buyer_tel: "{{ Auth::user()->user_tel }}",

@@ -194,8 +194,9 @@ class OrderController extends Controller
 
     }
 
-    public function ajax_orderprocess(Request $request)
+    public function ajax_orderqtyprocess(Request $request)
     {
+        //입력 수량 취소
         $CustomUtils = new CustomUtils;
 
         $ct_chk     = $request->input('ct_chk');
@@ -232,65 +233,33 @@ class OrderController extends Controller
             if(isset($ct_chk[$i])){
                 $cart_info = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $ct_id[$i]]])->first();
 
-                if($sct_status == '입력수량취소'){
-                    if($cart_info->sct_qty < $sct_qty[$i]){ //장바구니 수량 보다 더 입력 했을 경우
-                        echo json_encode(['message' => 'qty_big']);
-                        exit;
-                    }else{
-                        if($cart_info->sct_qty != $sct_qty[$i]){
-                            //수량 차이가 있을 경우
-                            //입력수량취소
-                            $minus_qty = $cart_info->sct_qty - $sct_qty[$i];   //차감 갯수
+                if($cart_info->sct_qty < $sct_qty[$i]){ //장바구니 수량 보다 더 입력 했을 경우
+                    echo json_encode(['message' => 'qty_big']);
+                    exit;
+                }else{
+                    if($cart_info->sct_qty != $sct_qty[$i]){
+                        //수량 차이가 있을 경우
+                        //입력수량취소
+                        $minus_qty = $cart_info->sct_qty - $sct_qty[$i];   //차감 갯수
 
-                            //갯수에 따른 환불 금액
-                            $qty_price = ($cart_info->sct_price + $cart_info->sio_price) * $minus_qty;
+                        //갯수에 따른 환불 금액
+                        $qty_price = ($cart_info->sct_price + $cart_info->sio_price) * $minus_qty;
 
-                            if($card_price > $qty_price){
-                                //결제 금액이 취소금액 보다 클때(신용카드만 부분 취소)
-                                $amount = $amount + $qty_price;
-                            }else if($card_price < $qty_price){
-                                //결제 금액 보다 취소금액이 클때(신용카드는 일단 돌려 주고)
-                                $amount = $order_info->od_receipt_price;    //카드금액 돌려 주고 나머지는 포인트로
-                            }else if($card_price == $qty_price){
-
-                            }
-
-                            $custom_data[$i]['ct_id'] = $ct_id[$i];
-                            $custom_data[$i]['minus_qty'] = $minus_qty;
+                        if($card_price > $qty_price){
+                            //결제 금액이 취소금액 보다 클때(신용카드만 부분 취소)
+                            $amount = $amount + $qty_price;
+                        }else if($card_price < $qty_price){
+                            //결제 금액 보다 취소금액이 클때(신용카드는 일단 돌려 주고)
+                            $amount = $card_price;    //카드금액 돌려 주고 나머지는 포인트로
                         }
+
+                        $custom_data[$i]['ct_id'] = $ct_id[$i];
+                        $custom_data[$i]['minus_qty'] = $minus_qty;
                     }
-                }else if($sct_status == '취소'){
-
-                    echo print_r($it_sel,true);
-
-
-/*
-
-                    if(isset($ct_chk[$i])){
-                        $cart_info = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $ct_id[$i]]])->first();
-
-
-                        var_dump(isset($it_sel[$i]));
-//var_dump($cart_info);
-                    }
-
-
-                    if(isset($it_sel[$i])){
-                        //선택 취소
-                        var_dump($it_sel[$i]);
-                    }
-
-*/
-
-
-                    //var_dump("cancel");
-
                 }
-
             }
-
         }
-exit;
+
         $custom_data = json_encode($custom_data);
         if($custom_data == '' || $amount == 0){
             echo json_encode(['message' => 'no_qty']);
@@ -301,6 +270,85 @@ exit;
         }
 
     }
+
+    public function ajax_orderitemprocess(Request $request)
+    {
+        //상품별 취소
+        $CustomUtils = new CustomUtils;
+
+        $ct_chk     = $request->input('ct_chk');
+        $sct_status = $request->input('sct_status');   //상태 값(입금,취소,준비,배송 등등)
+
+        if($ct_chk == ''){
+            echo json_encode(['message' => 'all_cancel']);
+            exit;
+        }
+
+        $order_id   = $request->input('order_id');
+
+        $user_id    = $request->input('user_id');
+        $od_email   = $request->input('od_email');
+        $page_move  = $request->input('page_move');
+
+        $it_sel     = $request->input('it_sel');
+        $ct_id      = $request->input('ct_id');     //장바구니 순번
+        $sct_qty    = $request->input('sct_qty');   //수량
+
+        $order_info = DB::table('shoporders')->select('order_id', 'od_receipt_price', 'od_receipt_point', 'od_misu')->where('order_id', $order_id)->first();
+        if(is_null($order_info)){
+            echo json_encode(['message' => 'no_order']);
+            exit;
+        }
+
+        //카드 결제 금액(실 결제 금액 : 결제금액(주문금액 + 모든 배송비) + 결제시 사용 포인트)
+        $card_price = (int)$order_info->od_receipt_price - (int)$order_info->od_receipt_point;
+
+        $amount = 0;
+        $custom_data = array();
+        $item_id = array();
+        $temp2 = '';
+
+        if(!is_null($it_sel)){
+echo "111111111";
+            for($i = 0; $i < count($it_sel); $i++){
+                $tmp = '';
+                $item_cnts = DB::table('shopcarts')->select('id')->where([['od_id', $order_info->order_id], ['item_code', $it_sel[$i]]])->orderBy('id', 'asc')->get();
+
+                foreach($item_cnts as $item_cnt){
+                    $tmp .= $item_cnt->id.',';
+                }
+
+                $item_id[$i] = $tmp;
+            }
+        }else{
+echo "222222222";
+        }
+//var_dump($item_id);
+exit;
+/*
+
+
+        for($i = 0; $i < count($ct_id); $i++){
+            if(isset($ct_chk[$i])){
+                $temp2 .= $ct_id[$i].',';
+            }
+        }
+
+        for($k = 0; $k < $item_id; $k++){
+
+        }
+*/
+
+        var_dump("RRRRRRRR");
+
+
+//var_dump(count($it_sel));
+
+
+echo "상품별 취소";
+    }
+
+
 
     public function ajax_admorderpaycancel(Request $request)
     {
@@ -320,6 +368,9 @@ exit;
 
         $order_info = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->first();
 
+        //카드 결제 금액(실 결제 금액 : 결제금액(주문금액 + 모든 배송비) + 결제시 사용 포인트)
+        $card_price = (int)$order_info->od_receipt_price - (int)$order_info->od_receipt_point;
+
         $cancel_result = Iamport::cancelPayment($imp_uid, $cancel_request_amount, $reason); //실제 취소 이루어 지는 부분
 
         if($cancel_result->success == true){
@@ -327,6 +378,7 @@ exit;
             foreach($custom_data as $k=>$v)
             {
                 $cart_info = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $custom_data[$k]['ct_id']]])->first();
+                $order_misu = DB::table('shoporders')->select('od_cancel_price', 'od_misu')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->first();
 
                 //남은 수량 계산
                 $have = $cart_info->sct_qty - $custom_data[$k]['minus_qty'];
@@ -354,10 +406,26 @@ exit;
 
                 $mod_history .= $order_info->od_mod_history.date("Y-m-d H:i:s", time()).' '.$cart_info->sct_option.' 입력수량취소 '.$cart_info->sct_qty.' -> '.$have."\n";
 
+                $qty_price = ($cart_info->sct_price + $cart_info->sio_price) * $custom_data[$k]['minus_qty'];   //취소 금액
+                if($card_price < $qty_price){   //결제금액 보다 취소 금액이 클때
+                    if($order_misu->od_misu  == 0){
+                        //처음 수량 취소 일때 카드값 전부 돌려 주고, 상품값 - 신용카드값 을 포인트로 지급
+                        $misu = $qty_price - $card_price;
+                    }else{
+                        //두번쨰 부터는
+                        $misu = $qty_price;
+                    }
+                    $CustomUtils->insert_point($order_info->user_id, $misu, '상품 구매 부분 취소', 10,'', $order_id);
+                    $od_cancel_price = $cancel_request_amount; //취소금액
+                }else{
+                    $misu = $cancel_request_amount;
+                    $od_cancel_price = $order_misu->od_cancel_price + $cancel_request_amount; //취소금액
+                }
+
                 //order 업데이트
                 $od_cart_price = $order_info->od_cart_price - $cancel_request_amount;   //총금액 - 취소 금액
-                $od_cancel_price = $cancel_request_amount; //취소금액
-                $od_misu = $order_info->od_misu + ((-1) * $cancel_request_amount); //미수금액(누적)
+
+                $od_misu = $order_misu->od_misu + ((-1) * $misu); //미수금액(누적)
 
                 $order_up = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->update([
                     'od_cart_price'     => $od_cart_price,
