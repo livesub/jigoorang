@@ -575,7 +575,7 @@ return false;
             pay_method: method,
             merchant_uid: merchant_uid,
             name: "{{ $goods }}",
-            amount: tot_pay,
+            amount: 0,
             buyer_email: "{{ Auth::user()->user_id }}",
             buyer_name: "{{ Auth::user()->user_name }}",
             buyer_tel: "{{ Auth::user()->user_tel }}",

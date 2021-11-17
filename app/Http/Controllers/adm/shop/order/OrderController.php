@@ -230,11 +230,9 @@ class OrderController extends Controller
 
         for($i = 0; $i < count($ct_id); $i++){
             if(isset($ct_chk[$i])){
-
                 $cart_info = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $ct_id[$i]]])->first();
 
                 if($sct_status == '입력수량취소'){
-
                     if($cart_info->sct_qty < $sct_qty[$i]){ //장바구니 수량 보다 더 입력 했을 경우
                         echo json_encode(['message' => 'qty_big']);
                         exit;
@@ -253,6 +251,8 @@ class OrderController extends Controller
                             }else if($card_price < $qty_price){
                                 //결제 금액 보다 취소금액이 클때(신용카드는 일단 돌려 주고)
                                 $amount = $order_info->od_receipt_price;    //카드금액 돌려 주고 나머지는 포인트로
+                            }else if($card_price == $qty_price){
+
                             }
 
                             $custom_data[$i]['ct_id'] = $ct_id[$i];
@@ -261,12 +261,36 @@ class OrderController extends Controller
                     }
                 }else if($sct_status == '취소'){
 
+                    echo print_r($it_sel,true);
+
+
+/*
+
+                    if(isset($ct_chk[$i])){
+                        $cart_info = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $ct_id[$i]]])->first();
+
+
+                        var_dump(isset($it_sel[$i]));
+//var_dump($cart_info);
+                    }
+
+
+                    if(isset($it_sel[$i])){
+                        //선택 취소
+                        var_dump($it_sel[$i]);
+                    }
+
+*/
+
+
+                    //var_dump("cancel");
+
                 }
 
             }
 
         }
-
+exit;
         $custom_data = json_encode($custom_data);
         if($custom_data == '' || $amount == 0){
             echo json_encode(['message' => 'no_qty']);
@@ -302,8 +326,6 @@ class OrderController extends Controller
             $mod_history = '';
             foreach($custom_data as $k=>$v)
             {
-                //echo $custom_data[$k]['ct_id'];
-                //echo $custom_data[$k]['minus_qty'];
                 $cart_info = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $custom_data[$k]['ct_id']]])->first();
 
                 //남은 수량 계산

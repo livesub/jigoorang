@@ -70,7 +70,6 @@
             <td rowspan="{{ $rowspan }}"><img src="{{ asset($image) }}"> {{ stripslashes($cart->item_name) }}</td>
             <td rowspan="{{ $rowspan }}">
                 <input type="checkbox" id="sit_sel_{{ $i }}" name="it_sel[]" value="{{ $cart->item_code }}" class="category-1-{{ $chk_box }}">
-                <input type="hidden" name="item_code[]" value="{{ $cart->item_code }}">
             </td>
                 @endif
 
@@ -217,8 +216,8 @@
                 dataType: 'text',
                 data: form_var,
                 success: function(result) {
-//alert(result);
-//return false;
+alert(result);
+return false;
                     var data = JSON.parse(result);
 //alert(data.custom_data);
 //return false;
