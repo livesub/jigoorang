@@ -89,6 +89,7 @@ class JoinController extends Controller
         $user_gender = trim($request->user_gender);
         $user_birth = trim(str_replace("-", "", $request->user_birth));
         //$user_confirm_code = str::random(60);  //사용자 이메일 확인을 위해서..
+        $promotion_agree = trim($request->promotion_agree);
 
         //trans('messages.join_Validator')) class 컨트롤러에서 표현 할때
         //예외처리
@@ -121,6 +122,7 @@ class JoinController extends Controller
             'user_phone' => $user_phone,
             'user_gender' => $user_gender,
             'user_birth' => $user_birth,
+            'user_promotion_agree' => $promotion_agree,
 
         ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
         //'user_confirm_code' => $user_confirm_code,

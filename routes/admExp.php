@@ -7,7 +7,27 @@ use App\Http\Controllers\auth\socialLoginController;
 use Illuminate\Http\Request;
 //컨트롤러 추가
 use App\Http\Controllers\adm\exp\AdmExpController;
+use App\Http\Controllers\adm\exp\AdmRatingItemController;
 
-Route::get('/', [AdmExpController::class, 'index'])->name('adm_exp_index');
+Route::group(['middleware' => 'is.admin'], function () {  
 
-Route::get('/exp_create', [AdmExpController::class, 'view_create'])->name('adm_exp_view_create');
+    Route::get('/', [AdmExpController::class, 'index'])->name('adm_exp_index');
+
+    //생성 페이지 라우트
+    Route::get('/exp_create', [AdmExpController::class, 'view_create'])->name('adm_exp_view_create');
+
+    //생성 DB저장 라우트
+    Route::post('/exp_create', [AdmExpController::class, 'view_save'])->name('adm_exp_view_save');
+
+    //수정 페이지 라우트
+    Route::get('/exp_modi/{id}', [AdmExpController::class, 'view_restore'])->name('adm_exp_view_restore');
+
+    //수정 DB저장 라우트
+    Route::post('/exp_modi/{id}', [AdmExpController::class, 'view_modi'])->name('adm_exp_view_modi');
+
+    //삭제 페이지 라우트
+    Route::get('/exp_delete/{id}', [AdmExpController::class, 'delete_expList'])->name('adm_exp_view_delete');
+
+    //체험단 등록 상품 검색 관련 라우트
+    Route::get('/exp_popup_for_search_item', [AdmExpController::class, 'popup_for_search_item'])->name('adm_exp_popup_for_search_item');
+});

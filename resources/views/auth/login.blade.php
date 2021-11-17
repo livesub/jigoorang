@@ -3,7 +3,7 @@
 @section('content')
 
 
-  <form name="flogin" id="flogin" method='POST' action='{{ route('login.store') }}' role='form' class='form__auth'>
+  <form name="flogin" id="flogin" method='POST' action='{{ route('login.store') }}' role='form' class='form__auth' onsubmit="return submit_check()">
     {!! csrf_field() !!}
     <input type="hidden" name="url" id="url" value="{{ $url }}">
 
@@ -143,7 +143,40 @@
     </section>
 </form>
     @endif
+<script>
+  
+  //이메일 정규식
+  var regEmail = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/;
+    //비밀번호 정규식
+  var regPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
+  //로그인 시 예외처리
+  function submit_check(){
+    var user_id = $('#user_id').val();
+    var user_pw = $('#user_pw').val();
 
+    if(user_id == "" || user_id == null){
+      alert('아이디가 빈 값입니다.');
+      return false;
+    }
+
+    if(user_pw == "" || user_pw == null){
+      alert('비밀번호가 빈 값입니다.');
+      return false;
+    }
+
+    if(regEmail.test(user_id) !== true){
+      alert('이메일 형식이 아닙니다. 다시 입력해 주세요');
+      return false;
+    }
+
+    if(regPw.test(user_pw) !== true){
+      alert('비밀번호 형식이 아닙니다. 다시 입력해 주세요');
+      return false;
+    }
+
+    return true;
+  }
+  </script>
 
 
 @endsection

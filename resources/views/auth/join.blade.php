@@ -302,9 +302,13 @@
 
     //submit true or false
     if(auth == ""){
+      
       alert('인증번호를 확인(입력)해주세요');
+
       return false;
-    }else if(cookie_certification == "" || cookie_num){
+
+    }else if(cookie_certification == "" || cookie_num == ""){
+
       alert('인증번호를 받아 주세요');
       //인증 후에도 시간초과로 없을 경우 다시 받게 초기화 시키기
       //태그 설정 해제
@@ -312,20 +316,29 @@
       $("#sms_send" ).prop('disabled', false);
       $("#user_phone" ).prop('readonly', false);
       $("#sms_send" ).prop('disabled', false);
+
       return false;
+
     }else if(user_phone != cookie_num){
+
       alert('인증받은 번호를 입력해주세요');
+
       return false;
+
     }else if(auth != "" && cookie_certification != "" && auth == cookie_certification && user_phone != "" && user_phone == cookie_num){
-      var result = email_check();
-      if(result == true){
+
+      var result = email_check(); //값을 얻기 위해서 동기식으로 진행
+      console.log(result);
+      if(result == "true"){
         $("#phone_certificate_confirmation").val(cookie_certification);
         //$("#cookie1").val(sk1);
         //$("#cookie2").val(sk2);
         return true;
       }else{
+
         alert('중복된 이메일 입니다.');
         return false;
+
       }
         
     }else{
@@ -349,7 +362,7 @@
   //이메일 중복확인 관련 ajax 함수
   function email_check(){
     var user_id = $("#user_id").val();
-
+    var check_result = "";
     if(regEmail.test(user_id) !== true || user_id == ""){
       alert("{{ __('auth.id_check')}}");
       return false;
@@ -362,15 +375,19 @@
         url: "{{ route('check_email') }}",
         dataType: 'json',
         data: { user_id : user_id },
+        async : false, //submit에서 값이 필요하기 때문에 동기식으로 전환
         success: function(result) {
           if(result[0] == "true"){
             //alert("{{ __('auth.email_ctf_true')}}")
-            return true;
-            //console.log("성공 : 사용가능 이메일"+result);
+            console.log("성공 : 사용가능 이메일"+result);
+            check_result = "true";
+            
           }else{
             //alert("{{ __('auth.email_ctf_false')}}")
-            return false;
-            //console.log("실패 : 중복된 이메일"+result);
+            console.log("실패 : 중복된 이메일"+result);
+            //return "false";
+            check_result = "false";
+            
           }
         },
         error: function(request,status,error) {
@@ -378,6 +395,7 @@
         }
       });
     }
+    return check_result;
   }
 
   //인증 확인 버튼 관련 함수

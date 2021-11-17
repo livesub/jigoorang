@@ -15,8 +15,8 @@ class CreateShortLinksTable extends Migration
     {
         Schema::create('short_links', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('code');
-            $table->text('link');
+            $table->string('code')->comment('식별 코드');
+            $table->text('link')->comment('원래 주소 값(이동할 링크)');
             $table->timestamps();
         });
     }

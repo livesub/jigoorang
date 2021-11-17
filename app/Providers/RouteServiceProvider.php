@@ -76,6 +76,12 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('admExp')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/admExp.php'));
+
+            //관리자 정량평가 관련
+            Route::prefix('adm/rating')
+                ->middleware('admRating')
+                ->namespace($this->namespace)
+                ->group(base_path('routes/admRatingItem.php'));
         });
     }
 
