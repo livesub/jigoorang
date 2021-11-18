@@ -40,12 +40,27 @@ class CartController extends Controller
 
         $sw_direct  = $request->input('sw_direct');     //장바구니 0, 바로구매 1
 
-        //session_start();    //라라벨에서 세션이 바로 적용 되지 않기에 임시 방편으로 작업
-
         $CustomUtils->set_cart_id($sw_direct);
 
         if($sw_direct) $tmp_cart_id = $CustomUtils->get_session('ss_cart_direct');
-        else $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
+        else{
+            $cart_infos = DB::table('shopcarts as a')
+            ->select('a.id', 'a.od_id', 'a.item_code', 'a.item_name', 'a.sct_price', 'a.sct_point', 'a.sct_qty', 'a.sct_status', 'a.sct_send_cost', 'a.item_sc_type', 'b.sca_id')
+            ->leftjoin('shopitems as b', function($join) {
+                    $join->on('a.item_code', '=', 'b.item_code');
+                })
+            //->where('a.od_id',$s_cart_id)
+            ->where([['a.user_id', Auth::user()->user_id], ['a.sct_status','쇼핑'], ['a.sct_direct','0']])  //장바구니 사라짐 문제
+            ->groupBy('a.item_code')
+            ->orderBy('a.id')
+            ->get();
+
+            if(count($cart_infos) > 0){
+                //장바구니 사라짐 문제 때문에 다시 세션 구움
+                $CustomUtils->set_session('ss_cart_id', $cart_infos[0]->od_id);
+                $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
+            }
+        }//$tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
 
         $tmp_cart_id = preg_replace('/[^a-z0-9_\-]/i', '', $tmp_cart_id);
 

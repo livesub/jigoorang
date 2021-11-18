@@ -224,8 +224,8 @@
                 dataType: 'text',
                 data: form_var,
                 success: function(result) {
-alert(result);
-return false;
+//alert(result);
+//return false;
                     var data = JSON.parse(result);
 //alert(data.custom_data);
 //return false;
@@ -236,7 +236,7 @@ return false;
 
                     if(data.message == 'all_cancel'){
                         alert('전체 주문 취소 상태 입니다.');
-                        location.href = "{!! route('orderlist', $page_move) !!}"
+                        location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
                         return false;
                     }
 
@@ -258,7 +258,7 @@ return false;
                     }
 
                     if(data.message == 'pay_cancel'){
-                        pay_cancel('{{ $order_info->imp_uid }}', '{{ $order_info->order_id }}', data.amount, data.custom_data);
+                        pay_cancel('{{ $order_info->imp_uid }}', '{{ $order_info->order_id }}', data.amount, data.custom_data, status);
                     }
 
                 },error: function(result) {
@@ -277,10 +277,19 @@ return false;
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
-    function pay_cancel(imp_uid, order_id, amount, custom_data){
+    function pay_cancel(imp_uid, order_id, amount, custom_data, status){
+        switch (status) {
+            case '입력수량취소':
+                var route_link = '{{ route('ajax_admorderqtypaycancel') }}';
+                break;
+            case '취소':
+                var route_link = '{{ route('ajax_admorderitempaycancel') }}';
+                break;
+        }
+
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-            url : '{{ route('ajax_admorderpaycancel') }}',
+            url : route_link,
             type : 'post',
             contentType : "application/json",
             data    : JSON.stringify({
@@ -295,20 +304,20 @@ return false;
             }),
             dataType : "text",
         }).done(function(result) { // 환불 성공시 로직
-//alert(result);
-//return false;
+alert(result);
+return false;
             if(result == "ok"){
                 alert("취소 처리 되었습니다.");
                 location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
             }
 
             if(result == "error"){
-                alert("주문 상품 취소가 실패 하였습니다. 관리자에게 문의 하세요.");
+                alert("주문 상품 취소가 실패 하였습니다. 관리자에게 문의 하세요.-1");
                 //location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
             }
 
         }).fail(function(error) { // 환불 실패시 로직
-            alert("주문 상품 취소가 실패 하였습니다. 관리자에게 문의 하세요.");
+            alert("주문 상품 취소가 실패 하였습니다. 관리자에게 문의 하세요.-2");
             //location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
         });
     }
