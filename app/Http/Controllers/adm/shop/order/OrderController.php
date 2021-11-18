@@ -607,6 +607,19 @@ class OrderController extends Controller
 
                     $mod_history .= $order_info->od_mod_history.date("Y-m-d H:i:s", time()).' '.$cart_info->sct_option.' 주문취소 '.$cart_info->sct_qty.' -> '.$have."\n";
 
+
+var_dump("내일 다시 (상품별 취소시 개별 배송비 돌려주어야 함");
+exit;
+                    //포인트 지급전에 개별 배송비가 있다면 포함해서 지급
+                    $cancel_cart_cnt = DB::table('shopcarts')->where([['item_code', $cart_info->item_code],['sct_status', '취소']])->count();
+                    if($item_cnt[$cart_cnt->item_code] == $cancel_cart_cnt){
+                        $misu_hap = $misu + $order_info->od_send_cost;  //상품 부분 취소일 경우 상품별 배송비도 같이 포함
+                    }else{
+                        $misu_hap = $misu;
+                    }
+
+
+
                     $qty_price = ($cart_info->sct_price + $cart_info->sio_price) * $cart_info->sct_qty;   //취소 금액
 
                     if($card_price < $qty_price){   //결제금액 보다 취소 금액이 클때
@@ -617,15 +630,7 @@ class OrderController extends Controller
                             //두번쨰 부터는
                             $misu = $qty_price;
                         }
-var_dump("내일 다시 (상품별 취소시 개별 배송비 돌려주어야 함");
-exit;
-                        //포인트 지급전에 개별 배송비가 있다면 포함해서 지급
-                        $cancel_cart_cnt = DB::table('shopcarts')->where([['item_code', $cart_info->item_code],['sct_status', '취소']])->count();
-                        if($item_cnt[$cart_cnt->item_code] == $cancel_cart_cnt){
-                            $misu_hap = $misu + $order_info->od_send_cost;  //상품 부분 취소일 경우 상품별 배송비도 같이 포함
-                        }else{
-                            $misu_hap = $misu;
-                        }
+
 
                         $CustomUtils->insert_point($order_info->user_id, $misu_hap, '상품 구매 부분 취소', 10,'', $order_id);
 
