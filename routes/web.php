@@ -6,6 +6,8 @@ use App\Http\Controllers\exp\expController;
 use App\Http\Controllers\sms\aligoSmsController;
 use App\Http\Controllers\auth\socialLoginController;
 use App\Http\Controllers\auth\JoinController;
+use App\Http\Controllers\member\MyPageInfoController;
+
 use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
@@ -145,6 +147,17 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'App\Http\Controllers\member\MypageController@withdraw',
     ]);
 
+    //회원정보수정 뷰 반환 라우트
+    Route::get('member/member_info', [MyPageInfoController::class, 'index'])->name('member_info_index');
+
+    //비밀번호 변경 라우트
+    Route::post('member/update_pw',[MyPageInfoController::class, 'update_pw'])->name('member_info_update_pw');
+
+    //핸드폰번호 변경 라우트
+    Route::post('member/update_phone_number',[MyPageInfoController::class, 'update_phone_number'])->name('member_info_update_phone_number');
+
+    //회원정보수정 라우트
+    Route::post('member/update_member',[MyPageInfoController::class, 'update_member'])->name('member_info_update_member');
  });
 
 /* 이메일 확인 리턴(외부에서 접속 해야 하기에 밖으로 뺌) */

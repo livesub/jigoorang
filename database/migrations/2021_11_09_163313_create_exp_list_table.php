@@ -18,7 +18,7 @@ class CreateExpListTable extends Migration
             $table->string('title')->comment('체험단 제목');
             $table->string('main_image_name')->comment('메인 이미지 이름');
             $table->integer('item_id')->comment('연계할 상품 아이디');
-            $table->integer('item_name')->comment('연계할 상품 이름');
+            $table->string('item_name')->comment('연계할 상품 이름');
             $table->integer('exp_limit_personnel')->comment('체험단 인원');
             $table->date('exp_date_start')->comment('모집 기간 시작일');
             $table->date('exp_date_end')->comment('모집 기간 종료일');

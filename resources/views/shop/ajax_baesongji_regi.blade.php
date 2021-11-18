@@ -6,15 +6,15 @@
         <td>배송지 등록</td>
     </tr>
     <tr>
-        <td>배송지명</td>
+        <!-- <td>배송지명</td> -->
         <td>
-            <input type="text" name="ad_c_subject" id="ad_c_subject">
+            <!-- <input type="text" name="ad_c_subject" id="ad_c_subject"> -->
             <input type="checkbox" name="ad_default" id="ad_default" value="1">
             <label for="ad_default">기본배송지로 설정</label>
         </td>
     </tr>
     <tr>
-        <td>이름</td>
+        <td>수령인</td>
         <td><input type="text" name="od_c_name" id="od_c_name"></td>
     </tr>
 
@@ -38,10 +38,10 @@
             <input type="hidden" name="od_c_addr_jibeon" id="od_c_addr_jibeon" value="">
         </td>
     </tr>
-    <tr>
+    <!-- <tr>
         <td>전화번호</td>
         <td><input type="text" name="od_c_tel" id="od_c_tel"></td>
-    </tr>
+    </tr> -->
     <tr>
         <td>핸드폰</td>
         <td><input type="text" name="od_c_hp" id="od_c_hp"></td>
@@ -56,11 +56,11 @@
 
 <script>
     function baesongji_regi(){
-        if($.trim($("#ad_c_subject").val()) == ""){
-            alert("배송지명을 입력 하세요.");
-            $("#ad_c_subject").focus();
-            return false;
-        }
+        // if($.trim($("#ad_c_subject").val()) == ""){
+        //     alert("배송지명을 입력 하세요.");
+        //     $("#ad_c_subject").focus();
+        //     return false;
+        // }
 
         if($.trim($("#od_c_name").val()) == ""){
             alert("이름을 입력 하세요.");
@@ -80,8 +80,14 @@
             return false;
         }
 
-        if($.trim($("#od_c_tel").val()) == ""){
-            alert("전화번호를 입력 하세요.");
+        // if($.trim($("#od_c_tel").val()) == ""){
+        //     alert("전화번호를 입력 하세요.");
+        //     $("#od_c_tel").focus();
+        //     return false;
+        // }
+
+        if($.trim($("#od_c_hp").val()) == ""){
+            alert("핸드폰번호를 입력 하세요.");
             $("#od_c_tel").focus();
             return false;
         }

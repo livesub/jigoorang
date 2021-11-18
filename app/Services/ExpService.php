@@ -8,13 +8,15 @@ use App\Helpers\Custom\PageSet; //페이지 함수
 //파일 관련 퍼사드 추가
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
-
+use \Carbon\Carbon;
 use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
 use Illuminate\Support\Facades\Auth;    //인증
 use Illuminate\Support\Facades\DB;
 use App\Models\items;    //상품 모델 정의
 use Validator;  //체크
 use App\Models\categorys; 
+use App\Models\shopitems;
+use App\Models\ExpApplicationList; 
 /**
  * Class ExpService
  * @package App\Services
@@ -102,11 +104,13 @@ class ExpService
             $page = 1;
             $start_num = 0;
         }
+        //날짜 지정
+        $date = Carbon::now()->format('Y-m-d');
 
         if($flag == 0){
             $expList = ExpList::latest();
         }else{
-            $expList = ExpList::where('exp_date_end', '>=', now())->where('exp_date_start', '<=', now())->latest();
+            $expList = ExpList::where('exp_date_end', '>=', $date)->where('exp_date_start', '<=', $date)->latest();
         }
         
 
@@ -152,7 +156,16 @@ class ExpService
 
         $result_exp = ExpList::find($id);
 
-        Storage::disk('public')->delete('exp_list/'.$result_exp->main_image_name);
+        //Storage::disk('public')->delete('exp_list/'.$result_exp->main_image_name);
+        //파일 삭제
+        if(File::exists(public_path('data/exp_list/'.$result_exp->main_image_name))){
+
+            File::delete(public_path('data/exp_list/'.$result_exp->main_image_name));
+        }
+
+        $editor_path = 'data/exp_list/editor/';
+        //스마트 에디터 파일 삭제
+        CustomUtils::editor_img_del($result_exp->exp_content, $editor_path);
 
         $result_exp->delete();
 
@@ -222,6 +235,43 @@ class ExpService
     public function detail_view($id){
 
         $result = ExpList::find($id);
+
+        if(!empty($result)){
+            //카테고리 찾기
+            $shopitems = shopitems::find($result->item_id);
+            //dd($shopitems->sca_id);
+
+            $result->sca_id = $shopitems->sca_id;
+            //dd($result->sca_id);
+        }else{
+            $result = "";
+        }
+        
+        return $result;
+    }
+
+    //신청단 정보 테이블 저장 함수
+    public function exp_form_save($request){
+
+        $result = ExpApplicationList::create([
+
+            'user_id' => $request->user_id,
+            'exp_id' => $request->exp_id,
+            'item_id' => $request->item_id,
+            'sca_id' => $request->sca_id,
+            'ad_name' => $request->ad_name,
+            'ad_hp'   => $request->ad_hp,
+            'ad_zip1' => $request->ad_zip1,
+            'ad_addr1' => $request->ad_addr1,
+            'ad_addr2' => $request->ad_addr2,
+            'ad_addr3' => $request->ad_addr3,
+            'ad_jibeon' => $request->ad_jibeon,
+            'shipping_memo' => $request->shipping_memo,
+            'reason_memo' => $request->reason_memo,
+            'promotion_yn' => $request->promotion_agree,
+            'user_name' => $request->user_name,
+
+        ])->exists();
 
         return $result;
     }

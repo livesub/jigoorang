@@ -179,7 +179,7 @@ class RatingItemService
         //카테고리 값이 변경 되었을 경우 db안에 같은 값이 있는지 확인이 필요하다.
         if($result->sca_id != $request->last_choice_ca_id){
 
-            $find_sca_id = $this->ratingItem->where('sca_id', $request->last_choice_ca_id);
+            $find_sca_id = $this->ratingItem->where('sca_id', $request->last_choice_ca_id)->first();
 
             if(!empty($find_sca_id)){
                 return redirect()->route('admRating.modi_view', $id)->with('alert_messages', '중복된 카테고리입니다 다시 시도해 주세요.');

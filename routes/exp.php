@@ -12,3 +12,5 @@ Route::get('/list/detail/{id}', [expController::class, 'view_detail'])->name('ex
 
 
 Route::get('/list/form/{id}', [expController::class, 'view_form'])->name('exp.list.form');
+
+Route::post('/list/form/create', [expController::class, 'exp_form_save'])->name('exp.list.form_create');
