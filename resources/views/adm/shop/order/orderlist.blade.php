@@ -82,6 +82,7 @@
                 $od_status6 = '';
                 $od_status7 = '';
                 $od_status8 = '';
+                $od_status9 = '';
 
                 if($od_status == '') $od_status1 = 'checked';
                 else if($od_status == '주문') $od_status2 = 'checked';
@@ -91,6 +92,7 @@
                 else if($od_status == '완료') $od_status6 = 'checked';
                 else if($od_status == '전체취소') $od_status7 = 'checked';
                 else if($od_status == '부분취소') $od_status8 = 'checked';
+                else if($od_status == '입력수량취소') $od_status9 = 'checked';
             @endphp
             <input type="radio" name="od_status" value="" id="od_status_all" {{ $od_status1 }}>
             <label for="od_status_all">전체</label>
@@ -108,6 +110,8 @@
             <label for="od_status_cancel">전체취소</label>
             <input type="radio" name="od_status" value="부분취소" id="od_status_pcancel" {{ $od_status8 }}>
             <label for="od_status_pcancel">부분취소</label>
+            <input type="radio" name="od_status" value="입력수량취소" id="od_status_pcancel" {{ $od_status9 }}>
+            <label for="od_status_pcancel">입력수량취소</label>
         </td>
     </tr>
     <tr>

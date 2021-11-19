@@ -59,8 +59,10 @@ class CartController extends Controller
                 //장바구니 사라짐 문제 때문에 다시 세션 구움
                 $CustomUtils->set_session('ss_cart_id', $cart_infos[0]->od_id);
                 $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
+            }else{
+                $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
             }
-        }//$tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
+        }
 
         $tmp_cart_id = preg_replace('/[^a-z0-9_\-]/i', '', $tmp_cart_id);
 

@@ -227,7 +227,7 @@
 //alert(result);
 //return false;
                     var data = JSON.parse(result);
-//alert(data.custom_data);
+//alert(data.amount);
 //return false;
                     if(data.message == 'no_number'){
                         alert('수량을 입력 하세요.');
