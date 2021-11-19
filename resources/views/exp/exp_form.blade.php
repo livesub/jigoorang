@@ -9,7 +9,7 @@
     <br>
     이메일 : {{ auth()->user()->user_id }}
     <br>
-    하고싶은 말 (선택) <input type="text" id="form_text" name="form_text" placeholder="하고 싶은 말을 입력하세요" maxlength="300">
+    평가단 참여이유 (필수) <input type="text" id="form_text" name="form_text" placeholder="30자 이상 ~ 300자이내로 작성하도록 해주세요(띄어쓰기 포함)" maxlength="300">
     <hr>
     <h2>배송지</h2>
     <form name="forderform" id="forderform">

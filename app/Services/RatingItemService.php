@@ -156,10 +156,12 @@ class RatingItemService
          //1단계 가져옴
         $one_str_cut = substr($ca_id,0,2);
         //dd($one_str_cut);
-        $one_step_infos = $this->getShopCate(1, 1,$one_str_cut);
+        //$one_step_infos = $this->getShopCate(1, 1,$one_str_cut);
+        $one_step_infos = $this->getShopCate(1, 1);
         //2단계 가져옴
         $two_str_cut = substr($ca_id,0,4);
-        $two_step_infos = $this->getShopCate(2, 1,$two_str_cut);
+        //$two_step_infos = $this->getShopCate(2, 1,$two_str_cut);
+        $two_step_infos = $this->getShopCate(2, 1,$one_str_cut);
 
         return view('adm.rating_item.rating_item_modi',[
             'ca_id'             => $ca_id,

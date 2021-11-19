@@ -36,7 +36,7 @@ class CreateShopitemsTable extends Migration
             $table->text('item_content2')->comment('상품추가내용');
             $table->text('item_content3')->comment('상품추가내용');
             $table->text('item_content4')->comment('상품추가내용');
-            $table->text('item_content4')->comment('상품추가내용');
+            $table->text('item_content5')->comment('상품추가내용');
             $table->integer('item_cust_price')->default(0)->comment('시중가격');
             $table->integer('item_price')->default(0)->comment('판매가격');
             $table->tinyInteger('item_point_type')->length(1)->default(0)->comment('포인트 유형');

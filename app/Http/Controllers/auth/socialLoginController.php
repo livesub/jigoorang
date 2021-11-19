@@ -60,7 +60,7 @@ class socialLoginController extends BaseController
                     }else{
                         $user_gender = 'W';
                     }
-                    $user_birth = "2007".$user_kakao['birthday'];
+                    $user_birth = "1996".$user_kakao['birthday'];
                     $user_phone = "";
 
 
