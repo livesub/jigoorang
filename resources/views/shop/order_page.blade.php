@@ -252,7 +252,7 @@
                 @if(Auth::user()->user_point > 0)
                 <tr>
                     <td>사용가능적립금</td>
-                    <td><input type="text" name="od_temp_point" value="{{ Auth::user()->user_point }}" id="od_temp_point" size="7" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 점</td>
+                    <td><input type="text" name="od_temp_point" value="{{ Auth::user()->user_point }}" id="od_temp_point" size="7" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 점<br>(최소 결제 금액은 1,000원 입니다.)</td>
                 </tr>
                 @endif
 
@@ -513,6 +513,15 @@
             if(user_point < od_temp_point){
                 alert("보유 적립금 보다 많이 결제할 수 없습니다.");
                 $("#od_temp_point").val(user_point);
+                $("#od_temp_point").focus();
+                return false;
+            }
+
+            //최소 결제 금액(1000원)
+            var min_price = total_price - od_temp_point;
+
+            if(min_price < 1000){
+                alert("최소 결제 금액은 1,000원 입니다.");
                 $("#od_temp_point").focus();
                 return false;
             }

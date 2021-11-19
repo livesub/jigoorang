@@ -123,7 +123,6 @@ class JoinController extends Controller
             'user_gender' => $user_gender,
             'user_birth' => $user_birth,
             'user_promotion_agree' => $promotion_agree,
-            
         ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
         //'user_confirm_code' => $user_confirm_code,
 

@@ -54,7 +54,7 @@ class MemberlistController extends Controller
         $type = 'member';
 
         $page_control = CustomUtils::page_function('users',$pageNum,$writeList,$pageNumList,$type,'','','','');
-        $members = DB::table('users')->where('user_level','>','1')->orderBy('id', 'desc')->skip($page_control['startNum'])->take($writeList)->get();
+        $members = DB::table('users')->where('user_level','>','2')->orderBy('id', 'desc')->skip($page_control['startNum'])->take($writeList)->get();
 
         $pageList = $page_control['preFirstPage'].$page_control['pre1Page'].$page_control['listPage'].$page_control['next1Page'].$page_control['nextLastPage'];
 
@@ -288,7 +288,7 @@ class MemberlistController extends Controller
 
         if($mode == "regi"){
             //등록
-            $select_disp = CustomUtils::select_box("user_level","회원@@관리자","10@@".config('app.ADMIN_LEVEL'), "");
+            $select_disp = CustomUtils::select_box("user_level","회원@@관리자","10@@3", "");
 
             return view('adm.memberregi',[
                 'title_ment'            => '등록',
@@ -306,7 +306,7 @@ class MemberlistController extends Controller
             //수정
             //회원 정보를 찾아 놓음
             $user_info = DB::table('users')->select('id', 'user_id', 'user_name', 'user_phone', 'user_thumb_name', 'user_ori_imagepath', 'user_level', 'user_type','created_at')->where('id', $num)->first();
-            $select_disp = CustomUtils::select_box("user_level","회원@@관리자","10@@".config('app.ADMIN_LEVEL'), "$user_info->user_level");
+            $select_disp = CustomUtils::select_box("user_level","회원@@관리자","10@@3", "$user_info->user_level");
 
             if($user_info->user_type == "Y") $user_status = "탈퇴";
             else $user_status = "가입";

@@ -18,7 +18,7 @@
 </table>
 
 <table border=1>
-    <form name="orderdetailform" id="orderdetailform" method="post" action="{{ route('ajax_orderprocess') }}">
+    <form name="orderdetailform" id="orderdetailform" method="post" action="">
     {!! csrf_field() !!}
     <input type="hidden" name="order_id" value="{{ $order_info->order_id }}">
     <input type="hidden" name="user_id" value="{{ $order_info->user_id }}">
@@ -70,19 +70,21 @@
             <td rowspan="{{ $rowspan }}"><img src="{{ asset($image) }}"> {{ stripslashes($cart->item_name) }}</td>
             <td rowspan="{{ $rowspan }}">
                 <input type="checkbox" id="sit_sel_{{ $i }}" name="it_sel[]" value="{{ $cart->item_code }}" class="category-1-{{ $chk_box }}">
-                <input type="hidden" name="item_code[]" value="{{ $cart->item_code }}">
             </td>
                 @endif
 
             <td>
+                @if($opt->sct_status == '취소')
+                <input type="checkbox" name="ct_chk[{{ $chk_cnt }}]" id="ct_chk_{{ $chk_cnt }}" value="{{ $chk_cnt }}" class="category-1-{{ $chk_box }}-{{ sprintf('%02d',$chk_box2) }}" checked disabled="disabled">
+                @else
                 <input type="checkbox" name="ct_chk[{{ $chk_cnt }}]" id="ct_chk_{{ $chk_cnt }}" value="{{ $chk_cnt }}" class="category-1-{{ $chk_box }}-{{ sprintf('%02d',$chk_box2) }}">
+                @endif
                 <input type="hidden" name="ct_id[{{ $chk_cnt }}]" value="{{ $opt->id }}">
                 {{ $opt->sct_option }}
             </td>
             <td>{{ $opt->sct_status }}</td>
             <td>
-                <input type="text" name="sct_qty[{{ $chk_cnt }}]" id="sct_qty_{{ $chk_cnt }}" value="{{ $opt->sct_qty }}" size="5">
-
+                <input type="text" name="sct_qty[{{ $chk_cnt }}]" id="sct_qty_{{ $chk_cnt }}" value="{{ $opt->sct_qty }}" size="5" onKeyup="this.value=this.value.replace(/[^1-9]/g,'');">
             </td>
             <td>{{ number_format($opt_price) }}</td>
             <td>{{ number_format($ct_price['stotal']) }}</td>
@@ -111,6 +113,7 @@
             <button type="button" onclick="status_change('준비')">준비</button>
             <button type="button" onclick="status_change('배송')">배송</button>
             <button type="button" onclick="status_change('완료')">배송완료</button>
+            <button type="button" onclick="status_change('입력수량취소')">입력수량취소</button>
             <button type="button" onclick="status_change('취소')">취소</button>
             <button type="button" onclick="status_change('반품')">반품</button>
         </td>
@@ -118,6 +121,14 @@
 </form>
 </table>
 
+<table border=1>
+    <tr>
+        <td>주문 수량변경 및 주문 전체취소 처리 내역</td>
+    </tr>
+    <tr>
+        <td>{!! nl2br($order_info->od_mod_history) !!}</td>
+    </tr>
+</table>
 
 
 <script>
@@ -167,7 +178,7 @@
 <script>
     function status_change(status){
         var msg = '';
-        if(status == "취소"){
+        if(status == "취소" || status == "입력수량취소"){
             msg = status + '시 자동 환불 처리 되어 복구 할수 없습니다.';
         }else{
             msg = status + '상태를 선택하셨습니다.';
@@ -178,11 +189,26 @@
             if($('#ct_chk_'+i).is(':checked') == true){
                 check = true;
             }
+
+            if($("#sct_qty_"+i).val() == ""){
+                alert("수량을 입력 하세요.");
+                $("#sct_qty_"+i).focus();
+                return false;
+            }
         }
 
         if (check == false) {
             alert("처리할 자료를 하나 이상 선택해 주십시오.");
             return false;
+        }
+
+        switch (status) {
+            case '입력수량취소':
+                var route_link = '{{ route('ajax_orderqtyprocess') }}';
+                break;
+            case '취소':
+                var route_link = '{{ route('ajax_orderitemprocess') }}';
+                break;
         }
 
         if (confirm(msg + "\n\n선택하신대로 처리하시겠습니까?")) {
@@ -194,13 +220,26 @@
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
                 type: 'post',
-                url: '{{ route('ajax_orderprocess') }}',
+                url: route_link,
                 dataType: 'text',
                 data: form_var,
                 success: function(result) {
+//alert(result);
+//return false;
                     var data = JSON.parse(result);
 //alert(data.custom_data);
 //return false;
+                    if(data.message == 'no_number'){
+                        alert('수량을 입력 하세요.');
+                        return false;
+                    }
+
+                    if(data.message == 'all_cancel'){
+                        alert('전체 주문 취소 상태 입니다.');
+                        location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
+                        return false;
+                    }
+
                     if(data.message == 'no_order'){
                         alert('해당 주문번호로 주문서가 존재하지 않습니다.');
                         location.href = "{!! route('orderlist', $page_move) !!}"
@@ -209,11 +248,17 @@
 
                     if(data.message == 'qty_big'){
                         alert('주문 수량 보다 크게 입력 할수 없습니다.');
+                        location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
+                        return false;
+                    }
+
+                    if(data.message == 'no_qty'){
+                        alert("처리할 수량을 변경해 주십시오.");
                         return false;
                     }
 
                     if(data.message == 'pay_cancel'){
-                        pay_cancel('{{ $order_info->imp_uid }}', '{{ $order_info->order_id }}', data.amount, data.custom_data);
+                        pay_cancel('{{ $order_info->imp_uid }}', '{{ $order_info->order_id }}', data.amount, data.custom_data, status);
                     }
 
                 },error: function(result) {
@@ -232,10 +277,19 @@
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script>
-    function pay_cancel(imp_uid, order_id, amount, custom_data){
+    function pay_cancel(imp_uid, order_id, amount, custom_data, status){
+        switch (status) {
+            case '입력수량취소':
+                var route_link = '{{ route('ajax_admorderqtypaycancel') }}';
+                break;
+            case '취소':
+                var route_link = '{{ route('ajax_admorderitempaycancel') }}';
+                break;
+        }
+
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-            url : '{{ route('ajax_admorderpaycancel') }}',
+            url : route_link,
             type : 'post',
             contentType : "application/json",
             data    : JSON.stringify({
@@ -258,12 +312,12 @@ return false;
             }
 
             if(result == "error"){
-                alert("주문 상품 취소가 실패 하였습니다. 관리자에게 문의 하세요.");
+                alert("주문 상품 취소가 실패 하였습니다. 관리자에게 문의 하세요.-1");
                 //location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
             }
 
         }).fail(function(error) { // 환불 실패시 로직
-            alert("주문 상품 취소가 실패 하였습니다. 관리자에게 문의 하세요.");
+            alert("주문 상품 취소가 실패 하였습니다. 관리자에게 문의 하세요.-2");
             //location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
         });
     }

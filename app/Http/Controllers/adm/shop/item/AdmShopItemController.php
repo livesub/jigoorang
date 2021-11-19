@@ -748,7 +748,7 @@ class AdmShopItemController extends Controller
             $item_info = DB::table('shopitems')->where('id', $request->input('chk_id')[$i])->first();
 
             $update_result = DB::table('shopitems')->where('item_code', $item_info->item_code)->update([
-                'item_del'          => 'Y',
+                'item_del'  => 'Y',
             ]);
         }
 
