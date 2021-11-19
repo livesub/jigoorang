@@ -208,7 +208,7 @@ class smsService
         return $retArr;
     }
 
-    //기본적인 커스텀 문자인증 관련 함수
+    //기본적인 커스텀 문자인증 관련 함수 메세지와 보낼 번호를 인자로 받음
     public function send_sms_custom($message, $phone_num){
         /**************** 문자전송하기 예제 필독항목 ******************/
         /* 동일내용의 문자내용을 다수에게 동시 전송하실 수 있습니다

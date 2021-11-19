@@ -73,6 +73,7 @@ class socialLoginController extends BaseController
                     //dd($user_birth);
                 }
 
+                //만나이 계산 함수
                 $age = $this->getAmericanAge($user_birth);
 
                 //만 14세 미만일 때 예외처리

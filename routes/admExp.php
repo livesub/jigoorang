@@ -11,6 +11,7 @@ use App\Http\Controllers\adm\exp\AdmRatingItemController;
 
 Route::group(['middleware' => 'is.admin'], function () {  
 
+    //리스트 페이지
     Route::get('/', [AdmExpController::class, 'index'])->name('adm_exp_index');
 
     //생성 페이지 라우트

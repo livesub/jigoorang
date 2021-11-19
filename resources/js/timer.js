@@ -8,7 +8,7 @@ window.start_timer = function start_timer(id, flag) {
   
   }
   
-  //타이머 함수
+  //타이머 함수 flag 값을 이용해 지난 후 로직을 위한 함수를 정의해 이용가능
 window.myTimer = function myTimer(value_id, flag=0) {
 
     time = time - 1; // 타이머 선택 숫자에서 -1씩 감산함(갱신되기 때문)
@@ -26,10 +26,13 @@ window.myTimer = function myTimer(value_id, flag=0) {
       
       //지난 후 로직을 위한 함수를 필요한 곳에서 정의
       if(flag != 0){
+        //지난 후 사용할 함수 이름
         return_to_sms(); 
       }
     }
   }
+
+//시간 정지 함수
 window.time_stop = function time_stop(value_id){
 
   time = return_time;

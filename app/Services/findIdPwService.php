@@ -25,7 +25,7 @@ class findIdPwService
         
     }
 
-    
+    //아이디 찾기 관련 함수
     public function findID($user_phone){
         
         $user_info = User::whereUser_phone($user_phone)->first();
@@ -50,6 +50,7 @@ class findIdPwService
         }
     }
 
+    //시간제한 비밀번호 링크 설정 관련 함수
     public function send_pw_link($user_phone){
 
         $user_info = User::whereUser_phone($user_phone)->first();
@@ -57,12 +58,13 @@ class findIdPwService
         if(!empty($user_info) && $user_info->user_platform_type == ""){
             
             $input['code'] = Str::random(6);
+            //addMinutes()안에 숫자를 분단위로 변경하면 원하는 시간을 설정 가능 지금 2분제한
             $url = URL::temporarySignedRoute('sendPwChangeLinkPro', now()->addMinutes(2), ['code' => Crypt::encryptString($user_info->id)]);
             //return URL::temporarySignedRoute('sendPwChangeLinkPro', now()->addMinutes(2), ['code' => Crypt::encryptString($user_info->id)]);
             //$result = $this->rand_code_save($url);
 
             $input['link'] = $url;
-            ;
+            
             $result = ShortLink::create($input)->exists();
 
             if($result){
@@ -85,6 +87,7 @@ class findIdPwService
         }
     }
 
+    //비밀번호 업데이트 함수
     public function update_pw($data){
         $user_phone = "";
         try {
@@ -111,7 +114,7 @@ class findIdPwService
 
     //단축 url 관련 삭제 함수
     public function delete_short_url_time_out(){
-        //생성시간이 5분전 보다 작을 경우(즉 5분이 지난 링크들)
+        //생성시간이 5분전 보다 작을 경우(즉 5분이 지난 링크들) 지금은 2분
         $currentDateTime = Carbon::now();
         $newDateTime = Carbon::now()->subMinutes(2);
 

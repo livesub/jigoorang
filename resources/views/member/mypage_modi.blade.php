@@ -5,7 +5,7 @@
     <br>
     이름                : {{ auth()->user()->user_name }}
     <br>
-    휴대폰 번호         : <div id="phone_number">{{ auth()->user()->user_phone }}<button onclick="view_phone()">변경</button></div> 
+    휴대폰 번호         : <div id="phone_number">{{ auth()->user()->user_phone }}</div><button onclick="view_phone()">변경</button>
     <br>
     <div id="modi_phone_view" style="display : none">
         {!! csrf_field() !!}
@@ -100,6 +100,8 @@
             deleteCookie(sk1, '{{ request()->getHost() }}', '/');
             deleteCookie(sk2, '{{ request()->getHost() }}', '/');
             $('#checked_ctf').val('');
+            $('#user_phone').val('');
+            $('#phone_certificate').val('');
         }
 
         function view_pw(){
@@ -108,6 +110,8 @@
 
         function close_pw(){
             $("#user_pw_view").hide();
+            $('#user_pw').val('');
+            $('#user_pw_confirmation').val('');
         }
 
         //인증번호 보내기 함수
@@ -297,20 +301,26 @@
             var phone_number = $("#user_phone").val();
             var cookie_certification = CryptoJS.AES.decrypt(getCookie(sk1), sk).toString(CryptoJS.enc.Utf8);
             var number_certification = CryptoJS.AES.decrypt(getCookie(sk2), sk).toString(CryptoJS.enc.Utf8);
+            let check_ctf = $('#checked_ctf').val();
 
             if(phone_number == ""){
-            alert('번호를 먼저 입력해주세요');
-            return false;
+                alert('번호를 먼저 입력해주세요');
+                return false;
             }
 
             if(phone_certificate == "" && cookie_certification == ""){
-            alert('인증 번호를 확인(입력)해주세요');
-            return false;
+                alert('인증 번호를 확인(입력)해주세요');
+                return false;
             }
 
             if(phone_number != number_certification){
-            alert('잘못된 번호 입니다. \n인정을 받은 번호를 입력해주세요');
-            return false;
+                alert('잘못된 번호 입니다. \n인정을 받은 번호를 입력해주세요');
+                return false;
+            }
+
+            if(check_ctf != '1'){
+                alert('인증확인 필요합니다.');
+                return false;
             }
 
             if(phone_certificate == cookie_certification){
@@ -328,6 +338,7 @@
                             //console.log('성공 : '+result[0]);
                             alert('핸드폰번호를 변경했습니다.');
                             $("#phone_number").text(phone_number);
+                            $("#phone_certificate" ).prop('readonly', false);
                             close_phone();
                         }else{
                             //console.log('실패 : '+result[0]);
@@ -364,7 +375,7 @@
             }
 
             
-            
+            return true;
         }
     </script>
 @endsection
