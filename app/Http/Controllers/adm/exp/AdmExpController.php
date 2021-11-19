@@ -35,6 +35,9 @@ class AdmExpController extends Controller
         $page = $request->input('page');
         //$page = 0;
         //$expAllLists = $this->expList->latest()->paginate(1);
+        $exp_directory = "data/exp_list/editor";
+        //setcookie('dir', public_path());
+        setcookie('directory', $exp_directory, (time() + 10800),"/"); //일단 3시간 잡음(3*60*60)
 
         return $this->expService->set_page($page);
         //return view('adm.exp.exp_list', compact('expAllLists'));
@@ -48,6 +51,16 @@ class AdmExpController extends Controller
         $exp_directory = "data/exp_list/editor";
         //setcookie('dir', public_path());
         setcookie('directory', $exp_directory, (time() + 10800),"/"); //일단 3시간 잡음(3*60*60)
+        $path = public_path('data/exp_list');
+
+        //폴더가 없으면 만들기
+        if(!is_dir($path)){
+            mkdir($path, 0777, true);
+        }
+
+        if(!is_dir($exp_directory)){
+            mkdir($exp_directory, 0777, true);
+        }
 
         return view('adm.exp.exp_create');
     }
@@ -61,15 +74,17 @@ class AdmExpController extends Controller
 
         //(파일이 현재 존재하는지 확인하는데 더하여, isValid 메소드를 사용하여 업로드된 파일에 아무런 문제가 없는지 확인할 수 있다.)
         if($request->file('exp_main_image')->isValid()){
-            $fileName = time().'_'.$request -> file('exp_main_image') -> getClientOriginalName();
-            $path = $request -> file('exp_main_image') -> storeAs('public/exp_list', $fileName);
+            //$fileName = time().'_'.$request -> file('exp_main_image') -> getClientOriginalName();
+            //$path = $request -> file('exp_main_image') -> storeAs('public/exp_list', $fileName);
+            $path = 'data/exp_list/';     //첨부물 저장 경로
+            $attachment_result = CustomUtils::attachment_save($request -> file('exp_main_image'),$path); //위의 패스로 이미지 저장됨
             // $request->file->move(public_path('board_file'), $fileName);
 
         }else{
             return false;
         }
         
-        $request->exp_main_image = $fileName;
+        $request->exp_main_image = $attachment_result[1];
 
         //서비스 클래스에 위임
         $this->expService->exp_save($request);
@@ -91,16 +106,23 @@ class AdmExpController extends Controller
         //파일이 있는지 여부 파악
         if($request->hasFile('exp_main_image')){
             
-            $fileName = time().'_'.$request -> file('exp_main_image') -> getClientOriginalName();
-            $path = $request -> file('exp_main_image') -> storeAs('public/exp_list', $fileName);
+            $path = 'data/exp_list/';     //첨부물 저장 경로
+            $attachment_result = CustomUtils::attachment_save($request -> file('exp_main_image'),$path); //위의 패스로 이미지 저장됨
+            // $fileName = time().'_'.$request -> file('exp_main_image') -> getClientOriginalName();
+            // $path = $request -> file('exp_main_image') -> storeAs('public/exp_list', $fileName);
             // $request->file->move(public_path('board_file'), $fileName);
             $result_exp = $this->expList->find($id);
             //업데이트 전에 이전 파일 삭제
             //Storage를 이용하면 storage/public 까지가 경로로 된다. 그래서 거기에 알맞게 경로를 지정해주면 된다.
             //즉 이 삭제 파일 경로는 storage/public/exp_list/파일이름이 된다.
-            Storage::disk('public')->delete('exp_list/'.$result_exp->main_image_name);
+            //Storage::disk('public')->delete('exp_list/'.$result_exp->main_image_name);
 
-            $request->exp_main_image = $fileName;
+            if(File::exists(public_path('data/exp_list/'.$result_exp->main_image_name))){
+
+                File::delete(public_path('data/exp_list/'.$result_exp->main_image_name));
+            }
+
+            $request->exp_main_image = $attachment_result[1];
 
         }
 

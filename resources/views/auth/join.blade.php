@@ -113,7 +113,7 @@
   </form>
   <script	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
   <script>
-    var time = 30; //제한시간 설정
+    var time = 30; //제한시간 설정 (초단위)
     var timer = 0;  //타이머 관한 기초값 0으로 설정
     var return_time = time; //다시 시작 시 시간
   </script>
@@ -124,13 +124,16 @@
     //이메일 정규식
     var regEmail = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/;
     //비밀번호 정규식
-    var regPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
+    var regPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@!*#&])[A-Za-z\d@!*#&]{8,20}$/;
+    //var regPw = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/;
     //생년월일 정규식
     var regBirth = /([0-9]{2}(0[1-9]|1[0-2])(0[1-9]|[1,2][0-9]|3[0,1]))/;
     //이름 정규식
     var regName = /^[가-힣a-zA-Z]{2,50}$/;
 
     var address = $('#address').val();
+    
+    //암호화를 쓰기 위한 secret 코드 선언
     var sk = "!q2q@";
     //암호화
     var sk1 = sha256('certification');
@@ -190,6 +193,8 @@
       data: { user_phone : user_phone },
       success: function(result) {
         if(result[0].result_code == "1"){
+          //시작할때마다 그 시간으로 초기화
+          time = return_time;
           start_timer('countdown', 1);
           // document.getElementById("countdown").innerHTML = $result_timer+"내에 입력해주세요";
           //console.log(time);

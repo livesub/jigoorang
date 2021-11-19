@@ -60,7 +60,7 @@ class socialLoginController extends BaseController
                     }else{
                         $user_gender = 'W';
                     }
-                    $user_birth = "2007".$user_kakao['birthday'];
+                    $user_birth = "1996".$user_kakao['birthday'];
                     $user_phone = "";
 
 
@@ -81,6 +81,9 @@ class socialLoginController extends BaseController
                     return redirect()->route('main.index')->with('alert_messages', "만 14세 미만은 가입이 불가합니다.");
 
                 }
+
+                //19961229 -> 961229로 변경
+                $user_birth = substr($user_birth, 2);
 
 
                 //이메일 기준으로 먼저 검색 필요하다.
@@ -156,6 +159,9 @@ class socialLoginController extends BaseController
                             $statistics->mem_statistics($social_info->email);
 
                             return redirect()->route('main.index')->with('alert_messages', $Messages::$login_chk['login_chk']['login_ok']);
+                        }else if($user_info->user_id == $social_info->email && $user_info->user_platform_type == ""){
+                            //이미 같은 아이디가 있을 경우
+                            return redirect()->route('main.index')->with('alert_messages', __('socialLogin.already_email'));
                         }else{
                             //이메일은 같으나 서로 다른 플랫폼에서 로그인 될 경우 예외처리
                             //다국어 처리 resource/lang/en or kr(locale에 따른)/socialLogin/platform_cross에서 확인가능

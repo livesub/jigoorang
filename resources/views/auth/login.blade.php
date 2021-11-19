@@ -73,11 +73,11 @@
 
     <div>
       <p class='text-center'>
-        {!! trans($ask_registration, ['url' => route('join.create','url='.urlencode($url))]) !!}
+        <!-- {!! trans($ask_registration, ['url' => route('join.create','url='.urlencode($url))]) !!} -->
       </p>
 
       <p class='text-center'>
-        {!! trans($ask_forgot, ['url' => route('pwchange.index')]) !!}
+        <!-- {!! trans($ask_forgot, ['url' => route('pwchange.index')]) !!} -->
       </p>
 
       <p class='text-center'>

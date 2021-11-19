@@ -2,7 +2,7 @@
 
 @section('content')
 
-<script>
+<!-- <script>
   function pw_change()
   {
     if($('#user_pw').val() == '')
@@ -185,9 +185,13 @@
         </ul>
     </div>
 @endif
---}}
-
-
+--}} -->
+<div class='page-header'>
+      <h4>
+      {{ $title_mypage }}
+      </h4>
+</div>
+<a href="{{ route('member_info_index') }}"><button>회원정보수정</button></a>
 
 
 

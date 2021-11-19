@@ -5,7 +5,7 @@
         @foreach($expAllLists as $expAllList)
         <tr>
             <td>
-                <a href="{{ route('exp.list.detail', $expAllList -> id) }}"><img src="{{asset('/storage/exp_list/'.$expAllList->main_image_name)}}" alt="1" style="width: 50%; height: 50%"></a>
+                <a href="{{ route('exp.list.detail', $expAllList -> id) }}"><img src="{{'/data/exp_list/'.$expAllList->main_image_name}}" alt="1" style="width: 50%; height: 50%"></a>
             </td>
             <tr>
                 <td>

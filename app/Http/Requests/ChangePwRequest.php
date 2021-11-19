@@ -25,7 +25,8 @@ class ChangePwRequest extends FormRequest
     {
         return [
             //유효성 검사 항목들 및 조건을 정의한다.
-            'user_pw' => ['required', 'confirmed', 'regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/'],
+            'user_pw' => ['required', 'confirmed', 'regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@!*#&])[A-Za-z\d@!*#&]{8,20}$/'],
+            //'user_pw' => ['required', 'confirmed', 'regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,20}$/'],
         ];
     }
 

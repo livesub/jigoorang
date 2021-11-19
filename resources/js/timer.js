@@ -32,8 +32,10 @@ window.myTimer = function myTimer(value_id, flag=0) {
   }
 window.time_stop = function time_stop(value_id){
 
+  time = return_time;
   clearInterval(timer); //타이머 초기화
   document.getElementById(value_id).innerHTML = "";
+  console.log('시간 값 : '+time);
 
 }
   

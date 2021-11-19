@@ -6,7 +6,7 @@
         <td>
             <table>
                 <tr>
-                    <td>배송지명</td>
+                    <!-- <td>배송지명</td> -->
                     <td>이름</td>
                     <td>배송지정보</td>
                     <td>관리</td>
@@ -27,8 +27,8 @@
                 <tr>
                     <td>
                         <input type="hidden" name="id_ori[{{ $i }}]" id="id_ori[{{ $i }}]" value="{{ $baesongji->id }}">
-                        <input type="checkbox" name="chk[{{ $i }}]" id="chk_{{ $i }}" value="1">
-                        <input type="text" name="ad_subject_ori[{{ $i }}]" id="ad_subject_ori{{ $i }}" size="12" maxlength="20" value="{{ $baesongji->ad_subject }}">
+                        <!-- <input type="checkbox" name="chk[{{ $i }}]" id="chk_{{ $i }}" value="1"> -->
+                        <!-- <input type="text" name="ad_subject_ori[{{ $i }}]" id="ad_subject_ori{{ $i }}" size="12" maxlength="20" value="{{ $baesongji->ad_subject }}"> -->
                     </td>
                     <td>{{ $baesongji->ad_name }}</td>
                     <td>
@@ -75,7 +75,7 @@
         $("#od_b_addr3").val(addr[6]);
         $("#od_b_addr_jibeon").val(addr[7]);
         $("#ad_subject").val(addr[8]);
-
+    
         calculate_sendcost(addr[3]);
     }
 
