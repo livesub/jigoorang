@@ -111,12 +111,14 @@
       </button>
     </div>
   </form>
+  <!-- 쿠키값 암호화를 위한 스크립트 추가 -->
   <script	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
   <script>
     var time = 30; //제한시간 설정 (초단위)
     var timer = 0;  //타이머 관한 기초값 0으로 설정
     var return_time = time; //다시 시작 시 시간
   </script>
+  <!-- 실질적인 타이머 함수들 정의 -->
   <script	src="{{ mix('js/timer.js') }}"></script>
   <script>
     //핸드폰 번호 정규식
@@ -143,21 +145,21 @@
     var cookie_value2 = "";
   //var value = "";
   window.onload = function() { // window.addEventListener('load', (event) => {와 동일합니다.
-    var decrypted1 = CryptoJS.AES.decrypt(getCookie(sk1), sk);
-    var certification = decrypted1.toString(CryptoJS.enc.Utf8);
-    var decrypted2 = CryptoJS.AES.decrypt(getCookie(sk2), sk);
-    var num = decrypted2.toString(CryptoJS.enc.Utf8);
+    // var decrypted1 = CryptoJS.AES.decrypt(getCookie(sk1), sk);
+    // var certification = decrypted1.toString(CryptoJS.enc.Utf8);
+    // var decrypted2 = CryptoJS.AES.decrypt(getCookie(sk2), sk);
+    // var num = decrypted2.toString(CryptoJS.enc.Utf8);
 
     
-    console.log(certification);
-    console.log(num);
+    // console.log(certification);
+    // console.log(num);
 
     var user_gender = $("#old_user_gender").val();
-    if((num != "" && num != undefined) && (certification != "" && certification != undefined)){
-      //$("#user_phone").val(num);
-      //$("#user_phone" ).prop('readonly', true);
-      //$("#sms_send" ).prop('disabled', true);
-    }
+    // if((num != "" && num != undefined) && (certification != "" && certification != undefined)){
+    //   $("#user_phone").val(num);
+    //   $("#user_phone" ).prop('readonly', true);
+    //   $("#sms_send" ).prop('disabled', true);
+    // }
 
     if(user_gender == 'M'){
       $("#user_gender_m" ).prop('checked', true);
@@ -200,18 +202,20 @@
           //console.log(time);
           alert("{{ __('auth.success_sms_send') }}");
           //console.log(result[0]);
-          //쿠키를 굽기전에 암호화해 정보 숨기기
+          //쿠키를 굽기전에 암호화해 정보 숨기기 (숨길 값, 시크릿 코드)
           cookie_value1 = CryptoJS.AES.encrypt(result[0].rand_num, sk);
           cookie_value2 = CryptoJS.AES.encrypt(user_phone, sk)
           setCookie(sk1.toString(), cookie_value1, 1);
           setCookie(sk2.toString(), cookie_value2, 1);
-          //복호화
+          //복호화 (복호화할 값, 시크릿 코드)
           var decrypted1 = CryptoJS.AES.decrypt(getCookie(sk1), sk);
           var text1 = decrypted1.toString(CryptoJS.enc.Utf8);
           var decrypted2 = CryptoJS.AES.decrypt(getCookie(sk2), sk);
           var text2 = decrypted2.toString(CryptoJS.enc.Utf8);
+          //콘솔로 확인하는 부분
           console.log(text1);
           console.log(text2);
+          //그에 따른 태그 설정값 변경
           $("#user_phone" ).prop('readonly', true);
           $("#sms_send" ).prop('disabled', true);
           $("#phone_certificate" ).prop('readonly', false);

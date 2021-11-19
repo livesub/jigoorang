@@ -15,7 +15,7 @@
         </div>
         
         <div class='form-group'>
-        <input name='user_name' id='user_name' type='text' class="form-control @error('user_name') is-invalid @enderror" value="{{ old('user_name') }}" >
+        <input name='user_name' id='user_name' type='hidden' class="form-control @error('user_name') is-invalid @enderror" value="{{ $create_result['user_name'] }}" >
         </div>
         
 
@@ -63,7 +63,7 @@
 @section('script')
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 <script>
-    var time = 10; //제한시간 설정
+    var time = 30; //제한시간 설정
     var timer = 0;  //타이머 관한 기초값 0으로 설정
     var return_time = time; //다시 시작 시 시간
 </script>
@@ -129,7 +129,8 @@
       data: { user_phone : user_phone },
       success: function(result) {
         if(result[0].result_code == "1" ){
-          start_timer('countdown', 'return_to_sms');
+          time = return_time;
+          start_timer('countdown', 1);
           alert("{{ __('auth.success_sms_send') }}");
           //console.log(result[0]);
           // setCookie(sk1.toString(), CryptoJS.AES.encrypt(result[0].rand_num, sk), 1);
@@ -209,12 +210,10 @@
     if(auth == ""){
       alert('인증번호를 확인(입력)해주세요');
       return false;
-    }else if(cookie_certification == "" || cookie_num){
+    }else if(cookie_certification == "" || cookie_num == ""){
       alert('인증번호를 받아 주세요');
       //인증 후에도 시간초과로 없을 경우 다시 받게 초기화 시키기
       //태그 설정 해제
-      $("#user_phone" ).prop('readonly', false);
-      $("#sms_send" ).prop('disabled', false);
       $("#user_phone" ).prop('readonly', false);
       $("#sms_send" ).prop('disabled', false);
       return false;
