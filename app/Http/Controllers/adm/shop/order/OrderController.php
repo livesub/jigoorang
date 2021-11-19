@@ -391,7 +391,8 @@ class OrderController extends Controller
                     $new_tmp3 .= $arr_tmp3[$g].',';
                 }
             }
-
+var_dump($tot_price);
+exit;
             if($card_price > $tot_price){
                 //결제 금액이 취소금액 보다 클때(신용카드만 부분 취소)
                 $amount = $tot_price;
@@ -408,6 +409,7 @@ class OrderController extends Controller
             echo json_encode(['message' => 'no_qty']);
             exit;
         }else{
+
             $custom_data = json_encode($custom_data);
             echo json_encode(['message' => 'pay_cancel', 'amount' => $amount, 'custom_data' => $custom_data]);
             exit;
@@ -550,11 +552,106 @@ class OrderController extends Controller
         }
 
         //카드 결제 금액(실 결제 금액 = 결제금액(주문금액 + 모든 배송비) - 결제시 사용 포인트) - 취소된 금액이 있는지
-        $card_price = ((int)$order_info->od_receipt_price - (int)$order_info->od_receipt_point) - (int)$order_info->od_cancel_price;
+        $card_price = (int)$order_info->od_receipt_price - (int)$order_info->od_receipt_point - (int)$order_info->od_cancel_price;
 
         $success = '';
         $chagam_point = 0;
         $all_chagam_point = 0;
+        $qty_price = 0;
+        $misu = 0;
+        $mod_history = '';
+
+
+
+
+
+
+
+
+        foreach($custom_data as $k=>$v)
+        {
+            $od_send_cost = 0;
+            $cart_info = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $custom_data[$k]]])->first();
+
+            if($cart_info->sio_id){ //옵션 상품일때
+                //취소 갯수 만큼 재고 늘리기
+                $qty_up = shopitemoptions::where([['item_code', $cart_info->item_code], ['sio_id', $cart_info->sio_id], ['sio_type',$cart_info->sio_type]])->first();
+                $qty_up->sio_stock_qty = $qty_up->sio_stock_qty + $cart_info->sct_qty;
+                //$update_result = $qty_up->save();
+            }else{
+                $qty_up = shopitems::where('item_code', $cart_info->item_code)->first();
+                $qty_up->item_stock_qty = $qty_up->item_stock_qty + $cart_info->sct_qty;
+                //$update_result = $qty_up->save();
+            }
+
+            //구입 적립 포인트 회수
+            $chagam_point += $cart_info->sct_point * $cart_info->sct_qty;
+
+
+            // 장바구니 수량변경
+            /*
+            $cart_up = DB::table('shopcarts')->where([['id', $custom_data[$k]], ['od_id', $order_id]])->update([
+                'sct_qty'       => $cart_info->sct_qty,
+                'sct_status'    => '취소',
+            ]);
+            */
+
+            $mod_history .= $order_info->od_mod_history.date("Y-m-d H:i:s", time()).' '.$cart_info->sct_option.' 주문취소 '.$cart_info->sct_qty.' -> 0'."\n";
+
+            //포인트 지급전에 개별 배송비가 있다면 포함해서 지급
+            $cancel_cart_cnt = DB::table('shopcarts')->where([['od_id', $order_id], ['item_code', $cart_info->item_code],['sct_status', '취소']])->count();
+
+            if($item_cnt[$cart_cnt->item_code] == $cancel_cart_cnt){
+                $od_send_cost = $order_info->od_send_cost;  //상품 부분 취소일 경우 상품별 배송비도 같이 포함
+            }
+
+            //$qty_price += ($cart_info->sct_price + $cart_info->sio_price + $od_send_cost) * $cart_info->sct_qty;   //취소 금액
+        }
+
+        //구입 적립 포인트 회수
+        //$CustomUtils->insert_point($order_info->user_id, (-1) * $chagam_point, '구매 적립 취소', 9,'', $order_id);
+        if($card_price < $cancel_request_amount){
+            //결제금액 보다 취소 금액이 클때
+
+        }else{//46500(상품 베ㅐ송비포함)
+            $misu = $cancel_request_amount;
+            $od_cancel_price = $order_info->od_cancel_price + $cancel_request_amount; //취소금액
+        }
+
+        //order 업데이트
+        $od_cart_price = $order_info->od_cart_price - $cancel_request_amount;   //총금액 - 취소 금액
+
+        $od_misu = $order_info->od_misu + ((-1) * $misu); //미수금액(누적)
+
+
+/*
+        $order_up = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->update([
+            //'od_cart_price'     => $od_cart_price,
+            //'od_receipt_price'  => $od_receipt_price,
+            'od_cancel_price'   => $od_cancel_price,
+            'od_misu'           => $od_misu,
+            'od_mod_history'    => $mod_history,
+            'od_status'         => '취소',
+        ]);
+*/
+var_dump($cancel_request_amount);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+exit;
 
         if($cancel_request_amount > 0){
             //취소 금액이 0원 보다 클때 Iamport 를 태운다.
@@ -606,16 +703,16 @@ class OrderController extends Controller
 
                 //order 업데이트
                 $order_up = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->update([
-                'od_cart_price'     => 0,
-                'od_cancel_price'   => $cancel_request_amount,
-                'od_misu'           => (-1) * $cancel_request_amount,
-                'od_receipt_point'  => 0,
-                //'de_send_cost'      => 0,
-                //'od_send_cost'      => 0,
-                //'od_send_cost2'     => 0,
-                'od_receipt_price'  => 0,
-                'od_mod_history'    => $mod_history,
-                'od_status'         => '취소',
+                    'od_cancel_price'   => $cancel_request_amount,
+                    'od_misu'           => (-1) * $cancel_request_amount,
+                    //'od_cart_price'     => 0,
+                    //'od_receipt_point'  => 0,
+                    //'de_send_cost'      => 0,
+                    //'od_send_cost'      => 0,
+                    //'od_send_cost2'     => 0,
+                    //'od_receipt_price'  => 0,
+                    'od_mod_history'    => $mod_history,
+                    'od_status'         => '취소',
                 ]);
             }else{
 
