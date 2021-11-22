@@ -391,8 +391,7 @@ class OrderController extends Controller
                     $new_tmp3 .= $arr_tmp3[$g].',';
                 }
             }
-var_dump($tot_price);
-exit;
+
             if($card_price > $tot_price){
                 //결제 금액이 취소금액 보다 클때(신용카드만 부분 취소)
                 $amount = $tot_price;
