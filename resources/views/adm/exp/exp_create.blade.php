@@ -18,7 +18,7 @@
                     </span>
                 @enderror
             </td>
-            
+
         </tr>
         <tr>
             <td>상품 설정</td>
@@ -36,7 +36,7 @@
         </tr>
         <tr>
             <td>체험단 인원</td>
-            <td><input type="number" id="exp_limit_personnel" name="exp_limit_personnel" value="{{ old('exp_limit_personnel') }}" min="0"></td>
+            <td><input type="text" id="exp_limit_personnel" name="exp_limit_personnel" value="{{ old('exp_limit_personnel') }}" min="0" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
         </tr>
         <tr>
             <td>모집기간</td>
@@ -52,7 +52,12 @@
         </tr>
         <tr>
             <td>메인 이미지</td>
-            <td><input type="file" id="exp_main_image" name="exp_main_image"></td>
+            <td>
+                <input type="file" id="exp_main_image" name="exp_main_image">
+                @error('exp_main_image')
+                    <strong><p>{{ $message }}</p></strong>
+                @enderror
+            </td>
         </tr>
         <tr>
             <td>상품내용</td>
@@ -97,10 +102,10 @@
         var exp_main_image = $('#exp_main_image').val(); //메인 이미지
         oEditors.getById["exp_content"].exec("UPDATE_CONTENTS_FIELD", []);
         var exp_content = $('#exp_content').val(); //체험단 설명
-        
+
 
         if(exp_title == "" || exp_title == null){
-            alert('제목이 비어있습니다.');
+            alert('제목을 입력 하세요.');
             return false;
         }
 
@@ -115,7 +120,7 @@
         }
 
         if(exp_limit_personnel == "" || exp_limit_personnel == null || exp_limit_personnel == 0 || exp_limit_personnel == "0"){
-            alert('인원의 값을 넣어주세요');
+            alert('인원을 입력 하세요.');
             return false;
         }
 
@@ -158,13 +163,13 @@
             alert('메인 이미지를 선택해주세요');
             return false;
         }
-        
+
         if(exp_content == ""  || exp_content == null || exp_content == '&nbsp;' || exp_content == '<p>&nbsp;</p>'){
             alert('상세내용을 입력해주세요');
             return false;
         }
 
-        
+
 
         return true;
     }

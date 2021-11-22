@@ -307,7 +307,7 @@ class BannerController extends Controller
         $b_target   = $request->input('b_target');
         $page       = $request->input('page');
 
-        if($id == "" && $b_name == ""){
+        if($id == "" || $b_name == ""){
             return redirect()->back()->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);
             exit;
         }

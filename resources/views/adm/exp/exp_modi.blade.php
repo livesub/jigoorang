@@ -11,14 +11,14 @@
         <tr>
             <td>제목</td>
             <td>
-                <input type="text" id="exp_title" name="exp_title" value="{{ $result_expList->title }}">
+                <input type="text" id="exp_title" name="exp_title" value="{{ stripslashes($result_expList->title) }}">
                 @error('exp_title')
                     <span class='invalid-feedback' role='alert'>
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
             </td>
-            
+
         </tr>
         <tr>
             <td>상품 설정</td>
@@ -36,7 +36,7 @@
         </tr>
         <tr>
             <td>체험단 인원</td>
-            <td><input type="number" id="exp_limit_personnel" name="exp_limit_personnel" value="{{ $result_expList->exp_limit_personnel }}"></td>
+            <td><input type="text" id="exp_limit_personnel" name="exp_limit_personnel" value="{{ $result_expList->exp_limit_personnel }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
         </tr>
         <tr>
             <td>모집기간</td>
@@ -54,7 +54,12 @@
             <td>메인 이미지</td>
             <td>
                 <input type="file" id="exp_main_image" name="exp_main_image">
-                현재 메인 이미지 파일 : {{ $result_expList->main_image_name }}
+                @error('exp_main_image')
+                    <strong>{{ $message }}</strong>
+                @enderror
+                <br>{{ $result_expList->main_image_ori_name }}<br>
+                <input type='checkbox' name="file_chk" id="file_chk" value='1'>수정,삭제,새로 등록시 체크 하세요.
+
             </td>
         </tr>
         <tr>
@@ -100,10 +105,10 @@
         var exp_main_image = $('#exp_main_image').val(); //메인 이미지
         oEditors.getById["exp_content"].exec("UPDATE_CONTENTS_FIELD", []);
         var exp_content = $('#exp_content').val(); //체험단 설명
-        
 
         if(exp_title == "" || exp_title == null){
-            alert('제목이 비어있습니다.');
+            alert('제목을 입력 하세요.');
+            $('#exp_title').focus();
             return false;
         }
 
@@ -118,7 +123,8 @@
         }
 
         if(exp_limit_personnel == "" || exp_limit_personnel == null || exp_limit_personnel == 0 || exp_limit_personnel == "0"){
-            alert('인원의 값을 넣어주세요');
+            alert('인원을 입력 하세요.');
+            $('#exp_limit_personnel').focus();
             return false;
         }
 
@@ -161,7 +167,7 @@
         //     alert('메인 이미지를 선택해주세요');
         //     return false;
         // }
-        
+
         if(exp_content == ""  || exp_content == null || exp_content == '&nbsp;' || exp_content == '<p>&nbsp;</p>'){
             alert('상세내용을 입력해주세요');
             return false;

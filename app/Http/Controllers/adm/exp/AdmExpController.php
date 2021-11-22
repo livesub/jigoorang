@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Auth;    //인증
 use Illuminate\Support\Facades\DB;
 use App\Models\items;    //상품 모델 정의
 use Validator;  //체크
-use App\Models\categorys;  
+use App\Models\categorys;
 
 class AdmExpController extends Controller
 {
@@ -31,7 +31,7 @@ class AdmExpController extends Controller
 
     //뷰 리스트 관련 함수
     public function index(Request $request){
-        
+
         $page = $request->input('page');
         //$page = 0;
         //$expAllLists = $this->expList->latest()->paginate(1);
@@ -55,11 +55,13 @@ class AdmExpController extends Controller
 
         //폴더가 없으면 만들기
         if(!is_dir($path)){
-            mkdir($path, 0777, true);
+            mkdir($path, 0755, true);
+            @chmod($path, 0755);
         }
 
         if(!is_dir($exp_directory)){
-            mkdir($exp_directory, 0777, true);
+            mkdir($exp_directory, 0755, true);
+            @chmod($exp_directory, 0755);
         }
 
         return view('adm.exp.exp_create');
@@ -72,22 +74,56 @@ class AdmExpController extends Controller
         $fileName = "";
         $path = "";
 
-        //(파일이 현재 존재하는지 확인하는데 더하여, isValid 메소드를 사용하여 업로드된 파일에 아무런 문제가 없는지 확인할 수 있다.)
-        if($request->file('exp_main_image')->isValid()){
-            //$fileName = time().'_'.$request -> file('exp_main_image') -> getClientOriginalName();
-            //$path = $request -> file('exp_main_image') -> storeAs('public/exp_list', $fileName);
-            $path = 'data/exp_list/';     //첨부물 저장 경로
-            $attachment_result = CustomUtils::attachment_save($request -> file('exp_main_image'),$path); //위의 패스로 이미지 저장됨
-            // $request->file->move(public_path('board_file'), $fileName);
+        $upload_max_filesize = ini_get('upload_max_filesize');  //서버 설정 파일 용량 제한
+        $upload_max_filesize = substr($upload_max_filesize, 0, -1); //2M (뒤에 M자르기)
 
-        }else{
-            return false;
+        $thumb_name = "";
+        $thumb_name2 = "";
+        $fileExtension = 'jpeg,jpg,png,gif,bmp,GIF,PNG,JPG,JPEG,BMP';  //이미지 일때 확장자 파악(이미지일 경우 썸네일 하기 위해)
+
+        if($request->hasFile('exp_main_image'))
+        {
+            $exp_main_image = $request->file('exp_main_image');
+            $file_type = $exp_main_image->getClientOriginalExtension();    //이미지 확장자 구함
+            $file_size = $exp_main_image->getSize();  //첨부 파일 사이즈 구함
+
+            //서버 php.ini 설정에 따른 첨부 용량 확인(php.ini에서 바꾸기)
+            $max_size_mb = $upload_max_filesize * 1024;   //라라벨은 kb 단위라 함
+
+            //첨부 파일 용량 예외처리
+            Validator::validate($request->all(), [
+                'exp_main_image'  => ['max:'.$max_size_mb, 'mimes:'.$fileExtension]
+            ], ['max' => $upload_max_filesize."MB 까지만 저장 가능 합니다.", 'mimes' => $fileExtension.' 파일만 등록됩니다.']);
+
+            $path = 'data/exp_list';     //첨부물 저장 경로
+            $attachment_result = CustomUtils::attachment_save($exp_main_image,$path); //위의 패스로 이미지 저장됨
+
+            if(!$attachment_result[0])
+            {
+                //return redirect()->route('adm.banner.create')->with('alert_messages', $Messages::$file_chk['file_chk']['file_false']);
+                return false;
+                exit;
+            }else{
+                for($k = 0; $k < 2; $k++){
+                    $resize_width_file_tmp = explode("%%","700%%200");
+                    $resize_height_file_tmp = explode("%%","7000%%200");
+
+                    $thumb_width = $resize_width_file_tmp[$k];
+                    $thumb_height = $resize_height_file_tmp[$k];
+
+                    $is_create = false;
+                    $thumb_name .= "@@".CustomUtils::thumbnail($attachment_result[1], $path, $path, $thumb_width, $thumb_height, $is_create, $is_crop=false, $crop_mode='center', $is_sharpen=false, $um_value='80/0.5/3');
+                }
+
+                //$data['b_pc_ori_img'] = $attachment_result[2];  //배열에 추가 함
+                //$data['exp_main_image'] = $attachment_result[1].$thumb_name;  //배열에 추가 함
+                $request->exp_main_ori_image = $attachment_result[2];
+                $request->exp_main_image = $attachment_result[1].$thumb_name;
+
+                //서비스 클래스에 위임
+                $this->expService->exp_save($request);
+            }
         }
-        
-        $request->exp_main_image = $attachment_result[1];
-
-        //서비스 클래스에 위임
-        $this->expService->exp_save($request);
 
         return redirect()->route('adm_exp_index')->with('alert_messages', "등록이 완료되었습니다.");
     }
@@ -103,27 +139,77 @@ class AdmExpController extends Controller
     //실제 DB 수정 관련 함수
     public function view_modi(ExpListRequest $request, $id){
 
-        //파일이 있는지 여부 파악
-        if($request->hasFile('exp_main_image')){
-            
-            $path = 'data/exp_list/';     //첨부물 저장 경로
-            $attachment_result = CustomUtils::attachment_save($request -> file('exp_main_image'),$path); //위의 패스로 이미지 저장됨
-            // $fileName = time().'_'.$request -> file('exp_main_image') -> getClientOriginalName();
-            // $path = $request -> file('exp_main_image') -> storeAs('public/exp_list', $fileName);
-            // $request->file->move(public_path('board_file'), $fileName);
-            $result_exp = $this->expList->find($id);
-            //업데이트 전에 이전 파일 삭제
-            //Storage를 이용하면 storage/public 까지가 경로로 된다. 그래서 거기에 알맞게 경로를 지정해주면 된다.
-            //즉 이 삭제 파일 경로는 storage/public/exp_list/파일이름이 된다.
-            //Storage::disk('public')->delete('exp_list/'.$result_exp->main_image_name);
+        $exp_title     = addslashes($request->input('exp_title'));
 
-            if(File::exists(public_path('data/exp_list/'.$result_exp->main_image_name))){
+        if($id == "" || $exp_title == ""){
+            return redirect()->back()->with('alert_messages', '잘못된 경로 입니다.');
+            exit;
+        }
 
-                File::delete(public_path('data/exp_list/'.$result_exp->main_image_name));
+        $upload_max_filesize = ini_get('upload_max_filesize');  //서버 설정 파일 용량 제한
+        $upload_max_filesize = substr($upload_max_filesize, 0, -1); //2M (뒤에 M자르기)
+
+        $fileExtension = 'jpeg,jpg,png,gif,bmp,GIF,PNG,JPG,JPEG,BMP';  //이미지 일때 확장자 파악(이미지일 경우 썸네일 하기 위해)
+
+        $path = 'data/exp_list';     //첨부물 저장 경로
+
+        $thumb_name = "";
+        $thumb_name2 = "";
+
+        $result_exp = $this->expList->find($id);
+
+        $file_chk = $request->input('file_chk'); //수정,삭제,새로등록 체크 파악
+
+        if($file_chk == 1){ //체크된 것들만 액션
+            if($request->hasFile('exp_main_image'))    //첨부가 있음
+            {
+                $exp_main_image = $request->file('exp_main_image');
+                $file_type = $exp_main_image->getClientOriginalExtension();    //이미지 확장자 구함
+                $file_size = $exp_main_image->getSize();  //첨부 파일 사이즈 구함
+
+                //서버 php.ini 설정에 따른 첨부 용량 확인(php.ini에서 바꾸기)
+                $max_size_mb = $upload_max_filesize * 1024;   //라라벨은 kb 단위라 함
+
+                //첨부 파일 용량 예외처리
+                Validator::validate($request->all(), [
+                    'exp_main_image'  => ['max:'.$max_size_mb, 'mimes:'.$fileExtension]
+                ], ['max' => $upload_max_filesize."MB 까지만 저장 가능 합니다.", 'mimes' => $fileExtension.' 파일만 등록됩니다.']);
+
+                $attachment_result = CustomUtils::attachment_save($exp_main_image,$path); //위의 패스로 이미지 저장됨
+                if(!$attachment_result[0])
+                {
+                    return redirect()->route('adm_exp_index')->with('alert_messages', '첨부 파일이 잘못 되었습니다.');
+                    exit;
+                }else{
+                    for($k = 0; $k < 2; $k++){
+                        $resize_width_file_tmp = explode("%%","700%%200");
+                        $resize_height_file_tmp = explode("%%","700%%200");
+
+                        $thumb_width = $resize_width_file_tmp[$k];
+                        $thumb_height = $resize_height_file_tmp[$k];
+
+                        $is_create = false;
+                        $thumb_name .= "@@".CustomUtils::thumbnail($attachment_result[1], $path, $path, $thumb_width, $thumb_height, $is_create, $is_crop=false, $crop_mode='center', $is_sharpen=false, $um_value='80/0.5/3');
+                    }
+
+                    $request->exp_main_ori_image = $attachment_result[2];
+                    $request->exp_main_image = $attachment_result[1].$thumb_name;
+                }
+            }else{
+                $request->exp_main_ori_image = '';
+                $request->exp_main_image = '';
             }
 
-            $request->exp_main_image = $attachment_result[1];
-
+            if($result_exp->main_image_name != ""){   //기존 첨부가 있는지 파악 - 있다면 기존 파일 전체 삭제후 재 등록
+                $file_cnt = explode('@@',$result_exp->main_image_name);
+                for($j = 0; $j < count($file_cnt); $j++){
+                    $img_path = "";
+                    $img_path = $path.'/'.$file_cnt[$j];
+                    if (file_exists($img_path)) {
+                        @unlink($img_path); //이미지 삭제
+                    }
+                }
+            }
         }
 
         $this->expService->exp_modi($request, $id);
@@ -133,6 +219,24 @@ class AdmExpController extends Controller
 
     //체험단 삭제 DB 저장
     public function delete_expList($id){
+
+        $path = 'data/exp_list';     //첨부물 저장 경로
+
+        $result_exp = $this->expList->find($id);
+
+        //첨부 파일 삭제
+        $main_image_name = $result_exp->main_image_name;
+        if($main_image_name != ""){
+            $file_cnt = explode('@@',$main_image_name);
+
+            for($j = 0; $j < count($file_cnt); $j++){
+                $img_path = "";
+                $img_path = $path.'/'.$file_cnt[$j];
+                if (file_exists($img_path)) {
+                    @unlink($img_path); //이미지 삭제
+                }
+            }
+        }
 
         $this->expService->exp_delete($id);
 

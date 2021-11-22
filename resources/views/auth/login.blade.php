@@ -144,7 +144,7 @@
 </form>
     @endif
 <script>
-  
+
   //이메일 정규식
   var regEmail = /^([\w\.\_\-])*[a-zA-Z0-9]+([\w\.\_\-])*([a-zA-Z0-9])+([\w\.\_\-])+@([a-zA-Z0-9]+\.)+[a-zA-Z0-9]{2,8}$/;
     //비밀번호 정규식
@@ -155,12 +155,12 @@
     var user_pw = $('#user_pw').val();
 
     if(user_id == "" || user_id == null){
-      alert('아이디가 빈 값입니다.');
+      alert('아이디(이메일주소)를 입력 하세요.');
       return false;
     }
 
     if(user_pw == "" || user_pw == null){
-      alert('비밀번호가 빈 값입니다.');
+      alert('비밀번호를 입력 하세요.');
       return false;
     }
 

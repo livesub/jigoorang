@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
  * @package App\Services
  */
 class smsService
-{   
+{
     //회원가입 및 소셜로그인 시 문자인증관련 함수
     public function auth_certification($user_phone){
         /**************** 문자전송하기 예제 필독항목 ******************/
@@ -40,7 +40,7 @@ class smsService
         //$_POST['subject'] = '제목입력'; //  LMS, MMS 제목 (미입력시 본문중 44Byte 또는 엔터 구분자 첫라인)
         // $_POST['image'] = '/tmp/pic_57f358af08cf7_sms_.jpg'; // MMS 이미지 파일 위치 (저장된 경로)
         //$_POST['msg_type'] = 'SMS'; //  SMS, LMS, MMS등 메세지 타입을 지정
-        $msg_type = 'SMS'; 
+        $msg_type = 'SMS';
         // ※ msg_type 미지정시 글자수/그림유무가 판단되어 자동변환됩니다. 단, 개행문자/특수문자등이 2Byte로 처리되어 SMS 가 LMS로 처리될 가능성이 존재하므로 반드시 msg_type을 지정하여 사용하시기 바랍니다.
         /****************** 전송정보 설정끝 ***************/
 
@@ -55,7 +55,7 @@ class smsService
         $sms['msg_type'] = $msg_type;
         // 만일 $_FILES 로 직접 Request POST된 파일을 사용하시는 경우 move_uploaded_file 로 저장 후 저장된 경로를 사용하셔야 합니다.
         // if(!empty($_FILES['image']['tmp_name'])) {
-        //     $tmp_filetype = mime_content_type($_FILES['image']['tmp_name']); 
+        //     $tmp_filetype = mime_content_type($_FILES['image']['tmp_name']);
         //     if($tmp_filetype != 'image/png' && $tmp_filetype != 'image/jpg' && $tmp_filetype != 'image/jpeg') $_POST['image'] = '';
         //     else {
         //         $_savePath = "./".uniqid(); // PHP의 권한이 허용된 디렉토리를 지정
@@ -148,7 +148,7 @@ class smsService
         $sms['title'] = $_POST['subject'];
         $sms['msg_type'] = $_POST['msg_type'];
         $sms['rand_num'] = $num;
-        
+
         $host_info = explode("/", $sms_url);
         $port = $host_info[0] == 'https:' ? 443 : 80;
 
@@ -235,7 +235,7 @@ class smsService
         //$_POST['subject'] = '제목입력'; //  LMS, MMS 제목 (미입력시 본문중 44Byte 또는 엔터 구분자 첫라인)
         // $_POST['image'] = '/tmp/pic_57f358af08cf7_sms_.jpg'; // MMS 이미지 파일 위치 (저장된 경로)
         //$_POST['msg_type'] = 'SMS'; //  SMS, LMS, MMS등 메세지 타입을 지정
-        $msg_type = 'SMS'; 
+        $msg_type = 'SMS';
         // ※ msg_type 미지정시 글자수/그림유무가 판단되어 자동변환됩니다. 단, 개행문자/특수문자등이 2Byte로 처리되어 SMS 가 LMS로 처리될 가능성이 존재하므로 반드시 msg_type을 지정하여 사용하시기 바랍니다.
         /****************** 전송정보 설정끝 ***************/
 
@@ -250,7 +250,7 @@ class smsService
         $sms['msg_type'] = $msg_type;
         // 만일 $_FILES 로 직접 Request POST된 파일을 사용하시는 경우 move_uploaded_file 로 저장 후 저장된 경로를 사용하셔야 합니다.
         // if(!empty($_FILES['image']['tmp_name'])) {
-        //     $tmp_filetype = mime_content_type($_FILES['image']['tmp_name']); 
+        //     $tmp_filetype = mime_content_type($_FILES['image']['tmp_name']);
         //     if($tmp_filetype != 'image/png' && $tmp_filetype != 'image/jpg' && $tmp_filetype != 'image/jpeg') $_POST['image'] = '';
         //     else {
         //         $_savePath = "./".uniqid(); // PHP의 권한이 허용된 디렉토리를 지정

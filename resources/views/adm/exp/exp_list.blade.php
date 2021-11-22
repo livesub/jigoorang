@@ -1,26 +1,81 @@
 @extends('layouts.admhead')
 
 @section('content')
-    <table>
+    <table border=1>
         @foreach($expAllLists as $expAllList)
+            @php
+            //이미지 처리
+            if($expAllList->main_image_name == "") {
+                $main_image_name_disp = asset("img/no_img.jpg");
+            }else{
+                $main_image_name_cut = explode("@@",$expAllList->main_image_name);
+                $main_image_name_disp = "/data/exp_list/".$main_image_name_cut[2];
+            }
+            @endphp
+
         <tr>
             <td>
-                <img src="{{'/data/exp_list/'.$expAllList->main_image_name}}" alt="1" style="width: 50%; height: 50%">
+                <img src="{{ $main_image_name_disp }}" style="width:100px;height:100px;">
             </td>
             <tr>
                 <td>
-                    각 아이디 : {{ $expAllList -> id }}  <br>
-                    제목 : {{ $expAllList-> title }} <br>
-                    수정 링크  : <a href="{{ route('adm_exp_view_restore', $expAllList -> id) }}">수정하기</a>
-                    체험단 모집 인원 : {{ $expAllList->exp_limit_personnel }}<br>
-                    모집기간 : {{ $expAllList->exp_date_start }}  ~ {{ $expAllList->exp_date_end }}<br>
-                    평가가능기간 : {{ $expAllList->exp_review_start }} ~ {{ $expAllList->exp_review_end }}<br>
-                    삭제 링크  : <a href="{{ route('adm_exp_view_delete', $expAllList -> id) }}">삭제하기</a>
+                    <table border=1>
+                        <tr>
+                            <td>
+                                제목 : {{ stripslashes($expAllList->title) }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                체험단 모집 인원 : {{ $expAllList->exp_limit_personnel }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                모집기간 : {{ $expAllList->exp_date_start }}  ~ {{ $expAllList->exp_date_end }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                평가가능기간 : {{ $expAllList->exp_review_start }} ~ {{ $expAllList->exp_review_end }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <button type="button" onclick="exp_modi({{ $expAllList->id }});">수정</button>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
         </tr>
         @endforeach
+        <tr>
+            <td><button onclick="location.href='{{ route('adm_exp_view_create') }}'">체험단 등록</button></td>
+        </tr>
     </table>
     {!! $pnPage !!}
-    <button onclick="location.href='{{ route('adm_exp_view_create') }}'">체험단 등록</button>
+
+
+
+
+<script>
+    function exp_modi(num){
+        var url = "{{ route('adm_exp_view_restore', ':num') }}";
+        url = url.replace(':num', num);
+        location.href = url;
+    }
+
+    function exp_del(num){
+        if (confirm("정말 삭제하시겠습니까?") == true){    //확인
+            var url = "{{ route('adm_exp_view_delete', ':num') }}";
+            url = url.replace(':num', num);
+            location.href = url;
+        }else{   //취소
+            return false;
+        }
+    }
+</script>
+
+
 @endsection

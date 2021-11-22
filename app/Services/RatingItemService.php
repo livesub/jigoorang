@@ -11,7 +11,7 @@ use App\Helpers\Custom\PageSet; //페이지 함수
  * @package App\Services
  */
 class RatingItemService
-{   
+{
     public function __construct(RatingItem $ratingItem)
     {
         //$this->middleware('auth');
@@ -31,8 +31,8 @@ class RatingItemService
 
         $page = $request->input('page');
         //페이지 구하기
-        $pageScale  = 1;  //한페이지당 라인수
-        $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
+        $pageScale  = 15;  //한페이지당 라인수
+        $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "" || $page != null)
         {
@@ -45,7 +45,7 @@ class RatingItemService
 
         }
 
-       
+
 
         //검색 처리
         $ca_id    = $request->input('ca_id');
@@ -65,7 +65,7 @@ class RatingItemService
         }else{
             $rating_items = $this->ratingItem->orderby('id', 'desc');
         }
-        
+
         $ratingList = $rating_items;
 
         $total_record   = 0;
@@ -76,8 +76,8 @@ class RatingItemService
         $rating_items_rows = $ratingList->orderby('id', 'desc')->offset($start_num)->limit($pageScale)->get();
 
         $tailarr = array();
-        //$tailarr['AA'] = 'AA';    //고정된 전달 파라메터가 있을때 사용
-        //$tailarr['bb'] = 'bb';
+        $tailarr['ca_id'] = $ca_id;
+        $tailarr['keyword'] = $keyword;
 
         $PageSet        = new PageSet;
         $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
@@ -89,7 +89,7 @@ class RatingItemService
         $nextLastPage   = $PageSet->nextLast("마지막");
         $listPage       = $PageSet->getPageList();
         $pnPage         = $prevPage.$listPage.$nextPage;
-        
+
         return view('adm.rating_item.rating_item_list',[
             'rating_items_rows' => $rating_items_rows,
             'ca_id' => $ca_id,
@@ -119,7 +119,7 @@ class RatingItemService
                 where([['sca_display','Y'],['sca_id','like',$str_cut.'%']])->whereRaw('length(sca_id) = '.$rs)->orderby('sca_id', 'ASC')->get();
             }
         }
-        
+
         return $result;
     }
 
@@ -143,7 +143,7 @@ class RatingItemService
         }else{
             return redirect()->route('admRating.index')->with('alert_messages', '오류 발생 다시 시도해주세요!');
         }
-        
+
     }
 
     //정량 평가 항목 수정 뷰 반환
@@ -171,7 +171,7 @@ class RatingItemService
             'two_str_cut'       => $two_str_cut,
             'result'            => $result,
         ]);
-    
+
     }
 
     //정량 평가 항목 수정 진행 함수
@@ -204,6 +204,6 @@ class RatingItemService
             //오류가 있을 경우
             return redirect()->route('admRating.index')->with('alert_messages', '오류 발생 다시 시도해주세요!');
         }
-        
+
     }
 }

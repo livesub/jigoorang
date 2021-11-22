@@ -188,5 +188,9 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'as' => 'ajax_admorderitempaycancel',
         'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@ajax_admorderitempaycancel',
     ]);
+
+    /* 체험단 관리 */
+
+
 });
 

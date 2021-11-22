@@ -88,9 +88,15 @@ Route::post('/baesongji_save', [
 ]);
 
 //배송지 수정
-Route::post('/baesongji_process', [
-    'as' => 'ajax_baesongji_modi',
+Route::get('/baesongji_modify', [
+    'as' => 'ajax_baesongji_modify',
     'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_baesongji_modify',
+]);
+
+//배송지 수정 저장
+Route::post('/baesongji_modify_save', [
+    'as' => 'ajax_baesongji_modify_save',
+    'uses' => 'App\Http\Controllers\shop\BaesongjiController@ajax_baesongji_modify_save',
 ]);
 
 //기본 배송지 변경

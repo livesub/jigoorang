@@ -22,18 +22,18 @@ class findIdPwService
     public function __construct(smsService $smsService)
     {
         $this->smsService = $smsService;
-        
+
     }
 
     //아이디 찾기 관련 함수
     public function findID($user_phone){
-        
+
         $user_info = User::whereUser_phone($user_phone)->first();
 
         if(!empty($user_info) && $user_info->user_platform_type == ""){
-            
+
             //보낼 메세지 설정
-            $message = "고객님의 지구랭 아이디는".$user_info->user_id."입니다.";
+            $message = "고객님의 지구랭 아이디는 ".$user_info->user_id." 입니다.";
             //여기서 문자로 보낸다.
             $result = $this->smsService->send_sms_custom($message, $user_phone);
 
@@ -56,7 +56,7 @@ class findIdPwService
         $user_info = User::whereUser_phone($user_phone)->first();
 
         if(!empty($user_info) && $user_info->user_platform_type == ""){
-            
+
             $input['code'] = Str::random(6);
             //addMinutes()안에 숫자를 분단위로 변경하면 원하는 시간을 설정 가능 지금 2분제한
             $url = URL::temporarySignedRoute('sendPwChangeLinkPro', now()->addMinutes(2), ['code' => Crypt::encryptString($user_info->id)]);
@@ -64,7 +64,7 @@ class findIdPwService
             //$result = $this->rand_code_save($url);
 
             $input['link'] = $url;
-            
+
             $result = ShortLink::create($input)->exists();
 
             if($result){
@@ -75,12 +75,12 @@ class findIdPwService
             }else{
                 return "";
             }
-            
+
 
         }else if(!empty($user_info) && $user_info->user_platform_type != ""){
 
             return $user_info->user_platform_type;
-            
+
         }else{
 
             return null;
@@ -109,7 +109,7 @@ class findIdPwService
 
             return $e;
         }
-        
+
     }
 
     //단축 url 관련 삭제 함수
@@ -119,8 +119,8 @@ class findIdPwService
         $newDateTime = Carbon::now()->subMinutes(2);
 
         $results = ShortLink::where('created_at', '<', $newDateTime);
-        
+
         $results->delete();
     }
-    
+
 }

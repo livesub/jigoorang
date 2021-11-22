@@ -5,14 +5,14 @@
     아이디 / 비밀번호 찾기 뷰입니다.<br>
     <lavel for="user_phone_for_id">아이디 찾기</lavel>
     <br>
-    <input type="number" min="0" name="user_phone_for_id" id="user_phone_for_id" placeholder="가입 시 입력한 번호를 입력해주세요!" value="">
+    <input type="text" min="0" name="user_phone_for_id" id="user_phone_for_id" placeholder="휴대전화 번호를 ‘-’없이 입력하세요." value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
     <br>
     <button onclick="find_id()">아이디 전송</button>
 
     <br><br>
     <lavel for="user_phone_for_pw">비밀번호 찾기</lavel>
     <br>
-    <input type="number" min="0" name="user_phone_for_pw" id="user_phone_for_pw" placeholder="가입 시 입력한 번호를 입력해주세요!" value="">
+    <input type="text" min="0" name="user_phone_for_pw" id="user_phone_for_pw" placeholder="휴대전화 번호를 ‘-’없이 입력하세요." value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
     <br>
     <button onclick="send_pwChange_link()">비밀번호 재설정 링크 전송</button>
 @endsection
@@ -22,10 +22,10 @@
     function find_id(){
 
         var user_phone_for_id = $('#user_phone_for_id').val();
-        
+
         if(user_phone_for_id != ""){
             $.ajax({
-                //아래 headers에 반드시 token을 추가해줘야 한다.!!!!! 
+                //아래 headers에 반드시 token을 추가해줘야 한다.!!!!!
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 type: 'post',
                 url: '{{ route('findId') }}',
@@ -34,12 +34,13 @@
                 success: function(result) {
                     if(result != "" && result != null && result[0].result_code != null && result[0].result_code != "" && result !="kakao" && result != "naver"){
                         //alert('아이디는 '+result+'입니다');
+
                         alert("{{ __('auth.success_found_phone') }}");
-                        console.log(result[0]);
+                        //console.log(result[0]);
                     }else if(result != null && result != "" && (result !="kakao" || result != "naver")){
                         alert('고객님은'+result+'를 이용하여 로그인 하실 수 있습니다.')
                     }else{
-                        alert('해당 번호로 등록된 아이디가 없습니다. \n회원가입 후 이용해주세요');
+                        alert('해당 휴대전화 번호로 등록된 아이디가 없습니다. \n회원가입 후 이용해주세요');
                     }
                     $('#user_phone_for_id').val("");
                 },
@@ -48,7 +49,7 @@
                 }
             });
         }else{
-            alert('빈값 입니다. 다시 시도해 주세요!');
+            alert('휴대전화 번호를 입력 하세요.');
         }
     }
 
@@ -60,7 +61,7 @@
 
         if(user_phone_for_pw != ""){
             $.ajax({
-                //아래 headers에 반드시 token을 추가해줘야 한다.!!!!! 
+                //아래 headers에 반드시 token을 추가해줘야 한다.!!!!!
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 type: 'post',
                 url: '{{ route('sendPwChangeLinkView') }}',
@@ -83,7 +84,7 @@
                 }
             });
         }else{
-            alert('빈값 입니다. 다시 시도해 주세요!');
+            alert('휴대전화 번호를 입력 하세요.');
         }
     }
 </script>

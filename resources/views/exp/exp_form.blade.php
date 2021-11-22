@@ -1,7 +1,7 @@
 @extends('layouts.head')
 
 @section('content')
-    신청 폼입니다. 
+    신청 폼입니다.
     <br>
     이름 : {{ auth()->user()->user_name }}
     <br>
@@ -9,25 +9,23 @@
     <br>
     이메일 : {{ auth()->user()->user_id }}
     <br>
-    평가단 참여이유 (필수) <input type="text" id="form_text" name="form_text" placeholder="30자 이상 ~ 300자이내로 작성하도록 해주세요(띄어쓰기 포함)" maxlength="300">
+    평가단 참여이유 (필수)<br>
+    <textarea id="form_text" name="form_text" placeholder="30자 이상 ~ 300자이내로 작성하도록 해주세요(띄어쓰기 포함)"></textarea>
+    <!-- 글자수 표현 -->
+    <div id="textLengthCheck"></div>
+
+
+
     <hr>
     <h2>배송지</h2>
     <form name="forderform" id="forderform">
-    <table border=1>
     {!! csrf_field() !!}
+    <table border=1>
                 <!-- 받으시는 분 입력 시작  -->
                 <tr>
                     <button type="button" onclick="baesongji()">배송지입력</button>
+                    <div id="disp_baesongi"></div>
                 </tr>
-                
-                
-                
-                <tr>
-                    <td colspan="2">
-                        <div id="disp_baesongi"></div>
-                    </td>
-                </tr>
-                
     </table>
     </form>
                 @if(empty($address))
@@ -49,7 +47,7 @@
                     <div>
                 @endif
                 <!-- <div>아아디 : {{ $id }}</div> -->
-                
+
                 <form action="{{ route('exp.list.form_create') }}" method="post" onsubmit="return check_submit()">
                     {!! csrf_field() !!}
                     <input type="hidden" id="exp_id" name="exp_id" value="{{ $id }}">
@@ -81,7 +79,34 @@
                     <br>
                     <button>평가단 신청</button>
                 </form>
-                
+
+
+<script>
+	$('#form_text').on('keyup', function() {
+		var content = $(this).val();
+        var srtlength = getTextLength(content);
+        $("#textLengthCheck").html("(" + srtlength + " 자 / 최대 300자)"); //실시간 글자수 카운팅
+
+		if (srtlength > 300) {
+			alert("최대 300자까지 입력 가능합니다.");
+			$(this).val(content.substring(0, 300));
+            $('#textLengthCheck').html("(300 자 / 최대 300자)");
+		}
+	});
+
+    function getTextLength(str) {
+        var len = 0;
+
+        for (var i = 0; i < str.length; i++) {
+            if (escape(str.charAt(i)).length == 6) {
+                len++;
+            }
+            len++;
+        }
+        return len;
+    }
+</script>
+
 <script>
     function baesongji(){
         $.ajax({
@@ -112,7 +137,7 @@
         $('#ad_addr').text($ad_addrs);
         //창닫기
         lay_close();
-        
+
         //보여주던 부분을 숨기고 display none 값들을 보여준다.
         $("#show_address").show();
         $("#none_address").hide();
@@ -128,26 +153,25 @@
         let od_b_addr2 = $("#od_b_addr2").val();
         let od_b_addr3 = $("#od_b_addr3").val();
         let od_b_addr_jibeon = $("#od_b_addr_jibeon").val();
-                        
+
         if(form_text == null || form_text == ""){
-            alert('참여이유를 작성해주시기 바랍니다.');
+            alert('참여이유를 작성해 주세요.');
             return false;
         }
 
         if(form_text.length < 30 || form_text.length >= 300){
-            alert('30자 이상 300자 이내로 작성해주세요');
+            alert('평가단 참여이유를 30자 이상~ 300자 이내로 작성해 주세요.');
             return false;
         }
         //주소가 없을 경우 예외처리 하나라도 없을 경우 나오게
         if((od_b_name == null || od_b_name == "") || (od_b_hp == null || od_b_hp == "") || (od_b_zip == null || od_b_zip == "")
-        || (od_b_addr1 == null || od_b_addr1 == "") || (od_b_addr2 == null || od_b_addr2 == "") || (od_b_addr3 == null || od_b_addr3 == "")
-        || (od_b_addr_jibeon == null || od_b_addr_jibeon == "")){
+        || (od_b_addr1 == null || od_b_addr1 == "") || (od_b_addr2 == null || od_b_addr2 == "")){
             alert('배송지가 입력되지 않았습니다.');
             return false;
         }
 
         if(!$('#promotion_agree').is(":checked")){
-            alert('약관동의를 체크해주세요');
+            alert('약관에 동의 후 평가단 신청이 가능합니다.');
             return false;
         }
 

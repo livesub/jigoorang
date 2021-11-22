@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Auth;    //인증
 use Illuminate\Support\Facades\DB;
 use App\Models\items;    //상품 모델 정의
 use Validator;  //체크
-use App\Models\categorys; 
+use App\Models\categorys;
 use App\Models\shopitems;
-use App\Models\ExpApplicationList; 
+use App\Models\ExpApplicationList;
 /**
  * Class ExpService
  * @package App\Services
@@ -41,7 +41,7 @@ class ExpService
             'exp_limit_personnel' => $request->exp_limit_personnel,
 
         ])->exists();
-        
+
         return $result;
     }
 
@@ -66,7 +66,7 @@ class ExpService
                 'exp_limit_personnel' => $request->exp_limit_personnel,
                 'updated_at' => now(),
             ]);
-            
+
         }else{
 
             $result = $expList->update([
@@ -83,7 +83,7 @@ class ExpService
                 'exp_content' => $request->exp_content,
                 'exp_limit_personnel' => $request->exp_limit_personnel,
                 'updated_at' => now(),
-    
+
             ]);
 
         }
@@ -113,7 +113,7 @@ class ExpService
         }else{
             $expList = ExpList::where('exp_date_end', '>=', $date)->where('exp_date_start', '<=', $date)->latest();
         }
-        
+
 
         $total_record   = 0;
         $total_record   = $expList->count(); //총 게시물 수
@@ -148,7 +148,7 @@ class ExpService
                 'pnPage'        => $pnPage,
             ]);
         }
-        
+
         //return view('adm.exp.exp_list', compact('expAllLists'));
     }
 
@@ -247,7 +247,7 @@ class ExpService
         }else{
             $result = "";
         }
-        
+
         return $result;
     }
 

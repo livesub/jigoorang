@@ -50,18 +50,18 @@
                             </table>
 
                         </td>
-                        
+
                     </tr>
                 </table>
             </td>
         </tr>
         <tr>
             <td>
-                
+
                     <label for="item_name1">
                         정량 평가 항목 내용 1
                     </label>
-                    <input type="text" id="item_name1" name="item_name1" value="{{ old('item_name1') }}"> 
+                    <input type="text" id="item_name1" name="item_name1" value="{{ old('item_name1') }}">
                     @error('item_name1')
                         <span class='invalid-feedback' role='alert'>
                             <strong>{{ $message }}</strong>
@@ -108,7 +108,7 @@
                         </span>
                     @enderror
                     <br>
-                
+
             </td>
         </tr>
         <tr>
@@ -185,6 +185,7 @@
             }
 		});
     });
+
     //예외처리 함수
     function form_check(){
 
@@ -194,20 +195,6 @@
         var item_name4 = $('#item_name4').val();
         var item_name5 = $('#item_name5').val();
         var last_choice_ca_id = $("#last_choice_ca_id").val();
-
-        //내용이 하나라도 없을 경우
-        // if((item_name1 == "" || item_name1 == null) && (item_name2 == "" || item_name2 == null) && (item_name3 == "" || item_name3 == null) && 
-        // (item_name4 == "" || item_name4 == null) && (item_name5 == "" || item_name5 == null)){
-        //     alert('한개의 내용은 입력하셔야 합니다.');
-        //     return false;
-        // }
-
-        //5개 다 체크
-        if((item_name1 == "" || item_name1 == null) || (item_name2 == "" || item_name2 == null) || (item_name3 == "" || item_name3 == null) || 
-        (item_name4 == "" || item_name4 == null) || (item_name5 == "" || item_name5 == null)){
-            alert('모든 항목을 입력하셔야 합니다.');
-            return false;
-        }
 
         //카테고리를 선택안했을 경우
         if(last_choice_ca_id == "" || last_choice_ca_id == null){
@@ -219,6 +206,13 @@
         //1차 카테는 불가
         if(last_choice_ca_id.length < 4){
             alert('2차 카테코리만 설정할 수 있습니다.');
+            return false;
+        }
+
+        //5개 다 체크
+        if((item_name1 == "" || item_name1 == null) || (item_name2 == "" || item_name2 == null) || (item_name3 == "" || item_name3 == null) ||
+        (item_name4 == "" || item_name4 == null) || (item_name5 == "" || item_name5 == null)){
+            alert('모든 항목을 입력하셔야 합니다.');
             return false;
         }
 

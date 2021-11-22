@@ -1595,6 +1595,27 @@ $um_value='80/0.5/3'
         }
     }
 
+    public function baesongji_modify_process($id, $ad_default, $ad_subject, $ad_name, $ad_tel, $ad_hp, $ad_zip1, $ad_addr1, $ad_addr2, $ad_addr3, $ad_jibeon){
+        if($ad_default == 1){
+            $update_default = DB::table('baesongjis')->where('user_id', Auth::user()->user_id)->update(['ad_default' => 0]);
+        }else{
+            $ad_default = 0;
+        }
+
+        $update_result = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['id', $id]])->update([
+            'ad_subject'    => addslashes($ad_subject),
+            'ad_default'    => $ad_default,
+            'ad_name'       => addslashes($ad_name),
+            'ad_tel'        => addslashes($ad_tel),
+            'ad_hp'         => addslashes($ad_hp),
+            'ad_zip1'       => (int)$ad_zip1,
+            'ad_addr1'      => addslashes($ad_addr1),
+            'ad_addr2'      => addslashes($ad_addr2),
+            'ad_addr3'      => addslashes($ad_addr3),
+            'ad_jibeon'     => $ad_jibeon,
+        ]);
+    }
+
     //포인트 처리
     public function insert_point($user_id, $point, $content='', $po_type, $po_write_id=0, $order_id=0)
     {

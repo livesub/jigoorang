@@ -1,7 +1,7 @@
 @extends('layouts.head')
 
 @section('content')
-  
+
   <form action='{{ route('join.store') }}' method='POST' role='form' class='form__auth' onsubmit="return check_submit()">
     {!! csrf_field() !!}
     <input type="hidden" name="url" id="url" value="{{ $url }}">
@@ -56,7 +56,7 @@
 
     <div class='form-group'>
       <label for="user_birth">생년월일</label>
-      <input name='user_birth' id='user_birth' type='text' class='form-control @error('user_birth') is-invalid @enderror' value='{{ old('user_birth') }}'>
+      <input name='user_birth' id='user_birth' type='text' class='form-control @error('user_birth') is-invalid @enderror' value='{{ old('user_birth') }}' onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
     </div>
     @error('user_birth')
         <span class='invalid-feedback' role='alert'>
@@ -134,7 +134,7 @@
     var regName = /^[가-힣a-zA-Z]{2,50}$/;
 
     var address = $('#address').val();
-    
+
     //암호화를 쓰기 위한 secret 코드 선언
     var sk = "!q2q@";
     //암호화
@@ -150,7 +150,7 @@
     // var decrypted2 = CryptoJS.AES.decrypt(getCookie(sk2), sk);
     // var num = decrypted2.toString(CryptoJS.enc.Utf8);
 
-    
+
     // console.log(certification);
     // console.log(num);
 
@@ -167,7 +167,7 @@
       $("#user_gender_w" ).prop('checked', true);
     }
   };
-  
+
   //인증번호 보내기
   function send_sms(){
     var user_phone = $('#user_phone').val();
@@ -187,7 +187,7 @@
     }
 
     $.ajax({
-      //아래 headers에 반드시 token을 추가해줘야 한다.!!!!! 
+      //아래 headers에 반드시 token을 추가해줘야 한다.!!!!!
       headers: {'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')},
       type: 'post',
       url: address,
@@ -247,44 +247,51 @@
     var user_gender = $('input[name=user_gender]:checked').val();
     var checked_ctf = $('#checked_ctf').val();
     //var phone_certificate = $("#phone_certificate").val();
-    
+
     //before to submit validate
     //id
     if(user_id == null || user_id == "" || regEmail.test(user_id) !== true){
       alert('아이디를 확인(입력)해주세요');
+      $('#user_id').focus();
       return false;
     }
 
     //pw
     if(user_pw == null || user_pw == "" || regPw.test(user_pw) != true){
       alert('비밀번호를 확인(입력)해주세요');
+      $("#user_pw").focus();
       return false;
     }
 
     //pw_con
     if(user_pw_con == null || user_pw_con == "" || regPw.test(user_pw_con) !== true || user_pw != user_pw_con){
       alert('비밀번호확인을 확인(입력)해주세요');
+      $("#user_pw_confirmation").focus();
       return false;
     }
 
     //name 길이 10자 제한
     if(user_name == null || user_name == "" || user_name.length > 10 || regName.test(user_name) !== true){
       alert('이름을 확인(입력)해주세요');
+      $("#user_name").focus();
       return false;
     }
 
     //birth
     if(user_birth == null || user_birth == "" || regBirth.test(user_birth) !== true || user_birth.length > 6){
       alert('생년월일을 확인(입력)해주세요');
+      $("#user_birth").focus();
       return false;
     }else if(get_age_check() != true){
-      alert('연령이 맞지 않습니다.');
+      alert('가입 연령이 맞지 않습니다.');
+      $("#user_birth").focus();
       return false;
     }
 
     //gender
     if(user_gender == null || user_gender == ""){
       alert("성별을 확인(입력)해주세요");
+      $("#old_user_gender").focus();
       return false;
     }
 
@@ -297,21 +304,23 @@
     //phone_certificate
     if(auth == null || auth == ""){
       alert("{{ __('auth.phone_check') }}");
+      $("#user_phone").focus();
       return false;
     }else if(auth != cookie_certification){
       alert("{{ __('auth.faild_certification_number') }}");
       return false;
     }
-    
+
     //checked_ctf
     if(checked_ctf == null || checked_ctf == "" || checked_ctf != '1'){
       alert('인증 확인 필요합니다.');
+      $('#checked_ctf').focus();
       return false;
     }
 
     //submit true or false
     if(auth == ""){
-      
+
       alert('인증번호를 확인(입력)해주세요');
 
       return false;
@@ -349,12 +358,12 @@
         return false;
 
       }
-        
+
     }else{
         alert("{{ __('auth.faild_certification_number') }}");
         return false;
     }
-    
+
   }
   //인증 제한 시간 지난 후에 로직 정의
   function return_to_sms(){
@@ -367,7 +376,7 @@
     deleteCookie(sk2, '{{ request()->getHost() }}', '/');
     $('#checked_ctf').val('');
   }
-  
+
   //이메일 중복확인 관련 ajax 함수
   function email_check(){
     var user_id = $("#user_id").val();
@@ -378,7 +387,7 @@
     }else{
       //ajax구현
       $.ajax({
-        //아래 headers에 반드시 token을 추가해줘야 한다.!!!!! 
+        //아래 headers에 반드시 token을 추가해줘야 한다.!!!!!
         headers: {'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')},
         type: 'post',
         url: "{{ route('check_email') }}",
@@ -390,13 +399,13 @@
             //alert("{{ __('auth.email_ctf_true')}}")
             console.log("성공 : 사용가능 이메일"+result);
             check_result = "true";
-            
+
           }else{
             //alert("{{ __('auth.email_ctf_false')}}")
             console.log("실패 : 중복된 이메일"+result);
             //return "false";
             check_result = "false";
-            
+
           }
         },
         error: function(request,status,error) {
@@ -445,10 +454,10 @@
     }
   }
   //새로고침이나 페이지 이동시 쿠키 삭제
-  window.addEventListener('beforeunload', (event) => { 
-      // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다. 
-      //event.preventDefault(); 
-      // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다. 
+  window.addEventListener('beforeunload', (event) => {
+      // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다.
+      //event.preventDefault();
+      // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다.
       //event.returnValue = '';
       //쿠키 삭제를 위한 도메인 과 path를 가져와서 보내준다.(즉 인증 관련 정보 삭제)
       deleteCookie(sk1, '{{ request()->getHost() }}', '/');

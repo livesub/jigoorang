@@ -58,8 +58,24 @@ class BaesongjiController extends Controller
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
+
+        $id = $request->input('num');
+
+        $baesongji = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['id', $id]])->first();
+
+
+        $view = view('shop.ajax_baesongji_modi',[
+            'baesongji'    => $baesongji,
+        ]);
+
+        return $view;
+
+
+exit;
+
+
         $chk        = $request->input('chk');
-        $id_ori       = $request->input('id_ori');
+        $id_ori     = $request->input('id_ori');
         $ad_subject = $request->input('ad_subject_ori');
         $ad_default = $request->input('ad_default_ori');
 
@@ -89,6 +105,30 @@ class BaesongjiController extends Controller
                 $update_result = DB::table('baesongjis')->where([['id', $id_val], ['user_id',Auth::user()->user_id]])->update(['ad_subject' => $ad_subject_val]);
             }
         }
+
+        echo "ok";
+        exit;
+    }
+
+    public function ajax_baesongji_modify_save(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
+
+        $user_id            = Auth::user()->user_id;
+        $num                = $request->input('num');
+        $ad_c_subject       = $request->input('ad_c_subject');
+        $od_c_name          = $request->input('od_c_name');
+        $od_c_zip           = $request->input('od_c_zip');
+        $od_c_addr1         = $request->input('od_c_addr1');
+        $od_c_addr2         = $request->input('od_c_addr2');
+        $od_c_addr3         = $request->input('od_c_addr3');
+        $od_c_addr_jibeon   = $request->input('od_c_addr_jibeon');
+        $od_c_tel           = $request->input('od_c_tel');
+        $od_c_hp            = $request->input('od_c_hp');
+        $ad_default         = $request->input('ad_default');
+
+        $CustomUtils->baesongji_modify_process($num, $ad_default, $ad_c_subject, $od_c_name, $od_c_tel, $od_c_hp, $od_c_zip, $od_c_addr1, $od_c_addr2, $od_c_addr3, $od_c_addr_jibeon);
 
         echo "ok";
         exit;

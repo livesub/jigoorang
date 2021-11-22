@@ -2,7 +2,7 @@
 
 @section('content')
     정량 평가 항목 리스트 뷰
-    <table>
+    <table border=1>
 <form name="search_form" id="search_form" method="get" action="{{ route('admRating.index') }}">
     <tr>
         <td>
@@ -21,15 +21,7 @@
                 @endforeach
             </select>
         </td>
-        <td>
-            <!-- <select name="item_search" id="item_search">
-                @php
-                    
-                @endphp
-                <option value="item_name" >카테고리</option>
-                <option value="item_code" >상품코드</option>
-            </select> -->
-        </td>
+
         <td>
             @php
                 if($keyword){
@@ -38,31 +30,45 @@
                     $key = "";
                 }
             @endphp
-            <input type="text" name="keyword" id="keyword" value="{{ $key }}"><button type="">검색</button>
+            <input type="text" name="keyword" id="keyword" value="{{ $keyword }}"><button type="">검색</button>
         </td>
     </tr>
 </form>
 </table>
-<table>
-    @foreach($rating_items_rows as $rating_item)
+<table border=1>
     <tr>
         <td>
-            카테고리 코드 : {{ $rating_item->sca_id }}
+            카테고리명
+        </td>
+        <td>항목1</td>
+        <td>항목2</td>
+        <td>항목3</td>
+        <td>항목4</td>
+        <td>항목5</td>
+        <td>비고</td>
+    </tr>
+    @foreach($rating_items_rows as $rating_item)
+        @php
+            $cate_info = DB::table('shopcategorys')->select('sca_name_kr')->where('sca_id', $rating_item->sca_id)->first();
+        @endphp
+    <tr>
+        <td>
+            {{ $cate_info->sca_name_kr }}
         </td>
         <td>
-            항목 1 : {{ $rating_item->item_name1 }}
+            {{ $rating_item->item_name1 }}
         </td>
         <td>
-            항목 2 : {{ $rating_item->item_name2 }}
+            {{ $rating_item->item_name2 }}
         </td>
         <td>
-            항목 3 : {{ $rating_item->item_name3 }}
+            {{ $rating_item->item_name3 }}
         </td>
         <td>
-            항목 4 : {{ $rating_item->item_name4 }}
+            {{ $rating_item->item_name4 }}
         </td>
         <td>
-            항목 5 : {{ $rating_item->item_name5 }}
+            {{ $rating_item->item_name5 }}
         </td>
         <td>
             <a href="{{ route('admRating.modi_view', $rating_item->id) }}">수정</a>
