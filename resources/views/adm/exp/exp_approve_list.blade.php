@@ -89,7 +89,6 @@
     @foreach($exp_app_lists as $exp_app_list)
         @php
             $exp_info = DB::table('exp_list')->where('id', $exp_app_list->exp_id)->first();
-            $user_info = DB::table('users')->where('id', $exp_app_list->user_id)->first();
 
             $checked = '';
             if($exp_app_list->access_yn == 'y') $checked = 'checked';
@@ -101,11 +100,16 @@
                 <tr>
                     <td><input type="checkbox" name="chk[]" id="chk_{{ $exp_app_list->id }}" value="{{ $exp_app_list->id }}" onclick='checkbox_cnt();' {{ $checked }}></td>
                     <td>{{ $k }}</td>
-                    <td>{{ $user_info->user_id }}</td>
-                    <td>{{ $user_info->user_name }}</td>
+                    <td>{{ $exp_app_list->user_id }}</td>
+                    <td>{{ $exp_app_list->user_name }}</td>
                 </tr>
                 <tr>
-                    <td colspan=6>{{ $exp_app_list->reason_memo }}</td>
+                    <td>내용</td>
+                    <td colspan=5>{{ $exp_app_list->reason_memo }}</td>
+                </tr>
+                <tr>
+                    <td>쇼핑메모</td>
+                    <td colspan=5>{{ $exp_app_list->shipping_memo }}</td>
                 </tr>
             </table>
         </td>

@@ -16,7 +16,7 @@ class CreateExpApplicationList extends Migration
         Schema::create('exp_application_list', function (Blueprint $table) {
 
             $table->id();
-            $table->integer('user_id')->comment('신청 유저 아이디');
+            $table->string('user_id')->comment('신청 유저 아이디');
             $table->string('user_name')->comment('신청자 이름');
             $table->integer('exp_id')->comment('체험단 아이디');
             $table->integer('item_id')->comment('상품 아이디');

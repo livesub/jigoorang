@@ -46,6 +46,7 @@ class shopcarts extends Model
         'sct_direct',
         'sct_select',
         'sct_select_time',
+        'review_yn',
     ];
 
     protected $hidden = [

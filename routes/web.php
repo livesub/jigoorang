@@ -158,6 +158,19 @@ Route::group(['middleware' => ['auth']], function () {
 
     //회원정보수정 라우트
     Route::post('member/update_member',[MyPageInfoController::class, 'update_member'])->name('member_info_update_member');
+
+
+    //mypage 체험단 리뷰 관련
+    Route::get('member/review_possible_list', [
+        'as' => 'mypage.review_possible_list',
+        'uses' => 'App\Http\Controllers\member\ReviewPossibleController@index',
+    ]);
+
+
+
+
+
+
  });
 
 /* 이메일 확인 리턴(외부에서 접속 해야 하기에 밖으로 뺌) */
@@ -353,7 +366,6 @@ Route::prefix('adm/rating')->group(base_path('routes/admRatingItem.php'));
 //대체 라우트 지정(설정된 라우트가 없을 경우 해당 메시지를 alert으로 보여주고 메인으로 이동)
 //위치를 제일 마지막에 두어야 모든 라우트에 대해 반응가능
 Route::fallback(function () {
-
     //return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
     return redirect()->route('short_url_delete');
 });

@@ -51,7 +51,7 @@
                 <form action="{{ route('exp.list.form_create') }}" method="post" onsubmit="return check_submit()">
                     {!! csrf_field() !!}
                     <input type="hidden" id="exp_id" name="exp_id" value="{{ $id }}">
-                    <input type="hidden" id="user_id" name="user_id" value="{{ auth()->user()->id }}">
+                    <input type="hidden" id="user_id" name="user_id" value="{{ auth()->user()->user_id }}">
                     <input type="hidden" id="sca_id" name="sca_id" value="{{ $result->sca_id }}">
                     <input type="hidden" id="item_id" name="item_id" value="{{ $result->item_id }}">
                     <input type="hidden" id="user_name" name="user_name" value="{{ auth()->user()->user_name }}">

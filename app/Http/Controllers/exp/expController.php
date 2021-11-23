@@ -52,7 +52,8 @@ class expController extends Controller
     public function view_form($id){
 
         //중복 확인
-        $overlab = $this->expApplicationList->whereUser_id(auth()->user()->id)->whereExp_id($id)->first();
+        //$overlab = $this->expApplicationList->whereUser_id(auth()->user()->id)->whereExp_id($id)->first();
+        $overlab = $this->expApplicationList->whereUser_id(auth()->user()->user_id)->whereExp_id($id)->first();
 
         //dd($overlab);
 
@@ -71,7 +72,7 @@ class expController extends Controller
         if(empty($address)){
 
             $address = $this->baesongjis->where('user_id', $user_id)->first();
-    
+
         }
         //dd($address);
         if(!empty($result)){
@@ -94,6 +95,6 @@ class expController extends Controller
         }else{
             return redirect()->route('exp.list')->with('alert_messages', '잘못된 접근입니다.!');
         }
-        
+
     }
 }
