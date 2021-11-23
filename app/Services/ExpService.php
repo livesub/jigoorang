@@ -30,6 +30,7 @@ class ExpService
 
             'title' => $request->exp_title,
             'main_image_name' =>$request->exp_main_image,
+            'main_image_ori_name' =>$request->exp_main_ori_image,
             'item_id' => $request->exp_item_code,
             'item_name' => $request->exp_item_name,
             'exp_date_start' => $request->exp_date_start,
@@ -51,7 +52,6 @@ class ExpService
         $expList = ExpList::find($id);
 
         if($request->exp_main_image == '' || $request->exp_main_image == null){
-
             $result = $expList->update([
 
                 'title' => $request->exp_title,
@@ -68,11 +68,11 @@ class ExpService
             ]);
 
         }else{
-
             $result = $expList->update([
 
                 'title' => $request->exp_title,
                 'main_image_name' => $request->exp_main_image,
+                'main_image_ori_name' => $request->exp_main_ori_image,
                 'item_id' => $request->exp_item_code,
                 'item_name' => $request->exp_item_name,
                 'exp_date_start' => $request->exp_date_start,
@@ -95,8 +95,8 @@ class ExpService
     //$flag를 통해 회원단과 관리자단에서 보여주는 기준을 다르게 표현 1이 있을 경우 회원단 날짜가 지난 체험단은 보여주지 않음
     public function set_page($page, $flag = 0){
 
-        $pageScale  = 1;  //한페이지당 라인수
-        $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
+        $pageScale  = 15;  //한페이지당 라인수
+        $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")
         {

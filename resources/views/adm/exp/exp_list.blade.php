@@ -11,6 +11,8 @@
                 $main_image_name_cut = explode("@@",$expAllList->main_image_name);
                 $main_image_name_disp = "/data/exp_list/".$main_image_name_cut[2];
             }
+
+            $exp_app_cnt = DB::table('exp_application_list')->where('exp_id', $expAllList->id)->count();
             @endphp
 
         <tr>
@@ -43,6 +45,10 @@
                         <tr>
                             <td>
                                 <button type="button" onclick="exp_modi({{ $expAllList->id }});">수정</button>
+                                @if($exp_app_cnt == 0)
+                                <!-- 신청자가 없을때 삭제 가능 -->
+                                <button type="button" onclick="exp_del({{ $expAllList->id }});">삭제</button>
+                                @endif
                             </td>
                         </tr>
                     </table>

@@ -15,7 +15,7 @@
         <tr>
             <td>
                 <a href="{{ route('exp.list.detail', $expAllList -> id) }}">
-                <img src="{{ $main_image_name_disp }}" alt="1" style="width: 50%; height: 50%">
+                <img src="{{ $main_image_name_disp }}">
                 </a>
             </td>
             <tr>

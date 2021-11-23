@@ -39,4 +39,9 @@ Route::group(['middleware' => 'is.admin'], function () {
         'uses' => 'App\Http\Controllers\adm\exp\AdmExpApproveController@index',
     ]);
 
+    //체험단 승인 저장
+    Route::post('approve', [
+        'as' => 'adm.approve.approve_ok',
+        'uses' => 'App\Http\Controllers\adm\exp\AdmExpApproveController@approve_ok',
+    ]);
 });

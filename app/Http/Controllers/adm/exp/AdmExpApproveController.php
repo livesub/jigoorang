@@ -40,25 +40,17 @@ class AdmExpApproveController extends Controller
 
         $exp_id     = $request->input('exp_id');
 
-        $page       = $request->input('page');
-        $pageScale  = 15;  //한페이지당 라인수
-        $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
+        $exp_last = DB::table('exp_list')->orderBy('id', 'DESC')->limit(1)->first();
 
-        if($page != "")
-        {
-            $start_num = $pageScale * ($page - 1);
-        }else{
-            $page = 1;
-            $start_num = 0;
-        }
-
-        $exp_info = DB::table('exp_list');
-        $exp_last = $exp_info->orderBy('id', 'DESC')->limit(1)->first();
-        $exp_lists = $exp_info->orderBy('id', 'DESC')->get();
+        $exp_lists = DB::table('exp_list')->orderBy('id', 'DESC')->get();
 
         $exp_application_info = DB::table('exp_application_list');
         if($exp_id == ''){
-            $exp_application_lists = $exp_application_info->where('exp_id', $exp_last->id);
+            if(is_null($exp_last)){
+                $exp_application_lists = $exp_application_info;
+            }else{
+                $exp_application_lists = $exp_application_info->where('exp_id', $exp_last->id);
+            }
         }else{
             $exp_application_lists = $exp_application_info->where('exp_id', $exp_id);
         }
@@ -66,7 +58,7 @@ class AdmExpApproveController extends Controller
         $total_record   = 0;
         $total_record   = $exp_application_lists->count(); //총 게시물 수
 
-        $exp_app_lists  = $exp_application_lists->get();
+        $exp_app_lists  = $exp_application_lists->orderBy('id')->get();
 
         $virtual_num = $total_record;
 
@@ -75,8 +67,36 @@ class AdmExpApproveController extends Controller
             'exp_id'        => $exp_id,
             'exp_app_lists' => $exp_app_lists,
             'virtual_num'   => $virtual_num,
+            'exp_last'      => $exp_last,
+            'total_record'  => $total_record,
         ]);
     }
+
+    public function approve_ok(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+
+        $exp_id = $request->input('exp_id');
+        $chk    = $request->input('chk');
+
+        if($exp_id == ''){
+            echo "no";
+            exit;
+        }
+
+        $update = DB::table('exp_application_list')->where('exp_id', $exp_id)->update(['access_yn' => 'n']);
+
+        if($chk != ""){
+            for($i = 0; $i < count($chk); $i++){
+                $update_chk = DB::table('exp_application_list')->where([['exp_id', $exp_id], ['id', $chk[$i]]])->update(['access_yn' => 'y']);
+            }
+        }
+
+        echo "yes";
+        exit;
+    }
+
+
 
     /**
      * Show the form for creating a new resource.

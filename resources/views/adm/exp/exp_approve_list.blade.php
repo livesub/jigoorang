@@ -27,34 +27,147 @@
         </td>
     </tr>
 </table>
+<table border=1>
+    @php
+        if($exp_id == ''){
+            if(is_null($exp_last)){
+                $exp_info2 = DB::table('exp_list')->first();
+            }else{
+                $exp_info2 = DB::table('exp_list')->where('id', $exp_last->id)->first();
+            }
 
+        }else{
+            $exp_info2 = DB::table('exp_list')->where('id', $exp_id)->first();
+        }
+
+        $k = 1;
+    @endphp
+
+    @if(!is_null($exp_last))
+    <tr>
+        <td>체험단명</td>
+        <td>{{ stripslashes($exp_info2->title) }}</td>
+    <tr>
+    <tr>
+        <td>모집기간</td>
+        <td>{{ $exp_info2->exp_date_start }} ~ {{ $exp_info2->exp_date_end }}</td>
+    <tr>
+    <tr>
+        <td>모집인원</td>
+        <td>{{ $exp_info2->exp_limit_personnel }}</td>
+    <tr>
+    <tr>
+        <td>당첨자발표일</td>
+        <td>{{ $exp_info2->exp_release_date }}</td>
+    <tr>
+    <tr>
+        <td>평가가능기간</td>
+        <td>{{ $exp_info2->exp_review_start }} ~ {{ $exp_info2->exp_review_end }}</td>
+    <tr>
+    @endif
+</table>
+
+<table>
+    <tr>
+        <td><span id="chk_cnt">0</span> / {{ $exp_info2->exp_limit_personnel }}</td>
+        <td>신청인원 {{ number_format($total_record) }} 명
+        <td><button type="button" onclick="exp_app_ok();">승인</button></td>
+    </tr>
+</table>
+
+<form name="exp_app_form" id="exp_app_form" method="post" action="" autocomplete="off">
+{!! csrf_field() !!}
+<input type="hidden" name="exp_id" id="exp_id" value="{{ $exp_info2->id }}">
 <table border=1>
     <tr>
         <td>선택</td>
         <td>번호</td>
-        <td>체험단명</td>
         <td>아이디</td>
         <td>이름</td>
-        <td>비고</td>
     </tr>
 
     @foreach($exp_app_lists as $exp_app_list)
+        @php
+            $exp_info = DB::table('exp_list')->where('id', $exp_app_list->exp_id)->first();
+            $user_info = DB::table('users')->where('id', $exp_app_list->user_id)->first();
+
+            $checked = '';
+            if($exp_app_list->access_yn == 'y') $checked = 'checked';
+        @endphp
+
     <tr>
-        <td><input type="checkbox" name="" id=""></td>
-        <td>{{ $virtual_num-- }}</td>
+        <td colspan=6>
+            <table border=1>
+                <tr>
+                    <td><input type="checkbox" name="chk[]" id="chk_{{ $exp_app_list->id }}" value="{{ $exp_app_list->id }}" onclick='checkbox_cnt();' {{ $checked }}></td>
+                    <td>{{ $k }}</td>
+                    <td>{{ $user_info->user_id }}</td>
+                    <td>{{ $user_info->user_name }}</td>
+                </tr>
+                <tr>
+                    <td colspan=6>{{ $exp_app_list->reason_memo }}</td>
+                </tr>
+            </table>
+        </td>
     </tr>
+        @php
+            $k++;
+        @endphp
     @endforeach
 </table>
 
 
 <script>
     $("#exp_id").change(function(){
-alert($(this).val());
         location.href = "{{ route('adm.approve.index') }}?exp_id="+$(this).val();
     });
 </script>
 
+<script>
+    var checked_cnt = $('input[name="chk[]"]:checked').length;
+    $("#chk_cnt").html(checked_cnt);
 
+    function checkbox_cnt(){
+        checked_cnt = $('input[name="chk[]"]:checked').length;
+        $("#chk_cnt").html(checked_cnt);
+    }
+</script>
+
+<script>
+    function exp_app_ok(){
+/*
+        var chk_cnt = $('input[name="chk[]"]:checked').length;
+        if(chk_cnt == 0){
+            alert('한명 이상 선택 하세요.');
+            return false;
+        }
+*/
+        var form_var = $("#exp_app_form").serialize();
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+            type : "post",
+            url : "{{ route('adm.approve.approve_ok') }}",
+            data : form_var,
+            dataType : 'text',
+            success : function(result){
+//alert(result);
+//return false;
+                if(result == 'no'){
+                    alert('잘못된 경로 입니다.');
+                    return false;
+                }
+
+                if(result == 'yes'){
+                    alert('승인 처리 되었습니다.');
+                    location.reload();
+                }
+            },
+            error: function(result){
+                console.log(result);
+            },
+        });
+    }
+</script>
 
 
 

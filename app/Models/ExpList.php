@@ -18,6 +18,7 @@ class ExpList extends Model
     protected $fillable = [
         'title',
         'main_image_name',
+        'main_image_ori_name',
         'item_id',
         'item_name',
         'exp_date_start',
