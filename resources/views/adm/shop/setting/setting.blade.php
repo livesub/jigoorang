@@ -89,6 +89,21 @@
 
 <table border=1>
     <tr>
+        <td><b>텍스트 리뷰 포인트</b></td>
+        <td>
+            <input type="text" name="text_point" value="{{ $text_point }}" id="text_point" class="frm_input" size="10"> pt
+        </td>
+    </tr>
+    <tr>
+        <td><b>포토 리뷰 포인트</b></td>
+        <td>
+            <input type="text" name="photo_point" value="{{ $photo_point }}" id="photo_point" class="frm_input" size="10"> pt
+        </td>
+    </tr>
+</table>
+
+<table border=1>
+    <tr>
         <td><b>기획전1 변경</b></td>
         <td>
             <input type="text" name="de_ment_change" value="{{ $de_ment_change }}" id="de_ment_change">

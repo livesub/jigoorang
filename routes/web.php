@@ -166,10 +166,23 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'App\Http\Controllers\member\ReviewPossibleController@index',
     ]);
 
+    //mypage 구매 리뷰 작성
+    Route::get('member/review_possible_shopwrite', [
+        'as' => 'mypage.review_possible_shopwrite',
+        'uses' => 'App\Http\Controllers\member\ReviewPossibleController@review_possible_shopwrite',
+    ]);
 
+    //mypage 체험단 리뷰 작성
+    Route::post('member/review_possible_expwrite', [
+        'as' => 'mypage.review_possible_expwrite',
+        'uses' => 'App\Http\Controllers\member\ReviewPossibleController@review_possible_expwrite',
+    ]);
 
-
-
+    //mypage 체험단 리뷰 작성 저장처리
+    Route::post('member/review_possible_save', [
+        'as' => 'mypage.review_possible_save',
+        'uses' => 'App\Http\Controllers\member\ReviewPossibleController@review_possible_save',
+    ]);
 
  });
 

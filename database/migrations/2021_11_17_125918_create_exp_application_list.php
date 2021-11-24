@@ -34,8 +34,9 @@ class CreateExpApplicationList extends Migration
             $table->enum('write_yn', ['y', 'n'])->default('n')->comment('리뷰 작성 여부');
             $table->enum('promotion_yn', ['y', 'n'])->default('y')->comment('약관동의 여부');
             $table->timestamps();
-
         });
+
+        DB::statement("ALTER TABLE exp_application_list comment '체험단 신청 정보'");
     }
 
     /**

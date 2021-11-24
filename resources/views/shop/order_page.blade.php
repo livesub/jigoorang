@@ -165,27 +165,20 @@
                     <td>{!! $addr_list !!}</td>
                 </tr>
 
-                @if(Auth::user())
                 <tr>
-                    <th scope="row"><label for="ad_subject">배송지명</label></th>
+                    <th scope="row"><label for="od_b_name">이름<strong class="sound_only"> 필수</strong></label></th>
                     <td>
-                        <input type="text" name="ad_subject" id="ad_subject" class="frm_input" maxlength="20">
+                        <input type="text" name="od_b_name" id="od_b_name" value="{{ $user_name }}" required class="frm_input required" maxlength="20">
                         <input type="checkbox" name="ad_default" id="ad_default" value="1">
                         <label for="ad_default">기본배송지로 설정</label>
                     </td>
-                </tr>
-                @endif
-
-                <tr>
-                    <th scope="row"><label for="od_b_name">이름<strong class="sound_only"> 필수</strong></label></th>
-                    <td><input type="text" name="od_b_name" id="od_b_name" value="{{ $user_name }}" required class="frm_input required" maxlength="20"></td>
                 </tr>
                 <tr>
                     <th scope="row"><label for="od_b_tel">전화번호<strong class="sound_only"> 필수</strong></label></th>
                     <td><input type="text" name="od_b_tel" id="od_b_tel" value="{{ $user_tel }}" required class="frm_input required" maxlength="20"></td>
                 </tr>
                 <tr>
-                    <th scope="row"><label for="od_b_hp">핸드폰</label></th>
+                    <th scope="row"><label for="od_b_hp">휴대폰번호<strong class="sound_only"> 필수</strong></label></th>
                     <td><input type="text" name="od_b_hp" value="{{ $user_phone }}" id="od_b_hp" class="frm_input" maxlength="20"></td>
                 </tr>
                 <tr>
@@ -447,12 +440,6 @@
         errfld = "";
         var deffld = "";
 
-        if($.trim($("#ad_subject").val()) == ""){
-            alert('배송지명을 입력 하세요.');
-            $("#ad_subject").focus();
-            return false;
-        }
-
         if($.trim($("#od_b_name").val()) == ""){
             alert('받으시는 분 이름을 입력하십시오.');
             $("#od_b_name").focus();
@@ -462,6 +449,12 @@
         if($.trim($("#od_b_tel").val()) == ""){
             alert('받으시는 분 전화번호를 입력하십시오.');
             $("#od_b_tel").focus();
+            return false;
+        }
+
+        if($.trim($("#od_b_hp").val()) == ""){
+            alert('받으시는 분 휴대폰번호를 입력하십시오.');
+            $("#od_b_hp").focus();
             return false;
         }
 

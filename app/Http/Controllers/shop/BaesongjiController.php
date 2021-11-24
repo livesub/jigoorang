@@ -69,8 +69,6 @@ class BaesongjiController extends Controller
         ]);
 
         return $view;
-
-
 exit;
 
 

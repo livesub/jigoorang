@@ -97,6 +97,7 @@
             dataType : 'text',
             success : function(result){
                 if(result == "ok"){
+                    alert("수정 되었습니다.");
                     baesongji();
                 }
             },

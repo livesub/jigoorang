@@ -41,6 +41,8 @@ class shopsettings extends Model
         'de_ment_change2',
         'shop_img_width',
         'shop_img_height',
+        'text_point',
+        'photo_point',
     ];
 
     protected $hidden = [

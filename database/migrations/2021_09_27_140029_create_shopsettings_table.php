@@ -36,6 +36,10 @@ class CreateShopsettingsTable extends Migration
             $table->string('de_ment_change2')->nullable()->comment('기획전2 멘트 변경');
             $table->string('shop_img_width')->nullable()->comment('이미지리사이징-넓이');
             $table->string('shop_img_height')->nullable()->comment('이미지리사이징-높이');
+
+            $table->integer('text_point')->default(0)->comment('텍스트 리뷰 포인트');
+            $table->integer('photo_point')->default(0)->comment('포토 리뷰 포인트');
+
             $table->timestamps();
         });
 

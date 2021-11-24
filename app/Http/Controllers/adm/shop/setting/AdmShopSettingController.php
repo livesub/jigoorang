@@ -61,6 +61,8 @@ class AdmShopSettingController extends Controller
         $de_ment_change         = '기획전1';
         $de_ment_change2        = '기획전2';
         $member_reg_point       = "3000";
+        $text_point             = "100";
+        $photo_point            = "100";
 
         if(!is_null($setting_info)){
             $id = $setting_info->id;
@@ -79,13 +81,19 @@ class AdmShopSettingController extends Controller
             $company_bank_use       = $setting_info->company_bank_use;
             $company_bank_account   = $setting_info->company_bank_account;
             $company_use_point      = $setting_info->company_use_point;
-
             //회원 가입 포인트
             $member_reg_point       = $setting_info->member_reg_point;
+
+            $text_point             = $setting_info->text_point;
+            $photo_point            = $setting_info->photo_point;
+
             //기본배송비
             $de_send_cost           = $setting_info->de_send_cost;
             //기본 배송비 무료 정책
             $de_send_cost_free      = $setting_info->de_send_cost_free;
+
+
+
             //기획전1 멘트 변경
             $de_ment_change         = stripslashes($setting_info->de_ment_change);
             //기획전1 멘트 변경
@@ -108,16 +116,20 @@ class AdmShopSettingController extends Controller
             'company_addr'          => $company_addr,
             'company_info_name'     => $company_info_name,
             'company_info_email'    => $company_info_email,
-            'company_bank_use'      => $company_bank_use,
+            'company_bank_use'      => (int)$company_bank_use,
             'company_bank_account'  => $company_bank_account,
-            'company_use_point'     => $company_use_point,
+            'company_use_point'     => (int)$company_use_point,
 
             //회원 가입 포인트
-            'member_reg_point'      => $member_reg_point,
+            'member_reg_point'      => (int)$member_reg_point,
+
+            'text_point'            => (int)$text_point,
+            'photo_point'           => (int)$photo_point,
+
             //기본배송비
-            'de_send_cost'          => $de_send_cost,
+            'de_send_cost'          => (int)$de_send_cost,
             //기본 배송비 무료 정책
-            'de_send_cost_free'     => $de_send_cost_free,
+            'de_send_cost_free'     => (int)$de_send_cost_free,
             //기획전1 멘트 변경
             'de_ment_change'        => $de_ment_change,
             //기획전2 멘트 변경
@@ -159,6 +171,10 @@ class AdmShopSettingController extends Controller
         $de_send_cost           = $request->input('de_send_cost');
         //기본 배송비 무료 정책
         $de_send_cost_free      = $request->input('de_send_cost_free');
+
+        $text_point             = $request->input('text_point');
+        $photo_point            = $request->input('photo_point');
+
         //기획전1 멘트 변경
         $de_ment_change         = $request->input('de_ment_change');
         //기획전2 멘트 변경
@@ -199,6 +215,10 @@ class AdmShopSettingController extends Controller
             'de_send_cost'          => (int)$de_send_cost,
             //기본 배송비 무료 정책
             'de_send_cost_free'     => (int)$de_send_cost_free,
+            'text_point'            => (int)$text_point,
+            'photo_point'           => (int)$photo_point,
+
+
             'de_ment_change'        => addslashes($de_ment_change),
             'de_ment_change2'       => addslashes($de_ment_change2),
             'shop_img_width'        => $shop_img_width,

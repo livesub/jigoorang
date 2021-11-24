@@ -23,6 +23,8 @@
     </tr>
     <tr>
         <td>
+            <form name="exp_form" id="exp_form" method="post" action="{{ route('mypage.review_possible_expwrite') }}">
+            {!! csrf_field() !!}
             <table border=1>
                 @php
                     $aa = '';
@@ -55,6 +57,7 @@
                 </tr>
                 @endforeach
             </table>
+            </form>
         </td>
     </tr>
 </table>
@@ -67,32 +70,37 @@
     </tr>
     <tr>
         <td>
+            <form name="shop_form" id="shop_form" method="get" action="{{ route('mypage.review_possible_shopwrite') }}">
+            <input type="hidden" name="cart_id" id="cart_id">
+            <input type="hidden" name="order_id" id="order_id">
+            <input type="hidden" name="item_code" id="item_code">
+
             <table border=1>
                 @php
                     $cc = '';
                 @endphp
 
-                @foreach($carts as $cart)
+                @foreach($orders as $order)
                     @php
-                        $image = $CustomUtils->get_item_image($cart->item_code, 3);
-                        $dd = substr($cart->regi_date, 0, 10);
+                        $image = $CustomUtils->get_item_image($order->item_code, 3);
+                        $dd = substr($order->regi_date, 0, 10);
                     @endphp
 
-                @if($cc != $dd)
+                    @if($cc != $dd)
                 <tr>
-                    <td>{{ substr($cart->regi_date, 0, 10) }}</td>
+                    <td>{{ substr($order->regi_date, 0, 10) }}</td>
                 </tr>
                     @php
-                    $cc = substr($cart->regi_date, 0, 10);
+                    $cc = substr($order->regi_date, 0, 10);
                     @endphp
-                @endif
+                    @endif
                 <tr>
                     <td><img src="{{ asset($image) }}"></td>
                     <td>
-                        {{ $cart->item_name }}<br>
-                        {{ $cart->sct_option }}
+                        {{ $order->item_name }}<br>
+                        {{ $order->sct_option }}
                     </td>
-                    <td><button type="button" onclick="cart_review('{{ $cart->id }}', '{{ substr($cart->regi_date, 0, 10) }}')">리뷰작성</button></td>
+                    <td><button type="button" onclick="cart_review('{{ $order->id }}', '{{ $order->order_id }}', '{{ $order->item_code }}', '{{ substr($order->regi_date, 0, 10) }}')">리뷰작성</button></td>
                 </tr>
                 @endforeach
             </table>
@@ -105,27 +113,31 @@
     var year = today.getFullYear();
     var month = ('0' + (today.getMonth() + 1)).slice(-2);
     var day = ('0' + today.getDate()).slice(-2);
-    var dateString = year + '-' + month  + '-' + day;
+    var todayString = year + '-' + month  + '-' + day;
 
     function exp_review(num, review_start){
-        if(dateString < review_start){
+        if(todayString < review_start){
             alert("평가 가능 시작일은 " + review_start + "입니다.");
             return false;
         }else{
-            alert("넘어 간다~~~~");
+            $("#exp_form").submit();
         }
     }
 
-    function cart_review(num, review_start){
-        var arr = review_start.split('-');
+    function cart_review(cart_id, order_id, item_code, order_pay_date){
+        var arr = order_pay_date.split('-');
         var dat = new Date(arr[0], arr[1], arr[2]);
-        var date_3day = dat.getFullYear() + "-" + dat.getMonth() + "-" + (dat.getDate() + 3);
-        var date_30day = dat.getFullYear() + "-" + dat.getMonth() + "-" + (dat.getDate() + 30);
-alert(date_3day);
+        var date_2day = dat.getFullYear() + "-" + ("0" + dat.getMonth()).slice(-2) + "-" + ("0" + (dat.getDate() + 2)).slice(-2);
 
-
-
-
+        if(todayString < date_2day){
+            alert("구매 리뷰 작성 가능일은 " + date_2day + "입니다.");
+            return false;
+        }else{
+            $("#cart_id").val(cart_id);
+            $("#order_id").val(order_id);
+            $("#item_code").val(item_code);
+            $("#shop_form").submit();
+        }
     }
 </script>
 
