@@ -1750,4 +1750,19 @@ $um_value='80/0.5/3'
         $mobile_agent = 'phone|samsung|lgtel|mobile|[^A]skt|nokia|blackberry|BB10|android|sony';
         return preg_match('/'.$mobile_agent.'/i', $_SERVER['HTTP_USER_AGENT']);
     }
+
+    public static function item_average($item_code)
+    {
+        $review_info = DB::table('review_saves')->where('item_code', $item_code)->get();
+        $review_sum = $review_info->sum('average');
+        $review_cnt = $review_info->count();
+        $item_cal = $review_sum / $review_cnt;
+        $item_average = round($item_cal, 2);
+
+        //상품 테이블에 평균값 저장
+        $up_result = DB::table('shopitems')->where('item_code', $item_code)->update(['item_average' => $item_average]);
+    }
+
 }
+
+

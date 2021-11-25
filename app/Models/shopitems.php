@@ -82,6 +82,7 @@ class shopitems extends Model
         'item_stock_qty',
         'item_tel_inq',
         'item_del',
+        'item_average',
     ];
 
     protected $hidden = [

@@ -173,7 +173,7 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
 
     //mypage 체험단 리뷰 작성
-    Route::post('member/review_possible_expwrite', [
+    Route::get('member/review_possible_expwrite', [
         'as' => 'mypage.review_possible_expwrite',
         'uses' => 'App\Http\Controllers\member\ReviewPossibleController@review_possible_expwrite',
     ]);
@@ -184,6 +184,11 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'App\Http\Controllers\member\ReviewPossibleController@review_possible_save',
     ]);
 
+    //mypage 체험단 리뷰 작성 수정 처리
+    Route::post('member/review_possible_modi_save', [
+        'as' => 'mypage.review_possible_modi_save',
+        'uses' => 'App\Http\Controllers\member\ReviewPossibleController@review_possible_modi_save',
+    ]);
  });
 
 /* 이메일 확인 리턴(외부에서 접속 해야 하기에 밖으로 뺌) */

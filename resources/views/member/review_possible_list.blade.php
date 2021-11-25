@@ -23,8 +23,12 @@
     </tr>
     <tr>
         <td>
-            <form name="exp_form" id="exp_form" method="post" action="{{ route('mypage.review_possible_expwrite') }}">
-            {!! csrf_field() !!}
+            <form name="exp_form" id="exp_form" method="get" action="{{ route('mypage.review_possible_expwrite') }}">
+            <input type="hidden" name="exp_id" id="exp_id">
+            <input type="hidden" name="exp_app_id" id="exp_app_id">
+            <input type="hidden" name="item_id" id="item_id">
+            <input type="hidden" name="sca_id" id="sca_id">
+
             <table border=1>
                 @php
                     $aa = '';
@@ -41,20 +45,23 @@
                         }
 
                         $bb = substr($exp_appinfo->regi_date, 0, 10);
+                        $review_exp_temporary_yn = DB::table('review_saves')->where([['exp_id', $exp_appinfo->id], ['exp_app_id', $exp_appinfo->exp_app_id], ['user_id', Auth::user()->user_id], ['temporary_yn', 'n']])->count();
                     @endphp
-                @if($aa != $bb)
+                @if($review_exp_temporary_yn == 0)
+                    @if($aa != $bb)
                 <tr>
                     <td>{{ substr($exp_appinfo->regi_date, 0, 10) }}</td>
                 </tr>
-                    @php
-                    $aa = substr($exp_appinfo->regi_date, 0, 10);
-                    @endphp
-                @endif
+                        @php
+                        $aa = substr($exp_appinfo->regi_date, 0, 10);
+                        @endphp
+                    @endif
                 <tr>
                     <td><img src="{{ $main_image_name_disp }}"></td>
                     <td>{{ stripslashes($exp_appinfo->title) }}</td>
-                    <td><button type="button" onclick="exp_review('{{ $exp_appinfo->id }}', '{{ $exp_appinfo->exp_review_start }}')">리뷰작성</button></td>
+                    <td><button type="button" onclick="exp_review('{{ $exp_appinfo->id }}', '{{ $exp_appinfo->exp_app_id }}', '{{ $exp_appinfo->item_id }}', '{{ $exp_appinfo->sca_id }}', '{{ $exp_appinfo->exp_review_start }}')">리뷰작성</button></td>
                 </tr>
+                @endif
                 @endforeach
             </table>
             </form>
@@ -84,16 +91,18 @@
                     @php
                         $image = $CustomUtils->get_item_image($order->item_code, 3);
                         $dd = substr($order->regi_date, 0, 10);
+                        $review_temporary_yn = DB::table('review_saves')->where([['cart_id', $order->id], ['item_code', $order->item_code], ['user_id', Auth::user()->user_id], ['temporary_yn', 'n']])->count();
                     @endphp
 
-                    @if($cc != $dd)
+                    @if($review_temporary_yn == 0)
+                        @if($cc != $dd)
                 <tr>
                     <td>{{ substr($order->regi_date, 0, 10) }}</td>
                 </tr>
-                    @php
-                    $cc = substr($order->regi_date, 0, 10);
-                    @endphp
-                    @endif
+                        @php
+                        $cc = substr($order->regi_date, 0, 10);
+                        @endphp
+                        @endif
                 <tr>
                     <td><img src="{{ asset($image) }}"></td>
                     <td>
@@ -102,6 +111,7 @@
                     </td>
                     <td><button type="button" onclick="cart_review('{{ $order->id }}', '{{ $order->order_id }}', '{{ $order->item_code }}', '{{ substr($order->regi_date, 0, 10) }}')">리뷰작성</button></td>
                 </tr>
+                    @endif
                 @endforeach
             </table>
         </td>
@@ -115,11 +125,15 @@
     var day = ('0' + today.getDate()).slice(-2);
     var todayString = year + '-' + month  + '-' + day;
 
-    function exp_review(num, review_start){
+    function exp_review(exp_id, exp_app_id, item_id, sca_id, review_start){
         if(todayString < review_start){
             alert("평가 가능 시작일은 " + review_start + "입니다.");
             return false;
         }else{
+            $("#exp_id").val(exp_id);
+            $("#exp_app_id").val(exp_app_id);
+            $("#item_id").val(item_id);
+            $("#sca_id").val(sca_id);
             $("#exp_form").submit();
         }
     }

@@ -9,10 +9,10 @@
       </h4>
 </div>
 
-<table>
-<form name="review_form" id="review_form" method="post" action="{{ route('mypage.review_possible_save') }}" enctype='multipart/form-data'>
+<table border=1>
+<form name="review_form" id="review_form" method="post" action="{{ route('mypage.review_possible_modi_save') }}" enctype='multipart/form-data'>
 {!! csrf_field() !!}
-<!-- 쇼핑몰 관련 -->
+<input type="hidden" name="review_save_id" id="review_save_id" value="{{ $review_saves_info->id }}">
 <input type="hidden" name="cart_id" id="cart_id" value="{{ $cart_id }}">
 <input type="hidden" name="content_length" id="content_length">
 <input type="hidden" name="order_id" id="order_id" value="{{ $order_id }}">
@@ -35,19 +35,60 @@
                 @php
                     $tmp = "item_name".$i;
                     $dip_name = $rating_item_info->$tmp;
+                    $score_tmp = "score".$i;
+
+                    $score_chk1 = '';
+                    $score_chk1_5 = '';
+                    $score_chk2 = '';
+                    $score_chk2_5 = '';
+                    $score_chk3 = '';
+                    $score_chk3_5 = '';
+                    $score_chk4 = '';
+                    $score_chk4_5 = '';
+                    $score_chk5 = '';
+
+                    switch($review_saves_info->$score_tmp) {
+                        case '1':
+                            $score_chk1 = "checked";
+                            break;
+                        case '1.5':
+                            $score_chk1_5 = "checked";
+                            break;
+                        case '2':
+                            $score_chk2 = "checked";
+                            break;
+                        case '2.5':
+                            $score_chk2_5 = "checked";
+                            break;
+                        case '3':
+                            $score_chk3 = "checked";
+                            break;
+                        case '3.5':
+                            $score_chk3_5 = "checked";
+                            break;
+                        case '4':
+                            $score_chk4 = "checked";
+                            break;
+                        case '4.5':
+                            $score_chk4_5 = "checked";
+                            break;
+                        case '5':
+                            $score_chk5 = "checked";
+                            break;
+                    }
                 @endphp
                 <tr>
                     <td>{{ $rating_item_info->$tmp }}</td>
                     <td>
-                        <input type="radio" name="score{{ $i }}" value="1">1점
-                        <input type="radio" name="score{{ $i }}" value="1.5">1.5점
-                        <input type="radio" name="score{{ $i }}" value="2">2점
-                        <input type="radio" name="score{{ $i }}" value="2.5">2.5점
-                        <input type="radio" name="score{{ $i }}" value="3">3점
-                        <input type="radio" name="score{{ $i }}" value="3.5">3.5점
-                        <input type="radio" name="score{{ $i }}" value="4">4점
-                        <input type="radio" name="score{{ $i }}" value="4.5">4.5점
-                        <input type="radio" name="score{{ $i }}" value="5">5점
+                        <input type="radio" name="score{{ $i }}" value="1" {{ $score_chk1 }}>1점
+                        <input type="radio" name="score{{ $i }}" value="1.5" {{ $score_chk1_5 }}>1.5점
+                        <input type="radio" name="score{{ $i }}" value="2" {{ $score_chk2 }}>2점
+                        <input type="radio" name="score{{ $i }}" value="2.5" {{ $score_chk2_5 }}>2.5점
+                        <input type="radio" name="score{{ $i }}" value="3" {{ $score_chk3 }}>3점
+                        <input type="radio" name="score{{ $i }}" value="3.5"{{ $score_chk3_5 }}>3.5점
+                        <input type="radio" name="score{{ $i }}" value="4" {{ $score_chk4 }}>4점
+                        <input type="radio" name="score{{ $i }}" value="4.5" {{ $score_chk4_5 }}>4.5점
+                        <input type="radio" name="score{{ $i }}" value="5" {{ $score_chk5 }}>5점
                     </td>
                 </tr>
                 @endfor
@@ -56,7 +97,7 @@
     <tr>
     <tr>
         <td>
-            <textarea name="review_content" id="review_content"></textarea>
+            <textarea name="review_content" id="review_content">{{ $review_saves_info->review_content }}</textarea>
         </td>
     </tr>
     <tr>
@@ -69,6 +110,11 @@
             @error('review_img'.$m)
                 <strong>{{ $message }}</strong>
             @enderror
+            @php
+            $review_img_name = "review_img_name$m";
+            @endphp
+            <br>{{ $review_saves_info->$review_img_name }}<br>
+            <input type='checkbox' name="file_chk{{ $m }}" id="file_chk{{ $m }}" value='1'>수정,삭제,새로 등록시 체크 하세요.
         </td>
     </tr>
     @endfor

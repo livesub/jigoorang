@@ -75,8 +75,9 @@ class CreateShopitemsTable extends Migration
             $table->text('item_img10')->nullable()->comment('상품 변경파일이름10(원본@@썸네일1@@썸네일2..)');
             $table->string('item_ori_img10')->nullable()->comment('상품 원본파일이름10');
             $table->enum('item_del', ['N', 'Y'])->length(2)->default('N')->comment('상품삭제:Y=>삭제');
+            $table->float('item_average')->comment('정량평가 평균점수');
             $table->timestamps();
-            $table->index(['sca_id','item_code']);
+            $table->index(['sca_id', 'item_code', 'item_average']);
         });
 
         DB::statement("ALTER TABLE shopitems comment 'shop 상품관리'");
