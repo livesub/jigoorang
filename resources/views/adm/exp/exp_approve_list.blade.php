@@ -146,30 +146,34 @@
             return false;
         }
 */
-        var form_var = $("#exp_app_form").serialize();
-        $.ajax({
-            headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-            type : "post",
-            url : "{{ route('adm.approve.approve_ok') }}",
-            data : form_var,
-            dataType : 'text',
-            success : function(result){
-//alert(result);
-//return false;
-                if(result == 'no'){
-                    alert('잘못된 경로 입니다.');
-                    return false;
-                }
+        if (confirm("승인/취소 처리 하시겠습니까?") == true){    //확인
+            var form_var = $("#exp_app_form").serialize();
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+                type : "post",
+                url : "{{ route('adm.approve.approve_ok') }}",
+                data : form_var,
+                dataType : 'text',
+                success : function(result){
+    //alert(result);
+    //return false;
+                    if(result == 'no'){
+                        alert('잘못된 경로 입니다.');
+                        return false;
+                    }
 
-                if(result == 'yes'){
-                    alert('승인 처리 되었습니다.');
-                    location.reload();
-                }
-            },
-            error: function(result){
-                console.log(result);
-            },
-        });
+                    if(result == 'yes'){
+                        alert('승인/취소 처리 되었습니다.');
+                        location.reload();
+                    }
+                },
+                error: function(result){
+                    console.log(result);
+                },
+            });
+        }else{   //취소
+            return false;
+        }
     }
 </script>
 
