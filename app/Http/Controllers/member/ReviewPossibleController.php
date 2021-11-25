@@ -564,4 +564,10 @@ class ReviewPossibleController extends Controller
         }
     }
 
+    public function review_my_list(Request $request)
+    {
+        dd("내가 쓴 리뷰 나오는 곳");
+    }
+
+
 }

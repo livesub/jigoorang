@@ -189,6 +189,12 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'mypage.review_possible_modi_save',
         'uses' => 'App\Http\Controllers\member\ReviewPossibleController@review_possible_modi_save',
     ]);
+
+    //mypage 체험단 내가쓴 리뷰
+    Route::get('member/review_my_list', [
+        'as' => 'mypage.review_my_list',
+        'uses' => 'App\Http\Controllers\member\ReviewPossibleController@review_my_list',
+    ]);
  });
 
 /* 이메일 확인 리턴(외부에서 접속 해야 하기에 밖으로 뺌) */

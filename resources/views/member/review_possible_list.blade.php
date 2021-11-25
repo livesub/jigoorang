@@ -11,8 +11,8 @@
 
 <table border=1>
     <tr>
-        <td>작성가능리뷰</td>
-        <td>내가쓴리뷰</td>
+        <td><span onclick="location.href='{{ route('mypage.review_possible_list') }}'">작성가능리뷰</a></td>
+        <td><span onclick="location.href='{{ route('mypage.review_my_list') }}'">내가쓴리뷰</span></td>
     </tr>
 </table>
 
