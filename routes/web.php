@@ -195,6 +195,13 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'mypage.review_my_list',
         'uses' => 'App\Http\Controllers\member\ReviewPossibleController@review_my_list',
     ]);
+
+    //mypage wish(하트) - 응원하기
+    Route::get('member/wish_list', [
+        'as' => 'mypage.wish_list',
+        'uses' => 'App\Http\Controllers\member\WishController@index',
+    ]);
+
  });
 
 /* 이메일 확인 리턴(외부에서 접속 해야 하기에 밖으로 뺌) */

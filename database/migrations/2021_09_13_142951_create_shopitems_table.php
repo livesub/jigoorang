@@ -76,6 +76,7 @@ class CreateShopitemsTable extends Migration
             $table->string('item_ori_img10')->nullable()->comment('상품 원본파일이름10');
             $table->enum('item_del', ['N', 'Y'])->length(2)->default('N')->comment('상품삭제:Y=>삭제');
             $table->float('item_average')->comment('정량평가 평균점수');
+            $table->integer('review_cnt')->default(0)->comment('리뷰 갯수');
             $table->timestamps();
             $table->index(['sca_id', 'item_code', 'item_average']);
         });

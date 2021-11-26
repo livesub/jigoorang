@@ -39,7 +39,7 @@ class ShopWishController extends Controller
         $item_code  = $request->input('item_code');
 
         //선택된 상품이 존재 하는지 체크
-        $item_chk = DB::table('shopitems')->where('item_code', $item_code)->count();
+        $item_chk = DB::table('shopitems')->where([['item_code', $item_code], ['item_del', 'Y'], ['item_display', 'N']])->count();
 
         if($item_chk == 0){
             echo "no_item";
@@ -48,9 +48,9 @@ class ShopWishController extends Controller
 
         //이미 wish 에 저장 되었는지 파악
         $wish_chk = DB::table('wishs')->where([['user_id', Auth::user()->user_id], ['item_code', $item_code]])->count();
+
         $wi_ip = $_SERVER['REMOTE_ADDR'];
         if($wish_chk == 0){
-
             $create_result = wishs::create([
                 'user_id'     => Auth::user()->user_id,
                 'item_code' => $item_code,
@@ -58,9 +58,13 @@ class ShopWishController extends Controller
             ]);
             $create_result->save();
 
-
-
             echo "ok";
+            exit;
+        }else{
+            $wish_chk_1 = DB::table('wishs')->where([['user_id', Auth::user()->user_id], ['item_code', $item_code]])->first();
+            DB::table('wishs')->where('id',$wish_chk_1->id)->delete();   //row 삭제
+
+            echo "del";
             exit;
         }
     }

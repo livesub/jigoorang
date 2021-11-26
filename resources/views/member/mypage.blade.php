@@ -198,15 +198,15 @@
     <td>취소/교환/반품 신청안내</td>
   </tr>
   <tr>
-    <td>구매상품 리뷰</td>
-    <td>응원한 상품</td>
+    <td><a href="{{ route('mypage.review_possible_list') }}">구매상품 리뷰</a></td>
+    <td><a href="{{ route('mypage.wish_list') }}">응원한 상품</a></td>
   </tr>
   <tr>
     <td>적립금현황</td>
     <td>배송지관리</td>
   </tr>
   <tr>
-    <td colspan=2><a href="{{ route('mypage.review_possible_list') }}">평가단 신청 결과확인</a></td>
+    <td colspan=2>평가단 신청 결과확인</a></td>
   </tr>
 </table>
 <a href="{{ route('member_info_index') }}"><button>회원정보수정</button></a>

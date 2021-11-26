@@ -130,7 +130,7 @@ class ReviewPossibleController extends Controller
                 'review_saves_info' => $review_saves_info,
                 'exp_id'            => 0,
                 'exp_app_id'        => 0,
-                'sca_id'            => 0,
+                'sca_id'            => $item_info->sca_id,
             ]);
         }else{
             return view('member.review_possible_write',[
@@ -141,7 +141,7 @@ class ReviewPossibleController extends Controller
                 'item_code'         => $item_code,
                 'exp_id'            => 0,
                 'exp_app_id'        => 0,
-                'sca_id'            => 0,
+                'sca_id'            => $item_info->sca_id,
             ]);
         }
     }
@@ -149,7 +149,17 @@ class ReviewPossibleController extends Controller
     public function review_possible_save(Request $request)
     {
         $CustomUtils = new CustomUtils;
+/*
+        $imagepush = $request->file('imagepush');
 
+        if($request->hasFile('imagepush')){
+            dd("ok");
+        }else{
+            dd("no");
+        }
+
+dd($imagepush);
+*/
         $cart_id        = $request->input('cart_id');
         $order_id       = $request->input('order_id');
         $item_code      = $request->input('item_code');
@@ -163,7 +173,14 @@ class ReviewPossibleController extends Controller
         $sca_id         = $request->input('sca_id');
 
         //예외처리
-        $review_saves_cnt = DB::table('review_saves')->where([['cart_id', $cart_id], ['item_code', $item_code], ['user_id', Auth::user()->user_id]])->count();
+        if($exp_id > "0" && $exp_app_id > "0"){
+            //체험단
+            $review_saves_cnt = DB::table('review_saves')->where([['exp_id', $exp_id], ['item_code', $item_code], ['user_id', Auth::user()->user_id]])->count();
+        }else{
+            //쇼핑
+            $review_saves_cnt = DB::table('review_saves')->where([['cart_id', $cart_id], ['item_code', $item_code], ['user_id', Auth::user()->user_id]])->count();
+        }
+
         if($review_saves_cnt > 0){
             return redirect(route('mypage.review_possible_list'))->with('alert_messages', '이미 리뷰를 작성 하셨습니다.');
             exit;
@@ -252,10 +269,11 @@ class ReviewPossibleController extends Controller
         }else{
             $ment = '리뷰가 등록되었습니다.';
             $route_link = route("mypage.review_possible_list");
+            $route_my_link = route("mypage.review_my_list");
             $save_ok = '
                 <script>
                     if (confirm("리뷰가 등록되었습니다.\\n해당페이지에서 확인하시겠습니까?") == true){    //확인
-                        location.href="";
+                        location.href="'.$route_my_link.'";
                     }else{   //취소
                         location.href="'.$route_link.'";
                     }
@@ -442,10 +460,11 @@ class ReviewPossibleController extends Controller
         }else{
             $ment = '리뷰가 등록되었습니다.';
             $route_link = route("mypage.review_possible_list");
+            $route_my_link = route("mypage.review_my_list");
             $save_ok = '
                 <script>
                     if (confirm("리뷰가 등록되었습니다.\\n해당페이지에서 확인하시겠습니까?") == true){    //확인
-                        location.href="";
+                        location.href="'.$route_my_link.'";
                     }else{   //취소
                         location.href="'.$route_link.'";
                     }
@@ -566,7 +585,63 @@ class ReviewPossibleController extends Controller
 
     public function review_my_list(Request $request)
     {
-        dd("내가 쓴 리뷰 나오는 곳");
+        $CustomUtils = new CustomUtils;
+
+        $date_type = $request->input('date_type');
+
+        //리뷰 관련
+        $where_exp = '';
+        $where_shop = '';
+
+        $review_saves_exp_sql = DB::table('review_saves')->where([['user_id', Auth::user()->user_id], ['temporary_yn', 'n']]);
+        $review_saves_shop_sql = DB::table('review_saves')->where([['user_id', Auth::user()->user_id], ['temporary_yn', 'n']]);
+
+        switch($date_type)
+        {
+            case 'one_month':
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0')->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -1 MONTH) and NOW()");
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']])->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -1 MONTH) and NOW()");
+                break;
+
+            case 'three_month':
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0')->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -3 MONTH) and NOW()");
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']])->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -3 MONTH) and NOW()");
+                break;
+
+            case 'six_month':
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0')->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -6 MONTH) and NOW()");
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']])->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -6 MONTH) and NOW()");
+                break;
+
+            case 'one_year':
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0')->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -1 YEAR) and NOW()");
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']])->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -1 YEAR) and NOW()");
+                break;
+
+            case 'three_year':
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0')->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -3 YEAR) and NOW()");
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']])->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -3 YEAR) and NOW()");
+                break;
+
+            case 'all':
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0');
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']]);
+                break;
+
+            default:
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0')->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -1 MONTH) and NOW()");
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']])->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -1 MONTH) and NOW()");
+                break;
+        }
+
+        $review_saves_exp_infos = $where_exp->orderBy('id', 'DESC')->get();     //체험단 쿼리
+        $review_saves_shop_infos = $where_shop->orderBy('id', 'DESC')->get();     //shop 쿼리
+
+        return view('member.review_my_list',[
+            'CustomUtils'               => $CustomUtils,
+            'review_saves_exp_infos'    => $review_saves_exp_infos,
+            'review_saves_shop_infos'   => $review_saves_shop_infos,
+        ]);
     }
 
 

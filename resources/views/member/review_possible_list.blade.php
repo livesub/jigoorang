@@ -48,6 +48,11 @@
                         $review_exp_temporary_yn = DB::table('review_saves')->where([['exp_id', $exp_appinfo->id], ['exp_app_id', $exp_appinfo->exp_app_id], ['user_id', Auth::user()->user_id], ['temporary_yn', 'n']])->count();
                     @endphp
                 @if($review_exp_temporary_yn == 0)
+                        @php
+                            $review = DB::table('review_saves')->select('temporary_yn')->where([['exp_id', $exp_appinfo->id], ['exp_app_id', $exp_appinfo->exp_app_id], ['user_id', Auth::user()->user_id]])->count();
+                            if($review == '1') $btn_ment = '임시저장중';
+                            else $btn_ment = '리뷰작성';
+                        @endphp
                     @if($aa != $bb)
                 <tr>
                     <td>{{ substr($exp_appinfo->regi_date, 0, 10) }}</td>
@@ -59,7 +64,7 @@
                 <tr>
                     <td><img src="{{ $main_image_name_disp }}"></td>
                     <td>{{ stripslashes($exp_appinfo->title) }}</td>
-                    <td><button type="button" onclick="exp_review('{{ $exp_appinfo->id }}', '{{ $exp_appinfo->exp_app_id }}', '{{ $exp_appinfo->item_id }}', '{{ $exp_appinfo->sca_id }}', '{{ $exp_appinfo->exp_review_start }}')">리뷰작성</button></td>
+                    <td><button type="button" onclick="exp_review('{{ $exp_appinfo->id }}', '{{ $exp_appinfo->exp_app_id }}', '{{ $exp_appinfo->item_id }}', '{{ $exp_appinfo->sca_id }}', '{{ $exp_appinfo->exp_review_start }}')">{{ $btn_ment }}</button></td>
                 </tr>
                 @endif
                 @endforeach
@@ -95,6 +100,11 @@
                     @endphp
 
                     @if($review_temporary_yn == 0)
+                        @php
+                            $review = DB::table('review_saves')->select('temporary_yn')->where([['cart_id', $order->id], ['item_code', $order->item_code], ['user_id', Auth::user()->user_id]])->count();
+                            if($review == '1') $btn_ment = '임시저장중';
+                            else $btn_ment = '리뷰작성';
+                        @endphp
                         @if($cc != $dd)
                 <tr>
                     <td>{{ substr($order->regi_date, 0, 10) }}</td>
@@ -109,7 +119,7 @@
                         {{ $order->item_name }}<br>
                         {{ $order->sct_option }}
                     </td>
-                    <td><button type="button" onclick="cart_review('{{ $order->id }}', '{{ $order->order_id }}', '{{ $order->item_code }}', '{{ substr($order->regi_date, 0, 10) }}')">리뷰작성</button></td>
+                    <td><button type="button" onclick="cart_review('{{ $order->id }}', '{{ $order->order_id }}', '{{ $order->item_code }}', '{{ substr($order->regi_date, 0, 10) }}')">{{ $btn_ment }}</button></td>
                 </tr>
                     @endif
                 @endforeach

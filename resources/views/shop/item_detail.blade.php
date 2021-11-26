@@ -434,7 +434,7 @@
 //alert(result);
 //return false;
                 if(result == "no_item"){
-                    alert('해당 상품이 존재 하지 않습니다.');
+                    alert('죄송합니다. 단종된 상품입니다.');
                     return false;
                 }
             },error: function(result) {
