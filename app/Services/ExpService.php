@@ -111,7 +111,9 @@ class ExpService
         if($flag == 0){
             $expList = ExpList::latest();
         }else{
-            $expList = ExpList::where('exp_date_end', '>=', $date)->where('exp_date_start', '<=', $date)->latest();
+            //$expList = ExpList::where('exp_date_end', '>=', $date)->where('exp_date_start', '<=', $date)->latest();
+            //모집기간 종료일 까지는 리스트가 살아 있는 대신 신청을 못하고, 평가 가능 기간 종료일일 때는 리스트에서 사라진다.
+            $expList = ExpList::where('exp_review_end', '>=', $date)->where('exp_date_start', '<=', $date)->latest();
         }
 
 

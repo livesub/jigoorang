@@ -445,4 +445,16 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'as' => 'adm.banner.modifysave',
         'uses' => 'App\Http\Controllers\adm\banner\BannerController@modifysave',
     ]);
+
+/*** 관리자 리뷰 관리 */
+    Route::get('reviewlist', [
+        'as' => 'adm.review.reviewlist',
+        'uses' => 'App\Http\Controllers\adm\review\AdmReviewMangerController@index',
+    ]);
+
+    Route::post('review_blind', [
+        'as' => 'adm.review.review_blind',
+        'uses' => 'App\Http\Controllers\adm\review\AdmReviewMangerController@review_blind',
+    ]);
+
 });

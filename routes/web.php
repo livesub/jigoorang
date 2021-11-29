@@ -202,6 +202,12 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'App\Http\Controllers\member\WishController@index',
     ]);
 
+    //mypage 평가단 신청 결과 확인
+    Route::get('member/exp_app_list', [
+        'as' => 'mypage.exp_app_list',
+        'uses' => 'App\Http\Controllers\member\ReviewPossibleController@exp_app_list',
+    ]);
+
  });
 
 /* 이메일 확인 리턴(외부에서 접속 해야 하기에 밖으로 뺌) */

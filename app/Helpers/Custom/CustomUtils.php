@@ -1680,6 +1680,10 @@ $um_value='80/0.5/3'
                 }
 
                 $up_result = DB::table('shopitemoptions')->where([['item_code', $cart_info->item_code], ['sio_id', $cart_info->sio_id]])->update(['sio_stock_qty' => $qty]);
+
+                //재고 수량 입력칸 (item_stock_qty) 합쳐서 업데이트(211129 추가)
+                $qty_info = DB::table('shopitemoptions')->select(DB::raw("SUM(sio_stock_qty) as sum_qty"))->where('item_code', $cart_info->item_code)->first();
+                $up_item_stock_qty = DB::table('shopitems')->where('item_code', $cart_info->item_code)->update(['item_stock_qty' => $qty_info->sum_qty]);
             }else{
                 //옵션 상품 아닐때
                 $item_info = DB::table('shopitems')->where('item_code', $cart_info->item_code)->first();
@@ -1753,7 +1757,7 @@ $um_value='80/0.5/3'
 
     public static function item_average($item_code)
     {
-        $review_info = DB::table('review_saves')->where('item_code', $item_code)->get();
+        $review_info = DB::table('review_saves')->where([['item_code', $item_code], ['review_blind', 'N']])->get();
         $review_sum = $review_info->sum('average');
         $review_cnt = $review_info->count();
         $item_cal = $review_sum / $review_cnt;

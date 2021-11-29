@@ -61,6 +61,7 @@
             $review_img_tmp = '';
             $review_img_cut = '';
             $review_img_disp = array();
+            $blind_ment = '';
 
             $rating_item_info = DB::table('rating_item')->where('sca_id', $review_saves_exp_info->sca_id)->first();
             for($i = 1; $i <= 5; $i++){
@@ -76,6 +77,8 @@
                 }
             }
             $dip_name = substr($dip_name, 0, -2);
+
+            if($review_saves_exp_info->review_blind == 'Y') $blind_ment = '삭제된 리뷰';
         @endphp
 
         @if($aa != $bb)
@@ -94,6 +97,7 @@
                 <tr>
                     <td><a href="{{ route('sitemdetail','item_code='.$review_saves_exp_info->item_code) }}"><img src="{{ $main_image_name_disp }}"></a></td>
                     <td>{{ $exp_list_info->title }}</td>
+                    <td>{{ $blind_ment }}</td>
                 </tr>
             </table>
         </td>
@@ -155,6 +159,7 @@
             $review_img_tmp = '';
             $review_img_cut = '';
             $review_img_disp_shop = array();
+            $blind_ment = '';
 
             $rating_item_info = DB::table('rating_item')->where('sca_id', $review_saves_shop_info->sca_id)->first();
 
@@ -171,7 +176,7 @@
                 }
             }
             $dip_name = substr($dip_name, 0, -2);
-
+            if($review_saves_shop_info->review_blind == 'Y') $blind_ment = '삭제된 리뷰';
         @endphp
 
         @if($cc != $dd)
@@ -191,6 +196,7 @@
                     <td><a href="{{ route('sitemdetail','item_code='.$review_saves_shop_info->item_code) }}"><img src="{{ $image }}"></a></td>
                     <td>{{ $cart_info->item_name }}<br>
                         {{ $cart_info->sct_option }}</td>
+                    <td>{{ $blind_ment }}</td>
                 </tr>
             </table>
         </td>

@@ -16,6 +16,7 @@ class review_saves extends Model
         'cart_id',
         'item_code',
         'user_id',
+        'user_name',
         'score1',
         'score2',
         'score3',
@@ -34,6 +35,7 @@ class review_saves extends Model
         'review_img5',
         'review_img_name5',
         'temporary_yn',
+        'review_blind',
     ];
 
     protected $hidden = [

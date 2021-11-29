@@ -132,6 +132,12 @@ header('Pragma: public');
                     <tr>
                         <td><a href="{{ route('adm.approve.index') }}">체험단 승인</a></td>
                     </tr>
+                    <tr>
+                        <td><br><br>리뷰 관리</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{{ route('adm.review.reviewlist') }}">리뷰 관리</a></td>
+                    </tr>
                 </table>
             </td>
 

@@ -21,6 +21,7 @@ class CreateReviewSavesTable extends Migration
             $table->integer('cart_id')->default(0)->comment('장바구니 id');
             $table->string('item_code')->default(0)->comment('상품코드');
             $table->string('user_id')->comment('신청 유저 아이디');
+            $table->string('user_name')->comment('신청 유저 이름');
             $table->float('score1')->comment('정량평가 점수1');
             $table->float('score2')->comment('정량평가 점수2');
             $table->float('score3')->comment('정량평가 점수3');
@@ -39,6 +40,7 @@ class CreateReviewSavesTable extends Migration
             $table->text('review_img5')->nullable()->comment('리뷰 첨부 파일이름5(원본@@썸네일1@@썸네일2..)');
             $table->string('review_img_name5')->nullable()->comment('리뷰 원본파일이름5');
             $table->enum('temporary_yn', ['y', 'n'])->default('y')->comment('임시저장여부(y=>임시저장, n=>저장)');
+            $table->enum('review_blind', ['N', 'Y'])->default('N')->comment('블라인드처리유무(N=>아님, Y=>블라인드)');
 
             $table->timestamps();
             $table->index(['exp_id', 'exp_app_id', 'sca_id', 'item_code', 'user_id']);

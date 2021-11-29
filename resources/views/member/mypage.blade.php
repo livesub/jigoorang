@@ -206,7 +206,7 @@
     <td>배송지관리</td>
   </tr>
   <tr>
-    <td colspan=2>평가단 신청 결과확인</a></td>
+    <td colspan=2><a href="{{ route('mypage.exp_app_list') }}">평가단 신청 결과확인</a></td>
   </tr>
 </table>
 <a href="{{ route('member_info_index') }}"><button>회원정보수정</button></a>

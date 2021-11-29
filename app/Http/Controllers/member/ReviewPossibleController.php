@@ -149,17 +149,32 @@ class ReviewPossibleController extends Controller
     public function review_possible_save(Request $request)
     {
         $CustomUtils = new CustomUtils;
+
+
+        $file_name = $_FILES['imagepush'];
+print_r($file_name);
+
 /*
         $imagepush = $request->file('imagepush');
 
+        print_r($imagepush);
+
+
+
+
+        //print_r($imagepush);
+
+*/
+
+exit;
+/*
         if($request->hasFile('imagepush')){
             dd("ok");
         }else{
             dd("no");
         }
-
-dd($imagepush);
 */
+
         $cart_id        = $request->input('cart_id');
         $order_id       = $request->input('order_id');
         $item_code      = $request->input('item_code');
@@ -197,6 +212,7 @@ dd($imagepush);
             'temporary_yn'      => $temporary_yn,
             'average'           => $average,
             'user_id'           => Auth::user()->user_id,
+            'user_name'         => Auth::user()->user_name,
             'review_content'    => $review_content,
         );
 
@@ -641,6 +657,53 @@ dd($imagepush);
             'CustomUtils'               => $CustomUtils,
             'review_saves_exp_infos'    => $review_saves_exp_infos,
             'review_saves_shop_infos'   => $review_saves_shop_infos,
+        ]);
+    }
+
+    //마이페이지 (평가단 신청 결과 확인)
+    public function exp_app_list(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+
+        $page       = $request->input('page');
+        $pageScale  = 10;  //한페이지당 라인수
+        $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
+
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
+
+        $exp_app_list = DB::table('exp_application_list')->where('user_id', Auth::user()->user_id);
+
+        $total_record   = 0;
+        $total_record   = $exp_app_list->count(); //총 게시물 수
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
+
+        $exp_app_rows = $exp_app_list->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
+
+        $tailarr = array();
+        //$tailarr['AA'] = 'AA';    //고정된 전달 파라메터가 있을때 사용
+
+        $PageSet        = new PageSet;
+        $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
+        $prevPage       = $PageSet->getPrevPage("이전");
+        $nextPage       = $PageSet->getNextPage("다음");
+        $pre10Page      = $PageSet->pre10("이전10");
+        $next10Page     = $PageSet->next10("다음10");
+        $preFirstPage   = $PageSet->preFirst("처음");
+        $nextLastPage   = $PageSet->nextLast("마지막");
+        $listPage       = $PageSet->getPageList();
+        $pnPage         = $prevPage.$listPage.$nextPage;
+
+        return view('member.exp_app_list',[
+            'CustomUtils'   => $CustomUtils,
+            'exp_app_rows'  => $exp_app_rows,
+            'pnPage'        => $pnPage,
         ]);
     }
 
