@@ -76,12 +76,12 @@
 
 
     <div class='form-group'>
-      전화번호 :
+      휴대폰번호 :
 
       @if ($mode == 'regi')
-        <input name='user_phone' id='user_phone' type='text' class='form-control @error('user_phone') is-invalid @enderror' value='{{ old('user_phone') }}' placeholder='{{ $user_phone }}'>
+        <input name='user_phone' id='user_phone' type='text' class='form-control @error('user_phone') is-invalid @enderror' value='{{ old('user_phone') }}' placeholder='{{ $user_phone }}' onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
       @else
-        <input name='user_phone' id='user_phone' type='text' class='form-control @error('user_phone') is-invalid @enderror' value='{{ $user_phone }}' placeholder='{{ $user_phone }}'>
+        <input name='user_phone' id='user_phone' type='text' class='form-control @error('user_phone') is-invalid @enderror' value='{{ $user_phone }}' placeholder='{{ $user_phone }}' onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
       @endif
     @error('user_phone')
         <span class='invalid-feedback' role='alert'>
@@ -102,7 +102,7 @@
       회원 상태 : {{ $user_status }}
     </div>
     @endif
-
+<!--
     <div class='form-group'>
       이미지 : <input name='user_imagepath[]' id='user_imagepath' type='file' class='form-control'>
         @error('user_imagepath.0')
@@ -111,7 +111,7 @@
         </span>
         @enderror
     </div>
-
+-->
     @if ($user_imagepath != '')
         <img src='{{ asset('/data/member/'.$user_imagepath) }}' style='border-radius: 50%;'>
         <a href="{{ url('filedown', $type) }}">{{ $user_ori_imagepath }}</a>

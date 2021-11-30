@@ -250,7 +250,7 @@
                                 <td>
                                     <button type="button" onclick="fitem_submit('cart');">장바구니</button>
                                     <button type="button" onclick="fitem_submit('buy');">바로구매</button>
-                                    <span onclick="item_wish('{{ $item_info->item_code }}');">위시리스트(하트)</span>
+                                    <span onclick="item_wish('{{ $item_info->item_code }}');">응원하기</span>
                                     <span>쇼셜 링크 작업 해야함</span>
                                 </td>
                             </tr>

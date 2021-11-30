@@ -208,6 +208,18 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'App\Http\Controllers\member\ReviewPossibleController@exp_app_list',
     ]);
 
+    //mypage 포인트 누적 현황
+    Route::get('member/user_point_list', [
+        'as' => 'mypage.user_point_list',
+        'uses' => 'App\Http\Controllers\member\UserPointController@index',
+    ]);
+
+    //mypage 포인트 사용 현황
+    Route::get('member/user_use_point_list', [
+        'as' => 'mypage.user_use_point_list',
+        'uses' => 'App\Http\Controllers\member\UserPointController@user_use_point_list',
+    ]);
+
  });
 
 /* 이메일 확인 리턴(외부에서 접속 해야 하기에 밖으로 뺌) */

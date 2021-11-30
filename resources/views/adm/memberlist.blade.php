@@ -17,7 +17,7 @@
         <td>이름</td>
         <td>아이디</td>
         <td>가입일</td>
-        <td>전화번호</td>
+        <td>휴대폰번호</td>
         <td>탈퇴여부</td>
     </tr>
     @foreach($members as $member)
@@ -43,10 +43,11 @@
 </table>
 <table>
     <tr>
+<!--
         <td>
             <button style="margin-top:20px;" onclick="mem_regi('regi');">회원등록</button>
         </td>
-
+-->
         <td>
             <button style="margin-top:20px;" onclick="mem_out();">회원 선택 탈퇴/가입 처리</button>
         </td>

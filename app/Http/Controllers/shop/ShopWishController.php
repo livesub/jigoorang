@@ -41,7 +41,7 @@ class ShopWishController extends Controller
         //선택된 상품이 존재 하는지 체크
         $item_chk = DB::table('shopitems')->where([['item_code', $item_code], ['item_del', 'Y'], ['item_display', 'N']])->count();
 
-        if($item_chk == 0){
+        if($item_chk != 0){
             echo "no_item";
             exit;
         }
