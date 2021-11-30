@@ -1619,7 +1619,7 @@ $um_value='80/0.5/3'
     //포인트 처리
     public function insert_point($user_id, $point, $content='', $po_type, $po_write_id=0, $order_id=0)
     {
-        //$po_type = 적립금 지금 유형 : 1=>회원가입적립,2=>상품 평가 적립,3=>상품 평가 취소,5=>평가단 평가 적립 ,6=>평가단 평가 취소, 7=>구매사용,8=>구매적립,9=>구매적립취소,10=>상품구매부분취소,11=>상품구매취소,12=>상품 포토 리뷰 적립,13=>상품 포토 리뷰 취소, 14=>평가단 포토 리뷰 적립, 15=>평가단 포토 리뷰 취소 17=>지구랭 특별 적립, 18=>지구랭 특별 적립 취소
+        //$po_type = 적립금 지금 유형 : 1=>회원가입적립, 2=>상품 평가 적립, 3=>상품 평가 취소, 5=>평가단 평가 적립 ,6=>평가단 평가 취소, 7=>구매사용,8=>구매적립,9=>구매적립취소,10=>상품구매부분취소,11=>상품구매취소,12=>상품 포토 리뷰 적립, 13=>상품 포토 리뷰 취소, 14=>평가단 포토 리뷰 적립, 15=>평가단 포토 리뷰 취소 17=>지구랭 특별 적립, 18=>지구랭 특별 적립 취소
         //po_write_id = 적립금 지급 유형 글번호(구매평 글번호)
 
         // 포인트가 없다면 업데이트 할 필요 없음
@@ -1758,16 +1758,24 @@ $um_value='80/0.5/3'
     public static function item_average($item_code)
     {
         $review_info = DB::table('review_saves')->where([['item_code', $item_code], ['review_blind', 'N']])->get();
-        $review_sum = $review_info->sum('average');
         $review_cnt = $review_info->count();
-        $item_cal = $review_sum / $review_cnt;
-        $item_average = round($item_cal, 2);
+
+        $review_sum = 0;
+        $item_cal = 0;
+        $item_average = 0;
+
+        if($review_cnt > 0){
+            $review_sum = $review_info->sum('average');
+            $item_cal = $review_sum / $review_cnt;
+            $item_average = round($item_cal, 2);
+        }
 
         //상품 테이블에 평균값 저장
         $up_result = DB::table('shopitems')->where('item_code', $item_code)->update([
             'item_average'  => $item_average,
-            'review_cnt'    => (int)$review_cnt
+            'review_cnt'    => (int)$review_cnt,
         ]);
+
     }
 
 }

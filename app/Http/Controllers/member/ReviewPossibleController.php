@@ -108,6 +108,10 @@ class ReviewPossibleController extends Controller
         }
 
         $rating_item_info = DB::table('rating_item')->where('sca_id', $item_info->sca_id)->first();
+        if(is_null($rating_item_info)){
+            return redirect(route('mypage.review_possible_list'))->with('alert_messages', '정량 평가 항목이 없습니다.\n관리자에게 문의 하세요.');
+            exit;
+        }
 
         //첨부 파일 저장소
         $target_path = "data/review";
@@ -150,11 +154,11 @@ class ReviewPossibleController extends Controller
     {
         $CustomUtils = new CustomUtils;
 
-
+/*
         $file_name = $_FILES['imagepush'];
 print_r($file_name);
 
-/*
+
         $imagepush = $request->file('imagepush');
 
         print_r($imagepush);
@@ -166,7 +170,7 @@ print_r($file_name);
 
 */
 
-exit;
+
 /*
         if($request->hasFile('imagepush')){
             dd("ok");
@@ -296,12 +300,26 @@ exit;
                 </script>
             ';
 
+            if($exp_id == 0){
+                //쇼핑몰 멘트
+                $point_ment1 = '상품 평가 적립';
+                $point_ment2 = '상품 포토 리뷰 적립';
+                $point_key1 = 2;
+                $point_key2 = 12;
+            }else{
+                //체험단 멘트
+                $point_ment1 = '평가단 평가 적립';
+                $point_ment2 = '평가단 포토 리뷰 적립';
+                $point_key1 = 5;
+                $point_key2 = 14;
+            }
+
             //포인트 지급 처리
             $setting = $CustomUtils->setting_infos();
-            $CustomUtils->insert_point(Auth::user()->user_id, $setting->text_point, '상품 평가 적립', 2,'', $order_id);
+            $CustomUtils->insert_point(Auth::user()->user_id, $setting->text_point, $point_ment1, $point_key1,'', 0);
 
             if($photo_flag == true){
-                $CustomUtils->insert_point(Auth::user()->user_id, $setting->photo_point, '상품 포토 리뷰 적립', 12,'', $order_id);
+                $CustomUtils->insert_point(Auth::user()->user_id, $setting->photo_point, $point_ment2, $point_key2,'', $order_id);
             }
         }
 
@@ -361,6 +379,11 @@ exit;
             $review_save_info = DB::table('review_saves')->where([['id', $review_save_id], ['cart_id', $cart_id], ['item_code', $item_code], ['user_id', Auth::user()->user_id], ['temporary_yn', 'y']])->first();
         }
 
+        $rating_item_info = DB::table('rating_item')->where('sca_id', $sca_id)->first();
+        if(is_null($rating_item_info)){
+            return redirect(route('mypage.review_possible_list'))->with('alert_messages', '정량 평가 항목이 없습니다.\n관리자에게 문의 하세요.');
+            exit;
+        }
 
         //DB 저장 배열 만들기
         $data = array(
@@ -470,6 +493,20 @@ exit;
             }
         }
 
+        if($exp_id == 0){
+            //쇼핑몰 멘트
+            $point_ment1 = '상품 평가 적립';
+            $point_ment2 = '상품 포토 리뷰 적립';
+            $point_key1 = 2;
+            $point_key2 = 12;
+        }else{
+            //체험단 멘트
+            $point_ment1 = '평가단 평가 적립';
+            $point_ment2 = '평가단 포토 리뷰 적립';
+            $point_key1 = 5;
+            $point_key2 = 14;
+        }
+
         if($temporary_yn == 'y'){
             $ment = '리뷰가 수정되었습니다.';
             $save_ok = redirect(route('mypage.review_possible_list'))->with('alert_messages', $ment);
@@ -488,7 +525,7 @@ exit;
             ';
 
             //포인트 지급 처리
-            $CustomUtils->insert_point(Auth::user()->user_id, $setting->text_point, '상품 평가 적립', 2,'', $order_id);
+            $CustomUtils->insert_point(Auth::user()->user_id, $setting->text_point, $point_ment1, $point_key1, '', 0);
         }
 
         //저장 처리
@@ -507,7 +544,7 @@ exit;
             }
 
             if($photo_flag == true){
-                $CustomUtils->insert_point(Auth::user()->user_id, $setting->photo_point, '상품 포토 리뷰 적립', 12,'', $order_id);
+                $CustomUtils->insert_point(Auth::user()->user_id, $setting->photo_point, $point_ment2, $point_key2,'' , 0);
             }
 
             //저장 처리 완료후 상품 평점 상품 테이블에 저장
@@ -560,6 +597,10 @@ exit;
         }
 
         $rating_item_info = DB::table('rating_item')->where('sca_id', $item_info->sca_id)->first();
+        if(is_null($rating_item_info)){
+            return redirect(route('mypage.review_possible_list'))->with('alert_messages', '정량 평가 항목이 없습니다.\n관리자에게 문의 하세요.');
+            exit;
+        }
 
         //첨부 파일 저장소
         $target_path = "data/review";

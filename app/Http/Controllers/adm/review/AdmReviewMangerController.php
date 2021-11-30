@@ -127,7 +127,6 @@ class AdmReviewMangerController extends Controller
 
         $update_result = DB::table('review_saves')->where('id', $id)->update(['review_blind' => $blind_type]);
 
-
         //체험단 평인지 쇼핑몰 구매 평인지 파악
         if($review_save_list->exp_id == 0){
             //쇼핑몰 구매평
@@ -137,42 +136,55 @@ class AdmReviewMangerController extends Controller
                 $point_key1 = 3;
                 $point_key2 = 13;
             }else{
-                $point_ment1 = '상품 평가 취소';
-                $point_ment2 = '상품 포토 리뷰 취소';
-                $point_key1 = 3;
-                $point_key2 = 13;
+                $point_ment1 = '상품 평가 적립';
+                $point_ment2 = '상품 포토 리뷰 적립';
+                $point_key1 = 2;
+                $point_key2 = 12;
             }
         }else{
             //체험단평
-            $point_ment1 = '평가단 평가 취소';
-            $point_ment2 = '평가단 포토 리뷰 취소';
-            $point_key1 = 6;
-            $point_key2 = 15;
+            if($blind_type == 'Y'){
+                $point_ment1 = '평가단 평가 취소';
+                $point_ment2 = '평가단 포토 리뷰 취소';
+                $point_key1 = 6;
+                $point_key2 = 15;
+            }else{
+                $point_ment1 = '평가단 평가 적립';
+                $point_ment2 = '평가단 포토 리뷰 적립';
+                $point_key1 = 5;
+                $point_key2 = 14;
+            }
         }
 
+        $photo_flag = false;
+        for($r = 1; $r <= 5; $r++){
+            $tmp_name = "review_img".$r;
+            if($review_save_list->$tmp_name != ''){
+                //한개라도 등록 되어 있다면
+                $photo_flag = true;
+            }
+        }
 
         if($blind_type == 'Y'){
             $CustomUtils->item_average($review_save_list->item_code);
 
+            $CustomUtils->insert_point($review_save_list->user_id, (-1) * $setting->text_point, $point_ment1, $point_key1, '', 0);
 
+            if($photo_flag){
 
-            $CustomUtils->insert_point(Auth::user()->user_id, (-1) * $setting->text_point, $point_ment1, $point_key1,'', $order_id);
-
-            $photo_flag = false;
-            for($r = 1; $r <= 5; $r++){
-                $tmp_name = "review_img".$r;
-                if($review_save_list->$tmp_name != ''){
-                    //한개라도 등록 되어 있다면
-                    $photo_flag = true;
-                }
+                $CustomUtils->insert_point($review_save_list->user_id, (-1) * $setting->photo_point, $point_ment2, $point_key2,'', 0);
             }
 
-            if($photo_flag == true){
-                $CustomUtils->insert_point(Auth::user()->user_id, (-1) * $setting->photo_point, $point_ment2, $point_key2,'', $order_id);
-            }
             echo "blind_ok";
         }else{
             $CustomUtils->item_average($review_save_list->item_code);
+
+            $CustomUtils->insert_point($review_save_list->user_id, $setting->text_point, $point_ment1, $point_key1,'', 0);
+
+            if($photo_flag){
+                $CustomUtils->insert_point($review_save_list->user_id, $setting->photo_point, $point_ment2, $point_key2,'', 0);
+            }
+
             echo "blind_no";
         }
 

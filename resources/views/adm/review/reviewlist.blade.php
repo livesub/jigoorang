@@ -176,6 +176,8 @@ $("#block_1").show();
                 },
                 dataType : 'text',
                 success : function(result){
+//alert(result);
+//return false;
                     if(result == 'blind_ok'){
                         alert('블라인드(blind) 처리 되었습니다.');
                         location.reload();
