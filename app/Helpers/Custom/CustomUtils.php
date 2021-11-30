@@ -1768,14 +1768,13 @@ $um_value='80/0.5/3'
             $review_sum = $review_info->sum('average');
             $item_cal = $review_sum / $review_cnt;
             $item_average = round($item_cal, 2);
+
+            //상품 테이블에 평균값 저장
+            $up_result = DB::table('shopitems')->where('item_code', $item_code)->update([
+                'item_average'  => $item_average,
+                'review_cnt'    => (int)$review_cnt,
+            ]);
         }
-
-        //상품 테이블에 평균값 저장
-        $up_result = DB::table('shopitems')->where('item_code', $item_code)->update([
-            'item_average'  => $item_average,
-            'review_cnt'    => (int)$review_cnt,
-        ]);
-
     }
 
 }

@@ -89,22 +89,20 @@ else if($seach_3 == 'user_name') $seach_3_name_selected = 'selected';
         $item_info = DB::table('shopitems')->select('item_name')->where('item_code', $review_save_row->item_code)->first(); //상품명 찾기
         $rating_item_info = DB::table('rating_item')->where('sca_id', $review_save_row->sca_id)->first();
 
-        //첨부 이미지가 있는 지 파악
+        //rating 있는 지 파악
         for($i = 1; $i <= 5; $i++){
-            $review_img_tmp = "review_img".$i;
-            if($review_save_row->$review_img_tmp != ""){
-                $review_img_cnt = true;
-                $review_img_cut = explode("@@",$review_save_row->$review_img_tmp);
-                $review_img_disp[$kk] = "/data/review/".$review_img_cut[2];
-                $kk++;
-            }
-
             $tmp = "item_name".$i;
             $score_tmp = "score".$i;
 
             $dip_name .= $rating_item_info->$tmp." ".number_format($review_save_row->$score_tmp, 2)." 점 / ";
         }
         $dip_name = substr($dip_name, 0, -2);
+
+        //리뷰 첨부 이미지 구하기
+        $review_save_imgs = DB::table('review_save_imgs')->where('rs_id', $review_save_row->id);
+        $review_save_imgs_cnt = $review_save_imgs->count();
+        $review_save_imgs_infos = array();
+        if($review_save_imgs_cnt > 0) $review_save_imgs_infos = $review_save_imgs->get();
 
         if($review_save_row->review_blind == "Y") $blind_ment = '블라인드 해제';
         else $blind_ment = '블라인드 처리';
@@ -126,14 +124,20 @@ else if($seach_3 == 'user_name') $seach_3_name_selected = 'selected';
     </tr>
 
 
-        @if($review_img_cnt == true)
+        @if($review_save_imgs_cnt > 0)
     <tr>
         <td colspan=5>
             <table>
                 <tr>
-            @for($w = 0; $w < count($review_img_disp); $w++)
-                    <td><img src="{{ $review_img_disp[$w] }}"></td>
-            @endfor
+            @foreach($review_save_imgs_infos as $review_save_imgs_info)
+                @php
+                    $review_img_cut = '';
+                    $review_img_disp = '';
+                    $review_img_cut = explode("@@",$review_save_imgs_info->review_img);
+                    $review_img_disp = "/data/review/".$review_img_cut[2];
+                @endphp
+                    <td><img src="{{ $review_img_disp }}"></td>
+            @endforeach
                 </tr>
             </table>
         </td>

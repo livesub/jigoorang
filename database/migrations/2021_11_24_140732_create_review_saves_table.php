@@ -29,16 +29,6 @@ class CreateReviewSavesTable extends Migration
             $table->float('score5')->comment('정량평가 점수5');
             $table->float('average')->comment('정량평가 평균점수');
             $table->text('review_content')->comment('리뷰 내용');
-            $table->text('review_img1')->nullable()->comment('리뷰 첨부 파일이름1(원본@@썸네일1@@썸네일2..)');
-            $table->string('review_img_name1')->nullable()->comment('리뷰 원본파일이름1');
-            $table->text('review_img2')->nullable()->comment('리뷰 첨부 파일이름2(원본@@썸네일1@@썸네일2..)');
-            $table->string('review_img_name2')->nullable()->comment('리뷰 원본파일이름2');
-            $table->text('review_img3')->nullable()->comment('리뷰 첨부 파일이름3(원본@@썸네일1@@썸네일2..)');
-            $table->string('review_img_name3')->nullable()->comment('리뷰 원본파일이름3');
-            $table->text('review_img4')->nullable()->comment('리뷰 첨부 파일이름1(원본@@썸네일1@@썸네일2..)');
-            $table->string('review_img_name4')->nullable()->comment('리뷰 원본파일이름1');
-            $table->text('review_img5')->nullable()->comment('리뷰 첨부 파일이름5(원본@@썸네일1@@썸네일2..)');
-            $table->string('review_img_name5')->nullable()->comment('리뷰 원본파일이름5');
             $table->enum('temporary_yn', ['y', 'n'])->default('y')->comment('임시저장여부(y=>임시저장, n=>저장)');
             $table->enum('review_blind', ['N', 'Y'])->default('N')->comment('블라인드처리유무(N=>아님, Y=>블라인드)');
 

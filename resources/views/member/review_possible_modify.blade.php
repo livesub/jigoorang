@@ -103,21 +103,21 @@
     <tr>
         <td>포토리뷰(선택)</td>
     </tr>
-    @for($m = 1; $m <= 5; $m++)
+
+    @if($review_save_imgs_cnt > 0)
+
+        @foreach($review_save_imgs_infos as $review_save_imgs_info)
     <tr>
         <td>
-            <input type="file" name="review_img{{ $m }}" id="review_img{{ $m }}">
-            @error('review_img'.$m)
-                <strong>{{ $message }}</strong>
-            @enderror
-            @php
-            $review_img_name = "review_img_name$m";
-            @endphp
-            <br>{{ $review_saves_info->$review_img_name }}<br>
-            <input type='checkbox' name="file_chk{{ $m }}" id="file_chk{{ $m }}" value='1'>수정,삭제,새로 등록시 체크 하세요.
+            <input type="file" name="review_img" id="review_img">
+            <br>{{ $review_save_imgs_info->review_img_name }}<br>
+            <input type='checkbox' name="file_chk" id="file_chk" value='1'>수정,삭제,새로 등록시 체크 하세요.
         </td>
     </tr>
-    @endfor
+        @endforeach
+    @endif
+
+
 </form>
 </table>
 

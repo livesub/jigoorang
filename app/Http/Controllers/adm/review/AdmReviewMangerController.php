@@ -110,7 +110,6 @@ class AdmReviewMangerController extends Controller
             'seach_3'           => $seach_3,
             'search_name'       => $search_name,
         ]);
-
     }
 
     public function review_blind(Request $request)
@@ -157,13 +156,8 @@ class AdmReviewMangerController extends Controller
         }
 
         $photo_flag = false;
-        for($r = 1; $r <= 5; $r++){
-            $tmp_name = "review_img".$r;
-            if($review_save_list->$tmp_name != ''){
-                //한개라도 등록 되어 있다면
-                $photo_flag = true;
-            }
-        }
+        $review_save_imgs_cnt = DB::table('review_save_imgs')->where('rs_id', $id)->count();
+        if($review_save_imgs_cnt > 0) $photo_flag = true;   //한개라도 등록 되어 있다면
 
         if($blind_type == 'Y'){
             $CustomUtils->item_average($review_save_list->item_code);

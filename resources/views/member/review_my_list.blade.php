@@ -68,15 +68,14 @@
                 $tmp = "item_name".$i;
                 $score_tmp = "score".$i;
                 $dip_name .= $rating_item_info->$tmp." ".number_format($review_saves_exp_info->$score_tmp, 2)." 점 / ";
-
-                $review_img_tmp = "review_img".$i;
-                if($review_saves_exp_info->$review_img_tmp != ""){
-                    $review_img_cut = explode("@@",$review_saves_exp_info->$review_img_tmp);
-                    $review_img_disp[$kk] = "/data/review/".$review_img_cut[2];
-                    $kk++;
-                }
             }
             $dip_name = substr($dip_name, 0, -2);
+
+            //리뷰 첨부 이미지 구하기
+            $review_save_imgs = DB::table('review_save_imgs')->where('rs_id', $review_saves_exp_info->id);
+            $review_save_imgs_cnt = $review_save_imgs->count();
+            $review_save_imgs_infos = array();
+            if($review_save_imgs_cnt > 0) $review_save_imgs_infos = $review_save_imgs->get();
 
             if($review_saves_exp_info->review_blind == 'Y') $blind_ment = '삭제된 리뷰';
         @endphp
@@ -110,19 +109,27 @@
         <td>{!! nl2br($review_saves_exp_info->review_content) !!}</td>
     </tr>
 
-        @if(count($review_img_disp) > 0)
+        @if($review_save_imgs_cnt > 0)
     <tr>
         <td>
             <table border=1>
                 <tr>
-            @for($w = 0; $w < count($review_img_disp); $w++)
-                    <td><img src="{{ $review_img_disp[$w] }}"></td>
-            @endfor
+            @foreach($review_save_imgs_infos as $review_save_imgs_infos)
+                @php
+                    $review_img_cut = '';
+                    $review_img_disp = '';
+
+                    $review_img_cut = explode("@@",$review_save_imgs_infos->review_img);
+                    $review_img_disp = "/data/review/".$review_img_cut[2];
+                @endphp
+                    <td><img src="{{ $review_img_disp }}"></td>
+            @endforeach
                 </tr>
             </table>
         </td>
     </tr>
         @endif
+
     <tr>
         <td height="40"></td>
     </tr>
@@ -167,15 +174,15 @@
                 $tmp = "item_name".$i;
                 $score_tmp = "score".$i;
                 $dip_name .= $rating_item_info->$tmp." ".number_format($review_saves_shop_info->$score_tmp, 2)." 점 / ";
-
-                $review_img_tmp = "review_img".$i;
-                if($review_saves_shop_info->$review_img_tmp != ""){
-                    $review_img_cut = explode("@@",$review_saves_shop_info->$review_img_tmp);
-                    $review_img_disp_shop[$kk] = "/data/review/".$review_img_cut[2];
-                    $kk++;
-                }
             }
             $dip_name = substr($dip_name, 0, -2);
+
+            //리뷰 첨부 이미지 구하기
+            $review_save_shop_imgs = DB::table('review_save_imgs')->where('rs_id', $review_saves_shop_info->id);
+            $review_save_imgs_shop_cnt = $review_save_shop_imgs->count();
+            $review_save_imgs_shop_infos = array();
+            if($review_save_imgs_shop_cnt > 0) $review_save_imgs_shop_infos = $review_save_shop_imgs->get();
+
             if($review_saves_shop_info->review_blind == 'Y') $blind_ment = '삭제된 리뷰';
         @endphp
 
@@ -183,9 +190,9 @@
     <tr>
         <td>주문일자: {{ substr($order_info->created_at, 0, 10) }}</td>
     </tr>
-        @php
-        $cc = substr($order_info->created_at, 0, 10);
-        @endphp
+            @php
+            $cc = substr($order_info->created_at, 0, 10);
+            @endphp
         @endif
 
 
@@ -210,14 +217,20 @@
         <td>{!! nl2br($review_saves_shop_info->review_content) !!}</td>
     </tr>
 
-    @if(count($review_img_disp_shop) > 0)
+    @if($review_save_imgs_shop_cnt > 0)
     <tr>
         <td>
             <table border=1>
                 <tr>
-            @for($w = 0; $w < count($review_img_disp_shop); $w++)
-                    <td><img src="{{ $review_img_disp_shop[$w] }}"></td>
-            @endfor
+            @foreach($review_save_imgs_shop_infos as $review_save_imgs_shop_info)
+                @php
+                    $review_img_shop_cut = '';
+                    $review_img_shop_disp = '';
+                    $review_img_shop_cut = explode("@@",$review_save_imgs_shop_info->review_img);
+                    $review_img_shop_disp = "/data/review/".$review_img_shop_cut[2];
+                @endphp
+                    <td><img src="{{ $review_img_shop_disp }}"></td>
+            @endforeach
                 </tr>
             </table>
         </td>

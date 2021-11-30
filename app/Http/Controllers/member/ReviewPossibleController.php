@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Auth;    //인증
 use Illuminate\Support\Facades\DB;
 use Validator;  //체크
 use App\Models\review_saves;    //review 모델 정의
+use App\Models\review_save_imgs;    //review 이미지 모델 정의
 
 class ReviewPossibleController extends Controller
 {
@@ -154,31 +155,6 @@ class ReviewPossibleController extends Controller
     {
         $CustomUtils = new CustomUtils;
 
-/*
-        $file_name = $_FILES['imagepush'];
-print_r($file_name);
-
-
-        $imagepush = $request->file('imagepush');
-
-        print_r($imagepush);
-
-
-
-
-        //print_r($imagepush);
-
-*/
-
-
-/*
-        if($request->hasFile('imagepush')){
-            dd("ok");
-        }else{
-            dd("no");
-        }
-*/
-
         $cart_id        = $request->input('cart_id');
         $order_id       = $request->input('order_id');
         $item_code      = $request->input('item_code');
@@ -240,45 +216,50 @@ print_r($file_name);
         $path = 'data/review';     //첨부물 저장 경로
 
         //첨부파일 관리
-        for($i = 1; $i <= 5; $i++){
-            if($request->hasFile('review_img'.$i))
-            {
-                $thumb_name = "";
-                $review_img[$i] = $request->file('review_img'.$i);
-                $file_type = $review_img[$i]->getClientOriginalExtension();    //이미지 확장자 구함
-                $file_size = $review_img[$i]->getSize();  //첨부 파일 사이즈 구함
-
-                //서버 php.ini 설정에 따른 첨부 용량 확인(php.ini에서 바꾸기)
-                $max_size_mb = $upload_max_filesize * 1024;   //라라벨은 kb 단위라 함
-
-                //첨부 파일 용량 예외처리
-                Validator::validate($request->all(), [
-                    'review_img'.$i  => ['max:'.$max_size_mb, 'mimes:'.$fileExtension]
-                ], ['max' => $upload_max_filesize."MB 까지만 저장 가능 합니다.", 'mimes' => $fileExtension.' 파일만 등록됩니다.']);
-
-                $attachment_result = CustomUtils::attachment_save($review_img[$i],$path); //위의 패스로 이미지 저장됨
-
-                if(!$attachment_result[0])
+        $data_img_tmp = array();
+        $review_img_cnt = $request->file('review_img');
+        if($review_img_cnt != ""){
+            for($i = 0; $i < count($review_img_cnt); $i++){
+                if($request->hasFile('review_img'))
                 {
-                    return redirect()->back()->with('alert_messages', '첨부 파일이 잘못 되었습니다.');
-                    exit;
-                }else{
-                    //썸네일 만들기
-                    for($k = 0; $k < 2; $k++){
-                        $resize_width_file_tmp = explode("%%","400%%100");
-                        $resize_height_file_tmp = explode("%%","400%%100");
+                    $thumb_name = "";
+                    $review_img[$i] = $request->file('review_img')[$i];
+                    $file_type = $review_img[$i]->getClientOriginalExtension();    //이미지 확장자 구함
+                    $file_size = $review_img[$i]->getSize();  //첨부 파일 사이즈 구함
 
-                        $thumb_width = $resize_width_file_tmp[$k];
-                        $thumb_height = $resize_height_file_tmp[$k];
+                    //서버 php.ini 설정에 따른 첨부 용량 확인(php.ini에서 바꾸기)
+                    $max_size_mb = $upload_max_filesize * 1024;   //라라벨은 kb 단위라 함
 
-                        $is_create = false;
-                        $thumb_name .= "@@".CustomUtils::thumbnail($attachment_result[1], $path, $path, $thumb_width, $thumb_height, $is_create, $is_crop=false, $crop_mode='center', $is_sharpen=false, $um_value='80/0.5/3');
+                    //첨부 파일 용량 예외처리
+                    Validator::validate($request->all(), [
+                        'review_img[]'  => ['max:'.$max_size_mb, 'mimes:'.$fileExtension]
+                    ], ['max' => $upload_max_filesize."MB 까지만 저장 가능 합니다.", 'mimes' => $fileExtension.' 파일만 등록됩니다.']);
+
+                    $attachment_result = CustomUtils::attachment_save($review_img[$i],$path); //위의 패스로 이미지 저장됨
+
+                    if(!$attachment_result[0])
+                    {
+                        return redirect()->back()->with('alert_messages', '첨부 파일이 잘못 되었습니다.');
+                        exit;
+                    }else{
+                        //썸네일 만들기
+                        for($k = 0; $k < 2; $k++){
+                            $resize_width_file_tmp = explode("%%","400%%100");
+                            $resize_height_file_tmp = explode("%%","400%%100");
+
+                            $thumb_width = $resize_width_file_tmp[$k];
+                            $thumb_height = $resize_height_file_tmp[$k];
+
+                            $is_create = false;
+                            $thumb_name .= "@@".CustomUtils::thumbnail($attachment_result[1], $path, $path, $thumb_width, $thumb_height, $is_create, $is_crop=false, $crop_mode='center', $is_sharpen=false, $um_value='80/0.5/3');
+                        }
+
+                        $data_img_tmp[$i]['review_img_name'] = $attachment_result[2];  //배열에 추가 함
+                        $data_img_tmp[$i]['review_img'] = $attachment_result[1].$thumb_name;  //배열에 추가 함
+
+
+                        $photo_flag = true;
                     }
-
-                    $data['review_img_name'.$i] = $attachment_result[2];  //배열에 추가 함
-                    $data['review_img'.$i] = $attachment_result[1].$thumb_name;  //배열에 추가 함
-
-                    $photo_flag = true;
                 }
             }
         }
@@ -326,6 +307,19 @@ print_r($file_name);
         //저장 처리
         $create_result = review_saves::create($data);
         $create_result->save();
+
+        $data_img = array();
+        $data_img['rs_id'] = $create_result->id;    //마지막 auto increment 값
+
+        //첨부 이미지 저장
+        for($y = 0; $y < count($data_img_tmp); $y++){
+            $data_img['review_img_name'] = $data_img_tmp[$y]['review_img_name'];
+            $data_img['review_img'] = $data_img_tmp[$y]['review_img'];
+
+            //이미지 저장 처리
+            $create_img_result = review_save_imgs::create($data_img);
+            $create_img_result->save();
+        }
 
         if($temporary_yn == 'n'){
             //저장 처리 완료후 상품 평점 상품 테이블에 저장
@@ -614,6 +608,11 @@ print_r($file_name);
 
         if($review_saves->count() > 0){
             $review_saves_info = $review_saves->first();
+            //리뷰 첨부 이미지 구하기
+            $review_save_imgs = DB::table('review_save_imgs')->where('rs_id', $review_saves_info->id);
+            $review_save_imgs_cnt = $review_save_imgs->count();
+            $review_save_imgs_infos = array();
+            if($review_save_imgs_cnt > 0) $review_save_imgs_infos = $review_save_imgs->get();
 
             return view('member.review_possible_modify',[
                 'CustomUtils'       => $CustomUtils,
@@ -625,6 +624,8 @@ print_r($file_name);
                 'exp_id'            => $exp_id,
                 'exp_app_id'        => $exp_app_id,
                 'sca_id'            => $sca_id,
+                'review_save_imgs_cnt'      => $review_save_imgs_cnt,
+                'review_save_imgs_infos'    => $review_save_imgs_infos,
             ]);
         }else{
             return view('member.review_possible_write',[
