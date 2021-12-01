@@ -190,6 +190,13 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'App\Http\Controllers\member\ReviewPossibleController@review_possible_modi_save',
     ]);
 
+    //mypage 체험단 리뷰 이미지 삭제 처리
+    Route::post('member/review_possible_img_del', [
+        'as' => 'mypage.ajax_review_possible_img_del',
+        'uses' => 'App\Http\Controllers\member\ReviewPossibleController@ajax_review_possible_img_del',
+    ]);
+
+
     //mypage 체험단 내가쓴 리뷰
     Route::get('member/review_my_list', [
         'as' => 'mypage.review_my_list',

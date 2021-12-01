@@ -123,8 +123,24 @@ class ReviewPossibleController extends Controller
 
         $review_saves = DB::table('review_saves')->where([['cart_id', $cart_id], ['item_code', $item_code], ['user_id', Auth::user()->user_id], ['temporary_yn', 'y']]);
         $review_saves_info = array();
+
+        $imgs_tmp = '';
         if($review_saves->count() > 0){
             $review_saves_info = $review_saves->first();
+
+            //리뷰 첨부 이미지 구하기
+            $review_save_imgs = DB::table('review_save_imgs')->where('rs_id', $review_saves_info->id);
+            $review_save_imgs_cnt = $review_save_imgs->count();
+            $review_save_imgs_infos = array();
+
+            if($review_save_imgs_cnt > 0){
+                $review_save_imgs_infos = $review_save_imgs->get();
+                foreach($review_save_imgs_infos as $review_save_imgs_info){
+                    $review_img = explode("@@", $review_save_imgs_info->review_img);
+                    $imgs_tmp .= "'".$review_img[2]."@@".$review_save_imgs_info->id."',";
+                }
+                $imgs_tmp = substr($imgs_tmp, 0, -1);
+            }
 
             return view('member.review_possible_modify',[
                 'CustomUtils'       => $CustomUtils,
@@ -136,6 +152,7 @@ class ReviewPossibleController extends Controller
                 'exp_id'            => 0,
                 'exp_app_id'        => 0,
                 'sca_id'            => $item_info->sca_id,
+                'imgs_tmp'          => $imgs_tmp,
             ]);
         }else{
             return view('member.review_possible_write',[
@@ -256,7 +273,6 @@ class ReviewPossibleController extends Controller
 
                         $data_img_tmp[$i]['review_img_name'] = $attachment_result[2];  //배열에 추가 함
                         $data_img_tmp[$i]['review_img'] = $attachment_result[1].$thumb_name;  //배열에 추가 함
-
 
                         $photo_flag = true;
                     }
@@ -406,15 +422,16 @@ class ReviewPossibleController extends Controller
         $path = 'data/review';     //첨부물 저장 경로
         $setting = $CustomUtils->setting_infos();
 
-        for($i = 1; $i <= 5; $i++){
-            $thumb_name = "";
-            $file_chk_tmp = 'file_chk'.$i;
-            $file_chk = $request->input($file_chk_tmp); //수정,삭제,새로등록 체크 파악
 
-            if($file_chk == 1){ //체크된 것들만 액션
-                if($request->hasFile('review_img'.$i))    //첨부가 있음
+        $data_img_tmp = array();
+        $review_img_cnt = $request->file('review_img');
+
+        if($review_img_cnt != ""){
+            for($i = 0; $i < count($review_img_cnt); $i++){
+                if($request->hasFile('review_img'))
                 {
-                    $review_img[$i] = $request->file('review_img'.$i);
+                    $thumb_name = "";
+                    $review_img[$i] = $request->file('review_img')[$i];
                     $file_type = $review_img[$i]->getClientOriginalExtension();    //이미지 확장자 구함
                     $file_size = $review_img[$i]->getSize();  //첨부 파일 사이즈 구함
 
@@ -423,14 +440,13 @@ class ReviewPossibleController extends Controller
 
                     //첨부 파일 용량 예외처리
                     Validator::validate($request->all(), [
-                        'review_img'.$i  => ['max:'.$max_size_mb, 'mimes:'.$fileExtension]
+                        'review_img[]'  => ['max:'.$max_size_mb, 'mimes:'.$fileExtension]
                     ], ['max' => $upload_max_filesize."MB 까지만 저장 가능 합니다.", 'mimes' => $fileExtension.' 파일만 등록됩니다.']);
 
                     $attachment_result = CustomUtils::attachment_save($review_img[$i],$path); //위의 패스로 이미지 저장됨
-
                     if(!$attachment_result[0])
                     {
-                        return redirect()->route('shop.item.create')->with('alert_messages', $Messages::$file_chk['file_chk']['file_false']);
+                        return redirect()->back()->with('alert_messages', '첨부 파일이 잘못 되었습니다.');
                         exit;
                     }else{
                         //썸네일 만들기
@@ -445,45 +461,24 @@ class ReviewPossibleController extends Controller
                             $thumb_name .= "@@".CustomUtils::thumbnail($attachment_result[1], $path, $path, $thumb_width, $thumb_height, $is_create, $is_crop=false, $crop_mode='center', $is_sharpen=false, $um_value='80/0.5/3');
                         }
 
-                        $data['review_img_name'.$i] = $attachment_result[2];  //배열에 추가 함
-                        $data['review_img'.$i] = $attachment_result[1].$thumb_name;  //배열에 추가 함
+                        $data_img_tmp[$i]['review_img_name'] = $attachment_result[2];  //배열에 추가 함
+                        $data_img_tmp[$i]['review_img'] = $attachment_result[1].$thumb_name;  //배열에 추가 함
 
-                        //기존 첨부 파일 삭제
-                        $review_img_tmp = 'review_img'.$i;
-
-                        if($review_save_info->$review_img_tmp != ""){   //기존 첨부가 있는지 파악 - 있다면 기존 파일 전체 삭제후 재 등록
-                            $file_cnt1 = explode('@@',$review_save_info->$review_img_tmp);
-                            for($j = 0; $j < count($file_cnt1); $j++){
-                                $img_path = "";
-                                $img_path = $path.'/'.$file_cnt1[$j];
-                                if (file_exists($img_path)) {
-                                    @unlink($img_path); //이미지 삭제
-                                }
-                            }
-                        }
+                        $photo_flag = true;
                     }
-
-                    $photo_flag = true;
-
-                }else{
-                    //체크는 되었으나 첨부파일이 없을때 기존 첨부 파일 삭제
-                    //기존 첨부 파일 삭제
-                    $review_img_tmp = 'review_img'.$i;
-
-                    if($review_save_info->$review_img_tmp != ""){   //기존 첨부가 있는지 파악 - 있다면 기존 파일 전체 삭제후 재 등록
-                        $file_cnt1 = explode('@@',$review_save_info->$review_img_tmp);
-                        for($j = 0; $j < count($file_cnt1); $j++){
-                            $img_path = "";
-                            $img_path = $path.'/'.$file_cnt1[$j];
-                            if (file_exists($img_path)) {
-                                @unlink($img_path); //이미지 삭제
-                            }
-                        }
-                    }
-
-                    $data['review_img_name'.$i] = "";  //배열에 추가 함
-                    $data['review_img'.$i] = "";  //배열에 추가 함
                 }
+            }
+
+            //첨부 이미지 저장
+            $data_img = array();
+            $data_img['rs_id'] = $review_save_id;
+            for($y = 0; $y < count($data_img_tmp); $y++){
+                $data_img['review_img_name'] = $data_img_tmp[$y]['review_img_name'];
+                $data_img['review_img'] = $data_img_tmp[$y]['review_img'];
+
+                //이미지 저장 처리
+                $create_img_result = review_save_imgs::create($data_img);
+                $create_img_result->save();
             }
         }
 
@@ -527,14 +522,9 @@ class ReviewPossibleController extends Controller
 
         if($temporary_yn == 'n'){
             //저장 버튼일때 이미지가 있는지 다시 파악해서 있으면 상품 포토 리뷰 적립를 적립 한다.
-            $review_save_img = DB::table('review_saves')->select('review_img1', 'review_img2', 'review_img3', 'review_img4', 'review_img5')->where([['id', $review_save_id], ['item_code', $item_code], ['user_id', Auth::user()->user_id]])->first();
-
-            for($r = 1; $r <= 5; $r++){
-                $tmp_name = "review_img".$r;
-                if($review_save_img->$tmp_name != ''){
-                    //한개라도 등록 되어 있다면
-                    $photo_flag = true;
-                }
+            $review_save_img = DB::table('review_save_imgs')->where('rs_id', $review_save_id)->count();
+            if($review_save_img > 0){
+                $photo_flag = true;
             }
 
             if($photo_flag == true){
@@ -606,13 +596,22 @@ class ReviewPossibleController extends Controller
         $review_saves = DB::table('review_saves')->where([['exp_id', $exp_id], ['exp_app_id', $exp_app_id], ['sca_id', $sca_id], ['item_code', $item_info->item_code], ['user_id', Auth::user()->user_id], ['temporary_yn', 'y']]);
         $review_saves_info = array();
 
+        $imgs_tmp = '';
         if($review_saves->count() > 0){
             $review_saves_info = $review_saves->first();
             //리뷰 첨부 이미지 구하기
             $review_save_imgs = DB::table('review_save_imgs')->where('rs_id', $review_saves_info->id);
             $review_save_imgs_cnt = $review_save_imgs->count();
             $review_save_imgs_infos = array();
-            if($review_save_imgs_cnt > 0) $review_save_imgs_infos = $review_save_imgs->get();
+
+            if($review_save_imgs_cnt > 0){
+                $review_save_imgs_infos = $review_save_imgs->get();
+                foreach($review_save_imgs_infos as $review_save_imgs_info){
+                    $review_img = explode("@@", $review_save_imgs_info->review_img);
+                    $imgs_tmp .= "'".$review_img[2]."@@".$review_save_imgs_info->id."',";
+                }
+                $imgs_tmp = substr($imgs_tmp, 0, -1);
+            }
 
             return view('member.review_possible_modify',[
                 'CustomUtils'       => $CustomUtils,
@@ -624,6 +623,7 @@ class ReviewPossibleController extends Controller
                 'exp_id'            => $exp_id,
                 'exp_app_id'        => $exp_app_id,
                 'sca_id'            => $sca_id,
+                'imgs_tmp'          => $imgs_tmp,
                 'review_save_imgs_cnt'      => $review_save_imgs_cnt,
                 'review_save_imgs_infos'    => $review_save_imgs_infos,
             ]);
@@ -749,5 +749,28 @@ class ReviewPossibleController extends Controller
         ]);
     }
 
+    public function ajax_review_possible_img_del(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+
+        $id     = $request->input('num');
+        $rs_id  = $request->input('rs_id');
+
+        $review_save_imgs_info = DB::table('review_save_imgs')->where([['id', $id], ['rs_id', $rs_id]])->first();
+
+        $path = 'data/review';     //첨부물 저장 경로
+
+        $file_cnt = explode('@@',$review_save_imgs_info->review_img);
+
+        for($j = 0; $j < count($file_cnt); $j++){
+            $img_path = "";
+            $img_path = $path.'/'.$file_cnt[$j];
+            if (file_exists($img_path)) {
+                @unlink($img_path); //이미지 삭제
+            }
+        }
+
+        DB::table('review_save_imgs')->where([['id', $id], ['rs_id', $rs_id]])->delete();
+    }
 
 }

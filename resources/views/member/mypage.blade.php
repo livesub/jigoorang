@@ -202,7 +202,7 @@
     <td><a href="{{ route('mypage.wish_list') }}">응원한 상품</a></td>
   </tr>
   <tr>
-    <td><a href="{{ route('mypage.user_point_list') }}">적립금현황</a></td>
+    <td><a href="{{ route('mypage.user_point_list') }}">적립금현황 {{ number_format(Auth::user()->user_point) }}P</a></td>
     <td>배송지관리</td>
   </tr>
   <tr>
