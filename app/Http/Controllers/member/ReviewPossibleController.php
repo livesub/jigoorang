@@ -539,7 +539,6 @@ class ReviewPossibleController extends Controller
         else return redirect(route('mypage.review_possible_list'))->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.');
     }
 
-
     /*** 체험단 관련 처리 */
     public function review_possible_expwrite(Request $request)
     {
