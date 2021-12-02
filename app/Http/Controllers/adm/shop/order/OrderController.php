@@ -612,7 +612,7 @@ class OrderController extends Controller
         if($card_price < $cancel_request_amount){
             //결제금액 보다 취소 금액이 클때
 
-        }else{//46500(상품 베ㅐ송비포함)
+        }else{
             $misu = $cancel_request_amount;
             $od_cancel_price = $order_info->od_cancel_price + $cancel_request_amount; //취소금액
         }
