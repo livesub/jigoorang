@@ -44,25 +44,12 @@ header('Pragma: public');
                         <td><a href="{{ route('adm.banner.index', 2) }}">하단 배너 이미지 관리</a></td>
                     </tr>
                     @if(auth()->user()->user_level < 2) <!-- 총관리자만 보는 메뉴 -->
-                    <tr>
-                        <td><a href="{{ route('adm.admemail.index') }}">회원 이메일 발송 관리</a></td>
-                    </tr>
+
                     <tr>
                         <td><a href="{{ route('adm.popup.index') }}">팝업 관리</a></td>
                     </tr>
                     <tr>
                         <td><a href="{{ route('adm.boardmanage.index') }}">게시판 관리</a></td>
-                    </tr>
-                    <tr>
-                        <td><br><a href="{{ route('adm.cate.index') }}">카테고리 관리</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="{{ route('adm.item.index') }}">상품 관리</a></td>
-                    </tr>
-
-
-                    <tr>
-                        <td><a href="{{ route('adm.menu.index') }}"><br>메뉴 관리</a></td>
                     </tr>
 
                     <tr>
@@ -78,16 +65,7 @@ header('Pragma: public');
                     </tr>
                     @endforeach
 
-                    <tr>
-                        <td><br><br><br>통계</td>
-                    </tr>
-                    <tr>
-                        <td><a href="{{ route('adm.membervisit.index') }}">회원 로그인 통계</a></td>
-                    </tr>
 
-                    <tr>
-                        <td><a href="{{ route('adm.visit.index') }}">방문자 통계</a></td>
-                    </tr>
 
                     <tr>
                         <td><br><a href="{{ route('adm.editor.delete') }}">에디터 불필요 파일 삭제</a></td>
