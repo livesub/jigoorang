@@ -42,14 +42,14 @@ return [
 
     'certification_number' => '인증번호를 입력해주세요',
 
-    'repeat_access' => '다시 진행해주시기 바랍니다.',
+    'repeat_access' => 'SNS 로그인/회원 가입에 실패 하였습니다.\n다시 진행해주시기 바랍니다.',
 
     'welcome' => '환영합니다.',
 
     'success_sms_send' => '인증문자발송완료 확인 필요합니다.',
 
     'already_reg_number' => '이미 등록된 번호입니다. \n아이디 / 비밀번호 찾기를 이용해주세요',
-    
+
     'empty_phone_number' => '휴대폰 번호가 비어있습니다. \n확인해주세요',
 
     //ajax 문자 전송 실패

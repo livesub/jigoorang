@@ -75,7 +75,7 @@
     @enderror
 
     <div class='form-group'>
-      <input name='user_phone' id='user_phone' type='text' class='form-control @error('user_phone') is-invalid @enderror' value='{{ old('user_phone') }}' placeholder='{{ $user_phone }}'>
+      <input name='user_phone' id='user_phone' type='text' class='form-control @error('user_phone') is-invalid @enderror' value='{{ old('user_phone') }}' placeholder='{{ $user_phone }}' onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
     </div>
     @error('user_phone')
         <span class='invalid-feedback' role='alert'>
@@ -110,7 +110,22 @@
         {{ $submit_join }}
       </button>
     </div>
+    <div>
+      <p class='text-center'>
+        <button type="button" onclick="location.href='{{ route('social.login','kakao') }}'">카카오 가입</button>
+      </p>
+
+      <p class='text-center'>
+        <button type="button" onclick="location.href='{{ route('social.login','naver') }}'">네이버 가입</button>
+      </p>
+    </div>
   </form>
+
+
+
+
+
+
   <!-- 쿠키값 암호화를 위한 스크립트 추가 -->
   <script	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
   <script>
@@ -213,8 +228,8 @@
           var decrypted2 = CryptoJS.AES.decrypt(getCookie(sk2), sk);
           var text2 = decrypted2.toString(CryptoJS.enc.Utf8);
           //콘솔로 확인하는 부분
-          console.log(text1);
-          console.log(text2);
+          //console.log(text1);
+          //console.log(text2);
           //그에 따른 태그 설정값 변경
           $("#user_phone" ).prop('readonly', true);
           $("#sms_send" ).prop('disabled', true);
@@ -224,11 +239,11 @@
           alert("{{ __('auth.already_reg_number') }}");
         }else{
           alert("{{ __('auth.failed_send_sms') }}");
-          console.log(result[0]);
+          //console.log(result[0]);
         }
       },
       error: function(request,status,error) {
-        console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+        //console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
       }
     });
 
@@ -346,7 +361,7 @@
     }else if(auth != "" && cookie_certification != "" && auth == cookie_certification && user_phone != "" && user_phone == cookie_num){
 
       var result = email_check(); //값을 얻기 위해서 동기식으로 진행
-      console.log(result);
+      //console.log(result);
       if(result == "true"){
         $("#phone_certificate_confirmation").val(cookie_certification);
         //$("#cookie1").val(sk1);
@@ -397,19 +412,19 @@
         success: function(result) {
           if(result[0] == "true"){
             //alert("{{ __('auth.email_ctf_true')}}")
-            console.log("성공 : 사용가능 이메일"+result);
+            //console.log("성공 : 사용가능 이메일"+result);
             check_result = "true";
 
           }else{
             //alert("{{ __('auth.email_ctf_false')}}")
-            console.log("실패 : 중복된 이메일"+result);
+            //console.log("실패 : 중복된 이메일"+result);
             //return "false";
             check_result = "false";
 
           }
         },
         error: function(request,status,error) {
-          console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+          //console.log("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
         }
       });
     }
@@ -473,7 +488,7 @@
       return false;
     }
     age = get_age(user_birth);
-    console.log("만 나이 : "+age);
+    //console.log("만 나이 : "+age);
 
     if(age < 14){
       //alert('만 14세 미만 입니다. \n확인해주세요');

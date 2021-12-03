@@ -102,6 +102,10 @@
       회원 상태 : {{ $user_status }}
     </div>
     @endif
+
+    <div class='form-group'>
+      포인트 : {{ number_format($user_point) }}P
+    </div>
 <!--
     <div class='form-group'>
       이미지 : <input name='user_imagepath[]' id='user_imagepath' type='file' class='form-control'>
@@ -111,21 +115,27 @@
         </span>
         @enderror
     </div>
--->
+
     @if ($user_imagepath != '')
         <img src='{{ asset('/data/member/'.$user_imagepath) }}' style='border-radius: 50%;'>
         <a href="{{ url('filedown', $type) }}">{{ $user_ori_imagepath }}</a>
         <input type='button' value='이미지 삭제' onclick='img_del();'>
     @endif
+-->
 
+    <div class='form-group'>
+    탈퇴 사유 : {{ $withdraw_type }}
+    </div>
 
+    <div class='form-group'>
+    탈퇴 내용 : {{ $withdraw_content }}
+    </div>
 
 
     <div class='form-group' style='margin-top: 2em;'>
       <button class='btn btn-primary btn-lg btn-block' type='submit'>
         {{ $title_ment }}
       </button>
-
 
     @if ($mode != 'regi')
       <button style="margin-top:20px;" type="button" onclick="mem_out();">회원 탈퇴/가입 처리</button>

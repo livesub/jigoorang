@@ -23,6 +23,7 @@ use Illuminate\Support\Str;     //각종 함수(str_random)
 use Validator;  //체크
 use Illuminate\Support\Facades\Hash; //비밀번호 함수
 use Illuminate\Support\Facades\File;
+use App\Helpers\Custom\PageSet; //페이지 함수
 
 class MemberlistController extends Controller
 {
@@ -39,32 +40,61 @@ class MemberlistController extends Controller
 
     public function index(Request $request)
     {
-/*
-        $admin_chk = CustomUtils::admin_access(Auth::user()->user_level,config('app.ADMIN_LEVEL'));
-        if(!$admin_chk){    //관리자 권한이 없을때 메인으로 보내 버림
-            return redirect()->route('main.index');
-            exit;
-        }
-*/
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
-        $pageNum     = $request->input('page');
-        $writeList   = 10;  //10갯씩 뿌리기
-        $pageNumList = 10; // 한 페이지당 표시될 글 갯수
-        $type = 'member';
+        $page       = $request->input('page');
+        $user_type  = $request->input('user_type');
 
-        $page_control = CustomUtils::page_function('users',$pageNum,$writeList,$pageNumList,$type,'','','','');
-        $members = DB::table('users')->where('user_level','>','2')->orderBy('id', 'desc')->skip($page_control['startNum'])->take($writeList)->get();
+        $pageScale  = 15;  //한페이지당 라인수
+        $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
-        $pageList = $page_control['preFirstPage'].$page_control['pre1Page'].$page_control['listPage'].$page_control['next1Page'].$page_control['nextLastPage'];
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
+
+        $members = DB::table('users')->where('user_level','>','2');
+        if($user_type != ""){
+            $members->where('user_type', $user_type);
+        }
+
+        $member_draw = DB::table('users')->where([['user_level','>','2'], ['user_type', 'Y']])->count();
+
+        $total_record   = 0;
+        $total_record   = $members->count(); //총 게시물 수
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
+
+        $member_rows = $members->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
+
+        $virtual_num = $total_record - $pageScale * ($page - 1);
+
+        $tailarr = array();
+        $tailarr['user_type'] = $user_type;
+
+        $PageSet        = new PageSet;
+        $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
+        $prevPage       = $PageSet->getPrevPage("이전");
+        $nextPage       = $PageSet->getNextPage("다음");
+        $pre10Page      = $PageSet->pre10("이전10");
+        $next10Page     = $PageSet->next10("다음10");
+        $preFirstPage   = $PageSet->preFirst("처음");
+        $nextLastPage   = $PageSet->nextLast("마지막");
+        $listPage       = $PageSet->getPageList();
+        $pnPage         = $prevPage.$listPage.$nextPage;
 
         return view('adm.memberlist', [
-            'virtual_num'=>$page_control['virtual_num'],
-            'totalCount'=>$page_control['totalCount'],
-            'members'=>$members,
-            'pageNum'=>$page_control['pageNum'],
-            'pageList'=>$pageList
-        ]); // 요청된 정보 처리 후 결과 되돌려줌
+            'user_type_selected'     => $user_type,
+            'virtual_num'   => $virtual_num,
+            'totalCount'    => $total_record,
+            'members'       => $member_rows,
+            'member_draw'   => $member_draw,
+            'pageNum'       => $page,
+            'pnPage'        => $pnPage
+        ]);
     }
 
     /**
@@ -285,6 +315,7 @@ class MemberlistController extends Controller
 
         $mode       = $request->input('mode');
         $num        = $request->input('num');
+        $user_point = 0;
 
         if($mode == "regi"){
             //등록
@@ -301,11 +332,12 @@ class MemberlistController extends Controller
                 'user_phone'            => '',
                 'user_imagepath'        => '',
                 'select_disp'           => $select_disp,
+                'user_point'            => $user_point,
             ],$Messages::$mypage['mypage']);
         }else{
             //수정
             //회원 정보를 찾아 놓음
-            $user_info = DB::table('users')->select('id', 'user_id', 'user_name', 'user_phone', 'user_thumb_name', 'user_ori_imagepath', 'user_level', 'user_type','created_at')->where('id', $num)->first();
+            $user_info = DB::table('users')->select('id', 'user_id', 'user_name', 'user_phone', 'user_thumb_name', 'user_ori_imagepath', 'user_level', 'user_type', 'withdraw_type', 'withdraw_content', 'user_point', 'created_at')->where('id', $num)->first();
             $select_disp = CustomUtils::select_box("user_level","회원@@관리자","10@@3", "$user_info->user_level");
 
             if($user_info->user_type == "Y") $user_status = "탈퇴";
@@ -326,7 +358,9 @@ class MemberlistController extends Controller
                 'user_ori_imagepath'    => $user_info->user_ori_imagepath,
                 'select_disp'           => $select_disp,
                 'user_status'           => $user_status,
-
+                'withdraw_type'         => $user_info->withdraw_type,
+                'withdraw_content'      => $user_info->withdraw_content,
+                'user_point'            => $user_info->user_point,
             ],$Messages::$mypage['mypage']);
         }
     }
@@ -445,11 +479,17 @@ Auth::attempt($credentials) 응 통해 비교 했다가 비교 했던 아이디�
         for ($i = 0; $i < count($request->input('chk_id')); $i++) {
             //탈퇴된 사람은 살리고, 안된 사람은 탈퇴 시기기 위해 회원 정보 불러옴
             $user_info = DB::table('users')->select('user_type')->where('id', $request->input('chk_id')[$i])->first();
-            if($user_info->user_type == "Y") $type_change = "N";
-            else $type_change = "Y";
+            if($user_info->user_type == "Y") {
+                $type_change = "N";
+                $withdraw_type = "";
+            }else{
+                $type_change = "Y";
+                $withdraw_type = "관리자 탈퇴";
+            }
 
             $user = User::whereid($request->input('chk_id')[$i])->first();  //update 할때 미리 값을 조회 하고 쓰면 update 구문으로 자동 변경
             $user->user_type = $type_change;
+            $user->withdraw_type = $withdraw_type;
             $result_up = $user->save();
         }
         return redirect()->route('adm.member.index')->with('alert_messages', $Messages::$adm_mem_chk['mem_chk']['out_ok']);

@@ -96,13 +96,29 @@ class MypageController extends Controller
         }
     }
 
+    public function withdraw_page(Request $request)
+    {
+        return view('member.withdraw_page',[
+        ]);
+    }
+
     //탈퇴 처리
     public function withdraw(Request $request)
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
+
+        $withdraw_type  = $request->input('withdraw_type');
+        $withdraw_chk   = $request->input('withdraw_chk');
+        $withdraw_content   = $request->input('withdraw_content');
+
+        if($withdraw_type == '' || $withdraw_chk != 'ok'){
+            return redirect(route('main.index'))->with('alert_messages', '잘못된 경로 입니다.');
+            exit;
+        }
+
         $user_id = Auth::user()->user_id;
 
-        $result_up = DB::table('users')->where('user_id', $user_id)->update(['user_type' => 'Y']);
+        $result_up = DB::table('users')->where('user_id', $user_id)->update(['user_type' => 'Y', 'withdraw_type' => $withdraw_type, 'withdraw_content' => $withdraw_content]);
 
         $user_info = User::whereUser_id($user_id)->first();  //update 할때 미리 값을 조회 하고 쓰면 update 구문으로 자동 변경
         $user_info->user_type = $user_info->user_type = 'Y';

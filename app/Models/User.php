@@ -50,7 +50,9 @@ class User extends Authenticatable
         'user_addr2',
         'user_addr3',
         'user_addr_jibeon',
-        'user_point'
+        'user_point',
+        'withdraw_type',
+        'withdraw_content',
     ];
 
     /**

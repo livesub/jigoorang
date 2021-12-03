@@ -142,7 +142,12 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
 
     //탈퇴 하기
-    Route::get('member/withdraw', [
+    Route::get('member/withdraw_page', [
+        'as' => 'mypage.withdraw_page',
+        'uses' => 'App\Http\Controllers\member\MypageController@withdraw_page',
+    ]);
+
+    Route::post('member/withdraw', [
         'as' => 'mypage.withdraw',
         'uses' => 'App\Http\Controllers\member\MypageController@withdraw',
     ]);
@@ -423,5 +428,5 @@ Route::prefix('adm/rating')->group(base_path('routes/admRatingItem.php'));
 //위치를 제일 마지막에 두어야 모든 라우트에 대해 반응가능
 Route::fallback(function () {
     //return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
-    return redirect()->route('short_url_delete');
+    return redirect()->route('main.index');
 });

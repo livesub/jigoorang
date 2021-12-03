@@ -63,7 +63,6 @@ class socialLoginController extends BaseController
                     $user_birth = "1996".$user_kakao['birthday'];
                     $user_phone = "";
 
-
                 }else if($provider == "naver"){
                     //dd($social_info->user['response']);
                     $user_naver = $social_info->user['response'];
@@ -78,9 +77,7 @@ class socialLoginController extends BaseController
 
                 //만 14세 미만일 때 예외처리
                 if($age < 14){
-
                     return redirect()->route('main.index')->with('alert_messages', "만 14세 미만은 가입이 불가합니다.");
-
                 }
 
                 //19961229 -> 961229로 변경
@@ -134,11 +131,28 @@ class socialLoginController extends BaseController
                                 'user_birth'            => $user_birth,
                             ]);
 
+                            /** 가입 포인트 추가(211015) **/
+                            $setting_info = CustomUtils::setting_infos();
+
+                            $po_content = "회원 가입 적립";
+                            $po_point = $setting_info->member_reg_point;    //지급 포인트 금액
+                            $po_use_point = 0;  //사용금액
+                            $po_type = 1;   //적립금 지급 유형 : 1=>회원가입,3=>구매평,5=>체험단평,7=>기타등등
+                            $po_write_id = 0;   //적립금 지급 유형 글번호
+                            $item_code = '';    //상품코드
+
+                            $po_cnt = DB::table('shoppoints')->where([['user_id', $social_info->email],['po_type',1]])->count(); //신규 회원 가입시 이미 주어진 포인트가 있는지
+
+                            if($setting_info->member_reg_point > 0 && $po_cnt == 0){
+                                CustomUtils::user_point_chk($social_info->email, $po_content, $po_point, $po_use_point, $po_type, $po_write_id, $item_code);
+                            }
+                            /** 가입 포인트 추가(211015) 끝 **/
+
                             Auth::login($create_result, $remember = true);
 
                             //회원 로그인 통계처리
-                            $statistics = new StatisticsController();
-                            $statistics->mem_statistics($social_info->email);
+                            //$statistics = new StatisticsController();
+                            //$statistics->mem_statistics($social_info->email);
 
                             return redirect()->route('main.index')->with('alert_messages', $Messages::$login_chk['login_chk']['login_ok']);
                         }else{
@@ -156,8 +170,8 @@ class socialLoginController extends BaseController
                             Auth::login($user_info, $remember = true);
 
                             //회원 로그인 통계처리
-                            $statistics = new StatisticsController();
-                            $statistics->mem_statistics($social_info->email);
+                            //$statistics = new StatisticsController();
+                            //$statistics->mem_statistics($social_info->email);
 
                             return redirect()->route('main.index')->with('alert_messages', $Messages::$login_chk['login_chk']['login_ok']);
                         }else if($user_info->user_id == $social_info->email && $user_info->user_platform_type == ""){
@@ -231,8 +245,8 @@ class socialLoginController extends BaseController
         Auth::login($create_result, $remember = true);
 
         //회원 로그인 통계처리
-        $statistics = new StatisticsController();
-        $statistics->mem_statistics($social_info->user_id);
+        //$statistics = new StatisticsController();
+        //$statistics->mem_statistics($social_info->user_id);
 
         return redirect()->route('main.index')->with('alert_messages', __('auth.welcome'));
     }

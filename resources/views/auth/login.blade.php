@@ -104,7 +104,9 @@
       </p> -->
     </div>
 </form>
-
+<table>
+  <tr><td>지구랭이 처음이신가요? <a href="{{ route('join.create_agree') }}">회원가입하기</a></td></tr>
+</table>
 <!-- 쇼핑몰 비회원 처리 -->
     @if (preg_match("/orderform/", $url))
   <form name="login_order_form" id="login_order_form" method='get' action='{{ route('orderform') }}'>

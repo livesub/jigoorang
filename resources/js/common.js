@@ -22,8 +22,8 @@ window.getCookie = function getCookie(cName) {
     return unescape(cValue);
   }
 
-  //쿠키삭제 
-window.deleteCookie = function deleteCookie(name, domain, path) { 
+  //쿠키삭제
+window.deleteCookie = function deleteCookie(name, domain, path) {
     //document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
     document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;domain='+domain+';path='+path+';';
   }
@@ -31,7 +31,7 @@ window.deleteCookie = function deleteCookie(name, domain, path) {
 //생년월일(ex: 971029)등의 형식을 받아 만나이구하기
 window.get_age = function get_age(yymmdd){
   var check_y = yymmdd.substr(0,2);
-  console.log("연도 : "+check_y);
+  //console.log("연도 : "+check_y);
   //현재 날짜 구하기
   var date = new Date();
 
@@ -51,10 +51,10 @@ window.get_age = function get_age(yymmdd){
 
   if(check_y <= checked_y){
     yymmdd = "20"+yymmdd;
-    console.log("연도 포함 : "+yymmdd);
+    //console.log("연도 포함 : "+yymmdd);
   }else{
     yymmdd = "19"+yymmdd;
-    console.log("연도 포함 : "+yymmdd);
+    //console.log("연도 포함 : "+yymmdd);
   }
 
   var birthdayy = yymmdd.substr(0, 4);

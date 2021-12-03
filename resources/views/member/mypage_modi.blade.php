@@ -63,6 +63,7 @@
                <input type="checkbox" id="select_agree" name="select_agree" value="Y" ><label for="select_agree">선택 항목</label>
             @endif
             <br>
+            <button type="button" onclick="member_withdraw();">회원탈퇴</button>
             <button type="button" onclick="history.back();"> 취소 </button> <button type="submit"> 확인 </button>
         </form>
     </div>
@@ -133,7 +134,7 @@
             }
 
             $.ajax({
-            //아래 headers에 반드시 token을 추가해줘야 한다.!!!!! 
+            //아래 headers에 반드시 token을 추가해줘야 한다.!!!!!
             headers: {'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')},
             type: 'post',
             url: "{{ route('auth_certification') }}",
@@ -207,7 +208,7 @@
 
             //console.log('여기까지 왔는가?');
             $.ajax({
-                //아래 headers에 반드시 token을 추가해줘야 한다.!!!!! 
+                //아래 headers에 반드시 token을 추가해줘야 한다.!!!!!
                 headers: {'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')},
                 type: 'post',
                 url: "{{ route('member_info_update_pw') }}",
@@ -270,10 +271,10 @@
             }
         }
         //새로고침이나 페이지 이동시 쿠키 삭제
-        window.addEventListener('beforeunload', (event) => { 
-            // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다. 
-            //event.preventDefault(); 
-            // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다. 
+        window.addEventListener('beforeunload', (event) => {
+            // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다.
+            //event.preventDefault();
+            // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다.
             //event.returnValue = '';
             //쿠키 삭제를 위한 도메인 과 path를 가져와서 보내준다.(즉 인증 관련 정보 삭제)
             deleteCookie(sk1, '{{ request()->getHost() }}', '/');
@@ -326,7 +327,7 @@
             if(phone_certificate == cookie_certification){
                 //ajax로 핸드폰 번호 변경하기
                 $.ajax({
-                    //아래 headers에 반드시 token을 추가해줘야 한다.!!!!! 
+                    //아래 headers에 반드시 token을 추가해줘야 한다.!!!!!
                     headers: {'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')},
                     type: 'post',
                     url: "{{ route('member_info_update_phone_number') }}",
@@ -357,7 +358,7 @@
         }
 
         function check_submit(){
-            
+
             //필수 항목 예외 처리
             if(!$("#age_over").prop("checked")){
                 alert('필수 항목을 체크해주세요!');
@@ -374,8 +375,18 @@
                 return false;
             }
 
-            
             return true;
         }
     </script>
+
+    <script>
+        function member_withdraw(){
+            location.href="{{ route('mypage.withdraw_page') }}";
+        }
+    </script>
+
+
+
+
+
 @endsection

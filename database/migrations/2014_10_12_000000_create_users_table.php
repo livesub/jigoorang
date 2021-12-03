@@ -38,8 +38,10 @@ class CreateUsersTable extends Migration
             $table->string('user_addr2')->comment('상세주소');
             $table->string('user_addr3')->comment('참고 항목');
             $table->char('user_addr_jibeon')->length(2)->comment('지번:J=>지번, R=>도로명');
-
             $table->integer('user_point')->default(0)->comment('포인트');
+            $table->string('withdraw_type')->nullable()->comment('탈퇴 사유');
+            $table->text('withdraw_content')->comment('탈퇴 사유내용');
+
             $table->rememberToken();
             $table->timestamps();
         });
