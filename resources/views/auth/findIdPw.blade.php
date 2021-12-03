@@ -38,9 +38,13 @@
                         alert("{{ __('auth.success_found_phone') }}");
                         //console.log(result[0]);
                     }else if(result != null && result != "" && (result !="kakao" || result != "naver")){
-                        alert('고객님은'+result+'를 이용하여 로그인 하실 수 있습니다.')
+                        alert('고객님은 비밀번호 없이 '+result+'를 이용하여 로그인 가능합니다.')
                     }else{
-                        alert('해당 휴대전화 번호로 등록된 아이디가 없습니다. \n회원가입 후 이용해주세요');
+                        if (confirm("입력하신 전화번호로 가입된 정보가 없습니다.\n회원가입 페이지로 이동합니다.") == true){
+                            location.href = "{{ route('join.create_agree') }}";
+                        }else{
+                            return false;
+                        }
                     }
                     $('#user_phone_for_id').val("");
                 },
@@ -70,12 +74,16 @@
                 success: function(result) {
                     if(result != "" && result != null && result[0].result_code != null && result[0].result_code != "" && result !="kakao" && result != "naver"){
                         //alert('아이디는 '+result+'입니다');
-                        alert('비밀번호 재설정 링크가 발송되었습니다. \n문자를 확인해주세요');
+                        alert('재설정 링크가 발송되었습니다.\n문자로 받으신 링크를 통해 비밀번호를 재설정 하세요.');
                         console.log(result);
                     }else if(result != null && result != "" && (result !="kakao" || result != "naver")){
-                        alert('고객님은'+result+'를 이용하여 로그인 하실 수 있습니다.')
+                        alert('고객님은 비밀번호 없이 '+result+'를 이용하여 로그인 가능합니다.')
                     }else{
-                        alert('해당 번호로 등록된 아이디가 없습니다. \n회원가입 후 이용해주세요');
+                        if (confirm("입력하신 전화번호로 가입된 정보가 없습니다.\n회원가입 페이지로 이동합니다.") == true){
+                            location.href = "{{ route('join.create_agree') }}";
+                        }else{
+                            return false;
+                        }
                     }
                     $('#user_phone_for_pw').val("");
                 },

@@ -33,7 +33,7 @@ class findIdPwService
         if(!empty($user_info) && $user_info->user_platform_type == ""){
 
             //보낼 메세지 설정
-            $message = "고객님의 지구랭 아이디는 ".$user_info->user_id." 입니다.";
+            $message = "[지구랭]고객님의 지구랭 아이디는 ".$user_info->user_id." 입니다.";
             //여기서 문자로 보낸다.
             $result = $this->smsService->send_sms_custom($message, $user_phone);
 
@@ -69,7 +69,7 @@ class findIdPwService
 
             if($result){
                 //문자 보내기
-                $message = "아래 링크를 통해 변경하신 후 이용 가능합니다.\n".route('short_url', $input['code']);
+                $message = "[지구랭]아래링크를 통해 비밀번호를 재설정 후 이용 부탁 드립니다.\n".route('short_url', $input['code']);
                 $result2 = $this->smsService->send_sms_custom($message, $user_phone);
                 return $result2;
             }else{
