@@ -11,7 +11,7 @@ Route::get('/', function () {
 */
 
 Route::get('/', [
-    'as' => 'index',
+    'as' => 'shop.index',
     'uses' => 'App\Http\Controllers\shop\ShopMainController@index',
 ]);
 
