@@ -29,12 +29,12 @@ class CartController extends Controller
      */
     public function __construct()
     {
-        session_start();
         $this->middleware('auth'); //회원만 들어 오기
     }
 
     public function ajax_cart_register(Request $request)
     {
+        session_start();
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
@@ -416,13 +416,13 @@ class CartController extends Controller
 
     public function cartlist(Request $request)
     {
+        session_start();
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
         $sw_direct  = $request->input('sw_direct');     //장바구니 0, 바로구매 1
         $sw_direct = isset($sw_direct) ? (int) $sw_direct : 0;
 
-        //session_start();
         $CustomUtils->set_cart_id($sw_direct);
         $s_cart_id = $CustomUtils->get_session('ss_cart_id');
 
@@ -465,6 +465,7 @@ class CartController extends Controller
 
     public function ajax_choice_option_modify(Request $request)
     {
+        session_start();
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 

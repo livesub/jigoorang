@@ -1,4 +1,4 @@
-@extends('layouts.shophead')
+@extends('layouts.head')
 
 @section('content')
 

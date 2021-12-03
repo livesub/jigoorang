@@ -59,7 +59,7 @@
         <tr>
             <td>
             @if(!auth()->user())
-                <a href='{{ route('login.index') }}'>LOGIN</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='{{ route('join.create') }}'>REGISTER</a>
+                <a href='{{ route('login.index') }}'>LOGIN</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='{{ route('join.create_agree') }}'>REGISTER</a>
             @else
                 <a href='{{ route('mypage.index') }}'>MYPAGE</a>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href='{{ route('logout.destroy') }}'>LOGOUT</a>
             @endif
@@ -73,7 +73,7 @@
             </td>
                 @endif
             @endif
-            <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="{{ route('index') }}">쇼핑몰</a></td>
+            <td>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp<a href="{{ route('shop.index') }}">쇼핑몰</a></td>
         </tr>
     </table>
 

@@ -32,12 +32,12 @@ class OrderController extends Controller
      */
     public function __construct()
     {
-        session_start();
         $this->middleware('auth'); //회원만 들어 오기
     }
 
     public function orderform(Request $request)
     {
+        session_start();
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
@@ -210,6 +210,7 @@ class OrderController extends Controller
     //재고체크
     public function ajax_orderstock(Request $request)
     {
+        session_start();
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
@@ -292,6 +293,7 @@ class OrderController extends Controller
     public function ajax_ordercomfirm(Request $request)
     {
         //header("Content-Type: application/json");
+        session_start();
         $CustomUtils = new CustomUtils;
 
         $data = file_get_contents('php://input');
