@@ -58,6 +58,7 @@ class findIdPwService
         if(!empty($user_info) && $user_info->user_platform_type == ""){
 
             $input['code'] = Str::random(6);
+
             //addMinutes()안에 숫자를 분단위로 변경하면 원하는 시간을 설정 가능 지금 2분제한
             $url = URL::temporarySignedRoute('sendPwChangeLinkPro', now()->addMinutes(2), ['code' => Crypt::encryptString($user_info->id)]);
             //return URL::temporarySignedRoute('sendPwChangeLinkPro', now()->addMinutes(2), ['code' => Crypt::encryptString($user_info->id)]);

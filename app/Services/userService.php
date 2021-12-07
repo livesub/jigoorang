@@ -7,8 +7,8 @@ use App\Models\User;    //모델 정의
  * @package App\Services
  */
 class userService
-{   
-    //번호를 이용 해당 번호를 가진 유저를 조회 
+{
+    //번호를 이용 해당 번호를 가진 유저를 조회
     public function find_user_to_phone_number($user_phone){
 
         $user_info = User::whereUser_phone($user_phone)->first();

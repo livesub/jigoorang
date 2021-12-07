@@ -38,8 +38,8 @@ window.deleteCookie = function deleteCookie(name, domain, path) {
 
 
 window.get_age = function get_age(yymmdd) {
-  var check_y = yymmdd.substr(0, 2);
-  //console.log("연도 : " + check_y); //현재 날짜 구하기
+  var check_y = yymmdd.substr(0, 2); //console.log("연도 : "+check_y);
+  //현재 날짜 구하기
 
   var date = new Date();
   var year = date.getFullYear();
@@ -51,11 +51,9 @@ window.get_age = function get_age(yymmdd) {
   var checked_y = String(year).substr(2, 2);
 
   if (check_y <= checked_y) {
-    yymmdd = "20" + yymmdd;
-    //console.log("연도 포함 : " + yymmdd);
+    yymmdd = "20" + yymmdd; //console.log("연도 포함 : "+yymmdd);
   } else {
-    yymmdd = "19" + yymmdd;
-    //console.log("연도 포함 : " + yymmdd);
+    yymmdd = "19" + yymmdd; //console.log("연도 포함 : "+yymmdd);
   }
 
   var birthdayy = yymmdd.substr(0, 4);

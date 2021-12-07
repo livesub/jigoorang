@@ -21,25 +21,25 @@ class findIdPwController extends Controller
 
     //아이디 및 비밀번호 찾기 view로 이동
     public function findIdPwView(){
-        
+
         return view('auth.findIdPw');
     }
 
     //아이디 찾기 관련
     public function findId(Request $request){
         $user_phone = $request->user_phone;
-        
+
         $result = $this->findIdPwService->findID($user_phone);
 
         //dd($result);
 
         return response()->json(array($result),200,[],JSON_UNESCAPED_UNICODE);
-       
+
     }
 
     //비밀번호 재설정 링크 관련
     public function sendPwChangeLink(Request $request){
-        
+
         $user_phone = $request->user_phone;
 
         $result = $this->findIdPwService->send_pw_link($user_phone);
@@ -61,7 +61,7 @@ class findIdPwController extends Controller
         }else{
 
             return redirect()->route('main.index')->with('alert_messages', __('auth.failed_change_pw'));
-            
+
         }
     }
 
@@ -80,12 +80,12 @@ class findIdPwController extends Controller
 
             return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
         }
-   
+
     }
 
     //단축 url 삭제관련
     public function delete_short_url(){
-        
+
         $this->findIdPwService->delete_short_url_time_out();
 
         //return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
@@ -94,7 +94,7 @@ class findIdPwController extends Controller
 
     //제한시간이 지난 경우의 페이지 이동 관련
     public function move_time_limit_page(){
-        
+
         return view('auth.failed_time_limit');
     }
 }

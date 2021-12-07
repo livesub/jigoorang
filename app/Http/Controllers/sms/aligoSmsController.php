@@ -18,7 +18,7 @@ class aligoSmsController extends Controller
 
     //인증문자를 보내기 위한 함수
     public function auth_certification(Request $request){
-        
+
         $user_phone = $request->user_phone;
 
         //그 번호로 일단 등록된 유저가 있는지 확인해야한다.
@@ -33,9 +33,9 @@ class aligoSmsController extends Controller
 
             return $result;
         }
-        
+
         //dd($result);
-        
+
         //return value 에서 result_code 가 1이 아닐경우에 문자전송 실패니 그에따른 분기점이 필요하다.
 
         return response()->json(array($result),200);

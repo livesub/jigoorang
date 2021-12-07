@@ -19,14 +19,7 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 /*
-Route::group(['prefix' => '{locale}'], function () {
-    Route::get('home','Controller@method');
-    Route::get('otherurl','Controller@method');
-});
-*/
-
 Route::get('/', [
     'as' => 'main.index',
     'uses' => 'App\Http\Controllers\MainController@index',
@@ -36,6 +29,15 @@ Route::get('/home', [
     'as' => 'home.index',
     'uses' => 'App\Http\Controllers\MainController@index',
 ]);
+*/
+/** 체험단 미리 오픈을 위해 라우터 변경(나중에 위에로 변경)-211207 */
+Route::get('/', [
+    'as' => 'main.index',
+    'uses' => 'App\Http\Controllers\exp\expController@index',
+]);
+
+
+
 
 /* 로그인이 되지 않은 페이지에 접근 했을시에 로그인 페이지로 이동 */
 Route::get('login', [

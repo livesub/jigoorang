@@ -77,12 +77,12 @@ class LoginController extends Controller
 
         //아이디 기억하기가 있을 경우 세션에 저장 아닐경우 삭제
         if($id_remember == "1"){
-            
+
             setcookie('id_remember', $user_id, time() + (86400*7));
-        
+
         }else{
             setcookie("id_remember", "", time() - 3600);
-           
+
         }
 
         $credentials = [
@@ -114,8 +114,8 @@ class LoginController extends Controller
         // }
 
         //회원 로그인 통계처리
-        $statistics = new StatisticsController();
-        $statistics->mem_statistics($user_id);
+        //$statistics = new StatisticsController();
+        //$statistics->mem_statistics($user_id);
 
         if (preg_match("/orderform/", $url)){   //장바구니로 리턴
             return redirect()->route('orderform')->with('alert_messages', $Messages::$login_chk['login_chk']['login_ok']);

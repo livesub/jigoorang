@@ -51,24 +51,35 @@ class socialLoginController extends BaseController
             //$social_info = Socialite::driver($provider)->user();
             try {
                 $social_info = Socialite::driver($provider)->user();
-
                 if($provider == "kakao"){
                     //dd($social_info->user['kakao_account']);
                     $user_kakao = $social_info->user['kakao_account'];
+
                     if($user_kakao['gender'] == 'male'){
                         $user_gender = 'M';
                     }else{
                         $user_gender = 'W';
                     }
-                    $user_birth = "1996".$user_kakao['birthday'];
-                    $user_phone = "";
+                    $user_birth = $user_kakao['birthyear'].$user_kakao['birthday'];
+                    //$user_phone = "";
+                    $phone_tmp = explode(" ", $user_kakao['phone_number']);
 
+                    if(empty($phone_tmp[1])){
+                        $user_phone = "";
+                    }else{
+                        $user_phone = "0".str_replace("-", "", $phone_tmp[1]);
+                    }
+                    $user_name =  $user_kakao['name'];
+//전화번호와 이름 값이 없을때를 위한 테스트(211207)
+//$user_phone = "";
+//$user_name = '';
                 }else if($provider == "naver"){
                     //dd($social_info->user['response']);
                     $user_naver = $social_info->user['response'];
                     $user_gender = $user_naver['gender'];
                     $user_phone = str_replace("-", "", $user_naver['mobile']);
                     $user_birth = $user_naver['birthyear'].str_replace("-", "", $user_naver['birthday']);
+                    $user_name =  $social_info->name;
                     //dd($user_birth);
                 }
 
@@ -96,7 +107,7 @@ class socialLoginController extends BaseController
                     //휴대폰 인증 추가 여부 확인 필요 view가 필요 데이터 바인딩 후에 넘겨주어야 할듯
                     $create_result = [
                         'user_id'               => $social_info->email,
-                        'user_name'             => $social_info->name,
+                        'user_name'             => $user_name,
                         'user_activated'        => 1,
                         'user_level'            => 10,
                         'user_type'             => 'N',
@@ -120,7 +131,7 @@ class socialLoginController extends BaseController
 
                             $create_result = User::create([
                                 'user_id'               => $social_info->email,
-                                'user_name'             => $social_info->name,
+                                'user_name'             => $user_name,
                                 'user_activated'        => 1,
                                 'user_level'            => 10,
                                 'user_type'             => 'N',

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta property="og:title" content="지구랭">
+    <meta property="og:description" content="지구랭">
+    <meta property="og:image" content="./resources/logo.png">
+
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/responsive.css">  
+
+    <title>지구랭</title>
+</head>
+<body>
+
+      <!-- 상세 모달 -->
+      <div class="modal_001 modal fade">
+        <div class="modal-background" onclick="detilclosemodal_001()"></div>
+        <div class="modal-dialog">
+            <div class="modal-dialog-title">
+                <h4>개인정보 제3자 제공 동의</h4>
+                <div class="btn-close" onclick="detilclosemodal_001()">
+                </div>
+            </div>
+            <div class="modal-dialog-contents">
+                <div class="modal-dialog-contents-title">
+                <ul class="modal-dialog-contents-text">
+                    <h4>개인정보보호법에 의거하여 다음과 같이 개인정보 수집 및 이용목적을 알려드립니다</h4>
+                    <li>제공업체 : 투비위어드</li>
+                    <li>제공목적 : 평가단 응모접수 관리, 물품 발송 및 수령 확인,  평가단 진행을 위한 고지 및 문의 응대,  제세공과금 납부관련 안내(필요시),  평가 리뷰 작성시 선정된 평가단 식별·인증</li>
+                    <li>제공정보 : 신청자의 이름, 핸드폰 번호, 이메일 주소, 배송 수령인의 이름, 핸드폰 번호, 주소 </li>
+                    <li>제공기간: 이벤트 종료 후 30일 이내 파기</li>
+                </ul>
+                <br>
+                <div class="solid"></div>
+                <br>
+                <ul class="modal-dialog-contents-text-01">   
+                    <li>제공업체 : 평가단이 평가 진행한 제품의 제조사</li>
+                    <li>제공목적 : 시장조사, 통계작성, 소비자 사용 후기를 통한 품질 업그레이드 연구 등</li>
+                    <li>제공정보 : 특정 개인을 식별할 수 없는 형태로 제공</li>
+                    <h4>개인정보 수집 및 이용 동의와 관련한 위 사항에 대하여 원하지 않는 경우 동의를 거부할 수 있으며, 동의하지 않는 경우는 서비스 이용에 제한이 있을 수 있습니다</h4>
+                </ul>
+                </div>
+                <div class="modal-dialog btn normal" onclick="detilclosemodal_001()">
+                    닫기
+                </div> 
+        </div>
+        </div>
+    </div>
+
+
+<div class="wrap">
+
+
+
+    <!-- 탭바 시작 -->
+    <div class="tabar">
+        <ul>
+            <li><a href="#">홈</a></li>
+            <li><a href="#">랭킹</a></li>
+            <li><a href="#">쇼핑</a></li>
+            <li><a href="#">기록</a></li>
+        </ul>
+    </div>
+    <!-- 탭바 끝 -->
+
+     <!-- 헤더 시작-->
+   <div class="header">
+    <div class="top">
+        <div class="logo">
+            <a href="/index.html"></a>
+            <h1>지구랭</h1>
+        </div>
+
+          <!-- 모바일 메뉴 시작 -->
+          <div class="ham">
+            <a class="btn_ham" onclick="openNav()"><span class="name">햄버거</span></a>
+        </div>
+
+        <div class="background"></div>
+        <div id="Sidenav" class="sidenav"> 
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+              <img src="/recources/icons/icon-cls.png" alt="">
+            </a>
+
+            <div class="m-menu">
+                <ul class="m-menu-my">
+                    <a href="#"><li>로그인<span class="m-menu-my-boder"></span></li></a> 
+                    <!-- <a href="#"><li>로그아웃<span class="m-menu-my-boder"></span></li></a>  -->
+
+                    <a href="/page/mypage/mypage.html"><li>마이페이지</li></a>
+                </ul>
+
+                <ul class="m-menu-child"> 
+                    <a href="#">
+                        <li>지구랭소개</li>
+                    </a>
+                    <a href="#">
+                        <li><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹 </li>
+                    </a>
+                    <a href="#">
+                        <li><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b> </li>
+                    </a>
+                    <a href="#">
+                        <li><b>지</b>구랭 <b>구</b>하는 기<b>록</b> </li>
+                    </a>
+                    <a href="/page/evaluation/evaluation_list.html"><li class="on">정직한 평가단</li></a>
+                    <a href="#"><li>고객센터 </li></a>
+                </ul>
+            </div> 
+        </div> 
+        <!-- 모바일 메뉴 끝 -->
+
+
+        <!-- <ul class="menu">
+            <li class="search"><a href="#"><span>검색</span></a></li>
+            <li class="cart">
+                <a class="conunt"><p id="">0</p></a>
+                <a><span>장바구니</span></a>
+            </li>
+            <li class="my"><a><span>마이페이지</span></a></li>
+            <li class="login"><a href="/page/login/login.html"><span>로그인</span></a></li>
+           <!-- <li class="loginout"><a href=""><span>로그아웃</span></a></li> 
+        </ul> -->
+
+
+            <!-- 오픈전 메뉴 -->
+            <ul class="menu2">
+                <li class="my"><a href="#"><span>마이페이지</span></a></li>
+                <li class="login"><a href="/page/login/login.html"><span>로그인</span></a></li>
+            <!-- <li class="loginout"><a href=""><span>로그아웃</span></a></li>-->
+            <!-- 로그아웃 -->
+            </ul>
+        </div>
+
+        
+        <div class="btm">
+            <ul class="navi">
+                <li><a href="">지구랭 소개</a></li>
+                <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹</a></li>
+                <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b></a></li>
+                <li><a href=""><b>지</b>구랭 <b>구</b>하는 기<b>록</b></a></li>
+                <li class="on"><a href="/page/evaluation/evaluation_list.html">정직한 평가단</a></li>
+                <li><a href="">고객센터</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 헤더 끝 -->
+
+
+
+
+
+
+
+
+    <!-- 서브 컨테이너 시작 -->
+    <div class="sub-container">
+        
+        <!-- 위치 시작 -->
+        <div class="location">
+            <ul>
+                <li><a href="/index.html">홈</a></li>
+                <li><a href="/page/evaluation/evaluation_list.html">정직한 평가단</a></li>
+            </ul>
+        </div>
+        <!-- 위치 끝 -->
+        
+        <!-- 타이틀 시작 -->
+        <div class="title_area">
+            <h2>평가단 신청하기</h2>
+            <div class="text_02 wt-nm">
+                정직한 평가단에 참여해 여러분의 사용 평가와 후기를 들려주세요. <br>
+                한 분 한 분의 평가가 모이면, 믿을 수 있는 친환경 제품이 <br>
+                더 많은 고객을 만날 수 있는 든든한 힘이 됩니다. 
+            </div>
+            <div class="line_14-100"></div>
+        </div>
+        <!-- 타이틀 끝 -->
+                
+        <!-- 신청서 시작  -->
+        <div class="eval">
+
+            <div class="board">
+                <!-- 신청서 작성 시작 -->
+                <div class="board_wrap">
+                    <div class="information">
+                        <h4>참여자 정보</h4>
+                        <ul class="information-name">
+                            <li> 이름</li>
+                            <li> 지구룡</li>
+                        </ul>
+                        <ul class="information-phon">
+                            <li> 휴대폰</li>
+                            <li> 010-1354-1235</li>
+                            <button>변경</button>
+                        </ul>
+                        <ul class="information-email">
+                            <li> 이메일</li>
+                            <li> g9ryong@g9ryong.com</li>
+                        </ul>
+                        <ul class="information-input">
+                            <li> 평가단 참여이유 <br>  
+                                <span>(필수입력)</span>
+                            </li>
+                            <!-- <input type="text" 
+                            placeholder="* 최대 300자까지 입력 가능합니다 &#13;&#10;
+                            * 참여 이유를 자세히 기입해 주세요. 선정 확률이 높아집니다&#13;&#10;
+                            * 과거에 비슷한 제품을 사용해 본 경험이 있으신가요? &#13;&#10;
+                               있다면 어떤 제품을 사용해 본 적이 있는지 제품명을 포함하여 적어주세요"
+                            /> -->
+                            <textarea name="" id="" cols="100%" 
+                            placeholder="* 최대 300자까지 입력 가능합니다 &#13;&#10;* 참여 이유를 자세히 기입해 주세요. 선정 확률이 높아집니다&#13;&#10;* 과거에 비슷한 제품을 사용해 본 경험이 있으신가요? &#13;&#10;*있다면 어떤 제품을 사용해 본 적이 있는지 제품명을 포함하여 적어주세요"></textarea>
+                        </ul>
+                    </div>
+
+
+                    <div class="information information_01">
+                        <div class="information-inner-title">
+                            <h4>배송지</h4>
+                            <button id="btn" onclick='changeBtnName()'>배송지 입력 + </button>    <!-- 배송지 입력버튼 -->
+                            <!-- <button>배송지 설정 / 변경</button> --> <!-- 클릭햇을때 배송지 입력버튼 -->
+                        </div>
+
+                        <div class="information-inner-title-btn" id="hide">
+                                등록된 배송지가 없습니다.<br> 
+                                <span>'배송지 입력'</span> 버튼을 눌러 배송지를 추가해 주세요.
+                        </div>
+
+                        <div class="information-inner-01">
+                            <ul class="information-name">
+                                <li> 수령인</li>
+                                <li> 지구룡</li>
+                            </ul>
+                            <ul class="information-phon">
+                                <li> 휴대폰</li>
+                                <li> 010-1354-1235</li>
+                            </ul>
+                            <ul class="information-address">
+                                <li> 주소</li>
+                                <li> 13458) 경기도 지구시 지구길(지구동, 지구아파트) 
+                                   <br> 1001동 101호</li>
+                            </ul>
+                            <ul class="information-input">
+                                <li> 배송메모 <br>  
+                                    <span>(필수입력)</span>
+                                </li>
+                                <input type="text" name="" id="" placeholder="배송시 남길 메세지를 입력해 주세요"></input>
+                            </ul>
+                          </div>
+                    </div>
+
+
+                        <div class="information information_02">
+                            <h4>참여자 정보</h4>
+                            <div class="information-inner-checkbox">
+                                <input type='checkbox' name='' value='' />
+                                <label for="checkbox">개인정보 제3자 제공 동의 <span>(필수)</span></label>
+                                    <p onclick="detilopenmodal_001()">상세보기</p>
+                            </div>
+                            <div class="information-inner-subtitle">
+                                <h4>안내사항</h4>
+                                <ul class="inner-subtitle">
+                                    <li>평가단 선정 결과 안내는 [마이페이지] 내 [나의 평가단]에서 확인할 수 있습니다</li>
+                                    <li>평가단 선정자 발표 및 배송 일정은 부득이한 사유로 변동될 수 있습니다</li>
+                                    <li>평가단 신청 완료 후 배송지 변경이 절대 불가능합니다</li>
+                                    <li>평가 제품은 신청시 등록하신 주소로 발송되며, 부정확한 정보 기입으로 발생한 배송 문제에 대해서는 재발송이 불가합니다</li>
+                                    <li>평가단으로 선정되었으나 리뷰를 미작성할 경우 향후 평가단 선정 과정에서 불이익을 받을 수 있습니다 </li>
+                                    <li>평가단 제품은 재판매 불가하며, 적발시 해당 평가로 인해 제공된 포인트는 삭감됩니다.  또한, 지구랭 서비스 이용에 제한을 받거나,<br> 이후 평가단 선정에 불이익을 받을 수 있습니다</li>
+                                    <li>평가 진행시, 답변이 불성실하거나 악의적인 리뷰가 있다고 판단될 경우 해당 평가 답변은 사전 통보 없이  삭제될 수 있으며, 향후 지구랭 서비스 이용에 제한을 받거나 이후 평가단 선정에 불이익을 받을 수 있습니다</li>
+                                    <li>평가단 신청하는 경우 위 안내 사항에 인지하고 동의하는 것으로 간주합니다</li>
+
+                                </ul>
+                            </div>  
+                       </div>
+                       <div class="list_img_btn_area">
+                        <button><a href="/page/evaluation/evaluation_list.html">평가단 신청</a></button>                 
+                    </div>
+                </div>
+                <!-- 신청서 작성 끝 -->
+            </div>
+
+        </div>
+        <!-- 신청서 끝  -->
+
+       
+
+    </div>
+    <!-- 서브 컨테이너 끝 -->
+
+
+
+
+
+    
+
+
+    <!-- 푸터 시작 -->
+    <div class="footer">
+        <div class="head">
+            <ul>
+                <li><a href="">이용약관</a></li>
+                <li><a href="">개인정보처리방침</a></li>
+            </ul>
+        </div>
+        <div class="bottom">
+            <div class="con_01">
+                <div class="title">지구랭</div>
+                <ul>
+                    <li>대표이사 : 지구랭</li>
+                    <li>사업자등록번호 : 123-45-12345 </li>
+                    <li>통신판매업신고 : 1235-서울-45678</li>
+                    <li>개인정보관리책임자 : 지구룡</li>
+                </ul>
+            </div>
+            <div class="con_01">
+                <div class="title">CONTACT US</div>
+                <ul>
+                    <li>대표전화 : 02-1234-1235</li>
+                    <li>서울시 강남구 테헤란로 123길 14</li>
+                    <li>이메일 : gigurang@gigurang.com</li>
+                </ul>
+            </div>
+            <div class="logo_f"></div>
+            <div class="copy">ⓒ GIGURANG</div>            
+        </div>
+    </div>
+    <!-- 푸터 끝 -->
+
+</div>
+<script src="/js/modal.js"></script>
+<script src="/js/button.js"></script> <!-- 배송지 입력버튼 js -->
+<script src="/js/sidenav.js"></script>
+</body>
+</html>

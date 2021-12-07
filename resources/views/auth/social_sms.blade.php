@@ -1,7 +1,7 @@
 @extends('layouts.head')
 
 @section('content')
-    소셜로그인 핸드폰 인증 뷰입니다.
+    소셜로그인 핸드폰 인증 뷰입니다.1111
     <form action="{{ route('social_save_member') }}" method='POST' role='form' class='form__auth' onsubmit="return sms_certification()">
         {!! csrf_field() !!}
 
@@ -13,11 +13,11 @@
         <div class='form-group'>
         <input name='user_pw' id='user_pw' type='hidden' class="form-control @error('user_pw') is-invalid @enderror" value="{{ $create_result['password'] }}" >
         </div>
-        
+
         <div class='form-group'>
-        <input name='user_name' id='user_name' type='hidden' class="form-control @error('user_name') is-invalid @enderror" value="{{ $create_result['user_name'] }}" >
+        <input name='user_name' id='user_name' type='text' class="form-control @error('user_name') is-invalid @enderror" value="{{ $create_result['user_name'] }}" style="display:none">
         </div>
-        
+
 
         <div class='form-group'>
         <input name='user_birth' id='user_birth' type='hidden' class="form-control @error('user_birth') is-invalid @enderror" value="{{ $create_result['user_birth'] }}">
@@ -26,13 +26,13 @@
         <div class='form-group'>
         <input name='user_provider' id='user_provider' type='hidden' class="form-control @error('user_provider') is-invalid @enderror" value="{{ $create_result['user_platform_type'] }}">
         </div>
-        
+
         <div class='form-group'>
         <input name='user_gender' id='user_gender' type='hidden' class="form-control @error('user_gender') is-invalid @enderror" value="{{ $create_result['user_gender'] }}">
         </div>
 
         <div class='form-group'>
-        <input name='user_phone' id='user_phone' type='text' class="form-control @error('user_phone') is-invalid @enderror" value="{{ old('user_phone') }}">
+        <input name='user_phone' id='user_phone' type='text' class="form-control @error('user_phone') is-invalid @enderror" value="{{ old('user_phone') }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
         </div>
         @error('user_phone')
             <span class='invalid-feedback' role='alert'>
@@ -58,8 +58,11 @@
         </div> -->
         <button type="submit">@lang('auth.form.register_btn')</button>
     </form>
-    
+
 @endsection
+
+
+
 @section('script')
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 <script>
@@ -92,7 +95,7 @@
   var cookie_value1 = "";
   var cookie_value2 = "";
   window.onload = function() { // window.addEventListener('load', (event) => {와 동일합니다.
-    
+
     var decrypted1 = CryptoJS.AES.decrypt(getCookie(sk1), sk);
     var certification = decrypted1.toString(CryptoJS.enc.Utf8);
     var decrypted2 = CryptoJS.AES.decrypt(getCookie(sk2), sk);
@@ -121,7 +124,7 @@
     }
 
     $.ajax({
-      //아래 headers에 반드시 token을 추가해줘야 한다.!!!!! 
+      //아래 headers에 반드시 token을 추가해줘야 한다.!!!!!
       headers: {'X-CSRF-TOKEN': $('input[name="_token"]').attr('value')},
       type: 'post',
       url: '{{ route('auth_certification') }}',
@@ -145,8 +148,8 @@
           var text1 = decrypted1.toString(CryptoJS.enc.Utf8);
           var decrypted2 = CryptoJS.AES.decrypt(getCookie(sk2), sk);
           var text2 = decrypted2.toString(CryptoJS.enc.Utf8);
-          console.log(text1);
-          console.log(text2);
+          //console.log("test==> "+text1);
+          //console.log(text2);
           // setCookie('social_certification', result[0].rand_num, 1);
           // setCookie('social_num', user_phone, 1);
           // console.log(getCookie('social_certification'));
@@ -172,16 +175,28 @@
     var auth = $("#phone_certificate").val();
     var cookie_certification = CryptoJS.AES.decrypt(getCookie(sk1), sk).toString(CryptoJS.enc.Utf8);
     var cookie_num = CryptoJS.AES.decrypt(getCookie(sk2), sk).toString(CryptoJS.enc.Utf8);
-  
+
     var user_name = $("#user_name").val();
     var user_phone = $("#user_phone").val();
     var checked_ctf = $('#checked_ctf').val();
     //var phone_certificate = $("#phone_certificate").val();
-    
+
     //before to submit validate
     //name 길이 10자 제한
+
+    if(auth == null || auth == ""){
+      alert('휴대폰 번호를 인증 받으세요.');
+      $("#user_phone").focus();
+      return false;
+    }else{
+      if(user_name == ""){
+        $("#user_name").show();
+      }
+    }
+
     if(user_name == null || user_name == "" || user_name.length > 10 || regName.test(user_name) !== true){
-      alert('이름을 확인(입력)해주세요');
+      alert('이름을 입력 해주세요.');
+      $("#user_name").focus();
       return false;
     }
 
@@ -199,7 +214,7 @@
       alert("{{ __('auth.faild_certification_number') }}");
       return false;
     }
-    
+
     //checked_ctf
     if(checked_ctf == null || checked_ctf == "" || checked_ctf != '1'){
       alert('인증 확인 필요합니다.');
@@ -226,7 +241,7 @@
       //$("#cookie1").val(sk1);
       //$("#cookie2").val(sk2);
       return true;
-         
+
     }else{
         alert("{{ __('auth.faild_certification_number') }}");
         return false;
@@ -238,7 +253,7 @@
   //   var value = $('#phone_certificate').val();
   //   var sms_certification_value = CryptoJS.AES.decrypt(getCookie(sk1), sk).toString(CryptoJS.enc.Utf8);
   //   //var sms_certification_value = getCookie('social_certification');
-    
+
   //   if((value != "" && sms_certification != "") && (value == sms_certification_value && phone != "") && name != "" && name != null){
 
   //       //alert('인증번호가 일치 합니다!')
@@ -319,10 +334,10 @@
   }
 
   //새로고침이나 페이지 이동시 쿠키 삭제
-  window.addEventListener('beforeunload', (event) => { 
-      // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다. 
-      //event.preventDefault(); 
-      // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다. 
+  window.addEventListener('beforeunload', (event) => {
+      // 명세에 따라 preventDefault는 호출해야하며, 기본 동작을 방지합니다.
+      //event.preventDefault();
+      // 대표적으로 Chrome에서는 returnValue 설정이 필요합니다.
       //event.returnValue = '';
       //쿠키 삭제를 위한 도메인 과 path를 가져와서 보내준다.(즉 인증 관련 정보 삭제)
       deleteCookie(sk1, '{{ request()->getHost() }}', '/');

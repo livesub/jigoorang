@@ -1,21 +1,58 @@
 @extends('layouts.head')
 
 @section('content')
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    아이디 / 비밀번호 찾기 뷰입니다.<br>
-    <lavel for="user_phone_for_id">아이디 찾기</lavel>
-    <br>
-    <input type="text" min="0" name="user_phone_for_id" id="user_phone_for_id" placeholder="휴대전화 번호를 ‘-’없이 입력하세요." value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-    <br>
-    <button onclick="find_id()">아이디 전송</button>
 
-    <br><br>
-    <lavel for="user_phone_for_pw">비밀번호 찾기</lavel>
-    <br>
-    <input type="text" min="0" name="user_phone_for_pw" id="user_phone_for_pw" placeholder="휴대전화 번호를 ‘-’없이 입력하세요." value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-    <br>
-    <button onclick="send_pwChange_link()">비밀번호 재설정 링크 전송</button>
-@endsection
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <!-- 서브 컨테이너 시작 -->
+    <div class="sub-container">
+
+        <!-- 위치 시작 -->
+        <div class="location">
+            <ul>
+                <li><a href="/">홈</a></li>
+                <li><a href="{{ route('findIdPwView')}}">ID/비밀번호 찾기</a></li>
+            </ul>
+        </div>
+        <!-- 위치 끝 -->
+
+        <!-- 타이틀 시작 -->
+        <div class="title_area_01">
+            <h2>ID/비밀번호 찾기</h2>
+        </div>
+        <!-- 타이틀 끝 -->
+
+        <!-- ID/비밀번호 찾기 시작  -->
+            <div class="find">
+
+                <!-- ID/비밀번호 찾기 컨텐츠 시작 -->
+                <div class="find_wrap">
+
+                  <form action="" class="find_form">
+                    <span class="id_find">
+                        <h3>아이디 찾기</h3>
+                        <input type="text" min="0" name="user_phone_for_id" id="user_phone_for_id" placeholder="휴대전화 번호를 ‘-’없이 입력하세요." value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                        <button type="button" class="btn-full-login" onclick="find_id()">아이디 발송</button>
+                    </span>
+                    <span class="pw_find">
+                        <h3>비밀번호 찾기</h3>
+                        <input type="text" min="0" name="user_phone_for_pw" id="user_phone_for_pw" placeholder="휴대전화 번호를 ‘-’없이 입력하세요." value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                        <button type="button" class="btn-full-login" onclick="send_pwChange_link()">비밀번호 재설정 링크 발송</button>
+                    </span>
+                  </form>
+                </div>
+
+                </div>
+                <!-- ID/비밀번호 찾기 컨텐츠 끝 -->
+            </div>
+
+        <!-- ID/비밀번호 찾기 끝  -->
+
+
+
+    </div>
+    <!-- 서브 컨테이너 끝 -->
+
 
 <script>
     //아이디 찾기 관련 ajax
@@ -34,8 +71,7 @@
                 success: function(result) {
                     if(result != "" && result != null && result[0].result_code != null && result[0].result_code != "" && result !="kakao" && result != "naver"){
                         //alert('아이디는 '+result+'입니다');
-
-                        alert("{{ __('auth.success_found_phone') }}");
+                        alert("입력한 휴대폰 번호로 아이디가 발송되었습니다.");
                         //console.log(result[0]);
                     }else if(result != null && result != "" && (result !="kakao" || result != "naver")){
                         alert('고객님은 비밀번호 없이 '+result+'를 이용하여 로그인 가능합니다.')
@@ -54,6 +90,8 @@
             });
         }else{
             alert('휴대전화 번호를 입력 하세요.');
+            $("#user_phone_for_id").focus();
+            return false;
         }
     }
 
@@ -93,6 +131,16 @@
             });
         }else{
             alert('휴대전화 번호를 입력 하세요.');
+            $("#user_phone_for_pw").focus();
+            return false;
         }
     }
 </script>
+
+
+
+
+
+
+@endsection
+

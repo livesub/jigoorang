@@ -1,0 +1,284 @@
+@charset "UTF-8";
+
+@font-face {
+  font-family: "SBAggroL";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "SBAggroM";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroM.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+@import url("//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css");
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video,
+/* input, */
+select,
+textarea {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: inherit;
+  vertical-align: top;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+  position: relative;
+  line-height: normal;
+  font-family: "Spoqa Han Sans Neo", "sans-serif";
+  letter-spacing: -1px;
+  resize: none;
+}
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 16px;
+  max-width: 100%;
+}
+ul,
+li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  font-size: inherit;
+  display: inline-block;
+  cursor: pointer;
+  line-height: inherit;
+}
+button {
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: -1px;
+  cursor: pointer;
+}
+button.btn {
+  font-size: 16px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #0070bf;
+  border: 0;
+}
+button.btn-full {
+  width: 100%;
+  height: 48px;
+  background-color: #3ec4ba;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+}
+button.btn-20 {
+  width: 20%;
+  height: 48px;
+  background-color: #fff;
+  border: solid 2px #3ec4ba;
+  color: #3ec4ba;
+  font-size: 16px;
+  position: relative;
+  top: 2px;
+}
+
+button.btn-20-active {
+  width: 20%;
+  height: 48px;
+  background-color: #fff;
+  color: #ddd;
+  font-size: 16px;
+  position: relative;
+  top: 2px;
+}
+
+button.btn-50 {
+  width: 50%;
+  height: 48px;
+  background-color: #fff;
+  border: solid 2px #3ec4ba;
+  color: #3ec4ba;
+  font-size: 16px;
+}
+button.btn-full-find {
+  width: 100%;
+  height: 48px;
+  background-color: #fff;
+  border: solid 2px #3ec4ba;
+  color: #3ec4ba;
+  font-size: 16px;
+}
+button.btn-full-login {
+  width: 100%;
+  height: 48px;
+  background-color: #3ec4ba;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+}
+button.btn-full-find {
+  width: 100%;
+  height: 48px;
+  background-color: #fff;
+  border: solid 2px #3ec4ba;
+  color: #3ec4ba;
+  font-size: 16px;
+}
+button.btn-full-kakao {
+  width: 100%;
+  height: 48px;
+  background-color: #f8ce46;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+}
+button.btn-full-naver {
+  width: 100%;
+  height: 48px;
+  background-color: #30c800;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+}
+button.btn-bg-mint {
+  background: #ffffff;
+  color: #000000;
+  border: solid 1px #999999;
+}
+
+button.btn-line-mint {
+  color: #ffffff;
+  background-color: #000000;
+}
+
+button.btn-bg-mint {
+  width: 116px;
+  height: 30px;
+  background: #ffffff;
+  color: #000000;
+  border: solid 2px #000000;
+}
+
+input[type="checkbox"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: #fff;
+  border: solid 1px #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  height: 16px;
+  outline: 0;
+  width: 16px;
+}
+input[type="checkbox"]::after {
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  content: "";
+  display: none;
+  height: 40%;
+  left: 40%;
+  position: relative;
+  top: 20%;
+  transform: rotate(45deg);
+  width: 15%;
+}
+input[type="checkbox"]:checked {
+  background: #3ec4ba;
+  border: solid 1px #fff;
+}
+input[type="checkbox"]:checked::after {
+  display: block;
+}
+input:focus {
+  outline: none;
+}

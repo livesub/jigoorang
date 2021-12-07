@@ -2,126 +2,110 @@
 
 @section('content')
 
-  <form action='{{ route('join.store') }}' method='POST' role='form' class='form__auth' onsubmit="return check_submit()">
-    {!! csrf_field() !!}
-    <input type="hidden" name="url" id="url" value="{{ $url }}">
+    <!-- 서브 컨테이너 시작 -->
+    <div class="sub-container">
 
-    <div class='page-header'>
-      <h4>
-      {{ $title_join }}
-      </h4>
+        <!-- 위치 시작 -->
+        <div class="location">
+            <ul>
+                <li><a href="/">홈</a></li>
+                <li><a href="{{ route('join.create_agree') }}">회원가입</a></li>
+            </ul>
+        </div>
+        <!-- 위치 끝 -->
+
+        <!-- 타이틀 시작 -->
+        <div class="title_area_01">
+            <h2>회원가입</h2>
+        </div>
+        <!-- 타이틀 끝 -->
+
+        <!-- 회원가입 시작  -->
+            <div class="join">
+
+                <!-- 회원가입 컨텐츠 시작 -->
+                <div class="join_wrap">
+                  <div class="text_04">
+                    <h2>정보입력</h2>
+                  </div>
+                  <div class="line_14 bk"></div>
+                  <form action='{{ route('join.store') }}' method='POST' role='form' class='join_form' onsubmit="return check_submit()">
+                  {!! csrf_field() !!}
+
+                <div class="join_input_box_01">
+                  <input name='user_phone' id='user_phone' type='text' class='@error('user_phone') is-invalid @enderror' value='{{ old('user_phone') }}' placeholder="휴대전화 번호를 '-' 없이 입력하세요." onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                  <button type="button" onclick="send_sms()" id="sms_send" class="btn-20">인증번호받기</button>
+                  <!-- <button type="button" class="btn-20-active">인증번호받기</button> -->
+                  <input name='phone_certificate' id='phone_certificate' type='text' class='@error('phone_certificate') is-invalid @enderror' value='' placeholder="인증번호를 입력하세요">
+                  <button type="button" onclick="check_ctf_number()" id="check_ctf" class="btn-20">인증번호확인</button>
+                  <span id="countdown"></span>
+
+                  <div class="solid"></div>
+                </div>
+
+                <div class="join_input_box_02">
+                  <input name='user_id' id='user_id' type='email' class='@error('user_id') is-invalid @enderror' value='{{ old('user_id') }}' placeholder="아이디로 사용 할 이메일 주소를 입력해 주세요">
+
+                  @error('user_id')
+                      <span role='alert'>{{ $message }}</span>
+                  @enderror
+
+                  <input name='user_pw' id='user_pw' type='password' class='@error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder="비밀번호를 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외)">
+
+                  @error('user_pw')
+                      <span role='alert'>{{ $message }}</span>
+                  @enderror
+
+                  <input name='user_pw_confirmation' id='user_pw_confirmation' type='password' class='@error('user_pw_confirmation') is-invalid @enderror' placeholder="비밀번호를 다시 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외)">
+
+                  @error('user_pw_confirmation')
+                      <span role='alert'>{{ $message }}</span>
+                  @enderror
+                </div>
+
+                <div class="join_input_box_03">
+                  <input name='user_name' id='user_name' type='text' class='@error('user_name') is-invalid @enderror' value='{{ old('user_name') }}' placeholder="이름을 입력하세요(10자 이내)">
+
+                  @error('user_name')
+                      <span role='alert'>{{ $message }}</span>
+                  @enderror
+
+                  <input name='user_birth' id='user_birth' type='text' class='@error('user_birth') is-invalid @enderror' value='{{ old('user_birth') }}' onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="생년월일을 입력하세요. 예)820724">
+
+                  @error('user_birth')
+                      <span role='alert'>{{ $message }}</span>
+                  @enderror
+
+                <div class="join_btn_box">
+                  <input type="hidden" id="old_user_gender" value="{{ old('user_gender') }}">
+                  <input name='user_gender' id='user_gender_m' type='radio' class='@error('user_gender') is-invalid @enderror' value='M'>남
+                  <input name='user_gender' id='user_gender_w' type='radio' class='@error('user_gender') is-invalid @enderror' value='W'>여
+                </div>
+                </div>
+
+                <input name='phone_certificate_confirmation' id='phone_certificate_confirmation' type='hidden' class='@error('user_pw_confirmation') is-invalid @enderror' value="{{ old('phone_certificate') }}">
+                <input name="cookie1" id="cookie1" type="hidden" value="">
+                <input name="cookie2" id="cookie2" type="hidden" value="">
+                <input name="address" id="address" type="hidden" value="{{ route('auth_certification') }}">
+                <input name="checked_ctf" id="checked_ctf" type="hidden" value="">
+                <input name="promotion_agree" id="promotion_agree" type="hidden" value="{{ $agree }}">
+
+                    <button type="submit" class="btn-full">가입하기</button>
+                  </div>
+                  </form>
+
+                </div>
+
+                </div>
+                <!-- 회원가입 끝 -->
+            </div>
+
+        <!-- 회원가입 끝  -->
+
+
+
     </div>
-
-    <div class='form-group'>
-      <label for="user_id">아이디(이메일주소)</label>
-      <input name='user_id' id='user_id' type='email' class='form-control @error('user_id') is-invalid @enderror' value='{{ old('user_id') }}' placeholder='{{ $user_id }}'>
-    </div>
-    @error('user_id')
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-    <!-- <button type="button" onclick="email_check()">중복확인</button> -->
-
-    <div class='form-group'>
-    <label for="user_pw">비밀번호</label>
-      <input name='user_pw' id='user_pw' type='password' class='form-control @error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder='{{ $user_pw }}'>
-    </div>
-    @error('user_pw')
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-
-
-    <div class='form-group'>
-      <label for="user_pw_confirmation">비밀번호확인</label>
-      <input name='user_pw_confirmation' id='user_pw_confirmation' type='password' class='form-control @error('user_pw_confirmation') is-invalid @enderror' placeholder='{{ $user_pw_confirmation }}'>
-    </div>
-    @error('user_pw_confirmation')
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-
-    <div class='form-group'>
-      <label for="user_name">이름</label>
-      <input name='user_name' id='user_name' type='text' class='form-control @error('user_name') is-invalid @enderror' value='{{ old('user_name') }}' placeholder='{{ $user_name }}'>
-    </div>
-    @error('user_name')
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-
-    <div class='form-group'>
-      <label for="user_birth">생년월일</label>
-      <input name='user_birth' id='user_birth' type='text' class='form-control @error('user_birth') is-invalid @enderror' value='{{ old('user_birth') }}' onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-    </div>
-    @error('user_birth')
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-    <div class='form-group'>
-      <input type="hidden" id="old_user_gender" value="{{ old('user_gender') }}">
-      <label><input name='user_gender' id='user_gender_m' type='radio' class='form-control @error('user_gender') is-invalid @enderror' value='M'>@lang('auth.form.gender_m')</label>
-      <label><input name='user_gender' id='user_gender_w' type='radio' class='form-control @error('user_gender') is-invalid @enderror' value='W'>@lang('auth.form.gender_w')</label>
-    </div>
-    @error('user_gender')
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-
-    <div class='form-group'>
-      <input name='user_phone' id='user_phone' type='text' class='form-control @error('user_phone') is-invalid @enderror' value='{{ old('user_phone') }}' placeholder='{{ $user_phone }}' onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-    </div>
-    @error('user_phone')
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-    <button type="button" onclick="send_sms()" id="sms_send">@lang('auth.form.cerfitication_btn')</button>
-
-    <div class='form-group'>
-      <input name='phone_certificate' id='phone_certificate' type='text' class='form-control @error('phone_certificate') is-invalid @enderror' value='' placeholder="@lang('auth.certification_number')">
-    </div>
-    <button type="button" onclick="check_ctf_number()" id="check_ctf">인증 확인</button>
-    @error('phone_certificate')
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-    <span id="countdown"></span>
-
-    <button type="button" onclick="get_age_check()" id="get_age">만나이체크</button>
-
-    <div class='form-group'>
-      <input name='phone_certificate_confirmation' id='phone_certificate_confirmation' type='hidden' class='form-control @error('user_pw_confirmation') is-invalid @enderror' value="{{ old('phone_certificate') }}">
-    </div>
-    <input name="cookie1" id="cookie1" type="hidden" value="">
-    <input name="cookie2" id="cookie2" type="hidden" value="">
-    <input name="address" id="address" type="hidden" value="{{ route('auth_certification') }}">
-    <input name="checked_ctf" id="checked_ctf" type="hidden" value="">
-    <input name="promotion_agree" id="promotion_agree" type="hidden" value="{{ $agree }}">
-    <div class='form-group' style='margin-top: 2em;'>
-      <button class='btn btn-primary btn-lg btn-block' type='submit'>
-        {{ $submit_join }}
-      </button>
-    </div>
-    <div>
-      <p class='text-center'>
-        <button type="button" onclick="location.href='{{ route('social.login','kakao') }}'">카카오 가입</button>
-      </p>
-
-      <p class='text-center'>
-        <button type="button" onclick="location.href='{{ route('social.login','naver') }}'">네이버 가입</button>
-      </p>
-    </div>
-  </form>
-
-
+    <!-- 서브 컨테이너 끝 -->
 
 
 
@@ -129,7 +113,7 @@
   <!-- 쿠키값 암호화를 위한 스크립트 추가 -->
   <script	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
   <script>
-    var time = 30; //제한시간 설정 (초단위)
+    var time = 300; //제한시간 설정 (초단위)
     var timer = 0;  //타이머 관한 기초값 0으로 설정
     var return_time = time; //다시 시작 시 시간
   </script>
@@ -188,17 +172,11 @@
     var user_phone = $('#user_phone').val();
 
     if(user_phone == "" || user_phone == null){
-
       alert("{{ __('auth.empty_phone_number') }}");
-
       return false;
-
     }else if(regPhone.test(user_phone) !== true) {
-
       alert("{{ __('auth.failed_phone_reg') }}");
-
       return false;
-
     }
 
     $.ajax({
@@ -266,35 +244,35 @@
     //before to submit validate
     //id
     if(user_id == null || user_id == "" || regEmail.test(user_id) !== true){
-      alert('아이디를 확인(입력)해주세요');
+      alert('아이디로 사용 할 이메일 주소를 입력해 주세요');
       $('#user_id').focus();
       return false;
     }
 
     //pw
     if(user_pw == null || user_pw == "" || regPw.test(user_pw) != true){
-      alert('비밀번호를 확인(입력)해주세요');
+      alert('비밀번호를 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외)');
       $("#user_pw").focus();
       return false;
     }
 
     //pw_con
     if(user_pw_con == null || user_pw_con == "" || regPw.test(user_pw_con) !== true || user_pw != user_pw_con){
-      alert('비밀번호확인을 확인(입력)해주세요');
+      alert('비밀번호를 다시 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외)');
       $("#user_pw_confirmation").focus();
       return false;
     }
 
     //name 길이 10자 제한
     if(user_name == null || user_name == "" || user_name.length > 10 || regName.test(user_name) !== true){
-      alert('이름을 확인(입력)해주세요');
+      alert('이름을 입력 해주세요');
       $("#user_name").focus();
       return false;
     }
 
     //birth
     if(user_birth == null || user_birth == "" || regBirth.test(user_birth) !== true || user_birth.length > 6){
-      alert('생년월일을 확인(입력)해주세요');
+      alert('생년월일을 입력해주세요');
       $("#user_birth").focus();
       return false;
     }else if(get_age_check() != true){
@@ -305,7 +283,7 @@
 
     //gender
     if(user_gender == null || user_gender == ""){
-      alert("성별을 확인(입력)해주세요");
+      alert("성별을 선택 해주세요");
       $("#old_user_gender").focus();
       return false;
     }
@@ -335,13 +313,9 @@
 
     //submit true or false
     if(auth == ""){
-
-      alert('인증번호를 확인(입력)해주세요');
-
+      alert('인증번호를 입력해주세요');
       return false;
-
     }else if(cookie_certification == "" || cookie_num == ""){
-
       alert('인증번호를 받아 주세요');
       //인증 후에도 시간초과로 없을 경우 다시 받게 초기화 시키기
       //태그 설정 해제
@@ -368,7 +342,6 @@
         //$("#cookie2").val(sk2);
         return true;
       }else{
-
         alert('중복된 이메일 입니다.');
         return false;
 
@@ -445,12 +418,12 @@
     }
 
     if(phone_certificate == "" && cookie_certification == ""){
-      alert('인증 번호를 확인(입력)해주세요');
+      alert('인증 번호를 입력 해주세요');
       return false;
     }
 
     if(phone_number != number_certification){
-      alert('잘못된 번호 입니다. \n인정을 받은 번호를 입력해주세요');
+      alert('잘못된 번호 입니다. \n인증을 받은 번호를 입력해주세요');
       return false;
     }
 
@@ -484,7 +457,7 @@
     var r_age = "";
     var user_birth = $("#user_birth").val();
     if(user_birth == ""){
-      alert('값 없음');
+      alert('잘못된 생년월일 입니다.');
       return false;
     }
     age = get_age(user_birth);
@@ -498,5 +471,18 @@
     }
   }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
 @endsection
 
