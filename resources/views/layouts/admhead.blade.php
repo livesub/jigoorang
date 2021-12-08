@@ -43,6 +43,7 @@ header('Pragma: public');
                     <tr>
                         <td><a href="{{ route('adm.banner.index', 2) }}">하단 배너 이미지 관리</a></td>
                     </tr>
+
                     @if(auth()->user()->user_level < 2) <!-- 총관리자만 보는 메뉴 -->
 
                     <tr>
@@ -84,9 +85,7 @@ header('Pragma: public');
                     <tr>
                         <td><a href="{{ route('shop.setting.index') }}">환경 설정</a></td>
                     </tr>
-                    <tr>
-                        <td><a href="{{ route('shop.sendcost.index') }}">추가 배송비 관리</a></td>
-                    </tr>
+
                     <tr>
                         <td><a href="{{ route('shop.cate.index') }}">분류 관리</a></td>
                     </tr>
@@ -94,10 +93,13 @@ header('Pragma: public');
                         <td><a href="{{ route('shop.item.index') }}">상품 관리</a></td>
                     </tr>
                     <tr>
-                        <td><a href="{{ route('orderlist') }}">주문 관리</a></td>
+                        <td><a href="{{ route('admRating.index') }}">정량 평가 관리</a></td>
                     </tr>
                     <tr>
-                        <td><a href="{{ route('admRating.index') }}">정량 평가 관리</a></td>
+                        <td><a href="{{ route('shop.sendcost.index') }}">추가 배송비 관리</a></td>
+                    </tr>
+                    <tr>
+                        <td><a href="{{ route('orderlist') }}">주문 관리</a></td>
                     </tr>
 
 

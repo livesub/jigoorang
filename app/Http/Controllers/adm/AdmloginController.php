@@ -68,7 +68,7 @@ class AdmloginController extends Controller
             exit;
         }
 
-        if(Auth::user()->user_level > 3){
+        if(Auth::user()->user_level > 3 || Auth::user()->user_type == 'Y'){
             auth()->logout();
             return redirect()->route('adm.login.index')->with('alert_messages', $Messages::$adm_login_chk['login_chk']['login_chk']);
             exit;

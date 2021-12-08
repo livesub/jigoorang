@@ -38,7 +38,7 @@ return [
 
     'failed_change_pw' => '잘못된 접근입니다. \n다시 시도해주세요',
 
-    'not_login_user' => '회원만 이용가능한 메뉴입니다. \n로그인 후 이용해주세요!',
+    'not_login_user' => '회원만 이용가능한 메뉴입니다. \n로그인 후 이용해주세요.',
 
     'certification_number' => '인증번호를 입력해주세요',
 

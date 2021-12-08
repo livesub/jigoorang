@@ -243,6 +243,7 @@ return [
     'ADMIN_PW' => env('ADMIN_PW'),
     'ADMIN_NAME' => env('ADMIN_NAME'),
     'ADMIN_LEVEL' => env('ADMIN_LEVEL'),
+    'ADMIN_CREATE_LEVEL' => env('ADMIN_CREATE_LEVEL'),
 
     /*** 회원 이미지 썸네일 크기 설장 */
     'thumb_width' => env('THUMB_WITH'),

@@ -7,7 +7,7 @@ use App\Http\Controllers\auth\socialLoginController;
 use Illuminate\Http\Request;
 
 //리스트 뷰 반환 라우트
-Route::get('/list', [expController::class, 'index'])->name('exp.list');
+//Route::get('/list', [expController::class, 'index'])->name('exp.list');
 
 //상세보기 뷰 반환 라우트
 Route::get('/list/detail/{id}', [expController::class, 'view_detail'])->name('exp.list.detail');

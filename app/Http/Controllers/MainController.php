@@ -43,13 +43,13 @@ class MainController extends Controller
             $admin_id = config('app.ADMIN_ID');
             $admin_pw = config('app.ADMIN_PW');
             $admin_name = config('app.ADMIN_NAME');
-            $admin_level = config('app.ADMIN_LEVEL');
+            $admin_create_level = config('app.ADMIN_CREATE_LEVEL');
 
             $create_result = User::create([
                 'user_id' => $admin_id,
                 'user_name' => $admin_name,
                 'password' => Hash::make($admin_pw),
-                'user_level' => $admin_level,
+                'user_level' => $admin_create_level,
                 'user_activated' => 1,
             ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
         }

@@ -22,9 +22,9 @@ class Authenticate extends Middleware
 
     public function handle($request, Closure $next, $guard = null)
     {
-        
+
         if (auth()->user() == null) {
-            
+
             return redirect()->route('main.index')->with('alert_messages', __('auth.not_login_user'));
         }
 
