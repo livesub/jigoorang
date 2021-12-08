@@ -44,6 +44,8 @@ class MemberlistController extends Controller
 
         $page       = $request->input('page');
         $user_type  = $request->input('user_type');
+        $user_type2 = $request->input('user_type2');
+        $keyword    = $request->input('keyword');
 
         $pageScale  = 15;  //한페이지당 라인수
         $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
@@ -61,6 +63,10 @@ class MemberlistController extends Controller
             $members->where('user_type', $user_type);
         }
 
+        if($user_type2 != "" && $keyword != ""){
+            $members->where($user_type2, 'like', '%'.$keyword.'%');
+        }
+
         $member_draw = DB::table('users')->where([['user_level','>','2'], ['user_type', 'Y']])->count();
 
         $total_record   = 0;
@@ -74,6 +80,8 @@ class MemberlistController extends Controller
 
         $tailarr = array();
         $tailarr['user_type'] = $user_type;
+        $tailarr['user_type2'] = $user_type2;
+        $tailarr['keyword'] = $keyword;
 
         $PageSet        = new PageSet;
         $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
@@ -93,7 +101,10 @@ class MemberlistController extends Controller
             'members'       => $member_rows,
             'member_draw'   => $member_draw,
             'pageNum'       => $page,
-            'pnPage'        => $pnPage
+            'pnPage'        => $pnPage,
+            'user_type'     => $user_type,
+            'user_type2'    => $user_type2,
+            'keyword'       => $keyword,
         ]);
     }
 
@@ -116,6 +127,8 @@ class MemberlistController extends Controller
 
         $mode       = $request->input('mode');
         $num        = $request->input('num');
+        $user_gender = $request->input('user_gender');
+        $user_birth = $request->input('user_birth');
 
         if($mode == "regi"){
             //등록일때
@@ -134,7 +147,8 @@ class MemberlistController extends Controller
                 'user_name'  => ['required', 'string'],
                 'user_pw'  => ['required', 'string', 'min:6', 'max:16', 'confirmed'],
                 'user_pw_confirmation'  => ['required', 'string', 'min:6', 'max:16', 'same:user_pw'],
-                'user_phone'  => ['required', 'max:20']
+                'user_phone'  => ['required', 'max:11', 'unique:users'],
+                'user_birth'  => ['required', 'max:6'],
             ], $Messages::$validate['join']);
 
             if($request->hasFile('user_imagepath'))
@@ -180,7 +194,8 @@ class MemberlistController extends Controller
                 'user_imagepath' => $attachment_result[1],
                 'user_ori_imagepath' => $attachment_result[2],
                 'user_thumb_name' => $thumb_name,
-
+                'user_gender' => $user_gender,
+                'user_birth' => $user_birth,
             ])->exists(); //저장,실패 결과 값만 받아 오기 위해  exists() 를 씀
 
             $data = array(
@@ -191,7 +206,7 @@ class MemberlistController extends Controller
             );
 
             $subject = sprintf('[%s] '.$Messages::$join_confirm_ment['confirm']['join_confirm'], $user_name);
-
+/*
             //이메일 함수 이용 발송
             $email_send_value = CustomUtils::email_send("auth.confirm_email",$user_name, $user_id, $subject, $data);
 
@@ -199,7 +214,7 @@ class MemberlistController extends Controller
             {
                 //이메일 발송 실패 시에 뭘 할건지 나중에 생각해야함
             }
-
+*/
             if($create_result) return redirect()->route('adm.member.index')->with('alert_messages', $Messages::$join_confirm_ment['confirm']['adm_join_success']);
             else return redirect()->route('adm.member.create')->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);  //치명적인 에러가 있을시 alert로 뿌리기 위해
         }else{
@@ -250,6 +265,8 @@ class MemberlistController extends Controller
                     $user->user_imagepath = $attachment_result[1];
                     $user->user_ori_imagepath = $attachment_result[2];
                     $user->user_thumb_name = $thumb_name;
+                    $user->user_gender = $user_gender;
+                    $user->user_birth = $user_birth;
                     $result_up = $user->save();
 
                     if(!$result_up)
@@ -282,6 +299,8 @@ class MemberlistController extends Controller
                 $user->user_name = $user_name;
                 $user->user_phone = $user_phone;
                 $user->user_level = $user_level;
+                $user->user_gender = $user_gender;
+                $user->user_birth = $user_birth;
                 $result_up = $user->save();
 
                 if(!$result_up)
@@ -333,11 +352,13 @@ class MemberlistController extends Controller
                 'user_imagepath'        => '',
                 'select_disp'           => $select_disp,
                 'user_point'            => $user_point,
+                'user_gender'           => '',
+                'user_birth'            => '',
             ],$Messages::$mypage['mypage']);
         }else{
             //수정
             //회원 정보를 찾아 놓음
-            $user_info = DB::table('users')->select('id', 'user_id', 'user_name', 'user_phone', 'user_thumb_name', 'user_ori_imagepath', 'user_level', 'user_type', 'withdraw_type', 'withdraw_content', 'user_point', 'created_at')->where('id', $num)->first();
+            $user_info = DB::table('users')->where('id', $num)->first();
             $select_disp = CustomUtils::select_box("user_level","회원@@관리자","10@@3", "$user_info->user_level");
 
             if($user_info->user_type == "Y") $user_status = "탈퇴";
@@ -361,6 +382,8 @@ class MemberlistController extends Controller
                 'withdraw_type'         => $user_info->withdraw_type,
                 'withdraw_content'      => $user_info->withdraw_content,
                 'user_point'            => $user_info->user_point,
+                'user_gender'           => $user_info->user_gender,
+                'user_birth'            => $user_info->user_birth,
             ],$Messages::$mypage['mypage']);
         }
     }

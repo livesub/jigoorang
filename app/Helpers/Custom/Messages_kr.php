@@ -84,7 +84,12 @@ class Messages_kr extends Controller
             //'user_email.regex' => '이메일 형식에 맞춰 입력하세요.',
             //'user_email.max' => '이메일을 200자 이하를 입력하세요.',
 
-            'user_phone.required' => '전화번호를 20자 이하를 입력하세요.',
+            'user_phone.required' => '전화번호를 11자 이하를 입력하세요.',
+            'user_phone.max' => '전화번호를 11자 이하를 입력하세요.',
+            'user_phone.unique' => '이미 사용중인 휴대폰 번호입니다.',
+
+            'user_birth.required' => '앞자리 2자리를 제외한 생년월일을 입력 하세요.(예 220101)',
+            'user_birth.max' => '생년월일을 5자 이하로 입력 하세요.(예 220101)',
         ]
     ];
 

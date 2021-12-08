@@ -14,27 +14,42 @@
 
 
 <table border=1>
+    <form name="memsearchlist" id="memsearchlist" method="get" action="{{ route('adm.member.index') }}">
     <h4>회원 리스트</h4>
-    <form name="memlist" id="memlist" method="post" action="{{ route('adm.member.out') }}">
-    {!! csrf_field() !!}
     <tr>
-        <td>
+        <td colspan="5">
             @php
                 $tmp = '';
                 $tmp2 = '';
                 $tmp3 = '';
+                $tmp4 = '';
+                $tmp5 = '';
+                $tmp6 = '';
 
                 if($user_type_selected == '') $tmp = 'selected';
                 else if($user_type_selected == 'N') $tmp2 = 'selected';
                 else if($user_type_selected == 'Y') $tmp3 = 'selected';
+
+                if($user_type2 == "") $tmp4 = "selected";
+                else if($user_type2 == "user_id") $tmp5 = "selected";
+                else if($user_type2 == "user_name") $tmp6 = "selected";
             @endphp
-            <select name="user_type_chk" id="user_type_chk" onchange="user_type_change(this.value);">
+            <select name="user_type" id="user_type" onchange="user_type_change(this.value);">
                 <option value="" {{ $tmp }}>전체</option>
                 <option value="N" {{ $tmp2 }}>회원</option>
                 <option value="Y" {{ $tmp3 }}>탈퇴회원</option>
             </select>
+            <select name="user_type2" id="user_type2">
+                <option value="user_id" {{ $tmp5 }}>아이디</option>
+                <option value="user_name" {{ $tmp6 }}>이름</option>
+            </select>
+            <input type="text" name="keyword" id="keyword" value="{{ $keyword }}"><button type="submit">검색</button>
         </td>
+    </form>
     </tr>
+
+    <form name="memlist" id="memlist" method="post" action="{{ route('adm.member.out') }}">
+    {!! csrf_field() !!}
     <tr>
         <td><input type="checkbox" id="chkall" onclick="if (this.checked) all_checked(true); else all_checked(false);" class="selec_chk"></td>
         <td>번호</td>
@@ -72,11 +87,11 @@
 
 <table>
     <tr>
-<!--
+
         <td>
             <button style="margin-top:20px;" onclick="mem_regi('regi');">회원등록</button>
         </td>
--->
+
         <td>
             <button style="margin-top:20px;" onclick="mem_out();">회원 선택 탈퇴/가입 처리</button>
         </td>
