@@ -65,10 +65,12 @@
 
                 <div class="m-menu">
                     <ul class="m-menu-my">
-                        <a href="#"><li>로그아웃<span class="m-menu-my-boder"></span></li></a>
+                        <a href="#"><li>로그인<span class="m-menu-my-boder"></span></li></a>
+                        <!-- <a href="#"><li>로그아웃<span class="m-menu-my-boder"></span></li></a>  -->
 
-                        <a href="#"><li>마이페이지</li></a>
+                        <a href="../../page/mypage/mypage.html"><li>마이페이지</li></a>
                     </ul>
+
                     <ul class="m-menu-child">
                         <a href="#">
                             <li>지구랭소개</li>
@@ -89,20 +91,28 @@
             </div>
             <!-- 모바일 메뉴 끝 -->
 
-            <ul class="menu">
+            <!-- <ul class="menu">
                 <li class="search"><a href="#"><span>검색</span></a></li>
-
                 <li class="cart">
                     <a class="conunt"><p id="">0</p></a>
                     <a><span>장바구니</span></a>
                 </li>
                 <li class="my"><a><span>마이페이지</span></a></li>
-                @if(!auth()->user())
+                <li class="login"><a href="/page/login/login.html"><span>로그인</span></a></li>
+                <li class="loginout"><a href=""><span>로그아웃</span></a></li>
+            </ul> -->
+
+            <!-- 오픈전 메뉴 -->
+            <ul class="menu2">
+            @if(!auth()->user())
+                <li class="my"><a href="{{ route('join.create_agree') }}"><span>마이페이지</span></a></li>
                 <li class="login"><a href="{{ route('login.index') }}"><span>로그인</span></a></li>
-                @else
-                <li class="login"><a href="{{ route('logout.destroy') }}"><span>로그인</span></a></li>
-                @endif
+            @else
+                <li class="my"><a href="{{ route('mypage.index') }}"><span>마이페이지</span></a></li>
+                <li class="loginout"><a href="{{ route('logout.destroy') }}"><span>로그아웃</span></a></li>
+            @endif
             </ul>
+
         </div>
 
         <div class="btm">
@@ -131,6 +141,31 @@
     @yield('script')
 
 
+@php
+    $setting_info = DB::table('shopsettings')->first();
+    $company_name = '';
+    $company_owner = '';
+    $company_saupja_no = '';
+    $company_tongsin_no = '';
+    $company_info_name = '';
+    $company_tel = '';
+    $company_zip = '';
+    $company_addr = '';
+    $company_info_email = '';
+
+    if($setting_info != ''){
+        $company_name = $setting_info->company_name;
+        $company_owner = $setting_info->company_owner;
+        $company_saupja_no = $setting_info->company_saupja_no;
+        $company_tongsin_no = $setting_info->company_tongsin_no;
+        $company_info_name = $setting_info->company_info_name;
+        $company_tel = $setting_info->company_tel;
+        $company_zip = $setting_info->company_zip;
+        $company_addr = $setting_info->company_addr;
+        $company_info_email = $setting_info->company_info_email;
+    }
+@endphp
+
     <!-- 푸터 시작 -->
     <div class="footer">
         <div class="head">
@@ -141,20 +176,20 @@
         </div>
         <div class="bottom">
             <div class="con_01">
-                <div class="title">지구랭</div>
+                <div class="title">{{ $company_name }}</div>
                 <ul>
-                    <li>대표이사 : 지구랭</li>
-                    <li>사업자등록번호 : 123-45-12345 </li>
-                    <li>통신판매업신고 : 1235-서울-45678</li>
-                    <li>개인정보관리책임자 : 지구룡</li>
+                    <li>대표이사 : {{ $company_owner }}</li>
+                    <li>사업자등록번호 : {{ $company_saupja_no }} </li>
+                    <li>통신판매업신고 : {{ $company_tongsin_no }}</li>
+                    <li>개인정보관리책임자 : {{ $company_info_name }}</li>
                 </ul>
             </div>
             <div class="con_01">
                 <div class="title">CONTACT US</div>
                 <ul>
-                    <li>대표전화 : 02-1234-1235</li>
-                    <li>서울시 강남구 테헤란로 123길 14</li>
-                    <li>이메일 : gigurang@gigurang.com</li>
+                    <li>대표전화 : {{ $company_tel }}</li>
+                    <li>{{ $company_zip }} {{ $company_addr }}</li>
+                    <li>이메일 : {{ $company_info_email }}</li>
                 </ul>
             </div>
             <div class="logo_f"></div>

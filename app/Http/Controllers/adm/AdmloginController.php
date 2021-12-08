@@ -34,7 +34,6 @@ class AdmloginController extends Controller
 
     public function index()
     {
-        //
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
         return view('adm.admlogin',$Messages::$adm_log_ment['admlogin']);
     }
@@ -61,11 +60,16 @@ class AdmloginController extends Controller
         $credentials = [
             'user_id' => trim($user_id),
             'password' => $user_pw,
-            'user_level' => 3,
         ];
 
         if (!Auth::attempt($credentials))
         {
+            return redirect()->route('adm.login.index')->with('alert_messages', $Messages::$adm_login_chk['login_chk']['login_chk']);
+            exit;
+        }
+
+        if(Auth::user()->user_level > 3){
+            auth()->logout();
             return redirect()->route('adm.login.index')->with('alert_messages', $Messages::$adm_login_chk['login_chk']['login_chk']);
             exit;
         }

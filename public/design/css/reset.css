@@ -189,6 +189,16 @@ button.btn-50 {
   color: #3ec4ba;
   font-size: 16px;
 }
+
+.btn-50 {
+  width: 50%;
+  height: 48px;
+  background-color: #fff;
+  border: solid 2px #3ec4ba;
+  color: #3ec4ba;
+  font-size: 16px;
+}
+
 button.btn-full-find {
   width: 100%;
   height: 48px;

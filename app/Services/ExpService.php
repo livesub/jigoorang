@@ -94,9 +94,8 @@ class ExpService
     //view에 보여줄 페이징 함수
     //$flag를 통해 회원단과 관리자단에서 보여주는 기준을 다르게 표현 1이 있을 경우 회원단 날짜가 지난 체험단은 보여주지 않음
     public function set_page($page, $flag = 0){
-
-        $pageScale  = 15;  //한페이지당 라인수
-        $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
+        $pageScale  = 10;  //한페이지당 라인수
+        $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")
         {

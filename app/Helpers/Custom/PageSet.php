@@ -57,9 +57,9 @@ class PageSet extends Controller
 			{
                 //블록의 갯수로 디자인 바꿈(211104)
                 if($this->blockScale > 1){
-                    $pShowPage .= "<strong>$dPage</strong>";
+                    $pShowPage .= "<div>$dPage</div>";
                 }else{
-                    $pShowPage = "<strong>$dPage / $this->totalPage</strong>";
+                    $pShowPage = "<div>$dPage / $this->totalPage</div>";
                 }
 			}
 			else
@@ -180,7 +180,7 @@ class PageSet extends Controller
 		}
 		else
 		{
-			$pShowPage .= "$text";
+			$pShowPage .= "<a href='javascript:void(0);'>$text</a>";
 		}
 		return $pShowPage;
 	}
@@ -198,7 +198,7 @@ class PageSet extends Controller
 			$pShowPage .= "<a href='?$this->tails&page=$npage'>$text</a>";
 			}
 		} else {
-			$pShowPage .= "$text";
+			$pShowPage .= "<a href='javascript:void(0);'>$text</a>";
 		}
 		return $pShowPage;
 	}

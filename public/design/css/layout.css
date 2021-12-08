@@ -44,7 +44,7 @@
   width: 200px;
   height: 76px;
   margin: 0 auto;
-  background: url("/recources/logo.png") no-repeat top center;
+  background: url("../recources/logo.png") no-repeat top center;
   background-size: 100%;
 }
 .header .top .logo h1 {
@@ -94,7 +94,7 @@
 .header .top .ham .btn_ham {
   width: 30px;
   height: 30px;
-  background: url("/recources/icons/icon-ham.png") no-repeat;
+  background: url("../recources/icons/icon-ham.png") no-repeat;
   background-size: 30px 30px;
 }
 .header .top .menu {
@@ -109,11 +109,11 @@
   margin-right: 10px;
 }
 .header .top .menu .search {
-  background: url("/recources/icons/icon-48-search.png") no-repeat top center;
+  background: url("../recources/icons/icon-48-search.png") no-repeat top center;
   background-size: 100%;
 }
 .header .top .menu .cart {
-  background: url("/recources/icons/icon-48-cart.png") no-repeat top center;
+  background: url("../recources/icons/icon-48-cart.png") no-repeat top center;
   background-size: 100%;
 }
 
@@ -135,11 +135,11 @@
 }
 
 .header .top .menu .my {
-  background: url("/recources/icons/icon-48-my.png") no-repeat top center;
+  background: url("../recources/icons/icon-48-my.png") no-repeat top center;
   background-size: 100%;
 }
 .header .top .menu .login {
-  background: url("/recources/icons/icon-48-login.png") no-repeat top center;
+  background: url("../recources/icons/icon-48-login.png") no-repeat top center;
   background-size: 100%;
 }
 .header .top .menu li a {
@@ -164,15 +164,15 @@
 }
 
 .header .top .menu2 .my {
-  background: url("/recources/icons/icon-48-my.png") no-repeat top center;
+  background: url("../recources/icons/icon-48-my.png") no-repeat top center;
   background-size: 100%;
 }
 .header .top .menu2 .login {
-  background: url("/recources/icons/icon-48-login.png") no-repeat top center;
+  background: url("../recources/icons/icon-48-login.png") no-repeat top center;
   background-size: 100%;
 }
 .header .top .menu2 .loginout {
-  background: url("/recources/icons/icon-s-48-logout.png") no-repeat top
+  background: url("../recources/icons/icon-s-48-logout.png") no-repeat top
     center;
   background-size: 100%;
 }
@@ -211,6 +211,9 @@
 }
 .header .btm .navi li.on {
   color: #000;
+}
+.header .btm .navi li.off {
+  color: #fff;
 }
 /* header 끝 */
 
@@ -254,7 +257,7 @@
 .footer .bottom .logo_f {
   width: 92px;
   height: 103px;
-  background: url("/recources/logo-2.png");
+  background: url("../recources/logo-2.png");
   position: absolute;
   top: 80px;
   right: 40px;
@@ -285,22 +288,22 @@
   text-align: center;
 }
 .tabar ul li:nth-child(1) {
-  background: url("/recources/icons/icon-30-home.png") no-repeat;
+  background: url("../recources/icons/icon-30-home.png") no-repeat;
   background-size: 30px 30px;
   background-position: center 10px;
 }
 .tabar ul li:nth-child(2) {
-  background: url("/recources/icons/icon-30-ranking.png") no-repeat;
+  background: url("../recources/icons/icon-30-ranking.png") no-repeat;
   background-size: 30px 30px;
   background-position: center 10px;
 }
 .tabar ul li:nth-child(3) {
-  background: url("/recources/icons/icon-30-shopping.png") no-repeat;
+  background: url("../recources/icons/icon-30-shopping.png") no-repeat;
   background-size: 30px 30px;
   background-position: center 10px;
 }
 .tabar ul li:nth-child(4) {
-  background: url("/recources/icons/icon-30-history.png") no-repeat;
+  background: url("../recources/icons/icon-30-history.png") no-repeat;
   background-size: 30px 30px;
   background-position: center 10px;
 }

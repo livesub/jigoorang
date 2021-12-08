@@ -40,7 +40,7 @@ class AdmShopSettingController extends Controller
         $setting_info = DB::table('shopsettings')->first();
 
         $id = "";
-        $company_name           = "회사명";
+        $company_name           = "지구랭";
         $company_saupja_no      = "123-45-67890";
         $company_owner          = "대표자명";
         $company_tel            = "02-123-4567";

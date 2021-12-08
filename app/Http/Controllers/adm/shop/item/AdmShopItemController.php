@@ -104,6 +104,9 @@ class AdmShopItemController extends Controller
         $pnPage         = $prevPage.$listPage.$nextPage;
 
         $setting_info = CustomUtils::setting_infos();
+        if($setting_info == false){
+            return redirect()->route('shop.setting.index')->with('alert_messages', '환경 설정 부터 진행 하세요.');
+        }
 
         return view('adm.shop.item.itemlist',[
             'ca_id'             => $ca_id,

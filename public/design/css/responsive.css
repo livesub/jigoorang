@@ -77,7 +77,7 @@
     display: inline-block;
     font-size: 20px;
     width: 100%;
-    background: url(/recources/imgs/icon-arwham.png) no-repeat;
+    background: url("../recources/imgs/icon-arwham.png") no-repeat;
     background-position: 97% 50%;
   }
 
@@ -159,7 +159,6 @@
     margin-top: 0px;
   }
 
-
   /* 오픈전 메뉴 */
   .header .top .menu2 {
     position: absolute;
@@ -182,9 +181,6 @@
   .header .btm {
     display: none;
   }
-
-
-  
 
   .sub-container {
     display: block;
@@ -220,7 +216,7 @@
   .footer .bottom .logo_f {
     width: 46px;
     height: 52px;
-    background: url("/recources/logo-2.png") no-repeat top center;
+    background: url("../recources/logo-2.png") no-repeat top center;
     background-size: 100% auto;
     position: absolute;
     top: 150px;
@@ -271,7 +267,7 @@
     margin-top: 30px;
     width: 100%;
     height: 250px;
-    background: url("/recources/imgs/list_title_pc.png") no-repeat;
+    background: url("../recources/imgs/list_title_pc.png") no-repeat;
     background-size: 100% auto;
     background-position: center;
   }
@@ -367,6 +363,10 @@
   .eval .board .board_wrap .list .btn_area {
     width: 150px;
     height: 120px;
+  }
+  .eval .board .board_wrap .list .btn_area a {
+    width: 100%;
+    height: 100%;
   }
   .eval .board .board_wrap .list .btn_area button {
     width: 110px;
@@ -479,7 +479,7 @@
     margin-top: 30px;
     width: 100%;
     height: 190px;
-    background: url("/recources/imgs/list_title_pc.png") no-repeat;
+    background: url("../recources/imgs/list_title_pc.png") no-repeat;
     background-size: 100% auto;
     background-position: center;
   }
@@ -568,12 +568,14 @@
   }
   .eval .board .board_wrap .list .body .title {
     max-width: 360px;
+    height: 60px;
     font-size: 16px;
     font-weight: bold;
     height: 39px;
   }
   .eval .board .board_wrap .list .body dl {
     margin-top: 8px;
+    bottom: 8px;
     font-size: 14px;
   }
   .eval .board .board_wrap .list .btn_area {
@@ -653,10 +655,8 @@
   }
 
   .join .join_wrap .join_form .join_input_box_03 .join_btn_box {
-    display: inline-block;
-    width: 100%;
   }
-
+  /* 
   .join .join_wrap .join_form .join_input_box_03 .btn-50 {
     width: 49%;
     height: 48px;
@@ -672,6 +672,17 @@
     border: solid 2px #3ec4ba;
     color: #3ec4ba;
     background-color: #fff;
+  } */
+
+  .join
+    .join_wrap
+    .join_form
+    .join_btn_box
+    .box-radio-input
+    input[type="radio"]
+    + span {
+    width: 100%;
+    height: 48px;
   }
 }
 
@@ -709,7 +720,7 @@
     font-size: 15px;
     background-size: 30px 30px;
     cursor: pointer;
-    background: url("/recources/icons/del.png");
+    background: url("../recources/icons/del.png");
   }
 
   .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title {
@@ -726,7 +737,7 @@
     margin-top: 30px;
     width: 100%;
     height: 335px;
-    background: url("/recources/imgs/rectangle2.png") no-repeat;
+    background: url("../recources/imgs/rectangle2.png") no-repeat;
     background-size: 100% auto;
     background-position: center;
   }
@@ -864,7 +875,7 @@
 
   /* 회원가입  */
 
-  .join .join_wrap .join_form .join_input_box_03 .join_btn_box {
+  /* .join .join_wrap .join_form .join_input_box_03 .join_btn_box {
     display: inline-block;
     width: 100%;
   }
@@ -884,6 +895,17 @@
     border: solid 2px #3ec4ba;
     color: #3ec4ba;
     background-color: #fff;
+  } */
+
+  .join
+    .join_wrap
+    .join_form
+    .join_btn_box
+    .box-radio-input
+    input[type="radio"]
+    + span {
+    width: 100%;
+    height: 48px;
   }
 
   /* 마이페이지 */

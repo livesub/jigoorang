@@ -44,7 +44,7 @@
                 </div>
 
                 <div class="join_input_box_02">
-                  <input name='user_id' id='user_id' type='email' class='@error('user_id') is-invalid @enderror' value='{{ old('user_id') }}' placeholder="아이디로 사용 할 이메일 주소를 입력해 주세요">
+                  <input name='user_id' id='user_id' type='email' class='@error('user_id') is-invalid @enderror ' value='{{ old('user_id') }}' placeholder="아이디로 사용 할 이메일 주소를 입력해 주세요">
 
                   @error('user_id')
                       <span role='alert'>{{ $message }}</span>
@@ -76,11 +76,19 @@
                       <span role='alert'>{{ $message }}</span>
                   @enderror
 
-                <div class="join_btn_box">
-                  <input type="hidden" id="old_user_gender" value="{{ old('user_gender') }}">
-                  <input name='user_gender' id='user_gender_m' type='radio' class='@error('user_gender') is-invalid @enderror' value='M'>남
-                  <input name='user_gender' id='user_gender_w' type='radio' class='@error('user_gender') is-invalid @enderror' value='W'>여
-                </div>
+
+                    <div class="join_btn_box">
+                        <input type="hidden" id="old_user_gender" value="{{ old('user_gender') }}">
+                        <label class="box-radio-input">
+                            <input type="radio" name="user_gender" value="M" id="user_gender_m" class='@error('user_gender') is-invalid @enderror'>
+                            <span>남</span>
+                        </label>
+                        <label class="box-radio-input">
+                            <input type="radio" name="user_gender" value="W" id="user_gender_w" class='@error('user_gender') is-invalid @enderror'>
+                            <span>여</span>
+                        </label>
+                    </div>
+
                 </div>
 
                 <input name='phone_certificate_confirmation' id='phone_certificate_confirmation' type='hidden' class='@error('user_pw_confirmation') is-invalid @enderror' value="{{ old('phone_certificate') }}">
@@ -241,8 +249,6 @@
     var checked_ctf = $('#checked_ctf').val();
     //var phone_certificate = $("#phone_certificate").val();
 
-    //before to submit validate
-    //id
     if(user_id == null || user_id == "" || regEmail.test(user_id) !== true){
       alert('아이디로 사용 할 이메일 주소를 입력해 주세요');
       $('#user_id').focus();
@@ -265,14 +271,14 @@
 
     //name 길이 10자 제한
     if(user_name == null || user_name == "" || user_name.length > 10 || regName.test(user_name) !== true){
-      alert('이름을 입력 해주세요');
+      alert('이름을 확인(입력)해 주세요');
       $("#user_name").focus();
       return false;
     }
 
     //birth
     if(user_birth == null || user_birth == "" || regBirth.test(user_birth) !== true || user_birth.length > 6){
-      alert('생년월일을 입력해주세요');
+      alert('생년월일을 확인(입력)해주세요');
       $("#user_birth").focus();
       return false;
     }else if(get_age_check() != true){
@@ -283,14 +289,15 @@
 
     //gender
     if(user_gender == null || user_gender == ""){
-      alert("성별을 선택 해주세요");
+      alert("성별을 확인(입력)해 주세요");
       $("#old_user_gender").focus();
       return false;
     }
 
     //phone
     if(user_phone == null || user_phone == "" || regPhone.test(user_phone) !== true || user_phone.length > 11){
-      alert("{{ __('auth.phone_check') }}");
+      alert("휴대폰 번호를 확인(입력)해 주세요");
+      $("#user_phone").focus();
       return false;
     }
 
@@ -301,6 +308,7 @@
       return false;
     }else if(auth != cookie_certification){
       alert("{{ __('auth.faild_certification_number') }}");
+      $("#phone_certificate").focus();
       return false;
     }
 
@@ -314,9 +322,11 @@
     //submit true or false
     if(auth == ""){
       alert('인증번호를 입력해주세요');
+      $("#phone_certificate").focus();
       return false;
     }else if(cookie_certification == "" || cookie_num == ""){
       alert('인증번호를 받아 주세요');
+      $("#phone_certificate").focus();
       //인증 후에도 시간초과로 없을 경우 다시 받게 초기화 시키기
       //태그 설정 해제
       $("#user_phone" ).prop('readonly', false);
@@ -327,9 +337,8 @@
       return false;
 
     }else if(user_phone != cookie_num){
-
       alert('인증받은 번호를 입력해주세요');
-
+      $("#phone_certificate").focus();
       return false;
 
     }else if(auth != "" && cookie_certification != "" && auth == cookie_certification && user_phone != "" && user_phone == cookie_num){
@@ -343,16 +352,17 @@
         return true;
       }else{
         alert('중복된 이메일 입니다.');
+        $("#user_id").focus();
         return false;
-
       }
 
     }else{
         alert("{{ __('auth.faild_certification_number') }}");
+        $("#phone_certificate").focus();
         return false;
     }
-
   }
+
   //인증 제한 시간 지난 후에 로직 정의
   function return_to_sms(){
     $("#user_phone" ).prop('readonly', false);
@@ -384,12 +394,10 @@
         async : false, //submit에서 값이 필요하기 때문에 동기식으로 전환
         success: function(result) {
           if(result[0] == "true"){
-            //alert("{{ __('auth.email_ctf_true')}}")
             //console.log("성공 : 사용가능 이메일"+result);
             check_result = "true";
 
           }else{
-            //alert("{{ __('auth.email_ctf_false')}}")
             //console.log("실패 : 중복된 이메일"+result);
             //return "false";
             check_result = "false";
@@ -413,17 +421,20 @@
     var number_certification = CryptoJS.AES.decrypt(getCookie(sk2), sk).toString(CryptoJS.enc.Utf8);
 
     if(phone_number == ""){
-      alert('번호를 먼저 입력해주세요');
+      alert('휴대전화번호를 먼저 입력해주세요');
+      $("#user_phone").focus();
       return false;
     }
 
     if(phone_certificate == "" && cookie_certification == ""){
       alert('인증 번호를 입력 해주세요');
+      $("#phone_certificate").focus();
       return false;
     }
 
     if(phone_number != number_certification){
       alert('잘못된 번호 입니다. \n인증을 받은 번호를 입력해주세요');
+      $("#phone_certificate").focus();
       return false;
     }
 
@@ -438,6 +449,7 @@
       setCookie(sk2.toString(), cookie_value2, 10);
     }else{
       alert('잘못된 인증번호 입니다.');
+      $("#phone_certificate").focus();
       return false;
     }
   }
@@ -458,6 +470,7 @@
     var user_birth = $("#user_birth").val();
     if(user_birth == ""){
       alert('잘못된 생년월일 입니다.');
+      $("#user_birth").focus();
       return false;
     }
     age = get_age(user_birth);

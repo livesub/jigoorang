@@ -9,10 +9,10 @@
     <meta property="og:description" content="지구랭">
     <meta property="og:image" content="./resources/logo.png">
 
-    <link rel="stylesheet" href="/css/reset.css">
-    <link rel="stylesheet" href="/css/layout.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/responsive.css">  
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/responsive.css">  
 
     <title>지구랭</title>
 </head>
@@ -34,7 +34,7 @@
    <div class="header">
     <div class="top">
         <div class="logo">
-            <a href="/index.html"></a>
+            <a href="../../index.html"></a>
             <h1>지구랭</h1>
         </div>
 
@@ -46,7 +46,7 @@
         <div class="background"></div>
         <div id="Sidenav" class="sidenav"> 
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
-              <img src="/recources/icons/icon-cls.png" alt="">
+              <img src="../../recources/icons/icon-cls.png" alt="">
             </a>
 
             <div class="m-menu">
@@ -54,9 +54,10 @@
                     <a href="#"><li>로그인<span class="m-menu-my-boder"></span></li></a> 
                     <!-- <a href="#"><li>로그아웃<span class="m-menu-my-boder"></span></li></a>  -->
 
-                    <a href="/page/mypage/mypage.html"><li>마이페이지</li></a>
+                    <a href="../../page/mypage/mypage.html"><li>마이페이지</li></a>
                 </ul>
 
+                <!-- class="on"(버튼 활성)  class="off" (버튼 비활성)-->
                 <ul class="m-menu-child"> 
                     <a href="#">
                         <li>지구랭소개</li>
@@ -70,7 +71,7 @@
                     <a href="#">
                         <li><b>지</b>구랭 <b>구</b>하는 기<b>록</b> </li>
                     </a>
-                    <a href="/page/evaluation/evaluation_list.html"><li>정직한 평가단</li></a>
+                    <a href="../../page/evaluation/evaluation_list.html"><li>정직한 평가단</li></a>
                     <a href="#"><li>고객센터 </li></a>
                 </ul>
             </div> 
@@ -93,20 +94,19 @@
         <!-- 오픈전 메뉴 -->
         <ul class="menu2">
             <li class="my"><a><span>마이페이지</span></a></li>
-            <li class="login"><a href="/page/login/login.html"><span>로그인</span></a></li>
+            <li class="login"><a href="../../page/login/login.html"><span>로그인</span></a></li>
            <!-- <li class="loginout"><a href=""><span>로그아웃</span></a></li>-->
            <!-- 로그아웃 -->
         </ul>
     </div>
 
-    
+    <!-- class="on"(버튼 활성)  class="off" (버튼 비활성)-->
         <div class="btm">
             <ul class="navi">
-                <li><a href="">지구랭 소개</a></li>
                 <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹</a></li>
                 <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b></a></li>
                 <li><a href=""><b>지</b>구랭 <b>구</b>하는 기<b>록</b></a></li>
-                <li><a href="/page/evaluation/evaluation_list.html">정직한 평가단</a></li>
+                <li><a href="../../page/evaluation/evaluation_list.html">정직한 평가단</a></li>
                 <li><a href="">고객센터</a></li>
             </ul>
         </div>
@@ -127,8 +127,8 @@
         <!-- 위치 시작 -->
         <div class="location">
             <ul>
-                <li><a href="/index.html">홈</a></li>
-                <li><a href="/page/evaluation/evaluation_list.html">회원가입</a></li>
+                <li><a href="../../index.html">홈</a></li>
+                <li><a href="../../page/evaluation/evaluation_list.html">회원가입</a></li>
             </ul>
         </div>
         <!-- 위치 끝 -->
@@ -148,54 +148,56 @@
                     <h2>정보입력</h2>
                   </div>
                   <div class="line_14 bk"></div>
-                  <form name=Join action="/" method="POST" class="join_form">
+                    <form name=Join action="/" method="POST" class="join_form">
 
-                <div class="join_input_box_01">
-                  <input type="text" name="" id="btn_num01" placeholder="휴대전화 번호를 '-' 없이 입력하세요."> 
-                  <button type="button" class="btn-20">인증번호받기</button>
-                  <!-- <button type="button" class="btn-20-active">인증번호받기</button> -->
+                    <div class="join_input_box_01">
+                        <input type="text" name="" id="btn_num01" placeholder="휴대전화 번호를 '-' 없이 입력하세요."> 
+                        <button type="button" class="btn-20">인증번호받기</button>
+                        <!-- <button type="button" class="btn-20-active">인증번호받기</button> -->
 
-                  <input type="text" name="" id="numbtn" placeholder="인증번호를 입력하세요"> 
-                  <button type="button" class="btn-20">인증번호확인</button>
-                  <span>4:59초 내에 인증해 주세요</span>
+                        <input type="text" name="" id="numbtn" placeholder="인증번호를 입력하세요"> 
+                        <button type="button" class="btn-20">인증번호확인</button>
+                        <span>4:59초 내에 인증해 주세요</span>
 
-                  <div class="solid"></div>
-                </div>  
+                        <div class="solid"></div>
+                        </div>  
 
-                <div class="join_input_box_02">
-                  <input type="text" name="" id="" placeholder="아이디로 사용 할 이메일 주소를 입력해 주세요"> 
+                        <div class="join_input_box_02">
+                        <input type="text" name="" id="" placeholder="아이디로 사용 할 이메일 주소를 입력해 주세요"> 
 
-                  <input type="text" name="" id="" placeholder="비밀번호를 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외)"> 
-                  <span>비밀번호 형식이 잘못되었습니다.</span>
+                        <input type="text" name="" id="" placeholder="비밀번호를 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외)"> 
+                        <span>비밀번호 형식이 잘못되었습니다.</span>
 
-                  <input type="text" name="" id="" placeholder="비밀번호를 다시 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외)">  
-                  <span>위의 비밀번호와 동일한 비밀번호를 입력하세요.</span>
+                        <input type="text" name="" id="" placeholder="비밀번호를 다시 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외)">  
+                        <span>위의 비밀번호와 동일한 비밀번호를 입력하세요.</span>
+                        </div>
+
+                        <div class="join_input_box_03">
+                        <input type="text" name="" id="" placeholder="이름을 입력하세요(10자 이내)"> 
+
+                        <input type="text" name="" id="" placeholder="생년월일을 입력하세요. 예)820724"> 
+
+                    <div class="join_btn_box">  
+                        <label class="box-radio-input">
+                            <input type="radio" name="cp_item" value="" checked="checked" id="user_gender_m">
+                            <span>남</span>
+                        </label>
+                        <label class="box-radio-input">
+                            <input type="radio" name="cp_item" value="" id="user_gender_w">
+                            <span>여</span>
+                        </label>
+                    </div>
                 </div>
-
-                <div class="join_input_box_03">
-                  <input type="text" name="" id="" placeholder="이름을 입력하세요(10자 이내)"> 
-
-                  <input type="text" name="" id="" placeholder="생년월일을 입력하세요. 예)820724"> 
-
-                <div class="join_btn_box">  
-                  <button class="btn-50" type="button" id="btn1">남</button>
-                  <button class="btn-50" type="button" id="btn2">여</button>
-                </div>
-                </div>
-
-                
-                 
                     <button type="submit" class="btn-full">가입하기</button>
-                  </div>
-                  </form>
-
                 </div>
+            </form>
 
-                </div>
-                <!-- 회원가입 끝 -->
-            </div>
+        </div>
 
-        <!-- 회원가입 끝  -->
+    </div>
+    <!-- 회원가입 끝 -->
+</div>
+<!-- 회원가입 끝  -->
 
        
 
@@ -242,9 +244,7 @@
     <!-- 푸터 끝 -->
 
 </div>
-<script src="/js/sidenav.js"></script>
-<script src="/js/join_btn.js"></script>
-
+<script src="../../js/sidenav.js"></script>
 
 </body>
 </html>

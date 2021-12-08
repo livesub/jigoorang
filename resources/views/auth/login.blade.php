@@ -34,12 +34,12 @@
                   {!! csrf_field() !!}
 
                   @if(isset($_COOKIE['id_remember']) && $_COOKIE['id_remember'] != "")
-                    <input name='user_id' id='user_id' type='email' class='@error('user_id') is-invalid @enderror' value="{{ $_COOKIE['id_remember'] }}" placeholder="아이디(이메일주소)를 입력하세요." autofocus>
+                    <input name='user_id' id='user_id' type='email' class='@error('user_id') is-invalid @enderror login_input' value="{{ $_COOKIE['id_remember'] }}" placeholder="아이디(이메일주소)를 입력하세요." autofocus>
                   @else
-                    <input name='user_id' id='user_id' type='email' class='@error('user_id') is-invalid @enderror' value="{{ old('user_id') }}" placeholder="아이디(이메일주소)를 입력하세요." autofocus>
+                    <input name='user_id' id='user_id' type='email' class='@error('user_id') is-invalid @enderror login_input' value="{{ old('user_id') }}" placeholder="아이디(이메일주소)를 입력하세요." autofocus>
                   @endif
 
-                    <input name='user_pw' id='user_pw' type='password' class='@error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder='{{ $user_pw }}'>
+                    <input name='user_pw' id='user_pw' type='password' class='@error('user_pw') is-invalid @enderror login_input' value='{{ old('user_pw') }}' placeholder='{{ $user_pw }}'>
                     <button type="submit" class="btn-full-login">로그인</button>
                     <div class="checkbox_login">
 

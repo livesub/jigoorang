@@ -17,7 +17,7 @@
 
         <tr>
             <td>
-                <img src="{{ $main_image_name_disp }}" style="width:100px;height:100px;">
+                <img src="{{ $main_image_name_disp }}">
             </td>
             <tr>
                 <td>
