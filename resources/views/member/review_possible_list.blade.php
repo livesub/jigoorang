@@ -103,7 +103,7 @@
 
     function po_moreList() {
         var page = $("#po_page").val();
-		if( page == '' ) page = 1;
+		if(page == '') page = 1;
         else page++;
 
 		$.ajax({
@@ -127,7 +127,7 @@
     function shop_moreList() {
         var page = $("#shop_page").val();
 
-		if( page == '' ) page = 1;
+		if(page == '') page = 1;
         else page++;
 
 		$.ajax({
