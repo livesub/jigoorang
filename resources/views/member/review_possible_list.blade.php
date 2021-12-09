@@ -18,114 +18,46 @@
 
 
 <table border=1>
+    <form name="exp_form" id="exp_form" method="get" action="{{ route('mypage.review_possible_expwrite') }}">
+    <input type="hidden" name="exp_id" id="exp_id">
+    <input type="hidden" name="exp_app_id" id="exp_app_id">
+    <input type="hidden" name="item_id" id="item_id">
+    <input type="hidden" name="sca_id" id="sca_id">
+    <input type="hidden" id="po_page">
+
     <tr>
         <td>[평가단선정]</td>
     </tr>
     <tr>
-        <td>
-            <form name="exp_form" id="exp_form" method="get" action="{{ route('mypage.review_possible_expwrite') }}">
-            <input type="hidden" name="exp_id" id="exp_id">
-            <input type="hidden" name="exp_app_id" id="exp_app_id">
-            <input type="hidden" name="item_id" id="item_id">
-            <input type="hidden" name="sca_id" id="sca_id">
+        <td id="review_possible_list">
 
-            <table border=1>
-                @php
-                    $aa = '';
-                @endphp
-
-                @foreach($exp_appinfos as $exp_appinfo)
-                    @php
-                        //이미지 처리
-                        if($exp_appinfo->main_image_name == "") {
-                            $main_image_name_disp = asset("img/no_img.jpg");
-                        }else{
-                            $main_image_name_cut = explode("@@",$exp_appinfo->main_image_name);
-                            $main_image_name_disp = "/data/exp_list/".$main_image_name_cut[2];
-                        }
-
-                        $bb = substr($exp_appinfo->regi_date, 0, 10);
-                        $review_exp_temporary_yn = DB::table('review_saves')->where([['exp_id', $exp_appinfo->id], ['exp_app_id', $exp_appinfo->exp_app_id], ['user_id', Auth::user()->user_id], ['temporary_yn', 'n']])->count();
-                    @endphp
-                @if($review_exp_temporary_yn == 0)
-                        @php
-                            $review = DB::table('review_saves')->select('temporary_yn')->where([['exp_id', $exp_appinfo->id], ['exp_app_id', $exp_appinfo->exp_app_id], ['user_id', Auth::user()->user_id]])->count();
-                            if($review == '1') $btn_ment = '임시저장중';
-                            else $btn_ment = '리뷰작성';
-                        @endphp
-                    @if($aa != $bb)
-                <tr>
-                    <td>{{ substr($exp_appinfo->regi_date, 0, 10) }}</td>
-                </tr>
-                        @php
-                        $aa = substr($exp_appinfo->regi_date, 0, 10);
-                        @endphp
-                    @endif
-                <tr>
-                    <td><img src="{{ $main_image_name_disp }}"></td>
-                    <td>{{ stripslashes($exp_appinfo->title) }}</td>
-                    <td><button type="button" onclick="exp_review('{{ $exp_appinfo->id }}', '{{ $exp_appinfo->exp_app_id }}', '{{ $exp_appinfo->item_id }}', '{{ $exp_appinfo->sca_id }}', '{{ $exp_appinfo->exp_review_start }}')">{{ $btn_ment }}</button></td>
-                </tr>
-                @endif
-                @endforeach
-            </table>
-            </form>
         </td>
     </tr>
+    <tr id="po_more">
+        <td><button type="button" id="addBtn" onclick="po_moreList();"><span>더보기</span></button></td>
+    </tr>
+    </form>
 </table>
 
 
 
 <table border=1>
+<form name="shop_form" id="shop_form" method="get" action="{{ route('mypage.review_possible_shopwrite') }}">
+<input type="hidden" name="cart_id" id="cart_id">
+<input type="hidden" name="order_id" id="order_id">
+<input type="hidden" name="item_code" id="item_code">
+<input type="hidden" id="shop_page">
     <tr>
         <td>[쇼핑]</td>
     </tr>
     <tr>
-        <td>
-            <form name="shop_form" id="shop_form" method="get" action="{{ route('mypage.review_possible_shopwrite') }}">
-            <input type="hidden" name="cart_id" id="cart_id">
-            <input type="hidden" name="order_id" id="order_id">
-            <input type="hidden" name="item_code" id="item_code">
-
-            <table border=1>
-                @php
-                    $cc = '';
-                @endphp
-
-                @foreach($orders as $order)
-                    @php
-                        $image = $CustomUtils->get_item_image($order->item_code, 3);
-                        $dd = substr($order->regi_date, 0, 10);
-                        $review_temporary_yn = DB::table('review_saves')->where([['cart_id', $order->id], ['item_code', $order->item_code], ['user_id', Auth::user()->user_id], ['temporary_yn', 'n']])->count();
-                    @endphp
-
-                    @if($review_temporary_yn == 0)
-                        @php
-                            $review = DB::table('review_saves')->select('temporary_yn')->where([['cart_id', $order->id], ['item_code', $order->item_code], ['user_id', Auth::user()->user_id]])->count();
-                            if($review == '1') $btn_ment = '임시저장중';
-                            else $btn_ment = '리뷰작성';
-                        @endphp
-                        @if($cc != $dd)
-                <tr>
-                    <td>{{ substr($order->regi_date, 0, 10) }}</td>
-                </tr>
-                        @php
-                        $cc = substr($order->regi_date, 0, 10);
-                        @endphp
-                        @endif
-                <tr>
-                    <td><img src="{{ asset($image) }}"></td>
-                    <td>
-                        {{ $order->item_name }}<br>
-                        {{ $order->sct_option }}
-                    </td>
-                    <td><button type="button" onclick="cart_review('{{ $order->id }}', '{{ $order->order_id }}', '{{ $order->item_code }}', '{{ substr($order->regi_date, 0, 10) }}')">{{ $btn_ment }}</button></td>
-                </tr>
-                    @endif
-                @endforeach
-            </table>
+        <td id="review_my_list">
         </td>
     </tr>
+    <tr id="shop_more">
+        <td><button type="button" id="addBtn2" onclick="shop_moreList();"><span>더보기</span></button></td>
+    </tr>
+</form>
 </table>
 
 <script>
@@ -166,8 +98,52 @@
 </script>
 
 
+<script>
+    po_moreList(); //함수 호출
 
+    function po_moreList() {
+        var page = $("#po_page").val();
+		if( page == '' ) page = 1;
+        else page++;
 
+		$.ajax({
+			type		: "get",
+			url			: "{{ route('mypage.ajax_review_possible_list') }}",
+			data		: {
+                'page'  : page,
+			},
+			success: function(html){
+                //console.log(html);
+                $("#review_possible_list").append(html);
+                return;
+			}
+		});
+    }
+</script>
+
+<script>
+    shop_moreList(); //함수 호출
+
+    function shop_moreList() {
+        var page = $("#shop_page").val();
+
+		if( page == '' ) page = 1;
+        else page++;
+
+		$.ajax({
+			type		: "get",
+			url			: "{{ route('mypage.ajax_review_shop_list') }}",
+			data		: {
+                'page'  : page,
+			},
+			success: function(html){
+                //console.log(html);
+                $("#review_my_list").append(html);
+                return;
+			}
+		});
+    }
+</script>
 
 
 

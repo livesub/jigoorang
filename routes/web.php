@@ -32,13 +32,14 @@ Route::get('/home', [
 */
 
 /** 체험단 미리 오픈을 위해 라우터 변경(나중에 위에로 변경)-211207 */
+
 Route::get('/', [
     'as' => 'main.index',
     'uses' => 'App\Http\Controllers\exp\expController@index',
 ]);
 
-Route::get('/list', [expController::class, 'index'])->name('exp.list');
 
+Route::get('/list', [expController::class, 'index'])->name('exp.list');
 
 
 /* 로그인이 되지 않은 페이지에 접근 했을시에 로그인 페이지로 이동 */
@@ -175,6 +176,18 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'App\Http\Controllers\member\ReviewPossibleController@index',
     ]);
 
+    //(평가단)
+    Route::get('member/ajax_review_possible_list', [
+        'as' => 'mypage.ajax_review_possible_list',
+        'uses' => 'App\Http\Controllers\member\ReviewPossibleController@ajax_review_possible_list',
+    ]);
+
+    //쇼핑몰
+    Route::get('member/ajax_review_shop_list', [
+        'as' => 'mypage.ajax_review_shop_list',
+        'uses' => 'App\Http\Controllers\member\ReviewPossibleController@ajax_review_shop_list',
+    ]);
+
     //mypage 구매 리뷰 작성
     Route::get('member/review_possible_shopwrite', [
         'as' => 'mypage.review_possible_shopwrite',
@@ -205,11 +218,22 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'App\Http\Controllers\member\ReviewPossibleController@ajax_review_possible_img_del',
     ]);
 
-
     //mypage 체험단 내가쓴 리뷰
     Route::get('member/review_my_list', [
         'as' => 'mypage.review_my_list',
         'uses' => 'App\Http\Controllers\member\ReviewPossibleController@review_my_list',
+    ]);
+
+    //mypage 체험단 내가쓴 리뷰(평가단)
+    Route::get('member/ajax_review_my_exp_list', [
+        'as' => 'mypage.ajax_review_my_exp_list',
+        'uses' => 'App\Http\Controllers\member\ReviewPossibleController@ajax_review_my_exp_list',
+    ]);
+
+    //mypage 체험단 내가쓴 리뷰(쇼핑몰)
+    Route::get('member/ajax_review_my_shop_list', [
+        'as' => 'mypage.ajax_review_my_shop_list',
+        'uses' => 'App\Http\Controllers\member\ReviewPossibleController@ajax_review_my_shop_list',
     ]);
 
     //mypage wish(하트) - 응원하기

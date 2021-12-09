@@ -66,7 +66,95 @@ class ReviewPossibleController extends Controller
             'CustomUtils'   => $CustomUtils,
             'exp_appinfos'  => $exp_appinfos,
             'orders'        => $orders,
+            'po_total_record'   => count($exp_appinfos),
         ]);
+    }
+
+    public function ajax_review_possible_list(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+
+        $page       = $request->input('page');
+        $now_date   = date('Y-m-d', time());
+
+        //체험단 쿼리
+        $exp_app = DB::table('exp_application_list as a')
+            ->select('b.*', 'a.id as exp_app_id', 'a.exp_id', 'a.item_id', 'a.sca_id', 'a.created_at as regi_date')
+            ->join('exp_list as b', function($join) {
+                    $join->on('a.exp_id', '=', 'b.id');
+                })
+            ->where([['b.exp_review_end', '>=', $now_date], ['a.user_id', Auth::user()->user_id], ['a.access_yn','y'], ['a.write_yn', 'n']]);
+
+        $pageScale  = 10;  //한페이지당 라인수
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+            $end_row = $pageScale * $page;
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
+
+        $total_record   = 0;
+        $total_record   = $exp_app->count(); //총 게시물 수
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
+
+        $exp_appinfos = $exp_app->orderBy('a.created_at', 'DESC')->offset($start_num)->limit($pageScale)->get();
+        $end_cnt = $exp_app->orderBy('a.created_at', 'DESC')->offset($end_row)->limit($pageScale)->get();
+
+        $view = view('member.ajax_review_possible_list',[
+            'CustomUtils'   => $CustomUtils,
+            'exp_appinfos'  => $exp_appinfos,
+            'page'          => $page,
+            'po_end_cnt'    => count($end_cnt),
+        ]);
+
+        return $view;
+    }
+
+    public function ajax_review_shop_list(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+
+        $page       = $request->input('page');
+        $now_date   = date('Y-m-d', time());
+
+        //쇼핑몰 쿼리
+        $orders_info = DB::table('shoporders as a')
+            ->select('b.*', 'a.order_id', 'a.created_at as regi_date')
+            ->leftjoin('shopcarts as b', function($join) {
+                $join->on('a.order_id', '=', 'b.od_id');
+                })
+            ->where([['a.user_id', Auth::user()->user_id], ['b.sct_qty','!=', '0'], ['b.review_yn', 'n'], ['b.sct_status', '!=', '취소']])
+            ->where(DB::raw('a.created_at + INTERVAL 30 DAY'), '>=', now());
+
+        $pageScale  = 10;  //한페이지당 라인수
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+            $end_row = $pageScale * $page;
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
+
+        $total_record   = 0;
+        $total_record   = $orders_info->count(); //총 게시물 수
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
+
+        $orders = $orders_info->orderBy('a.created_at', 'DESC')->offset($start_num)->limit($pageScale)->get();
+        $end_cnt = $orders_info->orderBy('a.created_at', 'DESC')->offset($end_row)->limit($pageScale)->get();
+
+        $view = view('member.ajax_review_shop_list',[
+            'CustomUtils'   => $CustomUtils,
+            'orders'        => $orders,
+            'shop_page'     => $page,
+            'shop_end_cnt'    => count($end_cnt),
+        ]);
+
+        return $view;
     }
 
     public function review_possible_shopwrite(Request $request)
@@ -698,7 +786,154 @@ class ReviewPossibleController extends Controller
             'CustomUtils'               => $CustomUtils,
             'review_saves_exp_infos'    => $review_saves_exp_infos,
             'review_saves_shop_infos'   => $review_saves_shop_infos,
+            'date_type'                 => $date_type,
         ]);
+    }
+
+    //내가 쓴 리뷰 체험단
+    public function ajax_review_my_exp_list(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+
+        $page       = $request->input('page');
+        $date_type  = $request->input('date_type');
+
+        //리뷰 관련
+        $where_exp = '';
+
+        $review_saves_exp_sql = DB::table('review_saves')->where([['user_id', Auth::user()->user_id], ['temporary_yn', 'n']]);
+
+        switch($date_type)
+        {
+            case 'one_month':
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0')->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -1 MONTH) and NOW()");
+                break;
+
+            case 'three_month':
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0')->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -3 MONTH) and NOW()");
+                break;
+
+            case 'six_month':
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0')->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -6 MONTH) and NOW()");
+                break;
+
+            case 'one_year':
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0')->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -1 YEAR) and NOW()");
+                break;
+
+            case 'three_year':
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0')->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -3 YEAR) and NOW()");
+                break;
+
+            case 'all':
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0');
+                break;
+
+            default:
+                $where_exp = $review_saves_exp_sql->where('exp_id', '!=', '0')->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -1 MONTH) and NOW()");
+                break;
+        }
+
+        $pageScale  = 10;  //한페이지당 라인수
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+            $end_row = $pageScale * $page;
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
+
+        $total_record   = 0;
+        $total_record   = $where_exp->count(); //총 게시물 수
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
+
+        $review_saves_exp_infos = $where_exp->orderBy('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
+        $end_cnt = $where_exp->orderBy('id', 'DESC')->offset($end_row)->limit($pageScale)->get();
+
+        //$review_saves_exp_infos = $where_exp->orderBy('id', 'DESC')->get();     //체험단 쿼리
+
+        $view = view('member.ajax_review_my_exp_list',[
+            'CustomUtils'               => $CustomUtils,
+            'review_saves_exp_infos'    => $review_saves_exp_infos,
+            'exp_page'                  => $page,
+            'exp_end_cnt'               => count($end_cnt),
+        ]);
+
+        return $view;
+    }
+
+    //내가 쓴 리뷰 쇼핑몰
+    public function ajax_review_my_shop_list(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+
+        $page       = $request->input('page');
+        $date_type  = $request->input('date_type');
+
+        $where_shop = '';
+
+        $review_saves_shop_sql = DB::table('review_saves')->where([['user_id', Auth::user()->user_id], ['temporary_yn', 'n']]);
+        switch($date_type)
+        {
+            case 'one_month':
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']])->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -1 MONTH) and NOW()");
+                break;
+
+            case 'three_month':
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']])->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -3 MONTH) and NOW()");
+                break;
+
+            case 'six_month':
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']])->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -6 MONTH) and NOW()");
+                break;
+
+            case 'one_year':
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']])->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -1 YEAR) and NOW()");
+                break;
+
+            case 'three_year':
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']])->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -3 YEAR) and NOW()");
+                break;
+
+            case 'all':
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']]);
+                break;
+
+            default:
+                $where_shop = $review_saves_shop_sql->where([['exp_id', '0'], ['cart_id', '!=', '0']])->whereRaw("updated_at between DATE_ADD(NOW(), INTERVAL -1 MONTH) and NOW()");
+                break;
+        }
+
+        $review_saves_shop_infos = $where_shop->orderBy('id', 'DESC')->get();     //shop 쿼리
+
+        $pageScale  = 10;  //한페이지당 라인수
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+            $end_row = $pageScale * $page;
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
+
+        $total_record   = 0;
+        $total_record   = $where_shop->count(); //총 게시물 수
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
+
+        $review_saves_shop_infos = $where_shop->orderBy('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
+        $end_cnt = $where_shop->orderBy('id', 'DESC')->offset($end_row)->limit($pageScale)->get();
+
+        $view = view('member.ajax_review_my_shop_list',[
+            'CustomUtils'               => $CustomUtils,
+            'review_saves_shop_infos'   => $review_saves_shop_infos,
+            'shop_page'                 => $page,
+            'shop_end_cnt'              => count($end_cnt),
+        ]);
+
+        return $view;
     }
 
     //마이페이지 (평가단 신청 결과 확인)
