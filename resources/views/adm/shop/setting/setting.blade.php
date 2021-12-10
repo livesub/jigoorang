@@ -120,7 +120,7 @@
 @if(Auth::user()->user_level < 3)
 <table border=1>
     <tr>
-        <td colspan="2"><b>이미지 리사이징 설정</b></td>
+        <td colspan="2"><b>쇼핑몰 이미지 리사이징 설정</b></td>
     </tr>
     <tr>
         <td>WIDTH</td>
