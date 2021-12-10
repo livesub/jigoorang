@@ -834,7 +834,7 @@ class ReviewPossibleController extends Controller
                 break;
         }
 
-        $pageScale  = 10;  //한페이지당 라인수
+        $pageScale  = 5;  //한페이지당 라인수
         if($page != "")
         {
             $start_num = $pageScale * ($page - 1);
@@ -908,7 +908,7 @@ class ReviewPossibleController extends Controller
 
         $review_saves_shop_infos = $where_shop->orderBy('id', 'DESC')->get();     //shop 쿼리
 
-        $pageScale  = 10;  //한페이지당 라인수
+        $pageScale  = 5;  //한페이지당 라인수
         if($page != "")
         {
             $start_num = $pageScale * ($page - 1);
