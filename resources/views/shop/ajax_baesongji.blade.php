@@ -1,3 +1,26 @@
+       <div class="modal-background" onclick="addressclosemodal_001()"></div>
+        <div class="modal-container">
+            <div class="modal-container-title">
+                <h4>배송지 주소</h4>
+                <div class="btn-close" onclick="addressclosemodal_001()">
+            </div>
+          </div>
+             <div class="modal-container-body">
+                 <p class="none">등록된 배송지가 없습니다</p>
+            </div>
+        </div>
+        <div class="btn btn_2ea">
+            <button class="modal_btn01" onclick="addressclosemodal_001()">
+                닫기
+            </button>
+            <button class="modal_btn02" onclick="addressclosemodal_001(); addressinputopen_001();">
+                배송지 추가
+            </button>
+        </div>
+
+
+
+
 <table border=1>
     <tr>
         <td>배송지 목록</td>

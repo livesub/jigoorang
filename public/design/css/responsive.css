@@ -393,6 +393,13 @@
     padding: 13px 13px 12px 13px;
   }
 
+  .eval .board .board_wrap .information {
+    padding: 20px 0 30px 0;
+    /* 20px 0 30px 0; */
+    border-bottom: 1px solid #ddd;
+    font-size: 16px;
+  }
+
   .eval .board .board_wrap .information .information-input {
     /* line-height: 145px; */
     flex-direction: column; /*수직 정렬*/
@@ -430,20 +437,25 @@
   }
 
   /* 마이페이지 */
+
+  .mypage .mypage_wrap {
+    padding: 0;
+  }
+
   .mypage .mypage_inner_01 {
     width: 100%;
+    height: 180px;
+    position: relative;
   }
 
   .mypage .mypage_inner_01 .mypage_innerbox_01 {
-    width: 100%;
   }
 
   .mypage .mypage_inner_01 .mypage_innerbox_02 {
-    width: 100%;
   }
 
   .mypage .mypage_inner_01 .mypage_box {
-    width: 25%;
+    width: 50%;
     height: 160px;
     background-color: #f8f8f8;
     border: solid 2px #ddd;
@@ -451,7 +463,148 @@
     display: block;
     text-align: center;
     padding: 20px 20px 0 0;
+    float: left;
+    box-sizing: border-box;
     /* border-right: none; */
+  }
+
+  .mypage .mypage_box_02 .text {
+    width: 250px;
+  }
+
+  .mypage .mypage_box_02 .text span:last-child {
+    position: absolute;
+  }
+  .mypage .mypage_inner_01 .mypage_box:nth-child(1) {
+    border-right: none;
+    border-bottom: none;
+  }
+  .mypage .mypage_inner_01 .mypage_box:nth-child(2) {
+    border-bottom: none;
+  }
+
+  .mypage .mypage_inner_01 .mypage_box.solid {
+    border-bottom: solid 2px #ddd;
+  }
+
+  /* 평가단 신청 리스트 */
+  .title_area.list h2 {
+    font-size: 16px;
+  }
+
+  .eval .board.mypage_list .board_wrap .list {
+    width: 100%;
+    display: flex;
+  }
+
+  .eval .board.mypage_list .board_wrap .list .body {
+    height: 100%;
+    max-height: 85px;
+    padding: 10px 0 10px 0;
+    font-size: 16px;
+  }
+
+  .eval .board.mypage_list .board_wrap .list .body .title {
+    max-width: 202px;
+    font-size: 14px;
+  }
+
+  .eval .board.mypage_list .board_wrap .list .title_sub {
+    width: 100%;
+    padding: 30px 10px 10px 10px;
+    text-align: right;
+    position: relative;
+    font-size: 15px;
+  }
+
+  /* 회원정보 수정 */
+  .eval
+    .board.mypage_list
+    .board_wrap
+    .list
+    .information.user_list
+    li:first-child {
+    width: 24%;
+    padding-right: 0;
+  }
+
+  /* 1:1 문의 내역 답변 (view) */
+
+  .eval .board.mypage_list .board_wrap .list.view {
+    padding: 10px 0 10px 0;
+  }
+
+  /* .eval .board.mypage_list .board_wrap .list.view .body {
+  margin: 0 0 20px 0;
+} */
+
+  .eval .board.mypage_list .board_wrap .list.view .title_sub a {
+    margin: 0;
+  }
+
+  .eval .board.mypage_list .board_wrap .list.view .body {
+    width: 100%;
+    height: 100%;
+  }
+
+  .eval .board.mypage_list .board_wrap .list.view .body.view {
+    width: 100%;
+    height: 100%;
+    margin: 10px 0 70px 0;
+  }
+
+  .eval .board.mypage_list .board_wrap .list.view .body .title03 {
+    width: 110%;
+    max-width: 700px;
+    height: auto;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .eval .board.mypage_list .board_wrap .list.view .body.view .ordernumber {
+    width: 100%;
+    height: 44px;
+    background: #f8f8f8;
+    border: solid 2px #ddd;
+    padding: 10px 20px;
+    font-size: 16px;
+  }
+
+  .eval .board.mypage_list .board_wrap .list.view .body.view .view_text {
+    margin: 30px 0 50px 0;
+  }
+
+  .eval .board.mypage_list .board_wrap .list.view .body.view .view_icon {
+    background: url("../recources/icons/view.png") no-repeat left;
+    width: 100%;
+    height: 16px;
+    background-size: 16px 16px;
+  }
+
+  .eval .board.mypage_list .board_wrap .list.view .body.view .view_icon h4 {
+    margin-left: 21px;
+    font-weight: bold;
+  }
+
+  .eval .board.mypage_list .board_wrap .list.view .body.view .view_text_02 {
+    margin: 30px 0 0 0;
+    padding-left: 20px;
+  }
+
+  .eval
+    .board.mypage_list
+    .board_wrap
+    .list.view
+    .body.view
+    .view_text_02
+    .day {
+    padding-top: 23px;
   }
 }
 
@@ -471,7 +624,109 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 50px;
+  }
+
+  .modal-dialog-contents .btn.btn00 .modal-dialog.btn.small01 {
+    border-top: solid 2px #ddd;
+    width: 50%;
+    margin-top: 0;
+    left: 0;
+    /* margin-left: 170px; */
+    font-size: 16px;
+    font-weight: bold;
+    color: #707070;
+  }
+
+  .modal-dialog-contents .btn.btn00 .modal-dialog.btn.small02 {
+    background: #3ec4ba;
+    color: #fff;
+    width: 50%;
+    margin-top: 0;
+    right: 0;
+    /* margin-left: 170px; */
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .modal .modal-container {
+    width: 100%;
+    height: 100%;
+    max-width: 480px;
+    max-height: 500px;
+    background-color: #fff;
+    margin: 0;
+    /* padding: 10px 10px 0 5px; */
+    position: fixed;
+    /* border-radius: 2rem; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+  }
+
+  .modal .btn.btn_2ea {
+    width: 100%;
+    max-width: 480px;
+  }
+
+  .modal .modal-container .modal-container-body .none {
+    text-align: center;
+    padding: 145px 0;
+  }
+
+  .modal-container-body .adress_input label {
+    width: 100%;
+    max-width: 110px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    margin-right: 10px;
+    top: 6px;
+  }
+
+  .modal-container-body .adress_input input {
+    width: 100%;
+    max-width: 365px;
+    height: 48px;
+  }
+
+  .modal-container-body .adress_input .adress_input03 {
+    width: 100%;
+    max-width: 100px;
+    height: 48px;
+  }
+
+  .modal-container-body .adress_input label .adress_input03_btn {
+    width: 91px;
+    height: 48px;
+    border: solid 2px #3ec4ba;
+    background: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    color: #3ec4ba;
+    margin: 0;
+  }
+
+  .modal-container-body .adress_input .adress_input04 {
+    margin-left: 61px;
+  }
+
+  /* 휴대전화번호 변경 모달 */
+
+  .modal .modal-container.num {
+    width: 100%;
+    height: 100%;
+    max-width: 480px;
+    max-height: 400px;
+  }
+
+  .modal .modal-container .modal-container-body.num .phonnum_input input {
+    width: 100%;
+    max-width: 291px;
+    height: 48px;
+    /* line-height: 145px; */
+    border: solid 2px #ddd;
+    caret-color: #ddd;
+    margin-top: 10px;
   }
 
   /* 공통 */
@@ -684,6 +939,68 @@
     width: 100%;
     height: 48px;
   }
+
+  /* 마이페이지  */
+
+  .mypage .mypage_wrap {
+    padding: 0;
+  }
+
+  /* 평가단 신청 리스트 */
+
+  .eval .board.mypage_list .board_wrap .list .body {
+    height: 100%;
+    padding: 10px 0 0 0;
+    font-size: 16px;
+  }
+
+  .eval .board.mypage_list .board_wrap .list .body .title {
+    max-width: 202px;
+    font-size: 14px;
+  }
+
+  /* 회원정보 수정 */
+  .eval
+    .board.mypage_list
+    .board_wrap
+    .list
+    .information.user_list
+    li:first-child {
+    width: 28%;
+    padding-right: 0;
+  }
+
+  /* 1:1 문의내역 (none) */
+
+  .eval .board.mypage_list .board_wrap .serch input {
+    width: 100%;
+    max-width: 260px;
+    height: 48px;
+    border: solid 2px #ddd;
+    caret-color: #ddd;
+    margin-top: 30px;
+  }
+
+  /* 1:1 문의내역 (view) */
+  .eval .board.mypage_list .board_wrap .list.view {
+    padding: 10px 0 30px 0;
+  }
+
+  .eval .board.mypage_list .board_wrap .list.view .body .title03 h4 {
+    font-size: 16px;
+    padding-bottom: 10px;
+  }
+
+  .eval .board.mypage_list .board_wrap .list.view .body .title03 {
+    width: 354px;
+    height: 80px;
+    font-size: 18px;
+    padding-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 @media screen and (max-width: 480px) {
@@ -729,6 +1046,162 @@
     overflow: scroll;
     font-size: 16px;
     -ms-overflow-style: none;
+  }
+
+  .modal .modal-container {
+    width: 100%;
+    height: 100%;
+    max-width: 320px;
+    max-height: 357px;
+    background-color: #fff;
+    margin: 0;
+    /* padding: 10px 10px 0 5px; */
+    position: fixed;
+    /* border-radius: 2rem; */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+  }
+
+  .modal .btn.btn_2ea {
+    width: 100%;
+    max-width: 320px;
+    max-height: 42px;
+    top: 74%;
+  }
+
+  .modal .modal-container .modal-container-body .none {
+    text-align: center;
+    padding: 110px 0;
+  }
+
+  .modal-container-body .adress_input label {
+    width: 100%;
+    max-width: 110px;
+    margin-bottom: 8px;
+    font-size: 16px;
+    margin-right: 10px;
+    top: 6px;
+  }
+
+  .modal-container-body .adress_input input {
+    width: 100%;
+    max-width: 220px;
+    height: 36px;
+  }
+
+  .modal-container-body .adress_input .adress_input03 {
+    width: 100%;
+    max-width: 100px;
+    height: 36px;
+  }
+
+  .modal-container-body .adress_input label .adress_input03_btn {
+    width: 91px;
+    height: 36px;
+    border: solid 2px #3ec4ba;
+    background: #fff;
+    font-size: 13px;
+    font-weight: bold;
+    color: #3ec4ba;
+    margin: 0;
+  }
+
+  .modal-container-body .adress_input .adress_input04 {
+    margin-left: 61px;
+  }
+
+  /* 휴대전화번호 변경 모달 */
+
+  .modal .modal-container.num {
+    width: 100%;
+    height: 100%;
+    max-width: 320px;
+    max-height: 240px;
+    padding: 15px;
+  }
+
+  .modal .modal-container.num .modal-container-title h4 {
+    font-size: 14px;
+    top: 7px;
+  }
+
+  .modal .modal-container.num .modal-container-body.num .phonnum_input input {
+    width: 100%;
+    max-width: 195px;
+    height: 36px;
+    margin-top: 10px;
+  }
+
+  .modal
+    .modal-container.num
+    .modal-container-body.num
+    .phonnum_input
+    input::placeholder {
+    font-size: 13px;
+    padding: 2px;
+  }
+
+  .modal .modal-container.num .modal-container-body.num .phonnum_input button {
+    width: 100%;
+    max-width: 90px;
+    line-height: 33px;
+    font-size: 13px;
+    font-weight: bold;
+    padding: 0;
+  }
+
+  .modal .modal-container.num .modal-container-body.num .phonnum_input p {
+    padding: 5px;
+    font-size: 10px;
+  }
+
+  .modal .modal-container.num .modal-container-body.num .phonnum_input .off {
+    width: 100%;
+    max-width: 90px;
+    line-height: 33px;
+    font-size: 13px;
+    padding: 0;
+  }
+
+  .modal .btn.btn_2ea.num {
+    top: 65%;
+    font-size: 13px;
+  }
+
+  .modal .btn.btn_2ea.num .modal_btn01 {
+    border: solid 1px #ddd;
+  }
+
+  /* 비밀번호 변경 모달 */
+
+  .modal .modal-container .modal-container-body.num .pw_input {
+    width: 100%;
+    font-size: 16px;
+  }
+
+  .modal .modal-container .modal-container-body.num .pw_input input {
+    width: 100%;
+    height: 36px;
+    margin-top: 10px;
+  }
+
+  .modal
+    .modal-container
+    .modal-container-body.num
+    .pw_input
+    input::placeholder {
+    font-size: 11px;
+  }
+
+  .modal .modal-container .modal-container-body.num .pw_input p {
+    padding: 5px;
+    font-size: 10px;
+  }
+
+  .modal .btn.btn_2ea.num {
+    top: 65%;
   }
 
   /* 공통 */
@@ -830,6 +1303,11 @@
     width: 320px;
   }
 
+  .eval .board .board_wrap .list_img iframe {
+    margin: 0 auto;
+    width: 320px;
+  }
+
   .eval .board .board_wrap .information_01 .information-inner-title-btn {
     padding: 22px;
   }
@@ -909,8 +1387,223 @@
   }
 
   /* 마이페이지 */
-  .mypage .mypage_box {
-    width: 162px;
+  .mypage .mypage_wrap {
+    padding: 0px;
+  }
+
+  .mypagetitle {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .mypagetitle p {
+    font-size: 15px;
+  }
+
+  .mypagetitle h3 {
+    font-size: 18px;
+  }
+
+  .mypagetitle .btn-bg-mint {
+    margin: 17px 0;
+    font-weight: bold;
+    font-size: 13px;
+  }
+
+  .mypage .title {
+    font-size: 24px;
+  }
+
+  .mypage h3 {
+    font-size: 15px;
+    padding: 15px 0;
+  }
+
+  .mypage .mypage_inner_01 {
+    width: 100%;
+    height: 160px;
+    position: relative;
+  }
+
+  .mypage .mypage_inner_01 .mypage_box {
+    width: 50%;
     height: 100px;
+    background-color: #f8f8f8;
+    border: solid 2px #ddd;
+    float: left;
+    display: block;
+    text-align: center;
+    padding: 5px 0 0 0;
+    float: left;
+    box-sizing: border-box;
+    font-size: 12px;
+    /* border-right: none; */
+  }
+
+  .mypage .mypage_inner_01 .mypage_box:nth-child(1) {
+    border-right: none;
+    border-bottom: none;
+  }
+  .mypage .mypage_inner_01 .mypage_box:nth-child(2) {
+    border-bottom: none;
+  }
+
+  .mypage .mypage_inner_01 .mypage_box.solid {
+    border-bottom: solid 2px #ddd;
+  }
+
+  .mypage .mypage_inner_01 .mypage_box span {
+    padding: 60px 0 0 0;
+  }
+
+  .mypage .mypage_inner_01 .mypage_box .mypage_box_img01 {
+    position: absolute;
+    background: url(../recources/imgs/rectangle_01.png) no-repeat center;
+    background-size: 95px 60px;
+    width: 100%;
+    height: 64px;
+  }
+
+  .mypage .mypage_inner_01 .mypage_box .mypage_box_img02 {
+    background: url(../recources/imgs/rectangle_02.png) no-repeat center;
+    position: absolute;
+    background-size: 90px 60px;
+    width: 100%;
+    height: 60px;
+  }
+
+  .mypage .mypage_inner_01 .mypage_box .mypage_box_img03 {
+    background: url(../recources/imgs/rectangle_03.png) no-repeat center;
+    position: absolute;
+    background-size: 90px 60px;
+    width: 100%;
+    height: 60px;
+  }
+
+  .mypage .mypage_inner_01 .mypage_box .mypage_box_img04 {
+    background: url(../recources/imgs/rectangle.png) no-repeat center;
+    position: absolute;
+    background-size: 90px 60px;
+    width: 100%;
+    height: 60px;
+  }
+
+  .mypage .mypage_inner_02 {
+    display: inline-block;
+    width: 100%;
+  }
+
+  .mypage .mypage_inner_02 .mypage_content_01 {
+    width: 100%;
+  }
+
+  .mypage .mypage_box_02 {
+    width: 100%;
+    height: 40px;
+    border: solid 2px #ddd;
+    font-size: 13px;
+    padding: 0 10px;
+    line-height: 35px;
+    margin-top: 0px;
+    background-size: 30px 30px;
+  }
+
+  .mypage .mypage_box_02 div {
+    position: absolute;
+    right: 50px;
+    top: 0px;
+    text-align: right;
+  }
+
+  .mypage .mypage_box_02 .point {
+    color: #3ec4ba;
+    font-weight: bold;
+    font-size: 15px;
+    margin-top: 7px;
+    right: 28px;
+  }
+
+  /* 평가단 신청 리스트 */
+  .title_area.list h2 {
+    font-size: 16px;
+  }
+
+  .eval .board.mypage_list .board_wrap .list .body {
+    height: 100%;
+    max-height: 85px;
+    padding: 10px 0 0 0;
+    font-size: 16px;
+  }
+
+  .eval .board.mypage_list .board_wrap .list .body .title {
+    width: 100%;
+    max-width: 202px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .eval .board.mypage_list .board_wrap .list .title_sub {
+    width: 100%;
+    padding: 30px 10px 10px 10px;
+    text-align: right;
+    position: relative;
+    font-size: 15px;
+  }
+  /* 회원정보 수정 */
+  .eval
+    .board.mypage_list
+    .board_wrap
+    .list
+    .information.user_list
+    li:first-child {
+    width: 47%;
+    padding-right: 0;
+  }
+
+  /* 1:1 문의내역 (none) */
+  .eval .board.mypage_list .board_wrap .serch {
+    width: 100%;
+    text-align: center;
+  }
+
+  .eval .board.mypage_list .board_wrap .serch input {
+    width: 100%;
+    max-width: 229px;
+    height: 36px;
+    border: solid 2px #ddd;
+    caret-color: #ddd;
+    margin-top: 15px;
+  }
+  .eval .board.mypage_list .board_wrap .serch button {
+    width: 100%;
+    max-width: 90px;
+    height: 36px;
+    margin-top: 15px;
+  }
+
+  /* 1:1 문의내역 (view) */
+
+  .eval .board.mypage_list .board_wrap .list.view .body .title03 h4 {
+    font-size: 10px;
+    padding-bottom: 10px;
+  }
+
+  .eval .board.mypage_list .board_wrap .list.view .body .title03 {
+    width: 250px;
+    height: 60px;
+    font-size: 14px;
+    padding-bottom: 10px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .eval .board.mypage_list .board_wrap .list.view .body.view {
+    font-size: 14px;
+  }
+
+  .eval .board.mypage_list .board_wrap .list.view .body.view h4 {
+    font-size: 14px;
   }
 }

@@ -14,7 +14,7 @@
 
     <meta property="og:title" content="지구랭">
     <meta property="og:description" content="지구랭">
-    <meta property="og:image" content="./resources/logo.png">
+    <meta property="og:image" content="{{ asset('/design/resources/logo.png') }}">
 
     <link rel="stylesheet" href="{{ asset('/design/css/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/css/layout.css') }}">

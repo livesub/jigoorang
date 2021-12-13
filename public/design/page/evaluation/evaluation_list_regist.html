@@ -18,7 +18,150 @@
 </head>
 <body>
 
-      <!-- 상세 모달 -->
+     <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. -->
+     <div class="modal_002 modal fade">
+       <div class="modal-background" onclick="addressclosemodal_001()"></div>
+        <div class="modal-container">
+            <div class="modal-container-title">
+                <h4>배송지 주소</h4>
+                <div class="btn-close" onclick="addressclosemodal_001()">
+            </div>
+          </div>
+             <div class="modal-container-body">
+                 <p class="none">등록된 배송지가 없습니다</p>
+            </div>
+        </div>
+        <div class="btn btn_2ea">
+            <button class="modal_btn01" onclick="addressclosemodal_001()">
+                닫기
+            </button>
+            <button class="modal_btn02" onclick="addressclosemodal_001(); addressinputopen_001();">
+                배송지 추가
+            </button>                    
+        </div> 
+    </div>
+    <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. 끝 -->
+
+
+
+     <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. -->
+     <div class="modal_003 modal fade">
+        <div class="modal-background" onclick="addressclose_001()"></div>
+         <div class="modal-container scroll">
+             <div class="modal-container-title">
+                 <h4>배송지 주소</h4>
+                 <div class="btn-close" onclick="addressclose_001()">
+             </div>
+           </div>
+              <div class="modal-container-body">
+                  <div class="modal-container-box">
+                    <h3>지구룡 <span>(기본 배송지)</span></h3>
+                    <p>경기도 지구시 지구동 지구아파트 
+                        <br>101동 101호</p> 
+
+                    <button class="btn-3ea-01">삭제</button>
+                    <button class="btn-3ea-02">수정</button>
+                    <button class="btn-3ea-03">선택</button>
+                  </div>
+
+                  <div class="modal-container-box">
+                    <h3>지구룡 <span>(기본 배송지)</span></h3>
+                    <p>경기도 지구시 지구동 지구아파트 
+                       <br>101동 101호</p> 
+
+                    <button class="btn-3ea-01">삭제</button>
+                    <button class="btn-3ea-02">수정</button>
+                    <button class="btn-3ea-03">선택</button>
+                  </div>
+                  <div class="modal-container-box">
+                    <h3>지구룡 <span>(기본 배송지)</span></h3>
+                    <p>경기도 지구시 지구동 지구아파트 
+                       <br>101동 101호</p> 
+
+                    <button class="btn-3ea-01">삭제</button>
+                    <button class="btn-3ea-02">수정</button>
+                    <button class="btn-3ea-03">선택</button>
+                  </div>
+                  <div class="modal-container-box">
+                    <h3>지구룡 <span>(기본 배송지)</span></h3>
+                    <p>경기도 지구시 지구동 지구아파트 
+                       <br>101동 101호</p> 
+
+                    <button class="btn-3ea-01">삭제</button>
+                    <button class="btn-3ea-02">수정</button>
+                    <button class="btn-3ea-03">선택</button>
+                  </div>
+                  <div class="modal-container-box">
+                    <h3>지구룡 <span>(기본 배송지)</span></h3>
+                    <p>경기도 지구시 지구동 지구아파트 
+                       <br>101동 101호</p> 
+
+                    <button class="btn-3ea-01">삭제</button>
+                    <button class="btn-3ea-02">수정</button>
+                    <button class="btn-3ea-03">선택</button>
+                  </div>
+             </div>
+         </div>
+         <div class="btn btn_2ea">
+             <button class="modal_btn01" onclick="addressclose_001()">
+                 닫기
+             </button>
+             <button class="modal_btn02" onclick="addressclose_001(); addressinputopen_001();">
+                 배송지 추가
+             </button>                    
+         </div> 
+     </div>
+     <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. 끝 -->
+
+
+
+
+     <!-- 배송지 모달 (입력) -->
+     <div class="modal_004 modal fade">
+        <div class="modal-background" onclick="addressinputclose_001()"></div>
+         <div class="modal-container">
+             <div class="modal-container-title">
+                 <h4>배송지 입력</h4>
+                 <div class="btn-close" onclick="addressinputclose_001()">
+             </div>
+           </div>
+              <div class="modal-container-body">
+                  <div class="adress_input">
+                    <label for="">수령인</label>
+                    <input type="name" name="" id="">
+
+                    <label for="">휴대폰</label>
+                    <input type="number" name="" id="">
+
+                <div class="adress_input02">
+                    <label for="">배송지</label>
+                    <input type="text" name="" id="" class="adress_input03">
+                    <label for="">
+                        <button class="adress_input03_btn">우편번호 찾기</button>
+                    </label>
+                </div>
+                    <input type="text" name="" id="" class="adress_input04">
+                    <input type="text" name="" id="" class="adress_input04">
+                </div>
+                <div class="checkbox">
+                  <input type="checkbox" name="" id="">
+                  <label for="">기본배송지 등록</label>
+                </div>
+             </div>
+         </div>
+         <div class="btn btn_2ea">
+             <button class="modal_btn01" onclick="addressinputclose_001()">
+                 닫기
+             </button>
+             <button class="modal_btn02" onclick="addressinputclose_001(); addressopen_001();">
+                 등록
+             </button>                    
+         </div> 
+     </div>
+    <!-- 배송지 모달 (입력) // 끝 -->
+    
+
+      <!-- 상세 모달 (상세보기) -->
       <div class="modal_001 modal fade">
         <div class="modal-background" onclick="detilclosemodal_001()"></div>
         <div class="modal-dialog">
@@ -52,6 +195,7 @@
         </div>
         </div>
     </div>
+    <!-- 상세 모달 끝 -->
 
 
 <div class="wrap">
@@ -90,7 +234,7 @@
 
             <div class="m-menu">
                 <ul class="m-menu-my">
-                    <a href="#"><li>로그인<span class="m-menu-my-boder"></span></li></a> 
+                    <a href="../../page/login/login.html"><li>로그인<span class="m-menu-my-boder"></span></li></a> 
                     <!-- <a href="#"><li>로그아웃<span class="m-menu-my-boder"></span></li></a>  -->
 
                     <a href="../../page/mypage/mypage.html"><li>마이페이지</li></a>
@@ -133,7 +277,7 @@
 
             <!-- 오픈전 메뉴 -->
             <ul class="menu2">
-                <li class="my"><a href="#"><span>마이페이지</span></a></li>
+                <li class="my"><a href="../../page/mypage/mypage.html"><span>마이페이지</span></a></li>
                 <li class="login"><a href="../../page/login/login.html"><span>로그인</span></a></li>
             <!-- <li class="loginout"><a href=""><span>로그아웃</span></a></li>-->
             <!-- 로그아웃 -->
@@ -219,14 +363,15 @@
                             <textarea name="" id="" cols="100%" 
                             placeholder="* 최대 300자까지 입력 가능합니다 &#13;&#10;* 참여 이유를 자세히 기입해 주세요. 선정 확률이 높아집니다&#13;&#10;* 과거에 비슷한 제품을 사용해 본 경험이 있으신가요? &#13;&#10;*있다면 어떤 제품을 사용해 본 적이 있는지 제품명을 포함하여 적어주세요"></textarea>
                         </ul>
+                        <span id="textLengthCheck" class="textLengthCheck"></span>
                     </div>
 
 
                     <div class="information information_01">
                         <div class="information-inner-title">
                             <h4>배송지</h4>
-                            <button id="btn" onclick='changeBtnName()'>배송지 입력 + </button>    <!-- 배송지 입력버튼 -->
-                            <!-- <button>배송지 설정 / 변경</button> --> <!-- 클릭햇을때 배송지 입력버튼 -->
+                            <button onclick='addressopenmodal_001()'>배송지 입력 + </button>    <!-- 배송지 입력버튼 -->
+                            <!-- <button id="btn" onclick='changeBtnName()'>배송지 설정 / 변경</button> --> <!-- 클릭햇을때 배송지 입력버튼 -->
                         </div>
 
                         <div class="information-inner-title-btn" id="hide">

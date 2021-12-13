@@ -2,215 +2,137 @@
 
 @section('content')
 
-<!-- <script>
-  function pw_change()
-  {
-    if($('#user_pw').val() == '')
-    {
-      alert('{{ $alert_pw }}');
-      $('#user_pw').focus();
-      return false;
-    }
+    <!-- 서브 컨테이너 시작 -->
+    <div class="sub-container">
 
-    if($('#user_pw_confirmation').val() == '')
-    {
-      alert('{{ $alert_pw_confirmation }}');
-      $('#user_pw_confirmation').focus();
-      return false;
-    }
+        <!-- 위치 시작 -->
+        <div class="location">
+            <ul>
+                <li><a href="/">홈</a></li>
+                <li><a href="{{ route('mypage.index') }}">마이페이지</a></li>
+            </ul>
+        </div>
+        <!-- 위치 끝 -->
 
-    if($('#user_pw').val().length < 6 || $('#user_pw').val().length > 16)
-    {
-      alert('비밀번호는 6자 이상 16이하로 입력 하세요.');
-      $('#user_pw').focus();
-      return false;
-    }
+        <!-- 타이틀 시작 -->
+        <div class="title_area">
+            <h2>마이페이지</h2>
+            <div class="text_02 wt-nm mypagetitle">
+            <span class="mypagetitle_left">
+               <p>안녕하세요</p>
+               <h3>{{ Auth::user()->user_name }}님</h3>
+            </span>
+            <a href="{{ route('member_info_index') }}">
+               <button class="btn-bg-mint">회원정보 수정</button>
+            </a>
+            </div>
+            <div class="line_14-100"></div>
+        </div>
+        <!-- 타이틀 끝 -->
 
-    if($('#user_pw_confirmation').val().length < 6 || $('#user_pw_confirmation').val().length > 16)
-    {
-      alert('비밀번호는 6자 이상 16이하로 입력 하세요.');
-      $('#user_pw_confirmation').focus();
-      return false;
-    }
+        <!-- 마이페이지시작  -->
 
-    if($('#user_pw').val() != $('#user_pw_confirmation').val())
-    {
-      alert('{{ $user_pw_same }}');
-      $('#user_pw_confirmation').focus();
-      return false;
-    }
-
-    $.ajax({
-          headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-          type: 'post',
-          url: '{{ route('mypage.pw_change') }}',
-          dataType: 'json',
-          data: {
-            'user_pw' : $('#user_pw').val(),
-            'user_pw_confirmation' : $('#user_pw_confirmation').val()
-          },
-          success: function(data) {
-            console.log(data);
-
-            if(data.status == 'false'){
-              alert(data.status_ment);
-            }else{
-              alert(data.status_ment);
-              location.href = '';
-            }
-          },
-          error: function(data) {
-
-            console.log(data);
-            //초기화
-            $(document).find('[name=user_pw]').val('');
-            $(document).find('[name=user_pw_confirmation]').val('');
-            $('#reset_user_pw').remove();
-            $('#reset_user_pw_confirmation').remove();
-
-            $.each(data.responseJSON.errors,function(field_name,error){
-              $(document).find("[name='+field_name+']").after("<span class='text-strong textdanger' id='reset_'+field_name>' +error+ '</span>");
-            })
-          }
-    });
-  }
-</script>
-
-    <div class='page-header'>
-      <h4>
-      {{ $title_mypage }}
-      </h4>
-    </div>
-
-  <form action='{{ route('mypage.infosave') }}' id='mypage_form' method='post' enctype='multipart/form-data'>
-  {!! csrf_field() !!}
-
-    <div class='form-group'>
-     {{ $title_id }} : <b>{{ $user_id }}</b>
-    </div>
+            <div class="mypage">
+                <!-- 마이페이지 컨텐츠 시작 -->
+                <div class="mypage_wrap">
+                    <div class="title">
+                        <h3>나의 쇼핑정보</h3>
+                </div>
+                    <div class="mypage_inner_01">
+                        <div class="mypage_innerbox_01">
+                            <div class="mypage_box">
+                            <a href="">
+                                <div class="mypage_box_img01"></div>
+                                <span>주문 배송내역</span>
+                            </a>
+                            </div>
 
 
-    <div class='form-group'>
-      {{ $title_name }} : <input name='user_name' id='user_name' type='text' class='form-control @error('user_name') is-invalid @enderror' value='{{ $user_name }}' placeholder='{{ $user_name }}'>
-    </div>
-    @error('user_name')
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
+                            <div class="mypage_box">
+                                <a href="">
+                                    <div class="mypage_box_img02"> </div>
+                                    <span>취소/교환/반품 신청안내</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    <div class="mypage_innerbox_02">
+                        <div class="mypage_box solid">
+                            <a href="">
+                                <div class="mypage_box_img03"></div>
+                                <span>구매상품 리뷰</span>
+                            </a>
+                        </div>
 
 
-    <div class='form-group'>
-      {{ $title_pw }} : <input name='user_pw' id='user_pw' type='password' class='form-control @error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder='{{ $user_pw }}'>
-    </div>
-    @error('user_pw')
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
-    </div>
+                        <div class="mypage_box solid">
+                            <a href="">
+                                <div class="mypage_box_img04"></div>
+                                <span>응원한 상품</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            <div class="mypage_inner_02">
+
+                <div class="mypage_content_01">
+                    <div class="title box_2">
+                        <h3>나의 계정설정</h3>
+                    </div>
+
+                    <a href="">
+                        <div class="mypage_box_02">
+                           포인트현황
+                           <div class="point">{{ number_format(Auth::user()->user_point) }}P</div>
+                        </div>
+                    </a>
+                </div>
+                <div class="mypage_content_01">
+                    <div class="title box_2">
+                        <h3>나의 배송지</h3>
+                    </div>
 
 
-    <div class='form-group'>
-      {{ $title_pw_confirmation }} : <input name='user_pw_confirmation' id='user_pw_confirmation' type='password' class='form-control @error('user_pw_confirmation') is-invalid @enderror' placeholder='{{ $user_pw_confirmation }}'>
-      <input type='button' value='{{ $pw_change }}' onclick='pw_change();'>
-    </div>
-    @error('user_pw_confirmation')
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
+                    <a href="">
+                        <div class="mypage_box_02 solid">
+                            배송지 관리
+                        </div>
+                    </a>
+                </div>
+                </div>
 
 
-    <div class='form-group'>
-      {{ $title_phone }} : <input name='user_phone' id='user_phone' type='text' class='form-control @error('user_phone') is-invalid @enderror' value='{{ $user_phone }}' placeholder='{{ $user_phone }}'>
-    </div>
-    @error('user_phone')
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    @enderror
+                <div class="mypage_inner_02">
+                    <div class="mypage_content_01">
+                        <div class="title box_2">
+                            <h3>나의 평가단</h3>
+                        </div>
 
-    <div class='form-group'>
-      {{ $title_image }} : <input name='user_imagepath[]' id='user_imagepath' type='file' class='form-control'>
-    </div>
-
-    @error('user_imagepath.0')
-    <div class='form-group'>
-        <span class='invalid-feedback' role='alert'>
-            <strong>{{ $message }}</strong>
-        </span>
-    </div>
-    @enderror
-
-    @if ($user_imagepath != '')
-        <img src='{{ asset('/data/member/'.$user_thumb_name) }}' style='border-radius: 50%;'>
-        <a href="{{ url('filedown', $type) }}">{{ $user_ori_imagepath }}</a>
-    @endif
+                        <a href="{{ route('mypage.exp_app_list') }}">
+                            <div class="mypage_box_02">
+                                평가단 신청 결과 확인
+                            </div>
+                        </a>
+                    </div>
+                    <div class="mypage_content_01">
+                        <div class="title box_2">
+                            <h3>나의 문의 내역</h3>
+                        </div>
+                        <a href="../../page/mypage/mypage_evaluation_list_view.html">
+                            <div class="mypage_box_02 solid">
+                                1:1 문의 내역/답변
+                            </div>
+                        </a>
+                    </div>
+                </div>
 
 
-    <div class='form-group'>
-      {{ $join_date }} : {{ $created_at }}
-    </div>
+            </div> <!-- 마이페이지 컨텐츠 끝 -->
 
-
-    <div class='form-group' style='margin-top: 2em;'>
-      <button class='btn btn-primary btn-lg btn-block' type='submit'>
-        {{ $submit_join }}
-      </button>
-      <button type="button" onclick="withdraw();">탈퇴 하기</button>
-    </div>
-
-
-  </form>
-
-<script>
-  function withdraw(){
-    if (confirm("정말 탈퇴 하시겠습니까?") == true){    //확인
-        location.href='{{ route('mypage.withdraw') }}';
-    }else{   //취소
-        return false;
-    }
-  }
-</script>
-
-
-{{--
-@if ($errors->any())
-    <div class='alert alert-danger'>
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
---}} -->
-<div class='page-header'>
-      <h4>
-      {{ $title_mypage }}
-      </h4>
-</div>
-
-<table border=1>
-  <tr>
-    <td>주문/배송내역</td>
-    <td>취소/교환/반품 신청안내</td>
-  </tr>
-  <tr>
-    <td><a href="{{ route('mypage.review_possible_list') }}">구매상품 리뷰</a></td>
-    <td><a href="{{ route('mypage.wish_list') }}">응원한 상품</a></td>
-  </tr>
-  <tr>
-    <td><a href="{{ route('mypage.user_point_list') }}">적립금현황 {{ number_format(Auth::user()->user_point) }}P</a></td>
-    <td>배송지관리</td>
-  </tr>
-  <tr>
-    <td colspan=2><a href="{{ route('mypage.exp_app_list') }}">평가단 신청 결과확인</a></td>
-  </tr>
-</table>
-<a href="{{ route('member_info_index') }}"><button>회원정보수정</button></a>
-
+    </div> <!-- 마이페이지 끝  -->
+</div><!-- 서브 컨테이너 끝 -->
 
 
 
