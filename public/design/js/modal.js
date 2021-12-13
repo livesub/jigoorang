@@ -7,7 +7,7 @@
 // function openmodal_001() {
 //     openModal();
 //     document.querySelector('.modal.modal_001').classList.add('in');
-// }
+// }        
 // function closemodal_001(){
 //     closeModal();
 //     document.querySelector('.modal.modal_001').classList.remove('in');
@@ -41,7 +41,6 @@ function addresscloseModal() {
 function addressopenmodal_001() {
     addressopenModal();
     document.querySelector('.modal.modal_002').classList.add('in');
-    baesongji();
 }
 function addressclosemodal_001() {
     addresscloseModal();
@@ -63,7 +62,7 @@ function addressopen_001() {
 }
 function addressclose_001() {
     addressclose();
-    document.querySelector('.modal.modal_002').classList.remove('in');
+    document.querySelector('.modal.modal_003').classList.remove('in');
 }
 
 
@@ -80,11 +79,11 @@ function addressinputopen_001() {
 }
 function addressinputclose_001() {
     addressinputclose();
-    document.querySelector('.modal.modal_002').classList.remove('in');
+    document.querySelector('.modal.modal_004').classList.remove('in');
 }
 
 
-//회원정보 (휴대폰 번호 변경)
+//회원정보 (휴대폰 번호 변경) 
 function phoninputopen() {
     document.querySelector('body').classList.add('modal-open')
 }
@@ -101,7 +100,7 @@ function phoninputclose_001() {
 }
 
 
-//회원정보 (비밀번호 변경)
+//회원정보 (비밀번호 변경) 
 function pwinputopen() {
     document.querySelector('body').classList.add('modal-open')
 }

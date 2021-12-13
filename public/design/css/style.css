@@ -75,8 +75,17 @@ h5 {
   border: solid 1px #ddd;
 }
 
+.list_solid {
+  border-top: solid 1px #ddd;
+  margin-top: 30px;
+}
+
 .point {
   color: #ff0000;
+}
+
+.point00 {
+  color: #3ec4ba;
 }
 
 /********** 메인 컨테이너 **********/
@@ -131,7 +140,7 @@ h5 {
     left: 290px;
     position: absolute;
   }
-
+  
   .swiper-button-prev {
     background: url(https://cdn-icons-png.flaticon.com/512/254/254442.png)
       no-repeat;
@@ -142,7 +151,7 @@ h5 {
     display: block;
     position: absolute;
   }
-
+  
   .swiper-button-next::after,
   .swiper-button-prev::after {
     display: none;
@@ -839,6 +848,16 @@ h5 {
   .board_wrap
   .information_01
   .information-inner-01
+  .information-address
+  li:last-child {
+  flex-direction: column;
+}
+
+.eval
+  .board
+  .board_wrap
+  .information_01
+  .information-inner-01
   .information-input
   li:first-child {
   padding: 0 88px 0 0;
@@ -1459,7 +1478,6 @@ input::placeholder {
   margin-top: 4px;
 }
 
-
 /* 평가단 신청 리스트 */
 .title_area.list h2 {
   font-size: 32px;
@@ -1477,52 +1495,196 @@ input::placeholder {
 
 .eval .board.mypage_list .board_wrap .list .title_sub {
   width: 100%;
-  padding: 30px 10px 10px 10px ;
+  padding: 30px 10px 10px 10px;
   text-align: right;
   position: relative;
   font-size: 20px;
 }
 
-.eval .board.mypage_list .board_wrap .list .title_sub.point01{
+.eval .board.mypage_list .board_wrap .list .title_sub.point01 {
   color: #707070;
 }
-.eval .board.mypage_list .board_wrap .list .title_sub.point02{
+.eval .board.mypage_list .board_wrap .list .title_sub.point02 {
   color: #3ec4ba;
 }
-
 
 /* 회원정보 수정 */
 .eval .board.mypage_list .board_wrap .list .information {
   border: none;
 }
 
-.eval .board.mypage_list .board_wrap .list .information.user_list  {
+.eval .board.mypage_list .board_wrap .list .information.user_list {
   width: 100%;
 }
 
-.eval .board.mypage_list .board_wrap .list .information.user_list li:first-child {
+.eval
+  .board.mypage_list
+  .board_wrap
+  .list
+  .information.user_list
+  li:first-child {
   width: 24%;
 }
 
-.eval .board.mypage_list .board_wrap .list .information.checkbox .checkbox_block {
+.eval
+  .board.mypage_list
+  .board_wrap
+  .list
+  .information.checkbox
+  .checkbox_block {
   display: block;
 }
 
-.eval .board.mypage_list .board_wrap .list .information.checkbox .checkbox_block li {
+.eval
+  .board.mypage_list
+  .board_wrap
+  .list
+  .information.checkbox
+  .checkbox_block
+  li {
   padding: 10px 0 0 0;
 }
 
 .eval .board.mypage_list .board_wrap .list input[type="checkbox"]:checked {
   background: #ddd;
   border: solid 1px #fff;
-  cursor:default
+  cursor: default;
 }
 
-.eval .board.mypage_list .board_wrap .list .information.checkbox .checkbox_block span {
+.eval
+  .board.mypage_list
+  .board_wrap
+  .list
+  .information.checkbox
+  .checkbox_block
+  span {
   color: #f00;
   font-weight: bold;
 }
 
+.eval .board.mypage_list .board_wrap a {
+  float: right;
+}
+
+.eval .board.mypage_list .board_wrap .secession {
+  color: #707070;
+}
+
+/* 회원 탈퇴 */
+
+.eval .board .board_wrap {
+  width: 100%;
+}
+
+.eval .board .board_wrap.secession_content {
+  padding: 30px 40px 30px 40px;
+}
+
+.eval
+  .board
+  .board_wrap.secession_content
+  .list_02 {
+    width: 100%;
+  }
+
+.eval
+  .board
+  .board_wrap.secession_content
+  .list_02
+  .secession_01
+  .secession_text_00 {
+  font-size: 16px;
+  letter-spacing: -0.5px;
+  padding: 19px 0 0 0;
+}
+
+.eval
+  .board
+  .board_wrap.secession_content
+  .list_02
+  .secession_01
+  .secession_text_01
+  li {
+  font-size: 16px;
+  letter-spacing: -1px;
+  line-height: 35px;
+}
+
+.eval
+  .board
+  .board_wrap.secession_content
+  .list_02
+  .secession_01
+  .secession_text_01
+  input {
+  margin: 20px 0 40px 0;
+}
+
+.eval
+  .board
+  .board_wrap.secession_content
+  .list_02
+  .secession_01
+  .secession_text_01
+  label {
+  top: 16px;
+}
+
+.eval .board .board_wrap.secession_content .list_02 .secession_02 {
+  padding: 20px 0 20px 0;
+}
+.eval .board .board_wrap.secession_content .list_02 .secession_02 h4 {
+  padding: 20px 0 20px 0;
+}
+.eval
+  .board
+  .board_wrap.secession_content
+  .list_02
+  .secession_02
+  .secession_radio_btn {
+  display: block;
+  padding: 20px 0 0 0;
+}
+
+.eval
+  .board
+  .board_wrap.secession_content
+  .list_02
+  .secession_02
+  .secession_radio_btn
+  li {
+  display: block;
+  padding: 5px 0 10px 0;
+}
+
+.eval
+  .board
+  .board_wrap.secession_content
+  .list_02
+  .secession_02
+  .secession_radio_btn
+  textarea {
+  vertical-align: top;
+  width: 100%;
+  /* line-height: 145px; */
+  height: 145px;
+  border: solid 2px #ddd;
+}
+
+.eval
+  .board
+  .board_wrap.secession_content
+  .list_02
+  .secession_02
+  .secession_radio_btn
+  textarea::placeholder {
+  padding: 10px;
+}
+
+.eval .board .board_wrap.secession_content .secession_btn_area {
+  width: 100%;
+  text-align: center;
+}
 
 /* 1:1 문의 내역 답변 (none) */
 .eval .board.mypage_list .board_wrap .serch {
@@ -1549,7 +1711,6 @@ input::placeholder {
   font-size: 16px;
   text-align: center;
 }
-
 
 /* 1:1 문의 내역 답변 (view) */
 
@@ -1581,12 +1742,12 @@ input::placeholder {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  overflow:hidden;
+  overflow: hidden;
 }
 
-.eval .board.mypage_list .board_wrap .list.view .body.view .ordernumber  {
+.eval .board.mypage_list .board_wrap .list.view .body.view .ordernumber {
   width: 100%;
-  height:44px;
+  height: 44px;
   background: #f8f8f8;
   border: solid 2px #ddd;
   padding: 10px 20px;
@@ -1597,12 +1758,11 @@ input::placeholder {
   margin: 30px 0 50px 0;
 }
 
-
 .eval .board.mypage_list .board_wrap .list.view .body.view .view_icon {
- background: url("../recources/icons/view.png") no-repeat left;
- width: 100%;
- height: 16px;
- background-size: 16px 16px;
+  background: url("../recources/icons/view.png") no-repeat left;
+  width: 100%;
+  height: 16px;
+  background-size: 16px 16px;
 }
 
 .eval .board.mypage_list .board_wrap .list.view .body.view .view_icon h4 {
@@ -1616,14 +1776,60 @@ input::placeholder {
 }
 
 .eval .board.mypage_list .board_wrap .list.view .body.view .view_text_02 .day {
- padding-top: 50px;
+  padding-top: 50px;
 }
 
+/* 1:1 문의 내역 답변 (list) */
+.eval .board .board_wrap .list .body .title p {
+  font-size: 16px;
+  font-weight: 600;
+}
 
+/* 고객센터 */
 
-
-
-
+.eval .board.mypage_list .board_wrap .tab_menu {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 500px;
+}
+.eval .board.mypage_list .board_wrap .tab_menu .list_tab {
+  overflow: hidden;
+}
+.eval .board.mypage_list .board_wrap .tab_menu .list_tab li {
+  float: left;
+  margin-right: 14px;
+  width: 100%;
+}
+.eval .board.mypage_list .board_wrap .tab_menu .list_tab .btn_list {
+  font-size: 20px;
+  width: 572px;
+  height: 70px;
+  text-align: center;
+  border-bottom: solid 4px #3ec4ba;
+}
+.eval .board.mypage_list .board_wrap .tab_menu .list_tab .is_on .btn_list {
+  color: #fff;
+  background: #3ec4ba;
+  width: 572px;
+  height: 70px;
+  text-align: center;
+}
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont {
+  /* display: none; */
+  position: absolute;
+  top: 25px;
+  left: 0;
+  background: #ddd;
+  color: #fff;
+  text-align: center;
+  width: 100%;
+  height: 500px;
+  line-height: 100px;
+}
+.eval .board.mypage_list .board_wrap .tab_menu .list_tab .cont_area .cont {
+  /* display: block; */
+}
 
 /* 모달 시작 */
 
@@ -1828,16 +2034,16 @@ input::placeholder {
 
 .modal .modal-container {
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: 680px;
-  max-height: 600px;
+  /* max-height: 500px; */
   background-color: #fff;
   margin: 0;
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  padding: 30px 40px 0px 40px;
+  /* padding: 30px 40px 0px 40px; */
 }
 
 .modal .modal-container .modal-container-title .btn-close {
@@ -1853,6 +2059,8 @@ input::placeholder {
 }
 
 .modal .modal-container .modal-container-body {
+  padding: 40px;
+  line-height: 1.5em;
 }
 
 .modal .modal-container .modal-container-body .none {
@@ -1864,13 +2072,13 @@ input::placeholder {
   width: 100%;
   max-width: 680px;
   height: 72px;
-  margin: 0;
+  margin: 0 auto;
   background: #f00;
   display: flex;
-  position: fixed;
+  /* position: fixed;
   top: 78%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
 }
 .modal .btn.btn_2ea .modal_btn01 {
   width: 50%;
@@ -1895,22 +2103,20 @@ input::placeholder {
 
 /* 배송지 모달 (주소) */
 
-.modal .modal-container.scroll {
+.modal .modal-container-body .scroll {
   overflow: scroll;
-  height: auto;
-  padding-bottom: 72px;
+  height: 364px;
+  margin-top: 30px;
   -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
+  scrollbar-width: none; /* Firefox */
 }
 
-.modal .modal-container.scroll::-webkit-scrollbar {
+.modal .modal-container .scroll::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera*/
 }
 
 .modal .modal-container .modal-container-body {
-  margin-top: 30px;
-
-
+  /* margin-top: 30px; */
 }
 
 /* .modal .btn.btn_2ea {
@@ -1929,11 +2135,11 @@ input::placeholder {
 .modal .modal-container .modal-container-body .modal-container-box {
   width: 100%;
   max-width: 600px;
-  height: 147px;
+  height: auto;
   border: solid 2px #ddd;
   margin-top: 10px;
   font-size: 16px;
-  padding: 10px 20px;
+  padding: 25px 20px;
   letter-spacing: -0.5px;
 }
 
@@ -2043,11 +2249,9 @@ input::placeholder {
   margin-top: 22px;
 }
 
-
-
 /* 휴대전화번호 변경 모달 */
 
-.modal .modal-container.num{
+.modal .modal-container.num {
   width: 100%;
   height: 100%;
   max-width: 680px;
@@ -2069,7 +2273,11 @@ input::placeholder {
   margin-top: 10px;
 }
 
-.modal .modal-container .modal-container-body.num .phonnum_input input::placeholder {
+.modal
+  .modal-container
+  .modal-container-body.num
+  .phonnum_input
+  input::placeholder {
   font-size: 16px;
   padding: 10px;
   color: #aeaeae;
@@ -2108,8 +2316,6 @@ input::placeholder {
 .modal .btn.btn_2ea.num {
   top: 70%;
 }
-
-
 
 /* 비밀번호 변경 모달 */
 

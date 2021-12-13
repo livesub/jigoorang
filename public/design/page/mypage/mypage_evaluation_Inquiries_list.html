@@ -17,78 +17,6 @@
     <title>지구랭</title>
 </head>
 <body>
-
-
-<!-- 휴대폰 번호변경  -->
-<div class="modal_005 modal fade">
-    <div class="modal-background" onclick=""></div>
-     <div class="modal-container num">
-         <div class="modal-container-title">
-             <h4>휴대전화 번호 변경</h4>
-             <div class="btn-close" onclick="phoninputclose_001()">
-         </div>
-       </div>
-          <div class="modal-container-body num">
-              <div class="phonnum_input">
-                <input type="number" name="" id="" placeholder="휴대전화 번호를 '-' 없이 입력하세요.">
-                <button>인증번호 받기</button>
-
-                <input type="number" name="" id="" placeholder="인증번호를 입력하세요">
-                <button>인증 확인</button>
-                <!-- <button class="off">인증 확인</button> -->
-                <p>4:59초 내에 인증해 주세요</p>
-            </div>
-         </div>
-     </div>
-     <div class="btn btn_2ea num">
-         <button class="modal_btn01" onclick="phoninputclose_001()">
-             닫기
-         </button>
-         <button class="modal_btn02" onclick="">
-             등록
-         </button>                    
-     </div> 
- </div>
-<!-- 휴대폰 번호변경 // 끝 -->
-
-
-<!-- pw변경  -->
-<div class="modal_006 modal fade">
-    <div class="modal-background" onclick=""></div>
-     <div class="modal-container num pw">
-         <div class="modal-container-title">
-             <h4>비밀번호 변경</h4>
-             <div class="btn-close" onclick="pwinputclose_001()">
-         </div>
-       </div>
-          <div class="modal-container-body num pw">
-              <div class="pw_input">
-                <input type="password" name="" id="" placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외))">
-                <p>비밀번호 형식이 잘못되었습니다.</p>
-
-                <input type="password" name="" id="" placeholder="비밀번호를 재입력(위와 같은 비밀번호를 입력해 주세요)">
-                <p>위의 비밀번호와 동일한 비밀번호를 입력하세요.</p>
-            </div>
-         </div>
-     </div>
-     <div class="btn btn_2ea num">
-         <button class="modal_btn01" onclick="pwinputclose_001()">
-             취소
-         </button>
-         <button class="modal_btn02" onclick="">
-             확인
-         </button>                    
-     </div> 
- </div>
-<!-- pw변경 // 끝 -->
-
-
-
-
-
-
-
-
 <div class="wrap">
 
     <!-- 탭바 시작 -->
@@ -199,85 +127,102 @@
             <ul>
                 <li><a href="../../index.html">홈</a></li>
                 <li><a href="../../page/mypage/mypage.html">마이페이지</a></li>
-                <li><a href="../../page/mypage/mypage_user_information.html">회원정보 수정</a></li>
+                <li><a href="../../page/mypage/mypage_evaluation_list.html">1:1 문의 내역 / 답변</a></li>
             </ul>
         </div>
         <!-- 위치 끝 -->
         
         <!-- 타이틀 시작 -->
         <div class="title_area list">
-            <h2>회원정보 수정</h2>
+            <h2>1:1 문의 내역 답변</h2>
             <div class="line_14-100"></div>
         </div>
         <!-- 타이틀 끝 -->
                 
-        <!-- 평가단 신청 결과 확인 시작  -->
+        <!-- 1:1문의내역 리스트 시작  -->
         <div class="eval">
 
             <div class="board mypage_list">
                 <!-- 리스트 시작 -->
                 <div class="board_wrap">
-                    <div class="list">                
-                        <div class="information user_list">
-                            <h4>회원 정보</h4>
-                            <ul class="information-email">
-                                <li> 아이디 (이메일 주소)</li>
-                                <li> g9ryong@g9ryong.com</li>
-                            </ul>
-                            <ul class="information-name">
-                                <li> 이름</li>
-                                <li> 지구룡</li>
-                            </ul>
-                            <ul class="information-phon">
-                                <li> 휴대폰</li>
-                                <li> 010-1354-1235</li>
-                                <button onclick="phoninputopen_001()">변경</button>
-                            </ul>
-                            <ul class="information-name">
-                                <li> 생년월일</li>
-                                <li> 840505</li>
-                            </ul>
-                            <ul class="information-name">
-                                <li> 성별</li>
-                                <li> 남</li>
-                            </ul>
-                            <ul class="information-phon">
-                                <li> 비밀번호</li>
-                                <li> ********</li>
-                                <button onclick="pwinputopen_001()">변경</button>
-                            </ul>
-                        </div>              
+                    <div class="serch">
+                        <input type="search" name="" id="">
+                        <label for=""><button class="serch">검색</button></label>
+                    </div>
+                    <div class="list list_solid">                
+                        <div class="body">
+                            <div class="title">
+                                <p>배송문의</p>
+                                겁나 문의 사항 많음 답변 바람                     
+                            </div>
+                            <dl>
+                                <dd>2021.10.15</dd>
+                            </dl>
+                        </div>
+                        <div class="title_sub point01"><!-- class="point01" (비활성) -->
+                           답변대기                   
+                        </div>                 
                     </div>
                     <div class="list">                
-                        <div class="information checkbox">
-                            <h4>서비스 약관 동의</h4>
-                        <ul class="checkbox_block">   
-                            <li>
-                            <input type="checkbox" name="" id="" checked disabled>
-                            <label for="">만 14세 이상입니다. <span>(필수)</span></label>
-                            </li>
-                            <li>
-                            <input type="checkbox" name="" id="" checked disabled>
-                            <label for="">약관동의 <span>(필수)</span></label>
-                            </li>
-                            <li>
-                            <input type="checkbox" name="" id="" checked disabled>
-                            <label for="">개인정보 보호방침 <span>(필수)</span></label>
-                            </li>
-                        </ul> 
-                        </div>              
+                        <div class="body">
+                            <div class="title">
+                                <p>배송문의</p>
+                                배송이 23년이 지났는데 안와요
+                            </div>
+                            <dl>
+                                <dd>2021.10.15</dd>
+                            </dl>
+                        </div>
+                        <div class="title_sub point02"> <!-- class="point02" (답변완료일때 활성) -->
+                            답변완료                   
+                        </div>                 
                     </div>
-                    <a href="../../page/mypage/mypage_user_secession.html"><span class="secession">회원탈퇴</span></a>
+                    <div class="list">                
+                        <div class="body">
+                            <div class="title">
+                                <p>배송문의</p>
+                                배송이 23년이 지났는데 안와요
+                            </div>
+                            <dl>
+                                <dd>2021.10.15</dd>
+                            </dl>
+                        </div>
+                        <div class="title_sub point02">
+                            <a href="../../page/evaluation/evaluation_list_view.html">답변완료</a>                    
+                        </div>                 
+                    </div>
+                    <div class="list">                
+                        <div class="body">
+                            <div class="title">
+                                <p>배송문의</p>
+                                배송이 23년이 지났는데 안와요
+                            </div>
+                            <dl>
+                                <dd>2021.10.15</dd>
+                            </dl>
+                        </div>
+                        <div class="title_sub point02"> <!-- class="point02" (답변완료일때 활성) -->
+                            <a href="../../page/evaluation/evaluation_list_view.html">답변완료</a>                    
+                        </div>                 
+                    </div>
+                    <div class="list">                
+                        <div class="body">
+                            <div class="title">
+                                <p>배송문의</p>
+                                배송이 23년이 지났는데 안와요
+                            </div>
+                            <dl>
+                                <dd>2021.10.15</dd>
+                            </dl>
+                        </div>
+                        <div class="title_sub point02">  <!-- class="point02" (답변완료일때 활성) -->
+                            답변완료                   
+                        </div>                 
+                    </div>
                 </div>
-                <!-- 리스트 끝 -->
-
+                <!--  1:1문의내역 리스트  끝  -->
             </div>
-
         </div>
-        <!-- 평가단 신청 결과 확인 끝  -->
-
-       
-
     </div>
     <!-- 서브 컨테이너 끝 -->
 
@@ -322,6 +267,6 @@
 
 </div>
 <script src="../../js/sidenav.js"></script>
-<script src="../../js/modal.js"></script>
+
 </body>
 </html>

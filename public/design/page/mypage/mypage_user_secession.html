@@ -199,14 +199,14 @@
             <ul>
                 <li><a href="../../index.html">홈</a></li>
                 <li><a href="../../page/mypage/mypage.html">마이페이지</a></li>
-                <li><a href="../../page/mypage/mypage_user_information.html">회원정보 수정</a></li>
+                <li><a href="../../page/mypage/mypage_user_information.html">회원탈퇴</a></li>
             </ul>
         </div>
         <!-- 위치 끝 -->
         
         <!-- 타이틀 시작 -->
         <div class="title_area list">
-            <h2>회원정보 수정</h2>
+            <h2>회원 탈퇴</h2>
             <div class="line_14-100"></div>
         </div>
         <!-- 타이틀 끝 -->
@@ -214,60 +214,51 @@
         <!-- 평가단 신청 결과 확인 시작  -->
         <div class="eval">
 
-            <div class="board mypage_list">
+            <div class="board">
                 <!-- 리스트 시작 -->
-                <div class="board_wrap">
-                    <div class="list">                
-                        <div class="information user_list">
-                            <h4>회원 정보</h4>
-                            <ul class="information-email">
-                                <li> 아이디 (이메일 주소)</li>
-                                <li> g9ryong@g9ryong.com</li>
-                            </ul>
-                            <ul class="information-name">
-                                <li> 이름</li>
-                                <li> 지구룡</li>
-                            </ul>
-                            <ul class="information-phon">
-                                <li> 휴대폰</li>
-                                <li> 010-1354-1235</li>
-                                <button onclick="phoninputopen_001()">변경</button>
-                            </ul>
-                            <ul class="information-name">
-                                <li> 생년월일</li>
-                                <li> 840505</li>
-                            </ul>
-                            <ul class="information-name">
-                                <li> 성별</li>
-                                <li> 남</li>
-                            </ul>
-                            <ul class="information-phon">
-                                <li> 비밀번호</li>
-                                <li> ********</li>
-                                <button onclick="pwinputopen_001()">변경</button>
+                <div class="board_wrap secession_content">
+                    <div class="list_02">                
+                        <div class="secession_01">
+                            <h4>지구랭 회원 탈퇴 안내</h4>
+
+                            <div class="secession_text_00">
+                                고객님, 저희 서비스가 부족하거나 불편해 탈퇴를 고민하게 해드려 죄송합니다.
+                                불편하셨던 점이나 불만사항을 알려주시면, 저희가 적극 반영하여 불편이 없도록 조치하겠습니다. <br>
+                                <span class="point00">(jigoorang_hehe@naver.com)</span><br><br><br>
+
+                                만약 그럼에도 회원 탈퇴를 원하신다면, 아래 사항을 유의하시기 바랍니다.</div><br>
+                            
+                            <ul class="secession_text_01">
+                                <li> 1. 탈퇴 시 사용하셨던 동일한 아이디, 휴대폰 번호는 재 가입 방지를 위해 90일간 보존된 후 삭제 처리됩니다.  (재가입을 원할 시 탈퇴일로부터 90일 이후 가능합니다) </li>
+                                <li> 2. 탈퇴 시 회원 정보의 복구는 불가능하며, 보유하신 포인트도 모두 무효화됩니다.</li>
+                                <li> 3. 작성하신 평가 및 리뷰 정보는 탈퇴 후에도 삭제되지 않습니다. 삭제를 원할 시, 반드시 탈퇴 전 직접 삭제하셔야 합니다.</li><br>
+
+                                <input type="checkbox" name="" id=""> <label for="">위 내용을 모두  확인하였으며 모든 내용에 동의 합니다.</label>
                             </ul>
                         </div>              
                     </div>
-                    <div class="list">                
-                        <div class="information checkbox">
-                            <h4>서비스 약관 동의</h4>
-                        <ul class="checkbox_block">   
-                            <li>
-                            <input type="checkbox" name="" id="" checked disabled>
-                            <label for="">만 14세 이상입니다. <span>(필수)</span></label>
-                            </li>
-                            <li>
-                            <input type="checkbox" name="" id="" checked disabled>
-                            <label for="">약관동의 <span>(필수)</span></label>
-                            </li>
-                            <li>
-                            <input type="checkbox" name="" id="" checked disabled>
-                            <label for="">개인정보 보호방침 <span>(필수)</span></label>
-                            </li>
-                        </ul> 
-                        </div>              
+                    <div class="list_02">     
+                        <div class="secession_02">
+                            <h4>회원 탈퇴 사유</h4>
+                            <p>그동안 지구랭을 이용해주셔서 감사합니다.<br>
+                                탈퇴 이유를 작성해주시면 더나은 서비스로 보답하겠습니다.</p>
+
+                          <ul class="secession_radio_btn">
+                            <li><input type="radio" name="" id=""> <label for="">방문 빈도가 낮아요</label></li>
+                            <li><input type="radio" name="" id=""> <label for="">개인 정보가 걱정돼요</label></li>
+                            <li><input type="radio" name="" id=""> <label for="">고객응대가 불만이에요(상담, 문의 등)</label></li>
+                            <li><input type="radio" name="" id=""> <label for="">배송, 교환, 환불, 반품이 불만이에요.</label></li>
+                            <li><input type="radio" name="" id=""> <label for="">상품이 부족해요</label></li>
+                            <li><input type="radio" name="" id=""> <label for="">컨텐츠가 불만이에요</label></li>
+                            <li><input type="radio" name="" id=""> <label for="">UI/UX가 불편해요</label></li>
+                            <li><input type="radio" name="" id=""> <label for="">기타(직접입력)</label></li>
+                            <textarea placeholder="이유를 작성해 주세요."></textarea>
+                          </ul>
+                        </div>                   
                     </div>
-                    <a href="../../page/mypage/mypage_user_secession.html"><span class="secession">회원탈퇴</span></a>
+                    <div class="secession_btn_area">
+                        <button class="btn-50-full">확인</button>
+                    </div>
                 </div>
                 <!-- 리스트 끝 -->
 

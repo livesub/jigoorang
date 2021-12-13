@@ -93,6 +93,7 @@
                         </ul>
                         </div>
                     </div>
+                    <a href="javascript:member_withdraw();"><span class="secession">회원탈퇴</span></a>
                 </div>
                 <!-- 리스트 끝 -->
 

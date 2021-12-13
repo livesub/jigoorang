@@ -2,9 +2,6 @@
 <script src="{{ asset('/js/zip.js') }}"></script>
 <script src="{{ asset('/design/js/modal.js') }}"></script>
 
-
-
-
         <div class="modal-background" onclick="addressinputclose_001()"></div>
         <input type="hidden" name="num" id="num" value="{{ $baesongji->id }}">
 
