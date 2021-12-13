@@ -1,85 +1,57 @@
-       <div class="modal-background" onclick="addressclosemodal_001()"></div>
-        <div class="modal-container">
-            <div class="modal-container-title">
-                <h4>배송지 주소</h4>
-                <div class="btn-close" onclick="addressclosemodal_001()">
-            </div>
-          </div>
-             <div class="modal-container-body">
-                 <p class="none">등록된 배송지가 없습니다</p>
-            </div>
-        </div>
-        <div class="btn btn_2ea">
-            <button class="modal_btn01" onclick="addressclosemodal_001()">
-                닫기
-            </button>
-            <button class="modal_btn02" onclick="addressclosemodal_001(); addressinputopen_001();">
-                배송지 추가
-            </button>
-        </div>
+<script src="{{ asset('/design/js/modal.js') }}"></script>
 
 
-
-
-<table border=1>
-    <tr>
-        <td>배송지 목록</td>
-    </tr>
-    <tr>
-        <td>
-            <table>
-                <tr>
-                    <td>이름</td>
-                    <td>배송지정보</td>
-                    <td>관리</td>
-                </tr>
-                @php
-                    $sep = chr(30);
-                    $i = 0;
-                    $addr = '';
-                @endphp
-
-                @foreach($baesongjis as $baesongji)
+        <div class="modal-background" onclick="addressclose_001()"></div>
+         <div class="modal-container scroll">
+             <div class="modal-container-title">
+                 <h4>배송지 주소</h4>
+                 <div class="btn-close" onclick="addressclose_001()">
+             </div>
+           </div>
+              <div class="modal-container-body">
+                @if(count($baesongjis) > 0)
                     @php
-                    $addr = $baesongji->ad_name.$sep.$baesongji->ad_tel.$sep.$baesongji->ad_hp.$sep.$baesongji->ad_zip1.$sep.$baesongji->ad_addr1.$sep.$baesongji->ad_addr2.$sep.$baesongji->ad_addr3.$sep.$baesongji->ad_jibeon.$sep.$baesongji->ad_subject;
-
-                    $checked = "";
-                    if($baesongji->ad_default == 1) $checked = "checked";
+                        $sep = chr(30);
+                        $i = 0;
+                        $addr = '';
                     @endphp
-                <tr>
-                    <td>
-                        <input type="hidden" name="id_ori[{{ $i }}]" id="id_ori[{{ $i }}]" value="{{ $baesongji->id }}">
-                        {{ $baesongji->ad_name }}
-                    </td>
-                    <td>
-                        {{ $baesongji->ad_addr1 }} {{ $baesongji->ad_addr2 }} {{ $baesongji->ad_addr3 }} <br>
-                        <span class="ad_tel">{{ $baesongji->ad_hp }}</span>
-                    </td>
-                    <td>
+
+                    @foreach($baesongjis as $baesongji)
+                        @php
+                        $addr = $baesongji->ad_name.$sep.$baesongji->ad_tel.$sep.$baesongji->ad_hp.$sep.$baesongji->ad_zip1.$sep.$baesongji->ad_addr1.$sep.$baesongji->ad_addr2.$sep.$baesongji->ad_addr3.$sep.$baesongji->ad_jibeon.$sep.$baesongji->ad_subject;
+
+                        $checked = "";
+                        if($baesongji->ad_default == 1) $checked = "checked";
+                        @endphp
+                  <div class="modal-container-box">
+                  <input type="hidden" name="id_ori[{{ $i }}]" id="id_ori[{{ $i }}]" value="{{ $baesongji->id }}">
+                    <h3>{{ $baesongji->ad_name }} <span>(기본 배송지)</span></h3>
+                    <p>{{ $baesongji->ad_addr1 }}
+                        <br>{{ $baesongji->ad_addr2 }} {{ $baesongji->ad_addr3 }}</p>
                         <input type="hidden" id="addr{{ $i }}" value="{{ $addr }}">
-                        <button type="button" onclick="del_addr('{{ $baesongji->id }}');">삭제</button>
-                        <button type="button" onclick="modi_addr('{{ $baesongji->id }}');">수정</button>
-                        <button type="button" onclick="return_addr('{{ $i }}');">선택</button>
-                        <input type="radio" name="ad_default_ori" id="ad_default{{ $i }}" {{ $checked }} onclick="ad_default_chk('{{ $baesongji->id }}')">
-                        <label for="ad_default_ori" class="default_lb mng_btn">기본배송지</label>
+                        <button type="button" class="btn-3ea-01" onclick="del_addr('{{ $baesongji->id }}');">삭제</button>
+                        <button type="button" class="btn-3ea-02" onclick="modi_addr('{{ $baesongji->id }}');">수정</button>
+                        <button type="button" class="btn-3ea-03" onclick="return_addr('{{ $i }}');">선택</button>
+                  </div>
+                        @php
+                            $i++;
+                        @endphp
+                    @endforeach
 
-                    </td>
-                </tr>
-                    @php
-                        $i++;
-                    @endphp
-                @endforeach
+                @else
+                  <p class="none">등록된 배송지가 없습니다</p>
+                @endif
+             </div>
+         </div>
+         <div class="btn btn_2ea">
+             <button class="modal_btn01" type="button" onclick="addressclose_001()">
+                 닫기
+             </button>
+             <button class="modal_btn02" type="button" onclick="baesongji_regi();">
+                 배송지 추가
+             </button>
+         </div>
 
-                <tr>
-                    <td>
-                        <button type="button" onclick="baesongji_regi();">등록</button>
-                        <button type="button" onclick="lay_close();">닫기</button>
-                    </td>
-                </tr>
-            </table>
-        </td>
-    <tr>
-</table>
 
 <script>
     function return_addr(num){

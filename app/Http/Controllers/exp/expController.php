@@ -61,12 +61,10 @@ class expController extends Controller
         //$overlab = $this->expApplicationList->whereUser_id(auth()->user()->id)->whereExp_id($id)->first();
         $overlab = $this->expApplicationList->whereUser_id(auth()->user()->user_id)->whereExp_id($id)->first();
 
-        //dd($overlab);
+
 
         if(!empty($overlab) || $overlab != null || $overlab != ""){
-
             return redirect()->route('exp.list.detail', $id)->with('alert_messages', "본 평가단을 이미 신청하셨습니다.");
-
         }
 
         $result = $this->expService->detail_view($id);

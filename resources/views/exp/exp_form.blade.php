@@ -30,6 +30,7 @@
 
         <!-- 신청서 시작  -->
         <div class="eval">
+
         <form action="{{ route('exp.list.form_create') }}" method="post" onsubmit="return check_submit()">
         {!! csrf_field() !!}
         <input type="hidden" id="exp_id" name="exp_id" value="{{ $id }}">
@@ -87,8 +88,8 @@
                             /> -->
                             <textarea id="form_text" name="form_text" cols="100%"
                             placeholder="* 최대 300자까지 입력 가능합니다 &#13;&#10;* 참여 이유를 자세히 기입해 주세요. 선정 확률이 높아집니다&#13;&#10;* 과거에 비슷한 제품을 사용해 본 경험이 있으신가요? &#13;&#10;*있다면 어떤 제품을 사용해 본 적이 있는지 제품명을 포함하여 적어주세요"></textarea>
-                            <span id="textLengthCheck"></span>
                         </ul>
+                        <span id="textLengthCheck" class="textLengthCheck"></span>
                     </div>
 
 
@@ -113,22 +114,24 @@
                         <div class="information-inner-01">
                             <ul class="information-name">
                                 <li> 수령인</li>
-                                <li> 지구룡</li>
+                                <li id="ad_name"> {{ $address->ad_name}}</li>
                             </ul>
                             <ul class="information-phon">
                                 <li> 휴대폰</li>
-                                <li> 010-1354-1235</li>
+                                <li id="ad_hp"> {{ $address->ad_hp }}</li>
                             </ul>
                             <ul class="information-address">
                                 <li> 주소</li>
-                                <li> 13458) 경기도 지구시 지구길(지구동, 지구아파트)
-                                   <br> 1001동 101호</li>
+                                <li id="ad_addr"> {{ $address->ad_zip1 }}) {{ $address->ad_addr1 }} {{ $address->ad_addr2 }}</li>
+                                <li id="ad_addr7"> {{ $address->ad_addr3 }}</li>
+
                             </ul>
                             <ul class="information-input">
                                 <li> 배송메모 <br>
                                     <span>(필수입력)</span>
                                 </li>
-                                <input type="text" name="" id="" placeholder="배송시 남길 메세지를 입력해 주세요">
+                                <input type="hidden" id="ad_jibeon_view" name="ad_jibeon_view" value="{{ $address->ad_jibeon }}">
+                                <input type="text" id="ship_memo" name="ship_memo" placeholder="배송시 남길 메세지를 입력해 주세요">
                             </ul>
                           </div>
                         @endif
@@ -159,7 +162,7 @@
                             </div>
                        </div>
                        <div class="list_img_btn_area">
-                        <button>평가단 신청</button>
+                        <button type="submit">평가단 신청</button>
                     </div>
                 </div>
                 <!-- 신청서 작성 끝 -->
@@ -173,7 +176,12 @@
     </div>
     <!-- 서브 컨테이너 끝 -->
 
-
+    <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. -->
+    <form name="forderform" id="forderform">
+    {!! csrf_field() !!}
+    <div class="modal_002 modal fade" id="disp_baesongi"></div>
+    </form>
+    <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. 끝 -->
 
 
       <!-- 상세 모달 -->
@@ -211,9 +219,33 @@
         </div>
     </div>
 
-    <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. -->
-    <div class="modal_002 modal fade" id="disp_baesongi"></div>
-    <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. 끝 -->
+
+
+<script>
+	$('#form_text').on('keyup', function() {
+		var content = $(this).val();
+        var srtlength = getTextLength(content);
+        $("#textLengthCheck").html("(" + srtlength + " 자 / 최대 300자)"); //실시간 글자수 카운팅
+
+		if (srtlength > 300) {
+			alert("최대 300자까지 입력 가능합니다.");
+			$(this).val(content.substring(0, 300));
+            $('#textLengthCheck').html("(300 자 / 최대 300자)");
+		}
+	});
+
+    function getTextLength(str) {
+        var len = 0;
+
+        for (var i = 0; i < str.length; i++) {
+            if (escape(str.charAt(i)).length == 6) {
+                len++;
+            }
+            len++;
+        }
+        return len;
+    }
+</script>
 
 <script>
     function baesongji(){
@@ -235,6 +267,72 @@
                 console.log(result);
             },
         });
+    }
+
+    function calculate_sendcost(){
+        //히든 값으로 가져온 값을 해당 태그에 html이나 text로 넣어준다.
+        $('#ad_name').text($("#od_b_name").val());
+        $('#ad_hp').text($("#od_b_hp").val());
+        let $ad_addrs = $("#od_b_zip").val()+") "+$("#od_b_addr1").val()+" "+ $("#od_b_addr2").val();
+        let $ad_addrs7 = $("#od_b_addr2").val()+" "+$("#od_b_addr3").val();
+        $('#ad_addr').text($ad_addrs);
+        $('#ad_addr7').text($ad_addrs7);
+
+        //창닫기
+        //lay_close();
+        addressinputclose();
+        document.querySelector('.modal.modal_002').classList.remove('in');
+        //보여주던 부분을 숨기고 display none 값들을 보여준다.
+        //$("#show_address").show();
+        //$("#none_address").hide();
+    }
+
+    //보내기 전 예외처리
+    function check_submit(){
+        let form_text = $('#form_text').val();
+        let od_b_name = $("#od_b_name").val();
+        let od_b_hp = $("#od_b_hp").val();
+        let od_b_zip = $("#od_b_zip").val();
+        let od_b_addr1 = $("#od_b_addr1").val();
+        let od_b_addr2 = $("#od_b_addr2").val();
+        let od_b_addr3 = $("#od_b_addr3").val();
+        let od_b_addr_jibeon = $("#od_b_addr_jibeon").val();
+
+        //주소가 없을 경우 예외처리 하나라도 없을 경우 나오게
+        if((od_b_name == null || od_b_name == "") || (od_b_hp == null || od_b_hp == "") || (od_b_zip == null || od_b_zip == "")
+        || (od_b_addr1 == null || od_b_addr1 == "") || (od_b_addr2 == null || od_b_addr2 == "")){
+            alert('배송지가 입력되지 않았습니다.');
+            return false;
+        }
+
+        if(form_text == null || form_text == ""){
+            alert('참여이유를 작성해 주세요.');
+            $('#form_text').focus();
+            return false;
+        }
+
+        if(form_text.length < 30 || form_text.length >= 300){
+            alert('평가단 참여이유를 30자 이상~ 300자 이내로 작성해 주세요.');
+            $('#form_text').focus();
+            return false;
+        }
+
+        if($.trim($("#ship_memo").val()) == ""){
+            alert('배송 메모를 입력 하세요.');
+            $('#ship_memo').focus();
+            return false;
+        }
+
+        if(!$('#promotion_agree').is(":checked")){
+            alert('약관에 동의 후 평가단 신청이 가능합니다.');
+            return false;
+        }
+
+        //참여이유 및 배송메모 값 옮기기
+        $("#reason_memo").val(form_text);
+        $("#shipping_memo").val($("#ship_memo").val());
+
+        return true;
     }
 </script>
 

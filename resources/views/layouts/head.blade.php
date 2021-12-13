@@ -132,13 +132,6 @@
     @yield('content')
 
 
-    {{-- alert_messages Error --}}
-    @if (Session::has('alert_messages'))
-    <script>
-        alert('{!! Session::get('alert_messages') !!}');
-    </script>
-    @endif
-    @yield('script')
 
 
 @php
@@ -199,7 +192,17 @@
     <!-- 푸터 끝 -->
 
 </div>
-<script src="{{ asset('/design/js/sidenav.js') }}"></script>
+    <script src="{{ asset('/design/js/sidenav.js') }}"></script>
+
+
+    {{-- alert_messages Error --}}
+    @if (Session::has('alert_messages'))
+    <script>
+        alert('{!! Session::get('alert_messages') !!}');
+    </script>
+    @endif
+    @yield('script')
+
 </body>
 </html>
 

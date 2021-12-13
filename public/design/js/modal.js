@@ -63,7 +63,7 @@ function addressopen_001() {
 }
 function addressclose_001() {
     addressclose();
-    document.querySelector('.modal.modal_003').classList.remove('in');
+    document.querySelector('.modal.modal_002').classList.remove('in');
 }
 
 
@@ -80,7 +80,7 @@ function addressinputopen_001() {
 }
 function addressinputclose_001() {
     addressinputclose();
-    document.querySelector('.modal.modal_004').classList.remove('in');
+    document.querySelector('.modal.modal_002').classList.remove('in');
 }
 
 
