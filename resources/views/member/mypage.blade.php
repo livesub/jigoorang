@@ -120,7 +120,7 @@
                         <div class="title box_2">
                             <h3>나의 문의 내역</h3>
                         </div>
-                        <a href="../../page/mypage/mypage_evaluation_list_view.html">
+                        <a href="{{ route('mypage.qna_list') }}">
                             <div class="mypage_box_02 solid">
                                 1:1 문의 내역/답변
                             </div>

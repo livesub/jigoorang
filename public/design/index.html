@@ -1,100 +1,115 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <meta property="og:title" content="지구랭">
-    <meta property="og:description" content="지구랭">
-    <meta property="og:image" content="./resources/logo.png">
+  <meta property="og:title" content="지구랭">
+  <meta property="og:description" content="지구랭">
+  <meta property="og:image" content="./resources/logo.png">
 
-    <link rel="stylesheet" href="./css/reset.css">
-    <link rel="stylesheet" href="./css/layout.css">
-    <link rel="stylesheet" href="./css/style.css">
-    <link rel="stylesheet" href="./css/responsive.css">  
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"/>
+  <link rel="stylesheet" href="./css/reset.css">
+  <link rel="stylesheet" href="./css/layout.css">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="stylesheet" href="./css/responsive.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 
-    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 
-    <title>지구랭</title>
+  <title>지구랭</title>
 </head>
+
 <body>
-<div class="wrap">
+  <div class="wrap">
 
     <!-- 헤더 시작-->
     <div class="header">
-        <div class="top">
-            <div class="logo">
-                <a href="./index.html"></a>
-                <h1>지구랭</h1>
-            </div>
+      <div class="top">
+        <div class="logo">
+          <a href="./index.html"></a>
+          <h1>지구랭</h1>
+        </div>
 
 
-            <!-- 모바일 메뉴 시작 -->
-            <div class="ham">
-              <a class="btn_ham" onclick="openNav()"><span class="name">햄버거</span></a>
-          </div>
+        <!-- 모바일 메뉴 시작 -->
+        <div class="ham">
+          <a class="btn_ham" onclick="openNav()"><span class="name">햄버거</span></a>
+        </div>
 
-          <div class="background"></div>
-          <div id="Sidenav" class="sidenav"> 
-              <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
-                <img src="/recources/icons/icon-cls.png" alt="">
+        <div class="background"></div>
+        <div id="Sidenav" class="sidenav">
+          <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+            <img src="/recources/icons/icon-cls.png" alt="">
+          </a>
+
+          <div class="m-menu">
+            <ul class="m-menu-my">
+              <a href="#">
+                <li>로그아웃<span class="m-menu-my-boder"></span></li>
               </a>
 
-              <div class="m-menu">
-                  <ul class="m-menu-my">
-                      <a href="#"><li>로그아웃<span class="m-menu-my-boder"></span></li></a> 
-                      
-                      <a href="#"><li>마이페이지</li></a>
-                  </ul>
-                  <ul class="m-menu-child"> 
-                      <a href="#">
-                          <li>지구랭소개<img src="/recources/imgs/icon-arwham.png" alt="" class="m-menu-icon"></li>
-                      </a>
-                      <a href="#">
-                              <li><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹 <img src="/recources/imgs/icon-arwham.png" alt="" class="m-menu-icon"></li>
-                      </a>
-                      <a href="#">
-                              <li><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b> <img src="/recources/imgs/icon-arwham.png" alt="" class="m-menu-icon"></li>
-                      </a>
-                      <a href="#">
-                              <li><b>지</b>구랭 <b>구</b>하는 기<b>록</b> <img src="/recources/imgs/icon-arwham.png" alt="" class="m-menu-icon"></li>
-                      </a>
-                      <a href="./page/evaluation/evaluation_list.html"><li>정직한 평가단 <img src="/recources/imgs/icon-arwham.png" alt="" class="m-menu-icon"></li></a>
-                      <a href="#"><li>고객센터 <img src="/recources/imgs/icon-arwham.png" alt="" class="m-menu-icon"></li></a>
-                  </ul>
-              </div> 
-          </div> 
-          <!-- 모바일 메뉴 끝 -->
+              <a href="#">
+                <li>마이페이지</li>
+              </a>
+            </ul>
+            <ul class="m-menu-child">
+              <a href="#">
+                <li>지구랭소개<img src="/recources/imgs/icon-arwham.png" alt="" class="m-menu-icon"></li>
+              </a>
+              <a href="#">
+                <li><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹 <img src="/recources/imgs/icon-arwham.png" alt=""
+                    class="m-menu-icon"></li>
+              </a>
+              <a href="#">
+                <li><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b> <img src="/recources/imgs/icon-arwham.png" alt=""
+                    class="m-menu-icon"></li>
+              </a>
+              <a href="#">
+                <li><b>지</b>구랭 <b>구</b>하는 기<b>록</b> <img src="/recources/imgs/icon-arwham.png" alt=""
+                    class="m-menu-icon"></li>
+              </a>
+              <a href="./page/evaluation/evaluation_list.html">
+                <li>정직한 평가단 <img src="/recources/imgs/icon-arwham.png" alt="" class="m-menu-icon"></li>
+              </a>
+              <a href="#">
+                <li>고객센터 <img src="/recources/imgs/icon-arwham.png" alt="" class="m-menu-icon"></li>
+              </a>
+            </ul>
+          </div>
+        </div>
+        <!-- 모바일 메뉴 끝 -->
 
 
-            <ul class="menu">
-                <li class="search"><a href="#"><span>검색</span></a></li>
-               <li class="cart">
-                    <a class="conunt"><p id="">0</p></a>
-                    <a><span>장바구니</span></a>
-                </li>
-                <li class="my"><a><span>마이페이지</span></a></li>
-                <li class="login"><a href="login.html"><span>로그인</span></a></li>
-            </ul>
-        </div>
-        
-        <div class="btm">
-            <ul class="navi">
-                <li class="on"><a href="">지구랭 소개</a></li>
-                <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹</a></li>
-                <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b></a></li>
-                <li><a href=""><b>지</b>구랭 <b>구</b>하는 기<b>록</b></a></li>
-                <li><a href="./page/evaluation/evaluation_list.html">정직한 평가단</a></li>
-                <li><a href="">고객센터</a></li>
-            </ul>
-        </div>
+        <ul class="menu">
+          <li class="search"><a href="#"><span>검색</span></a></li>
+          <li class="cart">
+            <a class="conunt">
+              <p id="">0</p>
+            </a>
+            <a><span>장바구니</span></a>
+          </li>
+          <li class="my"><a><span>마이페이지</span></a></li>
+          <li class="login"><a href="login.html"><span>로그인</span></a></li>
+        </ul>
+      </div>
+
+      <div class="btm">
+        <ul class="navi">
+          <li class="on"><a href="">지구랭 소개</a></li>
+          <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹</a></li>
+          <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b></a></li>
+          <li><a href=""><b>지</b>구랭 <b>구</b>하는 기<b>록</b></a></li>
+          <li><a href="./page/evaluation/evaluation_list.html">정직한 평가단</a></li>
+          <li><a href="">고객센터</a></li>
+        </ul>
+      </div>
     </div>
     <!-- 헤더 끝 -->
 
 
-     <!-- 상세 모달
+    <!-- 상세 모달
           
         <div class="modal_001 modal fade">
             <div class="modal-background" onclick="closemodal_001()"></div>
@@ -109,202 +124,228 @@
                 </div>
             </div>
         </div> -->
-    
-    
+
+
 
 
     <!-- 메인 컨테이너 시작 -->
     <div class="main-container">
 
-        <!-- 상단 비주얼 영역 시작 -->
-        <div class="visual">
-            <div class="test">  
-               <!-- Swiper -->
-                <div class="swiper mainSwiper">
-                    <div class="swiper-wrapper">
-                    <div class="swiper-slide"><img src="./recources/bg/img-mainvisual-p-01.png" alt=""></div>
-                    <div class="swiper-slide"><img src="./recources/bg/img-mainvisual-p-01.png" alt=""></div>
-                    <div class="swiper-slide"><img src="./recources/bg/img-mainvisual-p-01.png" alt=""></div>
-                    <div class="swiper-slide"><img src="./recources/bg/img-mainvisual-p-01.png" alt=""></div>
-                    <div class="swiper-slide"><img src="./recources/bg/img-mainvisual-p-01.png" alt=""></div>
-                    <div class="swiper-slide"><img src="./recources/bg/img-mainvisual-p-01.png" alt=""></div>
-                    <div class="swiper-slide"><img src="./recources/bg/img-mainvisual-p-01.png" alt=""></div>
-                </div>
-                
-                    <!-- <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div> -->
-                    <div class="swiper-pagination"></div>
-                </div>               
+      <!-- 상단 비주얼 영역 시작 -->
+      <div class="visual">
+        <div class="test">
+          <!-- Swiper -->
+          <div class="swiper mainSwiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="./recources/bg/img-mainvisual-p-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-mainvisual-m-01.png" alt="" class="mo">
+              </div>
+              <div class="swiper-slide">
+                <img src="./recources/bg/img-mainvisual-p-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-mainvisual-m-01.png" alt="" class="mo">
+              </div>
+              <div class="swiper-slide">
+                <img src="./recources/bg/img-mainvisual-p-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-mainvisual-m-01.png" alt="" class="mo">
+              </div>
+              <div class="swiper-slide">
+                <img src="./recources/bg/img-mainvisual-p-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-mainvisual-m-01.png" alt="" class="mo">
+              </div>
+              <div class="swiper-slide">
+                <img src="./recources/bg/img-mainvisual-p-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-mainvisual-m-01.png" alt="" class="mo">
+              </div>
+              <div class="swiper-slide">
+                <img src="./recources/bg/img-mainvisual-p-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-mainvisual-m-01.png" alt="" class="mo">
+              </div>
+              <div class="swiper-slide">
+                <img src="./recources/bg/img-mainvisual-p-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-mainvisual-m-01.png" alt="" class="mo">
+              </div>
             </div>
-        </div>
-        <!-- 상단 비주얼 영역 끝 -->
 
-        <!-- 리스트_01 -->
-        <div class="mbox_1280">
-            <h2>먼저 써 본 사람들의 추천랭킹</h2>
-            <div class="text_02">
-                친환경 제품을 먼저 사용해 본 ‘친환경 선배’들의 경험을 공유합니다. 궁금한 제품군을 선택해 보세요. 
-            <!-- <div class="slide_btn_1">
+            <!-- <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div> -->
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
+      </div>
+      <!-- 상단 비주얼 영역 끝 -->
+
+      <!-- 리스트_01 -->
+      <div class="mbox_1280">
+        <h2>먼저 써 본 사람들의 추천랭킹</h2>
+        <div class="text_02">
+          친환경 제품을 먼저 사용해 본 ‘친환경 선배’들의 경험을 공유합니다. 궁금한 제품군을 선택해 보세요.
+          <!-- <div class="slide_btn_1">
                 <div class="swiper-button-next-1"></div>
                 <div class="swiper-button-prev-1"></div>
             </div> -->
-            </div>
+        </div>
 
-            <div class="swiper bastSwiper">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-                    <div class="sub-img">
-                    <img src="./recources/imgs/img-01.png" class="slide-best" alt="">
-                  </div>
-                </div>
-                
-                  <div class="swiper-slide">
-                    <div class="sub-img">
-                    <img src="./recources/imgs/img-01.png" class="slide-best" alt="">
-                  </div>
-                </div> 
-                
-                <div class="swiper-slide"> 
-                  <div class="sub-img">
-                    <img src="./recources/imgs/img-01.png" class="slide-best" alt="">
-                  </div>
-                  </div>
-                  
-                  <div class="swiper-slide">
-                    <div class="sub-img">
-                      <img src="./recources/imgs/img-01.png" class="slide-best" alt=""></div>
-                </div>
-                
-                  <div class="swiper-slide"> 
-                    <div class="sub-img">
-                      <img src="./recources/imgs/img-01.png" class="slide-best" alt="">    </div>
-                </div>
-                  <div class="swiper-slide">
-                    <div class="sub-img">
-                      <img src="./recources/imgs/img-01.png" class="slide-best" alt="">    </div>
-                </div>
-                
-                  <div class="swiper-slide"> 
-                    <div class="sub-img">
-                      <img src="./recources/imgs/img-01.png" class="slide-best" alt="">    </div>
-                </div>
-          
-              <div class="swiper-slide"> 
-                <div class="sub-img">
-                  <img src="./recources/imgs/img-01.png" class="slide-best" alt=""></div>
+        <div class="swiper bastSwiper">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide">
+              <div class="sub-img">
+                <img src="./recources/imgs/img-01.png" class="slide-best" alt="">
               </div>
             </div>
+
+            <div class="swiper-slide">
+              <div class="sub-img">
+                <img src="./recources/imgs/img-01.png" class="slide-best" alt="">
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="sub-img">
+                <img src="./recources/imgs/img-01.png" class="slide-best" alt="">
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="sub-img">
+                <img src="./recources/imgs/img-01.png" class="slide-best" alt="">
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="sub-img">
+                <img src="./recources/imgs/img-01.png" class="slide-best" alt="">
+              </div>
+            </div>
+            <div class="swiper-slide">
+              <div class="sub-img">
+                <img src="./recources/imgs/img-01.png" class="slide-best" alt="">
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="sub-img">
+                <img src="./recources/imgs/img-01.png" class="slide-best" alt="">
+              </div>
+            </div>
+
+            <div class="swiper-slide">
+              <div class="sub-img">
+                <img src="./recources/imgs/img-01.png" class="slide-best" alt="">
+              </div>
+            </div>
+          </div>
         </div>
 
-        </div>
+      </div>
 
-        <!-- 리스트_02 -->
-        <div class="mbox_100">
-            <div class="inner">
-                <div class="title">
-                    <h2>지구랭 기획전 #1</h2>
-                    <div class="line_14"></div>
-                    <!-- <div class="slide_btn_2">
+      <!-- 리스트_02 -->
+      <div class="mbox_100 bg_00">
+        <div class="inner">
+          <div class="title">
+            <h2>지구랭 기획전 #1</h2>
+            <div class="line_14"></div>
+            <!-- <div class="slide_btn_2">
                         <div class="swiper-button-next-2"></div>
                         <div class="swiper-button-prev-2"></div>
                     </div> -->
+          </div>
+        </div>
+
+        <div class="sale">
+          <div class="swiper saleSwiper">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
                 </div>
-            </div>   
-            
-            <div class="sale">
-                <div class="swiper saleSwiper">
-                  <div class="swiper-wrapper">
-                    <div class="swiper-slide">
 
-                      <div class="sub-img-3">
-                         <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-                      </div>
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
 
-                      <div class="new-icon">
-                        <p>NEW</p>
-                      </div>
-
-                    <div class="main-project-title">
-                        <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-                    <span class="main-project-left">
-                      <p class="price">7,000원</p>
-                      <p class="sale-price">10,000원</p>
-                    </span>
-                    <span class="main-project-right">
-                      <p>30%</p>
-                    </span>
-                      <div class="project project_1">
-                        <div class="stars-outer">
-                          <div class="stars-inner"></div>
-                        </div>
-                        <p class="number"></p>
-                      </div>
-                      <div class="main-project-bottom">
-                      <span class="left">
-                      <p>리뷰 200</p>
-                      </span>
-                      <span class="right">
-                      <p>응원하기</p>
-                      <span class="wishlist">
-                    </span>
-                  </span>
-                    </div>
-                    </span>
-                    </div>
-                  </div>
-                  
-                  <div class="swiper-slide">
-                    <div class="sub-img-3">
-                    <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-                  </div>
-                  <div class="hot-icon">
-                    <p>HOT</p>
-                  </div> 
-                  <div class="main-project-title">
+                <div class="main-project-title">
                   <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-                    <span class="main-project-left">
+                  <span class="main-project-left">
                     <p class="price">7,000원</p>
                     <p class="sale-price">10,000원</p>
                   </span>
                   <span class="main-project-right">
-                   <p>30%</p>
+                    <p>30%</p>
                   </span>
-                    <div class="project project_2">
-                      <div class="stars-outer">
-                        <div class="stars-inner"></div>
-                      </div>
-                      <p class="number"></p>
+                  <div class="project project_1">
+                    <div class="stars-outer">
+                      <div class="stars-inner"></div>
                     </div>
-                    <div class="main-project-bottom">
+                    <p class="number"></p>
+                  </div>
+                  <div class="main-project-bottom">
                     <span class="left">
-                    <p>리뷰 200</p>
+                      <p>리뷰 200</p>
                     </span>
                     <span class="right">
-                    <p>응원하기</p>
-                    <span class="wishlist">
+                      <p>응원하기</p>
+                      <span class="wishlist">
+                      </span>
                     </span>
-                  </span>
                   </div>
                   </span>
-                  </div>
                 </div>
-                   
-                <div class="swiper-slide">
-                  <div class="sub-img-3">
+              </div>
+
+              <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+                <div class="hot-icon">
+                  <p>HOT</p>
+                </div>
+                <div class="main-project-title">
+                  <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                  <span class="main-project-left">
+                    <p class="price">7,000원</p>
+                    <p class="sale-price">10,000원</p>
+                  </span>
+                  <span class="main-project-right">
+                    <p>30%</p>
+                  </span>
+                  <div class="project project_2">
+                    <div class="stars-outer">
+                      <div class="stars-inner"></div>
+                    </div>
+                    <p class="number"></p>
+                  </div>
+                  <div class="main-project-bottom">
+                    <span class="left">
+                      <p>리뷰 200</p>
+                    </span>
+                    <span class="right">
+                      <p>응원하기</p>
+                      <span class="wishlist">
+                      </span>
+                    </span>
+                  </div>
+                  </span>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="sub-img-3">
                   <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
                 </div>
                 <div class="sale-icon">
                   <p>SALE</p>
                 </div>
                 <div class="main-project-title">
-                <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                  <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
                   <span class="main-project-left">
-                  <p class="price">7,000원</p>
-                  <p class="sale-price">10,000원</p>
-                </span>
-                <span class="main-project-right">
-                 <p>30%</p>
-                </span>
+                    <p class="price">7,000원</p>
+                    <p class="sale-price">10,000원</p>
+                  </span>
+                  <span class="main-project-right">
+                    <p>30%</p>
+                  </span>
                   <div class="project project_3">
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
@@ -312,201 +353,66 @@
                     <p class="number"></p>
                   </div>
                   <div class="main-project-bottom">
-                  <span class="left">
-                  <p>리뷰 200</p>
+                    <span class="left">
+                      <p>리뷰 200</p>
+                    </span>
+                    <span class="right">
+                      <p>응원하기</p>
+                      <span class="wishlist">
+                      </span>
+                    </span>
+                  </div>
                   </span>
-                  <span class="right">
-                  <p>응원하기</p>
-                  <span class="wishlist">
-                  </span>
-                </span>
-                </div>
-                </span>
                 </div>
               </div>
-                    
-                <div class="swiper-slide">
-                  <div class="sub-img-3">
+
+              <div class="swiper-slide">
+                <div class="sub-img-3">
                   <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
                 </div>
                 <div class="new-icon">
                   <p>NEW</p>
-                </div> 
+                </div>
                 <div class="project-title01">
-                <div class="main-project-title">
-                <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-                  <span class="main-project-left">
-                  <p class="price">7,000원</p>
-                  <p class="sale-price">10,000원</p>
-                </span>
-                <span class="main-project-right">
-                <p>30%</p>
-                </span>
-                  <div class="project project_4">
-                    <div class="stars-outer">
-                      <div class="stars-inner"></div>
-                    </div>
-                    <p class="number"></p>
-                  </div>
-                  <div class="main-project-bottom">
-                  <span class="left">
-                  <p>리뷰 200</p>
-                  </span>
-                  <span class="right">
-                  <p>응원하기</p>
-                  <span class="wishlist">
-                  </span>
-                </span>
-                </div>
-                </span>
-                </div>
-                </div>
-              </div>
-                    
-              <div class="swiper-slide">
-                <div class="sub-img-3">
-                <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-              </div>
-              <div class="new-icon">
-                <p>NEW</p>
-              </div>
-              <div class="main-project-title">
-              <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-                <span class="main-project-left">
-                <p class="price">7,000원</p>
-                <p class="sale-price">10,000원</p>
-              </span>
-              <span class="main-project-right">
-              <p>30%</p>
-              </span>
-                <div class="project project_5">
-                  <div class="stars-outer">
-                    <div class="stars-inner"></div>
-                  </div>
-                  <p class="number"></p>
-                </div>
-                <div class="main-project-bottom">
-                <span class="left">
-                <p>리뷰 200</p>
-                </span>
-                <span class="right">
-                <p>응원하기</p>
-                <span class="wishlist">
-                </span>
-              </span>
-              </div>
-              </span>
-              </div>
-              </div>
-              <div class="swiper-slide">
-                <div class="sub-img-3">
-                <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-              </div>
-              <div class="new-icon">
-                <p>NEW</p>
-              </div>
-              <div class="main-project-title">
-              <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-                <span class="main-project-left">
-                <p class="price">7,000원</p>
-                <p class="sale-price">10,000원</p>
-              </span>
-              <span class="main-project-right">
-              <p>30%</p>
-              </span>
-                <div class="project project_6">
-                  <div class="stars-outer">
-                    <div class="stars-inner"></div>
-                  </div>
-                  <p class="number"></p>
-                </div>
-                <div class="main-project-bottom">
-                <span class="left">
-                <p>리뷰 200</p>
-                </span>
-                <span class="right">
-                <p>응원하기</p>
-                <span class="wishlist">
-                </span>
-              </span>
-              </div>
-              </span>
-              </div>
-              </div>
-                    
-              <div class="swiper-slide">
-                <div class="sub-img-3">
-                <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-              </div>
-              <div class="new-icon">
-                <p>NEW</p>
-              </div>
-              <div class="main-project-title">
-              <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-                <span class="main-project-left">
-                <p class="price">7,000원</p>
-                <p class="sale-price">10,000원</p>
-              </span>
-              <span class="main-project-right">
-              <p>30%</p>
-              </span>
-
-                <div class="project project_7">
-                  <div class="stars-outer">
-                    <div class="stars-inner"></div>
-                  </div>
-                  <p class="number"></p>
-                </div>
-                
-                <div class="main-project-bottom">
-                <span class="left" id="">
-                <p>리뷰 200</p>
-                </span>
-                <span class="right" id="">
-                <p>응원하기</p>
-                <span class="wishlist">
-                </span>
-                </span>
-              </div>
-              </span>
-              </div>
-              </div>
-            
-                  </div>
-                </div>
-                
-            </div>
-        </div>   
-      
-
-
-
-
-        <!-- 리스트_03 -->
-        <div class="mbox_100 bg_01">
-            <div class="inner">
-                <div class="title">
-                    <h2>지구랭 기획전 #2</h2>
-                    <div class="line_14"></div>
-                </div> 
-            </div>  
-            
-            
-            <div class="sale">
-              <div class="swiper saleSwiper2">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-
-                    <div class="sub-img-3">
-                       <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-                    </div>
-
-                    <div class="new-icon">
-                      <p>NEW</p>
-                    </div>
-
                   <div class="main-project-title">
-                      <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                    <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                    <span class="main-project-left">
+                      <p class="price">7,000원</p>
+                      <p class="sale-price">10,000원</p>
+                    </span>
+                    <span class="main-project-right">
+                      <p>30%</p>
+                    </span>
+                    <div class="project project_4">
+                      <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                      </div>
+                      <p class="number"></p>
+                    </div>
+                    <div class="main-project-bottom">
+                      <span class="left">
+                        <p>리뷰 200</p>
+                      </span>
+                      <span class="right">
+                        <p>응원하기</p>
+                        <span class="wishlist">
+                        </span>
+                      </span>
+                    </div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+                <div class="main-project-title">
+                  <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
                   <span class="main-project-left">
                     <p class="price">7,000원</p>
                     <p class="sale-price">10,000원</p>
@@ -514,274 +420,34 @@
                   <span class="main-project-right">
                     <p>30%</p>
                   </span>
-                    <div class="project project_1">
-                      <div class="stars-outer">
-                        <div class="stars-inner"></div>
-                      </div>
-                      <p class="number"></p>
-                    </div>
-                    <div class="main-project-bottom">
-                    <span class="left">
-                    <p>리뷰 200</p>
-                    </span>
-                    <span class="right">
-                    <p>응원하기</p>
-                    <span class="wishlist">
-                  </span>
-                </span>
-                  </div>
-                  </span>
-                  </div>
-                </div>
-                
-                <div class="swiper-slide">
-                  <div class="sub-img-3">
-                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-                </div>
-                <div class="hot-icon">
-                  <p>HOT</p>
-                </div> 
-                <div class="main-project-title">
-                <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-                  <span class="main-project-left">
-                  <p class="price">7,000원</p>
-                  <p class="sale-price">10,000원</p>
-                </span>
-                <span class="main-project-right">
-                 <p>30%</p>
-                </span>
-                  <div class="project project_2">
+                  <div class="project project_5">
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
                     </div>
                     <p class="number"></p>
                   </div>
                   <div class="main-project-bottom">
-                  <span class="left">
-                  <p>리뷰 200</p>
+                    <span class="left">
+                      <p>리뷰 200</p>
+                    </span>
+                    <span class="right">
+                      <p>응원하기</p>
+                      <span class="wishlist">
+                      </span>
+                    </span>
+                  </div>
                   </span>
-                  <span class="right">
-                  <p>응원하기</p>
-                  <span class="wishlist">
-                  </span>
-                </span>
-                </div>
-                </span>
                 </div>
               </div>
-                 
               <div class="swiper-slide">
                 <div class="sub-img-3">
-                <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-              </div>
-              <div class="sale-icon">
-                <p>SALE</p>
-              </div>
-              <div class="main-project-title">
-              <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-                <span class="main-project-left">
-                <p class="price">7,000원</p>
-                <p class="sale-price">10,000원</p>
-              </span>
-              <span class="main-project-right">
-               <p>30%</p>
-              </span>
-                <div class="project project_3">
-                  <div class="stars-outer">
-                    <div class="stars-inner"></div>
-                  </div>
-                  <p class="number"></p>
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
                 </div>
-                <div class="main-project-bottom">
-                <span class="left">
-                <p>리뷰 200</p>
-                </span>
-                <span class="right">
-                <p>응원하기</p>
-                <span class="wishlist">
-                </span>
-              </span>
-              </div>
-              </span>
-              </div>
-            </div>
-                  
-              <div class="swiper-slide">
-                <div class="sub-img-3">
-                <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-              </div>
-              <div class="new-icon">
-                <p>NEW</p>
-              </div> 
-              <div class="project-title01">
-              <div class="main-project-title">
-              <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-                <span class="main-project-left">
-                <p class="price">7,000원</p>
-                <p class="sale-price">10,000원</p>
-              </span>
-              <span class="main-project-right">
-              <p>30%</p>
-              </span>
-                <div class="project project_4">
-                  <div class="stars-outer">
-                    <div class="stars-inner"></div>
-                  </div>
-                  <p class="number"></p>
+                <div class="new-icon">
+                  <p>NEW</p>
                 </div>
-                <div class="main-project-bottom">
-                <span class="left">
-                <p>리뷰 200</p>
-                </span>
-                <span class="right">
-                <p>응원하기</p>
-                <span class="wishlist">
-                </span>
-              </span>
-              </div>
-              </span>
-              </div>
-              </div>
-            </div>
-                  
-            <div class="swiper-slide">
-              <div class="sub-img-3">
-              <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-            </div>
-            <div class="new-icon">
-              <p>NEW</p>
-            </div>
-            <div class="main-project-title">
-            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-              <span class="main-project-left">
-              <p class="price">7,000원</p>
-              <p class="sale-price">10,000원</p>
-            </span>
-            <span class="main-project-right">
-            <p>30%</p>
-            </span>
-              <div class="project project_5">
-                <div class="stars-outer">
-                  <div class="stars-inner"></div>
-                </div>
-                <p class="number"></p>
-              </div>
-              <div class="main-project-bottom">
-              <span class="left">
-              <p>리뷰 200</p>
-              </span>
-              <span class="right">
-              <p>응원하기</p>
-              <span class="wishlist">
-              </span>
-            </span>
-            </div>
-            </span>
-            </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="sub-img-3">
-              <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-            </div>
-            <div class="new-icon">
-              <p>NEW</p>
-            </div>
-            <div class="main-project-title">
-            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-              <span class="main-project-left">
-              <p class="price">7,000원</p>
-              <p class="sale-price">10,000원</p>
-            </span>
-            <span class="main-project-right">
-            <p>30%</p>
-            </span>
-              <div class="project project_6">
-                <div class="stars-outer">
-                  <div class="stars-inner"></div>
-                </div>
-                <p class="number"></p>
-              </div>
-              <div class="main-project-bottom">
-              <span class="left">
-              <p>리뷰 200</p>
-              </span>
-              <span class="right">
-              <p>응원하기</p>
-              <span class="wishlist">
-              </span>
-            </span>
-            </div>
-            </span>
-            </div>
-            </div>
-                  
-            <div class="swiper-slide">
-              <div class="sub-img-3">
-              <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-            </div>
-            <div class="new-icon">
-              <p>NEW</p>
-            </div>
-            <div class="main-project-title">
-            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-              <span class="main-project-left">
-              <p class="price">7,000원</p>
-              <p class="sale-price">10,000원</p>
-            </span>
-            <span class="main-project-right">
-            <p>30%</p>
-            </span>
-
-              <div class="project project_7">
-                <div class="stars-outer">
-                  <div class="stars-inner"></div>
-                </div>
-                <p class="number"></p>
-              </div>
-              
-              <div class="main-project-bottom">
-              <span class="left" id="">
-              <p>리뷰 200</p>
-              </span>
-              <span class="right" id="">
-              <p>응원하기</p>
-              <span class="wishlist">
-              </span>
-              </span>
-            </div>
-            </span>
-            </div>
-            </div>
-          
-                </div>
-              </div>
-              
-          </div>
-        </div>
-        
-
-
-
-
-        <!-- 리스트_04 시작 -->
-        <div class="mbox_1280">
-            <h2>New Arrivals</h2>
-            <div class="line_14 bk"></div>
-            <div class="sale">
-              <div class="swiper saleSwiper3">
-                <div class="swiper-wrapper">
-                  <div class="swiper-slide">
-
-                    <div class="sub-img-3">
-                       <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-                    </div>
-
-                    <div class="new-icon">
-                      <p>NEW</p>
-                    </div>
-
-                  <div class="main-project-title">
-                      <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                <div class="main-project-title">
+                  <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
                   <span class="main-project-left">
                     <p class="price">7,000원</p>
                     <p class="sale-price">10,000원</p>
@@ -789,42 +455,423 @@
                   <span class="main-project-right">
                     <p>30%</p>
                   </span>
-                    <div class="project project_1">
+                  <div class="project project_6">
+                    <div class="stars-outer">
+                      <div class="stars-inner"></div>
+                    </div>
+                    <p class="number"></p>
+                  </div>
+                  <div class="main-project-bottom">
+                    <span class="left">
+                      <p>리뷰 200</p>
+                    </span>
+                    <span class="right">
+                      <p>응원하기</p>
+                      <span class="wishlist">
+                      </span>
+                    </span>
+                  </div>
+                  </span>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+                <div class="main-project-title">
+                  <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                  <span class="main-project-left">
+                    <p class="price">7,000원</p>
+                    <p class="sale-price">10,000원</p>
+                  </span>
+                  <span class="main-project-right">
+                    <p>30%</p>
+                  </span>
+
+                  <div class="project project_7">
+                    <div class="stars-outer">
+                      <div class="stars-inner"></div>
+                    </div>
+                    <p class="number"></p>
+                  </div>
+
+                  <div class="main-project-bottom">
+                    <span class="left" id="">
+                      <p>리뷰 200</p>
+                    </span>
+                    <span class="right" id="">
+                      <p>응원하기</p>
+                      <span class="wishlist">
+                      </span>
+                    </span>
+                  </div>
+                  </span>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+      <!-- 리스트_03 -->
+      <div class="mbox_100 bg_01">
+        <div class="inner">
+          <div class="title">
+            <h2>지구랭 기획전 #2</h2>
+            <div class="line_14"></div>
+          </div>
+        </div>
+
+
+        <div class="sale">
+          <div class="swiper saleSwiper2">
+            <div class="swiper-wrapper">
+
+              <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+
+                <div class="main-project-title">
+                    <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                    <span class="main-project-left">
+                        <p class="price">7,000원</p>
+                        <p class="sale-price">10,000원</p>
+                    </span>
+                    <span class="main-project-right">
+                        <p>30%</p>
+                    </span>
+                  <div class="project project_1">
                       <div class="stars-outer">
                         <div class="stars-inner"></div>
                       </div>
                       <p class="number"></p>
-                    </div>
-                    <div class="main-project-bottom">
-                    <span class="left">
-                    <p>리뷰 200</p>
-                    </span>
-                    <span class="right">
-                    <p>응원하기</p>
-                    <span class="wishlist">
-                  </span>
-                </span>
                   </div>
-                  </span>
+                  <div class="main-project-bottom">
+                      <span class="left">
+                        <p>리뷰 200</p>
+                      </span>
+                      <span class="right">
+                        <p>응원하기</p>
+                        <span class="wishlist">
+                        </span>
+                      </span>
                   </div>
                 </div>
-                
-                <div class="swiper-slide">
-                  <div class="sub-img-3">
+              </div>
+
+               <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+
+                <div class="main-project-title">
+                    <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                    <span class="main-project-left">
+                        <p class="price">7,000원</p>
+                        <p class="sale-price">10,000원</p>
+                    </span>
+                    <span class="main-project-right">
+                        <p>30%</p>
+                    </span>
+                  <div class="project project_1">
+                      <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                      </div>
+                      <p class="number"></p>
+                  </div>
+                  <div class="main-project-bottom">
+                      <span class="left">
+                        <p>리뷰 200</p>
+                      </span>
+                      <span class="right">
+                        <p>응원하기</p>
+                        <span class="wishlist">
+                        </span>
+                      </span>
+                  </div>
+                </div>
+              </div>
+
+
+               <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+
+                <div class="main-project-title">
+                    <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                    <span class="main-project-left">
+                        <p class="price">7,000원</p>
+                        <p class="sale-price">10,000원</p>
+                    </span>
+                    <span class="main-project-right">
+                        <p>30%</p>
+                    </span>
+                  <div class="project project_1">
+                      <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                      </div>
+                      <p class="number"></p>
+                  </div>
+                  <div class="main-project-bottom">
+                      <span class="left">
+                        <p>리뷰 200</p>
+                      </span>
+                      <span class="right">
+                        <p>응원하기</p>
+                        <span class="wishlist">
+                        </span>
+                      </span>
+                  </div>
+                </div>
+              </div>
+
+
+               <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+
+                <div class="main-project-title">
+                    <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                    <span class="main-project-left">
+                        <p class="price">7,000원</p>
+                        <p class="sale-price">10,000원</p>
+                    </span>
+                    <span class="main-project-right">
+                        <p>30%</p>
+                    </span>
+                  <div class="project project_1">
+                      <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                      </div>
+                      <p class="number"></p>
+                  </div>
+                  <div class="main-project-bottom">
+                      <span class="left">
+                        <p>리뷰 200</p>
+                      </span>
+                      <span class="right">
+                        <p>응원하기</p>
+                        <span class="wishlist">
+                        </span>
+                      </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+
+                <div class="main-project-title">
+                    <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                    <span class="main-project-left">
+                        <p class="price">7,000원</p>
+                        <p class="sale-price">10,000원</p>
+                    </span>
+                    <span class="main-project-right">
+                        <p>30%</p>
+                    </span>
+                  <div class="project project_1">
+                      <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                      </div>
+                      <p class="number"></p>
+                  </div>
+                  <div class="main-project-bottom">
+                      <span class="left">
+                        <p>리뷰 200</p>
+                      </span>
+                      <span class="right">
+                        <p>응원하기</p>
+                        <span class="wishlist">
+                        </span>
+                      </span>
+                  </div>
+                </div>
+              </div>
+
+              
+              <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+
+                <div class="main-project-title">
+                    <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                    <span class="main-project-left">
+                        <p class="price">7,000원</p>
+                        <p class="sale-price">10,000원</p>
+                    </span>
+                    <span class="main-project-right">
+                        <p>30%</p>
+                    </span>
+                  <div class="project project_1">
+                      <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                      </div>
+                      <p class="number"></p>
+                  </div>
+                  <div class="main-project-bottom">
+                      <span class="left">
+                        <p>리뷰 200</p>
+                      </span>
+                      <span class="right">
+                        <p>응원하기</p>
+                        <span class="wishlist">
+                        </span>
+                      </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+
+                <div class="main-project-title">
+                    <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                    <span class="main-project-left">
+                        <p class="price">7,000원</p>
+                        <p class="sale-price">10,000원</p>
+                    </span>
+                    <span class="main-project-right">
+                        <p>30%</p>
+                    </span>
+                  <div class="project project_1">
+                      <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                      </div>
+                      <p class="number"></p>
+                  </div>
+                  <div class="main-project-bottom">
+                      <span class="left">
+                        <p>리뷰 200</p>
+                      </span>
+                      <span class="right">
+                        <p>응원하기</p>
+                        <span class="wishlist">
+                        </span>
+                      </span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+
+
+
+
+      <!-- 리스트_04 시작 -->
+      <div class="mbox_1280">
+        <h2>New Arrivals</h2>
+        <div class="line_14 bk"></div>
+
+        <div class="sale">
+          <div class="swiper saleSwiper3">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+
+                <div class="main-project-title">
+                  <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                  <span class="main-project-left">
+                    <p class="price">7,000원</p>
+                    <p class="sale-price">10,000원</p>
+                  </span>
+                  <span class="main-project-right">
+                    <p>30%</p>
+                  </span>
+                  <div class="project project_1">
+                    <div class="stars-outer">
+                      <div class="stars-inner"></div>
+                    </div>
+                    <p class="number"></p>
+                  </div>
+                  <div class="main-project-bottom">
+                    <span class="left">
+                      <p>리뷰 200</p>
+                    </span>
+                    <span class="right">
+                      <p>응원하기</p>
+                      <span class="wishlist">
+                      </span>
+                    </span>
+                  </div>
+                  </span>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="sub-img-3">
                   <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
                 </div>
                 <div class="hot-icon">
                   <p>HOT</p>
-                </div> 
+                </div>
                 <div class="main-project-title">
-                <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                  <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
                   <span class="main-project-left">
-                  <p class="price">7,000원</p>
-                  <p class="sale-price">10,000원</p>
-                </span>
-                <span class="main-project-right">
-                 <p>30%</p>
-                </span>
+                    <p class="price">7,000원</p>
+                    <p class="sale-price">10,000원</p>
+                  </span>
+                  <span class="main-project-right">
+                    <p>30%</p>
+                  </span>
                   <div class="project project_2">
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
@@ -832,279 +879,300 @@
                     <p class="number"></p>
                   </div>
                   <div class="main-project-bottom">
-                  <span class="left">
-                  <p>리뷰 200</p>
-                  </span>
-                  <span class="right">
-                  <p>응원하기</p>
-                  <span class="wishlist">
-                  </span>
-                </span>
-                </div>
-                </span>
-                </div>
-              </div>
-                 
-              <div class="swiper-slide">
-                <div class="sub-img-3">
-                <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-              </div>
-              <div class="sale-icon">
-                <p>SALE</p>
-              </div>
-              <div class="main-project-title">
-              <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-                <span class="main-project-left">
-                <p class="price">7,000원</p>
-                <p class="sale-price">10,000원</p>
-              </span>
-              <span class="main-project-right">
-               <p>30%</p>
-              </span>
-                <div class="project project_3">
-                  <div class="stars-outer">
-                    <div class="stars-inner"></div>
+                    <span class="left">
+                      <p>리뷰 200</p>
+                    </span>
+                    <span class="right">
+                      <p>응원하기</p>
+                      <span class="wishlist">
+                      </span>
+                    </span>
                   </div>
-                  <p class="number"></p>
+                  </span>
                 </div>
-                <div class="main-project-bottom">
-                <span class="left">
-                <p>리뷰 200</p>
-                </span>
-                <span class="right">
-                <p>응원하기</p>
-                <span class="wishlist">
-                </span>
-              </span>
               </div>
-              </span>
-              </div>
-            </div>
-                  
-              <div class="swiper-slide">
-                <div class="sub-img-3">
-                <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-              </div>
-              <div class="new-icon">
-                <p>NEW</p>
-              </div> 
-              <div class="project-title01">
-              <div class="main-project-title">
-              <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-                <span class="main-project-left">
-                <p class="price">7,000원</p>
-                <p class="sale-price">10,000원</p>
-              </span>
-              <span class="main-project-right">
-              <p>30%</p>
-              </span>
-                <div class="project project_4">
-                  <div class="stars-outer">
-                    <div class="stars-inner"></div>
-                  </div>
-                  <p class="number"></p>
-                </div>
-                <div class="main-project-bottom">
-                <span class="left">
-                <p>리뷰 200</p>
-                </span>
-                <span class="right">
-                <p>응원하기</p>
-                <span class="wishlist">
-                </span>
-              </span>
-              </div>
-              </span>
-              </div>
-              </div>
-            </div>
-                  
-            <div class="swiper-slide">
-              <div class="sub-img-3">
-              <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-            </div>
-            <div class="new-icon">
-              <p>NEW</p>
-            </div>
-            <div class="main-project-title">
-            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-              <span class="main-project-left">
-              <p class="price">7,000원</p>
-              <p class="sale-price">10,000원</p>
-            </span>
-            <span class="main-project-right">
-            <p>30%</p>
-            </span>
-              <div class="project project_5">
-                <div class="stars-outer">
-                  <div class="stars-inner"></div>
-                </div>
-                <p class="number"></p>
-              </div>
-              <div class="main-project-bottom">
-              <span class="left">
-              <p>리뷰 200</p>
-              </span>
-              <span class="right">
-              <p>응원하기</p>
-              <span class="wishlist">
-              </span>
-            </span>
-            </div>
-            </span>
-            </div>
-            </div>
-            <div class="swiper-slide">
-              <div class="sub-img-3">
-              <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-            </div>
-            <div class="new-icon">
-              <p>NEW</p>
-            </div>
-            <div class="main-project-title">
-            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-              <span class="main-project-left">
-              <p class="price">7,000원</p>
-              <p class="sale-price">10,000원</p>
-            </span>
-            <span class="main-project-right">
-            <p>30%</p>
-            </span>
-              <div class="project project_6">
-                <div class="stars-outer">
-                  <div class="stars-inner"></div>
-                </div>
-                <p class="number"></p>
-              </div>
-              <div class="main-project-bottom">
-              <span class="left">
-              <p>리뷰 200</p>
-              </span>
-              <span class="right">
-              <p>응원하기</p>
-              <span class="wishlist">
-              </span>
-            </span>
-            </div>
-            </span>
-            </div>
-            </div>
-                  
-            <div class="swiper-slide">
-              <div class="sub-img-3">
-              <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-            </div>
-            <div class="new-icon">
-              <p>NEW</p>
-            </div>
-            <div class="main-project-title">
-            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-              <span class="main-project-left">
-              <p class="price">7,000원</p>
-              <p class="sale-price">10,000원</p>
-            </span>
-            <span class="main-project-right">
-            <p>30%</p>
-            </span>
 
-              <div class="project project_7">
-                <div class="stars-outer">
-                  <div class="stars-inner"></div>
+              <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
                 </div>
-                <p class="number"></p>
-              </div>
-              
-              <div class="main-project-bottom">
-              <span class="left" id="">
-              <p>리뷰 200</p>
-              </span>
-              <span class="right" id="">
-              <p>응원하기</p>
-              <span class="wishlist">
-              </span>
-              </span>
-            </div>
-            </span>
-            </div>
-            </div>
-          
+                <div class="sale-icon">
+                  <p>SALE</p>
+                </div>
+                <div class="main-project-title">
+                  <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                  <span class="main-project-left">
+                    <p class="price">7,000원</p>
+                    <p class="sale-price">10,000원</p>
+                  </span>
+                  <span class="main-project-right">
+                    <p>30%</p>
+                  </span>
+                  <div class="project project_3">
+                    <div class="stars-outer">
+                      <div class="stars-inner"></div>
+                    </div>
+                    <p class="number"></p>
+                  </div>
+                  <div class="main-project-bottom">
+                    <span class="left">
+                      <p>리뷰 200</p>
+                    </span>
+                    <span class="right">
+                      <p>응원하기</p>
+                      <span class="wishlist">
+                      </span>
+                    </span>
+                  </div>
+                  </span>
                 </div>
               </div>
-              
+
+              <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+                <div class="project-title01">
+                  <div class="main-project-title">
+                    <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                    <span class="main-project-left">
+                      <p class="price">7,000원</p>
+                      <p class="sale-price">10,000원</p>
+                    </span>
+                    <span class="main-project-right">
+                      <p>30%</p>
+                    </span>
+                    <div class="project project_4">
+                      <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                      </div>
+                      <p class="number"></p>
+                    </div>
+                    <div class="main-project-bottom">
+                      <span class="left">
+                        <p>리뷰 200</p>
+                      </span>
+                      <span class="right">
+                        <p>응원하기</p>
+                        <span class="wishlist">
+                        </span>
+                      </span>
+                    </div>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+                <div class="main-project-title">
+                  <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                  <span class="main-project-left">
+                    <p class="price">7,000원</p>
+                    <p class="sale-price">10,000원</p>
+                  </span>
+                  <span class="main-project-right">
+                    <p>30%</p>
+                  </span>
+                  <div class="project project_5">
+                    <div class="stars-outer">
+                      <div class="stars-inner"></div>
+                    </div>
+                    <p class="number"></p>
+                  </div>
+                  <div class="main-project-bottom">
+                    <span class="left">
+                      <p>리뷰 200</p>
+                    </span>
+                    <span class="right">
+                      <p>응원하기</p>
+                      <span class="wishlist">
+                      </span>
+                    </span>
+                  </div>
+                  </span>
+                </div>
+              </div>
+              <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+                <div class="main-project-title">
+                  <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                  <span class="main-project-left">
+                    <p class="price">7,000원</p>
+                    <p class="sale-price">10,000원</p>
+                  </span>
+                  <span class="main-project-right">
+                    <p>30%</p>
+                  </span>
+                  <div class="project project_6">
+                    <div class="stars-outer">
+                      <div class="stars-inner"></div>
+                    </div>
+                    <p class="number"></p>
+                  </div>
+                  <div class="main-project-bottom">
+                    <span class="left">
+                      <p>리뷰 200</p>
+                    </span>
+                    <span class="right">
+                      <p>응원하기</p>
+                      <span class="wishlist">
+                      </span>
+                    </span>
+                  </div>
+                  </span>
+                </div>
+              </div>
+
+              <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+                <div class="main-project-title">
+                  <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                  <span class="main-project-left">
+                    <p class="price">7,000원</p>
+                    <p class="sale-price">10,000원</p>
+                  </span>
+                  <span class="main-project-right">
+                    <p>30%</p>
+                  </span>
+
+                  <div class="project project_7">
+                    <div class="stars-outer">
+                      <div class="stars-inner"></div>
+                    </div>
+                    <p class="number"></p>
+                  </div>
+
+                  <div class="main-project-bottom">
+                    <span class="left" id="">
+                      <p>리뷰 200</p>
+                    </span>
+                    <span class="right" id="">
+                      <p>응원하기</p>
+                      <span class="wishlist">
+                      </span>
+                    </span>
+                  </div>
+                  </span>
+                </div>
+              </div>
+
+            </div>
           </div>
-            
+
         </div>
-        <!-- 리스트_04 끝 -->
+
+      </div>
+      <!-- 리스트_04 끝 -->
 
 
-        <!-- 하단 배너 시작 -->
-        <div class="mbox_1280">
-            <h2>친환경 메이커 소개</h2>
-       
+      <!-- 하단 배너 시작 -->
+      <div class="mbox_1280">
+        <h2>친환경 메이커 소개</h2>
+
         <!-- 하단 배너 끝 -->
-        <div class="test">  
+        <div class="test">
           <!-- Swiper -->
-           <div class="swiper Swiper3">
-               <div class="swiper-wrapper">
-               <div class="swiper-slide"><img src="./recources/imgs/img-ban-01.png" alt=""></div>
-               <div class="swiper-slide"><img src="./recources/imgs/img-ban-01.png" alt=""></div>
-               <div class="swiper-slide"><img src="./recources/imgs/img-ban-01.png" alt=""></div>
-               <div class="swiper-slide"><img src="./recources/imgs/img-ban-01.png" alt=""></div>
-               <div class="swiper-slide"><img src="./recources/imgs/img-ban-01.png" alt=""></div>
-               <div class="swiper-slide"><img src="./recources/imgs/img-ban-01.png" alt=""></div>
-               <div class="swiper-slide"><img src="./recources/imgs/img-ban-01.png" alt=""></div>
-           </div>
-           
-               <!-- <div class="swiper-button-next"></div>
+          <div class="swiper Swiper3">
+            <div class="swiper-wrapper">
+              <div class="swiper-slide">
+                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
+              </div>
+              <div class="swiper-slide">
+                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
+              </div>
+              <div class="swiper-slide">
+                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
+              </div>
+              <div class="swiper-slide">
+                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
+              </div>
+              <div class="swiper-slide">
+                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
+              <div class="swiper-slide">
+                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
+              </div>
+              <div class="swiper-slide">
+                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
+              </div>
+            </div>
+
+            <!-- <div class="swiper-button-next"></div>
                <div class="swiper-button-prev"></div> -->
-               <div class="swiper-pagination"></div>
-           </div>               
-       </div> 
+            <div class="swiper-pagination"></div>
+          </div>
+        </div>
       </div>
     </div>
-</div>  
-    <!-- 메인 컨테이너 끝 -->
+  </div>
+  <!-- 메인 컨테이너 끝 -->
 
 
-    <!-- 푸터 시작 -->
-    <div class="footer">
-        <div class="head">
-            <ul>
-                <li><a href="">이용약관</a></li>
-                <li><a href="">개인정보처리방침</a></li>
-            </ul>
-        </div>
-        <div class="bottom">
-            <div class="con_01">
-                <div class="title">지구랭</div>
-                <ul>
-                    <li>대표이사 : 지구랭</li>
-                    <li>사업자등록번호 : 123-45-12345 </li>
-                    <li>통신판매업신고 : 1235-서울-45678</li>
-                    <li>개인정보관리책임자 : 지구룡</li>
-                </ul>
-            </div>
-            <div class="con_01">
-                <div class="title">CONTACT US</div>
-                <ul>
-                    <li>대표전화 : 02-1234-1235</li>
-                    <li>서울시 강남구 테헤란로 123길 14</li>
-                    <li>이메일 : gigurang@gigurang.com</li>
-                </ul>
-            </div>
-            <div class="logo_f"></div>
-            <div class="copy">ⓒ GIGURANG</div>
-            
-        </div>
+  <!-- 푸터 시작 -->
+  <div class="footer">
+    <div class="head">
+      <ul>
+        <li><a href="">이용약관</a></li>
+        <li><a href="">개인정보처리방침</a></li>
+      </ul>
     </div>
-    <!-- 푸터 끝 -->
+    <div class="bottom">
+      <div class="con_01">
+        <div class="title">지구랭</div>
+        <ul>
+          <li>대표이사 : 지구랭</li>
+          <li>사업자등록번호 : 123-45-12345 </li>
+          <li>통신판매업신고 : 1235-서울-45678</li>
+          <li>개인정보관리책임자 : 지구룡</li>
+        </ul>
+      </div>
+      <div class="con_01">
+        <div class="title">CONTACT US</div>
+        <ul>
+          <li>대표전화 : 02-1234-1235</li>
+          <li>서울시 강남구 테헤란로 123길 14</li>
+          <li>이메일 : gigurang@gigurang.com</li>
+        </ul>
+      </div>
+      <div class="logo_f"></div>
+      <div class="copy">ⓒ GIGURANG</div>
 
-</div>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-<script src="./js/swiper.js"></script>
-<script src="./js/star.js"></script>
-<!-- <script src="./js/serach.js"></script> -->
-<script src="./js/modal.js"></script>
-<script src="./js/sidenav.js"></script>
+    </div>
+  </div>
+  <!-- 푸터 끝 -->
+
+  </div>
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <script src="./js/swiper.js"></script>
+  <script src="./js/star.js"></script>
+  <!-- <script src="./js/serach.js"></script> -->
+  <script src="./js/modal.js"></script>
+  <script src="./js/sidenav.js"></script>
 </body>
+
 </html>

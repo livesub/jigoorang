@@ -457,4 +457,21 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'uses' => 'App\Http\Controllers\adm\review\AdmReviewMangerController@review_blind',
     ]);
 
+/*** 관리자 1:1 문의 관리 */
+    //mypage 1:1 문의
+    Route::get('qna_list', [
+        'as' => 'adm.qna_list',
+        'uses' => 'App\Http\Controllers\adm\qna\QnaController@index',
+    ]);
+
+    //mypage 1:1 문의 답변
+    Route::get('qna_answer', [
+        'as' => 'adm.qna_answer',
+        'uses' => 'App\Http\Controllers\adm\qna\QnaController@qna_answer',
+    ]);
+
+    Route::post('qna_answer', [
+        'as' => 'adm.qna_answer_save',
+        'uses' => 'App\Http\Controllers\adm\qna\QnaController@qna_answer_save',
+    ]);
 });

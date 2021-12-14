@@ -114,17 +114,36 @@ var swiper = new Swiper(".saleSwiper2", {
     prevEl: ".swiper-button-prev-3",
   },
 
+  // centeredSlides: true,
+
+
   breakpoints: {
     360: {
-      slidesPerView: 2.5,
+      slidesPerView: 2.1,
       spaceBetween: 10,
     },
     480: {
-      slidesPerView: 2.5,
+      slidesPerView: 3.5,
+      spaceBetween: 10,
+    },
+    980: {
+      slidesPerView: 3.5,
       spaceBetween: 10,
     },
     1024: {
       slidesPerView: 4.5,
+      spaceBetween: 10,
+    },
+    1200: {
+      slidesPerView: 4.5,
+      spaceBetween: 10,
+    },
+    1460: {
+      slidesPerView: 6,
+      spaceBetween: 10,
+    },
+    1600: {
+      slidesPerView: 6,
       spaceBetween: 10,
     },
   }

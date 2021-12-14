@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
@@ -12,73 +13,82 @@
     <link rel="stylesheet" href="../../css/reset.css">
     <link rel="stylesheet" href="../../css/layout.css">
     <link rel="stylesheet" href="../../css/style.css">
-    <link rel="stylesheet" href="../../css/responsive.css">  
+    <link rel="stylesheet" href="../../css/responsive.css">
 
     <title>지구랭</title>
 </head>
+
 <body>
-<div class="wrap">
+    <div class="wrap">
 
-    <!-- 탭바 시작 -->
-    <div class="tabar">
-        <ul>
-            <li><a href="#">홈</a></li>
-            <li><a href="#">랭킹</a></li>
-            <li><a href="#">쇼핑</a></li>
-            <li><a href="#">기록</a></li>
-        </ul>
-    </div>
-    <!-- 탭바 끝 -->
+        <!-- 탭바 시작 -->
+        <div class="tabar">
+            <ul>
+                <li><a href="#">홈</a></li>
+                <li><a href="#">랭킹</a></li>
+                <li><a href="#">쇼핑</a></li>
+                <li><a href="#">기록</a></li>
+            </ul>
+        </div>
+        <!-- 탭바 끝 -->
 
-      <!-- 헤더 시작-->
-      <div class="header">
-        <div class="top">
-            <div class="logo">
-                <a href="../../index.html"></a>
-                <h1>지구랭</h1>
-            </div>
-    
-              <!-- 모바일 메뉴 시작 -->
-              <div class="ham">
-                <a class="btn_ham" onclick="openNav()"><span class="name">햄버거</span></a>
-            </div>
-    
-            <div class="background"></div>
-            <div id="Sidenav" class="sidenav"> 
-                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
-                  <img src="../../recources/icons/icon-cls.png" alt="">
-                </a>
-    
-                <div class="m-menu">
-                    <ul class="m-menu-my">
-                        <a href="../../page/login/login.html"><li>로그인<span class="m-menu-my-boder"></span></li></a> 
-                        <!-- <a href="#"><li>로그아웃<span class="m-menu-my-boder"></span></li></a>  -->
-    
-                        <a href="../../page/mypage/mypage.html"><li>마이페이지</li></a>
-                    </ul>
-    
-                    <ul class="m-menu-child"> 
-                        <a href="#">
-                            <li>지구랭소개</li>
-                        </a>
-                        <a href="#">
-                            <li><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹 </li>
-                        </a>
-                        <a href="#">
-                            <li><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b> </li>
-                        </a>
-                        <a href="#">
-                            <li><b>지</b>구랭 <b>구</b>하는 기<b>록</b> </li>
-                        </a>
-                        <a href="../../page/evaluation/evaluation_list.html"><li>정직한 평가단</li></a>
-                        <a href="#"><li>고객센터 </li></a>
-                    </ul>
-                </div> 
-            </div> 
-            <!-- 모바일 메뉴 끝 -->
-    
-    
-            <!-- <ul class="menu">
+        <!-- 헤더 시작-->
+        <div class="header">
+            <div class="top">
+                <div class="logo">
+                    <a href="../../index.html"></a>
+                    <h1>지구랭</h1>
+                </div>
+
+                <!-- 모바일 메뉴 시작 -->
+                <div class="ham">
+                    <a class="btn_ham" onclick="openNav()"><span class="name">햄버거</span></a>
+                </div>
+
+                <div class="background"></div>
+                <div id="Sidenav" class="sidenav">
+                    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+                        <img src="../../recources/icons/icon-cls.png" alt="">
+                    </a>
+
+                    <div class="m-menu">
+                        <ul class="m-menu-my">
+                            <a href="../../page/login/login.html">
+                                <li>로그인<span class="m-menu-my-boder"></span></li>
+                            </a>
+                            <!-- <a href="#"><li>로그아웃<span class="m-menu-my-boder"></span></li></a>  -->
+
+                            <a href="../../page/mypage/mypage.html">
+                                <li>마이페이지</li>
+                            </a>
+                        </ul>
+
+                        <ul class="m-menu-child">
+                            <a href="#">
+                                <li>지구랭소개</li>
+                            </a>
+                            <a href="#">
+                                <li><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹 </li>
+                            </a>
+                            <a href="#">
+                                <li><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b> </li>
+                            </a>
+                            <a href="#">
+                                <li><b>지</b>구랭 <b>구</b>하는 기<b>록</b> </li>
+                            </a>
+                            <a href="../../page/evaluation/evaluation_list.html">
+                                <li>정직한 평가단</li>
+                            </a>
+                            <a href="../../page/mypage/mypage_evaluation_list_service.html">
+                                <li>고객센터 </li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+                <!-- 모바일 메뉴 끝 -->
+
+
+                <!-- <ul class="menu">
                 <li class="search"><a href="#"><span>검색</span></a></li>
                 <li class="cart">
                     <a class="conunt"><p id="">0</p></a>
@@ -88,77 +98,77 @@
                 <li class="login"><a href="/page/login/login.html"><span>로그인</span></a></li>
                <!-- <li class="loginout"><a href=""><span>로그아웃</span></a></li> 
             </ul> -->
-    
-    
-            <!-- 오픈전 메뉴 -->
-            <ul class="menu2">
-                <li class="my"><a href="../../page/mypage/mypage.html"><span>마이페이지</span></a></li>
-                <li class="login"><a href="../../page/login/login.html"><span>로그인</span></a></li>
-               <!-- <li class="loginout"><a href=""><span>로그아웃</span></a></li>-->
-               <!-- 로그아웃 -->
-            </ul>
-        </div>
-    
-        
-        <div class="btm">
-            <ul class="navi">
-                <li><a href="">지구랭 소개</a></li>
-                <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹</a></li>
-                <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b></a></li>
-                <li><a href=""><b>지</b>구랭 <b>구</b>하는 기<b>록</b></a></li>
-                <li><a href="../../page/evaluation/evaluation_list.html">정직한 평가단</a></li>
-                <li><a href="">고객센터</a></li>
-            </ul>
-        </div>
-    </div>
-    <!-- 헤더 끝 -->
 
-    <!-- 서브 컨테이너 시작 -->
-    <div class="sub-container">
-        
-        <!-- 위치 시작 -->
-        <div class="location">
-            <ul>
-                <li><a href="../../index.html">홈</a></li>
-                <li><a href="../../page/mypage/mypage.html">마이페이지</a></li>
-            </ul>
-        </div>
-        <!-- 위치 끝 -->
-        
-        <!-- 타이틀 시작 -->
-        <div class="title_area">    
-            <h2>마이페이지</h2>
-            <div class="text_02 wt-nm mypagetitle">
-            <span class="mypagetitle_left">
-               <p>안녕하세요</p>
-               <h3>지구룡님</h3>
-            </span>
-            <a href="../../page/mypage/mypage_user_information.html">
-               <button class="btn-bg-mint">회원정보 수정</button>
-            </a>
+
+                <!-- 오픈전 메뉴 -->
+                <ul class="menu2">
+                    <li class="my"><a href="../../page/mypage/mypage.html"><span>마이페이지</span></a></li>
+                    <li class="login"><a href="../../page/login/login.html"><span>로그인</span></a></li>
+                    <!-- <li class="loginout"><a href=""><span>로그아웃</span></a></li>-->
+                    <!-- 로그아웃 -->
+                </ul>
             </div>
-            <div class="line_14-100"></div>
+
+
+            <div class="btm">
+                <ul class="navi">
+                    <li><a href="">지구랭 소개</a></li>
+                    <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹</a></li>
+                    <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b></a></li>
+                    <li><a href=""><b>지</b>구랭 <b>구</b>하는 기<b>록</b></a></li>
+                    <li><a href="../../page/evaluation/evaluation_list.html">정직한 평가단</a></li>
+                    <li><a href="../../page/mypage/mypage_evaluation_list_service.html">고객센터</a></li>
+                </ul>
+            </div>
         </div>
-        <!-- 타이틀 끝 -->
-                
-        <!-- 마이페이지시작  -->
-  
+        <!-- 헤더 끝 -->
+
+        <!-- 서브 컨테이너 시작 -->
+        <div class="sub-container">
+
+            <!-- 위치 시작 -->
+            <div class="location">
+                <ul>
+                    <li><a href="../../index.html">홈</a></li>
+                    <li><a href="../../page/mypage/mypage.html">마이페이지</a></li>
+                </ul>
+            </div>
+            <!-- 위치 끝 -->
+
+            <!-- 타이틀 시작 -->
+            <div class="title_area">
+                <h2>마이페이지</h2>
+                <div class="text_02 wt-nm mypagetitle">
+                    <span class="mypagetitle_left">
+                        <p>안녕하세요</p>
+                        <h3>지구룡님</h3>
+                    </span>
+                    <a href="../../page/mypage/mypage_user_information.html">
+                        <button class="btn-bg-mint">회원정보 수정</button>
+                    </a>
+                </div>
+                <div class="line_14-100"></div>
+            </div>
+            <!-- 타이틀 끝 -->
+
+            <!-- 마이페이지시작  -->
+
             <div class="mypage">
                 <!-- 마이페이지 컨텐츠 시작 -->
-                <div class="mypage_wrap"> 
+                <div class="mypage_wrap">
                     <div class="title">
                         <h3>나의 쇼핑정보</h3>
-                </div>
-                    <div class="mypage_inner_01">   
+                    </div>
+                    <div class="mypage_inner_01">
                         <div class="mypage_innerbox_01">
-                            <div class="mypage_box">  
-                            <a href="">
-                                <div class="mypage_box_img01"></div>
-                                <span>주문 배송내역</span> 
-                            </a>
+                            <div class="mypage_box">
+                                <a href="">
+                                    <div class="mypage_box_img01"></div>
+                                    <span>주문 배송내역</span>
+                                </a>
                             </div>
-                        
-                            
+
+
                             <div class="mypage_box">
                                 <a href="">
                                     <div class="mypage_box_img02"> </div>
@@ -167,121 +177,122 @@
                             </div>
                         </div>
 
-                    <div class="mypage_innerbox_02">
-                        <div class="mypage_box solid"> 
+                        <div class="mypage_innerbox_02">
+                            <div class="mypage_box solid">
+                                <a href="">
+                                    <div class="mypage_box_img03"></div>
+                                    <span>구매상품 리뷰</span>
+                                </a>
+                            </div>
+
+
+                            <div class="mypage_box solid">
+                                <a href="">
+                                    <div class="mypage_box_img04"></div>
+                                    <span>응원한 상품</span>
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="mypage_inner_02">
+
+                        <div class="mypage_content_01">
+                            <div class="title box_2">
+                                <h3>나의 계정설정</h3>
+                            </div>
+
                             <a href="">
-                                <div class="mypage_box_img03"></div>
-                                <span>구매상품 리뷰</span> 
+                                <div class="mypage_box_02">
+                                    포인트현황
+                                    <div class="point">3000P</div>
+                                </div>
                             </a>
                         </div>
-                       
-                       
-                        <div class="mypage_box solid"> 
+                        <div class="mypage_content_01">
+                            <div class="title box_2">
+                                <h3>나의 배송지</h3>
+                            </div>
+
+
                             <a href="">
-                                <div class="mypage_box_img04"></div>
-                                <span>응원한 상품</span>
-                            </a> 
-                        </div>    
-                    </div>   
-                        
-                </div>
-                
-            <div class="mypage_inner_02">
-
-                <div class="mypage_content_01">
-                    <div class="title box_2">
-                        <h3>나의 계정설정</h3>
-                    </div>
-                    
-                    <a href="">
-                        <div class="mypage_box_02">
-                           포인트현황
-                           <div class="point">3000P</div>
+                                <div class="mypage_box_02 solid">
+                                    배송지 관리
+                                </div>
+                            </a>
                         </div>
-                    </a>
-                </div>
-                <div class="mypage_content_01">
-                    <div class="title box_2">
-                        <h3>나의 배송지</h3>
                     </div>
 
-                    
-                    <a href="">
-                        <div class="mypage_box_02 solid">
-                            배송지 관리
-                        </div>
-                    </a> 
-                </div>
-                </div>
 
-                
-                <div class="mypage_inner_02">
-                    <div class="mypage_content_01">
-                        <div class="title box_2">
-                            <h3>나의 평가단</h3>
-                        </div>
-                        
-                        <a href="../../page/mypage/mypage_evaluation_list.html">
-                            <div class="mypage_box_02">
-                                평가단 신청 결과 확인
+                    <div class="mypage_inner_02">
+                        <div class="mypage_content_01">
+                            <div class="title box_2">
+                                <h3>나의 평가단</h3>
                             </div>
-                        </a>
-                    </div>
-                    <div class="mypage_content_01">
-                        <div class="title box_2">
-                            <h3>나의 문의 내역</h3>
+
+                            <a href="../../page/mypage/mypage_evaluation_list.html">
+                                <div class="mypage_box_02">
+                                    평가단 신청 결과 확인
+                                </div>
+                            </a>
                         </div>
-                        <a href="../../page/mypage/mypage_evaluation_list_view.html">
-                            <div class="mypage_box_02 solid">
-                                1:1 문의 내역/답변
+                        <div class="mypage_content_01">
+                            <div class="title box_2">
+                                <h3>나의 문의 내역</h3>
                             </div>
-                        </a> 
+                            <a href="../../page/mypage/mypage_evaluation_Inquiries_list.html">
+                                <div class="mypage_box_02 solid">
+                                    1:1 문의 내역/답변
+                                </div>
+                            </a>
+                        </div>
                     </div>
-                </div>
-
-               
-            </div> <!-- 마이페이지 컨텐츠 끝 -->
-       
-    </div> <!-- 마이페이지 끝  -->
-</div><!-- 서브 컨테이너 끝 -->
-
-    
 
 
-    <!-- 푸터 시작 -->
-    <div class="footer">
-        <div class="head">
-            <ul>
-                <li><a href="">이용약관</a></li>
-                <li><a href="">개인정보처리방침</a></li>
-            </ul>
-        </div>
-        <div class="bottom">
-            <div class="con_01">
-                <div class="title">지구랭</div>
+                </div> <!-- 마이페이지 컨텐츠 끝 -->
+
+            </div> <!-- 마이페이지 끝  -->
+        </div><!-- 서브 컨테이너 끝 -->
+
+
+
+
+        <!-- 푸터 시작 -->
+        <div class="footer">
+            <div class="head">
                 <ul>
-                    <li>대표이사 : 지구랭</li>
-                    <li>사업자등록번호 : 123-45-12345 </li>
-                    <li>통신판매업신고 : 1235-서울-45678</li>
-                    <li>개인정보관리책임자 : 지구룡</li>
+                    <li><a href="">이용약관</a></li>
+                    <li><a href="">개인정보처리방침</a></li>
                 </ul>
             </div>
-            <div class="con_01">
-                <div class="title">CONTACT US</div>
-                <ul>
-                    <li>대표전화 : 02-1234-1235</li>
-                    <li>서울시 강남구 테헤란로 123길 14</li>
-                    <li>이메일 : gigurang@gigurang.com</li>
-                </ul>
+            <div class="bottom">
+                <div class="con_01">
+                    <div class="title">지구랭</div>
+                    <ul>
+                        <li>대표이사 : 지구랭</li>
+                        <li>사업자등록번호 : 123-45-12345 </li>
+                        <li>통신판매업신고 : 1235-서울-45678</li>
+                        <li>개인정보관리책임자 : 지구룡</li>
+                    </ul>
+                </div>
+                <div class="con_01">
+                    <div class="title">CONTACT US</div>
+                    <ul>
+                        <li>대표전화 : 02-1234-1235</li>
+                        <li>서울시 강남구 테헤란로 123길 14</li>
+                        <li>이메일 : gigurang@gigurang.com</li>
+                    </ul>
+                </div>
+                <div class="logo_f"></div>
+                <div class="copy">ⓒ GIGURANG</div>
             </div>
-            <div class="logo_f"></div>
-            <div class="copy">ⓒ GIGURANG</div>            
         </div>
+        <!-- 푸터 끝 -->
+
     </div>
-    <!-- 푸터 끝 -->
-
-</div>
-<script src="/js/sidenav.js"></script>
+    <script src="/js/sidenav.js"></script>
 
 </body>
+
 </html>

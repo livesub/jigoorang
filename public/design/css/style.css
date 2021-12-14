@@ -47,6 +47,10 @@ h5 {
 }
 
 /* 배경 */
+
+.bg_00 {
+  background-color: #ffcd54 !important;
+}
 .bg_01 {
   background: #3ec4ba !important;
 }
@@ -88,6 +92,13 @@ h5 {
   color: #3ec4ba;
 }
 
+/* .show {
+  display: block;
+}
+.hidden {
+  overflow: hidden;
+} */
+
 /********** 메인 컨테이너 **********/
 .main-container .visual {
   width: 100%;
@@ -124,11 +135,21 @@ h5 {
   display: flex;
 }
 
+.main-container .visual .test .swiper-slide .pc {
+  display: block;
+}
+
+.main-container .visual .test .swiper-slide .mo {
+  display: none;
+}
+
+
 .main-container .visual .test .swiper-slide img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  background: #fff;
 }
 
 /*.swiper-button-next {
@@ -174,6 +195,15 @@ h5 {
   margin: 0 auto;
   padding: 70px 40px 80px 40px;
 }
+
+.main-container .mbox_1280 .test .swiper-slide .pc {
+  display: block;
+}
+
+.main-container .mbox_1280 .test .swiper-slide .mo {
+  display: none;
+}
+
 
 .main-container .mbox_1280 h2 {
   color: #000;
@@ -248,7 +278,7 @@ h5 {
 .main-container .mbox_100 {
   width: 100%;
   position: relative;
-  background: #ffcd54;
+  /* background: #ffcd54; */
 }
 .main-container .mbox_100 .inner {
   width: 100%;
@@ -265,9 +295,9 @@ h5 {
   max-width: 1579px;
   margin-left: auto;
   /* padding-bottom: 80px; */
-  padding: 0px 0px 40px 20px;
+  padding: 0px 0px 40px 30px;
   height: 100%;
-  background-color: #ffcd54;
+  /* background-color: #ffcd54; */
 }
 
 .main-container .mbox_100 .saleSwiper {
@@ -276,6 +306,14 @@ h5 {
 }
 
 .main-container .mbox_100 .saleSwiper .swiper-slide {
+  width: 290px;
+  height: 422px;
+  flex-wrap: wrap;
+  text-align: left;
+  background-color: #fff;
+}
+
+.main-container .mbox_100 .saleSwiper2 .swiper-slide {
   width: 290px;
   height: 422px;
   flex-wrap: wrap;
@@ -531,6 +569,203 @@ h5 {
   background-size: 100% auto;
   background-position: center;
 }
+
+/* 상품스와이프 (4ps) 1280 */
+
+.main-container .mbox_1280 {
+  width: 100%;
+  position: relative;
+  /* background: #ffcd54; */
+}
+.main-container .mbox_1280 .inner {
+  width: 100%;
+  max-width: 1280px;
+  padding: 70px 40px 40px 40px;
+  margin: 0 auto;
+}
+.main-container .mbox_1280 .inner h2 {
+  color: #fff;
+}
+
+.main-container .mbox_1280 .sale {
+  width: 100%;
+  max-width: 1579px;
+  margin-left: auto;
+  /* padding-bottom: 80px; */
+  padding: 0px 0px 40px 0px;
+  height: 100%;
+  /* background-color: #ffcd54; */
+}
+
+.main-container .mbox_1280 .saleSwiper3 {
+  height: 452px;
+  margin-top: 20px;
+}
+
+.main-container .mbox_1280 .saleSwiper3 .swiper-slide {
+  width: 290px;
+  height: 422px;
+  flex-wrap: wrap;
+  text-align: left;
+  background-color: #fff;
+}
+
+.main-container .mbox_1280 .swiper-slide .sub-img img {
+  width: 290px;
+  height: 250px;
+}
+
+.main-container .mbox_1280 .swiper-slide .slide-sale {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* 출력별 */
+.main-container .mbox_1280 .stars-outer {
+  display: inline-block;
+  position: relative;
+  font-size: 16px;
+  margin-top: 4px;
+  /* font-family: "Font Awesome 5 free"; */
+  /* letter-spacing: 1px; */
+}
+
+.main-container .mbox_1280 .stars-outer::before {
+  content: "★ ★ ★ ★ ★";
+  font-weight: 900;
+  color: #cccccc;
+}
+
+.main-container .mbox_1280 .stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.main-container .mbox_1280 .stars-inner::before {
+  content: "★ ★ ★ ★ ★";
+  /* content: "\f005 \f005 \f005 \f005 \f005"; */
+  color: #3ec4ba;
+  font-weight: 900;
+}
+
+.main-container .mbox_1280 .number {
+  font-size: 16px;
+  font-family: "SpoqaHanSans-Regular";
+  font-weight: 400;
+  color: #707070;
+  margin: 5px;
+  letter-spacing: -0.5px;
+}
+
+.main-container .mbox_1280 .sale h3 {
+  margin: 14px 0 10px 0;
+  font-size: 18px;
+}
+
+.main-container .mbox_1280 .swiper-slide .main-project-title {
+  position: relative;
+  margin: 0 16px 0 16px;
+}
+
+.main-container .mbox_1280 .swiper-slide .main-project-title p {
+  display: inline-block;
+}
+.main-container .mbox_1280 .swiper-slide .main-project-left .price {
+  display: inline-block;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.main-container .mbox_1280 .sale-price {
+  font-weight: 600;
+  text-decoration: line-through;
+  font-size: 17px;
+  margin-top: 3px;
+}
+
+.main-container .mbox_1280 .main-project-title .main-project-left {
+  float: left;
+  margin: 0 20px 0 0;
+}
+
+.main-container .mbox_1280 .main-project-title .main-project-right {
+  float: right;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.main-container .mbox_1280 .main-project-bottom p {
+  float: left;
+  font-size: 15px;
+  /* font-family: "SBAggroL"; */
+  font-weight: 400;
+}
+
+.main-container .mbox_1280 .main-project-bottom .left p {
+  margin: 5px 0px 5px;
+}
+
+.main-container .mbox_1280 .main-project-bottom .right {
+  float: right;
+  width: 88px;
+  display: -webkit-inline-box;
+}
+
+.main-container .mbox_1280 .main-project-bottom .right p {
+  margin: 5px 6px 5px;
+  font-size: 15px;
+}
+
+.main-container .mbox_1280 .main-project-bottom .right .wishlist {
+  width: 23px;
+  margin-top: 4px;
+  background: url("../recources/icons/icon-heart@3x.png") no-repeat;
+  background-size: 23px auto;
+  background-position: center;
+  display: block;
+}
+
+.main-container .mbox_1280 .project {
+  font-size: 0.7rem;
+  margin: 0 16px 10px 0;
+}
+
+.main-container .mbox_1280 .slide_btn_2 {
+  margin-left: 47px;
+}
+
+.main-container .mbox_1280 .clicked {
+  background: url("../recources/icons/icon-heart-2.png") no-repeat;
+  background-size: 24px 21px;
+}
+
+/* .main-container .mbox_1280 .swiper-button-next-2 {
+  background: url("../recources/imgs/img-page-arwleft.png") no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+}
+.main-container .mbox_1280 .swiper-button-prev-2 {
+  background: url("../recources/imgs/img-page-arwleft.png") no-repeat;
+  background-size: 100% auto;
+  background-position: center;
+  display: block;
+  position: absolute;
+  width: 30px;
+  height: 30px;
+}
+
+.main-container .mbox_1280 .inner .swiper-button-next-2::after,
+.main-container .mbox_1280 .inner .swiper-button-prev-2::after {
+  display: none;
+} */
 
 /* 평가단 */
 .eval {
@@ -1580,12 +1815,9 @@ input::placeholder {
   padding: 30px 40px 30px 40px;
 }
 
-.eval
-  .board
-  .board_wrap.secession_content
-  .list_02 {
-    width: 100%;
-  }
+.eval .board .board_wrap.secession_content .list_02 {
+  width: 100%;
+}
 
 .eval
   .board
@@ -1779,56 +2011,227 @@ input::placeholder {
   padding-top: 50px;
 }
 
+.eval .board.mypage_list .btn_page {
+  margin-top: 50px;
+  width: 100%;
+}
+
+.eval .board.mypage_list .btn_page button {
+  width: 160px;
+  height: 48px;
+  background: #fff;
+  border: solid 2px #ddd;
+  font-size: 16px;
+  font-weight: bold;
+  color: #707070;
+}
+
+.eval .board.mypage_list .btn_page span {
+  float: right;
+}
+
 /* 1:1 문의 내역 답변 (list) */
 .eval .board .board_wrap .list .body .title p {
   font-size: 16px;
   font-weight: 600;
 }
 
-/* 고객센터 */
+/**** 고객센터 ****/
 
 .eval .board.mypage_list .board_wrap .tab_menu {
   position: relative;
   width: 100%;
-  max-width: 1200px;
-  height: 500px;
+  height: auto;
 }
 .eval .board.mypage_list .board_wrap .tab_menu .list_tab {
   overflow: hidden;
+  display: flex;
+  border-bottom: solid 4px #3ec4ba;
 }
 .eval .board.mypage_list .board_wrap .tab_menu .list_tab li {
   float: left;
-  margin-right: 14px;
+  margin-top: 20px;
   width: 100%;
 }
 .eval .board.mypage_list .board_wrap .tab_menu .list_tab .btn_list {
   font-size: 20px;
-  width: 572px;
+  width: 100%;
   height: 70px;
   text-align: center;
-  border-bottom: solid 4px #3ec4ba;
+  font-size: 20px;
+  padding: 26px;
 }
 .eval .board.mypage_list .board_wrap .tab_menu .list_tab .is_on .btn_list {
   color: #fff;
   background: #3ec4ba;
-  width: 572px;
+  width: 100%;
   height: 70px;
   text-align: center;
 }
 .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont {
-  /* display: none; */
-  position: absolute;
-  top: 25px;
-  left: 0;
-  background: #ddd;
-  color: #fff;
-  text-align: center;
+  display: block;
+  /* background: #ddd; */
   width: 100%;
-  height: 500px;
+  height: auto;
   line-height: 100px;
+  padding: 30px 40px 30px 40px;
 }
+
 .eval .board.mypage_list .board_wrap .tab_menu .list_tab .cont_area .cont {
-  /* display: block; */
+  display: none;
+}
+
+.eval
+  .board.mypage_list
+  .board_wrap
+  .tab_menu
+  .cont_area
+  .cont
+  li
+  input::placeholder {
+  font-size: 16px;
+  letter-spacing: -0.5px;
+  padding: 15px;
+  color: #aeaeae;
+}
+
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-01 {
+  margin-top: 20px;
+}
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont li {
+  padding: 10px 0px 10px 20px;
+  display: flex;
+}
+
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .btn_area_50 {
+  width: 100%;
+  text-align: center;
+  margin-top: 50px;
+}
+
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .btn-50-full {
+  width: 50%;
+  text-align: center;
+}
+
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont li input {
+  text-align: left;
+}
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-01 li p {
+  width: 20%;
+}
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-02 li p {
+  width: 25%;
+}
+
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-04 li p {
+  width: 25%;
+}
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-01 select {
+  width: 100%;
+  max-width: 540px;
+  height: 48px;
+  border: solid 2px #ddd;
+  background: url("../recources/icons/arrow-option.png") no-repeat 95% 50%;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  font-size: 16px;
+  color: #aeaeae;
+  padding: 0 15px;
+}
+
+.eval
+  .board.mypage_list
+  .board_wrap
+  .tab_menu
+  .cont_area
+  .cont
+  .tab-01
+  select
+  option {
+  padding: 20px;
+}
+
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-02 input {
+  width: 100%;
+  height: 48px;
+  border: solid 2px #ddd;
+  text-align: left;
+}
+
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-03 li p {
+  width: 25%;
+}
+
+.eval
+  .board.mypage_list
+  .board_wrap
+  .tab_menu
+  .cont_area
+  .cont
+  .tab-03
+  li
+  span {
+  width: 100%;
+}
+
+.eval
+  .board.mypage_list
+  .board_wrap
+  .tab_menu
+  .cont_area
+  .cont
+  .tab-03
+  span
+  input {
+  width: 100%;
+  max-width: 450px;
+  height: 48px;
+  border: solid 2px #ddd;
+}
+
+.eval
+  .board.mypage_list
+  .board_wrap
+  .tab_menu
+  .cont_area
+  .cont
+  .tab-04
+  textarea {
+  width: 100%;
+  max-width: 974px;
+  height: 96px;
+  border: solid 2px #ddd;
+}
+
+.eval
+  .board.mypage_list
+  .board_wrap
+  .tab_menu
+  .cont_area
+  .cont
+  li
+  textarea::placeholder {
+  font-size: 16px;
+  letter-spacing: -0.5px;
+  padding: 15px;
+  color: #aeaeae;
+}
+
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.con_02 {
+  display: none;
+  /* background: #ddd; */
+  width: 100%;
+  height: auto;
+  line-height: 100px;
+  padding: 30px 40px 30px 40px;
+  letter-spacing: -0.5px;
+  font-size: 16px;
+}
+
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.con_02 span {
+  font-weight: bold;
 }
 
 /* 모달 시작 */
@@ -2192,6 +2595,40 @@ input::placeholder {
 }
 
 /* 배송지 모달 (입력) */
+.modal-container-body.adress {
+  overflow: scroll;
+  height: 554px;
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.modal-container-body.adress::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
+.modal-container-body.adress .adress_input .adress_input04 .adress_pop {
+  display: none;
+  border: solid 2px #ddd;
+  width: 490px;
+  height: 200px;
+  position: relative;
+}
+
+.modal-container-body.adress .adress_input .adress_input04 .adress_pop img {
+  cursor: pointer;
+  position: absolute;
+  right: 0px;
+  top: -1px;
+  z-index: 1;
+}
+
+.modal-container-body.adress
+  .adress_input
+  .adress_input04
+  .adress_pop::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera*/
+}
+
 .modal-container-body .adress_input {
   margin-top: 30px;
 }
@@ -2256,6 +2693,11 @@ input::placeholder {
   height: 100%;
   max-width: 680px;
   max-height: 400px;
+  padding: 20px;
+}
+
+.modal .modal-container .modal-container-body.num {
+  padding: 20px;
 }
 
 .modal .modal-container .modal-container-body.num .phonnum_input {

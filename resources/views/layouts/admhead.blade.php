@@ -118,6 +118,12 @@ header('Pragma: public');
                     <tr>
                         <td><a href="{{ route('adm.review.reviewlist') }}">리뷰 관리</a></td>
                     </tr>
+                    <tr>
+                        <td><br><br>1:1 문의관리</td>
+                    </tr>
+                    <tr>
+                        <td><a href="{{ route('adm.qna_list') }}">1:1 문의관리</a></td>
+                    </tr>
                 </table>
             </td>
 

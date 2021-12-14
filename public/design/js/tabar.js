@@ -4,7 +4,8 @@ let activeCont = ''; // 현재 활성화 된 컨텐츠 (기본:#tab1 활성화)
 
 for (var i = 0; i < tabList.length; i++) {
     tabList[i].querySelector('.btn_list').addEventListener('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); //기본 클릭 동작 방지하기
+
         for (var j = 0; j < tabList.length; j++) {
             // 나머지 버튼 클래스 제거
             tabList[j].classList.remove('is_on');
@@ -19,5 +20,6 @@ for (var i = 0; i < tabList.length; i++) {
         // 버튼 클릭시 컨텐츠 전환
         activeCont = this.getAttribute('href');
         document.querySelector(activeCont).style.display = 'block';
+        console.log(activeCont);
     });
 }

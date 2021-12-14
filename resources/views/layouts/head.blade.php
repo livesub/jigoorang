@@ -3,6 +3,18 @@
     header('Cache-Control: no-store, private, no-cache, must-revalidate');
     header('Cache-Control: pre-check=0, post-check=0, max-age=0, max-stale = 0', false);
     header('Pragma: public');
+
+    //url 주소의 / 를 잘라내어 마지막 배열값(페이지명)을 가져 온다
+    //메뉴 class="on" 하기 위해
+    $path_cut = explode("/",Request::path());
+    //$path_chk = array_pop($path_cut);
+    $menu_exp = '';
+    $menu_center = '';
+
+    if($path_cut[0] == "exp" || $path_cut[0] == "list" || $path_cut[0] == "") $menu_exp = ' class="on" ';
+    else if($path_cut[0] == "customer_center") $menu_center = ' class="on" ';
+
+
 @endphp
 
 <!DOCTYPE html>
@@ -16,7 +28,7 @@
     <meta property="og:description" content="지구랭">
     <meta property="og:image" content="{{ asset('/design/resources/logo.png') }}">
 
-    <link rel="stylesheet" href="{{ asset('/design/css/reset.css') }}">
+    <link rel="stylesheet" href="{{ ('/design/css/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/css/layout.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/css/responsive.css') }}">
@@ -84,8 +96,8 @@
                         <a href="#">
                                 <li><b>지</b>구랭 <b>구</b>하는 기<b>록</b> </li>
                         </a>
-                        <a href="{{ route('exp.list') }}"><li>정직한 평가단 </li></a>
-                        <a href="#"><li>고객센터 </li></a>
+                        <a href="{{ route('exp.list') }}"><li {!! $menu_exp !!}>정직한 평가단</li></a>
+                        <a href="{{ route('customer_center') }}"><li {!! $menu_center !!}>고객센터 </li></a>
                     </ul>
                 </div>
             </div>
@@ -121,8 +133,8 @@
                 <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹</a></li>
                 <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b></a></li>
                 <li><a href=""><b>지</b>구랭 <b>구</b>하는 기<b>록</b></a></li>
-                <li class="on"><a href="{{ route('exp.list') }}">정직한 평가단</a></li>
-                <li><a href="">고객센터</a></li>
+                <li {!! $menu_exp !!}><a href="{{ route('exp.list') }}">정직한 평가단</a></li>
+                <li {!! $menu_center !!}><a href="{{ route('customer_center') }}">고객센터</a></li>
             </ul>
         </div>
     </div>

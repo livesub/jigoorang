@@ -613,7 +613,6 @@
     font-weight: 600;
   }
 
-
   /* 회원탈퇴  */
 
   .eval .board .board_wrap.secession_content {
@@ -675,7 +674,11 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  .modal .modal-container .modal-container-body {
     padding: 20px;
+    line-height: 1.5em;
   }
 
   .modal .btn.btn_2ea {
@@ -699,7 +702,7 @@
 
   .modal-container-body .adress_input input {
     width: 100%;
-    max-width: 365px;
+    max-width: 370px;
     height: 48px;
   }
 
@@ -721,7 +724,7 @@
   }
 
   .modal-container-body .adress_input .adress_input04 {
-    margin-left: 61px;
+    margin-left: 60px;
   }
 
   /* 휴대전화번호 변경 모달 */
@@ -779,6 +782,15 @@
     height: 250px;
   }
 
+  .main-container .visual .test .swiper-slide .pc {
+    display: none;
+  }
+  
+  .main-container .visual .test .swiper-slide .mo {
+    display: block;
+  }
+  
+
   .main-container .mbox_1280 .swiper-button-prev-1 {
     display: none;
   }
@@ -807,6 +819,14 @@
 
   .main-container .mbox_100 .swiper-button-prev-2 {
     display: none;
+  }
+
+  .main-container .mbox_1280 .test .swiper-slide .pc {
+    display: none;
+  }
+  
+  .main-container .mbox_1280 .test .swiper-slide .mo {
+    display: block;
   }
 
   /********** 서브페이지 시작 **********/
@@ -1016,7 +1036,86 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
   }
-  
+
+  .eval .board.mypage_list .btn_page button {
+    width: 80px;
+    height: 48px;
+    background: #fff;
+    border: solid 2px #ddd;
+    font-size: 16px;
+    font-weight: bold;
+    color: #707070;
+  }
+
+  /**** 고객센터 ****/
+
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont {
+    padding: 30px 0px 30px 0px;
+  }
+
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont li {
+    padding: 10px 0px 10px 20px;
+    display: flex;
+  }
+  .eval
+    .board.mypage_list
+    .board_wrap
+    .tab_menu
+    .cont_area
+    .cont
+    .tab-01
+    select {
+    width: 81%;
+  }
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-03 li p {
+    width: 25%;
+  }
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-04 li p {
+    width: 25%;
+  }
+  .eval
+    .board.mypage_list
+    .board_wrap
+    .tab_menu
+    .cont_area
+    .cont
+    .tab-03
+    li
+    span {
+    display: inline;
+    width: 100%;
+  }
+
+  .eval
+    .board.mypage_list
+    .board_wrap
+    .tab_menu
+    .cont_area
+    .cont
+    .tab-03
+    li
+    span
+    input {
+    width: 70%;
+  }
+
+  .eval
+    .board.mypage_list
+    .board_wrap
+    .tab_menu
+    .cont_area
+    .cont
+    .tab-03
+    li
+    span
+    .btn-10 {
+    width: 27%;
+  }
+
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.con_02 {
+    padding: 30px 0px 30px 0px;
+  }
+
   /* 회원탈퇴  */
 
   .eval .board .board_wrap.secession_content {
@@ -1032,6 +1131,13 @@
   .mo {
     display: block;
   }
+
+  /* .show {
+    display: none;
+  }
+  .hidden {
+    display: block;
+  } */
 
   /* 모달 */
 
@@ -1072,18 +1178,16 @@
 
   .modal .modal-container {
     width: 100%;
-    height: 100%;
+    height: auto;
     max-width: 320px;
-    max-height: 357px;
     background-color: #fff;
-    margin: 0;
+    margin: 0 auto;
     /* padding: 10px 10px 0 5px; */
     position: fixed;
     /* border-radius: 2rem; */
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    padding: 20px;
   }
 
   .modal .btn.btn_2ea {
@@ -1099,7 +1203,7 @@
   }
 
   .modal .modal-container .modal-container-body {
-    padding: 0;
+    padding: 20px;
     height: auto;
   }
 
@@ -1136,7 +1240,7 @@
   }
 
   .modal-container-body .adress_input .adress_input04 {
-    margin-left: 61px;
+    margin-left: 60px;
   }
 
   /* 휴대전화번호 변경 모달 */
@@ -1254,7 +1358,7 @@
   .main-container .visual {
     position: relative;
     width: 100%;
-    height: 0;
+    height: 420px;
     overflow: hidden;
     padding-bottom: 100%;
   }
@@ -1634,6 +1738,122 @@
     font-size: 14px;
   }
 
+  /**** 고객센터 ****/
+
+  .eval .board.mypage_list .board_wrap .tab_menu .list_tab .btn_list {
+    font-size: 14px;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    padding: 17px;
+  }
+  .eval .board.mypage_list .board_wrap .tab_menu .list_tab .is_on .btn_list {
+    color: #fff;
+    background: #3ec4ba;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+  }
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont {
+    display: block;
+    /* background: #ddd; */
+    width: 100%;
+    height: auto;
+    line-height: 100px;
+    padding: 20px 0;
+  }
+
+  .eval .board.mypage_list .board_wrap .tab_menu .list_tab .cont_area .cont {
+    display: none;
+  }
+
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-01 {
+    margin-top: 2px;
+  }
+
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont h4 {
+    font-size: 14px;
+  }
+
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont li {
+    padding: 10px 0px 10px 0px;
+    display: block;
+  }
+
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont li p {
+    font-size: 13px;
+    padding-bottom: 10px;
+    color: #707070;
+  }
+
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont li input {
+    text-align: left;
+  }
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-01 li p {
+    width: 100%;
+  }
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .btn_area_50 {
+    width: 100%;
+    margin-top: 20px;
+  }
+
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .btn-50-full {
+    width: 100%;
+  }
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-02 li p {
+    width: 100%;
+  }
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-03 li p {
+    width: 100%;
+  }
+
+  .eval
+    .board.mypage_list
+    .board_wrap
+    .tab_menu
+    .cont_area
+    .cont
+    .tab-03
+    li
+    span {
+    display: inline;
+  }
+
+  .eval
+    .board.mypage_list
+    .board_wrap
+    .tab_menu
+    .cont_area
+    .cont
+    .tab-03
+    li
+    span
+    input {
+    width: 62%;
+  }
+
+  .eval
+    .board.mypage_list
+    .board_wrap
+    .tab_menu
+    .cont_area
+    .cont
+    .tab-03
+    li
+    span
+    .btn-10 {
+    width: 34%;
+    top: 2px;
+  }
+
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-04 li p {
+    width: 100%;
+  }
+
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.con_02 {
+    padding: 20px 0;
+    letter-spacing: -0.8px;
+  }
   /* 회원탈퇴  */
 
   .eval .board .board_wrap.secession_content {

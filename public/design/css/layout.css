@@ -19,7 +19,8 @@
 }
 .sub-container {
   display: block;
-  width: 1280px;
+  width: 100%;
+  max-width: 1280px;
   padding: 30px 40px 150px 40px;
   margin: 0 auto;
 }

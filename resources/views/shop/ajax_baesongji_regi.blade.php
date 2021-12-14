@@ -23,9 +23,16 @@
                     <label for="">
                         <button type="button" class="btn_address adress_input03_btn" onclick="win_zip('wrap_c','od_c_zip', 'od_c_addr1', 'od_c_addr2', 'od_c_addr3', 'od_c_addr_jibeon', 'btnFoldWrap_c');">우편번호 찾기</button>
                     </label>
-                    <div id="wrap_c" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
+
+
+
+                    <div id="wrap_c" class="adress_pop">
                     <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap_c" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" alt="접기 버튼">
                     </div>
+
+
+
+
                 </div>
                     <input type="text" name="od_c_addr1" id="od_c_addr1" required class="adress_input04" size="60" placeholder="기본주소" readonly>
                     <input type="text" name="od_c_addr2" id="od_c_addr2" class="adress_input04" size="60" placeholder="상세주소">

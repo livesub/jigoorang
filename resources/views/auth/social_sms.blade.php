@@ -1,72 +1,91 @@
 @extends('layouts.head')
 
 @section('content')
-    소셜로그인 핸드폰 인증 뷰입니다.1111
-    <form action="{{ route('social_save_member') }}" method='POST' role='form' class='form__auth' onsubmit="return sms_certification()">
-        {!! csrf_field() !!}
 
-        <div class='form-group'>
-        <input name='user_id' id='user_id' type='hidden' class="form-control @error('user_id') is-invalid @enderror" value="{{ $create_result['user_id'] }}" >
+
+
+<!-- 서브 컨테이너 시작 -->
+    <div class="sub-container">
+
+        <!-- 위치 시작 -->
+        <div class="location">
+            <ul>
+                <li><a href="/">홈</a></li>
+                <li><a href="{{ route('join.create_agree') }}">회원가입</a></li>
+            </ul>
+        </div>
+        <!-- 위치 끝 -->
+
+        <!-- 타이틀 시작 -->
+        <div class="title_area_01">
+            <h2>회원가입</h2>
+        </div>
+        <!-- 타이틀 끝 -->
+
+        <!-- sns 회원가입 시작  -->
+            <div class="join">
+
+                <!-- sns 회원가입 컨텐츠 시작 -->
+                <div class="join_wrap">
+                  <div class="text_04">
+                    <h2>휴대폰 인증</h2>
+                  </div>
+                  <div class="line_14 bk"></div>
+                    <form action="{{ route('social_save_member') }}" method='POST' role='form' class='join_form' onsubmit="return sms_certification()">
+                    {!! csrf_field() !!}
+                    <input name='user_id' id='user_id' type='hidden' class="@error('user_id') is-invalid @enderror" value="{{ $create_result['user_id'] }}" >
+                    <input name='user_pw' id='user_pw' type='hidden' class="@error('user_pw') is-invalid @enderror" value="{{ $create_result['password'] }}" >
+                    <input name='user_birth' id='user_birth' type='hidden' class="@error('user_birth') is-invalid @enderror" value="{{ $create_result['user_birth'] }}">
+                    <input name='user_provider' id='user_provider' type='hidden' class="@error('user_provider') is-invalid @enderror" value="{{ $create_result['user_platform_type'] }}">
+
+                    <input name="cookie1" id="cookie1" type="hidden" value="">
+                    <input name="cookie2" id="cookie2" type="hidden" value="">
+                    <input name="cookie3" id="cookie3" type="hidden" value="">
+                    <input name="cookie4" id="cookie4" type="hidden" value="">
+                    <input name="checked_ctf" id="checked_ctf" type="hidden" value="">
+                    <input name='user_gender' id='user_gender' type='hidden' class="@error('user_gender') is-invalid @enderror" value="{{ $create_result['user_gender'] }}">
+                    <div class="join_input_box_01">
+
+                        @if($create_result['user_name'] == "")
+                        <input name='user_name' id='user_name' type='text' class="@error('user_name') is-invalid @enderror" value="{{ $create_result['user_name'] }}"  placeholder="이름을 입력하세요.">
+                        @endif
+
+                        <input name='user_phone' id='user_phone' type='text' class="@error('user_phone') is-invalid @enderror" value="{{ old('user_phone') }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"  placeholder="휴대전화 번호를 '-' 없이 입력하세요.">
+                        @error('user_phone')
+                            <span role='alert'>{{ $message }}</span>
+                        @enderror
+                        <button type="button" onclick="send_sms()" id="sms_send" class="btn-20">인증번호받기</button>
+                        <input name='phone_certificate' id='phone_certificate' type='text' class="@error('phone_certificate') is-invalid @enderror" value='' placeholder="@lang('auth.certification_number')" placeholder="인증번호를 입력하세요">
+                        <button type="button" onclick="check_ctf_number()" id="check_ctf" class="btn-20">인증 확인</button>
+                        <span id="countdown"></span>
+                    </div>
+                    <button type="submit" class="btn-full">가입하기</button>
+                    </form>
+                </div>
+
+
         </div>
 
-
-        <div class='form-group'>
-        <input name='user_pw' id='user_pw' type='hidden' class="form-control @error('user_pw') is-invalid @enderror" value="{{ $create_result['password'] }}" >
-        </div>
-
-        <div class='form-group'>
-        <input name='user_name' id='user_name' type='text' class="form-control @error('user_name') is-invalid @enderror" value="{{ $create_result['user_name'] }}" style="display:none">
-        </div>
+    </div>
+    <!-- sns 회원가입 끝 -->
+</div>
+<!-- sns 회원가입 끝  -->
 
 
-        <div class='form-group'>
-        <input name='user_birth' id='user_birth' type='hidden' class="form-control @error('user_birth') is-invalid @enderror" value="{{ $create_result['user_birth'] }}">
-        </div>
 
-        <div class='form-group'>
-        <input name='user_provider' id='user_provider' type='hidden' class="form-control @error('user_provider') is-invalid @enderror" value="{{ $create_result['user_platform_type'] }}">
-        </div>
+    </div>
+    <!-- 서브 컨테이너 끝 -->
 
-        <div class='form-group'>
-        <input name='user_gender' id='user_gender' type='hidden' class="form-control @error('user_gender') is-invalid @enderror" value="{{ $create_result['user_gender'] }}">
-        </div>
 
-        <div class='form-group'>
-        <input name='user_phone' id='user_phone' type='text' class="form-control @error('user_phone') is-invalid @enderror" value="{{ old('user_phone') }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-        </div>
-        @error('user_phone')
-            <span class='invalid-feedback' role='alert'>
-                <strong>{{ $message }}</strong>
-            </span>
-        @enderror
-        <span id="countdown"></span>
-        <button type="button" onclick="send_sms()" id="sms_send">@lang('auth.form.cerfitication_btn')</button>
 
-        <div class='form-group'>
-        <input name='phone_certificate' id='phone_certificate' type='text' class="form-control @error('phone_certificate') is-invalid @enderror" value='' placeholder="@lang('auth.certification_number')">
-        </div>
-        <button type="button" onclick="check_ctf_number()" id="check_ctf">인증 확인</button>
-        <br>
-        <input name="cookie1" id="cookie1" type="hidden" value="">
-        <input name="cookie2" id="cookie2" type="hidden" value="">
-        <input name="cookie3" id="cookie3" type="hidden" value="">
-        <input name="cookie4" id="cookie4" type="hidden" value="">
-        <input name="checked_ctf" id="checked_ctf" type="hidden" value="">
 
-        <!-- <div class='form-group'>
-        <input name='phone_certificate_confirmation' id='phone_certificate_confirmation' type='hidden' class='form-control @error('user_pw_confirmation') is-invalid @enderror' value="{{ old('phone_certificate') }}">
-        </div> -->
-        <button type="submit">@lang('auth.form.register_btn')</button>
-    </form>
-
-@endsection
 
 
 
 @section('script')
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/js-sha256/0.9.0/sha256.min.js"></script>
 <script>
-    var time = 30; //제한시간 설정
+    var time = 300; //제한시간 설정
     var timer = 0;  //타이머 관한 기초값 0으로 설정
     var return_time = time; //다시 시작 시 시간
 </script>
@@ -110,16 +129,11 @@
   };
   function send_sms(){
     var user_phone = $('#user_phone').val();
-
     if(user_phone == "" || user_phone == null){
-
-      alert("{{ __('auth.empty_phone_number') }}");
-
+      alert("{{ __('auth.empty_phone_number') }}111111");
       return false;
     }else if(regPhone.test(user_phone) !== true) {
-
       alert("{{ __('auth.failed_phone_reg') }}");
-
       return false;
     }
 
@@ -183,6 +197,11 @@
 
     //before to submit validate
     //name 길이 10자 제한
+    if(user_name == null || user_name == "" || user_name.length > 10 || regName.test(user_name) !== true){
+      alert('이름을 입력 해주세요.');
+      $("#user_name").focus();
+      return false;
+    }
 
     if(auth == null || auth == ""){
       alert('휴대폰 번호를 인증 받으세요.');
@@ -190,19 +209,15 @@
       return false;
     }else{
       if(user_name == ""){
+        $("#user_name").focus();
         $("#user_name").show();
       }
-    }
-
-    if(user_name == null || user_name == "" || user_name.length > 10 || regName.test(user_name) !== true){
-      alert('이름을 입력 해주세요.');
-      $("#user_name").focus();
-      return false;
     }
 
     //phone
     if(user_phone == null || user_phone == "" || regPhone.test(user_phone) !== true || user_phone.length > 11){
       alert("{{ __('auth.phone_check') }}");
+      $("#user_phone").focus();
       return false;
     }
 
@@ -346,4 +361,6 @@
       deleteCookie(sk4, '{{ request()->getHost() }}', '/');
   });
 </script>
+
+
 @endsection

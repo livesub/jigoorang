@@ -125,7 +125,7 @@
      <div class="modal_004 modal fade">
         <div class="modal-background" onclick="addressinputclose_001()"></div>
          <div class="modal-container">
-             <div class="modal-container-body">
+             <div class="modal-container-body adress">
              <div class="modal-container-title">
                  <h4>배송지 입력</h4>
                  <div class="btn-close" onclick="addressinputclose_001()">
@@ -143,10 +143,17 @@
                     <label for="">배송지</label>
                     <input type="text" name="" id="" class="adress_input03" placeholder="우편번호">
                     <label for="">
-                        <button class="adress_input03_btn">우편번호 찾기</button>
+                        <button class="adress_input03_btn"  onclick="">우편번호 찾기</button>
                     </label>
                 </div>
                 <div class="adress_input04">
+                    <div id="wrap" class="adress_pop">
+                        <img src="//t1.daumcdn.net/postcode/resource/images/close.png" 
+                        id="btnFoldWrap"  
+                        onclick="" 
+                        alt="접기 버튼">
+                    </div>
+                        
                     <input type="text" name="" id="">
                     <input type="text" name="" id="">
                     <input type="text" name="" id="">
@@ -266,7 +273,7 @@
                         <li><b>지</b>구랭 <b>구</b>하는 기<b>록</b> </li>
                     </a>
                     <a href="../../page/evaluation/evaluation_list.html"><li class="on">정직한 평가단</li></a>
-                    <a href="#"><li>고객센터 </li></a>
+                    <a href="../../page/mypage/mypage_evaluation_list_service.html"><li>고객센터 </li></a>
                 </ul>
             </div> 
         </div> 
@@ -302,7 +309,7 @@
                 <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b></a></li>
                 <li><a href=""><b>지</b>구랭 <b>구</b>하는 기<b>록</b></a></li>
                 <li class="on"><a href="../../page/evaluation/evaluation_list.html">정직한 평가단</a></li>
-                <li><a href="">고객센터</a></li>
+                <li><a href="../../page/mypage/mypage_evaluation_list_service.html">고객센터</a></li>
             </ul>
         </div>
     </div>
@@ -495,5 +502,6 @@
 <script src="../../js/modal.js"></script>
 <script src="../../js/button.js"></script> <!-- 배송지 입력버튼 js -->
 <script src="../../js/sidenav.js"></script>
+
 </body>
 </html>

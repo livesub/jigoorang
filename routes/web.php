@@ -122,6 +122,12 @@ Route::post('auth/reset', [
     'uses' => 'App\Http\Controllers\auth\ResetController@store',
 ]);
 
+/** 고객센터 */
+Route::get('customer_center', [
+    'as' => 'customer_center',
+    'uses' => 'App\Http\Controllers\center\CenterController@index',
+]);
+
 /* 로그인 사용자만 볼수 있는 페이지를 group 로 묶는다 */
 Route::group(['middleware' => ['auth']], function () {
     /* 마이페이지 */
@@ -260,6 +266,26 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'App\Http\Controllers\member\UserPointController@user_use_point_list',
     ]);
 
+    //mypage 1:1 문의
+    Route::get('member/qna_list', [
+        'as' => 'mypage.qna_list',
+        'uses' => 'App\Http\Controllers\member\QnaController@index',
+    ]);
+
+    Route::get('member/qna_write', [
+        'as' => 'mypage.qna_write',
+        'uses' => 'App\Http\Controllers\member\QnaController@qna_write',
+    ]);
+
+    Route::post('member/qna_write', [
+        'as' => 'mypage.qna_write_save',
+        'uses' => 'App\Http\Controllers\member\QnaController@qna_write_save',
+    ]);
+
+    Route::get('member/qna_view', [
+        'as' => 'mypage.qna_view',
+        'uses' => 'App\Http\Controllers\member\QnaController@qna_view',
+    ]);
  });
 
 /* 이메일 확인 리턴(외부에서 접속 해야 하기에 밖으로 뺌) */
