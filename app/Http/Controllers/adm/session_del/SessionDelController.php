@@ -45,7 +45,7 @@ class SessionDelController extends Controller
             }
 
             if (time() > $atime + (3600 * 24)) {  // 지난시간을 초로 계산해서 적어주시면 됩니다. default : 24시간전
-                $return = unlink($session_file);
+                $return = @unlink($session_file);
 
                 flush();
             }
