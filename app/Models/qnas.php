@@ -14,6 +14,7 @@ class qnas extends Model
         'qna_subject',
         'order_id',
         'user_id',
+        'user_name',
         'qna_content',
         'qna_answer',
     ];

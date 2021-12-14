@@ -104,6 +104,7 @@ class QnaController extends Controller
         $data = array(
             'qna_cate'      => $qna_cate,
             'user_id'       => Auth::user()->user_id,
+            'user_name'     => Auth::user()->user_name,
             'qna_subject'   => $qna_subject,
             'qna_content'   => $qna_content,
         );
