@@ -45,7 +45,7 @@ header('Pragma: public');
                     </tr>
 
                     @if(auth()->user()->user_level < 2) <!-- 총관리자만 보는 메뉴 -->
-
+<!--
                     <tr>
                         <td><a href="{{ route('adm.popup.index') }}">팝업 관리</a></td>
                     </tr>
@@ -77,6 +77,7 @@ header('Pragma: public');
                     <tr>
                         <td><a href="{{ url('adm/clearcache') }}">캐시 파일 일괄 삭제</a></td>
                     </tr>
+-->
                     @endif
 
                     <tr>
