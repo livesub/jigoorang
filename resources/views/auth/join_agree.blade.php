@@ -89,7 +89,7 @@
                             <div class="solid"></div>
 
                         <div class="agree_box_all">
-                            <span>위 약관을 모두  확인하였으며 모든 내용에 동의 합니다.</span>
+                            <span>위 약관을 모두  확인하였으며 모든 내용에 동의합니다.</span>
 
                             <button type="submit" class="btn-full">로그인</button>
                        </div>

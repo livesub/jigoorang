@@ -34,14 +34,14 @@
                                 {{ $result -> title }}
                             </div>
                             <dl>
-                                <dt>평가단 모집인원</dt>
+                                <dt>모집인원</dt>
                                 <dd>{{ $result->exp_limit_personnel }}명</dd>
                                 <dt>모집기간</dt>
                                 <dd>{{ $result->exp_date_start }}  ~ {{ $result->exp_date_end }}</dd>
+                                <dt>선정자 발표일</dt>
+                                <dd>{{ $result->exp_release_date }}</dd>
                                 <dt>평가 가능기간</dt>
                                 <dd>{{ $result->exp_review_start }} ~ {{ $result->exp_review_end }}</dd>
-                                <dt>당첨자 발표일</dt>
-                                <dd>{{ $result->exp_release_date }}</dd>
                             </dl>
                         </div>
                         <!-- 리스트 끝 -->

@@ -34,9 +34,9 @@
                   {!! csrf_field() !!}
 
                   @if(isset($_COOKIE['id_remember']) && $_COOKIE['id_remember'] != "")
-                    <input name='user_id' id='user_id' type='email' class='@error('user_id') is-invalid @enderror login_input' value="{{ $_COOKIE['id_remember'] }}" placeholder="아이디(이메일주소)를 입력하세요." autofocus>
+                    <input name='user_id' id='user_id' type='email' class='@error('user_id') is-invalid @enderror login_input' value="{{ $_COOKIE['id_remember'] }}" placeholder="아이디(이메일 주소)를 입력하세요." autofocus>
                   @else
-                    <input name='user_id' id='user_id' type='email' class='@error('user_id') is-invalid @enderror login_input' value="{{ old('user_id') }}" placeholder="아이디(이메일주소)를 입력하세요." autofocus>
+                    <input name='user_id' id='user_id' type='email' class='@error('user_id') is-invalid @enderror login_input' value="{{ old('user_id') }}" placeholder="아이디(이메일 주소)를 입력하세요." autofocus>
                   @endif
 
                     <input name='user_pw' id='user_pw' type='password' class='@error('user_pw') is-invalid @enderror login_input' value='{{ old('user_pw') }}' placeholder='{{ $user_pw }}'>
@@ -86,7 +86,7 @@
     var user_pw = $('#user_pw').val();
 
     if(user_id == "" || user_id == null){
-      alert('아이디(이메일주소)를 입력 하세요.');
+      alert('아이디(이메일 주소)를 입력 하세요.');
       return false;
     }
 

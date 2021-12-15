@@ -48,6 +48,8 @@
 
                         @if($create_result['user_name'] == "")
                         <input name='user_name' id='user_name' type='text' class="@error('user_name') is-invalid @enderror" value="{{ $create_result['user_name'] }}"  placeholder="이름을 입력하세요.">
+                        @else
+                        <input name='user_name' id='user_name' type='hidden' value="{{ $create_result['user_name'] }}">
                         @endif
 
                         <input name='user_phone' id='user_phone' type='text' class="@error('user_phone') is-invalid @enderror" value="{{ old('user_phone') }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"  placeholder="휴대전화 번호를 '-' 없이 입력하세요.">

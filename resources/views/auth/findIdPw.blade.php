@@ -11,14 +11,14 @@
         <div class="location">
             <ul>
                 <li><a href="/">홈</a></li>
-                <li><a href="{{ route('findIdPwView')}}">ID/비밀번호 찾기</a></li>
+                <li><a href="{{ route('findIdPwView')}}">아이디/비밀번호 찾기</a></li>
             </ul>
         </div>
         <!-- 위치 끝 -->
 
         <!-- 타이틀 시작 -->
         <div class="title_area_01">
-            <h2>ID/비밀번호 찾기</h2>
+            <h2>아이디/비밀번호 찾기</h2>
         </div>
         <!-- 타이틀 끝 -->
 

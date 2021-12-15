@@ -47,16 +47,15 @@
                                 <li> 2. 탈퇴 시 회원 정보의 복구는 불가능하며, 보유하신 포인트도 모두 무효화됩니다.</li>
                                 <li> 3. 작성하신 평가 및 리뷰 정보는 탈퇴 후에도 삭제되지 않습니다. 삭제를 원할 시, 반드시 탈퇴 전 직접 삭제하셔야 합니다.</li><br>
 
-                                <input type="checkbox" name="withdraw_chk" id="withdraw_chk" value="ok"> <label for="">위 내용을 모두  확인하였으며 모든 내용에 동의 합니다.</label>
+                                <input type="checkbox" name="withdraw_chk" id="withdraw_chk" value="ok"> <label for="">위 내용을 모두 확인하였으며 모든 내용에 동의합니다.</label>
                             </ul>
                         </div>
                     </div>
                     <div class="list_02">
                         <div class="secession_02">
                             <h4>회원 탈퇴 사유</h4>
-                            <p>그동안 지구랭을 이용해주셔서 감사합니다.<br>
-                                탈퇴 이유를 작성해주시면 더나은 서비스로 보답하겠습니다.</p>
-
+                            <p>그동안 지구랭을 이용해 주셔서 감사합니다<br>
+                            탈퇴 이유를 작성해 주시면 더 나은 서비스로 보답하겠습니다</p>
                           <ul class="secession_radio_btn">
                             <li><input type="radio" name="withdraw_type" id="withdraw_type1" value="방문 빈도가 낮아요" onclick="withdraw_type_chk(1)"> <label for="">방문 빈도가 낮아요</label></li>
                             <li><input type="radio" name="withdraw_type" id="withdraw_type2" value="개인 정보가 걱정돼요" onclick="withdraw_type_chk(2)"> <label for="">개인 정보가 걱정돼요</label></li>

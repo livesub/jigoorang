@@ -41,7 +41,10 @@
                             $exp_app_cnt = DB::table('exp_application_list')->where([['exp_id', $exp_list->id], ['access_yn', 'y']])->count();
 
                             if($exp_app_cnt > 0){   //승인 난 상태
-                                if($exp_app_row->access_yn == 'y') $exp_ment = '확정';
+                                if($exp_app_row->access_yn == 'y'){
+                                    //$exp_ment = '선정되었어요';
+                                    $exp_ment = "<span onclick=\"alert('평가단 제품 수령 및 사용 후\\n[마이페이지] - [제품 평가 및 리뷰]에서\\n정직한 평가를 작성해주세요');\">선정되었어요</span>";
+                                }
                                 else $exp_ment = '다음에 만나요';
                             }else{
                                 if($now_date <= $exp_list->exp_release_date) $exp_ment = '신청중';

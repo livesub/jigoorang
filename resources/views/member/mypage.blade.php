@@ -60,7 +60,7 @@
                         <div class="mypage_box solid">
                             <a href="">
                                 <div class="mypage_box_img03"></div>
-                                <span>구매상품 리뷰</span>
+                                <span>제품 평가 및 리뷰</span>
                             </a>
                         </div>
 

@@ -40,7 +40,11 @@
                     <div class="list-none">
                         <img src="{{ asset('/design/recources/imgs/combined-shape.png') }}" alt="">
                         <br><br>
+                        @if($keyword == "")
+                        <p>등록된 글이 없습니다.</p>
+                        @else
                         <p>검색 결과가 없습니다.</p>
+                        @endif
                     </div>
                     @else
                         @foreach($qna_rows as $qna_row)

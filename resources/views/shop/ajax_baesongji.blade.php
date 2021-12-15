@@ -25,7 +25,11 @@
                         @endphp
                   <div class="modal-container-box">
                   <input type="hidden" name="id_ori[{{ $i }}]" id="id_ori[{{ $i }}]" value="{{ $baesongji->id }}">
-                    <h3>{{ $baesongji->ad_name }} <span>(기본 배송지)</span></h3>
+                    <h3>{{ $baesongji->ad_name }}
+                    @if($baesongji->ad_default != 0)
+                     <span>(기본 배송지)</span>
+                    @endif
+                     </h3>
                     <p>{{ $baesongji->ad_addr1 }}
                         <br>{{ $baesongji->ad_addr2 }} {{ $baesongji->ad_addr3 }}</p>
                         <input type="hidden" id="addr{{ $i }}" value="{{ $addr }}">

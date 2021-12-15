@@ -98,8 +98,8 @@
                           </div>
                           <div id="tab2" class="cont con_02">
                             <p>지구랭과의 제휴/입점 문의는<br>
-                              <span>jigoorang_hehe@naver.com</span> 으로 메일 주시면 감사드리겠습니다.<br>
-                              (메일 내용에 담당자분 성함과 연락처를 꼭 기입해 주세요)</p>
+                            <span>Jigoorang_hehe@naver.com</span> 으로 메일 주세요<br>
+                            (담당자분 성함과 연락처를 꼭 기입해 주세요)</p>
                           </div>
                         </div>
                         @endif

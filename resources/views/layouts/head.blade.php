@@ -51,7 +51,7 @@
             <li><a href="#">홈</a></li>
             <li><a href="#">랭킹</a></li>
             <li><a href="#">쇼핑</a></li>
-            <li><a href="#">기록</a></li>
+            <li><a href="#">소식</a></li>
         </ul>
     </div>
     <!-- 탭바 끝 -->
@@ -85,7 +85,7 @@
 
                     <ul class="m-menu-child">
                         <a href="#">
-                            <li>지구랭소개</li>
+                            <li>지구랭 소개</li>
                         </a>
                         <a href="#">
                                 <li><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹 </li>

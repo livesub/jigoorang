@@ -127,9 +127,7 @@
 
                             </ul>
                             <ul class="information-input">
-                                <li> 배송메모 <br>
-                                    <span>(필수입력)</span>
-                                </li>
+                                <li> 배송메모</li>
                                 <input type="hidden" id="ad_jibeon_view" name="ad_jibeon_view" value="{{ $address->ad_jibeon }}">
                                 <input type="text" id="ship_memo" name="ship_memo" placeholder="배송시 남길 메세지를 입력해 주세요">
                             </ul>
@@ -316,13 +314,13 @@
             $('#form_text').focus();
             return false;
         }
-
+/*
         if($.trim($("#ship_memo").val()) == ""){
             alert('배송 메모를 입력 하세요.');
             $('#ship_memo').focus();
             return false;
         }
-
+*/
         if(!$('#promotion_agree').is(":checked")){
             alert('약관에 동의 후 평가단 신청이 가능합니다.');
             return false;
