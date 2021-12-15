@@ -4,3 +4,5 @@ public/data
 node_modules
 /public/storage
 /storage/
+config/app.php
+/public/.htaccess
