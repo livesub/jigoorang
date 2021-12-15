@@ -1,14 +1,18 @@
-<script src="{{ asset('/design/js/modal.js') }}"></script>
+<script src="{{ asset('/design/js/modal-back02.js') }}"></script>
+
+<div class="modal_004 modal fade in">
+    <div class="modal-background" onclick="addressclosemodal_001()"></div>
+
+        <div class="modal-container">
+            <div class="modal-container-body">
+
+                <div class="modal-container-title">
+                    <h4>배송지 주소</h4>
+                    <div class="btn-close" onclick="addressclosemodal_001()">
+                </div>
 
 
-        <div class="modal-background" onclick="addressclose_001()"></div>
-         <div class="modal-container scroll">
-             <div class="modal-container-title">
-                 <h4>배송지 주소</h4>
-                 <div class="btn-close" onclick="addressclose_001()">
-             </div>
-           </div>
-              <div class="modal-container-body">
+
                 @if(count($baesongjis) > 0)
                     @php
                         $sep = chr(30);
@@ -23,20 +27,20 @@
                         $checked = "";
                         if($baesongji->ad_default == 1) $checked = "checked";
                         @endphp
-                  <div class="modal-container-box">
+                <div class="modal-container-box">
                   <input type="hidden" name="id_ori[{{ $i }}]" id="id_ori[{{ $i }}]" value="{{ $baesongji->id }}">
                     <h3>{{ $baesongji->ad_name }}
-                    @if($baesongji->ad_default != 0)
-                     <span>(기본 배송지)</span>
+                    @if($baesongji->ad_default == 1)
+                    <span>(기본 배송지)</span>
                     @endif
-                     </h3>
+                    </h3>
                     <p>{{ $baesongji->ad_addr1 }}
                         <br>{{ $baesongji->ad_addr2 }} {{ $baesongji->ad_addr3 }}</p>
                         <input type="hidden" id="addr{{ $i }}" value="{{ $addr }}">
                         <button type="button" class="btn-3ea-01" onclick="del_addr('{{ $baesongji->id }}');">삭제</button>
                         <button type="button" class="btn-3ea-02" onclick="modi_addr('{{ $baesongji->id }}');">수정</button>
                         <button type="button" class="btn-3ea-03" onclick="return_addr('{{ $i }}');">선택</button>
-                  </div>
+                </div>
                         @php
                             $i++;
                         @endphp
@@ -45,17 +49,20 @@
                 @else
                   <p class="none">등록된 배송지가 없습니다</p>
                 @endif
-             </div>
-         </div>
-         <div class="btn btn_2ea">
-             <button class="modal_btn01" type="button" onclick="addressclose_001()">
-                 닫기
-             </button>
-             <button class="modal_btn02" type="button" onclick="baesongji_regi();">
-                 배송지 추가
-             </button>
-         </div>
+            </div>
+        </div>
+            <div class="btn btn_2ea">
+                <button class="modal_btn01" type="button" onclick="addressclosemodal_001()">
+                    닫기
+                </button>
+                <button class="modal_btn02" type="button" onclick="baesongji_regi();">
+                    배송지 추가
+                </button>
+            </div>
 
+
+    </div>
+</div>
 
 <script>
     function return_addr(num){

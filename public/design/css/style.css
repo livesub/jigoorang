@@ -125,6 +125,7 @@ h5 {
 /* 메인 스와이퍼 */
 .main-container .visual .test .swiper {
   width: 100%;
+  height: 100%;
 }
 
 .main-container .visual .test .swiper-slide {
@@ -143,7 +144,6 @@ h5 {
   display: none;
 }
 
-
 .main-container .visual .test .swiper-slide img {
   display: block;
   width: 100%;
@@ -161,7 +161,7 @@ h5 {
     left: 290px;
     position: absolute;
   }
-  
+
   .swiper-button-prev {
     background: url(https://cdn-icons-png.flaticon.com/512/254/254442.png)
       no-repeat;
@@ -172,7 +172,7 @@ h5 {
     display: block;
     position: absolute;
   }
-  
+
   .swiper-button-next::after,
   .swiper-button-prev::after {
     display: none;
@@ -203,7 +203,6 @@ h5 {
 .main-container .mbox_1280 .test .swiper-slide .mo {
   display: none;
 }
-
 
 .main-container .mbox_1280 h2 {
   color: #000;
@@ -295,7 +294,7 @@ h5 {
   max-width: 1579px;
   margin-left: auto;
   /* padding-bottom: 80px; */
-  padding: 0px 0px 40px 30px;
+  padding: 0px 0px 40px 47px;
   height: 100%;
   /* background-color: #ffcd54; */
 }
@@ -592,7 +591,7 @@ h5 {
   max-width: 1579px;
   margin-left: auto;
   /* padding-bottom: 80px; */
-  padding: 0px 0px 40px 0px;
+  /* padding: 0px 0px 40px 0px; */
   height: 100%;
   /* background-color: #ffcd54; */
 }
@@ -766,6 +765,36 @@ h5 {
 .main-container .mbox_1280 .inner .swiper-button-prev-2::after {
   display: none;
 } */
+
+/* 서브 배너 */
+.main-container .mbox_1280 .sub_banner {
+  width: 100%;
+  text-align: center;
+  height: auto;
+}
+
+.main-container .mbox_1280 .sub_banner .swiper {
+  height: 325px;
+}
+
+.main-container .mbox_1280 .sub_banner .swiper-slide .pc {
+  display: block;
+}
+
+.main-container .mbox_1280 .sub_banner .swiper-slide .mo {
+  display: none;
+}
+
+.main-container .mbox_1280 .sub_banner .swiper-pagination-bullet-active {
+  width: 20px;
+  height: 9px;
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.main-container .mbox_1280 .sub_banner .swiper-pagination-bullet::after {
+  display: none;
+}
 
 /* 평가단 */
 .eval {
@@ -1252,6 +1281,7 @@ h5 {
 }
 .login .login_wrap form .checkbox_login label {
   margin-left: 2px;
+  /* top: 4px; */
 }
 .login .login_wrap form .checkbox_login a {
   float: right;
@@ -1267,10 +1297,10 @@ h5 {
 }
 
 .login .login_wrap .sns_login span {
-  font-size: 15px;
+  font-size: 16px;
 }
 .login .login_wrap .sns_login span a {
-  width: 85px;
+  width: 95px;
   text-decoration: underline;
   margin-left: 10px;
 }
@@ -2597,7 +2627,7 @@ input::placeholder {
 /* 배송지 모달 (입력) */
 .modal-container-body.adress {
   overflow: scroll;
-  height: 554px;
+  max-height: 554px;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
@@ -2606,12 +2636,35 @@ input::placeholder {
   display: none; /* Chrome, Safari, Opera*/
 }
 
-.modal-container-body.adress .adress_input .adress_input04 .adress_pop {
+.modal-container-body .adress_input .adress_input04 .adress_pop {
   display: none;
   border: solid 2px #ddd;
-  width: 490px;
-  height: 200px;
+  max-width: 500px;
+  max-height: 200px;
+  min-width: initial;
   position: relative;
+  margin-bottom: 10px;
+
+}
+
+/* .modal-container-body.adress .adress_input .adress_input04 .adress_pop iframe{
+  min-width: none;
+} */
+
+.modal-container-body.adress
+  .adress_input
+  .adress_input04
+  .adress_pop
+  #__daum__layer_1 {
+  min-width: inherit;
+}
+
+.modal-container-body.adress
+  .adress_input
+  .adress_input04
+  .adress_pop
+  #__daum__layer_2 {
+  min-width: 100px;
 }
 
 .modal-container-body.adress .adress_input .adress_input04 .adress_pop img {
@@ -2677,7 +2730,7 @@ input::placeholder {
 }
 
 .modal-container-body .adress_input .adress_input04 {
-  margin-left: 110px;
+  margin-left: 106px;
 }
 
 .modal-container-body .checkbox {
@@ -2690,14 +2743,22 @@ input::placeholder {
 
 .modal .modal-container.num {
   width: 100%;
-  height: 100%;
+  height: auto;
   max-width: 680px;
-  max-height: 400px;
-  padding: 20px;
+  /* max-height: 384px; */
+  /* padding: 16px; */
+}
+.modal .modal-container .modal-container-title {
+  padding: 16px;
+}
+
+.modal .modal-container .modal-container-title .btn-close {
+  margin: 10px;
 }
 
 .modal .modal-container .modal-container-body.num {
-  padding: 20px;
+  /* padding: 16px; */
+  padding: 0 20px 64px 38px;
 }
 
 .modal .modal-container .modal-container-body.num .phonnum_input {
@@ -2714,8 +2775,9 @@ input::placeholder {
   caret-color: #ddd;
   margin-top: 10px;
 }
-
 .modal
+  .modal-container.num
+  .modal
   .modal-container
   .modal-container-body.num
   .phonnum_input

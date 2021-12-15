@@ -6,12 +6,12 @@
         <input type="hidden" name="num" id="num" value="{{ $baesongji->id }}">
 
          <div class="modal-container">
+         <div class="modal-container-body">
              <div class="modal-container-title">
                  <h4>배송지 수정</h4>
-                 <div class="btn-close" onclick="addressinputclose_001()">
-             </div>
-           </div>
-              <div class="modal-container-body">
+                 <div class="btn-close" onclick="addressclosemodal_001()"></div>
+              </div>
+
                   <div class="adress_input">
                     <label for="">수령인</label>
                     <input type="text" name="od_c_name" id="od_c_name" value="{{ $baesongji->ad_name }}">
@@ -24,15 +24,17 @@
                     <label for="">
                         <button type="button" class="btn_address adress_input03_btn" onclick="win_zip('wrap_c','od_c_zip', 'od_c_addr1', 'od_c_addr2', 'od_c_addr3', 'od_c_addr_jibeon', 'btnFoldWrap_c');" value="{{ $baesongji->ad_zip1 }}">우편번호 찾기</button>
                     </label>
-                    <div id="wrap_c" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
-                    <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap_c" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" alt="접기 버튼">
-                    </div>
                 </div>
-                    <input type="text" name="od_c_addr1" id="od_c_addr1" required class="adress_input04" placeholder="기본주소" value="{{ $baesongji->ad_addr1 }}" readonly>
-                    <input type="text" name="od_c_addr2" id="od_c_addr2" class="adress_input04" placeholder="상세주소" value="{{ $baesongji->ad_addr2 }}">
-                    <input type="text" name="od_c_addr3" id="od_c_addr3" readonly="readonly" class="adress_input04" placeholder="참고항목" value="{{ $baesongji->ad_addr3 }}">
+                <div class="adress_input04">
+                    <div id="wrap_c" class="adress_pop">
+                     <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap_c" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" alt="접기 버튼">
+                    </div>
+                    <input type="text" name="od_c_addr1" id="od_c_addr1" required  placeholder="기본주소" value="{{ $baesongji->ad_addr1 }}" readonly>
+                    <input type="text" name="od_c_addr2" id="od_c_addr2"  placeholder="상세주소" value="{{ $baesongji->ad_addr2 }}">
+                    <input type="text" name="od_c_addr3" id="od_c_addr3" readonly="readonly"  placeholder="참고항목" value="{{ $baesongji->ad_addr3 }}">
                     <input type="hidden" name="od_c_addr_jibeon" id="od_c_addr_jibeon" value="{{ $baesongji->ad_jibeon }}">
                 </div>
+               </div>
                 <div class="checkbox">
                 @php
                     $ad_default_chk = '';
@@ -41,10 +43,9 @@
                   <input type="checkbox" name="ad_default" id="ad_default" value="1" {{ $ad_default_chk }}>
                   <label for="">기본배송지 등록</label>
                 </div>
-             </div>
-         </div>
+            </div>
          <div class="btn btn_2ea">
-             <button class="modal_btn01" type="button" onclick="addressinputclose_001()">
+             <button class="modal_btn01" type="button" onclick="addressclosemodal_001()">
                  닫기
              </button>
              <button class="modal_btn02" type="button" onclick="baesongji_modi();">
@@ -52,6 +53,7 @@
              </button>
          </div>
 
+    </div>
 <script>
     function baesongji_modi(){
         if($.trim($("#od_c_name").val()) == ""){
@@ -95,7 +97,8 @@
             success : function(result){
                 if(result == "ok"){
                     alert("수정 되었습니다.");
-                    baesongji();
+                    //baesongji();
+                    location.reload();
                 }
             },
             error: function(result){

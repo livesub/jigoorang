@@ -165,11 +165,11 @@ var swiper = new Swiper(".saleSwiper3", {
 
   breakpoints: {
     360: {
-      slidesPerView: 2.5,
+      slidesPerView: 2.1,
       spaceBetween: 10,
     },
     480: {
-      slidesPerView: 2.5,
+      slidesPerView: 3.5,
       spaceBetween: 10,
     },
     1024: {

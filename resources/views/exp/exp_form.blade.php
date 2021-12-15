@@ -1,7 +1,7 @@
 @extends('layouts.head')
 
 @section('content')
-<script src="{{ asset('/design/js/modal.js') }}"></script>
+
 <script src="{{ asset('/design/js/button.js') }}"></script> <!-- 배송지 입력버튼 js -->
 
     <!-- 서브 컨테이너 시작 -->
@@ -177,7 +177,7 @@
     <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. -->
     <form name="forderform" id="forderform">
     {!! csrf_field() !!}
-    <div class="modal_002 modal fade" id="disp_baesongi"></div>
+    <div class="modal modal_002 fade" id="disp_baesongi"></div>
     </form>
     <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. 끝 -->
 
@@ -335,6 +335,6 @@
 </script>
 
 
-
+<script src="{{ asset('/design/js/modal-back02.js') }}"></script>
 
 @endsection

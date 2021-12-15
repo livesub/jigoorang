@@ -305,9 +305,9 @@
     padding: 35px 20px;
   }
 
-  /* .main-container .mbox_100 .sale {
-    padding: 0px 0px 40px 41px;
-  } */
+  .main-container .mbox_100 .sale {
+    padding: 0px 0px 30px 21px;
+  }
 
   .main-container .mbox_1280 .swiper .swiper-slide .slide-best {
     border: 6px solid #cccccc;
@@ -332,6 +332,10 @@
 
   .main-container .mbox_100 .swiper-button-prev-2 {
     display: none;
+  }
+
+  .main-container .mbox_1280 .saleSwiper3 {
+    height: 426px;
   }
 
   /********** 서브페이지 시작 **********/
@@ -663,9 +667,9 @@
 
   .modal .modal-container {
     width: 100%;
-    height: 100%;
+    height: auto;
     max-width: 480px;
-    max-height: 500px;
+    /* max-height: 500px; */
     background-color: #fff;
     margin: 0;
     /* padding: 10px 10px 0 5px; */
@@ -727,18 +731,27 @@
     margin-left: 60px;
   }
 
+  .modal-container-body .adress_input .adress_input04 .adress_pop {
+    display: none;
+    border: solid 2px #ddd;
+    max-width: 370px;
+    max-height: 200px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
   /* 휴대전화번호 변경 모달 */
 
   .modal .modal-container.num {
     width: 100%;
-    height: 100%;
+    height: auto;
     max-width: 480px;
     max-height: 400px;
   }
 
   .modal .modal-container .modal-container-body.num .phonnum_input input {
     width: 100%;
-    max-width: 291px;
+    max-width: 252px;
     height: 48px;
     /* line-height: 145px; */
     border: solid 2px #ddd;
@@ -785,11 +798,10 @@
   .main-container .visual .test .swiper-slide .pc {
     display: none;
   }
-  
+
   .main-container .visual .test .swiper-slide .mo {
     display: block;
   }
-  
 
   .main-container .mbox_1280 .swiper-button-prev-1 {
     display: none;
@@ -808,6 +820,20 @@
     height: 190px;
   }
 
+  .main-container .mbox_1280 .sub_banner .swiper-slide .pc {
+    display: none;
+  }
+
+  .main-container .mbox_1280 .sub_banner .swiper-slide .mo {
+    display: block;
+  }
+
+  .main-container .mbox_1280 .sub_banner .swiper-slide {
+    width: 100%;
+    text-align: center;
+    height: 177px;
+  }
+
   .main-container .mbox_1280,
   .main-container .mbox_100 .inner {
     padding: 35px 0 20px 20px;
@@ -819,14 +845,6 @@
 
   .main-container .mbox_100 .swiper-button-prev-2 {
     display: none;
-  }
-
-  .main-container .mbox_1280 .test .swiper-slide .pc {
-    display: none;
-  }
-  
-  .main-container .mbox_1280 .test .swiper-slide .mo {
-    display: block;
   }
 
   /********** 서브페이지 시작 **********/
@@ -890,11 +908,20 @@
   .login .login_wrap form {
     font-size: 12px;
   }
+  .login .login_wrap form .checkbox_login label {
+    top: 4px;
+  }
   .login .login_wrap form .checkbox_login a {
     margin-top: 5px;
   }
   .login .login_wrap .sns_login span {
-    font-size: 12px;
+    font-size: 14px;
+    margin-top: 15px;
+  }
+
+  .login .login_wrap .sns_login span a {
+    width: 95px;
+    margin-left: 1px;
   }
 
   /* ID/비밀번호 찾기 */
@@ -945,7 +972,7 @@
 
   .join .join_wrap .join_form .join_input_box_03 .join_btn_box {
   }
-  /* 
+  /*
   .join .join_wrap .join_form .join_input_box_03 .btn-50 {
     width: 49%;
     height: 48px;
@@ -1203,7 +1230,7 @@
   }
 
   .modal .modal-container .modal-container-body {
-    padding: 20px;
+    padding: 8px;
     height: auto;
   }
 
@@ -1218,7 +1245,7 @@
 
   .modal-container-body .adress_input input {
     width: 100%;
-    max-width: 220px;
+    max-width: 244px;
     height: 36px;
   }
 
@@ -1243,24 +1270,45 @@
     margin-left: 60px;
   }
 
+  .modal-container-body .adress_input .adress_input04 .adress_pop {
+    display: none;
+    border: solid 2px #ddd;
+    /* width: 100%; */
+    max-width: 250px;
+    min-width: none;
+    max-height: 200px;
+    position: relative;
+    margin-bottom: 10px;
+  }
+
+  .modal-container-body
+    .adress_input04
+    .adress_pop
+    #__daum__layer_2 {
+    min-width: 0;
+  }
+
   /* 휴대전화번호 변경 모달 */
 
   .modal .modal-container.num {
     width: 100%;
-    height: 100%;
+    height: auto;
     max-width: 320px;
     max-height: 240px;
-    padding: 15px;
+    /* padding: 15px; */
+  }
+
+  .modal .modal-container.num .modal-container-title {
+    padding: 8px;
   }
 
   .modal .modal-container.num .modal-container-title h4 {
     font-size: 14px;
-    top: 7px;
   }
 
   .modal .modal-container.num .modal-container-body.num .phonnum_input input {
     width: 100%;
-    max-width: 195px;
+    max-width: 182px;
     height: 36px;
     margin-top: 10px;
   }
@@ -1306,6 +1354,10 @@
   }
 
   /* 비밀번호 변경 모달 */
+
+  .modal .modal-container .modal-container-body.num {
+    padding: 16px;
+  }
 
   .modal .modal-container .modal-container-body.num .pw_input {
     width: 100%;

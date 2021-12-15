@@ -108,31 +108,33 @@
 <!-- 휴대폰 번호변경  -->
 <div class="modal_005 modal fade">
     <div class="modal-background" onclick=""></div>
-     <div class="modal-container num">
-         <div class="modal-container-title">
-             <h4>휴대전화 번호 변경</h4>
-             <div class="btn-close" onclick="phoninputclose_001()">
-         </div>
-       </div>
-          <div class="modal-container-body num">
-              <div class="phonnum_input">
-                <input name='user_phone' id='user_phone' type='text' placeholder="휴대전화 번호를 '-' 없이 입력하세요." onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11">
-                <button onclick="send_sms()">인증번호 받기</button>
+        <div class="modal-container num">
+            <div class="modal-container-body num">
+                <div class="modal-container-title">
+                    <h4>휴대전화 번호 변경</h4>
+                    <div class="btn-close" onclick="phoninputclose_001()"></div>
+                </div>
 
-                <input name='phone_certificate' id='phone_certificate' type='text' placeholder="인증번호를 입력하세요">
-                <button onclick="check_ctf_number()"> 인증확인 </button>
-                <p id="countdown"></p>
+                <div class="phonnum_input">
+                    <input name='user_phone' id='user_phone' type='text' placeholder="휴대전화 번호를 '-' 없이 입력하세요." onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11">
+                    <button onclick="send_sms()">인증번호 받기</button>
+
+                    <input name='phone_certificate' id='phone_certificate' type='text' placeholder="인증번호를 입력하세요">
+                    <button onclick="check_ctf_number()"> 인증확인 </button>
+                    <p id="countdown"></p>
+                </div>
             </div>
-         </div>
-     </div>
-     <div class="btn btn_2ea num">
-         <button class="modal_btn01" onclick="phoninputclose_001()">
-             닫기
-         </button>
-         <button class="modal_btn02" onclick="change_phone_number()">
-             등록
-         </button>
-     </div>
+
+
+        <div class="btn btn_2ea num">
+            <button class="modal_btn01" onclick="phoninputclose_001()">
+                닫기
+            </button>
+            <button class="modal_btn02" onclick="change_phone_number()">
+                등록
+            </button>
+        </div>
+ </div>
  </div>
 <!-- 휴대폰 번호변경 // 끝 -->
 
@@ -140,22 +142,23 @@
 <!-- pw변경  -->
 <div class="modal_006 modal fade">
     <div class="modal-background" onclick=""></div>
-     <div class="modal-container num pw">
-         <div class="modal-container-title">
-             <h4>비밀번호 변경</h4>
-             <div class="btn-close" onclick="pwinputclose_001()">
-         </div>
-       </div>
-          <div class="modal-container-body num pw">
-              <div class="pw_input">
-                <input type="password" id="user_pw" name="user_pw" placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외))">
-                <p id="pw_error"></p>
+        <div class="modal-container num pw">
+           <div class="modal-container-body num pw">
+                 <div class="modal-container-title">
+                    <h4>비밀번호 변경</h4>
+                    <div class="btn-close" onclick="pwinputclose_001()"></div>
+                  </div>
 
-                <input type="password" id="user_pw_confirmation" name="user_pw_confirmation" placeholder="비밀번호를 재입력(위와 같은 비밀번호를 입력해 주세요)">
-                <p id="pw_confirmation_error"></p>
+                    <div class="pw_input">
+                        <input type="password" id="user_pw" name="user_pw" placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외))">
+                        <p id="pw_error"></p>
+
+                        <input type="password" id="user_pw_confirmation" name="user_pw_confirmation" placeholder="비밀번호를 재입력(위와 같은 비밀번호를 입력해 주세요)">
+                        <p id="pw_confirmation_error"></p>
+                    </div>
+
             </div>
-         </div>
-     </div>
+
      <div class="btn btn_2ea num">
          <button class="modal_btn01" onclick="pwinputclose_001()">
              취소
@@ -165,6 +168,8 @@
          </button>
      </div>
  </div>
+ </div>
+
 <!-- pw변경 // 끝 -->
 
 

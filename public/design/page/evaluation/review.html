@@ -17,79 +17,6 @@
     <title>지구랭</title>
 </head>
 <body>
-
-
-<!-- 휴대폰 번호변경  -->
-<div class="modal_005 modal fade">
-    <div class="modal-background" onclick=""></div>
-     <div class="modal-container num">
-         <div class="modal-container-title">
-             <h4>휴대전화 번호 변경</h4>
-             <div class="btn-close" onclick="phoninputclose_001()"></div>
-          </div>
-          <div class="modal-container-body num">
-              <div class="phonnum_input">
-                <input type="number" name="" id="" placeholder="휴대전화 번호를 '-' 없이 입력하세요.">
-                <button>인증번호 받기</button>
-
-                <input type="number" name="" id="" placeholder="인증번호를 입력하세요">
-                <button>인증 확인</button>
-                <!-- <button class="off">인증 확인</button> -->
-                <p>4:59초 내에 인증해 주세요</p>
-            </div>
-         </div>
-     
-     <div class="btn btn_2ea num">
-         <button class="modal_btn01" onclick="phoninputclose_001()">
-             닫기
-         </button>
-         <button class="modal_btn02" onclick="">
-             등록
-         </button>                    
-     </div>
-    </div> 
- </div>
-<!-- 휴대폰 번호변경 // 끝 -->
-
-
-<!-- pw변경  -->
-<div class="modal_006 modal fade">
-    <div class="modal-background" onclick=""></div>
-     <div class="modal-container num pw">
-          <div class="modal-container-title">
-             <h4>비밀번호 변경</h4>
-             <div class="btn-close" onclick="pwinputclose_001()"></div>
-          </div>
-          <div class="modal-container-body num pw">
-              <div class="pw_input">
-                <input type="password" name="" id="" placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외))">
-                <p>비밀번호 형식이 잘못되었습니다.</p>
-
-                <input type="password" name="" id="" placeholder="비밀번호를 재입력(위와 같은 비밀번호를 입력해 주세요)">
-                <p>위의 비밀번호와 동일한 비밀번호를 입력하세요.</p>
-            </div>
-         </div>
-    
-     <div class="btn btn_2ea num">
-         <button class="modal_btn01" onclick="pwinputclose_001()">
-             취소
-         </button>
-         <button class="modal_btn02" onclick="">
-             확인
-         </button>                    
-     </div>  
-     
-    </div>
- </div>
-<!-- pw변경 // 끝 -->
-
-
-
-
-
-
-
-
 <div class="wrap">
 
     <!-- 탭바 시작 -->
@@ -102,8 +29,9 @@
         </ul>
     </div>
     <!-- 탭바 끝 -->
-<!-- 헤더 시작-->
-<div class="header">
+
+    <!-- 헤더 시작-->
+   <div class="header">
     <div class="top">
         <div class="logo">
             <a href="../../index.html"></a>
@@ -123,7 +51,7 @@
 
             <div class="m-menu">
                 <ul class="m-menu-my">
-                    <a href="#"><li>로그인<span class="m-menu-my-boder"></span></li></a> 
+                    <a href="../../page/login/login.html"><li>로그인<span class="m-menu-my-boder"></span></li></a> 
                     <!-- <a href="#"><li>로그아웃<span class="m-menu-my-boder"></span></li></a>  -->
 
                     <a href="../../page/mypage/mypage.html"><li>마이페이지</li></a>
@@ -191,99 +119,137 @@
 
 
 
-
-    <!-- 서브 컨테이너 시작 -->
+    <!-- 메인 컨테이너 시작 -->
     <div class="sub-container">
         
         <!-- 위치 시작 -->
         <div class="location">
             <ul>
                 <li><a href="../../index.html">홈</a></li>
-                <li><a href="../../page/mypage/mypage.html">마이페이지</a></li>
-                <li><a href="../../page/mypage/mypage_user_information.html">회원정보 수정</a></li>
+                <li><a href="../../page/evaluation/evaluation_list.html">정직한 평가단</a></li>
             </ul>
         </div>
         <!-- 위치 끝 -->
         
         <!-- 타이틀 시작 -->
-        <div class="title_area list">
-            <h2>회원정보 수정</h2>
+        <div class="title_area">
+            <h2>정직한 평가단 모집</h2>
+            <div class="text_02 wt-nm">
+                친환경 제품을 무료로 사용가능한 지구랭의 평가단<br>
+                빨리 빨리 신청해 보세요!
+            </div>
             <div class="line_14-100"></div>
         </div>
         <!-- 타이틀 끝 -->
                 
-        <!-- 평가단 신청 결과 확인 시작  -->
+        <!-- 게시판 시작  -->
         <div class="eval">
 
-            <div class="board mypage_list">
+            <div class="board">
                 <!-- 리스트 시작 -->
                 <div class="board_wrap">
-                    <div class="list">                
-                        <div class="information user_list">
-                            <h4>회원 정보</h4>
-                            <ul class="information-email">
-                                <li> 아이디 (이메일 주소)</li>
-                                <li> g9ryong@g9ryong.com</li>
-                            </ul>
-                            <ul class="information-name">
-                                <li> 이름</li>
-                                <li> 지구룡</li>
-                            </ul>
-                            <ul class="information-phon">
-                                <li> 휴대폰</li>
-                                <li> 010-1354-1235</li>
-                                <button onclick="phoninputopen_001()">변경</button>
-                            </ul>
-                            <ul class="information-name">
-                                <li> 생년월일</li>
-                                <li> 840505</li>
-                            </ul>
-                            <ul class="information-name">
-                                <li> 성별</li>
-                                <li> 남</li>
-                            </ul>
-                            <ul class="information-phon">
-                                <li> 비밀번호</li>
-                                <li> ********</li>
-                                <button onclick="pwinputopen_001()">변경</button>
-                            </ul>
-                        </div>              
-                    </div>
-                    <div class="list">                
-                        <div class="information checkbox">
-                            <h4>서비스 약관 동의</h4>
-                        <ul class="checkbox_block">   
-                            <li>
-                            <input type="checkbox" name="" id="" checked disabled>
-                            <label for="">만 14세 이상입니다. <span>(필수)</span></label>
-                            </li>
-                            <li>
-                            <input type="checkbox" name="" id="" checked disabled>
-                            <label for="">약관동의 <span>(필수)</span></label>
-                            </li>
-                            <li>
-                            <input type="checkbox" name="" id="" checked disabled>
-                            <label for="">개인정보 보호방침 <span>(필수)</span></label>
-                            </li>
-                        </ul> 
-                        </div>              
-                    </div>
-                    <a href="../../page/mypage/mypage_user_secession.html"><span class="secession">회원탈퇴</span></a>
+
+                  <fieldset class="rating">
+                      <input type="radio" id="star5" name="rating" value="5" /><label class = "full" for="star5" title="Awesome - 5 stars"></label>
+                      <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+                      <input type="radio" id="star4" name="rating" value="4" /><label class = "full" for="star4" title="Pretty good - 4 stars"></label>
+                      <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+                      <input type="radio" id="star3" name="rating" value="3" /><label class = "full" for="star3" title="Meh - 3 stars"></label>
+                      <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+                      <input type="radio" id="star2" name="rating" value="2" /><label class = "full" for="star2" title="Kinda bad - 2 stars"></label>
+                      <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+                      <input type="radio" id="star1" name="rating" value="1" /><label class = "full" for="star1" title="Sucks big time - 1 star"></label>
+                      <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+                  </fieldset>
+
+
+                  <span class="star">
+                    ★★★★★
+                    <span>★★★★★</span>
+                    <input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+                  </span>
                 </div>
                 <!-- 리스트 끝 -->
-
             </div>
 
         </div>
-        <!-- 평가단 신청 결과 확인 끝  -->
+        <!-- 게시판 끝  -->
 
        
 
     </div>
-    <!-- 서브 컨테이너 끝 -->
+    <!-- 메인 컨테이너 끝 -->
 
 
+<style>
+  @import url(//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css);
 
+fieldset, label { margin: 0; padding: 0; }
+body{ margin: 20px; }
+h1 { font-size: 1.5em; margin: 10px; }
+
+/****** Style Star Rating Widget *****/
+
+.rating { 
+  border: none;
+  float: left;
+}
+
+.rating > input { display: none; } 
+.rating > label:before { 
+  margin: 5px;
+  font-size: 3em;
+  font-family: FontAwesome;
+  display: inline-block;
+  content: "\f005";
+}
+
+.rating > .half:before { 
+  content: "\f089";
+  position: absolute;
+}
+
+.rating > label { 
+  color: #ddd; 
+ float: right; 
+}
+
+/***** CSS Magic to Highlight Stars on Hover *****/
+
+.rating > input:checked ~ label, /* show gold star when clicked */
+.rating:not(:checked) > label:hover, /* hover current star */
+.rating:not(:checked) > label:hover ~ label { color: #3ec4ba;  } /* hover previous stars in list */
+
+.rating > input:checked + label:hover, /* hover current star when changing rating */
+.rating > input:checked ~ label:hover,
+.rating > label:hover ~ input:checked ~ label, /* lighten current selection */
+.rating > input:checked ~ label:hover ~ label { color: #3ec4ba;  } 
+
+.star {
+    position: relative;
+    font-size: 2rem;
+    color: #ddd;
+  }
+  
+  .star input {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+  
+  .star span {
+    width: 0;
+    position: absolute; 
+    left: 0;
+    color: red;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+</style>
 
 
     
@@ -323,6 +289,10 @@
 
 </div>
 <script src="../../js/sidenav.js"></script>
-<script src="../../js/modal.js"></script>
+<script>
+   const drawStar = (target) => {
+    document.querySelector(`.star span`).style.width = `${target.value * 10}%`;
+  }
+</script>
 </body>
 </html>
