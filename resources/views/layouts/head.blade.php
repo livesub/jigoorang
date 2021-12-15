@@ -28,7 +28,7 @@
     <meta property="og:description" content="지구랭">
     <meta property="og:image" content="{{ asset('/design/resources/logo.png') }}">
 
-    <link rel="stylesheet" href="{{ ('/design/css/reset.css') }}">
+    <link rel="stylesheet" href="{{ asset('/design/css/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/css/layout.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/css/responsive.css') }}">
