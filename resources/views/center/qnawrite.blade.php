@@ -40,7 +40,7 @@
 
                         @if(Auth::user() == "")
 
-                        <div class="cont">
+                        <div id="tab1" class="cont">
                             <div class="list-none">
                                 <img src="{{ asset('/design/recources/imgs/combined-shape.png') }}" alt="">
                                 <br><br>
@@ -50,6 +50,7 @@
                              <button class="btn-50-full" onclick="location.href='{{ route('login.index') }}'">로그인</button>
                             </div>
                         </div>
+                        <div id="tab2" class="cont con_02"></div>
                         @else
 
                           <div id="tab1" class="cont">
