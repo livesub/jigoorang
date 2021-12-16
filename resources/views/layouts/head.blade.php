@@ -77,10 +77,13 @@
 
                 <div class="m-menu">
                     <ul class="m-menu-my">
-                        <a href="#"><li>로그인<span class="m-menu-my-boder"></span></li></a>
-                        <!-- <a href="#"><li>로그아웃<span class="m-menu-my-boder"></span></li></a>  -->
-
-                        <a href="../../page/mypage/mypage.html"><li>마이페이지</li></a>
+                    @if(!auth()->user())
+                        <a href="{{ route('login.index') }}"><li>로그인<span class="m-menu-my-boder"></span></li></a>
+                        <a href="{{ route('join.create_agree') }}"><li>마이페이지</li></a>
+                    @else
+                        <a href="{{ route('logout.destroy') }}"><li>로그아웃<span class="m-menu-my-boder"></span></li></a>
+                        <a href="{{ route('mypage.index') }}"><li>마이페이지</li></a>
+                    @endif
                     </ul>
 
                     <ul class="m-menu-child">
