@@ -23,7 +23,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <meta property="og:title" content="지구랭">
     <meta property="og:description" content="지구랭">
     <meta property="og:image" content="{{ asset('/design/resources/logo.png') }}">
@@ -41,7 +41,7 @@
 <!-- 암호화 복호화를 위한 js 추가 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha256.js"></script>
-<script src='//code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
 
 <div class="wrap">
 

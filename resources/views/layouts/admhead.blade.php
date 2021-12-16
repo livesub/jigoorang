@@ -10,6 +10,7 @@ header('Pragma: public');
 <head>
     <meta charset='utf-8'>
     <title>ADIMISTRATOR</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 </head>
 <body>
 

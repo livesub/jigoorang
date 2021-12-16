@@ -61,7 +61,7 @@ class AdmShopSettingController extends Controller
         $de_ment_change         = '기획전1';
         $de_ment_change2        = '기획전2';
         $member_reg_point       = "3000";
-        $text_point             = "100";
+        $text_point             = "200";
         $photo_point            = "100";
 
         if(!is_null($setting_info)){

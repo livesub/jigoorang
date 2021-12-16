@@ -19,6 +19,12 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
+//https 일때 사용
+/*
+if (App::environment('local')) {
+    URL::forceScheme('https');
+}
+*/
 /*
 Route::get('/', [
     'as' => 'main.index',
