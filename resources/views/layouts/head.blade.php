@@ -23,7 +23,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> 
     <meta property="og:title" content="지구랭">
     <meta property="og:description" content="지구랭">
     <meta property="og:image" content="{{ asset('/design/resources/logo.png') }}">

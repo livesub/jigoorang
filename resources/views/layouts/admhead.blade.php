@@ -9,6 +9,8 @@ header('Pragma: public');
 <html lang='en'>
 <head>
     <meta charset='utf-8'>
+
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>ADIMISTRATOR</title>
 </head>
 <body>

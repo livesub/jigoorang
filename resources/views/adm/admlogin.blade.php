@@ -1,3 +1,25 @@
+
+@php
+header ('Pragma: no-cache');
+header('Cache-Control: no-store, private, no-cache, must-revalidate');
+header('Cache-Control: pre-check=0, post-check=0, max-age=0, max-stale = 0', false);
+header('Pragma: public');
+@endphp
+
+	<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='utf-8'>
+    <title>ADIMISTRATOR</title>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
+</head>
+<body>
+
+
+
+
+
+
 <table border=1>
 <form action='{{ route('adm.login.store') }}' method='POST' role='form' class='form__auth'>
 {!! csrf_field() !!}
@@ -44,4 +66,14 @@
     <script>
         alert('{!! Session::get('alert_messages') !!}');
     </script>
-    @endif
+	    @endif
+
+
+
+
+
+</body>
+</html>
+
+
+
