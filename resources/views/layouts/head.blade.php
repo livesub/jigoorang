@@ -79,7 +79,7 @@
                     <ul class="m-menu-my">
                     @if(!auth()->user())
                         <a href="{{ route('login.index') }}"><li>로그인<span class="m-menu-my-boder"></span></li></a>
-                        <a href="{{ route('join.create_agree') }}"><li>마이페이지</li></a>
+                        <a href="{{ route('login.index') }}"><li>마이페이지</li></a>
                     @else
                         <a href="{{ route('logout.destroy') }}"><li>로그아웃<span class="m-menu-my-boder"></span></li></a>
                         <a href="{{ route('mypage.index') }}"><li>마이페이지</li></a>
@@ -120,7 +120,7 @@
             <!-- 오픈전 메뉴 -->
             <ul class="menu2">
             @if(!auth()->user())
-                <li class="my"><a href="{{ route('join.create_agree') }}"><span>마이페이지</span></a></li>
+                <li class="my"><a href="{{ route('login.index') }}"><span>마이페이지</span></a></li>
                 <li class="login"><a href="{{ route('login.index') }}"><span>로그인</span></a></li>
             @else
                 <li class="my"><a href="{{ route('mypage.index') }}"><span>마이페이지</span></a></li>
