@@ -33,7 +33,7 @@
     <link rel="stylesheet" href="{{ asset('/design/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/css/responsive.css') }}">
 
-    <title>지구랭11111</title>
+    <title>지구랭</title>
 </head>
 <body>
 
