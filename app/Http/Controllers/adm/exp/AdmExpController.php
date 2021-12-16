@@ -52,8 +52,8 @@ class AdmExpController extends Controller
         //setcookie('dir', public_path());
         setcookie('directory', $exp_directory, (time() + 10800),"/"); //일단 3시간 잡음(3*60*60)
         $path = public_path('data/exp_list');
-
-        //폴더가 없으면 만들기
+	
+	//폴더가 없으면 만들기
         if(!is_dir($path)){
             mkdir($path, 0755, true);
             @chmod($path, 0755);
