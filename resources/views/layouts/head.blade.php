@@ -198,7 +198,7 @@
                 </ul>
             </div>
             <div class="logo_f"></div>
-            <div class="copy">ⓒ GIGURANG</div>
+            <div class="copy">ⓒ GIGOORANG</div>
         </div>
     </div>
     <!-- 푸터 끝 -->

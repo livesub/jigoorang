@@ -1,6 +1,6 @@
 <script src="{{ asset('/design/js/modal-back02.js') }}"></script>
 
-<div class="modal_004 modal fade in">
+
     <div class="modal-background" onclick="addressclosemodal_001()"></div>
 
         <div class="modal-container">
@@ -10,9 +10,6 @@
                     <h4>배송지 주소</h4>
                     <div class="btn-close" onclick="addressclosemodal_001()">
                 </div>
-
-
-
                 @if(count($baesongjis) > 0)
                     @php
                         $sep = chr(30);
@@ -39,7 +36,9 @@
                         <input type="hidden" id="addr{{ $i }}" value="{{ $addr }}">
                         <button type="button" class="btn-3ea-01" onclick="del_addr('{{ $baesongji->id }}');">삭제</button>
                         <button type="button" class="btn-3ea-02" onclick="modi_addr('{{ $baesongji->id }}');">수정</button>
+                        @if($b_addr != 'mypage')
                         <button type="button" class="btn-3ea-03" onclick="return_addr('{{ $i }}');">선택</button>
+                        @endif
                 </div>
                         @php
                             $i++;
@@ -61,7 +60,6 @@
             </div>
 
 
-    </div>
 </div>
 
 <script>
