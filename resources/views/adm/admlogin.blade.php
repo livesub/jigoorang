@@ -1,4 +1,3 @@
-
 @php
 header ('Pragma: no-cache');
 header('Cache-Control: no-store, private, no-cache, must-revalidate');
@@ -6,7 +5,7 @@ header('Cache-Control: pre-check=0, post-check=0, max-age=0, max-stale = 0', fal
 header('Pragma: public');
 @endphp
 
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang='en'>
 <head>
     <meta charset='utf-8'>
@@ -14,10 +13,6 @@ header('Pragma: public');
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
 </head>
 <body>
-
-
-
-
 
 
 <table border=1>
@@ -66,14 +61,8 @@ header('Pragma: public');
     <script>
         alert('{!! Session::get('alert_messages') !!}');
     </script>
-	    @endif
-
-
-
+    @endif
 
 
 </body>
 </html>
-
-
-

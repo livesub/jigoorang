@@ -41,7 +41,7 @@
 <!-- 암호화 복호화를 위한 js 추가 -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha256.js"></script>
-<script src='//code.jquery.com/jquery-3.3.1.min.js'></script>
+<script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
 
 <div class="wrap">
 
