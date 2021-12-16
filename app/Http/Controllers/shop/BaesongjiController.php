@@ -38,6 +38,8 @@ class BaesongjiController extends Controller
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
+        $b_addr = $request->input('b_addr');
+
         if(!Auth::user()){
             echo "no_mem";
             exit;
@@ -47,6 +49,7 @@ class BaesongjiController extends Controller
 
         $view = view('shop.ajax_baesongji',[
             'baesongjis'    => $baesongjis,
+            'b_addr'        => $b_addr,
         ]);
 
         return $view;

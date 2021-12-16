@@ -138,13 +138,16 @@
 </script>
 
 <script>
+
     function exp_app_ok(){
+
+/*
         var chk_cnt = $('input[name="chk[]"]:checked').length;
         if(chk_cnt == 0){
             alert('한명 이상 선택 하세요.');
             return false;
         }
-
+*/
         if (confirm("승인/취소 처리 하시겠습니까?") == true){    //확인
             var form_var = $("#exp_app_form").serialize();
             $.ajax({
