@@ -27,17 +27,24 @@ class RatingItemRequest extends FormRequest
             //유효성 검사 항목들 및 조건을 정의한다.
             'last_choice_ca_id' => ['required','min:4', 'unique:App\Models\RatingItem,sca_id'],
             //pw 정규식 패턴 추가 최소 8자 이상 한개의 문자,한개의 숫자, 한개의 특수문자 포함
-            'item_name1' => ['required', 'alpha'],
             //'user_phone' => ['required', 'numeric', 'unique:App\Models\User,user_phone', 'regex:/^01([0|1|6|7|8|9])([0-9]{3,4})([0-9]{4})$/'],
+/*
+            'item_name1' => ['required', 'alpha'],
             'item_name2' => ['required', 'alpha'],
             'item_name3' => ['required', 'alpha'],
             'item_name4' => ['required', 'alpha'],
             'item_name5' => ['required', 'alpha'],
+*/
+            'item_name1' => ['required'],
+            'item_name2' => ['required'],
+            'item_name3' => ['required'],
+            'item_name4' => ['required'],
+            'item_name5' => ['required'],
         ];
     }
 
     public function messages(){
-        
+
         return [
             //유효성 검사 에러메시지를 정의한다.
             'required' => ':attribute 은(는) 필수입력 사항입니다.',
