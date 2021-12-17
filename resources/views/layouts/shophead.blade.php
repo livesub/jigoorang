@@ -14,6 +14,7 @@
 <html lang='en'>
 <head>
     <meta charset='utf-8'>
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
     <title>지구랭</title>
 </head>
 <body>
