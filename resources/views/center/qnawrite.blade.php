@@ -74,7 +74,7 @@
                               <ul class="tab-02">
                                 <li>
                                     <p>글제목</p>
-                                    <input type="text" name="qna_subject" id="qna_subject" placeholder="제목을 입력하세요(50자 이내)">
+                                    <input type="text" name="qna_subject" id="qna_subject" placeholder="제목을 입력하세요(50자 이내)" aria-hidden="true">
                                 </li>
                               </ul>
 <!--
