@@ -9,9 +9,9 @@ header('Pragma: public');
 <html lang='en'>
 <head>
     <meta charset='utf-8'>
-    <title>ADIMISTRATOR</title>
     <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-</head>
+    <title>ADIMISTRATOR</title>
+    </head>
 <body>
 
 <script src='//code.jquery.com/jquery-3.3.1.min.js'></script>
