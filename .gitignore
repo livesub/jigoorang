@@ -6,3 +6,4 @@ node_modules
 /storage/
 config/app.php
 /public/.htaccess
+/app/Providers/AppServiceProvider.php
