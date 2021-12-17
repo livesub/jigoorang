@@ -54,8 +54,8 @@
                         @else
 
                           <div id="tab1" class="cont">
-                          <form name="qna_form" id="qna_form" method="post" role="form" action="{{ route('mypage.qna_write_save') }}">
-                          {!! csrf_field() !!}
+                          <form name="qna_form" id="qna_form" method="post" action="{{ route('mypage.qna_write_save') }}">
+
                             <h4>문의</h4>
                             <ul class="tab-01">
                                 <li>
