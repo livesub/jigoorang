@@ -54,7 +54,7 @@ class AdmShopSettingController extends Controller
         $company_bank_use       = "";
         $company_bank_account   = "OO은행 12345-67-89012 예금주명";
         $company_use_point      = "";
-        $shop_img_width         = "600%%500%%100";
+        $shop_img_width         = "600%%290%%100";
         $shop_img_height        = "500%%250%%80";
         $de_send_cost           = '2500';
         $de_send_cost_free      = '30000';
