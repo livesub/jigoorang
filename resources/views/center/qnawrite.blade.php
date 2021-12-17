@@ -54,7 +54,7 @@
                         @else
 
                           <div id="tab1" class="cont">
-                          <form name="qna_form" id="qna_form" method="post" action="{{ route('mypage.qna_write_save') }}" autocomplete="off">
+                          <form name="qna_form" id="qna_form" method="post" action="{{ route('mypage.qna_write_save') }}">
                           {!! csrf_field() !!}
                             <h4>문의</h4>
                             <ul class="tab-01">
@@ -74,7 +74,7 @@
                               <ul class="tab-02">
                                 <li>
                                     <p>글제목</p>
-                                    <input type="text" name="qna_subject" id="qna_subject" placeholder="제목을 입력하세요(50자 이내)" aria-hidden="true">
+                                    <input type="text" name="qna_subject" id="qna_subject" placeholder="제목을 입력하세요(50자 이내)">
                                 </li>
                               </ul>
 <!--
