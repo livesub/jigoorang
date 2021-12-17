@@ -48,7 +48,7 @@
     <!-- 탭바 시작 -->
     <div class="tabar">
         <ul>
-            <li><a href="#">홈</a></li>
+            <li><a href="/">홈</a></li>
             <li><a href="#">랭킹</a></li>
             <li><a href="#">쇼핑</a></li>
             <li><a href="#">소식</a></li>
