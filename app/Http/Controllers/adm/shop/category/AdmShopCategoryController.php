@@ -134,6 +134,63 @@ class AdmShopCategoryController extends Controller
 
         if($sca_rank == "") $sca_rank = 0;
 
+        //DB 저장 배열 만들기
+        $data = array(
+            'sca_id'      => $sca_id,
+            'sca_name_kr' => addslashes($sca_name_kr),
+            'sca_name_en' => addslashes($sca_name_en),
+            'sca_display' => $sca_display,
+            'sca_rank'    => $sca_rank,
+        );
+
+        //이미지 첨부
+        $fileExtension = 'jpeg,jpg,png,gif,bmp,GIF,PNG,JPG,JPEG,BMP';  //이미지 일때 확장자 파악(이미지일 경우 썸네일 하기 위해)
+        $upload_max_filesize = ini_get('upload_max_filesize');  //서버 설정 파일 용량 제한
+        $upload_max_filesize = substr($upload_max_filesize, 0, -1); //2M (뒤에 M자르기)
+
+        $path = 'data/shopcate';     //첨부물 저장 경로
+
+        if($request->hasFile('sca_img'))
+        {
+            $thumb_name = "";
+            $sca_img = $request->file('sca_img');
+            $file_type = $sca_img->getClientOriginalExtension();    //이미지 확장자 구함
+            $file_size = $sca_img->getSize();  //첨부 파일 사이즈 구함
+
+            //서버 php.ini 설정에 따른 첨부 용량 확인(php.ini에서 바꾸기)
+            $max_size_mb = $upload_max_filesize * 1024;   //라라벨은 kb 단위라 함
+
+            //첨부 파일 용량 예외처리
+            Validator::validate($request->all(), [
+                'sca_img'  => ['max:'.$max_size_mb, 'mimes:'.$fileExtension]
+            ], ['max' => $upload_max_filesize."MB 까지만 저장 가능 합니다.", 'mimes' => $fileExtension.' 파일만 등록됩니다.']);
+
+            $attachment_result = CustomUtils::attachment_save($sca_img,$path); //위의 패스로 이미지 저장됨
+            if(!$attachment_result[0])
+            {
+                return redirect()->route('shop.cate.cate_add')->with('alert_messages', $Messages::$file_chk['file_chk']['file_false']);
+                exit;
+            }else{
+                //썸네일 만들기
+                for($k = 0; $k < 2; $k++){
+                    $resize_width_file_tmp = explode("%%","290%%136");
+                    $resize_height_file_tmp = explode("%%","290%%136");
+
+                    $thumb_width = $resize_width_file_tmp[$k];
+                    $thumb_height = $resize_height_file_tmp[$k];
+
+                    $is_create = false;
+                    $thumb_name .= "@@".CustomUtils::thumbnail($attachment_result[1], $path, $path, $thumb_width, $thumb_height, $is_create, $is_crop=false, $crop_mode='center', $is_sharpen=false, $um_value='80/0.5/3');
+                }
+
+                $data['sca_img_ori_file_name'] = $attachment_result[2];  //배열에 추가 함
+                $data['sca_img'] = $attachment_result[1].$thumb_name;  //배열에 추가 함
+            }
+        }
+
+        $create_result = shopcategorys::create($data)->exists();
+
+/*
         $create_result = shopcategorys::create([
             'sca_id'      => $sca_id,
             'sca_name_kr' => addslashes($sca_name_kr),
@@ -141,7 +198,7 @@ class AdmShopCategoryController extends Controller
             'sca_display' => $sca_display,
             'sca_rank'    => $sca_rank,
         ])->exists();
-
+*/
         if($create_result) return redirect()->route('shop.cate.index')->with('alert_messages', $Messages::$category['insert']['in_ok']);
         else return redirect()->route('shop.cate.index')->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);  //치명적인 에러가 있을시 alert로 뿌리기 위해
     }
@@ -259,8 +316,8 @@ class AdmShopCategoryController extends Controller
             }else{
                 //썸네일 만들기
                 for($k = 0; $k < 2; $k++){
-                    $resize_width_file_tmp = explode("%%","500%%100");
-                    $resize_height_file_tmp = explode("%%","500%%100");
+                    $resize_width_file_tmp = explode("%%","290%%136");
+                    $resize_height_file_tmp = explode("%%","290%%136");
 
                     $thumb_width = $resize_width_file_tmp[$k];
                     $thumb_height = $resize_height_file_tmp[$k];
@@ -366,8 +423,8 @@ class AdmShopCategoryController extends Controller
                 }else{
                     //썸네일 만들기
                     for($k = 0; $k < 2; $k++){
-                        $resize_width_file_tmp = explode("%%",'500%%100');
-                        $resize_height_file_tmp = explode("%%",'500%%100');
+                        $resize_width_file_tmp = explode("%%",'290%%136');
+                        $resize_height_file_tmp = explode("%%",'290%%136');
 
                         $thumb_width = $resize_width_file_tmp[$k];
                         $thumb_height = $resize_height_file_tmp[$k];
