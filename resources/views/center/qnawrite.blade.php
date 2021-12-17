@@ -54,7 +54,7 @@
                         @else
 
                           <div id="tab1" class="cont">
-                          <form name="qna_form" id="qna_form" method="post" action="" autocomplete="off">
+                          <form name="qna_form" id="qna_form" method="post" action="member/qna_write">
                           {!! csrf_field() !!}
                             <h4>문의</h4>
                             <ul class="tab-01">
