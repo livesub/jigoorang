@@ -56,7 +56,7 @@
                           <div id="tab1" class="cont">
                           <form name="qna_form" id="qna_form" method="post" action="{{ route('mypage.qna_write_save') }}">
                           {!! csrf_field() !!}
-                            <h4>문의1</h4>
+                            <h4>문의</h4>
                             <ul class="tab-01">
                                 <li>
                                 <p>문의 / 카테고리</p>
