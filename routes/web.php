@@ -279,11 +279,13 @@ Route::group(['middleware' => ['auth']], function () {
     ]);
 
     Route::get('member/qna_write', [
+        'https' => true,
         'as' => 'mypage.qna_write',
         'uses' => 'App\Http\Controllers\member\QnaController@qna_write',
     ]);
 
     Route::post('member/qna_write', [
+        'https' => true,
         'as' => 'mypage.qna_write_save',
         'uses' => 'App\Http\Controllers\member\QnaController@qna_write_save',
     ]);
