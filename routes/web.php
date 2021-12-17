@@ -20,11 +20,12 @@ use Illuminate\Http\Request;
 |
 
 
-*/
+ */
+/*
 if (App::environment('local')) {
     URL::forceScheme('https');
 }
-
+ */
 /*
 Route::get('/', [
     'as' => 'main.index',
