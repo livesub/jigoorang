@@ -179,7 +179,7 @@
                 </tr>
                 <tr>
                     <th scope="row"><label for="od_b_hp">휴대폰번호<strong class="sound_only"> 필수</strong></label></th>
-                    <td><input type="text" name="od_b_hp" value="{{ $user_phone }}" id="od_b_hp" class="frm_input" maxlength="20"></td>
+                    <td><input type="text" name="od_b_hp" value="{{ $user_phone }}" id="od_b_hp" class="frm_input" maxlength="20" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"></td>
                 </tr>
                 <tr>
                     <th scope="row">주소</th>
