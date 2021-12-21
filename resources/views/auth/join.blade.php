@@ -36,7 +36,7 @@
                   <input name='user_phone' id='user_phone' type='text' class='@error('user_phone') is-invalid @enderror' value='{{ old('user_phone') }}' placeholder="휴대전화 번호를 '-' 없이 입력하세요." onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                   <button type="button" onclick="send_sms()" id="sms_send" class="btn-20">인증번호받기</button>
                   <!-- <button type="button" class="btn-20-active">인증번호받기</button> -->
-                  <input name='phone_certificate' id='phone_certificate' type='text' class='@error('phone_certificate') is-invalid @enderror' value='' placeholder="인증번호를 입력하세요" inputmode="numeric" pattern="[0-9]" autocomplete="one-time-code">
+                  <input name='phone_certificate' id='phone_certificate' type='text' class='@error('phone_certificate') is-invalid @enderror' value='' placeholder="인증번호를 입력하세요">
                   <button type="button" onclick="check_ctf_number()" id="check_ctf" class="btn-20">인증번호확인</button>
                   <span id="countdown"></span>
 
