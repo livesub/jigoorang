@@ -589,6 +589,7 @@ class OrderController extends Controller
             $mod_history = '';
 
             if($custom_data[0] == 0){
+
                 //전체 취소
                 $all_cart_infos = DB::table('shopcarts')->where([['od_id', $order_id], ['user_id', $order_info->user_id], ['sct_select', 1]])->whereRaw('sct_status in (\'입금\', \'준비\', \'배송\', \'배송완료\', \'입력수량취소\', \'반품\')')->get();
 
@@ -697,7 +698,7 @@ class OrderController extends Controller
                             $misu = $qty_price;
                         }
 
-                        $CustomUtils->insert_point($order_info->user_id, $misu, '상품 구매 부분 취소', 10,'', $order_id);
+                        //$CustomUtils->insert_point($order_info->user_id, $misu, '상품 구매 부분 취소', 10,'', $order_id);
 
                         if($cancel_request_amount == 0){
                             //취소 금액이 0원이라는 것은 카드 금액을 다 돌려 준 상태임
