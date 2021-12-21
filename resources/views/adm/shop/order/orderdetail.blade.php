@@ -305,8 +305,8 @@
             }),
             dataType : "text",
         }).done(function(result) { // 환불 성공시 로직
-//alert(result);
-//return false;
+alert(result);
+return false;
             if(result == "ok"){
                 alert("취소 처리 되었습니다.");
                 location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";

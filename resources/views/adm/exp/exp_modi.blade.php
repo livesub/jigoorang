@@ -58,7 +58,7 @@
                     <strong>{{ $message }}</strong>
                 @enderror
                 <br>{{ $result_expList->main_image_ori_name }}<br>
-                <input type='checkbox' name="file_chk" id="file_chk" value='1'>수정,삭제,새로 등록시 체크 하세요.
+                <input type='checkbox' name="file_chk" id="file_chk" value='1' accept="image/gif,image/jpeg,image/jpg,image/png">수정,삭제,새로 등록시 체크 하세요.
 
             </td>
         </tr>
