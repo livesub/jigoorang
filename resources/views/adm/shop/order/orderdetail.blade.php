@@ -307,6 +307,11 @@
         }).done(function(result) { // 환불 성공시 로직
 alert(result);
 return false;
+            if(result == "exception"){
+                alert("취소된 상품이 있어 전체 처리 할수 없습니다.");
+                location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
+            }
+
             if(result == "ok"){
                 alert("취소 처리 되었습니다.");
                 location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
