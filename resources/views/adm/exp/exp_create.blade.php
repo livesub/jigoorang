@@ -53,7 +53,7 @@
         <tr>
             <td>메인 이미지</td>
             <td>
-                <input type="file" id="exp_main_image" name="exp_main_image">
+                <input type="file" id="exp_main_image" name="exp_main_image" accept="image/gif,image/jpeg,image/jpg,image/png">
                 @error('exp_main_image')
                     <strong><p>{{ $message }}</p></strong>
                 @enderror

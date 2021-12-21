@@ -29,7 +29,7 @@
         <tr>
             <th scope="col">상품명</th>
             <th scope="col">
-                <input type="checkbox" id="sit_select_all" class="category-1">
+                <input type="checkbox" id="sit_select_all" name="all_chkbox" value="Y" class="category-1">
                 <!-- <input type="checkbox" id="sit_select_all"  onclick="selectAll(this)"> -->
             </th>
             <th scope="col">옵션항목</th>
@@ -235,8 +235,9 @@
                     }
 
                     if(data.message == 'all_cancel'){
-                        alert('전체 주문 취소 상태 입니다.');
-                        location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
+                        alert("처리할 자료를 하나 이상 선택해 주십시오.");
+                        //alert('전체 주문 취소 상태 입니다.');
+                        //location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";
                         return false;
                     }
 
@@ -304,8 +305,8 @@
             }),
             dataType : "text",
         }).done(function(result) { // 환불 성공시 로직
-alert(result);
-return false;
+//alert(result);
+//return false;
             if(result == "ok"){
                 alert("취소 처리 되었습니다.");
                 location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";

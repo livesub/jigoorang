@@ -51,7 +51,8 @@ class ExpService
 
         $expList = ExpList::find($id);
 
-        if($request->exp_main_image == '' || $request->exp_main_image == null){
+        //if($request->exp_main_image == '' || $request->exp_main_image == null){
+        if($request->file_chk == "" || $request->file_chk == null){
             $result = $expList->update([
 
                 'title' => $request->exp_title,
