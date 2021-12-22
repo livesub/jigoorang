@@ -78,13 +78,13 @@ function addresscloseModal() {
 
 }
 
-function addressopenmodal_001(b_addr) {
+function addressopenmodal_001() {
 
     addressopenModal();
 
     document.querySelector('.modal.modal_002').classList.add('in');
 
-    baesongji(b_addr);
+    baesongji();
 
 }
 

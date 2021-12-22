@@ -398,10 +398,10 @@ class OrderController extends Controller
             if($order_info->od_send_cost2 > 0){     //추가 배송비가 있는 상태
                 //주문 상품 총 갯수
                 $cart_cnt = DB::table('shopcarts')->where('od_id', $order_info->order_id)->count();
+
                 //취소된 주문 상품 총 갯수
                 $cart_cancel_cnt = DB::table('shopcarts')->where([['od_id', $order_info->order_id], ['sct_status', '취소']])->count();
-                $tmp_total = $cart_cancel_cnt + count(array_filter($arr_tmp3));
-
+                $tmp_total = $cart_cancel_cnt + count($arr_tmp1);
                 if($all_chkbox == 'Y' || $cart_cnt == $tmp_total){
                     $tot_price = $tot_price + $order_info->od_send_cost2;
                 }
@@ -456,6 +456,7 @@ class OrderController extends Controller
             //취소 금액이 0원 보다 클때 Iamport 를 태운다.
             $cancel_result = Iamport::cancelPayment($imp_uid, $cancel_request_amount, $reason); //실제 취소 이루어 지는 부분
             $success = $cancel_result->success;
+//$success = true;
         }else{
             //취소 금액이 0원일때 때문에..
             $success = true;
@@ -495,11 +496,17 @@ class OrderController extends Controller
                 $mod_history .= $order_info->od_mod_history.date("Y-m-d H:i:s", time()).' '.$cart_info->sct_option.' 입력수량취소 '.$cart_info->sct_qty.' -> '.$have."\n";
 
                 $qty_price = ($cart_info->sct_price + $cart_info->sio_price) * $custom_data[$k]['minus_qty'];   //취소 금액
-
-                if($card_price < $qty_price){   //결제금액 보다 취소 금액이 클때
+//var_dump("qty_price===> ".$qty_price);
+                //현재 카드 결제 잔액
+                $now_order_info = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->first();
+                $now_card_price = (int)$now_order_info->od_receipt_price - (int)$now_order_info->od_receipt_point - (int)$now_order_info->od_cancel_price;
+//1000 < 2000
+                if($now_card_price < $qty_price){   //결제금액 보다 취소 금액이 클때
+//var_dump("DDDDDD");
+//exit;
                     if($order_misu->od_misu  == 0){
                         //처음 수량 취소 일때 카드값 전부 돌려 주고, 상품값 - 신용카드값 을 포인트로 지급
-                        $misu = $qty_price - $card_price;
+                        $misu = $qty_price - $now_card_price;
                     }else{
                         //두번쨰 부터는
                         $misu = $qty_price;
@@ -512,15 +519,18 @@ class OrderController extends Controller
                         $od_cancel_price = $cancel_request_amount; //취소금액
                     }
                 }else{
-                    $misu = $cancel_request_amount;
-                    $od_cancel_price = $order_misu->od_cancel_price + $cancel_request_amount; //취소금액
+//var_dump($cancel_request_amount);
+                    //$misu = $cancel_request_amount;
+                    $misu = $qty_price;
+                    $od_cancel_price = $order_misu->od_cancel_price + $misu; //취소금액
                 }
 
                 //order 업데이트
-                $od_cart_price = $order_info->od_cart_price - $cancel_request_amount;   //총금액 - 취소 금액
+                $od_cart_price = $order_info->od_cart_price - $misu;   //총금액 - 취소 금액
 
                 $od_misu = $order_misu->od_misu + ((-1) * $misu); //미수금액(누적)
-
+//var_dump("od_cart_price===> ".$od_misu);
+//exit;
                 $order_up = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->update([
                     'od_cart_price'     => $od_cart_price,
                     'od_cancel_price'   => $od_cancel_price,
@@ -574,24 +584,31 @@ class OrderController extends Controller
         $misu = 0;
         $mod_history = '';
 
-
         if($cancel_request_amount > 0){
             //취소 금액이 0원 보다 클때 Iamport 를 태운다.
-            $cancel_result = Iamport::cancelPayment($imp_uid, $cancel_request_amount, $reason); //실제 취소 이루어 지는 부분
-            $success = $cancel_result->success;
+//            $cancel_result = Iamport::cancelPayment($imp_uid, $cancel_request_amount, $reason); //실제 취소 이루어 지는 부분
+//            $success = $cancel_result->success;
+$success = true;
         }else{
             //취소 금액이 0원일때 때문에..
             $success = true;
         }
-//var_dump($success);
-//exit;
+
         if($success == true){
             $mod_history = '';
 
             if($custom_data[0] == 0){
-
                 //전체 취소
+                //한개라도 취소한 상품이 있으면 여기 못들어 오게
+                $exception_cnt = DB::table('shopcarts')->where([['od_id', $order_id], ['user_id', $order_info->user_id], ['sct_select', 1], ['sct_status', '취소']])->count();
+                if($exception_cnt > 0){
+                    echo "exception";
+                    exit;
+                }
+
                 $all_cart_infos = DB::table('shopcarts')->where([['od_id', $order_id], ['user_id', $order_info->user_id], ['sct_select', 1]])->whereRaw('sct_status in (\'입금\', \'준비\', \'배송\', \'배송완료\', \'입력수량취소\', \'반품\')')->get();
+
+                $mod_history = $order_info->od_mod_history; //히스토리 내역
 
                 foreach($all_cart_infos as $all_cart_info){
                     //재고 늘리기
@@ -615,7 +632,7 @@ class OrderController extends Controller
                         'sct_status'    => '취소',
                     ]);
 
-                    $mod_history .= $order_info->od_mod_history.date("Y-m-d H:i:s", time()).' '.$all_cart_info->sct_option.' 주문취소 '.$all_cart_info->sct_qty.' -> 0'."\n";
+                    $mod_history .= date("Y-m-d H:i:s", time()).' '.$all_cart_info->sct_option.' 주문취소 '.$all_cart_info->sct_qty.' -> 0'."\n";
                 }
 
                 $CustomUtils->insert_point($order_info->user_id, (-1) * $chagam_point, '구매 적립 취소', 9,'', $order_id);
@@ -641,8 +658,8 @@ class OrderController extends Controller
                     'od_status'         => '취소',
                 ]);
             }else{
-
                 $mod_history2 = '';
+                $mod_history2 = $order_info->od_mod_history;
 
                 foreach($custom_data as $k=>$v)
                 {
@@ -657,24 +674,26 @@ class OrderController extends Controller
                         //취소 갯수 만큼 재고 늘리기
                         $qty_up = shopitemoptions::where([['item_code', $cart_info->item_code], ['sio_id', $cart_info->sio_id], ['sio_type',$cart_info->sio_type]])->first();
                         $qty_up->sio_stock_qty = $qty_up->sio_stock_qty + $cart_info->sct_qty;
-                        $update_result = $qty_up->save();
+//                        $update_result = $qty_up->save();
                     }else{
                         $qty_up = shopitems::where('item_code', $cart_info->item_code)->first();
                         $qty_up->item_stock_qty = $qty_up->item_stock_qty + $cart_info->sct_qty;
-                        $update_result = $qty_up->save();
+//                        $update_result = $qty_up->save();
                     }
 
                     //구입 적립 포인트 회수
                     $chagam_point = $cart_info->sct_point * $cart_info->sct_qty;
-                    $CustomUtils->insert_point($order_info->user_id, (-1) * $chagam_point, '구매 적립 취소', 9,'', $order_id);
+//                    $CustomUtils->insert_point($order_info->user_id, (-1) * $chagam_point, '구매 적립 취소', 9,'', $order_id);
 
                     // 장바구니 수량변경
+/*
                     $cart_up = DB::table('shopcarts')->where([['id', $custom_data[$k]], ['od_id', $order_id]])->update([
                         'sct_qty'       => $have,
                         'sct_status'    => '취소',
                     ]);
+*/
+                    $mod_history2 .= date("Y-m-d H:i:s", time()).' '.$cart_info->sct_option.' 주문취소 '.$cart_info->sct_qty.' -> '.$have."\n";
 
-                    $mod_history2 .= $order_info->od_mod_history.date("Y-m-d H:i:s", time()).' '.$cart_info->sct_option.' 주문취소 '.$cart_info->sct_qty.' -> '.$have."\n";
 
                     //포인트 지급전에 개별 배송비가 있다면 포함해서 지급
                     $cancel_cart_cnt = DB::table('shopcarts')->where([['item_code', $cart_info->item_code],['sct_status', '취소']])->count();
@@ -697,7 +716,7 @@ class OrderController extends Controller
                             //두번쨰 부터는
                             $misu = $qty_price;
                         }
-
+var_dump($misu);
                         //$CustomUtils->insert_point($order_info->user_id, $misu, '상품 구매 부분 취소', 10,'', $order_id);
 
                         if($cancel_request_amount == 0){
@@ -708,15 +727,18 @@ class OrderController extends Controller
                         }
 
                     }else{
-                        $misu = $cancel_request_amount;
-                        $od_cancel_price = $order_misu->od_cancel_price + $cancel_request_amount; //취소금액
+                        //$misu = $cancel_request_amount;
+                        $misu = $qty_price;
+                        //$od_cancel_price = $order_misu->od_cancel_price + $cancel_request_amount; //취소금액
+                        $od_cancel_price = $order_misu->od_cancel_price + $misu; //취소금액
                     }
 
                     //order 업데이트
-                    $od_cart_price = $order_info->od_cart_price - $cancel_request_amount;   //총금액 - 취소 금액
-
+                    $od_cart_price = $order_info->od_cart_price - $misu;   //총금액 - 취소 금액
                     $od_misu = $order_misu->od_misu + ((-1) * $misu); //미수금액(누적)
+var_dump("od_cart_price====> ".$od_misu);
 
+exit;
                     $order_up = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->update([
                         'od_cart_price'     => $od_cart_price,
                         'od_cancel_price'   => $od_cancel_price,
@@ -725,7 +747,21 @@ class OrderController extends Controller
                         'od_status'         => '취소',
                     ]);
                 }
+exit;
+/*
+                //추가 배송비(산간지역)를 취소 하기 위해(-전체 상품이 취소되는 시점에서 추가 배송비를 취소 한다.)
+                if($order_info->od_send_cost2 > 0){     //추가 배송비가 있는 상태
+                    //주문 상품 총 갯수
+                    $cart_cnt = DB::table('shopcarts')->where('od_id', $order_info->order_id)->count();
 
+                    //취소된 주문 상품 총 갯수
+                    $cart_cancel_cnt = DB::table('shopcarts')->where([['od_id', $order_info->order_id], ['sct_status', '취소']])->count();
+
+                    if($cart_cnt == $cart_cancel_cnt){
+
+                    }
+                }
+*/
                 //내역 따로 업뎃
                 $order_od_mod_history_up = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->update([
                     'od_mod_history'    => $mod_history2,

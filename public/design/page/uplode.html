@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <style>
+    .row {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 80px;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .community-container .sub-title {
+      background: url("../resources/background-sample/community.png") center no-repeat;
+      background-size: cover;
+    }
+
+    .community-container .contents .board>.btns {
+      margin-top: 50px;
+      text-align: right;
+    }
+
+    .community-container .contents .board>.btns button {
+      width: 100px;
+      height: 50px;
+      font-size: 20px;
+      border: none;
+      background-color: #0070bf;
+      color: #fff;
+    }
+
+    .community-container .contents .board.write .write-form {
+      border-top: solid 4px #000000;
+    }
+
+    .community-container .contents .board.write .write-form .row {
+      align-items: center;
+      justify-content: center;
+    }
+
+    .community-container .contents .board.write .write-form .col {
+      line-height: unset;
+    }
+
+    .community-container .contents .board.write .write-form .row {
+      align-items: stretch;
+    }
+
+    .community-container .contents .board.write .write-form .col:first-child {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 200px;
+      font-size: 22px;
+      font-weight: bold;
+      text-align: center;
+      color: #000000;
+      background-color: #f7f7f7;
+    }
+
+    .community-container .contents .board.write .write-form .col:not(:first-child) {
+      flex: 1;
+      padding: 16px 30px;
+      font-size: 0;
+    }
+
+    .community-container .contents .board.write .write-form .col input {
+      min-width: 355px;
+      font-size: 20px;
+      line-height: 1.5;
+      color: #000000;
+    }
+
+    .community-container .contents .board.write .write-form .col input[type=password] {
+      width: 240px;
+      min-width: 240px;
+    }
+
+    .community-container .contents .board.write .write-form .col *.full {
+      width: 100%;
+    }
+
+    .community-container .contents .board.write .write-form .col textarea {
+      height: 560px;
+      border: solid 1px #999999;
+      padding: 20px;
+      font-size: 20px;
+      line-height: 1.5;
+      color: #000000;
+    }
+
+    .community-container .contents .board.write .write-form .col input::placeholder,
+    .community-container .contents .board.write .write-form .col textarea::placeholder {
+      color: #bbbbbb;
+    }
+
+    .community-container .contents .board.write .write-form .col .file_uploader {
+      width: 105px;
+      height: 30px;
+      font-size: 17px;
+      font-weight: 500;
+      letter-spacing: -1px;
+      text-align: center;
+      color: #ffffff;
+      background-color: #0070bf;
+      padding-top: 7px;
+    }
+
+    .community-container .contents .board.write .write-form .col .file_uploader.hide {
+      display: none;
+    }
+
+    .community-container .contents .board.write .write-form .col .file_uploader>label {
+      padding: 8px 20px;
+      cursor: pointer;
+    }
+
+    .community-container .contents .board.write .write-form .col .file_uploader>label>input {
+      display: none;
+    }
+
+    .community-container .contents .board.write .write-form .col .files>div {
+      font-size: 20px;
+      line-height: 1.5;
+      color: #000000;
+      text-decoration: underline;
+      margin-top: 5px;
+    }
+
+    .community-container .contents .board.write .write-form .col .files>div:first-child {
+      margin-top: 10px;
+    }
+
+    .community-container .img {
+      width: 80px;
+      height: 80px;
+    }
+
+    .community-container .contents .board.write .write-form .col .files>div>div.remove {
+      display: inline-block;
+      font-size: 0;
+      width: 24px;
+      height: 24px;
+      margin: 13px;
+      background-image: url("./img/btn-ui-24-close-gray.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="community-container">
+    <div class="contents">
+      <form class="board write" name="fwrite" id="fwrite" action="" onsubmit="" method="post"
+        enctype="multipart/form-data">
+        <div class="write-form">
+          <div class="row">
+            <div class="col">파일첨부</div>
+            <div class="col">
+              <div class="file_uploader">
+                <label>파일첨부<input type="file" id="file_uploader" accept="image/*" onchange="changeWriteFile()"
+                    multiple /></label>
+              </div>
+              <div class="files">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="btns">
+          <button class="btn" type="submit" id="btn_submit">임시저장</button>
+          <button class="btn" type="submit" id="btn_submit">등록</button>
+          <button class="btn btn-white" type="button" onclick="">취소</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      let imageMap = {};
+      function imageFormData() {
+        let formData = new FormData();
+
+        for (let key in imageMap) {
+          console.log(imageMap[key]);
+          formData.append("review_img[]", imageMap[key], imageMap[key].name);
+        }
+
+        // for (let value of formData.entries()) {
+        //   console.log(value);
+        // }
+        return formData;
+      }
+
+
+      let showimage = ["../recources/imgs/arrow-option-01.png", "../recources/imgs/arrow-option-01.png", "../recources/imgs/arrow-option-01.png", "../recources/imgs/arrow-option-01.png", "../recources/imgs/arrow-option-01.png"]; //이미지 값 넣는곳
+      changeWriteFile(showimage);
+        
+      
+      function changeWriteFile(uploadedUrls) {
+        const fileUploaderEl = document.querySelector("#file_uploader");
+        const parentEl = fileUploaderEl.parentElement.parentElement;
+        const filesEl = parentEl.parentElement.lastElementChild;
+        let cnt = Number(filesEl.childElementCount);
+        const attatchedFiles = fileUploaderEl.files;
+
+        if (cnt + attatchedFiles.length > 5) {
+          //alert("파일 첨부는 최대 5개까지 가능합니다.");
+          alert("파일 첨부는 최대 5개까지 가능합니다.");
+          fileUploaderEl.value = "";
+          return;
+        }
+        
+        if (uploadedUrls != undefined) {
+          for(const url of uploadedUrls) {
+            makePreviewDiv(filesEl, url);
+          }
+        } else if (attatchedFiles.length > 0) {
+          for (const file of attatchedFiles) {
+            makePreviewDiv(filesEl, file);
+          }
+        }
+
+        fileUploaderEl.value = "";
+      }
+      console.log(imageMap);
+
+      function makePreviewDiv(filesEl, fileOrUrl) {
+        const childEl = document.createElement("div");
+        // childEl.innerText = attatchedFiles[i].name;
+        const image = document.createElement('img');
+        childEl.id = "file_img_" + Date.now();
+        if(fileOrUrl instanceof File) {
+          image.src = URL.createObjectURL(fileOrUrl);
+          imageMap[childEl.id] = fileOrUrl;
+        } else if(typeof fileOrUrl === 'string') {
+          console.log(fileOrUrl);
+          image.src = fileOrUrl;
+        }
+        image.classList.add("img");
+
+        const childRemoveEl = document.createElement("div");
+        // childRemoveEl.classList.add("remove");
+        childRemoveEl.onclick = function (event) {
+          attached_file_del(event, typeof fileOrUrl === 'string' ? fileOrUrl : null);
+        };
+        childRemoveEl.innerText = "remove";
+        childEl.append(image);
+        childEl.append(childRemoveEl);
+
+        filesEl.append(childEl);
+        // console.log(filesEl);
+      }
+
+      function attached_file_del(evnt, url) {
+        var con_test = confirm("첨부파일을 삭제 하시겠습니까?");
+
+        if(url != null) {
+          console.log(url);
+          //ajax file delete code
+        }
+
+        if (con_test == true) {
+          const parentEl = evnt.target.parentElement;
+          parentEl.remove();
+          delete imageMap[parentEl.id];
+        }
+        else if (con_test == false) {
+          return false;
+        }
+      }
+    </script>
+  </div>
+
+  </div>
+  </div>
+  </div>
+  </div>
+</body>
+
+</html>

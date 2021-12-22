@@ -60,7 +60,8 @@ class findIdPwService
             $input['code'] = Str::random(6);
 
             //addMinutes()안에 숫자를 분단위로 변경하면 원하는 시간을 설정 가능 지금 2분제한
-            $url = URL::temporarySignedRoute('sendPwChangeLinkPro', now()->addMinutes(2), ['code' => Crypt::encryptString($user_info->id)]);
+            //$url = URL::temporarySignedRoute('sendPwChangeLinkPro', now()->addMinutes(5), ['code' => Crypt::encryptString($user_info->id)]);
+            $url = URL::temporarySignedRoute('sendPwChangeLinkPro', now()->addMinutes(5), ['code' => base64_encode($user_info->id)]);
             //return URL::temporarySignedRoute('sendPwChangeLinkPro', now()->addMinutes(2), ['code' => Crypt::encryptString($user_info->id)]);
             //$result = $this->rand_code_save($url);
 
@@ -93,7 +94,9 @@ class findIdPwService
         $user_phone = "";
         try {
             //복호화 후 복호화한 것으로 user를 찾는다.
-            $user_id = Crypt::decryptString($data->code);
+            //$user_id = Crypt::decryptString($data->code);
+            $user_id = base64_decode($data->code);
+
             $user = User::find($user_id);
 
             $update_result = $user->update([
@@ -107,7 +110,6 @@ class findIdPwService
             return true;
         } catch (DecryptException $e) {
             //
-
             return $e;
         }
 

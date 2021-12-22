@@ -44,7 +44,7 @@ return [
 
     'repeat_access' => 'SNS 로그인/회원 가입에 실패 하였습니다.\n다시 진행해주시기 바랍니다.',
 
-    'welcome' => '환영합니다.',
+    'welcome' => '지구랭에 오신걸 환영합니다.',
 
     'success_sms_send' => '인증문자발송완료 확인 필요합니다.',
 

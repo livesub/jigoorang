@@ -110,10 +110,12 @@
                 dataType: 'json',
                 data: { user_phone : user_phone_for_pw },
                 success: function(result) {
+//alert(result);
+//return false;
                     if(result != "" && result != null && result[0].result_code != null && result[0].result_code != "" && result !="kakao" && result != "naver"){
                         //alert('아이디는 '+result+'입니다');
                         alert('재설정 링크가 발송되었습니다.\n문자로 받으신 링크를 통해 비밀번호를 재설정 하세요.');
-                        console.log(result);
+                        //console.log(result);
                     }else if(result != null && result != "" && (result !="kakao" || result != "naver")){
                         alert('고객님은 비밀번호 없이 '+result+'를 이용하여 로그인 가능합니다.')
                     }else{

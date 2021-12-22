@@ -3,6 +3,7 @@
 
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> <!-- 실서버 -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
@@ -23,6 +24,17 @@
 
 <body>
   <div class="wrap">
+
+     <!-- 탭바 시작 -->
+     <div class="tabar">
+      <ul>
+          <li><a href="#">홈</a></li>
+          <li><a href="#">랭킹</a></li>
+          <li><a href="#">쇼핑</a></li>
+          <li><a href="#">기록</a></li>
+      </ul>
+    </div>
+    <!-- 탭바 끝 -->
 
     <!-- 헤더 시작-->
     <div class="header">
@@ -278,7 +290,7 @@
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
                     </div>
-                    <p class="number"></p>
+                    <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                     <span class="left">
@@ -314,7 +326,7 @@
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
                     </div>
-                    <p class="number"></p>
+                    <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                     <span class="left">
@@ -350,7 +362,7 @@
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
                     </div>
-                    <p class="number"></p>
+                    <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                     <span class="left">
@@ -387,7 +399,7 @@
                       <div class="stars-outer">
                         <div class="stars-inner"></div>
                       </div>
-                      <p class="number"></p>
+                      <p class="number">0/5</p>
                     </div>
                     <div class="main-project-bottom">
                       <span class="left">
@@ -424,7 +436,7 @@
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
                     </div>
-                    <p class="number"></p>
+                    <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                     <span class="left">
@@ -459,7 +471,7 @@
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
                     </div>
-                    <p class="number"></p>
+                    <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                     <span class="left">
@@ -496,7 +508,7 @@
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
                     </div>
-                    <p class="number"></p>
+                    <p class="number">0/5</p>
                   </div>
 
                   <div class="main-project-bottom">
@@ -526,6 +538,7 @@
       <!-- 리스트_03 -->
       <div class="mbox_100 bg_01">
         <div class="inner">
+          <div class="main">
           <div class="title">
             <h2>지구랭 기획전 #2</h2>
             <div class="line_14"></div>
@@ -559,7 +572,7 @@
                       <div class="stars-outer">
                         <div class="stars-inner"></div>
                       </div>
-                      <p class="number"></p>
+                      <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                       <span class="left">
@@ -596,45 +609,7 @@
                       <div class="stars-outer">
                         <div class="stars-inner"></div>
                       </div>
-                      <p class="number"></p>
-                  </div>
-                  <div class="main-project-bottom">
-                      <span class="left">
-                        <p>리뷰 200</p>
-                      </span>
-                      <span class="right">
-                        <p>응원하기</p>
-                        <span class="wishlist">
-                        </span>
-                      </span>
-                  </div>
-                </div>
-              </div>
-
-
-               <div class="swiper-slide">
-                <div class="sub-img-3">
-                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
-                </div>
-
-                <div class="new-icon">
-                  <p>NEW</p>
-                </div>
-
-                <div class="main-project-title">
-                    <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-                    <span class="main-project-left">
-                        <p class="price">7,000원</p>
-                        <p class="sale-price">10,000원</p>
-                    </span>
-                    <span class="main-project-right">
-                        <p>30%</p>
-                    </span>
-                  <div class="project project_1">
-                      <div class="stars-outer">
-                        <div class="stars-inner"></div>
-                      </div>
-                      <p class="number"></p>
+                      <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                       <span class="left">
@@ -672,7 +647,45 @@
                       <div class="stars-outer">
                         <div class="stars-inner"></div>
                       </div>
-                      <p class="number"></p>
+                      <p class="number">0/5</p>
+                  </div>
+                  <div class="main-project-bottom">
+                      <span class="left">
+                        <p>리뷰 200</p>
+                      </span>
+                      <span class="right">
+                        <p>응원하기</p>
+                        <span class="wishlist">
+                        </span>
+                      </span>
+                  </div>
+                </div>
+              </div>
+
+
+               <div class="swiper-slide">
+                <div class="sub-img-3">
+                  <img src="./recources/imgs/img-01.png" class="slide-sale" alt="">
+                </div>
+
+                <div class="new-icon">
+                  <p>NEW</p>
+                </div>
+
+                <div class="main-project-title">
+                    <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                    <span class="main-project-left">
+                        <p class="price">7,000원</p>
+                        <p class="sale-price">10,000원</p>
+                    </span>
+                    <span class="main-project-right">
+                        <p>30%</p>
+                    </span>
+                  <div class="project project_1">
+                      <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                      </div>
+                      <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                       <span class="left">
@@ -709,7 +722,7 @@
                       <div class="stars-outer">
                         <div class="stars-inner"></div>
                       </div>
-                      <p class="number"></p>
+                      <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                       <span class="left">
@@ -747,7 +760,7 @@
                       <div class="stars-outer">
                         <div class="stars-inner"></div>
                       </div>
-                      <p class="number"></p>
+                      <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                       <span class="left">
@@ -784,7 +797,7 @@
                       <div class="stars-outer">
                         <div class="stars-inner"></div>
                       </div>
-                      <p class="number"></p>
+                      <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                       <span class="left">
@@ -804,7 +817,7 @@
 
         </div>
       </div>
-
+</div>
 
 
 
@@ -840,7 +853,7 @@
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
                     </div>
-                    <p class="number"></p>
+                    <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                     <span class="left">
@@ -876,7 +889,7 @@
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
                     </div>
-                    <p class="number"></p>
+                    <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                     <span class="left">
@@ -912,7 +925,7 @@
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
                     </div>
-                    <p class="number"></p>
+                    <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                     <span class="left">
@@ -949,7 +962,7 @@
                       <div class="stars-outer">
                         <div class="stars-inner"></div>
                       </div>
-                      <p class="number"></p>
+                      <p class="number">0/5</p>
                     </div>
                     <div class="main-project-bottom">
                       <span class="left">
@@ -986,7 +999,7 @@
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
                     </div>
-                    <p class="number"></p>
+                    <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                     <span class="left">
@@ -1021,7 +1034,7 @@
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
                     </div>
-                    <p class="number"></p>
+                    <p class="number">0/5</p>
                   </div>
                   <div class="main-project-bottom">
                     <span class="left">
@@ -1058,7 +1071,7 @@
                     <div class="stars-outer">
                       <div class="stars-inner"></div>
                     </div>
-                    <p class="number"></p>
+                    <p class="number">0/5</p>
                   </div>
 
                   <div class="main-project-bottom">
@@ -1089,43 +1102,48 @@
         <h2>친환경 메이커 소개</h2>
 
         <!-- 하단 배너 끝 -->
-        <div class="test">
+        <div class="sub_banner">
           <!-- Swiper -->
           <div class="swiper Swiper3">
             <div class="swiper-wrapper">
+              
               <div class="swiper-slide">
                 <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
                 <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
               </div>
+              
               <div class="swiper-slide">
                 <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
                 <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
               </div>
-              <div class="swiper-slide">
-                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
-                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
-              </div>
-              <div class="swiper-slide">
-                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
-                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
-              </div>
-              <div class="swiper-slide">
-                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
-                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
-              <div class="swiper-slide">
-                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
-                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
-              </div>
-              <div class="swiper-slide">
-                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
-                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
-              </div>
-            </div>
 
-            <!-- <div class="swiper-button-next"></div>
-               <div class="swiper-button-prev"></div> -->
+              <div class="swiper-slide">
+                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
+              </div>
+
+              <div class="swiper-slide">
+                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
+              </div>
+
+              <div class="swiper-slide">
+                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
+              </div>
+
+              <div class="swiper-slide">
+                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
+              </div>
+
+              <div class="swiper-slide">
+                <img src="./recources/imgs/img-ban-01.png" alt="" class="pc">
+                <img src="./recources/bg/img-ban-01-m.png" alt="" class="mo">
+              </div>
+
+            </div>
             <div class="swiper-pagination"></div>
-          </div>
         </div>
       </div>
     </div>
