@@ -27,7 +27,7 @@ class CreateExpApplicationList extends Migration
             $table->string('ad_addr1')->comment('신청인 기본주소');
             $table->string('ad_addr2')->comment('신청인 상세주소');
             $table->string('ad_addr3')->nullable()->comment('신청인 주소참고항목');
-            $table->string('ad_jibeon')->comment('신청인 지번주소');
+            $table->string('ad_jibeon')->nullable()->comment('신청인 지번주소');
             $table->string('shipping_memo')->nullable()->comment('배송메모');
             $table->text('reason_memo')->comment('참여하는 이유항목');
             $table->enum('access_yn', ['y', 'n'])->default('n')->comment('승인 여부');

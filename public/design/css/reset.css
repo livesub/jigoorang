@@ -228,6 +228,16 @@ button.btn-full-find {
   color: #3ec4ba;
   font-size: 16px;
 }
+
+button.btn-full-sd {
+  width: 100%;
+  height: 48px;
+  background-color: #fff;
+  border: solid 2px #3ec4ba;
+  color: #3ec4ba;
+  font-size: 16px;
+}
+
 button.btn-full-login {
   width: 100%;
   height: 48px;
@@ -244,6 +254,7 @@ button.btn-full-find {
   color: #3ec4ba;
   font-size: 16px;
 }
+
 button.btn-full-kakao {
   width: 100%;
   height: 48px;
@@ -270,6 +281,14 @@ button.btn-bg-mint {
 button.btn-line-mint {
   color: #ffffff;
   background-color: #000000;
+}
+
+button.btn-sd {
+  width: 100%;
+  height: 30px;
+  background: #ffffff;
+  color: #000000;
+  border: solid 2px #000000;
 }
 
 button.btn-bg-mint {
@@ -313,4 +332,184 @@ input[type="checkbox"]:checked::after {
 }
 input:focus {
   outline: none;
+}
+
+/* margin */
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.mt-30 {
+  margin-top: 30px;
+}
+.mt-40 {
+  margin-top: 40px;
+}
+.mt-50 {
+  margin-top: 50px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.mb-30 {
+  margin-bottom: 30px;
+}
+.mb-40 {
+  margin-bottom: 40px;
+}
+.mb-50 {
+  margin-bottom: 50px;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+.ml-20 {
+  margin-left: 20px;
+}
+.ml-30 {
+  margin-left: 30px;
+}
+.ml-40 {
+  margin-left: 40px;
+}
+.ml-50 {
+  margin-left: 50px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+.mr-20 {
+  margin-right: 20px;
+}
+.mr-30 {
+  margin-right: 30px;
+}
+.mr-40 {
+  margin-right: 40px;
+}
+.mr-50 {
+  margin-right: 50px;
+}
+
+/* padding */
+
+.pdt-10 {
+  margin-top: 10px;
+}
+.pdt-20 {
+  margin-top: 20px;
+}
+.pdt-30 {
+  margin-top: 30px;
+}
+.pdt-40 {
+  margin-top: 40px;
+}
+.pdt-50 {
+  margin-top: 50px;
+}
+
+.pdb-10 {
+  margin-bottom: 10px;
+}
+.pdb-20 {
+  margin-bottom: 20px;
+}
+.pdb-30 {
+  margin-bottom: 30px;
+}
+.pdb-40 {
+  margin-bottom: 40px;
+}
+.pdb-50 {
+  margin-bottom: 50px;
+}
+
+.pdl-10 {
+  margin-left: 10px;
+}
+.pdl-20 {
+  margin-left: 20px;
+}
+.pdl-30 {
+  margin-left: 30px;
+}
+.pdl-40 {
+  margin-left: 40px;
+}
+.pdl-50 {
+  margin-left: 50px;
+}
+
+.pdr-10 {
+  margin-right: 10px;
+}
+.pdr-20 {
+  margin-right: 20px;
+}
+.pdr-30 {
+  margin-right: 30px;
+}
+.pdr-40 {
+  margin-right: 40px;
+}
+.pdr-50 {
+  margin-right: 50px;
+}
+
+/* color */
+
+.cr_01 {
+  color: #ddd;
+}
+.cr_02 {
+  color: #3ec4ba;
+}
+.cr_03 {
+  color: #ff0000;
+}
+.cr_04 {
+  color: #707070;
+}
+
+/* solid */
+sol-g {
+  border: solid 2px #ddd;
+}
+/* bg */
+
+.bg_01 {
+  background-color: #3ec4ba;
+}
+.bg_02 {
+  background-color: #f0f0f0;
+}
+/* .bg_03 {
+  background-color: #3ec4ba;
+} */
+
+textarea:focus {
+  outline: none;
+}
+button:focus {
+  outline: none;
+}
+input:focus {
+  outline: none;
+}
+
+
+.none {
+  display: none;
+}
+.block {
+  display: block;
 }

@@ -119,13 +119,13 @@ class Messages_kr extends Controller
         'login_chk' => [
             'login_chk' => '회원이 아니거나 탈퇴 회원 일수 있습니다.\n아이디 또는 비빌번호를 확인 하세요.',
             'email_chk' => '메일 인증이 필요 합니다.',
-            'login_ok' => '환영합니다.',
+            'login_ok' => '지구랭에 오신걸 환영합니다.',
         ]
     ];
 
     static $logout_chk = [
         'logout' => [
-            'logout' => '안녕히 가세요.',
+            'logout' => '다음에 또 만나요\nFrom. 지구랭',
         ]
     ];
 

@@ -11,7 +11,7 @@
         <div class="location">
             <ul>
                 <li><a href="/">홈</a></li>
-                <li><a href="">비밀번호 재설정</a></li>
+                <li><a href="/">비밀번호 재설정</a></li>
             </ul>
         </div>
         <!-- 위치 끝 -->

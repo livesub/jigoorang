@@ -300,7 +300,7 @@
             $("#pw_error").text("");
 
             if(regPw.test(user_pw) !== true){
-                $("#pw_error").text("비밀번호 형식이 잘못되었습니다.");
+                $("#pw_error").text("비밀번호 형식에 맞게 다시 입력해 주세요\n영문,숫자,특수문자 조합 8~20자 (% $ ? 제외)");
                 $("#user_pw").focus();
                 return false;
             }
