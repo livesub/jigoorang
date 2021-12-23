@@ -387,6 +387,7 @@ class UrlGenerator implements UrlGeneratorContract
     public function hasCorrectSignature(Request $request, $absolute = true)
     {
         $url = $absolute ? $request->url() : '/'.$request->path();
+	$url = str_replace("http://","https://", $url);
 
         $queryString = ltrim(preg_replace('/(^|&)signature=[^&]+/', '', $request->server->get('QUERY_STRING')), '&');
 

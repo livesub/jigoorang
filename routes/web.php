@@ -429,6 +429,8 @@ Route::post('/sendPwChange', [findIdPwController::class, 'sendPwChangeLink'])->n
 
 //시간이 제한된 라우트 제작
 Route::get('/sendPwChange/{code}', function (Request $request, $code) {
+
+
     if(!$request->hasValidSignature()){
         //기간이 지났을 경우의 처리 또는 없거나 -> 잉여 단축url 삭제
         //abort(401);

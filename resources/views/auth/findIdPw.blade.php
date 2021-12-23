@@ -68,7 +68,9 @@
                 url: '{{ route('findId') }}',
                 dataType: 'json',
                 data: { user_phone : user_phone_for_id },
-                success: function(result) {
+		success: function(result) {
+//alert(result);
+i//return false;
                     if(result != "" && result != null && result[0].result_code != null && result[0].result_code != "" && result !="kakao" && result != "naver"){
                         //alert('아이디는 '+result+'입니다');
                         alert("입력한 휴대폰 번호로 아이디가 발송되었습니다.");

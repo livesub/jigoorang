@@ -40,10 +40,8 @@ class findIdPwController extends Controller
     //비밀번호 재설정 링크 관련
     public function sendPwChangeLink(Request $request){
 
-        $user_phone = $request->user_phone;
-
+	    $user_phone = $request->user_phone;
         $result = $this->findIdPwService->send_pw_link($user_phone);
-
         //비밀번호 재설정 링크 문자로 전송
 
         return response()->json(array($result),200,[],JSON_UNESCAPED_UNICODE);
@@ -68,11 +66,11 @@ class findIdPwController extends Controller
     //비밀번호 변경 단축 URL 관련
     public function shortenLink($code)
     {
-        $find = ShortLink::where('code', $code)->first();
-
-        if(!empty($find)){
-
-            return redirect($find->link);
+	$find = ShortLink::where('code', $code)->first();    
+	    
+	if(!empty($find)){
+ 
+	    return redirect($find->link);
 
         }else{
 
