@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> <!-- 실서버 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
@@ -29,7 +30,7 @@
             </div>
           </div>
             
-                 <p class="none">등록된 배송지가 없습니다</p>
+                 <p class="adress_none">등록된 배송지가 없습니다</p>
             </div>
         
         <div class="btn btn_2ea">
@@ -125,57 +126,64 @@
      <div class="modal_004 modal fade">
         <div class="modal-background" onclick="addressinputclose_001()"></div>
          <div class="modal-container">
-             <div class="modal-container-body adress">
-             <div class="modal-container-title">
-                 <h4>배송지 입력</h4>
-                 <div class="btn-close" onclick="addressinputclose_001()">
-             </div>
-           </div>
+
+            <div class="modal-container-body adress">
+                <div class="modal-container-title">
+                    <h4>배송지 입력</h4>
+                    <div class="btn-close" onclick="addressinputclose_001()"></div>
+                </div>
+          
               
                 <div class="adress_input">
-                    <label for="">수령인</label>
-                    <input type="name" name="" id="" placeholder="수령인">
+                        <label for="">수령인</label>
+                        <input type="name" name="" id="" placeholder="수령인">
 
-                    <label for="">휴대폰</label>
-                    <input type="number" name="" id="" placeholder="012-3456-7890">
-
-                <div class="adress_input02">
-                    <label for="">배송지</label>
-                    <input type="text" name="" id="" class="adress_input03" placeholder="우편번호">
-                    <label for="">
-                        <button class="adress_input03_btn"  onclick="sample3_execDaumPostcode()">우편번호 찾기</button>
-                    </label>
-                </div>
-                <div class="adress_input04">
-                    <div id="wrap" class="adress_pop">
-                        <img src="//t1.daumcdn.net/postcode/resource/images/close.png" 
-                        id="btnFoldWrap"  
-                        onclick="foldDaumPostcode()" 
-                        alt="접기 버튼">
-                    </div>
+                        <label for="">휴대폰</label>
+                        <input type="number" name="" id="" placeholder="012-3456-7890">
                         
-                    <input type="text" name="" id="">
-                    <input type="text" name="" id="">
-                    <input type="text" name="" id="">
+            
+                    <div class="adress_input02">
+                        <p>배송지</p> <!--수정 2021.12.16-->
+                        <input type="text" name="" id="" class="adress_input03" placeholder="우편번호">
+                        <label for="">
+                            <button class="adress_input03_btn"  onclick="sample3_execDaumPostcode()">우편번호 찾기</button>
+                        </label>
+                    </div> 
+            
+                    <div class="adress_input04">
+                        <div id="wrap" class="adress_pop">
+                            <img src="//t1.daumcdn.net/postcode/resource/images/close.png" 
+                            id="btnFoldWrap"  
+                            onclick="foldDaumPostcode()" 
+                            alt="접기 버튼">
+                        </div>
+                            
+                        <input type="text" name="" id="">
+                        <input type="text" name="" id="">
+                        <input type="text" name="" id="">
+                    </div> 
                 </div>
-                </div>
+
                 <div class="checkbox">
-                  <input type="checkbox" name="" id="" checked>
-                  <label for="">기본배송지 등록</label>
+                        <input type="checkbox" name="" id="" checked>
+                        <label for="">기본배송지 등록</label>
                 </div>
-             </div>
+            
+            </div>
         
             <div class="btn btn_2ea">
-             <button class="modal_btn01" onclick="addressinputclose_001()">
-                 닫기
-             </button>
-             <button class="modal_btn02" onclick="addressinputclose_001(); addressopen_001();">
-                 등록
-             </button> 
+                <button class="modal_btn01" onclick="addressinputclose_001()">
+                    닫기
+                </button>
+                <button class="modal_btn02" onclick="addressinputclose_001(); addressopen_001();">
+                    등록
+                </button> 
             </div>                    
          </div> 
      </div>
     <!-- 배송지 모달 (입력) // 끝 -->
+
+
     
 
       <!-- 상세 모달 (상세보기) -->
@@ -338,8 +346,8 @@
         <div class="title_area">
             <h2>평가단 신청하기</h2>
             <div class="text_02 wt-nm">
-                정직한 평가단에 참여해 여러분의 사용 평가와 후기를 들려주세요. <br>
-                한 분 한 분의 평가가 모이면, 믿을 수 있는 친환경 제품이 <br>
+                정직한 평가단에 참여해 <span>여러분의 사용 평가와 후기를 들려주세요.</span><br class="block_br">
+                한 분 한 분의 평가가 모이면, 믿을 수 있는 친환경 제품이 <!-- <br> 제거  -->  
                 더 많은 고객을 만날 수 있는 든든한 힘이 됩니다. 
             </div>
             <div class="line_14-100"></div>
@@ -409,7 +417,7 @@
                                 <li> 주소</li>
                                 <li> 
                                     <div>13458) 경기도 지구시 지구길(지구동, 지구아파트)</div>
-                                    <div>101/101</div>                                
+                                    <div>101/101</div>   <!--  div 추가 -->                             
                                 </li>                                
                             </ul>
                             <ul class="information-input">
@@ -476,22 +484,24 @@
             <div class="con_01">
                 <div class="title">지구랭</div>
                 <ul>
-                    <li>대표이사 : 지구랭</li>
-                    <li>사업자등록번호 : 123-45-12345 </li>
-                    <li>통신판매업신고 : 1235-서울-45678</li>
-                    <li>개인정보관리책임자 : 지구룡</li>
+                    <li>대표이사 : 유혜연</li>
+                    <li>사업자등록번호 : 397-05-01970</li>
+                    <li>통신판매업신고 :제 2021-서울마포-3124 호</li>
+                    <li>개인정보관리책임자 : 유혜연</li>
                 </ul>
             </div>
             <div class="con_01">
                 <div class="title">CONTACT US</div>
                 <ul>
-                    <li>대표전화 : 02-1234-1235</li>
-                    <li>서울시 강남구 테헤란로 123길 14</li>
-                    <li>이메일 : gigurang@gigurang.com</li>
+                    <!-- <li>대표전화 : 02-1234-1235</li> -->
+                    <li>서울시 마포구 월드컵북로 361 14층 11호 
+                        <br>(상암동, DMC이안오피스텔) 
+                    </li>
+                    <li>이메일 : jigoorang_hehe@naver.com</li>
                 </ul>
             </div>
             <div class="logo_f"></div>
-            <div class="copy">ⓒ GIGURANG</div>            
+            <div class="copy">ⓒ JIGOORANG ALL RIGHTS RESERVED</div>              
         </div>
     </div>
     <!-- 푸터 끝 -->

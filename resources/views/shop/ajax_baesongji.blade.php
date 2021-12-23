@@ -10,6 +10,7 @@
                     <h4>배송지 주소</h4>
                     <div class="btn-close" onclick="addressclosemodal_001()">
                 </div>
+            <div class="scroll">
                 @if(count($baesongjis) > 0)
                     @php
                         $sep = chr(30);
@@ -24,6 +25,7 @@
                         $checked = "";
                         if($baesongji->ad_default == 1) $checked = "checked";
                         @endphp
+
                 <div class="modal-container-box">
                   <input type="hidden" name="id_ori[{{ $i }}]" id="id_ori[{{ $i }}]" value="{{ $baesongji->id }}">
                     <h3>{{ $baesongji->ad_name }}
@@ -46,10 +48,11 @@
                     @endforeach
 
                 @else
-                  <p class="none">등록된 배송지가 없습니다</p>
+                  <p class="adress_none">등록된 배송지가 없습니다</p>
                 @endif
             </div>
         </div>
+    </div>
             <div class="btn btn_2ea">
                 <button class="modal_btn01" type="button" onclick="addressclosemodal_001()">
                     닫기

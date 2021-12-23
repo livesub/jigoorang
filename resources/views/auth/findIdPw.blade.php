@@ -31,12 +31,12 @@
                   <form action="" class="find_form">
                     <span class="id_find">
                         <h3>아이디 찾기</h3>
-                        <input type="text" min="0" name="user_phone_for_id" id="user_phone_for_id" placeholder="휴대전화 번호를 ‘-’없이 입력하세요." value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                        <input type="text" min="0" name="user_phone_for_id" id="user_phone_for_id" placeholder="가입시 사용한 휴대전화 번호를 ‘-’없이 입력하세요." value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                         <button type="button" class="btn-full-login" onclick="find_id()">아이디 발송</button>
                     </span>
                     <span class="pw_find">
                         <h3>비밀번호 찾기</h3>
-                        <input type="text" min="0" name="user_phone_for_pw" id="user_phone_for_pw" placeholder="휴대전화 번호를 ‘-’없이 입력하세요." value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                        <input type="text" min="0" name="user_phone_for_pw" id="user_phone_for_pw" placeholder="가입시 사용한 휴대전화 번호를 ‘-’없이 입력하세요." value="" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                         <button type="button" class="btn-full-login" onclick="send_pwChange_link()">비밀번호 재설정 링크 발송</button>
                     </span>
                   </form>

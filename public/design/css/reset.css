@@ -1,5 +1,7 @@
 @charset "UTF-8";
 
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css);
+
 @font-face {
   font-family: "SBAggroL";
   src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/SBAggroL.woff")
@@ -14,7 +16,6 @@
   font-weight: normal;
   font-style: normal;
 }
-@import url("//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSansNeo.css");
 
 html,
 body,
@@ -112,7 +113,7 @@ textarea {
   position: relative;
   line-height: normal;
   font-family: "Spoqa Han Sans Neo", "sans-serif";
-  letter-spacing: -1px;
+  letter-spacing: -0.5px;
   resize: none;
 }
 * {
@@ -136,6 +137,7 @@ a {
   display: inline-block;
   cursor: pointer;
   line-height: inherit;
+  width: 100%;
 }
 button {
   font-weight: normal;
@@ -193,12 +195,23 @@ button.btn-20-active {
   top: 2px;
 }
 
-button.btn-50 {
-  width: 50%;
-  height: 48px;
+.btn-30 {
+  width: 100%;
+  height: 68px;
   background-color: #fff;
   border: solid 2px #3ec4ba;
   color: #3ec4ba;
+  font-size: 16px;
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.btn-30-sol {
+  width: 100%;
+  height: 30px;
+  background-color: #fff;
+  border: solid 2px #ddd;
+  color: #707070;
   font-size: 16px;
 }
 
@@ -209,6 +222,15 @@ button.btn-50 {
   border: solid 2px #3ec4ba;
   color: #3ec4ba;
   font-size: 16px;
+}
+
+.btn-50-bg {
+  width: 50%;
+  height: 48px;
+  background-color: #3ec4ba;
+  color: #fff;
+  font-size: 16px;
+  border: none;
 }
 
 .btn-50-full {
@@ -228,6 +250,16 @@ button.btn-full-find {
   color: #3ec4ba;
   font-size: 16px;
 }
+
+button.btn-full-sd {
+  width: 100%;
+  height: 48px;
+  background-color: #fff;
+  border: solid 2px #3ec4ba;
+  color: #3ec4ba;
+  font-size: 16px;
+}
+
 button.btn-full-login {
   width: 100%;
   height: 48px;
@@ -235,6 +267,7 @@ button.btn-full-login {
   color: #fff;
   border: none;
   font-size: 16px;
+  font-weight: bold;
 }
 button.btn-full-find {
   width: 100%;
@@ -244,6 +277,7 @@ button.btn-full-find {
   color: #3ec4ba;
   font-size: 16px;
 }
+
 button.btn-full-kakao {
   width: 100%;
   height: 48px;
@@ -251,6 +285,7 @@ button.btn-full-kakao {
   color: #fff;
   border: none;
   font-size: 16px;
+  font-weight: bold;
 }
 button.btn-full-naver {
   width: 100%;
@@ -260,7 +295,29 @@ button.btn-full-naver {
   border: none;
   font-size: 16px;
   margin-bottom: 15px;
+  font-weight: bold;
 }
+button.btn-30-kakao {
+  width: 100%;
+  height: 68px;
+  background-color: #f8ce46;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  margin-right: 5px;
+  font-weight: bold;
+}
+button.btn-30-naver {
+  width: 100%;
+  height: 68px;
+  background-color: #30c800;
+  color: #fff;
+  border: none;
+  font-size: 16px;
+  margin-bottom: 15px;
+  font-weight: bold;
+}
+
 button.btn-bg-mint {
   background: #ffffff;
   color: #000000;
@@ -270,6 +327,14 @@ button.btn-bg-mint {
 button.btn-line-mint {
   color: #ffffff;
   background-color: #000000;
+}
+
+button.btn-sd {
+  width: 100%;
+  height: 30px;
+  background: #ffffff;
+  color: #000000;
+  border: solid 2px #000000;
 }
 
 button.btn-bg-mint {
@@ -288,9 +353,10 @@ input[type="checkbox"] {
   border: solid 1px #ddd;
   border-radius: 4px;
   cursor: pointer;
-  height: 16px;
+  height: 20px;
   outline: 0;
-  width: 16px;
+  width: 20px;
+  padding: 0;
 }
 input[type="checkbox"]::after {
   border: solid #fff;
@@ -311,6 +377,269 @@ input[type="checkbox"]:checked {
 input[type="checkbox"]:checked::after {
   display: block;
 }
+
+input {
+  padding: 10px;
+  color: #aeaeae;
+}
+
+textarea {
+  padding: 10px;
+}
+
 input:focus {
   outline: none;
+}
+select:focus {
+  outline: none;
+}
+
+textarea:focus {
+  outline: none;
+}
+button:focus {
+  outline: none;
+}
+input:focus {
+  outline: none;
+}
+
+/* margin */
+.mt-10 {
+  margin-top: 10px;
+}
+.mt-20 {
+  margin-top: 20px;
+}
+.mt-30 {
+  margin-top: 30px;
+}
+.mt-40 {
+  margin-top: 40px;
+}
+.mt-50 {
+  margin-top: 50px;
+}
+
+.mb-10 {
+  margin-bottom: 10px;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.mb-30 {
+  margin-bottom: 30px;
+}
+.mb-40 {
+  margin-bottom: 40px;
+}
+.mb-50 {
+  margin-bottom: 50px;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+.ml-20 {
+  margin-left: 20px;
+}
+.ml-30 {
+  margin-left: 30px;
+}
+.ml-40 {
+  margin-left: 40px;
+}
+.ml-50 {
+  margin-left: 50px;
+}
+
+.mr-10 {
+  margin-right: 10px;
+}
+.mr-20 {
+  margin-right: 20px;
+}
+.mr-30 {
+  margin-right: 30px;
+}
+.mr-40 {
+  margin-right: 40px;
+}
+.mr-50 {
+  margin-right: 50px;
+}
+
+/* padding */
+.pd-10 {
+  padding: 10px;
+}
+.pd-20 {
+  padding: 20px;
+}
+.pd-30 {
+  padding: 30px;
+}
+.pd-40 {
+  padding: 40px;
+}
+.pd-50 {
+  padding: 50px;
+}
+
+.pdt-10 {
+  padding-top: 10px;
+}
+.pdt-20 {
+  padding-top: 20px;
+}
+.pdt-30 {
+  padding-top: 30px;
+}
+.pdt-40 {
+  padding-top: 40px;
+}
+.pdt-50 {
+  padding-top: 50px;
+}
+
+.pdb-10 {
+  padding-bottom: 10px;
+}
+.pdb-20 {
+  padding-bottom: 20px;
+}
+.pdb-30 {
+  padding-bottom: 30px;
+}
+.pdb-40 {
+  padding-bottom: 40px;
+}
+.pdb-50 {
+  padding-bottom: 50px;
+}
+
+.pdl-10 {
+  padding-left: 10px;
+}
+.pdl-20 {
+  padding-left: 20px;
+}
+.pdl-30 {
+  padding-left: 30px;
+}
+.pdl-40 {
+  padding-left: 40px;
+}
+.pdl-50 {
+  padding-left: 50px;
+}
+
+.pdr-10 {
+  padding-right: 10px;
+}
+.pdr-20 {
+  padding-right: 20px;
+}
+.pdr-30 {
+  padding-right: 30px;
+}
+.pdr-40 {
+  padding-right: 40px;
+}
+.pdr-50 {
+  padding-right: 50px;
+}
+
+/* color */
+
+.cr_01 {
+  color: #ddd;
+}
+.cr_02 {
+  color: #3ec4ba;
+}
+.cr_03 {
+  color: #ff0000;
+}
+.cr_04 {
+  color: #707070;
+}
+.cr_05 {
+  color: #f1f1f1;
+}
+.cr_06 {
+  color: #000;
+}
+.cr_07 {
+  color: #fc6a20;
+}
+
+/* solid */
+.sol-g {
+  border: solid 2px #ddd;
+}
+.sol-g-r {
+  border-right: solid 2px #ddd;
+}
+
+.sol-b-b {
+  border-right: solid 2px #000;
+}
+.sol-bb {
+  border-bottom: solid 2px #000;
+}
+/* bg */
+
+.bg_01 {
+  background-color: #3ec4ba;
+}
+.bg_02 {
+  background-color: #f0f0f0;
+}
+.bg_03 {
+  background-color: #3ec4ba;
+}
+.bg_04 {
+  background-color: #e6faf9;
+}
+.bg_05 {
+  background-color: #f8f8f8;
+}
+
+.none {
+  display: none;
+}
+.block {
+  display: block;
+}
+
+.block_br {
+  display: block;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+/* float */
+.flt-r {
+  float: right;
+}
+
+.flt-l {
+  float: right;
+}
+
+/* text-aling */
+.txt-l {
+  text-align: left;
+}
+
+.txt-r {
+  text-align: right;
+}
+
+.md-p {
+  font-weight: 400;
+  font-size: 13px;
 }

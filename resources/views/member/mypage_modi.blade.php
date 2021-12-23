@@ -78,16 +78,16 @@
                         <form action="{{ route('member_info_update_member') }}" method="post" onsubmit="return check_submit()">
                         {!! csrf_field() !!}
                             <li>
-                            <input type="checkbox" id="age_over" name="age_over" checked disabled>
+                            <!--<input type="checkbox" id="age_over" name="age_over" checked disabled>-->
                             <label for="">만 14세 이상입니다. <span>(필수)</span></label>
                             </li>
                             <li>
-                            <input type="checkbox" id="terms_agree" name="terms_agree" checked disabled>
-                            <label for="">약관동의 <span>(필수)</span></label>
+                            <!--<input type="checkbox" id="terms_agree" name="terms_agree" checked disabled>-->
+                            <a href=""><label for="">약관동의 <span>(필수)</span></label></a><!-- 약관동의 페이지 링크 -->
                             </li>
                             <li>
-                            <input type="checkbox" id="pro_agree" name="pro_agree" checked disabled>
-                            <label for="">개인정보 보호방침 <span>(필수)</span></label>
+                            <!--<input type="checkbox" id="pro_agree" name="pro_agree" checked disabled>-->
+                            <a href=""><label for="">개인정보 보호방침 <span>(필수)</span></label></a><!-- 개인정보 보호 페이지 링크 -->
                             </li>
                         </form>
                         </ul>
@@ -109,12 +109,12 @@
 <div class="modal_005 modal fade">
     <div class="modal-background" onclick=""></div>
         <div class="modal-container num">
-            <div class="modal-container-body num">
-                <div class="modal-container-title">
-                    <h4>휴대전화 번호 변경</h4>
-                    <div class="btn-close" onclick="phoninputclose_001()"></div>
-                </div>
+            <div class="modal-container-title">
+                <h4>휴대전화 번호 변경</h4>
+                <div class="btn-close" onclick="phoninputclose_001()"></div>
+            </div>
 
+            <div class="modal-container-body num">
                 <div class="phonnum_input">
                     <input name='user_phone' id='user_phone' type='text' placeholder="휴대전화 번호를 '-' 없이 입력하세요." onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11">
                     <button onclick="send_sms()">인증번호 받기</button>
@@ -143,20 +143,18 @@
 <div class="modal_006 modal fade">
     <div class="modal-background" onclick=""></div>
         <div class="modal-container num pw">
-           <div class="modal-container-body num pw">
-                 <div class="modal-container-title">
-                    <h4>비밀번호 변경</h4>
-                    <div class="btn-close" onclick="pwinputclose_001()"></div>
-                  </div>
+            <div class="modal-container-title">
+                <h4>비밀번호 변경</h4>
+                <div class="btn-close" onclick="pwinputclose_001()"></div>
+            </div>
+            <div class="modal-container-body num pw">
+                <div class="pw_input">
+                    <input type="password" id="user_pw" name="user_pw" placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외))">
+                    <p id="pw_error"></p>
 
-                    <div class="pw_input">
-                        <input type="password" id="user_pw" name="user_pw" placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외))">
-                        <p id="pw_error"></p>
-
-                        <input type="password" id="user_pw_confirmation" name="user_pw_confirmation" placeholder="비밀번호를 재입력(위와 같은 비밀번호를 입력해 주세요)">
-                        <p id="pw_confirmation_error"></p>
-                    </div>
-
+                    <input type="password" id="user_pw_confirmation" name="user_pw_confirmation" placeholder="비밀번호를 재입력(위와 같은 비밀번호를 입력해 주세요)">
+                    <p id="pw_confirmation_error"></p>
+                </div>
             </div>
 
      <div class="btn btn_2ea num">

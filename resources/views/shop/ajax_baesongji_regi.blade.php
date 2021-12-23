@@ -4,7 +4,7 @@
 
     <div class="modal-background" onclick="addressclosemodal_001()"></div>
         <div class="modal-container">
-           <div class="modal-container-body">
+           <div class="modal-container-body adress">
 
             <div class="modal-container-title">
                  <h4>배송지 입력</h4>
@@ -19,7 +19,7 @@
                     <input type="text" name="od_c_hp" id="od_c_hp" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="11">
 
                 <div class="adress_input02">
-                    <label for="">배송지</label>
+                    <p>배송지</p>
                     <input type="text" name="od_c_zip" id="od_c_zip" readonly required class="adress_input03" maxlength="6" placeholder="우편번호">
                     <label for="">
                         <button type="button" class="btn_address adress_input03_btn" onclick="win_zip('wrap_c','od_c_zip', 'od_c_addr1', 'od_c_addr2', 'od_c_addr3', 'od_c_addr_jibeon', 'btnFoldWrap_c');">우편번호 찾기</button>

@@ -87,7 +87,7 @@
                                있다면 어떤 제품을 사용해 본 적이 있는지 제품명을 포함하여 적어주세요"
                             /> -->
                             <textarea id="form_text" name="form_text" cols="100%"
-                            placeholder="* 최대 300자까지 입력 가능합니다 &#13;&#10;* 참여 이유를 자세히 기입해 주세요. 선정 확률이 높아집니다&#13;&#10;* 과거에 비슷한 제품을 사용해 본 경험이 있으신가요? &#13;&#10;*있다면 어떤 제품을 사용해 본 적이 있는지 제품명을 포함하여 적어주세요"></textarea>
+                            placeholder="* 최소 30 자이상,  최대 300  자이내로 입력가능합니다. &#13;&#10;* 참여 이유를 자세히 기입해 주세요. 선정 확률이 높아집니다&#13;&#10;* 과거에 비슷한 제품을 사용해 본 경험이 있으신가요? &#13;&#10;*있다면 어떤 제품을 사용해 본 적이 있는지 제품명을 포함하여 적어주세요"></textarea>
                         </ul>
                         <span id="textLengthCheck" class="textLengthCheck"></span>
                     </div>
@@ -122,10 +122,17 @@
                             </ul>
                             <ul class="information-address">
                                 <li> 주소</li>
-                                <li id="ad_addr"> {{ $address->ad_zip1 }}) {{ $address->ad_addr1 }} {{ $address->ad_addr2 }}</li>
-                                <li id="ad_addr7"> {{ $address->ad_addr3 }}</li>
+                                <li class="block-add">
+                                <p id="ad_addr">
+                                {{ $address->ad_zip1 }})
+                                {{ $address->ad_addr1 }}<br>
+                                <span>{{ $address->ad_addr2 }}</span></p>
+
+                                <p id="ad_addr7">{{ $address->ad_addr3 }}</p>
+                                </li>
 
                             </ul>
+
                             <ul class="information-input">
                                 <li> 배송메모</li>
                                 <input type="hidden" id="ad_jibeon_view" name="ad_jibeon_view" value="{{ $address->ad_jibeon }}">
@@ -271,8 +278,8 @@
         //히든 값으로 가져온 값을 해당 태그에 html이나 text로 넣어준다.
         $('#ad_name').text($("#od_b_name").val());
         $('#ad_hp').text($("#od_b_hp").val());
-        let $ad_addrs = $("#od_b_zip").val()+") "+$("#od_b_addr1").val()+" "+ $("#od_b_addr2").val();
-        let $ad_addrs7 = $("#od_b_addr2").val()+" "+$("#od_b_addr3").val();
+        let $ad_addrs = $("#od_b_zip").val()+") "+$("#od_b_addr1").val()+" "+ $("#od_b_addr2").val()+"  ";
+        let $ad_addrs7 = $("#od_b_addr3").val();
         $('#ad_addr').text($ad_addrs);
         $('#ad_addr7').text($ad_addrs7);
 

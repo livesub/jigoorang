@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> <!-- 실서버 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta property="og:title" content="지구랭">
+    <meta property="og:description" content="지구랭">
+    <meta property="og:image" content="./resources/logo.png">
+
+    <link rel="stylesheet" href="../../css/reset.css">
+    <link rel="stylesheet" href="../../css/layout.css">
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="../../css/responsive.css">  
+
+    <title>지구랭</title>
+</head>
+<body>
+<div class="wrap">
+
+    <!-- 탭바 시작 -->
+    <div class="tabar">
+        <ul>
+            <li><a href="#">홈</a></li>
+            <li><a href="#">랭킹</a></li>
+            <li><a href="#">쇼핑</a></li>
+            <li><a href="#">기록</a></li>
+        </ul>
+    </div>
+    <!-- 탭바 끝 -->
+<!-- 헤더 시작-->
+<div class="header">
+    <div class="top">
+        <div class="logo">
+            <a href="../../index.html"></a>
+            <h1>지구랭</h1>
+        </div>
+
+          <!-- 모바일 메뉴 시작 -->
+          <div class="ham">
+            <a class="btn_ham" onclick="openNav()"><span class="name">햄버거</span></a>
+        </div>
+
+        <div class="background"></div>
+        <div id="Sidenav" class="sidenav"> 
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
+              <img src="../../recources/icons/icon-cls.png" alt="">
+            </a>
+
+            <div class="m-menu">
+                <ul class="m-menu-my">
+                    <a href="#"><li>로그인<span class="m-menu-my-boder"></span></li></a> 
+                    <!-- <a href="#"><li>로그아웃<span class="m-menu-my-boder"></span></li></a>  -->
+
+                    <a href="../../page/mypage/mypage.html"><li>마이페이지</li></a>
+                </ul>
+
+                <!-- class="on"(버튼 활성)  class="off" (버튼 비활성)-->
+                <ul class="m-menu-child"> 
+                    <a href="#">
+                        <li>지구랭소개</li>
+                    </a>
+                    <a href="#">
+                        <li><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹 </li>
+                    </a>
+                    <a href="#">
+                        <li><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b> </li>
+                    </a>
+                    <a href="#">
+                        <li><b>지</b>구랭 <b>구</b>하는 기<b>록</b> </li>
+                    </a>
+                    <a href="../../page/evaluation/evaluation_list.html"><li class="on">정직한 평가단</li></a>
+                    <a href="../../page/mypage/mypage_evaluation_list_service.html"><li>고객센터 </li></a>
+                </ul>
+            </div> 
+        </div> 
+        <!-- 모바일 메뉴 끝 -->
+
+
+        <!-- <ul class="menu">
+            <li class="search"><a href="#"><span>검색</span></a></li>
+            <li class="cart">
+                <a class="conunt"><p id="">0</p></a>
+                <a><span>장바구니</span></a>
+            </li>
+            <li class="my"><a><span>마이페이지</span></a></li>
+            <li class="login"><a href="/page/login/login.html"><span>로그인</span></a></li>
+           <!-- <li class="loginout"><a href=""><span>로그아웃</span></a></li> 
+        </ul> -->
+
+
+            <!-- 오픈전 메뉴 -->
+            <ul class="menu2">
+                <li class="my"><a href="../../page/mypage/mypage.html"><span>마이페이지</span></a></li>
+                <li class="login"><a href="../../page/login/login.html"><span>로그인</span></a></li>
+            <!-- <li class="loginout"><a href=""><span>로그아웃</span></a></li>-->
+            <!-- 로그아웃 -->
+            </ul>
+        </div>
+
+        <!-- class="on"(버튼 활성)  class="off" (버튼 비활성)-->
+        <div class="btm">
+            <ul class="navi">
+                <li><a href="">지구랭 소개</a></li>
+                <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹</a></li>
+                <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b></a></li>
+                <li><a href=""><b>지</b>구랭 <b>구</b>하는 기<b>록</b></a></li>
+                <li class="on"><a href="../../page/evaluation/evaluation_list.html">정직한 평가단</a></li>
+                <li><a href="../../page/mypage/mypage_evaluation_list_service.html">고객센터</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- 헤더 끝 -->
+
+
+
+
+
+
+
+    <!-- 서브 컨테이너 시작 -->
+    <div class="sub-container">
+        
+        <!-- 위치 시작 -->
+        <div class="location">
+            <ul>
+                <li><a href="../../index.html">홈</a></li>
+                <li><a href="../../page/mypage/mypage.html">마이페이지</a></li>
+                <li><a href="../../page/mypage/mypage_evaluation_list.html">취소/교환/반품</a></li>
+
+            </ul>
+        </div>
+        <!-- 위치 끝 -->
+        
+        <!-- 타이틀 시작 -->
+        <div class="title_area list">
+            <h2>교환/반품 신청</h2>
+            <div class="line_14-100"></div>
+        </div>
+        <!-- 타이틀 끝 -->
+                
+        <!-- 주문 배송내역 시작  -->
+        <div class="eval">
+
+            <div class="board mypage_list">
+                <!-- 리스트 시작 -->
+                <div class="board_wrap">
+
+                    <div class="list ev_rul inner">
+                      <div class="sub_title"><h4 class="bold">주문 내역</h4></div>
+                      <div class="pr_body pd-00">
+                            <div class="pr-t pd-00">
+                                <div class="pr_img">
+                                    <img src="../../recources/imgs/sample_img.png" alt="">
+                                </div>
+
+                                <div class="pr_name">
+                                    <span class="cr_02">주문취소</span> 
+
+                                    <ul>
+                                        <a href=""><li><h4 class="mt-10">[대나무숲] 요즘 인싸들만 쓴다는 아이템 000칫솔</h4></li></a> 
+                                        <li>소형 / 파랑</li>
+                                        <li class="price_pd">6000원 1개</li>
+                                    </ul>
+                                    
+                                </div>
+                            </div>
+                      </div>
+                    </div>
+
+                       <div class="list ev_rul inner">
+                        <div class="sub_title"><h4>교환/반품 사유</h4></div>
+                           <div class="pr_body pd-00">
+                             <div class="pr_name m-00">
+                    
+                                 <ul class="oder_name wt-00 wt-01">
+                                   <li>사유 <span class="cr_03">(필수)</span></li>
+                                   <li>
+                                   <select name="" id="">
+                                      <option value="">1</option>
+                                      <option value="">2</option>
+                                      <option value="">3</option>
+                                   </select>
+                                  </li>
+                                 </ul>
+
+                                 <ul class="oder_name wt-00 wt-01">
+                                  <li>상세사유 (선택)</li>
+                                  <li><textarea name="" id="" cols="30" rows="10" placeholder="내용을 입력해 주세요"></textarea></li>
+                                </ul>
+
+                              </div>   
+                          </div>
+
+                          <div class="pd-20">
+                            <div class="oder">
+                              <h4 class="cr_06">안내사항</h4>
+                               <ul>
+                                <li class="text">
+                                  <span class="cr_06">
+                                   관리자가 확인 후 조치 해 드리겠습니다.<br>
+                                   경우에 따라 추가 배송비가 발생할 수 있습니다.
+                                  </span>
+                                </li> 
+                              </ul>
+                            </div>
+                        </div>
+                      </div>
+
+                      <div class="btn">
+                        <a href=""><button class="btn-50-bg">등록</button></div>
+                      </div>
+
+                  
+                   
+                    
+                </div>
+                <!-- 리스트 끝 -->
+
+               
+            </div>
+
+        </div>
+        <!-- 주문 배송 내역 끝  -->
+
+       
+
+    </div>
+    <!-- 서브 컨테이너 끝 -->
+
+
+
+
+
+    
+
+
+    <!-- 푸터 시작 -->
+    <div class="footer">
+        <div class="head">
+            <ul>
+                <li><a href="">이용약관</a></li>
+                <li><a href="">개인정보처리방침</a></li>
+            </ul>
+        </div>
+        <div class="bottom">
+            <div class="con_01">
+                <div class="title">지구랭</div>
+                <ul>
+                    <li>대표이사 : 유혜연</li>
+                    <li>사업자등록번호 : 397-05-01970</li>
+                    <li>통신판매업신고 :제 2021-서울마포-3124 호</li>
+                    <li>개인정보관리책임자 : 유혜연</li>
+                </ul>
+            </div>
+            <div class="con_01">
+                <div class="title">CONTACT US</div>
+                <ul>
+                    <!-- <li>대표전화 : 02-1234-1235</li> -->
+                    <li>서울시 마포구 월드컵북로 361 14층 11호 
+                        <br>(상암동, DMC이안오피스텔) 
+                    </li>
+                    <li>이메일 : jigoorang_hehe@naver.com</li>
+                </ul>
+            </div>
+            <div class="logo_f"></div>
+            <div class="copy">ⓒ JIGOORANG ALL RIGHTS RESERVED</div>              
+        </div>
+    </div>
+    <!-- 푸터 끝 -->
+
+</div>
+<script src="../../js/sidenav.js"></script>
+
+</body>
+</html>

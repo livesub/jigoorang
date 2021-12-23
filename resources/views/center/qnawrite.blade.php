@@ -20,7 +20,7 @@
         </div>
         <!-- 타이틀 끝 -->
 
-        <!-- 평가단 신청 결과 확인 시작  -->
+        <!-- 1:1문의 시작  -->
         <div class="eval">
 
             <div class="board mypage_list">
@@ -56,7 +56,7 @@
                           <div id="tab1" class="cont">
                           <form name="qna_form" id="qna_form" method="post" action="{{ route('mypage.qna_write_save') }}">
                           {!! csrf_field() !!}
-                            <h4>문의1</h4>
+
                             <ul class="tab-01">
                                 <li>
                                 <p>문의 / 카테고리</p>
@@ -67,6 +67,7 @@
                                         <option value="주문/결제 관련">주문/결제 관련</option>
                                         <option value="취소/교환/반품 관련">취소/교환/반품 관련</option>
                                         <option value="포인트 관련">포인트 관련</option>
+                                        <option value="기타 문의">평가단 관련</option>
                                         <option value="기타 문의">기타 문의</option>
                                     </select>
                                 </li>
@@ -90,7 +91,7 @@
 -->
                               <ul class="tab-04">
                                 <li>
-                                    <p>문의글</p>
+                                    <p>문의 글</p>
                                     <textarea name="qna_content" id="qna_content" placeholder="내용을 입력해 주세요"></textarea>
                                 </li>
                             </ul>
@@ -101,7 +102,7 @@
                           </div>
                           <div id="tab2" class="cont con_02">
                             <p>지구랭과의 제휴/입점 문의는<br>
-                            <span>Jigoorang_hehe@naver.com</span> 으로 메일 주세요<br>
+                            <span>jigoorang_hehe@naver.com</span> 으로 메일 주세요<br>
                             (담당자분 성함과 연락처를 꼭 기입해 주세요)</p>
                           </div>
                         </div>
@@ -111,7 +112,7 @@
 
                       </div>
                 </div>
-                <!-- 평가단 신청 결과 확인 끝  -->
+                <!-- 1:1문의 끝  -->
 
             </div>
         </div>

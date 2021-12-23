@@ -11,14 +11,14 @@
             <ul>
                 <li><a href="/">홈</a></li>
                 <li><a href="{{ route('mypage.index') }}">마이페이지</a></li>
-                <li><a href="{{ route('mypage.qna_list') }}">1:1 문의 내역 / 답변</a></li>
+                <li><a href="{{ route('mypage.qna_list') }}">나의 문의 내역</a></li>
             </ul>
         </div>
         <!-- 위치 끝 -->
 
         <!-- 타이틀 시작 -->
         <div class="title_area list">
-            <h2>1:1 문의 내역 답변</h2>
+            <h2>나의 문의 내역</h2>
             <div class="line_14-100"></div>
         </div>
         <!-- 타이틀 끝 -->
@@ -36,6 +36,8 @@
                     </form>
                     </div>
 
+                    <div class="solid"></div>
+
                     @if(count($qna_rows) == 0)
                     <div class="list-none">
                         <img src="{{ asset('/design/recources/imgs/combined-shape.png') }}" alt="">
@@ -48,23 +50,23 @@
                     </div>
                     @else
                         @foreach($qna_rows as $qna_row)
-                    <div class="list">
-                        <div class="body">
+                    <div class="list ev_rul">
+
+                        <p class="md-p">{{ $qna_row->qna_cate }}</p>
                             <div class="title">
-                                <p>{{ $qna_row->qna_cate }}</p>
                                 <a href="{{ route('mypage.qna_view', 'id='.$qna_row->id.'&page='.$page.'&keyword='.$keyword) }}">{{ stripslashes($qna_row->qna_subject) }}</a>
                             </div>
-                            <dl>
-                                <dd>{{ substr($qna_row->created_at, 0, 10) }}</dd>
-                            </dl>
-                        </div>
+
+                            <div class="date point01">{{ substr($qna_row->created_at, 0, 10) }}</div>
+
+
 
                             @if($qna_row->qna_answer == "")
-                        <div class="title_sub point01"><!-- class="point01" (비활성) -->
+                        <div class="result point01"><!-- class="point01" (비활성) -->
                            답변대기
                         </div>
                             @else
-                        <div class="title_sub point02"> <!-- class="point02" (답변완료일때 활성) -->
+                        <div class="result point02"> <!-- class="point02" (답변완료일때 활성) -->
                             답변완료
                         </div>
                             @endif
