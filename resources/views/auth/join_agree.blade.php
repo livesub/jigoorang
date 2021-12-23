@@ -82,16 +82,17 @@
                             </div>
 
                         </div> -->
+                        <div class="solid mb-10"></div>
 
                             <input type="checkbox" name="selectall" id="selectall" onclick="selectAll(this)"/>
                             <label for="selectall" class="bold">전체동의</label>
 
-                            <div class="solid"></div>
+
 
                         <div class="agree_box_all">
                             <span>위 약관을 모두  확인하였으며 모든 내용에 동의합니다.</span>
 
-                            <button type="submit" class="btn-full">로그인</button>
+                            <button type="submit" class="btn-full">회원가입</button>
                        </div>
                   </form>
                 <!-- 약관동의 끝-->
