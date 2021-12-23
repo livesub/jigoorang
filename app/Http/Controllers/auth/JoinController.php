@@ -26,6 +26,10 @@ use Illuminate\Support\Facades\DB;
 use App\Models\shoppoints;    //포인트 모델 정의
 //Request class 적용 request값의 예외처리에 대한 정의
 use App\Http\Requests\UserRequest;
+use Illuminate\Support\Facades\Auth;    //인증
+
+
+
 class JoinController extends Controller
 {
     public function __construct(User $user)
@@ -148,72 +152,24 @@ class JoinController extends Controller
         }
         /** 가입 포인트 추가(211015) 끝 **/
 
-        // $data = array(
-        //     'user_name' => $user_name,
-        //     'user_confirm_code' => $user_confirm_code,
-        //     'name_welcome' => $Messages::$email_certificate['email_certificate']['name_welcome'],
-        //     'join_open' => $Messages::$email_certificate['email_certificate']['join_open'],
-        // );
 
-        // $subject = sprintf('[%s] '.$Messages::$join_confirm_ment['confirm']['join_confirm'], $user_name);
+        if($create_result){
+            //가입 즉시 로그인으로 변경(211223)
+            $credentials = [
+                'user_id' => trim($user_id),
+                'password' => $user_pw,
+                'user_type' => 'N',
+            ];
 
-
-        //이메일 함수 이용 발송
-        //$email_send_value = CustomUtils::email_send("auth.confirm_email",$user_name, $user_id, $subject, $data);
-
-        //if(!$email_send_value)
-        //{
-            //이메일 발송 실패 시에 뭘 할건지 나중에 생각해야함
-        //}
-
-        if($create_result) return redirect()->route('main.index')->with('alert_messages', $Messages::$join_confirm_ment['confirm']['join_success']);
-        else return redirect()->route('main.index')->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);  //치명적인 에러가 있을시 alert로 뿌리기 위해
-
-
-        /******************************************************* */
-        /* model 에 정의 하지 않고 DB 처리 프로그램 할때 사용       */
-        /******************************************************* */
-/*
-//예제1)
-        $count_result = DB::table('users') -> select(DB::raw('count(*) as user_count')) -> where('user_name', '=', $user_name) -> get();
-        if($count_result[0]->user_count <> 0) {
-            return response()->json(['status' => 'overlap_user_name'], 200, [], JSON_PRETTY_PRINT);
-            exit;
+            Auth::attempt($credentials, $remember=true);
+            return redirect()->route('main.index')->with('alert_messages', $Messages::$join_confirm_ment['confirm']['join_success']);
+        }else{
+            return redirect()->route('main.index')->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);  //치명적인 에러가 있을시 alert로 뿌리기 위해
         }
 
-        $in_result = DB::table('users')->insert([
-            'role_id'   => 2,
-            'user_name'  => $user_name,    //아이디
-            'password'  => Hash::make($password),
-            'name'      => $name,    //이름
-            'phone'     => $phone,
-            'email'     => $email
-        ]);
-
-        if($in_result = 1) $status = true;
-        else $status = false;
-
-        return response()->json(['status' => $status], 200, [], JSON_PRETTY_PRINT);
-*/
-
-
 /*
-//예제2)
-        $user = new User([
-            'role_id'   => 2,
-            'user_name'  => $user_name,    //아이디
-            'password'  => Hash::make($password),
-            'name'      => $name,    //이름
-            'phone'     => $phone,$status = false;
-            'email'     => $email
-        ]);
-
-        $result = $user->save();
-
-        if(!$result) $status = false;
-        else $status = true;
-
-        return response()->json(['status' => $status], 200, [], JSON_PRETTY_PRINT);
+        if($create_result) return redirect()->route('main.index')->with('alert_messages', $Messages::$join_confirm_ment['confirm']['join_success']);
+        else return redirect()->route('main.index')->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);  //치명적인 에러가 있을시 alert로 뿌리기 위해
 */
     }
 

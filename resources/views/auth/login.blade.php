@@ -65,11 +65,11 @@
 
                     <div class="mt-30"> <span>지구랭이 처음이신가요?<span>
                       <div class="btn_3ea mt-20 flx">
-                        <a href="{{ route('social.login','kakao') }}"><button class="btn-30">이메일로<br>회원가입</button></a>
+                        <a href="{{ route('join.create_agree') }}"><button class="btn-30">이메일로<br>회원가입</button></a>
                         <a href="{{ route('social.login','kakao') }}">
                         <button class="btn-30-kakao">카카오로<br>회원가입</button>
                         </a>
-                        <a href="{{ route('social.login','kakao') }}">
+                        <a href="{{ route('social.login','naver') }}">
                         <button class="btn-30-naver">네이버로<br>회원가입</button>
                         </a>
                       </div>

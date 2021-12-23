@@ -40,7 +40,11 @@
             </div>
 
             <div class="checkbox"><!-- 체크박스 시작 -->
-                  <input type="checkbox" name="ad_default" id="ad_default" value="1">
+                @php
+                    $default_chk = '';
+                    if($baesong_cnt == 0) $default_chk = 'checked';
+                @endphp
+                  <input type="checkbox" name="ad_default" id="ad_default" value="1" {{ $default_chk }}>
                   <label for="">기본배송지 등록</label>
             </div><!-- 체크박스 끝 -->
         </div>
