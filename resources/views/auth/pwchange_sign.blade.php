@@ -84,22 +84,22 @@
         }
 
         $result_params = get_query(location.search);
-        console.log($result_params.expires);
+        //console.log($result_params.expires);
         $int_time = parseInt($result_params.expires);
         //$time_1 = date('y-m-d-H-i-s', $int_time);
         //$time_1 = date('Y-m-d H:i:s', $int_time);
         var myDate = new Date($int_time * 1000)
-        console.log(myDate);
-        console.log("Date: "+myDate.getDate()+
-          "/"+(myDate.getMonth()+1)+
-          "/"+myDate.getFullYear()+
-          " "+myDate.getHours()+
-          ":"+myDate.getMinutes()+
-          ":"+myDate.getSeconds());
+        //console.log(myDate);
+        //console.log("Date: "+myDate.getDate()+
+        //  "/"+(myDate.getMonth()+1)+
+        //  "/"+myDate.getFullYear()+
+        //  " "+myDate.getHours()+
+        //  ":"+myDate.getMinutes()+
+        //  ":"+myDate.getSeconds());
         //현재 시간 구하기
         var current_time = new Date();
 
-        console.log("현재 시간 : "+current_time);
+        //console.log("현재 시간 : "+current_time);
         //제한 시간이 지날 경우의 예외처리 추가
         function check_submit(){
             var current_time = new Date();
