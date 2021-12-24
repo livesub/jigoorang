@@ -27,6 +27,7 @@
     <meta property="og:title" content="지구랭">
     <meta property="og:description" content="지구랭">
     <meta property="og:image" content="{{ asset('/design/resources/logo.png') }}">
+    <meta name="naver-site-verification" content="fb44216dac5adf92f534a7f19c86a31276e15416" />
 
     <link rel="stylesheet" href="{{ asset('/design/css/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/css/layout.css') }}">
