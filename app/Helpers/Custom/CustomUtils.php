@@ -1598,8 +1598,24 @@ $um_value='80/0.5/3'
     public function baesongji_modify_process($id, $ad_default, $ad_subject, $ad_name, $ad_tel, $ad_hp, $ad_zip1, $ad_addr1, $ad_addr2, $ad_addr3, $ad_jibeon){
         if($ad_default == 1){
             $update_default = DB::table('baesongjis')->where('user_id', Auth::user()->user_id)->update(['ad_default' => 0]);
+
+            $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
+                'user_zip'          => (int)$ad_zip1,
+                'user_addr1'        => addslashes($ad_addr1),
+                'user_addr2'        => addslashes($ad_addr2),
+                'user_addr3'        => addslashes($ad_addr3),
+                'user_addr_jibeon'  => $ad_jibeon,
+            ]);
         }else{
             $ad_default = 0;
+
+            $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
+                'user_zip'          => '',
+                'user_addr1'        => '',
+                'user_addr2'        => '',
+                'user_addr3'        => '',
+                'user_addr_jibeon'  => '',
+            ]);
         }
 
         $update_result = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['id', $id]])->update([
