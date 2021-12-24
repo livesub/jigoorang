@@ -133,8 +133,16 @@
                 <p>로그인/가입</p>
                 </a></li>
             @else
-                <li class="my"><a href="{{ route('mypage.index') }}"><span>마이페이지</span></a></li>
-                <li class="loginout"><a href="{{ route('logout.destroy') }}"><span>로그아웃</span></a></li>
+                <li class="my"><a href="{{ route('mypage.index') }}">
+                    <span>마이페이지</span>
+                    <p class="block">마이페이지</p>
+                    <p class="none">MY</p>
+                </a></li>
+
+                <li class="loginout"><a href="{{ route('logout.destroy') }}">
+                    <span>로그아웃</span>
+                    <p class="ml-7">로그아웃</p>
+                </a></li>
             @endif
             </ul>
 

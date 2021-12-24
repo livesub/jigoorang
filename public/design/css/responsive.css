@@ -340,6 +340,13 @@
     font-size: 13px;
   }
 
+  button.btn-bg-mint {
+    width: 88px;
+    height: 23px;
+    font-size: 13px;
+    padding: 0;
+  }
+
   /* 메인 컨테이너 */
   .main-container .visual {
     width: 100%;
@@ -410,6 +417,19 @@
     height: 120px;
     padding: 15px 20px;
   }
+  .eval .board .board_wrap .list .body .title {
+    max-width: 360px;
+    font-size: 16px;
+    font-weight: bold;
+    height: 40px;
+  }
+
+  .eval .board .board_wrap .list .body dl {
+    /* margin-top: 5px; */
+    padding-top: 0;
+    font-size: 14px;
+  }
+
   .eval .board .board_wrap .list_view .body {
     height: 180px;
     padding: 25px 0 0 0;
@@ -418,15 +438,22 @@
   .eval .board .board_wrap .list_view .list_img_text {
     padding: 40px 0px 0px;
   }
-  .eval .board .board_wrap .list .body .title {
+
+  .eval .board .board_wrap .list_view .body .title {
     max-width: 360px;
-    font-size: 16px;
+    font-size: 15px;
     font-weight: bold;
     height: 40px;
   }
-  .eval .board .board_wrap .list .body dl {
-    /* margin-top: 5px; */
-    padding-top: 0;
+
+
+  .eval .board .board_wrap .list_view .body dl {
+    font-size: 14px;
+  }
+  .eval .board .board_wrap .list_view .body dd {
+    font-size: 14px;
+  }
+  .eval .board .board_wrap .list_view .body dt {
     font-size: 14px;
   }
   .eval .board .board_wrap .list .btn_area {
@@ -515,6 +542,10 @@
     width: 100%;
     height: 180px;
     position: relative;
+  }
+
+  .mypagetitle h3 {
+    font-size: 22px;
   }
 
   .mypage .mypage_inner_01 .mypage_innerbox_01 {
@@ -1291,6 +1322,18 @@
     /* height: auto; */
     padding: 15px;
   }
+
+  /* 평가단 뷰 */
+  .eval .board .board_wrap .list_view .body dl {
+    font-size: 12px;
+  }
+  .eval .board .board_wrap .list_view .body dd {
+    font-size: 12px;
+  }
+  .eval .board .board_wrap .list_view .body dt {
+    font-size: 12px;
+  }
+
   .eval .board .board_wrap .list .btn_area button {
     width: 100%;
     height: 36px;
@@ -1299,6 +1342,10 @@
     top: 0;
     transform: translate(0, 0);
     margin-top: 20px;
+  }
+
+  .eval .board .board_wrap .list_img_btn_area button {
+    font-size: 13px;
   }
 
   /* 로그인 */
@@ -2787,9 +2834,11 @@
   }
 
   .mypagetitle .btn-bg-mint {
-    margin: 17px 0;
+    margin: 23px 0;
     font-weight: bold;
     font-size: 13px;
+    width: 88px;
+    height: 24px;
   }
 
   .mypage .title {
