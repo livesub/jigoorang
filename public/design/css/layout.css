@@ -139,6 +139,13 @@
   background: url("../recources/icons/icon-48-my.png") no-repeat top center;
   background-size: 100%;
 }
+
+.header .top .menu .my p{
+  font-size: 11px;
+  width: 52px;
+  margin-top: 50px;
+}
+
 .header .top .menu .login {
   background: url("../recources/icons/icon-48-login.png") no-repeat top center;
   background-size: 100%;
@@ -183,6 +190,12 @@
 }
 .header .top .menu2 li a span {
   display: none;
+}
+
+.header .top .menu2 li a p{
+  font-size: 11px;
+  width: 52px;
+  margin-top: 50px;
 }
 
 .header .btm {

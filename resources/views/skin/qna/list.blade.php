@@ -11,14 +11,14 @@
             <ul>
                 <li><a href="../../index.html">홈</a></li>
                 <li><a href="../../page/mypage/mypage.html">마이페이지</a></li>
-                <li><a href="../../page/mypage/mypage_evaluation_list.html">나의 문의 내역</a></li>
+                <li><a href="../../page/mypage/mypage_evaluation_list.html">1:1 문의 내역</a></li>
             </ul>
         </div>
         <!-- 위치 끝 -->
 
         <!-- 타이틀 시작 -->
         <div class="title_area list">
-            <h2>나의 문의 내역</h2>
+            <h2>1:1 문의 내역</h2>
             <div class="line_14-100"></div>
         </div>
         <!-- 타이틀 끝 -->

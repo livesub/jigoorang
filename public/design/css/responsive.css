@@ -179,8 +179,21 @@
     margin-right: 0px;
   }
   .header .top .menu2 li a {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 27px;
+  }
+  .header .top .menu2 li a p{
+    font-size: 11px;
+    text-align: center;
+    width: 28px;
+    margin-top: 27px;
+  }
+
+  .header .top .menu2 li a .block{
+    display: none;
+  }
+  .header .top .menu2 li a .none{
+    display: block;
   }
   .header .top .menu2 li:last-child {
     display: none;
@@ -287,15 +300,6 @@
     margin-top: 15px;
   }
 
-  .title_area .title_img {
-    margin-top: 30px;
-    width: 100%;
-    height: 250px;
-    background: url("../recources/imgs/list_title_pc.png") no-repeat;
-    background-size: 100% auto;
-    background-position: center;
-  }
-
   .line_14 {
     max-width: 100%;
     padding: 4px;
@@ -334,6 +338,13 @@
     width: 100%;
     height: 45px;
     font-size: 13px;
+  }
+
+  button.btn-bg-mint {
+    width: 88px;
+    height: 23px;
+    font-size: 13px;
+    padding: 0;
   }
 
   /* 메인 컨테이너 */
@@ -412,9 +423,37 @@
     font-weight: bold;
     height: 40px;
   }
+
   .eval .board .board_wrap .list .body dl {
     /* margin-top: 5px; */
     padding-top: 0;
+    font-size: 14px;
+  }
+
+  .eval .board .board_wrap .list_view .body {
+    height: 180px;
+    padding: 25px 0 0 0;
+  }
+
+  .eval .board .board_wrap .list_view .list_img_text {
+    padding: 40px 0px 0px;
+  }
+
+  .eval .board .board_wrap .list_view .body .title {
+    max-width: 360px;
+    font-size: 15px;
+    font-weight: bold;
+    height: 40px;
+  }
+
+
+  .eval .board .board_wrap .list_view .body dl {
+    font-size: 14px;
+  }
+  .eval .board .board_wrap .list_view .body dd {
+    font-size: 14px;
+  }
+  .eval .board .board_wrap .list_view .body dt {
     font-size: 14px;
   }
   .eval .board .board_wrap .list .btn_area {
@@ -503,6 +542,10 @@
     width: 100%;
     height: 180px;
     position: relative;
+  }
+
+  .mypagetitle h3 {
+    font-size: 22px;
   }
 
   .mypage .mypage_inner_01 .mypage_innerbox_01 {
@@ -1157,15 +1200,6 @@
     font-size: 16px;
   }
 
-  .title_area .title_img {
-    margin-top: 30px;
-    width: 100%;
-    height: 190px;
-    background: url("../recources/imgs/list_title_pc.png") no-repeat;
-    background-size: 100% auto;
-    background-position: center;
-  }
-
   /* 레이아웃 */
   .sub-container {
     display: block;
@@ -1288,6 +1322,18 @@
     /* height: auto; */
     padding: 15px;
   }
+
+  /* 평가단 뷰 */
+  .eval .board .board_wrap .list_view .body dl {
+    font-size: 12px;
+  }
+  .eval .board .board_wrap .list_view .body dd {
+    font-size: 12px;
+  }
+  .eval .board .board_wrap .list_view .body dt {
+    font-size: 12px;
+  }
+
   .eval .board .board_wrap .list .btn_area button {
     width: 100%;
     height: 36px;
@@ -1296,6 +1342,10 @@
     top: 0;
     transform: translate(0, 0);
     margin-top: 20px;
+  }
+
+  .eval .board .board_wrap .list_img_btn_area button {
+    font-size: 13px;
   }
 
   /* 로그인 */
@@ -2581,10 +2631,6 @@
   .title_area .title_img {
     margin-top: 30px;
     width: 100%;
-    height: 374px;
-    background: url("../recources/imgs/rectangle2.png") no-repeat;
-    background-size: 100% auto;
-    background-position: center;
   }
 
   /* 레이아웃 */
@@ -2788,9 +2834,11 @@
   }
 
   .mypagetitle .btn-bg-mint {
-    margin: 17px 0;
+    margin: 23px 0;
     font-weight: bold;
     font-size: 13px;
+    width: 88px;
+    height: 24px;
   }
 
   .mypage .title {

@@ -149,7 +149,7 @@
             </div>
             <div class="modal-container-body num pw">
                 <div class="pw_input">
-                    <input type="password" id="user_pw" name="user_pw" placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외))">
+                    <input type="password" id="user_pw" name="user_pw" placeholder="비밀번호 입력 (영문, 숫자, 특수문자 조합 8~20자(%$?^()제외))">
                     <p id="pw_error"></p>
 
                     <input type="password" id="user_pw_confirmation" name="user_pw_confirmation" placeholder="비밀번호를 재입력(위와 같은 비밀번호를 입력해 주세요)">

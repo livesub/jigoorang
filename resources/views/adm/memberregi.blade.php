@@ -48,7 +48,7 @@
 
 
     <div class='form-group'>
-      비밀번호 : <input name='user_pw' id='user_pw' type='password' class='form-control @error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder='{{ $user_pw }}'> 영문, 숫자, 특수문자 조합 8~20자(%$?제외)
+      비밀번호 : <input name='user_pw' id='user_pw' type='password' class='form-control @error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder='{{ $user_pw }}'> 영문, 숫자, 특수문자 조합 8~20자(%$?^()제외)
     @error('user_pw')
         <br>
         <span role='alert'>{{ $message }}</span>
@@ -57,7 +57,7 @@
 
 
     <div class='form-group'>
-      비밀번호 확인 : <input name='user_pw_confirmation' id='user_pw_confirmation' type='password' class='form-control @error('user_pw_confirmation') is-invalid @enderror' placeholder='{{ $user_pw_confirmation }}'> 영문, 숫자, 특수문자 조합 8~20자(%$?제외)
+      비밀번호 확인 : <input name='user_pw_confirmation' id='user_pw_confirmation' type='password' class='form-control @error('user_pw_confirmation') is-invalid @enderror' placeholder='{{ $user_pw_confirmation }}'> 영문, 숫자, 특수문자 조합 8~20자(%$?^()제외)
     @error('user_pw_confirmation')
         <br>
         <span role='alert'>{{ $message }}</span>
