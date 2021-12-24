@@ -113,7 +113,7 @@ class QnaController extends Controller
         $create_result = qnas::create($data);
         $create_result->save();
 
-        if($create_result) return redirect(route('customer_center'))->with('alert_messages', '저장 되었습니다.');
+        if($create_result) return redirect(route('customer_center'))->with('alert_messages', '문의 주셔서 감사합니다.\n답변은 [마이페이지] - [나의 문의내역]에서 확인하실 수 있습니다.\n최대한 빠르게 답변 드리겠습니다.');
         else return redirect(route('customer_center'))->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.');  //치명적인 에러가 있을시
     }
 

@@ -111,14 +111,22 @@
                     <td>평가단 참여이유</td>
                     <td colspan=5>{{ $exp_app_list->reason_memo }}</td>
                 </tr>
-                <tr>
-                    <td>배송메모</td>
-                    <td colspan=5>{{ $exp_app_list->shipping_memo }}</td>
-                </tr>
 
+                <tr>
+                    <td>배송지 수령인</td>
+                    <td colspan=5>{{ $exp_app_list->ad_name }}</td>
+                </tr>
+                <tr>
+                    <td>배송지 수령인 핸드폰</td>
+                    <td colspan=5>{{ $exp_app_list->ad_hp }}</td>
+                </tr>
                 <tr>
                     <td>배송지</td>
                     <td colspan=5>({{ $exp_app_list->ad_zip1 }}) {{ $exp_app_list->ad_addr1 }} {{ $exp_app_list->ad_addr2 }} {{ $exp_app_list->ad_addr3 }}</td>
+                </tr>
+                <tr>
+                    <td>배송메모</td>
+                    <td colspan=5>{{ $exp_app_list->shipping_memo }}</td>
                 </tr>
             </table>
         </td>
