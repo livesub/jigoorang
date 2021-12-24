@@ -72,6 +72,7 @@
         <td><span id="chk_cnt">0</span> / {{ $exp_info2->exp_limit_personnel }}</td>
         <td>신청인원 {{ number_format($total_record) }} 명
         <td><button type="button" onclick="exp_app_ok();">선정</button></td>
+        <td><button type="button" onclick="excel_download();">엑셀 다운로드</button></td>
     </tr>
 </table>
 
@@ -196,7 +197,11 @@
     }
 </script>
 
-
+<script>
+    function excel_download(){
+        location.href = "{{ route('adm.exceldown') }}?exp_id="+$("#exp_id").val();
+    }
+</script>
 
 
 
