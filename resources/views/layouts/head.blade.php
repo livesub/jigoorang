@@ -50,9 +50,9 @@
     <div class="tabar">
         <ul>
             <li><a href="/">홈</a></li>
-            <li><a href="#">랭킹</a></li>
-            <li><a href="#">쇼핑</a></li>
-            <li><a href="#">소식</a></li>
+            <li><a href="javascript:alert('22 년 2 월 OPEN  예정');">랭킹</a></li>
+            <li><a href="javascript:alert('22 년 2 월 OPEN  예정');">쇼핑</a></li>
+            <li><a href="javascript:alert('22 년 2 월 OPEN  예정');">소식</a></li>
         </ul>
     </div>
     <!-- 탭바 끝 -->
@@ -79,26 +79,29 @@
                 <div class="m-menu">
                     <ul class="m-menu-my">
                     @if(!auth()->user())
-                        <a href="{{ route('login.index') }}"><li>로그인<span class="m-menu-my-boder"></span></li></a>
+                        <a href="{{ route('login.index') }}">
+                        <li>로그인 <p class="jo_p">(회원가입)</p></li></a>
+                        <span class="m-menu-my-boder"></span>
                         <a href="{{ route('login.index') }}"><li>마이페이지</li></a>
                     @else
-                        <a href="{{ route('logout.destroy') }}"><li>로그아웃<span class="m-menu-my-boder"></span></li></a>
+                        <a href="{{ route('logout.destroy') }}"><li>로그아웃</li></a>
+                        <span class="m-menu-my-boder"></span>
                         <a href="{{ route('mypage.index') }}"><li>마이페이지</li></a>
                     @endif
                     </ul>
 
                     <ul class="m-menu-child">
-                        <a href="#">
+                        <a href="javascript:alert('22 년 2 월 OPEN  예정');">
                             <li>지구랭 소개</li>
                         </a>
-                        <a href="#">
+                        <a href="javascript:alert('22 년 2 월 OPEN  예정');">
                                 <li><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹 </li>
                         </a>
-                        <a href="#">
-                                <li><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b> </li>
+                        <a href="javascript:alert('22 년 2 월 OPEN  예정');">
+                                <li><b>지</b>구랭 <b>구</b>하는 <b>쇼</b>핑 </li>
                         </a>
-                        <a href="#">
-                                <li><b>지</b>구랭 <b>구</b>하는 기<b>록</b> </li>
+                        <a href="javascript:alert('22 년 2 월 OPEN  예정');">
+                                <li><b>지</b>구랭 <b>구</b>하는 <b>기</b>록 </li>
                         </a>
                         <a href="{{ route('exp.list') }}"><li {!! $menu_exp !!}>정직한 평가단</li></a>
                         <a href="{{ route('customer_center') }}"><li {!! $menu_center !!}>고객센터 </li></a>
@@ -121,11 +124,26 @@
             <!-- 오픈전 메뉴 -->
             <ul class="menu2">
             @if(!auth()->user())
-                <li class="my"><a href="{{ route('login.index') }}"><span>마이페이지</span></a></li>
-                <li class="login"><a href="{{ route('login.index') }}"><span>로그인</span></a></li>
+                <li class="my"><a href="{{ route('login.index') }}">
+                <span>마이페이지</span>
+                <p class="block">마이페이지</p>
+                <p class="none">MY</p>
+                </a></li>
+                <li class="login"><a href="{{ route('login.index') }}">
+                <span>로그인</span>
+                <p>로그인/가입</p>
+                </a></li>
             @else
-                <li class="my"><a href="{{ route('mypage.index') }}"><span>마이페이지</span></a></li>
-                <li class="loginout"><a href="{{ route('logout.destroy') }}"><span>로그아웃</span></a></li>
+                <li class="my"><a href="{{ route('mypage.index') }}">
+                    <span>마이페이지</span>
+                    <p class="block">마이페이지</p>
+                    <p class="none">MY</p>
+                </a></li>
+
+                <li class="loginout"><a href="{{ route('logout.destroy') }}">
+                    <span>로그아웃</span>
+                    <p class="ml-7">로그아웃</p>
+                </a></li>
             @endif
             </ul>
 
@@ -133,10 +151,10 @@
 
         <div class="btm">
             <ul class="navi">
-                <li><a href="">지구랭 소개</a></li>
-                <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹</a></li>
-                <li><a href=""><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b></a></li>
-                <li><a href=""><b>지</b>구랭 <b>구</b>하는 기<b>록</b></a></li>
+                <li><a href="javascript:alert('22 년 2 월 OPEN  예정');">지구랭 소개</a></li>
+                <li><a href="javascript:alert('22 년 2 월 OPEN  예정');"><b>지</b>구랭 <b>구</b>하는 <b>랭</b>킹</a></li>
+                <li><a href="javascript:alert('22 년 2 월 OPEN  예정');"><b>지</b>구랭 <b>구</b>하는 <b>쇼핑</b></a></li>
+                <li><a href="javascript:alert('22 년 2 월 OPEN  예정');"><b>지</b>구랭 <b>구</b>하는 기<b>록</b></a></li>
                 <li {!! $menu_exp !!}><a href="{{ route('exp.list') }}">정직한 평가단</a></li>
                 <li {!! $menu_center !!}><a href="{{ route('customer_center') }}">고객센터</a></li>
             </ul>
@@ -196,13 +214,13 @@
             <div class="con_01">
                 <div class="title">CONTACT US</div>
                 <ul>
-                    <li>대표전화 : {{ $company_tel }}</li>
+                    {{-- <li>대표전화 : {{ $company_tel }}</li> --}}
                     <li>{{ $company_zip }} {{ $company_addr }}</li>
                     <li>이메일 : {{ $company_info_email }}</li>
                 </ul>
             </div>
             <div class="logo_f"></div>
-            <div class="copy">ⓒ JIGOORANG</div>
+            <div class="copy">ⓒ JIGOORANG ALL RIGHTS RESERVED</div>
         </div>
     </div>
     <!-- 푸터 끝 -->

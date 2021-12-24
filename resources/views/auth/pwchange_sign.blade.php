@@ -38,12 +38,12 @@
 
                     <form form name="chagePw" id="changePw" method='POST' action='{{ route('resetPw') }}' role='form' class='form__auth' onsubmit="return check_submit()">
                     {!! csrf_field() !!}
-                    <input name='user_pw' id='user_pw' type='password' class='@error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder="사용하실 비밀번호를 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외))">
+                    <input name='user_pw' id='user_pw' type='password' class='@error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder="사용하실 비밀번호를 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(%$?^()제외))">
                     @error('user_pw')
                         <span role='alert'>{{ $message }}</span>
                     @enderror
 
-                    <input name='user_pw_confirmation' id='user_pw_confirmation' type='password' class='@error('user_pw_confirmation') is-invalid @enderror' placeholder="사용하실 비밀번호를 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(% $ ? 제외).">
+                    <input name='user_pw_confirmation' id='user_pw_confirmation' type='password' class='@error('user_pw_confirmation') is-invalid @enderror' placeholder="사용하실 비밀번호를 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(%$?^()제외).">
                     @error('user_pw_confirmation')
                         <span role='alert'>{{ $message }}</span>
                     @enderror
@@ -84,22 +84,22 @@
         }
 
         $result_params = get_query(location.search);
-        console.log($result_params.expires);
+        //console.log($result_params.expires);
         $int_time = parseInt($result_params.expires);
         //$time_1 = date('y-m-d-H-i-s', $int_time);
         //$time_1 = date('Y-m-d H:i:s', $int_time);
         var myDate = new Date($int_time * 1000)
-        console.log(myDate);
-        console.log("Date: "+myDate.getDate()+
-          "/"+(myDate.getMonth()+1)+
-          "/"+myDate.getFullYear()+
-          " "+myDate.getHours()+
-          ":"+myDate.getMinutes()+
-          ":"+myDate.getSeconds());
+        //console.log(myDate);
+        //console.log("Date: "+myDate.getDate()+
+        //  "/"+(myDate.getMonth()+1)+
+        //  "/"+myDate.getFullYear()+
+        //  " "+myDate.getHours()+
+        //  ":"+myDate.getMinutes()+
+        //  ":"+myDate.getSeconds());
         //현재 시간 구하기
         var current_time = new Date();
 
-        console.log("현재 시간 : "+current_time);
+        //console.log("현재 시간 : "+current_time);
         //제한 시간이 지날 경우의 예외처리 추가
         function check_submit(){
             var current_time = new Date();

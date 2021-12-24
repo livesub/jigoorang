@@ -74,12 +74,13 @@ class socialLoginController extends BaseController
 //$user_phone = "";
 //$user_name = '';
                 }else if($provider == "naver"){
-                    //dd($social_info->user['response']);
                     $user_naver = $social_info->user['response'];
                     $user_gender = $user_naver['gender'];
                     $user_phone = str_replace("-", "", $user_naver['mobile']);
                     $user_birth = $user_naver['birthyear'].str_replace("-", "", $user_naver['birthday']);
                     $user_name =  $social_info->name;
+//$user_phone = "";
+//$user_name = '';
                     //dd($user_birth);
                 }
 

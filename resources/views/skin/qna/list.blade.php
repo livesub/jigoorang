@@ -11,14 +11,14 @@
             <ul>
                 <li><a href="../../index.html">홈</a></li>
                 <li><a href="../../page/mypage/mypage.html">마이페이지</a></li>
-                <li><a href="../../page/mypage/mypage_evaluation_list.html">1:1 문의 내역 / 답변</a></li>
+                <li><a href="../../page/mypage/mypage_evaluation_list.html">1:1 문의 내역</a></li>
             </ul>
         </div>
         <!-- 위치 끝 -->
 
         <!-- 타이틀 시작 -->
         <div class="title_area list">
-            <h2>1:1 문의 내역 답변</h2>
+            <h2>1:1 문의 내역</h2>
             <div class="line_14-100"></div>
         </div>
         <!-- 타이틀 끝 -->
@@ -43,7 +43,7 @@
                                 <dd>2021.10.15 13:23:12</dd>
                             </dl>
                         </div>
-                        <div class="title_sub point02">
+                        <div class="result point02">
                             <a href="../../page/evaluation/evaluation_list_view.html">답변완료</a>
                         </div>
                     </div>
@@ -60,13 +60,15 @@
                     </div>
                     <div class="list view">
                         <div class="body view">
-                           <div class="view_icon"><h4>관리자 답변</h4></div>
+                           <div class="view_icon">
+                                <h4>지구랭</h4>
+                           </div>
                             <div class="view_text_02">
-                            <p>태풍이 휘몰아쳐서 택배차가 날아갔어요.<br>
-                                좀만 더 기다리세요</p>
+                                <p>태풍이 휘몰아쳐서 택배차가 날아갔어요.<br>
+                                    좀만 더 기다리세요</p>
 
 
-                            <p class="day">2021.10.15 13:23:12</p>
+                                <p class="day">2021.10.15 13:23:12</p>
                             </div>
                         </div>
 

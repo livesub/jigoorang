@@ -139,7 +139,10 @@ exit;
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
+        $baesong_cnt = DB::table('baesongjis')->where('user_id',Auth::user()->user_id)->count();
+
         $view = view('shop.ajax_baesongji_regi',[
+            'baesong_cnt'   => $baesong_cnt,
         ]);
 
         return $view;

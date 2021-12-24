@@ -106,13 +106,13 @@ header('Pragma: public');
 
 
                     <tr>
-                        <td><br><br>체험단 관리</td>
+                        <td><br><br>평가단 관리</td>
                     </tr>
                     <tr>
-                        <td><a href="{{ route('adm_exp_index') }}">체험단 등록</a></td>
+                        <td><a href="{{ route('adm_exp_index') }}">평가단 등록</a></td>
                     </tr>
                     <tr>
-                        <td><a href="{{ route('adm.approve.index') }}">체험단 승인</a></td>
+                        <td><a href="{{ route('adm.approve.index') }}">평가단 승인</a></td>
                     </tr>
                     <tr>
                         <td><br><br>리뷰 관리</td>

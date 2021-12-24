@@ -139,6 +139,13 @@
   background: url("../recources/icons/icon-48-my.png") no-repeat top center;
   background-size: 100%;
 }
+
+.header .top .menu .my p{
+  font-size: 11px;
+  width: 52px;
+  margin-top: 50px;
+}
+
 .header .top .menu .login {
   background: url("../recources/icons/icon-48-login.png") no-repeat top center;
   background-size: 100%;
@@ -183,6 +190,12 @@
 }
 .header .top .menu2 li a span {
   display: none;
+}
+
+.header .top .menu2 li a p{
+  font-size: 11px;
+  width: 52px;
+  margin-top: 50px;
 }
 
 .header .btm {
@@ -258,13 +271,14 @@
 .footer .bottom .logo_f {
   width: 92px;
   height: 103px;
-  background: url("../recources/logo-2.png");
+  background: url("../recources/logo-3.png");
   position: absolute;
   top: 80px;
   right: 40px;
 }
 .footer .bottom .copy {
   margin-top: 25px;
+  color: #707070;
 }
 
 /* 탭바 */
@@ -289,7 +303,7 @@
   text-align: center;
 }
 .tabar ul li:nth-child(1) {
-  background: url("../recources/icons/icon-30-home.png") no-repeat;
+  background: url("../recources/icons/icon-s-30-home.png") no-repeat;
   background-size: 30px 30px;
   background-position: center 10px;
 }
@@ -304,11 +318,71 @@
   background-position: center 10px;
 }
 .tabar ul li:nth-child(4) {
-  background: url("../recources/icons/icon-30-history.png") no-repeat;
+  background: url("../recources/icons/icon-s-30-history.png") no-repeat;
   background-size: 30px 30px;
   background-position: center 10px;
 }
 .tabar ul li a {
   width: 100%;
   padding-top: 45px;
+}
+
+/* 출력별 */
+.stars-outer {
+  display: inline-block;
+  position: relative;
+  font-size: 16px;
+  margin-top: 4px;
+  /* font-family: "Font Awesome 5 free"; */
+  /* letter-spacing: 1px; */
+}
+
+.stars-outer::before {
+  content: "★ ★ ★ ★ ★";
+  font-weight: 900;
+  color: #cccccc;
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-inner::before {
+  content: "★ ★ ★ ★ ★";
+  /* content: "\f005 \f005 \f005 \f005 \f005"; */
+  color: #3ec4ba;
+  font-weight: 900;
+}
+
+.number {
+  font-size: 16px;
+  font-family: "SpoqaHanSans-Regular";
+  font-weight: 400;
+  color: #707070;
+  margin: 5px;
+  letter-spacing: -0.5px;
+}
+
+/* 상품 */
+.price {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.sale-price {
+  text-decoration: line-through;
+  font-size: 17px;
+  top: 4px;
+}
+
+.pct {
+  font-weight: 600;
+  font-size: 22px;
+  margin-top: 3px;
+  color: #f06b27;
 }

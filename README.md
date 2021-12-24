@@ -14,3 +14,4 @@ Composer : 1.10.1
 Laravel : 8.x
 
 네이버 스마트에디터 : smarteditor2-2.8.2.3
+# jigoorang_pb

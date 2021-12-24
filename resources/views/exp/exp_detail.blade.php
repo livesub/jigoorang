@@ -43,6 +43,8 @@
                                 <dt>평가 가능기간</dt>
                                 <dd>{{ $result->exp_review_start }} ~ {{ $result->exp_review_end }}</dd>
                             </dl>
+
+                            <div class="sol-g-title mt-20"></div>
                         </div>
                         <!-- 리스트 끝 -->
                         <div class="list_contents">

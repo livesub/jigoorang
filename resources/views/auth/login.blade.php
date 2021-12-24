@@ -51,7 +51,7 @@
 
                     <label for="아이디저장">아이디저장</label>
                     <input type='checkbox' name='remember' value='{{ old('remember', 1) }}' checked><label for="로그인 상태 유지">로그인 상태 유지</label>
-                    <a href="{{ route('findIdPwView')}}" class="">아이디 / 비밀번호 찾기</a>
+                    <a href="{{ route('findIdPwView')}}" class="ip_find">아이디 / 비밀번호 찾기</a>
                   </div>
                   </form>
 
@@ -60,7 +60,20 @@
                     <div class="sns_login">
                     <a href="{{ route('social.login','kakao') }}"><button type="button" class="btn-full-kakao">카카오 로그인</button></a>
                     <a href="{{ route('social.login','naver') }}"><button type="button" class="btn-full-naver">네이버 로그인</button></a>
-                    <span>지구랭이 처음이신가요? <a href="{{ route('join.create_agree') }}">회원가입하기</a></span>
+                    {{-- <span>지구랭이 처음이신가요?
+                    <a href="{{ route('join.create_agree') }}">회원가입하기</a></span> --}}
+
+                    <div class="mt-30"> <span>지구랭이 처음이신가요?<span>
+                      <div class="btn_3ea mt-20 flx">
+                        <a href="{{ route('join.create_agree') }}"><button class="btn-30">이메일로<br>회원가입</button></a>
+                        <a href="{{ route('social.login','kakao') }}">
+                        <button class="btn-30-kakao">카카오로<br>회원가입</button>
+                        </a>
+                        <a href="{{ route('social.login','naver') }}">
+                        <button class="btn-30-naver">네이버로<br>회원가입</button>
+                        </a>
+                      </div>
+                    </div>
                   </div>
                 </div>
 
@@ -101,7 +114,7 @@
     }
 
     if(regPw.test(user_pw) !== true){
-      alert('비밀번호 형식에 맞게 다시 입력해 주세요\n영문,숫자,특수문자 조합 8~20자 (% $ ? 제외)');
+      alert('비밀번호 형식에 맞게 다시 입력해 주세요\n영문,숫자,특수문자 조합 8~20자 (%$?^()제외)');
       return false;
     }
 

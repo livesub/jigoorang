@@ -44,4 +44,10 @@ Route::group(['middleware' => 'is.admin'], function () {
         'as' => 'adm.approve.approve_ok',
         'uses' => 'App\Http\Controllers\adm\exp\AdmExpApproveController@approve_ok',
     ]);
+
+    Route::get('exceldown', [
+        'as' => 'adm.exceldown',
+        'uses' => 'App\Http\Controllers\ExceldownController@excel_down',
+    ]);
+
 });

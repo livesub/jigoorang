@@ -67,7 +67,7 @@
                         </div>
 
 
-                        <div class="mypage_box solid">
+                        <div class="mypage_box solid sol">
                             <a href="">
                                 <div class="mypage_box_img04"></div>
                                 <span>응원한 상품</span>

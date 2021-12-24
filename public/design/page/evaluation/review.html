@@ -2,6 +2,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests"> <!-- 실서버 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
@@ -166,12 +167,63 @@
                   <span class="star">
                     ★★★★★
                     <span>★★★★★</span>
-                    <input type="range" oninput="drawStar(this)" value="1" step="1" min="0" max="10">
+                    <input type="range" oninput="drawStar(this);" value="1" step="1" min="0" max="10">
+                    <p id="value1"></p>
                   </span>
+
+                  <div class="rating">
+                    ★★★★★
+                    <span>★★★★★</span>
+                  </div>
+                </div>
+
+                <p>
+                <span class="star-rt" oninput="star()">★★★★★</span>
+                </p>
+
+                <div id="box">
+                    <div>★★★★★</div>
+                    <div class="color">★★★★★</div>
                 </div>
                 <!-- 리스트 끝 -->
             </div>
 
+
+            <div class='RatingStar'>
+              <div class='RatingScore'>
+                <div class='outer-star'>
+                  <div class='inner-star'></div>
+                </div>
+                <p class="numberRating"></p>
+              </div>
+            </div>
+
+            <div class='RatingStar'>
+              <div class='RatingScore'>
+                <div class='outer-star'>
+                  <div class='inner-star'></div>
+                </div>
+                <p class="numberRating"></p>
+              </div>
+            </div>
+
+            <div class='RatingStar'>
+              <div class='RatingScore'>
+                <div class='outer-star'>
+                  <div class='inner-star'></div>
+                </div>
+                <p class="numberRating"></p>
+              </div>
+            </div>
+
+            <div class='RatingStar'>
+              <div class='RatingScore'>
+                <div class='outer-star'>
+                  <div class='inner-star'></div>
+                </div>
+                <p class="numberRating"></p>
+              </div>
+            </div>
         </div>
         <!-- 게시판 끝  -->
 
@@ -249,6 +301,44 @@ h1 { font-size: 1.5em; margin: 10px; }
     pointer-events: none;
   }
 
+  p { font-size: 30px; }
+
+  .star-rt {
+  position: relative;
+  display: inline-block;
+  color: transparent;
+}
+
+.star-rt:before {
+  content: '★★★★★';
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: gray;
+}
+
+.star-rt-ative{
+  content: '★★★★★';
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: gold;
+  overflow: hidden;
+}
+
+.star-rt-0:after { width: 0%; }
+.star-rt-1:after { width: 20%; }
+.star-rt-2:after { width: 40%; }
+.star-rt-3:after { width: 60%; }
+.star-rt-4:after { width: 80%; }
+.star-rt-5:after { width: 100%; }
+
+
+.inner-star::before{color: #FF9600;}
+.outer-star {position: relative;display: inline-block;color: #CCCCCC;}
+.inner-star {position: absolute;left: 0;top: 0;width: 0%;overflow: hidden;white-space: nowrap;}
+.outer-star::before, .inner-star::before {content: '★★★★★';font-weight: 900; font-size: 30px;}
+
 </style>
 
 
@@ -257,42 +347,68 @@ h1 { font-size: 1.5em; margin: 10px; }
 
     <!-- 푸터 시작 -->
     <div class="footer">
-        <div class="head">
-            <ul>
-                <li><a href="">이용약관</a></li>
-                <li><a href="">개인정보처리방침</a></li>
-            </ul>
-        </div>
-        <div class="bottom">
-            <div class="con_01">
-                <div class="title">지구랭</div>
-                <ul>
-                    <li>대표이사 : 지구랭</li>
-                    <li>사업자등록번호 : 123-45-12345 </li>
-                    <li>통신판매업신고 : 1235-서울-45678</li>
-                    <li>개인정보관리책임자 : 지구룡</li>
-                </ul>
-            </div>
-            <div class="con_01">
-                <div class="title">CONTACT US</div>
-                <ul>
-                    <li>대표전화 : 02-1234-1235</li>
-                    <li>서울시 강남구 테헤란로 123길 14</li>
-                    <li>이메일 : gigurang@gigurang.com</li>
-                </ul>
-            </div>
-            <div class="logo_f"></div>
-            <div class="copy">ⓒ GIGURANG</div>            
-        </div>
-    </div>
-    <!-- 푸터 끝 -->
+      <div class="head">
+          <ul>
+              <li><a href="">이용약관</a></li>
+              <li><a href="">개인정보처리방침</a></li>
+          </ul>
+      </div>
+      <div class="bottom">
+          <div class="con_01">
+              <div class="title">지구랭</div>
+              <ul>
+                  <li>대표이사 : 유혜연</li>
+                  <li>사업자등록번호 : 397-05-01970</li>
+                  <li>통신판매업신고 :제 2021-서울마포-3124 호</li>
+                  <li>개인정보관리책임자 : 유혜연</li>
+              </ul>
+          </div>
+          <div class="con_01">
+              <div class="title">CONTACT US</div>
+              <ul>
+                  <!-- <li>대표전화 : 02-1234-1235</li> -->
+                  <li>서울시 마포구 월드컵북로 361 14층 11호 
+                      <br>(상암동, DMC이안오피스텔) 
+                  </li>
+                  <li>이메일 : jigoorang_hehe@naver.com</li>
+              </ul>
+          </div>
+          <div class="logo_f"></div>
+          <div class="copy">ⓒ JIGOORANG ALL RIGHTS RESERVED</div>              
+      </div>
+  </div>
+  <!-- 푸터 끝 -->
 
 </div>
 <script src="../../js/sidenav.js"></script>
 <script>
+  
    const drawStar = (target) => {
-    document.querySelector(`.star span`).style.width = `${target.value * 10}%`;
+    document.querySelector(`.star span`).style.width = `${target.value * 10} %`;
   }
+
+ratings = {
+  RatingScore: 4.5
+
+} 
+
+totalRating = 5;
+table = document.querySelector('.RatingStar');
+
+function rateIt() {
+  for (rating in ratings) {
+    ratingPercentage = ratings[rating] / totalRating * 100;
+    ratingRounded = Math.round(ratingPercentage / 10) * 10 + '%';
+    star = table.querySelector(`.${rating} .inner-star`);
+    numberRating = table.querySelector(`.${rating} .numberRating`);
+    star.style.width = ratingRounded;
+    numberRating.innerText = ratings[rating];}
+
+}
+rateIt()
+
+
+</script>
 </script>
 </body>
 </html>
