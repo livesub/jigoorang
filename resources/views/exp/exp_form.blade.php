@@ -229,7 +229,9 @@
 <script>
 	$('#form_text').on('keyup', function() {
 		var content = $(this).val();
-        var srtlength = getTextLength(content);
+        //var srtlength = getTextLength(content);
+        var srtlength = content.length;
+
         $("#textLengthCheck").html("(" + srtlength + " 자 / 최대 300자)"); //실시간 글자수 카운팅
 
 		if (srtlength > 300) {
@@ -256,7 +258,8 @@
     loading_read();
     function loading_read(){
         $("#form_text").val(getCookie("Ck_01"));
-        var srtlength = getTextLength($("#form_text").val());
+        //var srtlength = getTextLength($("#form_text").val());
+        var srtlength = $("#form_text").val().length;
         $("#textLengthCheck").html("(" + srtlength + " 자 / 최대 300자)"); //실시간 글자수 카운팅
     }
 </script>
@@ -328,7 +331,7 @@
             return false;
         }
 
-        if(srtlength2 < 30 || srtlength2 >= 300){
+        if(form_text.length < 30 || form_text.length >= 300){
             alert('평가단 참여이유를 30자 이상~ 300자 이내로 작성해 주세요.');
             $('#form_text').focus();
             return false;
@@ -355,29 +358,7 @@
     }
 </script>
 
-<script>
-function setCookie(cName, cValue, cDay){
-    var expire = new Date();
-    expire.setDate(expire.getDate() + cDay);
-    cookies = cName + '=' + escape(cValue) + '; path=/ '; // 한글 깨짐을 막기위해 escape(cValue)를 합니다.
-    if(typeof cDay != 'undefined') cookies += ';expires=' + expire.toGMTString() + ';';
-    document.cookie = cookies;
-}
-// 쿠키 가져오기 함수
-function getCookie(cName) {
-    cName = cName + '=';
-    var cookieData = document.cookie;
-    var start = cookieData.indexOf(cName);
-    var cValue = '';
-    if(start != -1){
-        start += cName.length;
-        var end = cookieData.indexOf(';', start);
-        if(end == -1)end = cookieData.length;
-        cValue = cookieData.substring(start, end);
-    }
-    return unescape(cValue);
-}
-</script>
+
 
 
 

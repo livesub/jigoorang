@@ -53,7 +53,7 @@
         <tr>
             <td>메인 이미지</td>
             <td>
-                <input type="file" id="exp_main_image" name="exp_main_image" accept="image/gif,image/jpeg,image/jpg,image/png">
+                <input type="file" id="exp_main_image" name="exp_main_image" accept="image/gif,image/jpeg,image/jpg,image/png"> ※ 이미지 사이즈 : 360 X 180
                 @error('exp_main_image')
                     <strong><p>{{ $message }}</p></strong>
                 @enderror

@@ -17,6 +17,7 @@ class expController extends Controller
 
     public function __construct(ExpService $expService, ExpList $expList, baesongjis $baesongjis, ExpApplicationList $expApplicationList)
     {
+        phpinfo();
         $this->expService = $expService;
         $this->expList = $expList;
         $this->baesongjis = $baesongjis;

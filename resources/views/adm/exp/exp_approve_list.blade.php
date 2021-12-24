@@ -6,7 +6,7 @@
 <table>
     <tr>
         <td>
-            <h4>체험단 승인</h4>
+            <h4>체험단 선정</h4>
         </td>
     </tr>
 </table>
@@ -71,7 +71,7 @@
     <tr>
         <td><span id="chk_cnt">0</span> / {{ $exp_info2->exp_limit_personnel }}</td>
         <td>신청인원 {{ number_format($total_record) }} 명
-        <td><button type="button" onclick="exp_app_ok();">승인</button></td>
+        <td><button type="button" onclick="exp_app_ok();">선정</button></td>
     </tr>
 </table>
 
@@ -84,6 +84,7 @@
         <td>번호</td>
         <td>아이디</td>
         <td>이름</td>
+        <td>휴대폰번호</td>
     </tr>
 
     @foreach($exp_app_lists as $exp_app_list)
@@ -92,6 +93,8 @@
 
             $checked = '';
             if($exp_app_list->access_yn == 'y') $checked = 'checked';
+
+            $user_info = DB::table('users')->where('user_id', $exp_app_list->user_id)->first();
         @endphp
 
     <tr>
@@ -102,14 +105,20 @@
                     <td>{{ $k }}</td>
                     <td>{{ $exp_app_list->user_id }}</td>
                     <td>{{ $exp_app_list->user_name }}</td>
+                    <td>{{ $user_info->user_phone }}</td>
                 </tr>
                 <tr>
-                    <td>내용</td>
+                    <td>평가단 참여이유</td>
                     <td colspan=5>{{ $exp_app_list->reason_memo }}</td>
                 </tr>
                 <tr>
-                    <td>쇼핑메모</td>
+                    <td>배송메모</td>
                     <td colspan=5>{{ $exp_app_list->shipping_memo }}</td>
+                </tr>
+
+                <tr>
+                    <td>배송지</td>
+                    <td colspan=5>({{ $exp_app_list->ad_zip1 }}) {{ $exp_app_list->ad_addr1 }} {{ $exp_app_list->ad_addr2 }} {{ $exp_app_list->ad_addr3 }}</td>
                 </tr>
             </table>
         </td>
