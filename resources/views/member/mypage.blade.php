@@ -144,15 +144,16 @@
 <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. 끝 -->
 
 <script>
-    function baesongji(b_addr){
+    function baesongji(){
         $.ajax({
             type : 'get',
             url : '{{ route('ajax_baesongji') }}',
             data : {
-                b_addr : b_addr,
+                b_addr : 'mypage',
             },
             dataType : 'text',
             success : function(result){
+
                 if(result == "no_mem"){
                     alert("회원이시라면 회원로그인 후 이용해 주십시오.");
                     return false;
