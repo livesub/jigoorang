@@ -257,7 +257,7 @@
   h4 {
   }
   .text_02 {
-    font-size: 15px;
+    font-size: 16px;
     max-width: 100%;
     margin-top: 10px;
   }
@@ -469,7 +469,7 @@
     height: 80px;
   }
   .eval .board .paging {
-    width: 320px;
+    width: 100%;
     text-align: center;
     font-size: 14px;
     font-weight: bold;
@@ -493,6 +493,14 @@
     padding: 20px 0 30px 0;
     /* 20px 0 30px 0; */
     border-bottom: 1px solid #ddd;
+    font-size: 16px;
+  }
+
+  .eval .board .board_wrap .information h4 {
+    font-size: 18px;
+  }
+
+  .eval .board .board_wrap .information ul {
     font-size: 16px;
   }
 
@@ -642,6 +650,7 @@
   .eval .board.mypage_list .board_wrap .list .result {
     font-size: 15px;
   }
+
 
   /* 회원정보 수정 */
   .eval
@@ -1145,6 +1154,13 @@
     max-width: 480px;
   }
 
+  .modal-container-body.adress {
+    overflow: scroll;
+    max-height: 520px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+
   .modal .modal-container .modal-container-body .adress_none {
     text-align: center;
     padding: 145px 0;
@@ -1536,7 +1552,7 @@
     width: 100%;
     max-width: 56px;
     height: 100%;
-    border: solid 2px #000;
+    border: solid 1px #000;
     margin-left: 20px;
     text-align: center;
     font-size: 13px;
@@ -2438,6 +2454,13 @@
     display: block;
   } */
 
+
+  /* 공통 */
+
+  .text_02 {
+    font-size: 15px;
+  }
+
   /* 모달 */
 
   .modal .modal-dialog {
@@ -2456,16 +2479,22 @@
     padding: 20px;
   }
 
-  .modal .modal-dialog .modal-dialog-title .btn-close {
-    position: absolute;
-    right: 0;
-    width: 30px;
-    height: 30px;
-    font-size: 15px;
-    background-size: 30px 30px;
-    cursor: pointer;
-    background: url("../recources/icons/del.png");
+  .modal .modal-container-title h4 {
+    font-family: "SBAggroB", "sans-serif";
+    font-size: 16px;
   }
+
+  .modal .modal-container .modal-container-title .btn-close {
+    position: absolute;
+    top: -5px;
+    right: 0;
+    width: 25px;
+    height: 25px;
+    font-size: 15px;
+    background-size: 25px 25px;
+    cursor: pointer;
+    background: url(../recources/icons/del.png);
+}
 
   .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title {
     width: 100%;
@@ -2489,10 +2518,46 @@
     transform: translate(-50%, -50%);
   }
 
+  .modal .modal-container .modal-container-body .modal-container-box h3 span {
+    font-size: 12px;
+    line-height: 23px;
+    margin-left: 0;
+  }
+
+  .modal .modal-container .modal-container-body .modal-container-box p {
+    font-size: 14px;
+  }
+
+  .modal .modal-container .modal-container-body .modal-container-box .btn-3ea-01 {
+    width: 47px;
+    height: 27px;
+    font-size: 13px;
+  }
+  .modal .modal-container .modal-container-body .modal-container-box .btn-3ea-02 {
+    width: 47px;
+    height: 27px;
+    font-size: 13px;
+  }
+
+  .modal .modal-container .modal-container-body .modal-container-box .btn-3ea-03 {
+    width: 47px;
+    height: 27px;
+    font-size: 13px;
+  }
+
+  .modal .btn.btn_2ea .modal_btn01 {
+    font-size: 13px;
+    border: solid 1px #ddd;
+  }
+
+  .modal .btn.btn_2ea .modal_btn02 {
+    font-size: 13px;
+  }
+
   .modal .btn.btn_2ea {
     width: 100%;
     max-width: 320px;
-    max-height: 42px;
+    max-height: 43px;
     top: 74%;
   }
 
@@ -2501,16 +2566,27 @@
     padding: 110px 0;
   }
 
+  .modal .modal-container-body .scroll {
+    margin-top: 10px;
+  }
+
   .modal .modal-container .modal-container-body {
     padding: 8px;
     height: auto;
+  }
+
+  .modal-container-body.adress {
+    overflow: scroll;
+    max-height: 445px;
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
   }
 
   .modal-container-body .adress_input label {
     width: 100%;
     max-width: 110px;
     margin-bottom: 8px;
-    font-size: 16px;
+    font-size: 13px;
     margin-right: 10px;
     top: 6px;
   }
@@ -2519,6 +2595,10 @@
     width: 100%;
     max-width: 244px;
     height: 36px;
+  }
+
+  .modal-container-body .adress_input .adress_input02 p {
+    font-size: 13px;
   }
 
   .modal-container-body .adress_input .adress_input03 {
@@ -2551,6 +2631,10 @@
     max-height: 200px;
     position: relative;
     margin-bottom: 10px;
+  }
+
+  .modal-container-body .checkbox label  {
+    font-size: 13px;
   }
 
   /* 휴대전화번호 변경 모달 */
@@ -2755,6 +2839,15 @@
     width: 320px;
   }
 
+  .eval .board .board_wrap .information h4 {
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .eval .board .board_wrap .information ul {
+    font-size: 13px;
+  }
+
   .eval .board .board_wrap .information_01 .information-inner-title-btn {
     padding: 22px;
   }
@@ -2803,8 +2896,34 @@
     .information-inner-01
     .information-address
     .block-add {
-    padding: 0 0px 0 130px;
+    padding: 0 0px 0 120px;
   }
+
+  .eval .board .board_wrap .information .information-phon button {
+    margin-left: 12px;
+  }
+
+  .eval .board .board_wrap .information .information-inner-checkbox label {
+    font-size: 13px;
+    top: 3px;
+  }
+
+  .eval .board .board_wrap .information .information-inner-checkbox p {
+    font-size: 13px;
+  }
+
+  .eval .board .board_wrap .information_01 .information-inner-title button {
+    width: 110px;
+    height: 25px;
+    border: solid 1px #3ec4ba;
+    background-color: #fff;
+    font-size: 13px;
+    font-weight: 400;
+    color: #3ec4ba;
+  }
+
+
+
 
   /* 로그인 */
 
@@ -2999,6 +3118,10 @@
     max-height: 50px;
     -webkit-line-clamp: 2; /* 표시하고자 하는 라인 수 */
     -webkit-box-orient: vertical;
+  }
+
+  .eval .board.mypage_list .board_wrap .list .result span {
+    font-size: 13px;
   }
 
   /* 회원정보 수정 */

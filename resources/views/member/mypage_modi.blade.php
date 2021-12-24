@@ -73,7 +73,7 @@
                     </div>
                     <div class="list">
                         <div class="information checkbox">
-                            <h4>서비스 약관 동의</h4>
+                            <h4>서비스 약관 동의 내역</h4>
                         <ul class="checkbox_block">
                         <form action="{{ route('member_info_update_member') }}" method="post" onsubmit="return check_submit()">
                         {!! csrf_field() !!}

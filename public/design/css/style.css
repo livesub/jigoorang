@@ -1052,8 +1052,14 @@ h5 {
   /* line-height: 145px; */
   border: solid 2px #ddd;
   caret-color: #ddd;
+  margin-top: 10px;
 }
 
+.eval .board .board_wrap .information #textLengthCheck {
+  font-size: 12px;
+  top: 3px;
+  color: #707070;
+}
 .eval .board .board_wrap .information .information-input textarea::placeholder {
   /* padding: 10px; */
   color: #aeaeae;
@@ -2467,7 +2473,7 @@ input::placeholder {
   appearance: none;
   font-size: 16px;
   color: #aeaeae;
-  padding: 0 15px;
+  padding: 0 10px;
 }
 
 .eval
@@ -2487,6 +2493,7 @@ input::placeholder {
   height: 48px;
   border: solid 2px #ddd;
   text-align: left;
+  font-size: 16px;
 }
 
 .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-03 li p {
@@ -2532,6 +2539,8 @@ input::placeholder {
   max-width: 974px;
   height: 96px;
   border: solid 2px #ddd;
+  color: #aeaeae;
+  font-size: 16px;
 }
 
 .eval
@@ -3709,8 +3718,8 @@ input::placeholder {
   position: absolute;
   top: 0;
   right: 0;
-  width: 40px;
-  height: 40px;
+  width: 25px;
+  height: 25px;
   font-size: 15px;
   background-size: 40px 40px;
   cursor: pointer;
@@ -3732,7 +3741,7 @@ input::placeholder {
   max-width: 680px;
   height: 72px;
   margin: 0 auto;
-  background: #f00;
+  /* background: #f00; */
   display: flex;
   /* position: fixed;
   top: 78%;
@@ -3765,7 +3774,7 @@ input::placeholder {
 .modal .modal-container-body .scroll {
   overflow: scroll;
   height: 364px;
-  margin-top: 30px;
+  margin-top: 20px;
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }

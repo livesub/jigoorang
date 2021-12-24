@@ -144,7 +144,7 @@
 
 
                         <div class="information information_02">
-                            <h4>참여자 정보</h4>
+                            <h4>평가단 참여 동의</h4>
                             <div class="information-inner-checkbox">
                                 <input type="checkbox" id="promotion_agree" name="promotion_agree" value="y">
 
