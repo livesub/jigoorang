@@ -1608,7 +1608,7 @@ $um_value='80/0.5/3'
             ]);
         }else{
             $ad_default = 0;
-
+/*
             $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
                 'user_zip'          => '',
                 'user_addr1'        => '',
@@ -1616,6 +1616,7 @@ $um_value='80/0.5/3'
                 'user_addr3'        => '',
                 'user_addr_jibeon'  => '',
             ]);
+*/
         }
 
         $update_result = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['id', $id]])->update([

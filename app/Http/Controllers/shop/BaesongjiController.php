@@ -186,14 +186,6 @@ exit;
             echo "default_no_del";
             exit;
         }else{
-            $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
-                'user_zip'          => '',
-                'user_addr1'        => '',
-                'user_addr2'        => '',
-                'user_addr3'        => '',
-                'user_addr_jibeon'  => '',
-            ]);
-
             DB::table('baesongjis')->where([['id', $id],['user_id',$user_id]])->delete();   //row 삭제
 
             echo "ok";
