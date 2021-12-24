@@ -30,6 +30,7 @@
             <div class="board mypage_list">
                 <!-- 리스트 시작 -->
                 <div class="board_wrap">
+
                 @if(count($exp_app_rows) > 0)
                     @foreach($exp_app_rows as $exp_app_row)
                         @php
@@ -43,25 +44,26 @@
                             if($exp_app_cnt > 0){   //승인 난 상태
                                 if($exp_app_row->access_yn == 'y'){
                                     //$exp_ment = '선정되었어요';
-                                    $exp_ment = "<span onclick=\"alert('평가단 제품 수령 및 사용 후\\n[마이페이지] - [제품 평가 및 리뷰]에서\\n정직한 평가를 작성해주세요');\">선정되었어요</span>";
+                                    $exp_ment = "<span class='cr_02 line bold' onclick=\"alert('평가단 제품 수령 및 사용 후\\n[마이페이지] - [제품 평가 및 리뷰]에서\\n정직한 평가를 작성해주세요');\">선정되었어요</span>";
                                 }
                                 else $exp_ment = '다음에 만나요';
                             }else{
                                 if($now_date <= $exp_list->exp_release_date) $exp_ment = '신청중';
-                                else $exp_ment = "<span onclick=\"alert('기간이 만료되어 확인이 불가합니다');\">다음에 만나요</span>";
+                                else $exp_ment = "<span class='cr_06'onclick=\"alert('기간이 만료되어 확인이 불가합니다');\">다음에 만나요</span>";
                             }
+
                         @endphp
-                    <div class="list">
-                        <div class="body">
+                    <div class="list ev_rul">
+
                             <div class="title">
                                 {{ stripslashes($exp_list->title) }}
                             </div>
-                            <dl>
-                                <dd>{{ substr($exp_list->created_at, 0, 10) }}</dd>
-                            </dl>
-                        </div>
+                            <div class="date">
+                                {{ substr($exp_list->created_at, 0, 10) }}
+                            </div>
 
-                        <div class="title_sub point01">
+
+                        <div class="result cr_04">
                             {!! $exp_ment !!}
                         </div>
                     </div>
@@ -76,6 +78,7 @@
 
 
                 </div>
+
                 <!-- 리스트 끝 -->
 
                 <!-- 페이징 시작 -->

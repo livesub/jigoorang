@@ -538,6 +538,10 @@
     padding: 0;
   }
 
+  .mypage h3 {
+    font-size: 20px;
+  }
+
   .mypage .mypage_inner_01 {
     width: 100%;
     height: 180px;
@@ -547,6 +551,31 @@
   .mypagetitle h3 {
     font-size: 22px;
   }
+
+  .mypage .mypage_box_02 {
+    width: 100%;
+    height: 60px;
+    padding: 0 20px;
+    line-height: 60px;
+    border: solid 2px #ddd;
+    border-right: none;
+    font-size: 18px;
+    /* margin-top: 28px; */
+    background: url(../recources/imgs/invalid-name.png) no-repeat right center;
+    background-size: 60px 60px;
+    color: #707070;
+    position: relative;
+}
+
+.mypage .mypage_box_02 .point {
+  color: #3ec4ba;
+  font-weight: bold;
+  margin-top: 0;
+}
+
+.mypage .mypage_box_02 div {
+  top: 18px;
+}
 
   .mypage .mypage_inner_01 .mypage_innerbox_01 {
   }
