@@ -76,11 +76,11 @@ class ExceldownController extends Controller
                 </tr>
                 <tr>
                     <td>배송지 수령인 휴대폰번호</td>
-                    <td colspan='3'>$exp_app_list->ad_hp</td>
+                    <td colspan='3' style=mso-number-format:'\@'>$exp_app_list->ad_hp</td>
                 </tr>
                 <tr>
                     <td>배송지</td>
-                    <td colspan='3'>(".$exp_app_list->ad_zip1.") ".$exp_app_list->ad_addr1." ".$exp_app_list->ad_addr2." ".$exp_app_list->ad_addr3."</td>
+                    <td colspan='3' style=mso-number-format:'\@'>(".$exp_app_list->ad_zip1.") ".$exp_app_list->ad_addr1." ".$exp_app_list->ad_addr2." ".$exp_app_list->ad_addr3."</td>
                 </tr>
                 <tr>
                     <td>배송메모</td>
