@@ -123,8 +123,15 @@
             <!-- 오픈전 메뉴 -->
             <ul class="menu2">
             @if(!auth()->user())
-                <li class="my"><a href="{{ route('login.index') }}"><span>마이페이지</span></a></li>
-                <li class="login"><a href="{{ route('login.index') }}"><span>로그인</span></a></li>
+                <li class="my"><a href="{{ route('login.index') }}">
+                <span>마이페이지</span>
+                <p class="block">마이페이지</p>
+                <p class="none">MY</p>
+                </a></li>
+                <li class="login"><a href="{{ route('login.index') }}">
+                <span>로그인</span>
+                <p>로그인/가입</p>
+                </a></li>
             @else
                 <li class="my"><a href="{{ route('mypage.index') }}"><span>마이페이지</span></a></li>
                 <li class="loginout"><a href="{{ route('logout.destroy') }}"><span>로그아웃</span></a></li>

@@ -41,7 +41,7 @@
 
             <div class="checkbox"><!-- 체크박스 시작 -->
                   <input type="checkbox" name="ad_default" id="ad_default" value="1">
-                  <label for="">기본배송지 등록</label>
+                  <label for="">기본배송지 등록 (이번부터 적용)</label>
             </div><!-- 체크박스 끝 -->
         </div>
             <div class="btn btn_2ea"><!-- 버튼 시작 -->

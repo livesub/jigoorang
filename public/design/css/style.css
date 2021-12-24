@@ -32,6 +32,14 @@ h5 {
 }
 .text_02 span {
   display: inline;
+  width: 100%;
+  /* max-width: 110px; */
+}
+
+.text_02.mypagetitle span {
+  display: inline;
+  width: 100%;
+  max-width: 110px;
 }
 
 .text_03 {
@@ -581,13 +589,9 @@ h5 {
   text-align: center;
 }
 
-.title_area .title_img {
+.title_area .title_img img {
   margin-top: 30px;
-  width: 1200px;
-  height: 304px;
-  background: url("../recources/imgs/list_title_pc.png") no-repeat;
-  background-size: 100% auto;
-  background-position: center;
+  width: 100%;
 }
 
 /* 상품스와이프 (4ps) 1280 */
@@ -918,6 +922,7 @@ h5 {
 .eval .board .board_wrap .list_view .body dd {
   display: inline-block;
   width: 63%;
+  color: #000;
 }
 
 .eval .board .board_wrap .list_view .list_img img {
@@ -1633,7 +1638,7 @@ input::placeholder {
 }
 
 .mypagetitle .btn-bg-mint {
-  margin: 20px 0;
+  margin: 23px 0;
   font-weight: bold;
   font-size: 16px;
 }
@@ -1650,6 +1655,7 @@ input::placeholder {
   font-size: 24px;
   padding: 20px 0;
 }
+
 
 .mypage .mypage_inner_01 {
   width: 100%;

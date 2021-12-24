@@ -44,7 +44,7 @@
                             <div class="list-none">
                                 <img src="{{ asset('/design/recources/imgs/combined-shape.png') }}" alt="">
                                 <br><br>
-                                <p>로그인후 이용 가능합니다.</p>
+                                <p>로그인 후 이용 가능합니다.</p>
                             </div>
                             <div class="btn_area_50">
                              <button class="btn-50-full" onclick="location.href='{{ route('login.index') }}'">로그인</button>

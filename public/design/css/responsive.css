@@ -179,8 +179,21 @@
     margin-right: 0px;
   }
   .header .top .menu2 li a {
-    width: 30px;
-    height: 30px;
+    width: 24px;
+    height: 27px;
+  }
+  .header .top .menu2 li a p{
+    font-size: 11px;
+    text-align: center;
+    width: 28px;
+    margin-top: 27px;
+  }
+
+  .header .top .menu2 li a .block{
+    display: none;
+  }
+  .header .top .menu2 li a .none{
+    display: block;
   }
   .header .top .menu2 li:last-child {
     display: none;
@@ -285,15 +298,6 @@
   .title_area_01 h2 {
     font-size: 18px;
     margin-top: 15px;
-  }
-
-  .title_area .title_img {
-    margin-top: 30px;
-    width: 100%;
-    height: 250px;
-    background: url("../recources/imgs/list_title_pc.png") no-repeat;
-    background-size: 100% auto;
-    background-position: center;
   }
 
   .line_14 {
@@ -405,6 +409,14 @@
     width: calc(100% - 240px - 150px);
     height: 120px;
     padding: 15px 20px;
+  }
+  .eval .board .board_wrap .list_view .body {
+    height: 180px;
+    padding: 25px 0 0 0;
+  }
+
+  .eval .board .board_wrap .list_view .list_img_text {
+    padding: 40px 0px 0px;
   }
   .eval .board .board_wrap .list .body .title {
     max-width: 360px;
@@ -1155,15 +1167,6 @@
   }
   .title_area h2 {
     font-size: 16px;
-  }
-
-  .title_area .title_img {
-    margin-top: 30px;
-    width: 100%;
-    height: 190px;
-    background: url("../recources/imgs/list_title_pc.png") no-repeat;
-    background-size: 100% auto;
-    background-position: center;
   }
 
   /* 레이아웃 */
@@ -2581,10 +2584,6 @@
   .title_area .title_img {
     margin-top: 30px;
     width: 100%;
-    height: 374px;
-    background: url("../recources/imgs/rectangle2.png") no-repeat;
-    background-size: 100% auto;
-    background-position: center;
   }
 
   /* 레이아웃 */

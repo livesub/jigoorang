@@ -185,6 +185,12 @@
   display: none;
 }
 
+.header .top .menu2 li a p{
+  font-size: 11px;
+  width: 52px;
+  margin-top: 50px;
+}
+
 .header .btm {
   background: #3ec4ba;
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
