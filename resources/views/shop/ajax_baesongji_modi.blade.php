@@ -26,7 +26,7 @@
                     </label>
                 </div>
                 <div class="adress_input04">
-                    <div id="wrap_c" class="adress_pop">
+                    <div id="wrap_c" class="adress_pop" style="height:100px;">
                      <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap_c" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" alt="접기 버튼">
                     </div>
                     <input type="text" name="od_c_addr1" id="od_c_addr1" required  placeholder="기본주소" value="{{ $baesongji->ad_addr1 }}" readonly>
@@ -38,9 +38,13 @@
                 <div class="checkbox">
                 @php
                     $ad_default_chk = '';
-                    if($baesongji->ad_default == 1) $ad_default_chk = 'checked';
+                    $default_disabled = '';
+                    if($baesongji->ad_default == 1){
+                        $ad_default_chk = 'checked';
+                        $default_disabled = 'disabled';
+                    }
                 @endphp
-                  <input type="checkbox" name="ad_default" id="ad_default" value="1" {{ $ad_default_chk }}>
+                  <input type="checkbox" name="ad_default" id="ad_default" value="1" {{ $ad_default_chk }} {{ $default_disabled }}>
                   <label for="">기본배송지 등록 (이번부터 적용)</label>
                 </div>
             </div>
@@ -95,6 +99,8 @@
             data : form_var,
             dataType : 'text',
             success : function(result){
+//alert(result);
+//return false;
                 if(result == "ok"){
                     alert("수정 되었습니다.");
                     //baesongji();

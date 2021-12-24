@@ -134,6 +134,11 @@
                 success : function(result){
 //alert(result);
 //return false;
+                    if(result == "default_no_del"){
+                        alert("기본 배송지는 삭제 할수 없습니다.");
+                        return false;
+                    }
+
                     if(result == "ok"){
                         baesongji();
                     }

@@ -99,7 +99,7 @@
                             @if(empty($address))
                             <button type="button" id="btn" onclick="addressopenmodal_001('')">배송지 입력 + </button>    <!-- 배송지 입력버튼 -->
                             @else
-                            <button type="button" onclick="addressopenmodal_001()">배송지 설정 / 변경</button> <!-- 클릭햇을때 배송지 입력버튼 -->
+                            <button type="button" onclick="addressopenmodal_001(); baesongji();">배송지 설정 / 변경</button> <!-- 클릭햇을때 배송지 입력버튼 -->
                             @endif
 
                         </div>
@@ -275,6 +275,8 @@
             },
             dataType : 'text',
             success : function(result){
+//alert(result);
+//return false;
                 if(result == "no_mem"){
                     alert("회원이시라면 회원로그인 후 이용해 주십시오.");
                     return false;
