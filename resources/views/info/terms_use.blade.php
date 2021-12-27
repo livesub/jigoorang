@@ -11,8 +11,8 @@
         <!-- 위치 시작 -->
         <div class="location">
             <ul>
-                <li><a href="../../index.html">홈</a></li>
-                <li><a href="../../page/login/login_find.html">이용약관</a></li>
+                <li><a href="/">홈</a></li>
+                <li><a href="{{ route('terms_use') }}">이용약관</a></li>
             </ul>
         </div>
         <!-- 위치 끝 -->
