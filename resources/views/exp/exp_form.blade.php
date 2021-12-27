@@ -125,8 +125,8 @@
                                 <li class="block-add">
                                 <p id="ad_addr">
                                 {{ $address->ad_zip1 }})
-                                {{ $address->ad_addr1 }}<br>
-                                <span>{{ $address->ad_addr2 }}</span></p>
+                                {{ $address->ad_addr1 }}</p>
+                                <p id="ad_addr6">{{ $address->ad_addr2 }}</p>
 
                                 <p id="ad_addr7">{{ $address->ad_addr3 }}</p>
                                 </li>
@@ -294,10 +294,12 @@
         //히든 값으로 가져온 값을 해당 태그에 html이나 text로 넣어준다.
         $('#ad_name').text($("#od_b_name").val());
         $('#ad_hp').text($("#od_b_hp").val());
-        let $ad_addrs = $("#od_b_zip").val()+") "+$("#od_b_addr1").val()+" "+ $("#od_b_addr2").val()+"  ";
-        let $ad_addrs7 = $("#od_b_addr3").val();
+        let $ad_addrs = $("#od_b_zip").val()+") "+$("#od_b_addr1").val()+" "
+        let $ad_addrs6 =$("#od_b_addr2").val() +$("#od_b_addr3").val() ; //상세주소 참조메모
+        //let $ad_addrs7 = $("#od_b_addr3").val();
         $('#ad_addr').text($ad_addrs);
-        $('#ad_addr7').text($ad_addrs7);
+        $('#ad_addr6').text($ad_addrs6);
+        //$('#ad_addr7').text($ad_addrs7);
 
         //창닫기
         //lay_close();
