@@ -8,7 +8,7 @@
 
                 <div class="modal-container-title">
                     <h4>배송지 주소</h4>
-                    <div class="btn-close" onclick="addressclosemodal_001()">
+                    <div class="btn-close" onclick="addressclosemodal_001()"></div>
                 </div>
             <div class="scroll">
                 @if(count($baesongjis) > 0)
@@ -52,7 +52,7 @@
                 @endif
             </div>
         </div>
-    </div>
+
             <div class="btn btn_2ea">
                 <button class="modal_btn01" type="button" onclick="addressclosemodal_001()">
                     닫기
@@ -134,6 +134,11 @@
                 success : function(result){
 //alert(result);
 //return false;
+                    if(result == "default_no_del"){
+                        alert("기본 배송지는 삭제 할수 없습니다.");
+                        return false;
+                    }
+
                     if(result == "ok"){
                         baesongji();
                     }

@@ -128,6 +128,14 @@ exit;
         $od_c_hp            = $request->input('od_c_hp');
         $ad_default         = $request->input('ad_default');
 
+        if($ad_default == null){
+            $baesongji_info = DB::table('baesongjis')->where([['user_id',$user_id], ['id', $num]])->first();
+
+            if($baesongji_info->ad_default == 1){
+                $ad_default = 1;
+            }
+        }
+
         $CustomUtils->baesongji_modify_process($num, $ad_default, $ad_c_subject, $od_c_name, $od_c_tel, $od_c_hp, $od_c_zip, $od_c_addr1, $od_c_addr2, $od_c_addr3, $od_c_addr_jibeon);
 
         echo "ok";
@@ -165,6 +173,13 @@ exit;
         $od_c_hp            = $request->input('od_c_hp');
         $ad_default         = $request->input('ad_default');
 
+        if($ad_default == null){
+            $baesongji_cnt = DB::table('baesongjis')->where('user_id',$user_id)->count();
+            if($baesongji_cnt == 0){
+                $ad_default = 1;
+            }
+        }
+
         $CustomUtils->baesongji_process($ad_default, $ad_c_subject, $od_c_name, $od_c_tel, $od_c_hp, $od_c_zip, $od_c_addr1, $od_c_addr2, $od_c_addr3, $od_c_addr_jibeon);
 
         echo "ok";
@@ -179,10 +194,20 @@ exit;
         $id         = $request->input('num');
         $user_id    = Auth::user()->user_id;
 
-        DB::table('baesongjis')->where([['id', $id],['user_id',$user_id]])->delete();   //row 삭제
+        //DB::table('baesongjis')->where([['id', $id],['user_id',$user_id]])->delete();   //row 삭제
+        $baesongji_chk = DB::table('baesongjis')->where([['id', $id],['user_id',$user_id]])->first();
 
-        echo "ok";
-        exit;
+        if($baesongji_chk->ad_default == 1){
+            echo "default_no_del";
+            exit;
+        }else{
+            DB::table('baesongjis')->where([['id', $id],['user_id',$user_id]])->delete();   //row 삭제
+
+            echo "ok";
+            exit;
+        }
+
+
     }
 
     public function ajax_ordersendcost(Request $request)

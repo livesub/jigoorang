@@ -99,7 +99,7 @@
                             @if(empty($address))
                             <button type="button" id="btn" onclick="addressopenmodal_001('')">배송지 입력 + </button>    <!-- 배송지 입력버튼 -->
                             @else
-                            <button type="button" onclick="addressopenmodal_001()">배송지 설정 / 변경</button> <!-- 클릭햇을때 배송지 입력버튼 -->
+                            <button type="button" onclick="addressopenmodal_001(); baesongji();">배송지 설정 / 변경</button> <!-- 클릭햇을때 배송지 입력버튼 -->
                             @endif
 
                         </div>
@@ -125,8 +125,8 @@
                                 <li class="block-add">
                                 <p id="ad_addr">
                                 {{ $address->ad_zip1 }})
-                                {{ $address->ad_addr1 }}<br>
-                                <span>{{ $address->ad_addr2 }}</span></p>
+                                {{ $address->ad_addr1 }}</p>
+                                <p id="ad_addr6">{{ $address->ad_addr2 }}</p>
 
                                 <p id="ad_addr7">{{ $address->ad_addr3 }}</p>
                                 </li>
@@ -144,7 +144,7 @@
 
 
                         <div class="information information_02">
-                            <h4>참여자 정보</h4>
+                            <h4>평가단 참여 동의</h4>
                             <div class="information-inner-checkbox">
                                 <input type="checkbox" id="promotion_agree" name="promotion_agree" value="y">
 
@@ -275,6 +275,8 @@
             },
             dataType : 'text',
             success : function(result){
+//alert(result);
+//return false;
                 if(result == "no_mem"){
                     alert("회원이시라면 회원로그인 후 이용해 주십시오.");
                     return false;
@@ -292,10 +294,12 @@
         //히든 값으로 가져온 값을 해당 태그에 html이나 text로 넣어준다.
         $('#ad_name').text($("#od_b_name").val());
         $('#ad_hp').text($("#od_b_hp").val());
-        let $ad_addrs = $("#od_b_zip").val()+") "+$("#od_b_addr1").val()+" "+ $("#od_b_addr2").val()+"  ";
-        let $ad_addrs7 = $("#od_b_addr3").val();
+        let $ad_addrs = $("#od_b_zip").val()+") "+$("#od_b_addr1").val()+" "
+        let $ad_addrs6 =$("#od_b_addr2").val() +$("#od_b_addr3").val() ; //상세주소 참조메모
+        //let $ad_addrs7 = $("#od_b_addr3").val();
         $('#ad_addr').text($ad_addrs);
-        $('#ad_addr7').text($ad_addrs7);
+        $('#ad_addr6').text($ad_addrs6);
+        //$('#ad_addr7').text($ad_addrs7);
 
         //창닫기
         //lay_close();

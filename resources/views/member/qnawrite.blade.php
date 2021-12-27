@@ -69,7 +69,7 @@
                               </ul>
                               <ul class="tab-04">
                                 <li>
-                                    <p>문의글</p>
+                                    <p>문의 글</p>
                                     <textarea placeholder="내용을 입력해 주세요"></textarea>
                                 </li>
                             </ul>

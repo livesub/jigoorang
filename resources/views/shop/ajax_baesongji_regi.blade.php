@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="adress_input04">
-                    <div id="wrap_c" class="adress_pop"><!-- 다음 우편번호 찾기  -->
+                    <div id="wrap_c" class="adress_pop" style="height:100px;"><!-- 다음 우편번호 찾기  -->
                         <img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap_c" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" alt="접기 버튼">
                     </div>
 
@@ -42,9 +42,13 @@
             <div class="checkbox"><!-- 체크박스 시작 -->
                 @php
                     $default_chk = '';
-                    if($baesong_cnt == 0) $default_chk = 'checked';
+                    $default_disabled = '';
+                    if($baesong_cnt == 0){
+                        $default_chk = 'checked';
+                        $default_disabled = 'disabled';
+                    }
                 @endphp
-                  <input type="checkbox" name="ad_default" id="ad_default" value="1" {{ $default_chk }}>
+                  <input type="checkbox" name="ad_default" id="ad_default" value="1" {{ $default_chk }} {{ $default_disabled }}>
                   <label for="">기본배송지 등록 (이번부터 적용)</label>
             </div><!-- 체크박스 끝 -->
         </div>
@@ -100,6 +104,8 @@
             data : form_var,
             dataType : 'text',
             success : function(result){
+//alert(result);
+//return false;
                 if(result == "ok"){
                     //baesongji();
                     location.reload();

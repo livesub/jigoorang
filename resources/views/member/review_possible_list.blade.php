@@ -3,62 +3,96 @@
 @section('content')
 
 
-<div class='page-header'>
-      <h4>
-            마이페이지
-      </h4>
-</div>
-
-<table border=1>
-    <tr>
-        <td><span onclick="location.href='{{ route('mypage.review_possible_list') }}'">작성가능리뷰</a></td>
-        <td><span onclick="location.href='{{ route('mypage.review_my_list') }}'">내가쓴리뷰</span></td>
-    </tr>
-</table>
 
 
-<table border=1>
+    <!-- 서브 컨테이너 시작 -->
+    <div class="sub-container">
+
+        <!-- 위치 시작 -->
+        <div class="location">
+            <ul>
+                <li><a href="/">홈</a></li>
+                <li><a href="{{ route('mypage.index') }}">마이페이지</a></li>
+                <li><a href="{{ route('mypage.review_possible_list') }}">제품 평가 및 리뷰</a></li>
+            </ul>
+        </div>
+        <!-- 위치 끝 -->
+
+        <!-- 타이틀 시작 -->
+        <div class="title_area list">
+            <h2>제품 평가 및 리뷰</h2>
+        </div>
+        <!-- 타이틀 끝 -->
+
+        <!-- 고객센터 시작  -->
+        <div class="eval">
+
+            <div class="board mypage_list">
+                <!-- 리스트 시작 -->
+                <div class="board_wrap">
+                    <div class="tab_menu">
+                        <ul class="list_tab">
+                            <li class="is_on">
+                                <a href="{{ route('mypage.review_possible_list') }}" class="btn_list">작성 가능 리뷰</a>
+                            </li>
+                            <li>
+                                <a href="{{ route('mypage.review_my_list') }}" class="btn_list">내가 쓴 리뷰</a>
+                            </li>
+                        </ul>
+
+                        <div class="cont_area">
+                            <div id="tab1" class="cont cont_wrap">
+                                <div class="notie">삭제된 리뷰일 경우 확인이 불가합니다.</div>
     <form name="exp_form" id="exp_form" method="get" action="{{ route('mypage.review_possible_expwrite') }}">
     <input type="hidden" name="exp_id" id="exp_id">
     <input type="hidden" name="exp_app_id" id="exp_app_id">
     <input type="hidden" name="item_id" id="item_id">
     <input type="hidden" name="sca_id" id="sca_id">
     <input type="hidden" id="po_page">
-
-    <tr>
-        <td>[평가단선정]</td>
-    </tr>
-    <tr>
-        <td id="review_possible_list">
-
-        </td>
-    </tr>
-    <tr id="po_more">
-        <td><button type="button" id="addBtn" onclick="po_moreList();"><span>더보기</span></button></td>
-    </tr>
-    </form>
-</table>
+                                    <div class="cot_list" id="review_possible_list">
+                                        <h4 class="mt-20 mb-20">평가단 선정</h4>
+                                    </div>
+                                    <div class="cot_list" id="po_more">
+                                        <button class="btn-full-sd" type="button" id="addBtn" onclick="po_moreList();">작성가능 리뷰 더보기</button>
+                                    </div>
+</form>
 
 
 
-<table border=1>
+
+
+                                    <div class="line_15 bk"></div>
 <form name="shop_form" id="shop_form" method="get" action="{{ route('mypage.review_possible_shopwrite') }}">
 <input type="hidden" name="cart_id" id="cart_id">
 <input type="hidden" name="order_id" id="order_id">
 <input type="hidden" name="item_code" id="item_code">
 <input type="hidden" id="shop_page">
-    <tr>
-        <td>[쇼핑]</td>
-    </tr>
-    <tr>
-        <td id="review_my_list">
-        </td>
-    </tr>
-    <tr id="shop_more">
-        <td><button type="button" id="addBtn2" onclick="shop_moreList();"><span>더보기</span></button></td>
-    </tr>
+                                    <div class="cot_list" id="review_my_list">
+                                        <h4 class="mt-20 mb-20">쇼핑</h4>
+
+
+
+
+
+
+                                    </div>
+                                    <div class="cot_list" id="shop_more">
+                                        <button class="btn-full-sd" type="button" id="addBtn2" onclick="shop_moreList();">작성가능 리뷰 더보기</button>
+                                    </div>
 </form>
-</table>
+                            </div><!-- tab1 끝 -->
+
+
+                        </div>
+                    </div>
+                <!-- 고객센터 끝  -->
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- 서브 컨테이너 끝 -->
+
 
 <script>
     var today = new Date();
@@ -144,9 +178,5 @@
 		});
     }
 </script>
-
-
-
-
 
 @endsection

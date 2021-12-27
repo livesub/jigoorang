@@ -388,6 +388,15 @@ Route::post('board/commemtdelete/{tb_name}', [  //게시판 댓글 삭제 처리
     'uses' => 'App\Http\Controllers\board\BoardController@commemtdelete',
 ]);
 
+Route::get('terms_use', [  //이용약관
+    'as' => 'terms_use',
+    'uses' => 'App\Http\Controllers\info\InfoController@terms_use',
+]);
+
+Route::get('privacy', [  //개인정보
+    'as' => 'privacy',
+    'uses' => 'App\Http\Controllers\info\InfoController@privacy',
+]);
 
 
 /*** 프론트 메뉴 관리 */
