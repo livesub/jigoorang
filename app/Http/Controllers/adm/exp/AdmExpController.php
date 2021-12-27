@@ -106,7 +106,7 @@ class AdmExpController extends Controller
             }else{
                 for($k = 0; $k < 2; $k++){
                     $resize_width_file_tmp = explode("%%","360%%260");
-                    $resize_height_file_tmp = explode("%%","180%%80");
+                    $resize_height_file_tmp = explode("%%","180%%100");
 
                     $thumb_width = $resize_width_file_tmp[$k];
                     $thumb_height = $resize_height_file_tmp[$k];
@@ -183,7 +183,7 @@ class AdmExpController extends Controller
                 }else{
                     for($k = 0; $k < 2; $k++){
                         $resize_width_file_tmp = explode("%%","360%%260");
-                        $resize_height_file_tmp = explode("%%","180%%80");
+                        $resize_height_file_tmp = explode("%%","180%%100");
 
                         $thumb_width = $resize_width_file_tmp[$k];
                         $thumb_height = $resize_height_file_tmp[$k];

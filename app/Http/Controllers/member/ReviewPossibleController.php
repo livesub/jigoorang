@@ -85,7 +85,7 @@ class ReviewPossibleController extends Controller
                 })
             ->where([['b.exp_review_end', '>=', $now_date], ['a.user_id', Auth::user()->user_id], ['a.access_yn','y'], ['a.write_yn', 'n']]);
 
-        $pageScale  = 1;  //한페이지당 라인수
+        $pageScale  = 10;  //한페이지당 라인수
         if($page != "")
         {
             $start_num = $pageScale * ($page - 1);
