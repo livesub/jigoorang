@@ -97,7 +97,7 @@
                     </div>
 
                     <div class="mypage_box_02 solid" style="cursor:pointer" onclick="addressopenmodal_001('mypage'); baesongji();">
-                            배송지 관리
+                        배송지 관리
                     </div>
 
                 </div>
