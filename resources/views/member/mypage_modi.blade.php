@@ -83,11 +83,11 @@
                             </li>
                             <li>
                             <!--<input type="checkbox" id="terms_agree" name="terms_agree" checked disabled>-->
-                            <a href=""><label for="" class="line">약관동의 <span>(필수)</span></label></a><!-- 약관동의 페이지 링크 -->
+                            <a href="{{ route('terms_use') }}"><label for="" class="line">약관동의 <span>(필수)</span></label></a><!-- 약관동의 페이지 링크 -->
                             </li>
                             <li>
                             <!--<input type="checkbox" id="pro_agree" name="pro_agree" checked disabled>-->
-                            <a href=""><label for="" class="line">개인정보 보호방침 <span>(필수)</span></label></a><!-- 개인정보 보호 페이지 링크 -->
+                            <a href="{{ route('privacy') }}"><label for="" class="line">개인정보 보호방침 <span>(필수)</span></label></a><!-- 개인정보 보호 페이지 링크 -->
                             </li>
                         </form>
                         </ul>
