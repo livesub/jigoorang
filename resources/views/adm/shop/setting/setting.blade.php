@@ -126,14 +126,14 @@
         <td>WIDTH</td>
         <td>
             <input type="text" name="shop_img_width" value="{{ $shop_img_width }}" id="shop_img_width" size="30">
-            <br>(리사이징될 파일 넓이 - '%%'구분자사용)<br>예) 600%%290%%100
+            <br>(리사이징될 파일 넓이 - '%%'구분자사용)<br>예) 600%%290%%160
         </td>
     </tr>
     <tr>
         <td>HEIGHT</td>
         <td>
             <input type="text" name="shop_img_height" value="{{ $shop_img_height }}" id="shop_img_height" size="30">
-            <br>(리사이징될 파일 높이 - '%%'구분자사용)<br>예) 500%%250%%80
+            <br>(리사이징될 파일 높이 - '%%'구분자사용)<br>예) 500%%250%%140
         </td>
     </tr>
 </table>
