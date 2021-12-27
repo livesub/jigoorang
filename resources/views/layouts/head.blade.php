@@ -197,8 +197,8 @@
     <div class="footer">
         <div class="head">
             <ul>
-                <li><a href="">이용약관</a></li>
-                <li><a href="">개인정보처리방침</a></li>
+                <li><a href="{{ route('terms_use') }}">이용약관</a></li>
+                <li><a href="{{ route('privacy') }}">개인정보처리방침</a></li>
             </ul>
         </div>
         <div class="bottom">
