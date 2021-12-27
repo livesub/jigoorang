@@ -43,43 +43,33 @@
                         <div class="cont_area">
                             <div id="tab1" class="cont cont_wrap">
                                 <div class="notie">삭제된 리뷰일 경우 확인이 불가합니다.</div>
-    <form name="exp_form" id="exp_form" method="get" action="{{ route('mypage.review_possible_expwrite') }}">
-    <input type="hidden" name="exp_id" id="exp_id">
-    <input type="hidden" name="exp_app_id" id="exp_app_id">
-    <input type="hidden" name="item_id" id="item_id">
-    <input type="hidden" name="sca_id" id="sca_id">
-    <input type="hidden" id="po_page">
+                                <form name="exp_form" id="exp_form" method="get" action="{{ route('mypage.review_possible_expwrite') }}">
+                                <input type="hidden" name="exp_id" id="exp_id">
+                                <input type="hidden" name="exp_app_id" id="exp_app_id">
+                                <input type="hidden" name="item_id" id="item_id">
+                                <input type="hidden" name="sca_id" id="sca_id">
+                                <input type="hidden" id="po_page">
                                     <div class="cot_list" id="review_possible_list">
                                         <h4 class="mt-20 mb-20">평가단 선정</h4>
                                     </div>
                                     <div class="cot_list" id="po_more">
                                         <button class="btn-full-sd" type="button" id="addBtn" onclick="po_moreList();">작성가능 리뷰 더보기</button>
                                     </div>
-</form>
-
-
-
-
+                                </form>
 
                                     <div class="line_15 bk"></div>
-<form name="shop_form" id="shop_form" method="get" action="{{ route('mypage.review_possible_shopwrite') }}">
-<input type="hidden" name="cart_id" id="cart_id">
-<input type="hidden" name="order_id" id="order_id">
-<input type="hidden" name="item_code" id="item_code">
-<input type="hidden" id="shop_page">
+                                    <form name="shop_form" id="shop_form" method="get" action="{{ route('mypage.review_possible_shopwrite') }}">
+                                    <input type="hidden" name="cart_id" id="cart_id">
+                                    <input type="hidden" name="order_id" id="order_id">
+                                    <input type="hidden" name="item_code" id="item_code">
+                                    <input type="hidden" id="shop_page">
                                     <div class="cot_list" id="review_my_list">
                                         <h4 class="mt-20 mb-20">쇼핑</h4>
-
-
-
-
-
-
                                     </div>
                                     <div class="cot_list" id="shop_more">
                                         <button class="btn-full-sd" type="button" id="addBtn2" onclick="shop_moreList();">작성가능 리뷰 더보기</button>
                                     </div>
-</form>
+                                    </form>
                             </div><!-- tab1 끝 -->
 
 

@@ -96,7 +96,7 @@
                         <h3>나의 배송지</h3>
                     </div>
 
-                    <div class="mypage_box_02 solid" onclick="addressopenmodal_001('mypage'); baesongji();">
+                    <div class="mypage_box_02 solid" style="cursor:pointer" onclick="addressopenmodal_001('mypage'); baesongji();">
                             배송지 관리
                     </div>
 
