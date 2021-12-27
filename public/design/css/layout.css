@@ -303,7 +303,7 @@
   text-align: center;
 }
 .tabar ul li:nth-child(1) {
-  background: url("../recources/icons/icon-s-30-home.png") no-repeat;
+  background: url("../recources/icons/icon-s-30-home@3x.png") no-repeat;
   background-size: 30px 30px;
   background-position: center 10px;
 }
@@ -318,7 +318,7 @@
   background-position: center 10px;
 }
 .tabar ul li:nth-child(4) {
-  background: url("../recources/icons/icon-s-30-history.png") no-repeat;
+  background: url("../recources/icons/icon-s-30-history@3x.png") no-repeat;
   background-size: 30px 30px;
   background-position: center 10px;
 }
