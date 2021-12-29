@@ -195,7 +195,7 @@
             'num' : $('#num').val()
           },
           success: function(data) {
-            console.log(data);
+            //console.log(data);
             if(data.status == 'false'){
               alert(data.status_ment);
             }else{
@@ -204,7 +204,7 @@
             }
           },
           error: function(data) {
-            console.log("error==> " + data);
+            //console.log("error==> " + data);
             //초기화
             $(document).find('[name=user_pw]').val('');
             $(document).find('[name=user_pw_confirmation]').val('');

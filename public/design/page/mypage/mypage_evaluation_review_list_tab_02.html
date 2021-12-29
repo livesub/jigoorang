@@ -147,86 +147,17 @@
                 <div class="board_wrap">
                     <div class="tab_menu">
                         <ul class="list_tab">
-                            <li class="is_on">
-                                <a href="#tab1" class="btn_list">작성 가능 리뷰</a>
-                            </li>
                             <li>
-                                <a href="#tab2" class="btn_list">내가 쓴 리뷰</a>
+                                <a href="#" class="btn_list">작성 가능 리뷰</a>
+                            </li>
+                            <li class="is_on">
+                                <a href="#" class="btn_list">내가 쓴 리뷰</a>
                             </li>
                         </ul>
     
                         <div class="cont_area">
-                            <div id="tab1" class="cont cont_wrap">
-                                <div class="notie">삭제된 리뷰일 경우 확인이 불가합니다.</div>
-                                    <div class="cot_list">
-                                        <h4 class="mt-20 mb-20">평가단 선정</h4>
-
-                                        
-                                        <div class="cot_body">
-                                            <p class="cr_04 mb-20">2021.10.11</p>
-                                            <img src="../../recources/imgs/sample_img.png" alt="">
-                                            <div class="info">
-                                                <p>2021 가을 맞이 대나무 칫솔  평가단</p> 
-                                                <p>40,00명 대모집</p>
-                                            </div>
-                                            
-                                            <button class="btn-sd">리뷰작성</button>
-                                           
-                                        </div>
-
-                                        <div class="cot_body">
-                                            <p class="cr_04 mb-20">2021.10.11</p>
-                                            <img src="../../recources/imgs/sample_img.png" alt="">
-                                            <div class="info">
-                                                <p>2021 가을 맞이 대나무 칫솔  평가단</p> 
-                                                <p>40,00명 대모집</p>
-                                            </div>
-                                            <button class="btn-sd">리뷰작성</button>
-                                        </div>
-
-                                        <button class="btn-full-sd">작성가능 리뷰 더보기</button>
-                                    </div>
-
-                                        <div class="line_15 bk"></div>
-                                    
-                                    <div class="cot_list">
-                                        <h4 class="mt-20 mb-20">쇼핑</h4>
-
-                                        <div class="cot_body">
-                                            <p class="cr_04 mb-20">2021.10.11</p>
-                                            <img src="../../recources/imgs/sample_img.png" alt="">
-                                            <div class="info">
-                                                <p>2021 가을 맞이 대나무 칫솔  평가단</p> 
-                                                <p>40,00명 대모집</p>
-                                            </div>
-                                         
-                                            <button class="btn-sd">리뷰작성</button>
-                                        </div>
-                                        <div class="cot_body">
-                                            <p class="cr_04 mb-20">2021.10.11</p>
-                                            <img src="../../recources/imgs/sample_img.png" alt="">
-                                            <div class="info">
-                                                <p>2021 가을 맞이 대나무 칫솔  평가단</p> 
-                                                <p>40,00명 대모집</p>
-                                            </div>
-                                            <button class="btn-sd">리뷰작성</button>
-                                        </div>
-                                        <div class="cot_body">
-                                            <p class="cr_04 mb-20">2021.10.11</p>
-                                            <img src="../../recources/imgs/sample_img.png" alt="">
-                                            <div class="info">
-                                                <p>2021 가을 맞이 대나무 칫솔  평가단</p> 
-                                                <p>40,00명 대모집</p>
-                                            </div>
-                                            <button class="btn-sd">리뷰작성</button>
-                                        </div>
-                                        <button class="btn-full-sd">작성가능 리뷰 더보기</button>
-                                    </div>
-                            </div><!-- tab1 끝 -->
-
-
                             <!-- tab2 시작 -->
-                            <div id="tab2" class="cont cont_wrap">
+                            <div class="cont cont_wrap">
                               <div class="notie">삭제된 리뷰일 경우 확인이 불가합니다.</div>
                               <div class="fleter">
                                 <button class="on">1개월내</button><!-- 활성일때 class="on"-->
@@ -607,15 +538,14 @@
 </div>
 <!-- <script src="../../js/star.js"></script> -->
 <script src="../../js/sidenav.js"></script>
-<script src="../../js/tabar.js"></script>
 <script src="../../js/star.js"></script>
 <script>
 function toggle() {
-  var x = document.getElementById("toggle")
-  if (x.style.display === "none") {
-    x.style.display = "block";
+  var tog = document.getElementById("toggle")
+  if (tog.style.display === "none") {
+    tog.style.display = "block";
   } else {
-    x.style.display = "none";
+    tog.style.display = "none";
   }
 }
 
