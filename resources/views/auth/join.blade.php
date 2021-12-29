@@ -50,13 +50,13 @@
                       <span role='alert'>{{ $message }}</span>
                   @enderror
 
-                  <input name='user_pw' id='user_pw' type='password' class='@error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder="비밀번호를 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(%$?^()제외)">
+                  <input name='user_pw' id='user_pw' type='password' class='@error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder="비밀번호 입력(영문,숫자,특문조합 8~20자(%$?^()제외)">
 
                   @error('user_pw')
                       <span role='alert'>{{ $message }}</span>
                   @enderror
 
-                  <input name='user_pw_confirmation' id='user_pw_confirmation' type='password' class='@error('user_pw_confirmation') is-invalid @enderror' placeholder="비밀번호를 다시 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(%$?^()제외)">
+                  <input name='user_pw_confirmation' id='user_pw_confirmation' type='password' class='@error('user_pw_confirmation') is-invalid @enderror' placeholder="위 비밀번호를 다시 입력해 주세요">
 
                   @error('user_pw_confirmation')
                       <span role='alert'>{{ $message }}</span>
@@ -222,9 +222,21 @@
           $("#phone_certificate" ).prop('readonly', false);
           $("#check_ctf" ).prop('disabled', false);
         }else if(result[0] == '2'){
-          alert("{{ __('auth.already_reg_number') }}");
+          if (confirm("{{ __('auth.already_reg_number') }}") == true){    //확인
+            location.href = "{{ route('findIdPwView') }}";
+          }else{   //취소
+            return false;
+          }
+
+        }else if(result[0] == '3'){
+          alert("고객님은 카카오를 이용하여 로그인 가능합니다.");
+          return false;
+        }else if(result[0] == '4'){
+          alert("고객님은 네이버를 이용하여 로그인 가능합니다.");
+          return false;
         }else{
           alert("{{ __('auth.failed_send_sms') }}");
+          return false;
           //console.log(result[0]);
         }
       },

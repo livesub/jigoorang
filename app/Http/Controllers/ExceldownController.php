@@ -53,6 +53,12 @@ class ExceldownController extends Controller
                 <td><b>아이디</b></td>
                 <td><b>이름</b></td>
                 <td><b>휴대폰번호</b></td>
+                <td><b>참여이유</b></td>
+                <td><b>배송지수령인</b></td>
+                <td><b>배송지수령인휴대폰번호</b></td>
+                <td><b>배송지</b></td>
+                <td><b>배송메모</b></td>
+                <td><b>선정유무</b></td>
             </tr>
         ";
 
@@ -60,34 +66,16 @@ class ExceldownController extends Controller
             $user_info = DB::table('users')->select('user_phone')->where('user_id', $exp_app_list->user_id)->first();
             $dsp_html .= "
                 <tr>
-                    <td>$k</td>
+                    <td style='text-align:left;'>$k</td>
                     <td>$exp_app_list->user_id</td>
                     <td>$exp_app_list->user_name</td>
                     <td style=mso-number-format:'\@'>$user_info->user_phone</td>
-                </tr>
-
-                <tr>
-                    <td>평가단 참여이유</td>
-                    <td colspan='3'>$exp_app_list->reason_memo</td>
-                </tr>
-                <tr>
-                    <td>배송지 수령인</td>
-                    <td colspan='3'>$exp_app_list->ad_name</td>
-                </tr>
-                <tr>
-                    <td>배송지 수령인 휴대폰번호</td>
-                    <td colspan='3' style=mso-number-format:'\@'>$exp_app_list->ad_hp</td>
-                </tr>
-                <tr>
-                    <td>배송지</td>
-                    <td colspan='3' style=mso-number-format:'\@'>(".$exp_app_list->ad_zip1.") ".$exp_app_list->ad_addr1." ".$exp_app_list->ad_addr2." ".$exp_app_list->ad_addr3."</td>
-                </tr>
-                <tr>
-                    <td>배송메모</td>
-                    <td colspan='3'>$exp_app_list->shipping_memo</td>
-                </tr>
-                <tr>
-                    <td style='height:30px;' colspan='4'></td>
+                    <td>$exp_app_list->reason_memo</td>
+                    <td>$exp_app_list->ad_name</td>
+                    <td style=mso-number-format:'\@'>$exp_app_list->ad_hp</td>
+                    <td style=mso-number-format:'\@'>(".$exp_app_list->ad_zip1.") ".$exp_app_list->ad_addr1." ".$exp_app_list->ad_addr2." ".$exp_app_list->ad_addr3."</td>
+                    <td>$exp_app_list->shipping_memo</td>
+                    <td>$exp_app_list->access_yn</td>
                 </tr>
             ";
             $k++;

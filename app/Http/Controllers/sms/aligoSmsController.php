@@ -25,11 +25,15 @@ class aligoSmsController extends Controller
         $exists = $this->userService->find_user_to_phone_number($user_phone);
 
         if(($user_phone != "" || $user_phone != null) && $exists == ""){
-
             $result = $this->smsService->auth_certification($user_phone);
             // return $user_phone;
         }else{
             $result = ['2'];
+            if($exists->user_platform_type == "kakao"){
+                $result = ['3'];
+            }else if($exists->user_platform_type == "naver"){
+                $result = ['4'];
+            }
 
             return $result;
         }

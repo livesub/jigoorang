@@ -26,7 +26,7 @@ class CreateShopordertempsTable extends Migration
             $table->integer('od_receipt_price')->default(0)->comment('결제금액');
             $table->integer('od_receipt_point')->default(0)->comment('결제 포인트');
             $table->integer('tot_item_point')->default(0)->comment('각 상품의 포인트 합');
-            $table->char('ad_zip1')->length(5)->comment('받으시는 분 우편번호');
+            $table->string('ad_zip1')->comment('받으시는 분 우편번호');
             $table->string('od_ip')->comment('주문자IP');
             $table->timestamps();
             $table->index(['order_id','od_id','user_id']);

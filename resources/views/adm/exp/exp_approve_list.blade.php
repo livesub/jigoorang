@@ -97,7 +97,8 @@
 
             $user_info = DB::table('users')->where('user_id', $exp_app_list->user_id)->first();
  
-	 @endphp
+
+        @endphp
 
     <tr>
         <td colspan=6>
