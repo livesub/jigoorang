@@ -44,7 +44,7 @@ class ExceldownController extends Controller
 
         <table>
             <tr>
-                <td><b>체험단명 : ".stripslashes($exp_info->title)."_".$now_date."</b></td>
+                <td colspan='9'><b>체험단명 : ".stripslashes($exp_info->title)."_".$now_date."</b></td>
             </tr>
         </table>
         <table>
