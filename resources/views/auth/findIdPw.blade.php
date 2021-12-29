@@ -62,7 +62,7 @@
 
         if(user_phone_for_id != ""){
             $.ajax({
-                //아래 headers에 반드시 token을 추가해줘야 한다.!!!!!
+                //아래 headers에 반드시 token을 추가해줘야 한다.!!!!!s
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 type: 'post',
                 url: '{{ route('findId') }}',
