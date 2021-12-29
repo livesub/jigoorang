@@ -50,13 +50,13 @@
                       <span role='alert'>{{ $message }}</span>
                   @enderror
 
-                  <input name='user_pw' id='user_pw' type='password' class='@error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder="비밀번호를 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(%$?^()제외)">
+                  <input name='user_pw' id='user_pw' type='password' class='@error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder="비밀번호 입력(영문,숫자,특문조합 8~20자(%$?^()제외)">
 
                   @error('user_pw')
                       <span role='alert'>{{ $message }}</span>
                   @enderror
 
-                  <input name='user_pw_confirmation' id='user_pw_confirmation' type='password' class='@error('user_pw_confirmation') is-invalid @enderror' placeholder="비밀번호를 다시 입력해 주세요(영문, 숫자, 특수문자 조합 8~20자(%$?^()제외)">
+                  <input name='user_pw_confirmation' id='user_pw_confirmation' type='password' class='@error('user_pw_confirmation') is-invalid @enderror' placeholder="위 비밀번호를 다시 입력해 주세요">
 
                   @error('user_pw_confirmation')
                       <span role='alert'>{{ $message }}</span>
