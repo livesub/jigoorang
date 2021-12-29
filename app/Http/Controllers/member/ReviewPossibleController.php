@@ -461,6 +461,7 @@ class ReviewPossibleController extends Controller
         $CustomUtils = new CustomUtils;
 
         $review_save_id = $request->input('review_save_id');
+
         $cart_id        = $request->input('cart_id');
         $order_id       = $request->input('order_id');
         $item_code      = $request->input('item_code');
@@ -608,11 +609,13 @@ class ReviewPossibleController extends Controller
 
         if($temporary_yn == 'y'){
             $ment = '리뷰가 수정되었습니다.';
-            $save_ok = redirect(route('mypage.review_possible_list'))->with('alert_messages', $ment);
+            //$save_ok = redirect(route('mypage.review_possible_list'))->with('alert_messages', $ment);
+            $save_ok = response()->json(['route' => route('mypage.review_possible_list'), 'status' => 'temp_save'], 200, [], JSON_PRETTY_PRINT);
         }else{
             $ment = '리뷰가 등록되었습니다.';
             $route_link = route("mypage.review_possible_list");
             $route_my_link = route("mypage.review_my_list");
+/*
             $save_ok = '
                 <script>
                     if (confirm("리뷰가 등록되었습니다.\\n해당페이지에서 확인하시겠습니까?") == true){    //확인
@@ -622,6 +625,8 @@ class ReviewPossibleController extends Controller
                     }
                 </script>
             ';
+*/
+            $save_ok = response()->json(['route' => route('mypage.review_possible_list'), 'status' => 'save_ok', 'my_page' => route('mypage.review_my_list')], 200, [], JSON_PRETTY_PRINT);
 
             //포인트 지급 처리
             $CustomUtils->insert_point(Auth::user()->user_id, $setting->text_point, $point_ment1, $point_key1, '', 0);
@@ -645,8 +650,19 @@ class ReviewPossibleController extends Controller
             $CustomUtils->item_average($item_code);
         }
 
+        /*
         if($update_result) return $save_ok;
         else return redirect(route('mypage.review_possible_list'))->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.');
+        */
+        if($update_result){
+            //echo $save_ok;
+            return $save_ok;
+            exit;
+        }else{
+            return response()->json(['route' => route('mypage.review_possible_list'),'status' => 'error'], 200, [], JSON_PRETTY_PRINT);
+            //echo "error";
+            exit;
+        }
     }
 
     /*** 체험단 관련 처리 */
@@ -722,9 +738,9 @@ class ReviewPossibleController extends Controller
                     $imgs_tmp .= "'".$review_img[2]."',";
                     $img_key .= $review_save_imgs_info->id."@@";
                 }
-dd($img_key);
-                $imgs_tmp = substr($imgs_tmp, 0, -1);
 
+                $imgs_tmp = substr($imgs_tmp, 0, -1);
+                $img_key = substr($img_key, 0, -2);
             }
 
             return view('member.review_possible_modify',[
@@ -738,6 +754,7 @@ dd($img_key);
                 'exp_app_id'        => $exp_app_id,
                 'sca_id'            => $sca_id,
                 'imgs_tmp'          => $imgs_tmp,
+                'img_key'           => $img_key,
                 'review_save_imgs_cnt'      => $review_save_imgs_cnt,
                 'review_save_imgs_infos'    => $review_save_imgs_infos,
             ]);

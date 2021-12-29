@@ -1,3 +1,4 @@
+//const { exists } = require("laravel-mix/src/File");
 
 let imageMap = {};
 function review_save(review_type){

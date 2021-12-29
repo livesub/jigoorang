@@ -54,12 +54,15 @@ class socialLoginController extends BaseController
                 if($provider == "kakao"){
                     //dd($social_info->user['kakao_account']);
                     $user_kakao = $social_info->user['kakao_account'];
-
+                    $user_gender = '';
+/*
+승인 나기 전까지 잠시 막아둠(211229)
                     if($user_kakao['gender'] == 'male'){
                         $user_gender = 'M';
                     }else{
                         $user_gender = 'W';
                     }
+*/
                     $user_birth = $user_kakao['birthyear'].$user_kakao['birthday'];
                     //$user_phone = "";
                     $phone_tmp = explode(" ", $user_kakao['phone_number']);
@@ -75,7 +78,8 @@ class socialLoginController extends BaseController
 //$user_name = '';
                 }else if($provider == "naver"){
                     $user_naver = $social_info->user['response'];
-                    $user_gender = $user_naver['gender'];
+                    //$user_gender = $user_naver['gender'];     승인 나기 전까지 잠시 막아둠(211229)
+                    $user_gender = '';
                     $user_phone = str_replace("-", "", $user_naver['mobile']);
                     $user_birth = $user_naver['birthyear'].str_replace("-", "", $user_naver['birthday']);
                     $user_name =  $social_info->name;
