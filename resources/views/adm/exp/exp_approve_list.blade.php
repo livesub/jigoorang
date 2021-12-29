@@ -96,6 +96,7 @@
             if($exp_app_list->access_yn == 'y') $checked = 'checked';
 
             $user_info = DB::table('users')->where('user_id', $exp_app_list->user_id)->first();
+
         @endphp
 
     <tr>

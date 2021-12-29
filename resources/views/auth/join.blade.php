@@ -222,9 +222,21 @@
           $("#phone_certificate" ).prop('readonly', false);
           $("#check_ctf" ).prop('disabled', false);
         }else if(result[0] == '2'){
-          alert("{{ __('auth.already_reg_number') }}");
+          if (confirm("{{ __('auth.already_reg_number') }}") == true){    //확인
+            location.href = "{{ route('findIdPwView') }}";
+          }else{   //취소
+            return false;
+          }
+
+        }else if(result[0] == '3'){
+          alert("고객님은 카카오를 이용하여 로그인 가능합니다.");
+          return false;
+        }else if(result[0] == '4'){
+          alert("고객님은 네이버를 이용하여 로그인 가능합니다.");
+          return false;
         }else{
           alert("{{ __('auth.failed_send_sms') }}");
+          return false;
           //console.log(result[0]);
         }
       },

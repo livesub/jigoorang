@@ -53,6 +53,7 @@ class socialLoginController extends BaseController
                 $social_info = Socialite::driver($provider)->user();
                 if($provider == "kakao"){
                     //dd($social_info->user['kakao_account']);
+
                     $user_kakao = $social_info->user['kakao_account'];
                     $user_gender = '';
 /*
@@ -72,12 +73,14 @@ class socialLoginController extends BaseController
                     }else{
                         $user_phone = "0".str_replace("-", "", $phone_tmp[1]);
                     }
-                    $user_name =  $user_kakao['name'];
+
+                    $user_name =  $user_kakao['profile']['nickname'];   //카카오는 이름 대신 닉네임으로 저장
 //전화번호와 이름 값이 없을때를 위한 테스트(211207)
 //$user_phone = "";
 //$user_name = '';
                 }else if($provider == "naver"){
                     $user_naver = $social_info->user['response'];
+//dd($user_naver);
                     //$user_gender = $user_naver['gender'];     승인 나기 전까지 잠시 막아둠(211229)
                     $user_gender = '';
                     $user_phone = str_replace("-", "", $user_naver['mobile']);

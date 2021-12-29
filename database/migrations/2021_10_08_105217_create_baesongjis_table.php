@@ -21,7 +21,7 @@ class CreateBaesongjisTable extends Migration
             $table->string('ad_name')->comment('받으시는 분 이름');
             $table->string('ad_tel')->comment('받으시는 분 전화번호');
             $table->string('ad_hp')->comment('받으시는 분 휴대폰번호');
-            $table->char('ad_zip1')->length(5)->comment('받으시는 분 우편번호');
+            $table->string('ad_zip1')->comment('받으시는 분 우편번호');
             $table->string('ad_addr1')->comment('받으시는 분 기본주소');
             $table->string('ad_addr2')->comment('받으시는 분 상세주소');
             $table->string('ad_addr3')->comment('받으시는 분 주소 참고 항목');

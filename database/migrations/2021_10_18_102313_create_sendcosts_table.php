@@ -16,8 +16,8 @@ class CreateSendcostsTable extends Migration
         Schema::create('sendcosts', function (Blueprint $table) {
             $table->id()->comment('순번');
             $table->string('sc_name')->comment('지역명');
-            $table->char('sc_zip1')->length(5)->comment('우편번호 시작');
-            $table->char('sc_zip2')->length(5)->comment('우편번호 끝');
+            $table->string('sc_zip1')->comment('우편번호 시작');
+            $table->string('sc_zip2')->comment('우편번호 끝');
             $table->integer('sc_price')->default(0)->comment('추가배송비');
             $table->timestamps();
             $table->index(['sc_zip1','sc_zip2']);

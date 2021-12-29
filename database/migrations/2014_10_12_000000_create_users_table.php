@@ -33,7 +33,7 @@ class CreateUsersTable extends Migration
             $table->string('user_platform_type')->nullable()->comment('소셜 로그인 방식');
             $table->timestamp('user_email_verified_at')->nullable();
 
-            $table->integer('user_zip')->length(5)->default(0)->comment('우편번호');
+            $table->string('user_zip')->default(0)->comment('우편번호');
             $table->string('user_addr1')->comment('주소');
             $table->string('user_addr2')->comment('상세주소');
             $table->string('user_addr3')->comment('참고 항목');
