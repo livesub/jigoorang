@@ -105,12 +105,23 @@
     }
 
     function cart_review(cart_id, order_id, item_code, order_pay_date){
-        var arr = order_pay_date.split('-');
-        var dat = new Date(arr[0], arr[1], arr[2]);
-        var date_2day = dat.getFullYear() + "-" + ("0" + dat.getMonth()).slice(-2) + "-" + ("0" + (dat.getDate() + 2)).slice(-2);
+        var dat = new Date(order_pay_date);
+        const year1 = dat.getFullYear();
+        const month1 = dat.getMonth();
+        const day1 = dat.getDate() + 2; //2일 후 부터 작성 가능
+        const day2 = dat.getDate() + 30; //30일 이내
 
-        if(todayString < date_2day){
-            alert("구매 리뷰 작성 가능일은 " + date_2day + "입니다.");
+        const new_2day = new Date(year1, month1, day1);
+        const new_30day = new Date(year1, month1, day2);
+
+        var date_2day = new_2day.getFullYear() + '-' + ("0" + (new_2day.getMonth() + 1)).slice(-2) + '-' + ("0" + new_2day.getDate()).slice(-2);
+        var date_30day = new_30day.getFullYear() + '-' + ("0" + (new_30day.getMonth() + 1)).slice(-2) + '-' + ("0" + new_30day.getDate()).slice(-2);
+
+        if(todayString > date_30day){
+            alert("평가 가능 기간은 " + date_30day + "까지 입니다.");
+            return false;
+        }else if(todayString < date_2day){
+            alert("평가 가능 기간은 " + date_2day + "입니다.");
             return false;
         }else{
             $("#cart_id").val(cart_id);
