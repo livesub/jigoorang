@@ -2,6 +2,8 @@
 
 @section('content')
 
+<script src="{{ asset('/design/js/tabar.js') }}"></script>
+<script src="{{ asset('/design/js/star.js') }}"></script>
 
     <!-- 서브 컨테이너 시작 -->
     <div class="sub-container">
@@ -94,169 +96,24 @@
                             <input type="hidden" id="po_page">
                             <input type="hidden" id="shop_page">
 
-                              <div class="cot_list" id="review_my_exp_list">
+                            <div class="cot_list" id="review_my_exp_list">
                                 <h4 class="mt-20 mb-20">평가단 선정</h4>
 
-                                <button class="btn-full-sd">내가 쓴 리뷰 더보기</button>
+                            </div>
+                            <div class="cot_list" id="po_more">
+                                <button class="btn-full-sd" type="button" id="addBtn" onclick="po_moreList();">내가 쓴 리뷰 더보기</button>
                             </div>
 
-                                <div class="line_15 bk"></div>
+                            <div class="line_15 bk"></div>
 
-                            <div class="cot_list">
+
+
+                            <div class="cot_list" id="review_my_shop_list">
                                 <h4 class="mt-20 mb-20">쇼핑</h4>
-
-                                <div class="cot_body">
-                                    <p class="cr_04 mb-20">2021.10.11</p>
-                                    <img src="../../recources/imgs/sample_img.png" alt="">
-                                    <div class="info tab">
-                                        <div class="rm_v">삭제된리뷰</div>
-                                        <p>2021 가을 맞이 대나무 칫솔  평가단</p>
-                                        <p>40,00명 대모집</p>
-                                    </div>
-
-                                  <div class="cot_review mt-20 mb-20">
-                                      <div class="cot_id_day mb-20">
-                                          <p class="cot_id">jig*****</p>
-                                          <p class="cot_day">2021-10-10</p>
-                                      </div>
-                                      <div class="cot_box">
-                                          <div class="cot_rating">
-                                            <div class="cot_rating_02">
-                                                <span>
-                                                  <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                  <p class="bold">3.50</p>
-                                                </span>
-                                                <span>
-                                                    <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                    <p class="bold">3.50</p>
-                                                </span>
-                                                <span>
-                                                    <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                    <p class="bold">3.50</p>
-                                                </span>
-                                                <span>
-                                                    <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                    <p class="bold">3.50</p>
-                                                </span>
-                                            </div>
-                                            <div class="cot_rating_01" id="project_1">
-                                                <span>사용후 만족도</span>
-                                                <div class="inline">
-                                                    <div class="stars-outer">
-                                                        <div class="stars-inner"></div>
-                                                    </div>
-                                                    <p class="number"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                      </div>
-
-                                      <div class="cot_review_text">
-                                            <p>포장도 깔끔하고 배송도 빠르고 제품도 맘에 들어요.<br>
-                                            향이 너무 좋습니다.
-                                            </p>
-
-                                        <div class="cot_more" onclick="toggle()">
-                                            <p>더보기</p>
-                                            <span class="arr_bt"></span>
-                                        </div>
-
-                                        <div id="toggle" class="toggle">
-                                            <p>지난번에 써보고 좋아서 다시 한번 주문했어요. <br>
-                                            사람들이 추천하는 이유가 있는듯 합니다.<br>
-                                            </p>
-
-                                            <div class="cot_photo">
-                                                <img src="../../recources/imgs/sample_img.png" alt="">
-                                                <img src="../../recources/imgs/sample_img.png" alt="">
-                                                <img src="../../recources/imgs/sample_img.png" alt="">
-                                                <img src="../../recources/imgs/sample_img.png" alt="">
-                                                <img src="../../recources/imgs/sample_img.png" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                  </div>
-
-
-                                </div>
-
-
-                                <div class="cot_body">
-                                    <p class="cr_04 mb-20">2021.10.11</p>
-                                    <img src="../../recources/imgs/sample_img.png" alt="">
-                                    <div class="info tab">
-                                        <div class="rm_v">삭제된리뷰</div>
-                                        <p>2021 가을 맞이 대나무 칫솔  평가단</p>
-                                        <p>40,00명 대모집</p>
-                                    </div>
-
-                                  <div class="cot_review mt-20 mb-20">
-                                      <div class="cot_id_day mb-20">
-                                          <p class="cot_id">jig*****</p>
-                                          <p class="cot_day">2021-10-10</p>
-                                      </div>
-                                      <div class="cot_box">
-                                          <div class="cot_rating">
-                                            <div class="cot_rating_02">
-                                                <span>
-                                                  <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                  <p class="bold">3.50</p>
-                                                </span>
-                                                <span>
-                                                    <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                    <p class="bold">3.50</p>
-                                                </span>
-                                                <span>
-                                                    <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                    <p class="bold">3.50</p>
-                                                </span>
-                                                <span>
-                                                    <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                    <p class="bold">3.50</p>
-                                                </span>
-                                            </div>
-                                            <div class="cot_rating_01" id="project_1">
-                                                <span>사용후 만족도</span>
-
-                                                <div class="inline">
-                                                    <div class="stars-outer">
-                                                        <div class="stars-inner"></div>
-                                                    </div>
-                                                    <p class="number"></p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                      </div>
-
-                                      <div class="cot_review_text">
-                                            <p>포장도 깔끔하고 배송도 빠르고 제품도 맘에 들어요.<br>
-                                            향이 너무 좋습니다.
-                                            </p>
-
-                                        <div class="cot_more" onclick="toggle()">
-                                            <p>더보기</p>
-                                            <span class="arr_bt"></span>
-                                        </div>
-
-                                        <div id="toggle" class="toggle">
-                                            <p>지난번에 써보고 좋아서 다시 한번 주문했어요. <br>
-                                            사람들이 추천하는 이유가 있는듯 합니다.<br>
-                                            </p>
-
-                                            <div class="cot_photo">
-                                                <img src="../../recources/imgs/sample_img.png" alt="">
-                                                <img src="../../recources/imgs/sample_img.png" alt="">
-                                                <img src="../../recources/imgs/sample_img.png" alt="">
-                                                <img src="../../recources/imgs/sample_img.png" alt="">
-                                                <img src="../../recources/imgs/sample_img.png" alt="">
-                                            </div>
-                                        </div>
-                                    </div>
-                                  </div>
-
-
-                                </div>
-                                <button class="btn-full-sd">내가 쓴 리뷰 더보기</button>
+                            </div>
+                            <div class="cot_list" id="shop_more">
+                                <button class="btn-full-sd" type="button" id="addBtn2" onclick="shop_moreList();">내가 쓴 리뷰 더보기</button>
+                            </div>
                             </div>
 
                             </div>
@@ -286,6 +143,7 @@
                 'date_type' : '{{ $date_type }}',
 			},
 			success: function(html){
+
                 //console.log(html);
                 $("#review_my_exp_list").append(html);
                 return;
@@ -321,7 +179,44 @@
 
 
 
+<script>
+$(document).ready(function(){
 
+    $('.box').each(function(){
+        var content = $(this).children('.text_content');
+        var content_txt = content.text();
+        var content_txt_short = content_txt.substring(0,500)+"...";
+        var btn_more = $('<a href="javascript:void(0)" class="cot_more">더보기</a>');
+
+
+        $(this).append(btn_more);
+
+        if(content_txt.length >= 100){
+            content.html(content_txt_short)
+
+        }else{
+            btn_more.hide()
+        }
+
+        btn_more.click(toggle_content);
+
+        function toggle_content(){
+            if($(this).hasClass('short')){
+                // 접기 상태
+                $(this).html('더보기');
+                content.html(content_txt_short)
+                $(this).removeClass('short');
+            }else{
+                // 더보기 상태
+                $(this).html('접기');
+                content.html(content_txt);
+                $(this).addClass('short');
+
+            }
+        }
+    });
+});
+</script>
 
 
 @endsection

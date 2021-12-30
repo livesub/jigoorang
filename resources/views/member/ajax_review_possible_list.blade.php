@@ -11,9 +11,9 @@
                                                 }
 
                                                 $bb = substr($exp_appinfo->regi_date, 0, 10);
-                                                $review_exp_temporary_yn = DB::table('review_saves')->where([['exp_id', $exp_appinfo->id], ['exp_app_id', $exp_appinfo->exp_app_id], ['user_id', Auth::user()->user_id], ['temporary_yn', 'n']])->count();
+                                                //$review_exp_temporary_yn = DB::table('review_saves')->where([['exp_id', $exp_appinfo->id], ['exp_app_id', $exp_appinfo->exp_app_id], ['user_id', Auth::user()->user_id], ['temporary_yn', 'n']])->count();
                                             @endphp
-                                        @if($review_exp_temporary_yn == 0)
+                                        {{-- @if($review_exp_temporary_yn == 0) --}}
                                                 @php
                                                     $review = DB::table('review_saves')->select('temporary_yn')->where([['exp_id', $exp_appinfo->id], ['exp_app_id', $exp_appinfo->exp_app_id], ['user_id', Auth::user()->user_id]])->count();
                                                     if($review == '1') $btn_ment = '임시저장중';
@@ -30,7 +30,7 @@
 
                                         </div>
 
-                                        @endif
+                                        {{-- @endif --}}
                                         @endforeach
                                     @else
                                         <div class="list-none">
