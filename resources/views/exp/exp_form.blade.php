@@ -231,8 +231,7 @@
 		var content = $(this).val();
         //var srtlength = getTextLength(content);
         var srtlength = content.length;
-alert(srtlength);
-return false;
+
         $("#textLengthCheck").html("(" + srtlength + " 자 / 최대 300자)"); //실시간 글자수 카운팅
 
 		if (srtlength > 300) {
