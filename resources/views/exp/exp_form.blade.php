@@ -231,7 +231,8 @@
 		var content = $(this).val();
         //var srtlength = getTextLength(content);
         var srtlength = content.length;
-
+alert(srtlength);
+return false;
         $("#textLengthCheck").html("(" + srtlength + " 자 / 최대 300자)"); //실시간 글자수 카운팅
 
 		if (srtlength > 300) {
@@ -335,7 +336,7 @@
             return false;
         }
 
-        if(form_text.length < 30 || form_text.length >= 300){
+        if(form_text.length < 30 || form_text.length > 300){
             alert('평가단 참여이유를 30자 이상~ 300자 이내로 작성해 주세요.');
             $('#form_text').focus();
             return false;
