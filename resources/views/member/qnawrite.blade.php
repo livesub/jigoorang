@@ -11,7 +11,7 @@
             <ul>
                 <li><a href="/">홈</a></li>
                 <li><a href="{{ route('mypage.index') }}">마이페이지</a></li>
-                <li><a href="{{ ../../page/mypage/mypage_evaluation_list.html }}">1:1 문의 내역 / 답변</a></li>
+                <li><a href="{{ route('customer_center') }}">1:1 문의 내역 / 답변</a></li>
             </ul>
         </div>
         <!-- 위치 끝 -->
