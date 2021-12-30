@@ -83,10 +83,7 @@ class ReviewPossibleController extends Controller
             ->join('exp_list as b', function($join) {
                     $join->on('a.exp_id', '=', 'b.id');
                 })
-            ->join('review_saves as c', function($join) {
-                $join->on('a.exp_id', '=', 'c.exp_id');
-            })
-            ->where([['b.exp_review_end', '>=', $now_date], ['a.user_id', Auth::user()->user_id], ['a.access_yn','y'], ['a.write_yn', 'n'], ['c.temporary_yn', 'y']]);
+            ->where([['b.exp_review_end', '>=', $now_date], ['a.user_id', Auth::user()->user_id], ['a.access_yn','y'], ['a.write_yn', 'n']]);
 
         $pageScale  = 10;  //한페이지당 라인수
         if($page != "")
@@ -129,10 +126,7 @@ class ReviewPossibleController extends Controller
             ->leftjoin('shopcarts as b', function($join) {
                 $join->on('a.order_id', '=', 'b.od_id');
                 })
-            ->leftjoin('review_saves as c', function($join) {
-                $join->on('b.id', '=', 'c.cart_id');
-            })
-            ->where([['a.user_id', Auth::user()->user_id], ['b.sct_qty','!=', '0'], ['b.review_yn', 'n'], ['b.sct_status', '!=', '취소'], ['c.temporary_yn', 'y']])
+            ->where([['a.user_id', Auth::user()->user_id], ['b.sct_qty','!=', '0'], ['b.review_yn', 'n'], ['b.sct_status', '!=', '취소']])
             ->where(DB::raw('a.created_at + INTERVAL 30 DAY'), '>=', now());
 
         $pageScale  = 10;  //한페이지당 라인수

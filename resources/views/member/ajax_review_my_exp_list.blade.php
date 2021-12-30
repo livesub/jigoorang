@@ -88,6 +88,7 @@
                                       <div class="cot_review_text box">
                                         <input type="hidden" id="con_all_{{ $review_saves_exp_info->id }}" value="{!! nl2br($review_saves_exp_info->review_content) !!}">
                                         <input type="hidden" id="short_type_{{ $review_saves_exp_info->id }}">
+                                        <input type="hidden" id="short_con_{{ $review_saves_exp_info->id }}">
 
                                         <div class="text_content{{ $review_saves_exp_info->id }}" id="content_{{ $review_saves_exp_info->id }}">
                                             {!! nl2br($review_saves_exp_info->review_content) !!}
@@ -114,6 +115,7 @@
                                             var content_val = $.trim($("#content_"+con_val).text());
                                             var content_short = content_val.substring(0,500)+"...";
                                             $("#content_"+con_val).html(content_short);
+                                            $("#short_con_"+{{ $review_saves_exp_info->id }}).val(content_short);
                                         </script>
                                     </div>
                                 </div>
@@ -143,20 +145,11 @@
             $("#short_type_"+num).val('short');
         }else{
             var con_all = $("#con_all_"+num).val();
-            var content_short = con_all.substring(0,500)+"...";
+            var content_short = $("#short_con_"+num).val();
 
             $("#content_"+num).html(content_short);
             $(".cot_more").html('더보기');
             $("#short_type_"+num).val('');
         }
-
-/*
-var con_val = '{{ $review_saves_exp_info->id }}';
-                                            var content_val = $.trim($("#content_"+con_val).text());
-                                            var content_short = content_val.substring(0,500)+"...";
-                                            $("#content_"+con_val).html(content_short);
-*/
-
-
     }
 </script>
