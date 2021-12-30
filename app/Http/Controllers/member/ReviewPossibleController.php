@@ -841,6 +841,7 @@ class ReviewPossibleController extends Controller
 
         $page       = $request->input('page');
         $date_type  = $request->input('date_type');
+        $po_project_val = $request->input('po_project_val');
 
         //리뷰 관련
         $where_exp = '';
