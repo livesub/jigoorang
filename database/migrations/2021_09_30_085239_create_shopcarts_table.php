@@ -41,7 +41,7 @@ class CreateShopcartsTable extends Migration
             $table->tinyInteger('sct_direct')->length(1)->default(0)->comment('바로구매 체크 : 0=>담기,1=>바로구매');
             $table->tinyInteger('sct_select')->length(1)->default(0)->comment('구매진행 체크');
             $table->string('sct_select_time')->comment('담긴 상품 중 주문하기를 실행한 시각');
-            $table->enum('review_yn', ['y', 'n'])->default('n')->comment('리부작성여부');
+            $table->enum('review_yn', ['y', 'n'])->default('n')->comment('리부작성여부(임시저장시 n)');
             $table->timestamps();
 
             $table->index(['od_id','item_code','sct_status']);

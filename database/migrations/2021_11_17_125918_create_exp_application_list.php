@@ -31,7 +31,7 @@ class CreateExpApplicationList extends Migration
             $table->string('shipping_memo')->nullable()->comment('배송메모');
             $table->text('reason_memo')->comment('참여하는 이유항목');
             $table->enum('access_yn', ['y', 'n'])->default('n')->comment('승인 여부');
-            $table->enum('write_yn', ['y', 'n'])->default('n')->comment('리뷰 작성 여부');
+            $table->enum('write_yn', ['y', 'n'])->default('n')->comment('리뷰 작성 여부(임시저장시 n)');
             $table->enum('promotion_yn', ['y', 'n'])->default('y')->comment('약관동의 여부');
             $table->timestamps();
         });
