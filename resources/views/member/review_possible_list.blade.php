@@ -49,7 +49,7 @@
                                 <input type="hidden" name="item_id" id="item_id">
                                 <input type="hidden" name="sca_id" id="sca_id">
                                 <input type="hidden" id="po_page">
-                                    <div class="cot_list" id="review_possible_list">
+                                    <div class="cot_list my_list" id="review_possible_list">
                                         <h4 class="mt-20 mb-20">평가단 선정</h4>
                                     </div>
                                     <div class="cot_list" id="po_more">

@@ -2,6 +2,7 @@ div.inlineBlock {
   display: inline-block;
 }
 
+
 /* text */
 h1 {
 }
@@ -2897,6 +2898,20 @@ input::placeholder {
   .tab_menu
   .cont_area
   .cont.cont_wrap
+  .cot_list.my_list
+  img{
+    width: 20%;
+    max-width: 360px;
+    max-height: 180px;
+  }
+
+
+.eval
+  .board.mypage_list
+  .board_wrap
+  .tab_menu
+  .cont_area
+  .cont.cont_wrap
   .cot_list
   .cot_body
   .info {
@@ -3100,13 +3115,9 @@ input::placeholder {
   .cont.cont_wrap
   .cot_list
   .cot_body
-  .cot_more {
-  width: 100%;
-  max-width: 68px;
-  font-size: 15px;
-  /* padding-bottom: 20px; */
-  color: #3ec4ba;
-  background: url("../recources/icons/rectangle_bt.png") no-repeat right;
+  .cot_review_text
+  br {
+  display: none;
 }
 
 .eval
@@ -3117,9 +3128,13 @@ input::placeholder {
   .cont.cont_wrap
   .cot_list
   .cot_body
-  .cot_review_text
-  #toggle {
-  display: none;
+  .cot_more {
+  width: 100%;
+  max-width: 68px;
+  font-size: 15px;
+  /* padding-bottom: 20px; */
+  color: #3ec4ba;
+  background: url("../recources/icons/rectangle_bt.png") no-repeat right;
 }
 
 .eval
@@ -3154,7 +3169,7 @@ input::placeholder {
   background: url("../recources/icons/arrow-option-01.png") no-repeat right;
   padding-bottom: 2px;
   padding-left: 2px;
-  padding-top: 2px;
+  /* padding-top: 2px; */
   font-weight: bold;
 }
 
