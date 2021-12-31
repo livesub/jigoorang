@@ -391,6 +391,14 @@ class ReviewPossibleController extends Controller
             //$save_ok = redirect(route('mypage.review_possible_list'))->with('alert_messages', $ment);
             $save_ok = response()->json(['route' => route('mypage.review_possible_list'), 'status' => 'temp_save'], 200, [], JSON_PRETTY_PRINT);
         }else{
+            if($exp_id > "0" && $exp_app_id > "0"){
+                //체험단일때
+                $update_result = DB::table('exp_application_list')->where([['id', $exp_app_id], ['user_id', Auth::user()->user_id]])->update(['write_yn' => 'y']);
+            }else{
+                //쇼핑몰일때
+                $update_result = DB::table('shopcarts')->where([['id', $cart_id], ['item_code', $item_code], ['user_id', Auth::user()->user_id]])->update(['review_yn' => 'y']);
+            }
+
             $ment = '리뷰가 등록되었습니다.';
             $route_link = route("mypage.review_possible_list");
             $route_my_link = route("mypage.review_my_list");
@@ -623,6 +631,13 @@ class ReviewPossibleController extends Controller
             //$save_ok = redirect(route('mypage.review_possible_list'))->with('alert_messages', $ment);
             $save_ok = response()->json(['route' => route('mypage.review_possible_list'), 'status' => 'temp_save'], 200, [], JSON_PRETTY_PRINT);
         }else{
+            if($exp_id > 0){
+                //체험단일때
+                $update_result = DB::table('exp_application_list')->where([['id', $exp_app_id], ['user_id', Auth::user()->user_id]])->update(['write_yn' => 'y']);
+            }else{
+                //쇼핑몰일때
+                $update_result = DB::table('shopcarts')->where([['id', $cart_id], ['item_code', $item_code], ['user_id', Auth::user()->user_id]])->update(['review_yn' => 'y']);
+            }
             $ment = '리뷰가 등록되었습니다.';
             $route_link = route("mypage.review_possible_list");
             $route_my_link = route("mypage.review_my_list");
