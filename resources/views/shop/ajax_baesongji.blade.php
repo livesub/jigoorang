@@ -33,7 +33,8 @@
                     <span>(기본 배송지)</span>
                     @endif
                     </h3>
-                    <p>{{ $baesongji->ad_addr1 }}
+
+                    <p>{{ $baesongji->ad_zip1 }}) {{ $baesongji->ad_addr1 }}
                         <br>{{ $baesongji->ad_addr2 }} {{ $baesongji->ad_addr3 }}</p>
                         <input type="hidden" id="addr{{ $i }}" value="{{ $addr }}">
                         <button type="button" class="btn-3ea-01" onclick="del_addr('{{ $baesongji->id }}');">삭제</button>

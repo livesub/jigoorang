@@ -1487,7 +1487,7 @@ $um_value='80/0.5/3'
         $baesongji_first_chk = DB::table('baesongjis')->where('user_id', Auth::user()->user_id)->count();
         if($baesongji_first_chk == 0){
             $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
-                'user_zip'          => (int)$ad_zip1,
+                'user_zip'          => $ad_zip1,
                 'user_addr1'        => addslashes($ad_addr1),
                 'user_addr2'        => addslashes($ad_addr2),
                 'user_addr3'        => addslashes($ad_addr3),
@@ -1501,7 +1501,7 @@ $um_value='80/0.5/3'
                 'ad_name'       => addslashes($ad_name),
                 'ad_tel'        => addslashes($ad_tel),
                 'ad_hp'         => addslashes($ad_hp),
-                'ad_zip1'       => (int)$ad_zip1,
+                'ad_zip1'       => $ad_zip1,
                 'ad_addr1'      => addslashes($ad_addr1),
                 'ad_addr2'      => addslashes($ad_addr2),
                 'ad_addr3'      => addslashes($ad_addr3),
@@ -1516,7 +1516,7 @@ $um_value='80/0.5/3'
                 if($baesongji_chk == 0){
                     //같은 주소가 없을때
                     $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
-                        'user_zip'          => (int)$ad_zip1,
+                        'user_zip'          => $ad_zip1,
                         'user_addr1'        => addslashes($ad_addr1),
                         'user_addr2'        => addslashes($ad_addr2),
                         'user_addr3'        => addslashes($ad_addr3),
@@ -1533,7 +1533,7 @@ $um_value='80/0.5/3'
                         'ad_name'       => addslashes($ad_name),
                         'ad_tel'        => addslashes($ad_tel),
                         'ad_hp'         => addslashes($ad_hp),
-                        'ad_zip1'       => (int)$ad_zip1,
+                        'ad_zip1'       => $ad_zip1,
                         'ad_addr1'      => addslashes($ad_addr1),
                         'ad_addr2'      => addslashes($ad_addr2),
                         'ad_addr3'      => addslashes($ad_addr3),
@@ -1542,7 +1542,7 @@ $um_value='80/0.5/3'
                 }else{
                     //같은 주소가 있을때
                     $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
-                        'user_zip'          => (int)$ad_zip1,
+                        'user_zip'          => $ad_zip1,
                         'user_addr1'        => addslashes($ad_addr1),
                         'user_addr2'        => addslashes($ad_addr2),
                         'user_addr3'        => addslashes($ad_addr3),
@@ -1573,7 +1573,7 @@ $um_value='80/0.5/3'
                         'ad_name'       => addslashes($ad_name),
                         'ad_tel'        => addslashes($ad_tel),
                         'ad_hp'         => addslashes($ad_hp),
-                        'ad_zip1'       => (int)$ad_zip1,
+                        'ad_zip1'       => $ad_zip1,
                         'ad_addr1'      => addslashes($ad_addr1),
                         'ad_addr2'      => addslashes($ad_addr2),
                         'ad_addr3'      => addslashes($ad_addr3),
@@ -1600,7 +1600,7 @@ $um_value='80/0.5/3'
             $update_default = DB::table('baesongjis')->where('user_id', Auth::user()->user_id)->update(['ad_default' => 0]);
 
             $up_result = DB::table('users')->where('user_id', Auth::user()->user_id)->update([
-                'user_zip'          => (int)$ad_zip1,
+                'user_zip'          => $ad_zip1,
                 'user_addr1'        => addslashes($ad_addr1),
                 'user_addr2'        => addslashes($ad_addr2),
                 'user_addr3'        => addslashes($ad_addr3),
@@ -1625,7 +1625,7 @@ $um_value='80/0.5/3'
             'ad_name'       => addslashes($ad_name),
             'ad_tel'        => addslashes($ad_tel),
             'ad_hp'         => addslashes($ad_hp),
-            'ad_zip1'       => (int)$ad_zip1,
+            'ad_zip1'       => $ad_zip1,
             'ad_addr1'      => addslashes($ad_addr1),
             'ad_addr2'      => addslashes($ad_addr2),
             'ad_addr3'      => addslashes($ad_addr3),
