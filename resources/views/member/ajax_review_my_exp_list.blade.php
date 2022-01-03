@@ -87,10 +87,11 @@
 
                                       <div class="cot_review_text box">
 
-                                        <div class="text_content" id="content_{{ $review_saves_exp_info->id }}">
+                                        <div class="text_content hideContent" id="content_{{ $review_saves_exp_info->id }}">
                                             {!! nl2br($review_saves_exp_info->review_content) !!}
                                         </div>
-                                        <div class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}">더보기</div>
+                                        <div class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}">
+                                        </div>
                                        </div>
 
                                         <div class="cot_photo">
@@ -106,13 +107,7 @@
                                                 <img src="{{ $review_img_disp }}" alt="">
                                         @endforeach
                                         </div>
-                                        <!--<script>
-                                            var con_val = '{{ $review_saves_exp_info->id }}';
-                                            var content_val = $.trim($("#content_"+con_val).text());
-                                            var content_short = content_val.substring(0,500)+"...";
-                                            $("#content_"+con_val).html(content_short);
-                                            $("#short_con_"+{{ $review_saves_exp_info->id }}).val(content_short);
-                                        </script>-->
+
                                     </div>
                                 </div>
                                 @endforeach
@@ -131,32 +126,15 @@
     }
 </script>
 
-<!--<script>
-    function morebtn(num) {
-        if($("#short_type_"+num).val() == ""){
-            var con_all = $("#con_all_"+num).val();
-            $("#content_"+num).html(con_all);
-            //$(".cot_more").html('접기');
-            $("#short_type_"+num).val('short');
-        }
-        else{
-            var con_all = $("#con_all_"+num).val();
-            var content_short = $("#short_con_"+num).val();
-            $("#content_"+num).html(content_short);
-            //$(".cot_more").html('더보기');
-            $("#short_type_"+num).val('');
-        }
-    }
-</script>-->
-
 <script>
     $('.box').each(function(cnt){
         var content = $('#content_'+ cnt);
         var content_txt = content.text();
-        var content_txt_short = content_txt.substr(0,350)+"";
+        var content_txt_short = content_txt.substr(0,350)+"...";
         var btn_more = $('#cot_more_'+ cnt);
 
         if(content_txt.length > 350){
+            btn_more.html('더보기');
             content.html(content_txt_short);
         }
 

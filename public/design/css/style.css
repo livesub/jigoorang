@@ -2900,7 +2900,7 @@ input::placeholder {
   .cont.cont_wrap
   .cot_list.my_list
   img{
-    width: 20%;
+    /* width: 20%; */
     max-width: 360px;
     max-height: 180px;
   }
@@ -2918,6 +2918,8 @@ input::placeholder {
   /* background: url("../recources/imgs/sample_img.png") no-repeat left; */
   display: inline-block;
 }
+
+
 
 .eval
   .board.mypage_list
@@ -3056,9 +3058,10 @@ input::placeholder {
   .cot_rating_02
   span {
   display: flex;
-  padding-right: 20px;
+  padding-right: 50px;
   padding-top: 25px;
 }
+
 .eval
   .board.mypage_list
   .board_wrap
