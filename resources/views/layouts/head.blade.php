@@ -238,6 +238,8 @@
         alert('{!! Session::get('alert_messages') !!}');
     </script>
     @endif
+
+
     @yield('script')
 
 </body>
