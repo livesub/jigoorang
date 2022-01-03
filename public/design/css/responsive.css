@@ -2060,7 +2060,7 @@
   }
 
   .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list.my_list img {
-    max-width: 100px;
+    max-width: 200px;
     /* width: 100%; */
   }
 
@@ -2484,7 +2484,7 @@
     .cot_more {
     width: 100%;
     max-width: 68px;
-    font-size: 15px;
+    font-size: 13px;
     /* padding-bottom: 20px; */
     color: #3ec4ba;
     background: url("../recources/icons/rectangle_bt.png") no-repeat right;
