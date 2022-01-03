@@ -162,21 +162,21 @@ class AdmReviewMangerController extends Controller
         if($blind_type == 'Y'){
             $CustomUtils->item_average($review_save_list->item_code);
 
-            $CustomUtils->insert_point($review_save_list->user_id, (-1) * $setting->text_point, $point_ment1, $point_key1, '', 0);
+            $CustomUtils->insert_point($review_save_list->user_id, (-1) * $setting->text_point, $point_ment1, $point_key1, $id, 0);
 
             if($photo_flag){
 
-                $CustomUtils->insert_point($review_save_list->user_id, (-1) * $setting->photo_point, $point_ment2, $point_key2,'', 0);
+                $CustomUtils->insert_point($review_save_list->user_id, (-1) * $setting->photo_point, $point_ment2, $point_key2, $id, 0);
             }
 
             echo "blind_ok";
         }else{
             $CustomUtils->item_average($review_save_list->item_code);
 
-            $CustomUtils->insert_point($review_save_list->user_id, $setting->text_point, $point_ment1, $point_key1,'', 0);
+            $CustomUtils->insert_point($review_save_list->user_id, $setting->text_point, $point_ment1, $point_key1, $id, 0);
 
             if($photo_flag){
-                $CustomUtils->insert_point($review_save_list->user_id, $setting->photo_point, $point_ment2, $point_key2,'', 0);
+                $CustomUtils->insert_point($review_save_list->user_id, $setting->photo_point, $point_ment2, $point_key2, $id, 0);
             }
 
             echo "blind_no";
