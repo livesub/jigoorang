@@ -87,11 +87,10 @@
 
                                       <div class="cot_review_text box">
 
-                                        <div class="text_content hideContent" id="content_{{ $review_saves_exp_info->id }}">
-                                            {!! nl2br($review_saves_exp_info->review_content) !!}
-                                        </div>
-                                        <div class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}">
-                                        </div>
+                                            <div class="text_content" id="content_{{ $review_saves_exp_info->id }}">
+                                                {!! nl2br($review_saves_exp_info->review_content) !!}
+                                            </div>
+                                            <div class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}"></div>
                                        </div>
 
                                         <div class="cot_photo">
