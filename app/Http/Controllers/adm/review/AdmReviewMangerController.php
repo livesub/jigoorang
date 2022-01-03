@@ -169,6 +169,8 @@ class AdmReviewMangerController extends Controller
                 $CustomUtils->insert_point($review_save_list->user_id, (-1) * $setting->photo_point, $point_ment2, $point_key2, $id, 0);
             }
 
+            $update_user_result = DB::table('users')->where('user_id', $review_save_list->user_id)->update(['blacklist' => 'y']);   //블랙리스트처리
+
             echo "blind_ok";
         }else{
             $CustomUtils->item_average($review_save_list->item_code);
@@ -179,6 +181,7 @@ class AdmReviewMangerController extends Controller
                 $CustomUtils->insert_point($review_save_list->user_id, $setting->photo_point, $point_ment2, $point_key2, $id, 0);
             }
 
+            $update_user_result = DB::table('users')->where('user_id', $review_save_list->user_id)->update(['blacklist' => 'n']);   //블랙리스트해제
             echo "blind_no";
         }
 

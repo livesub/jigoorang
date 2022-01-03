@@ -59,15 +59,25 @@ class MemberlistController extends Controller
         }
 
         $members = DB::table('users')->where('user_level','>','2');
+
         if($user_type != ""){
-            $members->where('user_type', $user_type);
+            if($user_type == 'Y' || $user_type == 'N'){
+                $members->where('user_type', $user_type);
+            }else if($user_type == 'blacklist'){
+                $members->where('blacklist', 'y');
+            }else if($user_type == 'site_no'){
+                $members->where('site_access_no', 'y');
+            }
+
         }
 
         if($user_type2 != "" && $keyword != ""){
             $members->where($user_type2, 'like', '%'.$keyword.'%');
         }
 
-        $member_draw = DB::table('users')->where([['user_level','>','2'], ['user_type', 'Y']])->count();
+        $member_draw = DB::table('users')->where([['user_level','>','2'], ['user_type', 'Y']])->count();    //탈퇴 회원
+        $member_blacklist = DB::table('users')->where([['user_level','>','2'], ['blacklist', 'y']])->count();    //블랙리스트 회원
+        $member_site_access_no = DB::table('users')->where([['user_level','>','2'], ['site_access_no', 'y']])->count();    //사이트 접근 불가 회원
 
         $total_record   = 0;
         $total_record   = $members->count(); //총 게시물 수
@@ -100,6 +110,8 @@ class MemberlistController extends Controller
             'totalCount'    => $total_record,
             'members'       => $member_rows,
             'member_draw'   => $member_draw,
+            'member_blacklist'   => $member_blacklist,
+            'member_site_access_no'   => $member_site_access_no,
             'pageNum'       => $page,
             'pnPage'        => $pnPage,
             'user_type'     => $user_type,
@@ -231,6 +243,11 @@ class MemberlistController extends Controller
 
             $user_id = $user_info->user_id;
 
+            $blacklist = $request->get('blacklist');
+            if($blacklist == "" ) $blacklist = 'n';
+            $site_access_no = $request->get('site_access_no');
+            if($site_access_no == "" ) $site_access_no = 'n';
+
             if($request->hasFile('user_imagepath'))
             {
                 //첨부 파일이 있을때
@@ -267,6 +284,8 @@ class MemberlistController extends Controller
                     $user->user_thumb_name = $thumb_name;
                     $user->user_gender = $user_gender;
                     $user->user_birth = $user_birth;
+                    $user->blacklist = $blacklist;
+                    $user->site_access_no = $site_access_no;
                     $result_up = $user->save();
 
                     if(!$result_up)
@@ -301,6 +320,8 @@ class MemberlistController extends Controller
                 $user->user_level = $user_level;
                 $user->user_gender = $user_gender;
                 $user->user_birth = $user_birth;
+                $user->blacklist = $blacklist;
+                $user->site_access_no = $site_access_no;
                 $result_up = $user->save();
 
                 if(!$result_up)
@@ -384,6 +405,8 @@ class MemberlistController extends Controller
                 'user_point'            => $user_info->user_point,
                 'user_gender'           => $user_info->user_gender,
                 'user_birth'            => $user_info->user_birth,
+                'blacklist'             => $user_info->blacklist,
+                'site_access_no'        => $user_info->site_access_no,
             ],$Messages::$mypage['mypage']);
         }
     }

@@ -52,6 +52,10 @@ class expController extends Controller
     //체험단 신청 폼 뷰 이동 관련 함수
     public function view_form($id){
 
+        if(auth()->user()->blacklist == 'y'){
+            return redirect()->route('exp.list')->with('alert_messages', "블랙 리스트 회원입니다.");
+        }
+
         $exp_list = DB::table('exp_list')->select('exp_date_end')->where('id', $id)->first();
         if(date('Y-m-d', time()) > $exp_list->exp_date_end){
             return redirect()->route('exp.list')->with('alert_messages', "모집 기간이 종료 되었습니다.");

@@ -53,6 +53,8 @@ class User extends Authenticatable
         'user_point',
         'withdraw_type',
         'withdraw_content',
+        'blacklist',
+        'site_access_no',
     ];
 
     /**

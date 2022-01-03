@@ -96,16 +96,16 @@
                             <input type="hidden" id="po_page">
                             <input type="hidden" id="shop_page">
 
-                            <div class="cot_list" id="review_my_exp_list">
+                            <div class="cot_list my_list" id="review_my_exp_list">
                                 <h4 class="mt-20 mb-20">평가단 선정</h4>
 
                             </div>
+
                             <div class="cot_list" id="po_more">
                                 <button class="btn-full-sd" type="button" id="addBtn" onclick="po_moreList();">내가 쓴 리뷰 더보기</button>
                             </div>
 
                             <div class="line_15 bk"></div>
-
 
 
                             <div class="cot_list" id="review_my_shop_list">
@@ -126,6 +126,7 @@
         </div>
     </div>
     <!-- 서브 컨테이너 끝 -->
+
 
 <script>
     po_moreList(); //함수 호출
