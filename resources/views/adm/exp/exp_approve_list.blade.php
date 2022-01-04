@@ -29,6 +29,9 @@
 </table>
 <table border=1>
     @php
+        $exp_limit_personnel = 0;
+        $exp_app_id = 0;
+
         if($exp_id == ''){
             if(is_null($exp_last)){
                 $exp_info2 = DB::table('exp_list')->first();
@@ -44,6 +47,10 @@
     @endphp
 
     @if(!is_null($exp_last))
+    @php
+        $exp_limit_personnel = $exp_info2->exp_limit_personnel;
+        $exp_app_id = $exp_info2->id;
+    @endphp
     <tr>
         <td>체험단명</td>
         <td>{{ stripslashes($exp_info2->title) }}</td>
@@ -54,7 +61,7 @@
     <tr>
     <tr>
         <td>모집인원</td>
-        <td>{{ $exp_info2->exp_limit_personnel }}</td>
+        <td>{{ $exp_limit_personnel }}</td>
     <tr>
     <tr>
         <td>당첨자발표일</td>
@@ -69,7 +76,7 @@
 
 <table>
     <tr>
-        <td><span id="chk_cnt">0</span> / {{ $exp_info2->exp_limit_personnel }}</td>
+        <td><span id="chk_cnt">0</span> / {{ $exp_limit_personnel }}</td>
         <td>신청인원 {{ number_format($total_record) }} 명
         <td><button type="button" onclick="exp_app_ok();">선정</button></td>
         <td><button type="button" onclick="excel_download();">엑셀 다운로드</button></td>
@@ -78,7 +85,7 @@
 
 <form name="exp_app_form" id="exp_app_form" method="post" action="" autocomplete="off">
 {!! csrf_field() !!}
-<input type="hidden" name="exp_id" id="exp_id" value="{{ $exp_info2->id }}">
+<input type="hidden" name="exp_id" id="exp_id" value="{{ $exp_app_id }}">
 <table border=1>
     <tr>
         <td>선택</td>
