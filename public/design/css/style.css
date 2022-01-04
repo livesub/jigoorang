@@ -2077,6 +2077,7 @@ input::placeholder {
   color: #3ec4ba;
   /* padding-top: 5px; */
   float: right;
+  padding-top: 3px;
 }
 
 .eval .board.mypage_list .board_wrap .information.review .upload {
@@ -3189,6 +3190,11 @@ input::placeholder {
   font-weight: bold;
   letter-spacing: -0.63px;
   padding: 30px;
+  width: calc(95% - 350px);
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-height: 74px;
+
 }
 
 .eval

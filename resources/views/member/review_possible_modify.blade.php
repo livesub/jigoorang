@@ -120,11 +120,11 @@ function star_modi(num) {
                         <div class="information review">
                           <div class="tt_sub">
                             <h4>포토리뷰</h4>
-                            <span class="point">(필수)</span>
+                            <span class="point">(선택)</span>
 
                             <div class="file_uploader">
                               <label>사진첨부 + <input type="file" id="file_uploader" accept="image/*" onchange="changeWriteFile()"
-                                      multiple /></label>
+                            /></label>
                             </div>
                           </div>
 
@@ -144,8 +144,8 @@ function star_modi(num) {
             </div>
 
             <div class="btn-3ea">
-                <button type="button" class="btn-50 sol-g">취소</button>
-                <button type="button" class="btn-50" onclick="review_save('y');">임시저장</button>
+                <button type="button" class="btn-50 sol-g" onclick="history.back(-1);">취소</button>
+                <button type="button" class="btn-50" onclick="review_save('n');">임시저장</button>
                 <button type="button" class="btn-50 bg-01" onclick="review_save('n');">등록</button>
             </div>
         </div>
@@ -368,8 +368,6 @@ function attached_file_del(evnt, url, key_val) {
                     'rs_id' : '{{ $review_saves_info->id }}',
                 },
                 success: function(result) {
-    //alert(result);
-    //return false;
                     const parentEl = evnt.target.parentElement;
                     parentEl.remove();
                     delete imageMap[parentEl.id];

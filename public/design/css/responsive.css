@@ -2000,7 +2000,12 @@
     font-weight: bold;
     letter-spacing: -0.5px;
     padding: 0 0 0 5px;
-    margin-top: 30px;
+    width: calc(95% - 212px);
+    text-overflow: ellipsis;
+    overflow: hidden;
+    max-height: 68px;
+    padding: 20px;
+    margin-top: 5px;
     /* padding-top: 20px; */
   }
 
@@ -2255,6 +2260,8 @@
     .info {
     /* background: url("../recources/imgs/sample_img.png") no-repeat left; */
     display: inline-block;
+    max-height: 53px;
+    width: calc(95% - 190px);
   }
 
   .eval
@@ -2582,7 +2589,7 @@
     .tt_sub
     .file_uploader {
     width: 80px;
-    height: 21px;
+    height: 24px;
     font-size: 13px;
     font-weight: 400;
     border: solid 1px #3ec4ba;
@@ -3834,6 +3841,20 @@
   }
 
   /* 제품 / 리뷰 평가 (tab2) */
+
+  .eval
+  .board.mypage_list
+  .board_wrap
+  .tab_menu
+  .cont_area
+  .cont.cont_wrap
+  .cot_list
+  .cot_body
+  .info {
+  display: inline-block;
+  width:95%
+}
+
   .eval
     .board.mypage_list
     .board_wrap
@@ -3843,7 +3864,8 @@
     .cot_list
     .cot_body
     img {
-    max-width: 100px;
+    max-width: 380px;
+    width: 100%;
   }
 
   .eval

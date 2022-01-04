@@ -19,8 +19,8 @@
         <!-- 타이틀 시작 -->
         <div class="title_area list">
             <h2>리뷰작성</h2>
-            <img src="{{ asset('/design/recources/imgs/review_wt.png') }}" alt="" class="block">
-            <img src="{{ asset('/design/recources/imgs/review_wt_m.png') }}" alt="" class="none">
+            <img src="{{ asset('/design/recources/imgs/sub_banner_2pc@3x.png') }}" alt="" class="block">
+            <img src="{{ asset('/design/recources/imgs/sub_banner_2mo@3x.png') }}" alt="" class="none">
             <div class="line_14-100"></div>
         </div>
         <!-- 타이틀 끝 -->
@@ -99,11 +99,11 @@
                         <div class="information review">
                           <div class="tt_sub">
                             <h4>포토리뷰</h4>
-                            <span class="point">(필수)</span>
+                            <span class="point">(선택)</span>
 
                             <div class="file_uploader">
                               <label>사진첨부 + <input type="file" id="file_uploader" accept="image/*" onchange="changeWriteFile()"
-                                      multiple /></label>
+                              /></label>
                             </div>
                           </div>
 
