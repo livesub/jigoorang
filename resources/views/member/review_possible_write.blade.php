@@ -27,7 +27,7 @@
 
         <!-- 리뷰작성 시작  -->
         <div class="eval">
-        <form name="review_form" id="review_form" method="post" action="" enctype='multipart/form-data'>
+        <form name="review_form" id="review_form" method="post" action="" enctype='multipart/form-data' autocomplete="off">
         {!! csrf_field() !!}
         <!-- 쇼핑몰 관련 -->
         <input type="hidden" name="cart_id" id="cart_id" value="{{ $cart_id }}">
