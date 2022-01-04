@@ -29,7 +29,7 @@
 </table>
 <table border=1>
     @php
-        if($exp_id == ''){
+	if($exp_id == ''){
             if(is_null($exp_last)){
                 $exp_info2 = DB::table('exp_list')->first();
             }else{
@@ -37,7 +37,7 @@
             }
 
         }else{
-            $exp_info2 = DB::table('exp_list')->where('id', $exp_id)->first();
+	    $exp_info2 = DB::table('exp_list')->where('id', $exp_id)->first();
         }
 
         $k = 1;
