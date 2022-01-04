@@ -133,7 +133,7 @@
         <td>HEIGHT</td>
         <td>
             <input type="text" name="shop_img_height" value="{{ $shop_img_height }}" id="shop_img_height" size="30">
-            <br>(리사이징될 파일 높이 - '%%'구분자사용)<br>예) 500%%250%%140
+            <br>(리사이징될 파일 높이 - '%%'구분자사용)<br>예) 520%%250%%140
         </td>
     </tr>
 </table>
