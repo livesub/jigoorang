@@ -116,6 +116,22 @@
     <div class='form-group'>
       포인트 : {{ number_format($user_point) }}P
     </div>
+
+
+    <div class='form-group'>
+    @php
+        $blacklist_chk = '';
+        $site_access_no_chk = '';
+        if($blacklist == 'y') $blacklist_chk = 'checked';
+        if($site_access_no == 'y') $site_access_no_chk = 'checked';
+    @endphp
+
+      블랙리스트 : <input type="checkbox" name="blacklist" id="blacklist" value="y" {{ $blacklist_chk }}>
+    </div>
+    <div class='form-group'>
+      사이트 접근 불가 : <input type="checkbox" name="site_access_no" id="site_access_no" value="y" {{ $site_access_no_chk }}>
+    </div>
+
     <div class='form-group'>
     탈퇴 사유 : {{ $withdraw_type }}
     </div>

@@ -113,7 +113,10 @@ class QnaController extends Controller
         $create_result = qnas::create($data);
         $create_result->save();
 
-        if($create_result) return redirect(route('customer_center'))->with('alert_messages', '문의 주셔서 감사합니다.\n답변은 [마이페이지] - [나의 문의내역]에서 확인하실 수 있습니다.\n최대한 빠르게 답변 드리겠습니다.');
+        if($create_result){
+            //return redirect(route('customer_center'))->with('alert_messages', '문의 주셔서 감사합니다.\n답변은 [마이페이지] - [나의 문의내역]에서 확인하실 수 있습니다.\n최대한 빠르게 답변 드리겠습니다.');
+            return "<script>if (confirm('문의 주셔서 감사합니다.\\n답변은 [마이페이지] - [나의 문의내역]에서 확인하실 수 있습니다.\\n최대한 빠르게 답변 드리겠습니다.') == true){ location.href='".route('mypage.qna_list')."' }else{ location.href='".route('customer_center')."' }</script>";
+        }
         else return redirect(route('customer_center'))->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.');  //치명적인 에러가 있을시
     }
 
@@ -125,7 +128,10 @@ class QnaController extends Controller
         $page       = $request->input('page');
         $keyword    = $request->input('keyword');
 
-        $qna_info = DB::table('qnas')->where('id', $id)->first();
+        $qna_info = DB::table('qnas')->where([['id', $id], ['user_id', Auth::user()->user_id]])->first();
+        if($qna_info == ""){
+            return redirect(route('mypage.qna_list'))->with('alert_messages', '잘못된 경로 입니다.');  //치명적인 에러가 있을시
+        }
 
         $add_where = '';
         if($keyword != ""){
@@ -133,8 +139,9 @@ class QnaController extends Controller
             $add_where = " and (qna_subject like '%$keyword%' or qna_content like '%$keyword%') ";
         }
 
-        $pre = DB::select(" select id from qnas where id =(select max(id) from qnas where id < $id $add_where) ");
-        $next = DB::select(" select id from qnas where id =(select min(id) from qnas where id > $id $add_where) ");
+        $auth_user_id = Auth::user()->user_id;
+        $pre = DB::select(" select id from qnas where id =(select max(id) from qnas where user_id = '$auth_user_id' and id < $id $add_where) ");
+        $next = DB::select(" select id from qnas where id =(select min(id) from qnas where user_id = '$auth_user_id' and id > $id $add_where) ");
 
         $pre_cnt = count($pre);
         $next_cnt = count($next);

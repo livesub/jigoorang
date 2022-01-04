@@ -53,8 +53,14 @@ function review_save(review_type){
         data: formData,
         dataType : 'json',
         success : function(data){
-//alert(data.my_page);
+//alert(data);
 //return false;
+
+            if(data.status == "img_error"){
+                alert("이미지 용량이 큽니다\n용량을 줄여서 올려 주세요.");
+                location.reload();
+            }
+
             if(data.status == "temp_save"){
                 alert("리뷰가 임시 등록되었습니다.");
                 location.href = data.route;

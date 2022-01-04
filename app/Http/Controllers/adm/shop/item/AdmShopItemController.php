@@ -478,7 +478,7 @@ class AdmShopItemController extends Controller
                     exit;
                 }else{
                     //썸네일 만들기
-                    for($k = 0; $k < 3; $k++){
+                    for($k = 0; $k < 4; $k++){
                         $resize_width_file_tmp = explode("%%",$resiz_result['shop_img_width']);
                         $resize_height_file_tmp = explode("%%",$resiz_result['shop_img_height']);
 
@@ -1321,7 +1321,7 @@ class AdmShopItemController extends Controller
                         exit;
                     }else{
                         //썸네일 만들기
-                        for($k = 0; $k < 3; $k++){
+                        for($k = 0; $k < 4; $k++){
                             $resize_width_file_tmp = explode("%%",$resiz_result['shop_img_width']);
                             $resize_height_file_tmp = explode("%%",$resiz_result['shop_img_height']);
 

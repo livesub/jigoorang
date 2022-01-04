@@ -10,6 +10,12 @@
     <tr>
         <td>탈퇴 회원 : <?= $member_draw ?>명</td>
     </tr>
+    <tr>
+        <td>블랙리스트 회원 : <?= $member_blacklist ?>명</td>
+    </tr>
+<tr>
+        <td>사이트 접근 불가 회원 : <?= $member_site_access_no ?>명</td>
+    </tr>
 </table>
 
 
@@ -25,10 +31,14 @@
                 $tmp4 = '';
                 $tmp5 = '';
                 $tmp6 = '';
+                $tmp10 = '';
+                $tmp11 = '';
 
                 if($user_type_selected == '') $tmp = 'selected';
                 else if($user_type_selected == 'N') $tmp2 = 'selected';
                 else if($user_type_selected == 'Y') $tmp3 = 'selected';
+                else if($user_type_selected == 'blacklist') $tmp10 = 'selected';
+                else if($user_type_selected == 'site_no') $tmp11 = 'selected';
 
                 if($user_type2 == "") $tmp4 = "selected";
                 else if($user_type2 == "user_id") $tmp5 = "selected";
@@ -38,6 +48,8 @@
                 <option value="" {{ $tmp }}>전체</option>
                 <option value="N" {{ $tmp2 }}>회원</option>
                 <option value="Y" {{ $tmp3 }}>탈퇴회원</option>
+                <option value="blacklist" {{ $tmp10 }}>블랙리스트회원</option>
+                <option value="site_no" {{ $tmp11 }}>사이트접근불가회원</option>
             </select>
             <select name="user_type2" id="user_type2">
                 <option value="user_id" {{ $tmp5 }}>아이디</option>
@@ -59,12 +71,20 @@
         <td>휴대폰번호</td>
         <td>포인트</td>
         <td>탈퇴여부</td>
+        <td>블랙리스트</td>
+        <td>사이트 접근 불가</td>
     </tr>
     @foreach($members as $member)
         @php
             $user_type = "";
             if($member->user_type == 'Y') $user_type = '탈퇴';
             else $user_type = '가입';
+
+            $blacklist_chk = '';
+            if($member->blacklist == 'y') $blacklist_chk = '블랙리스트';
+
+            $site_access_no_chk = '';
+            if($member->site_access_no == 'y') $site_access_no_chk = '사이트 접근 불가';
         @endphp
     <tr>
         <td><input type="checkbox" name="chk_id[]" value="{{ $member->id }}" id="chk_id_{{ $member->id }}" class="selec_chk"></td>
@@ -75,6 +95,8 @@
         <td>{{ $member->user_phone }}</td>
         <td>{{ number_format($member->user_point) }}P</td>
         <td>{{ $user_type }}</td>
+        <td>{{ $blacklist_chk }}</td>
+        <td>{{ $site_access_no_chk }}</td>
     </tr>
 
     @endforeach

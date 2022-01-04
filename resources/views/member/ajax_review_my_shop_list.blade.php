@@ -80,11 +80,12 @@
                                                 @endfor
                                       </div>
 
-                                      <div class="cot_review_text box">
-                                        <div class="text_content">
-                                            {!! nl2br($review_saves_shop_info->review_content) !!}
-                                        </div>
-                                        <div class="cot_more">더보기</div>
+                                       <div class="cot_review_text box">
+
+                                            <div class="text_content" id="content_{{ $review_saves_shop_info->id }}">
+                                                {!! nl2br($review_saves_shop_info->review_content) !!}
+                                            </div>
+                                            <div class="cot_more" id="cot_more_{{ $review_saves_shop_info->id }}"></div>
                                        </div>
 
                                         <div class="cot_photo">
@@ -117,5 +118,36 @@
     if({{ $shop_end_cnt }} == 0){
         $("#shop_more").hide();
     }
+</script>
+
+<script>
+    $('.box').each(function(cnt){
+        var content = $('#content_'+ cnt);
+        var content_txt = content.text();
+        var content_txt_short = content_txt.substr(0,350)+"...";
+        var btn_more = $('#cot_more_'+ cnt);
+
+        if(content_txt.length > 350){
+            btn_more.html('더보기');
+            content.html(content_txt_short);
+        }
+
+        btn_more.click(toggle_content);
+
+        function toggle_content(){
+        if($(this).hasClass('short')){
+            // 접기 상태
+            $(this).html('더보기');
+            content.html(content_txt_short);
+            $(this).removeClass('short');
+        }else{
+            // 더보기 상태
+            $(this).html('접기');
+            content.html(content_txt);
+            $(this).addClass('short');
+            }
+        }
+    });
+
 </script>
 

@@ -184,6 +184,9 @@ class socialLoginController extends BaseController
                         auth()->logout();
                         return redirect()->route('main.index')->with('alert_messages', $Messages::$social['withdraw_chk']);
 
+                    }else if($user_info->site_access_no == 'y'){
+                        auth()->logout();
+                        return redirect()->route('main.index')->with('alert_messages', '사이트 접근 불가 회원입니다.');
                     }else{
                         if($provider == $user_info->user_platform_type){
                             Auth::login($user_info, $remember = true);

@@ -101,6 +101,14 @@ class LoginController extends Controller
             exit;
         }
 
+        //사이트 접근 불가 회원일때 로그 아웃 시킴 (220103)
+        if(Auth::user()->site_access_no == 'y'){
+            auth()->logout();
+            return redirect()->route('main.index')->with('alert_messages', '사이트 접근 불가 회원입니다.');
+        }
+
+
+
         //이메일 인증이 안됬으면 로그아웃 시킴
         // if(!auth()->user()->user_activated)
         // {

@@ -84,12 +84,7 @@ class ReviewPossibleController extends Controller
                     $join->on('a.exp_id', '=', 'b.id');
                 })
             ->where([['b.exp_review_end', '>=', $now_date], ['a.user_id', Auth::user()->user_id], ['a.access_yn','y'], ['a.write_yn', 'n']]);
-/*
-            ->join('review_saves as c', function($join) {
-                $join->on('a.exp_id', '=', 'c.exp_id');
-            })
-            ->where([['b.exp_review_end', '>=', $now_date], ['a.user_id', Auth::user()->user_id], ['a.access_yn','y'], ['a.write_yn', 'n'], ['c.temporary_yn', 'y']]);
-*/
+
         $pageScale  = 10;  //한페이지당 라인수
         if($page != "")
         {
@@ -133,13 +128,7 @@ class ReviewPossibleController extends Controller
                 })
             ->where([['a.user_id', Auth::user()->user_id], ['b.sct_qty','!=', '0'], ['b.review_yn', 'n'], ['b.sct_status', '!=', '취소']])
             ->where(DB::raw('a.created_at + INTERVAL 30 DAY'), '>=', now());
-/*
-            ->leftjoin('review_saves as c', function($join) {
-                $join->on('b.id', '=', 'c.cart_id');
-            })
-            ->where([['a.user_id', Auth::user()->user_id], ['b.sct_qty','!=', '0'], ['b.review_yn', 'n'], ['b.sct_status', '!=', '취소'], ['c.temporary_yn', 'y']])
-            ->where(DB::raw('a.created_at + INTERVAL 30 DAY'), '>=', now());
-*/
+
         $pageScale  = 10;  //한페이지당 라인수
         if($page != "")
         {
@@ -342,7 +331,9 @@ class ReviewPossibleController extends Controller
         $data_img_tmp = array();
         $review_img_cnt = $request->file('review_img');
         if($review_img_cnt != ""){
+
             for($i = 0; $i < count($review_img_cnt); $i++){
+
                 if($request->hasFile('review_img'))
                 {
                     $thumb_name = "";
@@ -382,13 +373,14 @@ class ReviewPossibleController extends Controller
 
                         $photo_flag = true;
                     }
+                }else{
+                    return response()->json(['route' => route('mypage.review_possible_list'),'status' => 'img_error'], 200, [], JSON_PRETTY_PRINT);
                 }
             }
         }
 
         if($temporary_yn == 'y'){
             $ment = '리뷰가 임시 등록되었습니다.';
-            //$save_ok = redirect(route('mypage.review_possible_list'))->with('alert_messages', $ment);
             $save_ok = response()->json(['route' => route('mypage.review_possible_list'), 'status' => 'temp_save'], 200, [], JSON_PRETTY_PRINT);
         }else{
             if($exp_id > "0" && $exp_app_id > "0"){
@@ -402,40 +394,8 @@ class ReviewPossibleController extends Controller
             $ment = '리뷰가 등록되었습니다.';
             $route_link = route("mypage.review_possible_list");
             $route_my_link = route("mypage.review_my_list");
-/*
-            $save_ok = '
-                <script>
-                    if (confirm("리뷰가 등록되었습니다.\\n해당페이지에서 확인하시겠습니까?") == true){    //확인
-                        location.href="'.$route_my_link.'";
-                    }else{   //취소
-                        location.href="'.$route_link.'";
-                    }
-                </script>
-            ';
-*/
+
             $save_ok = response()->json(['route' => route('mypage.review_possible_list'), 'status' => 'save_ok', 'my_page' => route('mypage.review_my_list')], 200, [], JSON_PRETTY_PRINT);
-
-            if($exp_id == 0){
-                //쇼핑몰 멘트
-                $point_ment1 = '상품 평가 적립';
-                $point_ment2 = '상품 포토 리뷰 적립';
-                $point_key1 = 2;
-                $point_key2 = 12;
-            }else{
-                //체험단 멘트
-                $point_ment1 = '평가단 평가 적립';
-                $point_ment2 = '평가단 포토 리뷰 적립';
-                $point_key1 = 5;
-                $point_key2 = 14;
-            }
-
-            //포인트 지급 처리
-            $setting = $CustomUtils->setting_infos();
-            $CustomUtils->insert_point(Auth::user()->user_id, $setting->text_point, $point_ment1, $point_key1,'', 0);
-
-            if($photo_flag == true){
-                $CustomUtils->insert_point(Auth::user()->user_id, $setting->photo_point, $point_ment2, $point_key2,'', $order_id);
-            }
         }
 
         //저장 처리
@@ -458,6 +418,28 @@ class ReviewPossibleController extends Controller
         if($temporary_yn == 'n'){
             //저장 처리 완료후 상품 평점 상품 테이블에 저장
             $CustomUtils->item_average($item_code);
+
+            if($exp_id == 0){
+                //쇼핑몰 멘트
+                $point_ment1 = '상품 평가 적립';
+                $point_ment2 = '상품 포토 리뷰 적립';
+                $point_key1 = 2;
+                $point_key2 = 12;
+            }else{
+                //체험단 멘트
+                $point_ment1 = '평가단 평가 적립';
+                $point_ment2 = '평가단 포토 리뷰 적립';
+                $point_key1 = 5;
+                $point_key2 = 14;
+            }
+
+            //포인트 지급 처리
+            $setting = $CustomUtils->setting_infos();
+            $CustomUtils->insert_point(Auth::user()->user_id, $setting->text_point, $point_ment1, $point_key1, $create_result->id, $order_id);
+
+            if($photo_flag == true){
+                $CustomUtils->insert_point(Auth::user()->user_id, $setting->photo_point, $point_ment2, $point_key2, $create_result->id, $order_id);
+            }
         }
 
         if($create_result){
@@ -469,10 +451,6 @@ class ReviewPossibleController extends Controller
             //echo "error";
             exit;
         }
-/*
-        if($create_result) return $save_ok;
-        else return redirect(route('mypage.review_possible_list'))->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.');
-*/
     }
 
     public function review_possible_modi_save(Request $request)
@@ -596,6 +574,8 @@ class ReviewPossibleController extends Controller
 
                         $photo_flag = true;
                     }
+                }else{
+                    return response()->json(['route' => route('mypage.review_possible_list'),'status' => 'img_error'], 200, [], JSON_PRETTY_PRINT);
                 }
             }
 
@@ -628,7 +608,6 @@ class ReviewPossibleController extends Controller
 
         if($temporary_yn == 'y'){
             $ment = '리뷰가 수정되었습니다.';
-            //$save_ok = redirect(route('mypage.review_possible_list'))->with('alert_messages', $ment);
             $save_ok = response()->json(['route' => route('mypage.review_possible_list'), 'status' => 'temp_save'], 200, [], JSON_PRETTY_PRINT);
         }else{
             if($exp_id > 0){
@@ -641,21 +620,11 @@ class ReviewPossibleController extends Controller
             $ment = '리뷰가 등록되었습니다.';
             $route_link = route("mypage.review_possible_list");
             $route_my_link = route("mypage.review_my_list");
-/*
-            $save_ok = '
-                <script>
-                    if (confirm("리뷰가 등록되었습니다.\\n해당페이지에서 확인하시겠습니까?") == true){    //확인
-                        location.href="'.$route_my_link.'";
-                    }else{   //취소
-                        location.href="'.$route_link.'";
-                    }
-                </script>
-            ';
-*/
+
             $save_ok = response()->json(['route' => route('mypage.review_possible_list'), 'status' => 'save_ok', 'my_page' => route('mypage.review_my_list')], 200, [], JSON_PRETTY_PRINT);
 
             //포인트 지급 처리
-            $CustomUtils->insert_point(Auth::user()->user_id, $setting->text_point, $point_ment1, $point_key1, '', 0);
+            $CustomUtils->insert_point(Auth::user()->user_id, $setting->text_point, $point_ment1, $point_key1, $review_save_id, $order_id);
         }
 
         //저장 처리
@@ -669,17 +638,14 @@ class ReviewPossibleController extends Controller
             }
 
             if($photo_flag == true){
-                $CustomUtils->insert_point(Auth::user()->user_id, $setting->photo_point, $point_ment2, $point_key2,'' , 0);
+                $CustomUtils->insert_point(Auth::user()->user_id, $setting->photo_point, $point_ment2, $point_key2, $review_save_id, $order_id);
             }
 
             //저장 처리 완료후 상품 평점 상품 테이블에 저장
             $CustomUtils->item_average($item_code);
         }
 
-        /*
-        if($update_result) return $save_ok;
-        else return redirect(route('mypage.review_possible_list'))->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.');
-        */
+
         if($update_result){
             //echo $save_ok;
             return $save_ok;

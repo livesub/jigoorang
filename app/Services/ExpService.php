@@ -181,7 +181,7 @@ class ExpService
 
         $pageNum     = $request->input('page');
         $writeList   = 20;  //페이지당 글수
-        $pageNumList = 20; //블럭당 페이지수
+        $pageNumList = 10; //블럭당 페이지수
 
         $tb_name = "shopitems";
         $type = 'shopitems';

@@ -238,7 +238,7 @@
   .footer .bottom .logo_f {
     width: 46px;
     height: 52px;
-    background: url("../recources/logo-3.png") no-repeat top center;
+    background: url("../recources/logo-2@4x.png") no-repeat top center;
     background-size: 100% auto;
     position: absolute;
     top: 150px;
@@ -420,6 +420,13 @@
   /********** 서브페이지 시작 **********/
 
   /* 평가단 */
+
+  .eval .board .board_wrap .list-none p {
+    font-size: 13px;
+    font-weight: 400;
+  }
+
+
   .eval .board .board_wrap .list .thumb {
     width: 240px;
     height: 120px;
@@ -1183,6 +1190,9 @@
     width: 15px;
   }
 
+  .line_15 {
+    margin-top: 70px;
+  }
   /* 모달 */
 
   .modal .modal-dialog {
@@ -2049,6 +2059,11 @@
     border: solid 2px #ddd;
   }
 
+  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list.my_list img {
+    max-width: 200px;
+    /* width: 100%; */
+  }
+
   /* tab2 (내가쓴리뷰) */
 
   .eval
@@ -2469,7 +2484,7 @@
     .cot_more {
     width: 100%;
     max-width: 68px;
-    font-size: 15px;
+    font-size: 13px;
     /* padding-bottom: 20px; */
     color: #3ec4ba;
     background: url("../recources/icons/rectangle_bt.png") no-repeat right;

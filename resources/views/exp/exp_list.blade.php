@@ -25,8 +25,8 @@
                 지금 ‘정직한 평가단’을 신청하셔서, 여러분의 정직한 평가와 후기를 공유해주세요.
             </div>
             <div class="title_img">
-            <img src="{{ asset('/design/recources/imgs/list_title_pc@2x.png') }}" alt="" class="block">
-            <img src="{{ asset('/design/recources/imgs/rectangle2@2x.png') }}" alt="" class="none">
+            <img src="{{ asset('/design/recources/bg/img_sub_pc01@3x.png') }}" alt="" class="block">
+            <img src="{{ asset('/design/recources/bg/img_sub_mo01@3x.png') }}" alt="" class="none">
             </div>
             <div class="line_14-100"></div>
         </div>
@@ -93,6 +93,10 @@
             <div class="text_02 wt-nm">
                 지구랭은 친환경 제품의 사용 경험을 모으고 나눕니다.<br>
                 지금 ‘정직한 평가단’을 신청하셔서, 여러분의 정직한 평가와 후기를 공유해주세요.
+            </div>
+            <div class="title_img">
+            <img src="{{ asset('/design/recources/bg/img_sub_pc01@3x.png') }}" alt="" class="block">
+            <img src="{{ asset('/design/recources/bg/img_sub_mo01@3x.png') }}" alt="" class="none">
             </div>
             <div class="line_14-100"></div>
         </div>

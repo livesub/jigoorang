@@ -14,6 +14,7 @@ class review_saves extends Model
         'exp_app_id',
         'sca_id',
         'cart_id',
+        'order_id',
         'item_code',
         'user_id',
         'user_name',

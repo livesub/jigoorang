@@ -19,6 +19,7 @@ class CreateReviewSavesTable extends Migration
             $table->integer('exp_app_id')->default(0)->comment('체험단 신청 id');
             $table->string('sca_id')->default(0)->comment('카테고리');
             $table->integer('cart_id')->default(0)->comment('장바구니 id');
+            $table->bigInteger('order_id')->default(0)->comment('주문서번호');
             $table->string('item_code')->default(0)->comment('상품코드');
             $table->string('user_id')->comment('신청 유저 아이디');
             $table->string('user_name')->comment('신청 유저 이름');
