@@ -55,6 +55,7 @@ function review_save(review_type){
         url: $("#form_route").val(),
         processData: false,
         contentType: false,
+        cache : false,
         data: formData,
         dataType : 'text',
         success : function(data){
