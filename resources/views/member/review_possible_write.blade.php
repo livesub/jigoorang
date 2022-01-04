@@ -102,8 +102,8 @@
                             <span class="point">(필수)</span>
 
                             <div class="file_uploader">
-                              <label>사진첨부 + <input type="file" id="file_uploader" accept="image/*" onchange="changeWriteFile()"
-                                      multiple /></label>
+                              <!-- <label>사진첨부 + <input type="file" id="file_uploader" accept="image/*" onchange="changeWriteFile()" multiple /></label> -->
+                              <label>사진첨부 + <input type="file" id="file_uploader" accept="image/*" onchange="changeWriteFile()" /></label>
                             </div>
                           </div>
 

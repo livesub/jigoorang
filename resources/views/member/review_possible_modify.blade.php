@@ -123,8 +123,8 @@ function star_modi(num) {
                             <span class="point">(필수)</span>
 
                             <div class="file_uploader">
-                              <label>사진첨부 + <input type="file" id="file_uploader" accept="image/*" onchange="changeWriteFile()"
-                                      multiple /></label>
+                              <!-- <label>사진첨부 + <input type="file" id="file_uploader" accept="image/*" onchange="changeWriteFile()" multiple /></label> -->
+                              <label>사진첨부 + <input type="file" id="file_uploader" accept="image/*" onchange="changeWriteFile()" /></label>
                             </div>
                           </div>
 
@@ -144,9 +144,9 @@ function star_modi(num) {
             </div>
 
             <div class="btn-3ea">
-                <button type="button" class="btn-50 sol-g">취소</button>
-                <button type="button" class="btn-50" onclick="review_save('y');">임시저장</button>
-                <button type="button" class="btn-50 bg-01" onclick="review_save('n');">등록</button>
+                <button type="button" class="btn-50 sol-g" onclick="history.back(-1);">취소</button>
+                <button type="button" class="btn-50" id="tmp_save_y" onclick="review_save('y');">임시저장</button>
+                <button type="button" class="btn-50 bg-01" id="tmp_save_n" onclick="review_save('n');">등록</button>
             </div>
         </div>
         </form>
@@ -241,6 +241,7 @@ function review_save(review_type){
         url: $("#form_route").val(),
         processData: false,
         contentType: false,
+        cache : false,
         data: formData,
         dataType : 'json',
         success : function(data){
