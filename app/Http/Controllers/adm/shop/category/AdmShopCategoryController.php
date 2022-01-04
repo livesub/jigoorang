@@ -173,8 +173,8 @@ class AdmShopCategoryController extends Controller
             }else{
                 //썸네일 만들기
                 for($k = 0; $k < 2; $k++){
-                    $resize_width_file_tmp = explode("%%","290%%136");
-                    $resize_height_file_tmp = explode("%%","290%%136");
+                    $resize_width_file_tmp = explode("%%","230%%136");
+                    $resize_height_file_tmp = explode("%%","230%%136");
 
                     $thumb_width = $resize_width_file_tmp[$k];
                     $thumb_height = $resize_height_file_tmp[$k];
@@ -316,8 +316,8 @@ class AdmShopCategoryController extends Controller
             }else{
                 //썸네일 만들기
                 for($k = 0; $k < 2; $k++){
-                    $resize_width_file_tmp = explode("%%","290%%136");
-                    $resize_height_file_tmp = explode("%%","290%%136");
+                    $resize_width_file_tmp = explode("%%","230%%136");
+                    $resize_height_file_tmp = explode("%%","230%%136");
 
                     $thumb_width = $resize_width_file_tmp[$k];
                     $thumb_height = $resize_height_file_tmp[$k];
@@ -423,8 +423,8 @@ class AdmShopCategoryController extends Controller
                 }else{
                     //썸네일 만들기
                     for($k = 0; $k < 2; $k++){
-                        $resize_width_file_tmp = explode("%%",'290%%136');
-                        $resize_height_file_tmp = explode("%%",'290%%136');
+                        $resize_width_file_tmp = explode("%%",'230%%136');
+                        $resize_height_file_tmp = explode("%%",'230%%136');
 
                         $thumb_width = $resize_width_file_tmp[$k];
                         $thumb_height = $resize_height_file_tmp[$k];
