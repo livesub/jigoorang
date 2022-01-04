@@ -137,6 +137,9 @@
         </td>
     </tr>
 </table>
+@else
+<input type="hidden" name="shop_img_width" value="{{ $shop_img_width }}">
+<input type="hidden" name="shop_img_height" value="{{ $shop_img_height }}">
 @endif
 
 <table>
