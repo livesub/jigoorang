@@ -42,7 +42,7 @@ function star_modi(num) {
             <div class="board mypage_list">
                 <!-- 리스트 시작 -->
                 <div class="board_wrap">
-<form name="review_form" id="review_form" method="post" action="" enctype='multipart/form-data'>
+<form name="review_form" id="review_form" method="post" action="" enctype='multipart/form-data' autocomplete="off">
 {!! csrf_field() !!}
 <input type="hidden" name="review_save_id" id="review_save_id" value="{{ $review_saves_info->id }}">
 <input type="hidden" name="cart_id" id="cart_id" value="{{ $cart_id }}">
