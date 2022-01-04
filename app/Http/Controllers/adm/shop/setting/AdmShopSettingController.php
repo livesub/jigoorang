@@ -54,8 +54,8 @@ class AdmShopSettingController extends Controller
         $company_bank_use       = "";
         $company_bank_account   = "OO은행 12345-67-89012 예금주명";
         $company_use_point      = "";
-        $shop_img_width         = "600%%290%%160";
-        $shop_img_height        = "520%%250%%140";
+        $shop_img_width         = "600%%290%%160%%110";
+        $shop_img_height        = "520%%250%%140%%96";
         $de_send_cost           = '2500';
         $de_send_cost_free      = '30000';
         $de_ment_change         = '기획전1';
@@ -185,12 +185,12 @@ class AdmShopSettingController extends Controller
         $shop_img_width_tmp     = explode("%%",$shop_img_width);
         $shop_img_height_tmp    = explode("%%",$shop_img_height);
 
-        if(count($shop_img_width_tmp) != 3){   //3개가 등록 되었는지 체크
+        if(count($shop_img_width_tmp) < 3){   //3개가 등록 되었는지 체크
             return redirect(route('shop.setting.index'))->with('alert_messages', $Messages::$shop['resize_num']);  //리사이즈 갯수 체크
             exit;
         }
 
-        if(count($shop_img_height_tmp) != 3){  //3개가 등록 되었는지 체크
+        if(count($shop_img_height_tmp) < 3){  //3개가 등록 되었는지 체크
             return redirect(route('shop.setting.index'))->with('alert_messages', $Messages::$shop['resize_num']);  //리사이즈 갯수 체크
             exit;
         }
