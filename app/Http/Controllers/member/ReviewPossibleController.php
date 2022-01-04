@@ -331,7 +331,9 @@ class ReviewPossibleController extends Controller
         $data_img_tmp = array();
         $review_img_cnt = $request->file('review_img');
         if($review_img_cnt != ""){
+
             for($i = 0; $i < count($review_img_cnt); $i++){
+
                 if($request->hasFile('review_img'))
                 {
                     $thumb_name = "";
@@ -371,6 +373,8 @@ class ReviewPossibleController extends Controller
 
                         $photo_flag = true;
                     }
+                }else{
+                    return response()->json(['route' => route('mypage.review_possible_list'),'status' => 'img_error'], 200, [], JSON_PRETTY_PRINT);
                 }
             }
         }
@@ -570,6 +574,8 @@ class ReviewPossibleController extends Controller
 
                         $photo_flag = true;
                     }
+                }else{
+                    return response()->json(['route' => route('mypage.review_possible_list'),'status' => 'img_error'], 200, [], JSON_PRETTY_PRINT);
                 }
             }
 
