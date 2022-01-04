@@ -57,10 +57,10 @@ function review_save(review_type){
         contentType: false,
         cache : false,
         data: formData,
-        dataType : 'text',
+        dataType : 'json',
         success : function(data){
-alert(data);
-return false;
+//alert(data);
+//return false;
 
             if(data.status == "img_error"){
                 alert("이미지 용량이 큽니다\n용량을 줄여서 올려 주세요.");
