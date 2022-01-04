@@ -43,7 +43,7 @@
                     <div class="mypage_inner_01">
                         <div class="mypage_innerbox_01">
                             <div class="mypage_box">
-                            <a href="">
+                            <a href="javascript:alert('22 년 2 월 OPEN  예정');">
                                 <div class="mypage_box_img01"></div>
                                 <span>주문 배송내역</span>
                             </a>
@@ -51,7 +51,7 @@
 
 
                             <div class="mypage_box">
-                                <a href="">
+                                <a href="javascript:alert('22 년 2 월 OPEN  예정');">
                                     <div class="mypage_box_img02"> </div>
                                     <span>취소/교환/반품 신청안내</span>
                                 </a>
@@ -68,7 +68,7 @@
 
 
                         <div class="mypage_box solid sol">
-                            <a href="">
+                            <a href="javascript:alert('22 년 2 월 OPEN  예정');">
                                 <div class="mypage_box_img04"></div>
                                 <span>응원한 상품</span>
                             </a>

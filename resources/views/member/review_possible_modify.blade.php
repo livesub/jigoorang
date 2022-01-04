@@ -121,7 +121,7 @@ function star_modi(num) {
                         <div class="information review">
                           <div class="tt_sub">
                             <h4>포토리뷰</h4>
-                            <span class="point">(필수)</span>
+                            <span class="point">(선택)</span>
 
                             <div class="file_uploader">
                               <!-- <label>사진첨부 + <input type="file" id="file_uploader" accept="image/*" onchange="changeWriteFile()" multiple /></label> -->
@@ -379,8 +379,6 @@ function attached_file_del(evnt, url, key_val) {
                     'rs_id' : '{{ $review_saves_info->id }}',
                 },
                 success: function(result) {
-    //alert(result);
-    //return false;
                     const parentEl = evnt.target.parentElement;
                     parentEl.remove();
                     delete imageMap[parentEl.id];
