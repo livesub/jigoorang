@@ -271,10 +271,11 @@
 .footer .bottom .logo_f {
   width: 92px;
   height: 103px;
-  background: url("../recources/logo-3.png");
+  background: url("../recources/logo-2@4x.png");
   position: absolute;
   top: 80px;
   right: 40px;
+  background-size: 92px auto;
 }
 .footer .bottom .copy {
   margin-top: 25px;
