@@ -56,6 +56,7 @@ function review_save(review_type){
         processData: false,
         contentType: false,
         cache : false,
+        contentType: false,
         data: formData,
         dataType : 'text',
         success : function(data){
