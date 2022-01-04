@@ -124,8 +124,8 @@
 
             <div class="btn-3ea">
                 <button type="button" class="btn-50 sol-g" onclick="history.back(-1);">취소</button>
-                <button type="button" class="btn-50" onclick="review_save('y');">임시저장</button>
-                <button type="button" class="btn-50 bg-01" onclick="review_save('n');">등록</button>
+                <button type="button" class="btn-50" id="tmp_save_y" onclick="review_save('y');">임시저장</button>
+                <button type="button" class="btn-50 bg-01" id="tmp_save_n" onclick="review_save('n');">등록</button>
             </div>
         </div>
         <!-- 리뷰 작성 끝  -->

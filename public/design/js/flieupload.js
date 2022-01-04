@@ -44,6 +44,11 @@ function review_save(review_type){
     //   console.log(value);
     // }
 
+    const target = document.getElementById('tmp_save_y');
+    target.disabled = true;
+    const target2 = document.getElementById('tmp_save_n');
+    target2.disabled = true;
+
     $.ajax({
         headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
         type : 'post',
