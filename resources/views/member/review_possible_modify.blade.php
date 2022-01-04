@@ -115,6 +115,7 @@ function star_modi(num) {
                                 &#13;&#10;- 좋았던 점과 아쉬운 점을 포함하여 최대한 자세하게 작성해 주세요
                                 &#13;&#10;- 상품과 무관한 리뷰나 악의적 비방,욕설이 포함된  리뷰는 통보 없이 삭제되며 적립 혜택이 회수됩니다">{{ $review_saves_info->review_content }}</textarea>
                           </div>
+                          <span id="textLengthCheck" class="textLengthCheck"></span>
                       </div>
 
                         <div class="information review">
@@ -158,12 +159,22 @@ function star_modi(num) {
     <!-- 서브 컨테이너 끝 -->
 
 <script>
-    $('#review_content').on('keyup', function() {
-        var content = $(this).val();
+    var load_content = $("#review_content").val().length;
+    $("#textLengthCheck").html("(" + load_content + " 자 / 최대 300자)"); //실시간 글자수 카운팅
+
+	$('#review_content').on('keyup', function() {
+		var content = $(this).val();
         //var srtlength = getTextLength(content);
         var srtlength = content.length;
-        $("#content_length").val(srtlength);
-    });
+
+        $("#textLengthCheck").html("(" + srtlength + " 자 / 최대 300자)"); //실시간 글자수 카운팅
+
+		if (srtlength > 300) {
+			alert("최대 300자까지 입력 가능합니다.");
+			$(this).val(content.substring(0, 300));
+            $('#textLengthCheck').html("(300 자 / 최대 300자)");
+		}
+	});
 
     function getTextLength(str) {
         var len = 0;
@@ -177,7 +188,6 @@ function star_modi(num) {
         return len;
     }
 </script>
-
 
 
 
@@ -385,9 +395,6 @@ function attached_file_del(evnt, url, key_val) {
     }
 }
 </script>
-
-
-
 
 
 
