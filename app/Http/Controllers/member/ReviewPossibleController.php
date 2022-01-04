@@ -279,32 +279,6 @@ class ReviewPossibleController extends Controller
         $exp_app_id     = $request->input('exp_app_id');
         $sca_id         = $request->input('sca_id');
 
-        $review_img_cnt = $request->file('review_img');
-        if($review_img_cnt != ""){
-
-            for($i = 0; $i < count($review_img_cnt); $i++){
-
-                $review_img[$i] = $request->file('review_img')[$i];
-
-                if($request->hasFile('review_img'))
-                {
-                    var_dump($request->hasFile('review_img'));
-                }
-            }
-        }
-
-
-exit;
-
-
-
-
-
-
-
-
-
-
         //예외처리
         if($exp_id > "0" && $exp_app_id > "0"){
             //체험단

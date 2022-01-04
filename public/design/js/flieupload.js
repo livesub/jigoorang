@@ -57,7 +57,7 @@ function review_save(review_type){
         contentType: false,
         cache : false,
         data: formData,
-        dataType : 'text',
+        dataType : 'json',
         success : function(data){
 
             if(data.status == "img_error"){
