@@ -2018,7 +2018,7 @@
     .cot_list
     .cot_body
     .info.tab {
-    margin-top: 0px;
+    margin-top: 18px;
   }
 
   .eval
@@ -2412,7 +2412,7 @@
     display: block;
     font-size: 13px;
     padding-bottom: 10px;
-    margin-top: 20px;
+    margin-top: 5px;
   }
 
   .eval
