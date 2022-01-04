@@ -285,10 +285,10 @@ class ReviewPossibleController extends Controller
             for($i = 0; $i < count($review_img_cnt); $i++){
 
                 $review_img[$i] = $request->file('review_img')[$i];
-
+var_dump($review_img[$i]->getClientOriginalName());
                 if($request->hasFile('review_img'))
                 {
-                    var_dump($request->hasFile('review_img'));
+                    //var_dump($request->hasFile('review_img'));
                 }
             }
         }
