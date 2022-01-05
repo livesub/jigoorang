@@ -433,8 +433,7 @@
     }
 
     function forderform_check(){
-alert($("#od_b_addr_jibeon").val());
-return false;
+
         // 재고체크
         var stock_msg = order_stock_check();
 

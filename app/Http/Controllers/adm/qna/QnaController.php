@@ -94,10 +94,12 @@ class QnaController extends Controller
         $keyword    = $request->input('keyword');
 
         $qna_info = DB::table('qnas')->where('id', $id)->first();
+        $user_info = DB::table('users')->where('user_id', $qna_info->user_id)->first();
 
         return view('adm.qna.qna_answer',[
             'CustomUtils'       => $CustomUtils,
             'qna_info'          => $qna_info,
+            'user_info'         => $user_info,
             'page'              => $page,
             'keyword'           => $keyword,
         ]);

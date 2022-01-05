@@ -12,6 +12,18 @@
 <input type="hidden" name="page" id="page" value="{{ $page }}">
 <input type="hidden" name="keyword" id="keyword" value="{{ $keyword }}">
     <tr>
+        <td>아이디</td>
+        <td>{{ $user_info->user_id }}</td>
+    </tr>
+    <tr>
+        <td>이름</td>
+        <td>{{ $user_info->user_name }}</td>
+    </tr>
+    <tr>
+        <td>전화번호</td>
+        <td>{{ $user_info->user_phone }}</td>
+    </tr>
+    <tr>
         <td>문의 카테고리</td>
         <td>{{ $qna_info->qna_cate }}</td>
     </tr>
