@@ -463,10 +463,10 @@
   }
 
   .eval .board .board_wrap .list_view .body .title {
-    max-width: 360px;
+    /* max-width: 360px; */
     font-size: 15px;
     font-weight: bold;
-    height: 40px;
+    height: 45px;
   }
 
   .eval .board .board_wrap .list_view .body dl {
