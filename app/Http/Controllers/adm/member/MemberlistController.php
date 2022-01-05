@@ -407,6 +407,7 @@ class MemberlistController extends Controller
                 'user_birth'            => $user_info->user_birth,
                 'blacklist'             => $user_info->blacklist,
                 'site_access_no'        => $user_info->site_access_no,
+                'user_platform_type'    => $user_info->user_platform_type,
             ],$Messages::$mypage['mypage']);
         }
     }
