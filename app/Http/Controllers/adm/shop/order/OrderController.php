@@ -414,7 +414,8 @@ class OrderController extends Controller
                 //결제 금액 보다 취소금액이 크거나 같을때(신용카드는 일단 돌려 주고)
                 $amount = $card_price;    //카드금액 돌려 주고 나머지는 포인트로
             }
-
+var_dump($amount);
+exit;
             $custom_data = $new_tmp.$new_tmp3;
             $custom_data = array_filter(explode(',', substr($custom_data, 0, -1)));
         }
@@ -586,9 +587,9 @@ class OrderController extends Controller
 
         if($cancel_request_amount > 0){
             //취소 금액이 0원 보다 클때 Iamport 를 태운다.
-//            $cancel_result = Iamport::cancelPayment($imp_uid, $cancel_request_amount, $reason); //실제 취소 이루어 지는 부분
-//            $success = $cancel_result->success;
-$success = true;
+            $cancel_result = Iamport::cancelPayment($imp_uid, $cancel_request_amount, $reason); //실제 취소 이루어 지는 부분
+            $success = $cancel_result->success;
+//$success = true;
         }else{
             //취소 금액이 0원일때 때문에..
             $success = true;
@@ -674,24 +675,24 @@ $success = true;
                         //취소 갯수 만큼 재고 늘리기
                         $qty_up = shopitemoptions::where([['item_code', $cart_info->item_code], ['sio_id', $cart_info->sio_id], ['sio_type',$cart_info->sio_type]])->first();
                         $qty_up->sio_stock_qty = $qty_up->sio_stock_qty + $cart_info->sct_qty;
-//                        $update_result = $qty_up->save();
+                        $update_result = $qty_up->save();
                     }else{
                         $qty_up = shopitems::where('item_code', $cart_info->item_code)->first();
                         $qty_up->item_stock_qty = $qty_up->item_stock_qty + $cart_info->sct_qty;
-//                        $update_result = $qty_up->save();
+                        $update_result = $qty_up->save();
                     }
 
                     //구입 적립 포인트 회수
                     $chagam_point = $cart_info->sct_point * $cart_info->sct_qty;
-//                    $CustomUtils->insert_point($order_info->user_id, (-1) * $chagam_point, '구매 적립 취소', 9,'', $order_id);
+                    $CustomUtils->insert_point($order_info->user_id, (-1) * $chagam_point, '구매 적립 취소', 9,'', $order_id);
 
                     // 장바구니 수량변경
-/*
+
                     $cart_up = DB::table('shopcarts')->where([['id', $custom_data[$k]], ['od_id', $order_id]])->update([
                         'sct_qty'       => $have,
                         'sct_status'    => '취소',
                     ]);
-*/
+
                     $mod_history2 .= date("Y-m-d H:i:s", time()).' '.$cart_info->sct_option.' 주문취소 '.$cart_info->sct_qty.' -> '.$have."\n";
 
 
@@ -716,8 +717,8 @@ $success = true;
                             //두번쨰 부터는
                             $misu = $qty_price;
                         }
-var_dump($misu);
-                        //$CustomUtils->insert_point($order_info->user_id, $misu, '상품 구매 부분 취소', 10,'', $order_id);
+
+                        $CustomUtils->insert_point($order_info->user_id, $misu, '상품 구매 부분 취소', 10,'', $order_id);
 
                         if($cancel_request_amount == 0){
                             //취소 금액이 0원이라는 것은 카드 금액을 다 돌려 준 상태임
@@ -725,7 +726,7 @@ var_dump($misu);
                         }else{
                             $od_cancel_price = $cancel_request_amount; //취소금액
                         }
-
+//var_dump($od_cancel_price);
                     }else{
                         //$misu = $cancel_request_amount;
                         $misu = $qty_price;
@@ -736,9 +737,10 @@ var_dump($misu);
                     //order 업데이트
                     $od_cart_price = $order_info->od_cart_price - $misu;   //총금액 - 취소 금액
                     $od_misu = $order_misu->od_misu + ((-1) * $misu); //미수금액(누적)
-var_dump("od_cart_price====> ".$od_misu);
+//var_dump("od_cart_price====> ".$od_misu);
 
-exit;
+
+
                     $order_up = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->update([
                         'od_cart_price'     => $od_cart_price,
                         'od_cancel_price'   => $od_cancel_price,
@@ -746,9 +748,10 @@ exit;
                         //'od_mod_history'    => $mod_history,
                         'od_status'         => '취소',
                     ]);
+
                 }
-exit;
-/*
+//exit;
+
                 //추가 배송비(산간지역)를 취소 하기 위해(-전체 상품이 취소되는 시점에서 추가 배송비를 취소 한다.)
                 if($order_info->od_send_cost2 > 0){     //추가 배송비가 있는 상태
                     //주문 상품 총 갯수
@@ -761,7 +764,7 @@ exit;
 
                     }
                 }
-*/
+
                 //내역 따로 업뎃
                 $order_od_mod_history_up = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->update([
                     'od_mod_history'    => $mod_history2,

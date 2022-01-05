@@ -88,7 +88,7 @@
             </td>
             <td>{{ number_format($opt_price) }}</td>
             <td>{{ number_format($ct_price['stotal']) }}</td>
-            <td>{{ number_format($ct_point['stotal']) }} 점</td>
+            <td>{{ number_format($ct_point['stotal']) }} P</td>
         </tr>
                 @php
                     $i++;
