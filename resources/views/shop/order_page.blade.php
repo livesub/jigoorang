@@ -298,11 +298,17 @@
 
 <script>
     var zipcode = "";
+    add_baesong_price();
 
     $("#od_b_addr2").focus(function() {
+        add_baesong_price();
+    });
+
+    function add_baesong_price(){
+
         var zip = $("#od_b_zip").val().replace(/[^0-9]/g, "");
-        if(zip == "")
-            return false;
+//alert(zip);
+        if(zip == "" || zip == "0") return false;
 
         var code = String(zip);
 
@@ -311,7 +317,7 @@
 
         zipcode = code;
         calculate_sendcost(code);
-    });
+    };
 
     function calculate_sendcost(code)
     {
