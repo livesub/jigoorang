@@ -375,6 +375,7 @@ class MemberlistController extends Controller
                 'user_point'            => $user_point,
                 'user_gender'           => '',
                 'user_birth'            => '',
+                'user_platform_type'    => '',
             ],$Messages::$mypage['mypage']);
         }else{
             //수정
