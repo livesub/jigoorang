@@ -198,7 +198,7 @@
                         <br>
                         <input type="text" name="od_b_addr3" id="od_b_addr3" value="{{ $user_addr3 }}" readonly="readonly" class="frm_input frm_address" size="60" placeholder="참고항목">
                         <label for="od_b_addr3" class="sound_only">참고항목</label><br>
-                        <input type="hidden" name="od_b_addr_jibeon" id="od_b_addr_jibeon" value="">
+                        <input type="hidden" name="od_b_addr_jibeon" id="od_b_addr_jibeon" value="{{ $user_addr_jibeon }}">
                     </td>
                 </tr>
                 <tr>
@@ -433,7 +433,8 @@
     }
 
     function forderform_check(){
-
+alert($("#od_b_addr_jibeon").val());
+return false;
         // 재고체크
         var stock_msg = order_stock_check();
 

@@ -26,7 +26,7 @@
             </div>
             <div class="title_img">
             <img src="{{ asset('/design/recources/bg/img_sub_pc01@3x.png') }}" alt="" class="block">
-            <img src="{{ asset('/design/recources/bg/img_sub_mo01@3x.png') }}" alt="" class="none">
+            <img src="{{ asset('/design/recources/bg/img_sub_mo01@3x.jpg') }}" alt="" class="none">
             </div>
             <div class="line_14-100"></div>
         </div>
