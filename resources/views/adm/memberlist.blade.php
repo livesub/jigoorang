@@ -69,6 +69,7 @@
         <td>아이디</td>
         <td>가입일</td>
         <td>휴대폰번호</td>
+        <td>가입경로</td>
         <td>포인트</td>
         <td>탈퇴여부</td>
         <td>블랙리스트</td>
@@ -85,6 +86,11 @@
 
             $site_access_no_chk = '';
             if($member->site_access_no == 'y') $site_access_no_chk = '사이트 접근 불가';
+
+
+            if($member->user_platform_type == '') $platform_type = '회원가입';
+            else if($member->user_platform_type == 'kakao') $platform_type = '카카오';
+            else if($member->user_platform_type == 'naver') $platform_type = '네이버';
         @endphp
     <tr>
         <td><input type="checkbox" name="chk_id[]" value="{{ $member->id }}" id="chk_id_{{ $member->id }}" class="selec_chk"></td>
@@ -93,6 +99,7 @@
         <td>{{ $member->user_id }}</td>
         <td>{{ $member->created_at }}</td>
         <td>{{ $member->user_phone }}</td>
+        <td>{{ $platform_type }}</td>
         <td>{{ number_format($member->user_point) }}P</td>
         <td>{{ $user_type }}</td>
         <td>{{ $blacklist_chk }}</td>

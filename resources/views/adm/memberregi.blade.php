@@ -46,7 +46,7 @@
     </div>
 
 
-
+@if($user_platform_type != 'kakao' && $user_platform_type != 'naver')
     <div class='form-group'>
       비밀번호 : <input name='user_pw' id='user_pw' type='password' class='form-control @error('user_pw') is-invalid @enderror' value='{{ old('user_pw') }}' placeholder='{{ $user_pw }}'> 영문, 숫자, 특수문자 조합 8~20자(%$?^()제외)
     @error('user_pw')
@@ -66,7 +66,7 @@
     @if ($mode == 'modi')
       <input type='button' value='{{ $pw_change }}' onclick='pw_change();'>
     @endif
-
+@endif
     </div>
 
 
@@ -117,6 +117,14 @@
       포인트 : {{ number_format($user_point) }}P
     </div>
 
+    <div class='form-group'>
+@php
+    if($user_platform_type == '') $platform_type = '회원가입';
+    else if($user_platform_type == 'kakao') $platform_type = '카카오';
+    else if($user_platform_type == 'naver') $platform_type = '네이버';
+@endphp
+      가입경로 : {{ $platform_type }}
+    </div>
 
     <div class='form-group'>
     @php
