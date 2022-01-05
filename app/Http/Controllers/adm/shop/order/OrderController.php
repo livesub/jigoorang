@@ -386,14 +386,20 @@ class OrderController extends Controller
             if(count(array_filter($arr_tmp3)) != 0){
                 for($g = 0; $g < count(array_filter($arr_tmp3)); $g++){
                     $cart_info2 = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $arr_tmp3[$g]]])->first();
-
+var_dump($cart_info2->item_sc_price);
                     //상품 금액만
                     if($cart_info2->sio_type) $tot_price += $cart_info2->sio_price * $cart_info2->sct_qty;
                     else $tot_price += ($cart_info2->sct_price + $cart_info2->sio_price) * $cart_info2->sct_qty;
+
+
+
+
+
                     $new_tmp3 .= $arr_tmp3[$g].',';
                 }
             }
-
+var_dump("tot_price-====> ".$tot_price);
+exit;
             //추가 배송비(산간지역)를 취소 하기 위해(-전체 상품이 취소되는 시점에서 추가 배송비를 취소 한다.)
             if($order_info->od_send_cost2 > 0){     //추가 배송비가 있는 상태
                 //주문 상품 총 갯수
@@ -584,7 +590,8 @@ exit;
         $qty_price = 0;
         $misu = 0;
         $mod_history = '';
-
+var_dump($cancel_request_amount);
+exit;
         if($cancel_request_amount > 0){
             //취소 금액이 0원 보다 클때 Iamport 를 태운다.
             $cancel_result = Iamport::cancelPayment($imp_uid, $cancel_request_amount, $reason); //실제 취소 이루어 지는 부분
