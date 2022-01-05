@@ -33,7 +33,7 @@
     </tr>
     <tr>
         <td>문의 글</td>
-        <td>{{ stripslashes($qna_info->qna_subject) }}</td>
+        <td>{{ stripslashes($qna_info->qna_content) }}</td>
     </tr>
     <tr>
         <td>답변 글</td>
