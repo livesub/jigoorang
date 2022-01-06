@@ -43,6 +43,7 @@ class CreateUsersTable extends Migration
             $table->text('withdraw_content')->comment('탈퇴 사유내용');
             $table->enum('blacklist', ['n', 'y'])->default('n')->comment('블랙리스트');
             $table->enum('site_access_no', ['n', 'y'])->default('n')->comment('사이트 접근 불가');
+            $table->string('withdraw_date')->nullable()->comment('탈퇴일');
 
             $table->rememberToken();
             $table->timestamps();

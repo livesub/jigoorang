@@ -122,6 +122,7 @@ class MypageController extends Controller
 
         $user_info = User::whereUser_id($user_id)->first();  //update 할때 미리 값을 조회 하고 쓰면 update 구문으로 자동 변경
         $user_info->user_type = $user_info->user_type = 'Y';
+        $user_info->withdraw_date = now();
         $result_up = $user_info->save();
 
         if(!$result_up)
