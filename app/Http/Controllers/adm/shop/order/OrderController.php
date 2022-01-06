@@ -228,6 +228,7 @@ class OrderController extends Controller
 
         $amount = 0;
         $custom_data = array();
+        $setting_info = setting_infos();
 
         for($i = 0; $i < count($ct_id); $i++){
             if(isset($ct_chk[$i])){
@@ -244,11 +245,21 @@ class OrderController extends Controller
 
                         //갯수에 따른 환불 금액
                         $qty_price = ($cart_info->sct_price + $cart_info->sio_price) * $minus_qty;
-
+var_dump($qty_price);
                         if($card_price > $qty_price){
+                            //배송비 무료 정책(30000원) 에 의한 처리 프로세서
+                            $kk = $card_price - $qty_price;
+var_dump($kk);
+                            //if($card_price - )
+
+
+
+
+
                             //결제 금액이 취소금액 보다 클때(신용카드만 부분 취소)
                             $amount = $amount + $qty_price;
                         }else if($card_price <= $qty_price){
+var_dump("2222222");
                             //결제 금액 보다 취소금액이 크거나 같을때(신용카드는 일단 돌려 주고)
                             $amount = $card_price;    //카드금액 돌려 주고 나머지는 포인트로
                         }
@@ -259,7 +270,7 @@ class OrderController extends Controller
                 }
             }
         }
-
+exit;
         if(empty($custom_data)){
             echo json_encode(['message' => 'no_qty']);
             exit;
