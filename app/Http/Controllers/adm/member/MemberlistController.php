@@ -530,14 +530,20 @@ Auth::attempt($credentials) 응 통해 비교 했다가 비교 했던 아이디�
             if($user_info->user_type == "Y") {
                 $type_change = "N";
                 $withdraw_type = "";
+                $withdraw_content = "";
+                $withdraw_date = "";
             }else{
                 $type_change = "Y";
                 $withdraw_type = "관리자 탈퇴";
+                $withdraw_content = "관리자 탈퇴";
+                $withdraw_date = now();
             }
 
             $user = User::whereid($request->input('chk_id')[$i])->first();  //update 할때 미리 값을 조회 하고 쓰면 update 구문으로 자동 변경
             $user->user_type = $type_change;
             $user->withdraw_type = $withdraw_type;
+            $user->withdraw_content = $withdraw_content;
+            $user->withdraw_date = $withdraw_date;
             $result_up = $user->save();
         }
         return redirect()->route('adm.member.index')->with('alert_messages', $Messages::$adm_mem_chk['mem_chk']['out_ok']);
