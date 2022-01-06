@@ -106,8 +106,6 @@ class socialLoginController extends BaseController
                 //이메일 기준으로 먼저 검색 필요하다.
                 $user_info = User::whereUser_id($social_info->email)->first();
 
-                //$user_info = User::whereUser_phone($user_phone)->first();
-
                 $user_pw = pack('V*', rand(), rand(), rand(), rand()); //비밀번호 강제 생성
 
                 if(empty($user_info)){
@@ -176,9 +174,22 @@ class socialLoginController extends BaseController
                             return redirect()->route('main.index')->with('alert_messages', $Messages::$login_chk['login_chk']['login_ok']);
                         }else{
                             return redirect()->route('main.index')->with('alert_messages', "이미 등록된 번호입니다.");
+/*
+                            if($user_info_phone->user_type == "Y"){
+                                return redirect()->route('main.index')->with('alert_messages', "탈퇴 하신 회원 입니다.");
+                            }else{
+                                $user_platform = DB::table('users')->where([['user_phone', $user_phone], ['user_platform_type', $provider]])->first();
+                                if(is_null($user_platform)){
+                                    if($provider == "kakao") return redirect()->route('main.index')->with('alert_messages', "고객님은 네이버를 이용하여 로그인 가능합니다.");
+                                    else if($provider == "naver") return redirect()->route('main.index')->with('alert_messages', "고객님은 카카오를 이용하여 로그인 가능합니다.");
+                                }else{
+                                    Auth::login($user_info, $remember = true);
+                                    return redirect()->route('main.index')->with('alert_messages', $Messages::$login_chk['login_chk']['login_ok']);
+                                }
+                            }
+*/
                         }
                     }
-
                 }else{
                     if($user_info->user_type == 'Y'){
                         auth()->logout();
