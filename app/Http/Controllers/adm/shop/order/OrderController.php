@@ -217,7 +217,7 @@ class OrderController extends Controller
         $ct_id      = $request->input('ct_id');     //장바구니 순번
         $sct_qty    = $request->input('sct_qty');   //수량
 
-        $order_info = DB::table('shoporders')->select('order_id', 'od_receipt_price', 'od_receipt_point', 'od_cancel_price', 'od_misu')->where('order_id', $order_id)->first();
+        $order_info = DB::table('shoporders')->where('order_id', $order_id)->first();
         if(is_null($order_info)){
             echo json_encode(['message' => 'no_order']);
             exit;
@@ -228,7 +228,6 @@ class OrderController extends Controller
 
         $amount = 0;
         $custom_data = array();
-        $setting_info = setting_infos();
 
         for($i = 0; $i < count($ct_id); $i++){
             if(isset($ct_chk[$i])){
@@ -245,21 +244,11 @@ class OrderController extends Controller
 
                         //갯수에 따른 환불 금액
                         $qty_price = ($cart_info->sct_price + $cart_info->sio_price) * $minus_qty;
-var_dump($qty_price);
+
                         if($card_price > $qty_price){
-                            //배송비 무료 정책(30000원) 에 의한 처리 프로세서
-                            $kk = $card_price - $qty_price;
-var_dump($kk);
-                            //if($card_price - )
-
-
-
-
-
                             //결제 금액이 취소금액 보다 클때(신용카드만 부분 취소)
                             $amount = $amount + $qty_price;
                         }else if($card_price <= $qty_price){
-var_dump("2222222");
                             //결제 금액 보다 취소금액이 크거나 같을때(신용카드는 일단 돌려 주고)
                             $amount = $card_price;    //카드금액 돌려 주고 나머지는 포인트로
                         }
@@ -270,6 +259,30 @@ var_dump("2222222");
                 }
             }
         }
+
+        //기본 배송비무료 정책(3만원)인데 취소 처리
+        //3만원 넘어간 상품만 적용
+        if($order_info->de_send_cost_free != 0 && $order_info->de_send_cost_free <= $order_info->od_cart_price){
+            //if(총금액(남은금액) - 취소 금액 < 30000(무료정책))
+            if(($card_price - $amount) < $order_info->de_send_cost_free){
+var_dump($amount);
+var_dump($order_info->de_send_cost);
+                //if(취소금액 < 기본 배송비){
+                if($amount < $order_info->de_send_cost){
+                    echo json_encode(['message' => 'no_cencel']);
+                    exit;
+                }else{
+                    //무료배송비 정책 이하로 취소시 취소 금액에서 기본 배송비를 빼고 돌려 준다
+                    //한번 빼고 돌려 줬는지 디비에 저장 한다.
+                    $de_send_cost_up = DB::table('shoporders')->where('order_id', $order_id)->update([
+                        'de_cost_minus' => $order_info->de_send_cost,
+                    ]);
+
+                    $amount = $amount - $order_info->de_send_cost;
+                }
+            }
+        }
+var_dump("amount===> ".$amount);
 exit;
         if(empty($custom_data)){
             echo json_encode(['message' => 'no_qty']);
@@ -283,6 +296,7 @@ exit;
 
     public function ajax_orderitemprocess(Request $request)
     {
+exit;
         //상품별 취소
         $CustomUtils = new CustomUtils;
 

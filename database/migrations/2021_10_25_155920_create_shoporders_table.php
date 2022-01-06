@@ -52,6 +52,7 @@ class CreateShopordersTable extends Migration
             $table->string('od_delivery_company')->nullable()->comment('배송회사');
             $table->string('od_invoice')->nullable()->comment('운송장번호');
             $table->integer('od_misu')->default(0)->comment('미수금');
+            $table->integer('de_cost_minus')->default(0)->comment('무료배송비 이하 취소시 한번 빼줬다는 표시');
             $table->text('od_mod_history')->nullable()->comment('상태변경 히스토리');
             $table->string('od_ip')->comment('주문자IP');
             $table->timestamps();
