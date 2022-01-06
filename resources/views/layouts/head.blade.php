@@ -104,7 +104,7 @@
                                 <li><b>지</b>구를 <b>구</b>하는 <b>쇼</b>핑 </li>
                         </a>
                         <a href="javascript:alert('22 년 2 월 OPEN  예정');">
-                                <li><b>지</b>구를 <b>구</b>하는 <b>기</b>록 </li>
+                                <li><b>지</b>구를 <b>구</b>하는 기<b>록</b> </li>
                         </a>
                         <a href="{{ route('exp.list') }}"><li {!! $menu_exp !!}>정직한 평가단</li></a>
                         <a href="{{ route('customer_center') }}"><li {!! $menu_center !!}>고객센터 </li></a>
