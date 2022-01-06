@@ -406,7 +406,7 @@ class Messages_kr extends Controller
     static $social = [
         'join_fail' => '이미 사용하고 있는 아이디 입니다.',
         'join_cencel' => '인증을 취소 하셨습니다.',
-        'withdraw_chk' => '탈퇴된 회원입니다.',
+        'withdraw_chk' => '탈퇴 하신 회원입니다.',
     ];
 
     //팝업 관련
