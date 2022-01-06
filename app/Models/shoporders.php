@@ -57,6 +57,7 @@ class shoporders extends Model
         'od_delivery_company',
         'od_invoice',
         'od_misu',
+        'de_cost_minus',
         'od_mod_history',
         'od_ip',
     ];

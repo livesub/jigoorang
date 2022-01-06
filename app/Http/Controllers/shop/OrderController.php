@@ -418,7 +418,8 @@ class OrderController extends Controller
         }
 
         // 추가배송비가 상이함
-        $od_b_zip   = preg_replace('/[^0-9]/', '', $ordertemp->ad_zip1);
+        //$od_b_zip   = preg_replace('/[^0-9]/', '', $ordertemp->ad_zip1);
+        $od_b_zip   = $ordertemp->ad_zip1;
         $sendcost_info = DB::table('sendcosts')->select('id', 'sc_price')->where([['sc_zip1', '<=', $od_b_zip], ['sc_zip2', '>=', $od_b_zip]])->first();
 
         if($i_send_cost2 != (int)$sendcost_info->sc_price){
@@ -471,17 +472,16 @@ class OrderController extends Controller
         $od_send_cost2      = (int)$request->input('od_send_cost2');
         $od_receipt_price   = (int)$request->input('od_receipt_price');
         $od_temp_point      = (int)$request->input('od_temp_point');
-        $od_b_zip           = (int)$request->input('od_b_zip');
+        $od_b_zip           = $request->input('od_b_zip');
         $tot_item_point     = (int)$request->input('tot_item_point');
 
         $ordertemp_cnt = DB::table('shopordertemps')->where([['od_id',$od_id], ['user_id', Auth::user()->user_id]])->count();
 
         //주문금액 배송비 무료 정책 추가(211112)
-        //무료 배송이 됐을 경우 기본 배송비는 0, de_send_cost_free 값저장
-        //무료 배송이 안됐을 경우 기본 배송비는 쎄팅, de_send_cost_free 0
         if($od_cart_price >= $de_send_cost_free){
-            $de_send_cost = 0;
+            //$de_send_cost = 0;
         }else{
+            //무료배송비 정책 금액 이하 일때
             $de_send_cost_free = 0;
         }
 
@@ -616,15 +616,6 @@ class OrderController extends Controller
         $imp_card_name      = $request->input('imp_card_name');   //카드사에서 전달 받는 값(카드사명칭)
         $imp_card_quota     = $request->input('imp_card_quota');   //카드사에서 전달 받는 값(할부개월수)
         $imp_card_number    = $request->input('imp_card_number');   //카드사에서 전달 받는 값(카드번호)
-
-        //주문금액 배송비 무료 정책 추가(211112)
-        //무료 배송이 됐을 경우 기본 배송비는 0, de_send_cost_free 값저장
-        //무료 배송이 안됐을 경우 기본 배송비는 쎄팅, de_send_cost_free 0
-        if($od_cart_price >= $de_send_cost_free){
-            $de_send_cost = 0;
-        }else{
-            $de_send_cost_free = 0;
-        }
 
 /*
 //데스트 위함

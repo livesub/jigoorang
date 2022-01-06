@@ -229,6 +229,7 @@ return false;
                     var data = JSON.parse(result);
 //alert(data.amount);
 //return false;
+
                     if(data.message == 'no_number'){
                         alert('수량을 입력 하세요.');
                         return false;
@@ -255,6 +256,11 @@ return false;
 
                     if(data.message == 'no_qty'){
                         alert("처리할 수량을 변경해 주십시오.");
+                        return false;
+                    }
+
+                    if(data.message == 'no_cancel'){
+                        alert('무료 기본 배송비 이하 상품입니다.\n전체 취소를 선택 하세요.');
                         return false;
                     }
 
