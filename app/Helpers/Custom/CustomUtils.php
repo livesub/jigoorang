@@ -1380,10 +1380,10 @@ $um_value='80/0.5/3'
         $total_send_cost = 0;
         $diff = 0;
 
-        $scs = DB::table('shopcarts')->select('item_code')->where([['od_id',$cart_id], ['sct_send_cost','0'], ['sct_select',$selected]])->whereRaw('sct_status in (\'쇼핑\', \'주문\', \'입금\', \'준비\',\'입력수량취소\', \'배송\', \'완료\')')->distinct('item_code')->get();
+        $scs = DB::table('shopcarts')->select('item_code')->where([['od_id',$cart_id], ['sct_send_cost','0'], ['sct_select',$selected]])->whereRaw('sct_status in (\'쇼핑\', \'주문\', \'입금\', \'준비\',\'부분취소\',\'상품취소\', \'배송\', \'완료\')')->distinct('item_code')->get();
 
         foreach ($scs as $sc){
-            $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_qty) as qty from shopcarts where item_code = '{$sc->item_code}' and od_id = '$cart_id' and sct_status IN ( '쇼핑', '주문', '입금', '준비', '입력수량취소', '배송', '완료' ) and sct_select = '{$selected}' ");
+            $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_qty) as qty from shopcarts where item_code = '{$sc->item_code}' and od_id = '$cart_id' and sct_status IN ( '쇼핑', '주문', '입금', '준비', '부분취소','상품취소', '배송', '완료' ) and sct_select = '{$selected}' ");
 
             $send_cost = $this->get_item_sendcost($sc->item_code, $sum[0]->price, $sum[0]->qty, $cart_id);
 
