@@ -13,7 +13,12 @@
     <tr>
         <td>현재 주문상태 : {{ $order_info->od_status }}</td>
         <td>주문일시 : {{ substr($order_info->od_receipt_time, 0, 16) }} ({{ $CustomUtils->get_yoil($order_info->od_receipt_time) }})</td>
-        <td>결제금액 : {{ number_format(((int)$order_info->od_cart_price + (int)$order_info->de_send_cost + (int)$order_info->od_send_cost + (int)$order_info->od_send_cost2) - (int)$order_info->od_receipt_point) }}</strong>원</td>
+        <td>
+            @if($order_info->de_send_cost_free == 0)
+            결제금액 : {{ number_format(((int)$order_info->od_cart_price + (int)$order_info->de_send_cost + (int)$order_info->od_send_cost + (int)$order_info->od_send_cost2) - (int)$order_info->od_receipt_point) }}</strong>원</td>
+            @else
+            결제금액 : {{ number_format(((int)$order_info->od_cart_price + (int)$order_info->od_send_cost + (int)$order_info->od_send_cost2) - (int)$order_info->od_receipt_point) }}</strong>원</td>
+            @endif
     </tr>
 </table>
 
@@ -226,12 +231,11 @@
                 dataType: 'text',
                 data: form_var,
                 success: function(result) {
-alert(result);
-return false;
+//alert(result);
+//return false;
                     var data = JSON.parse(result);
 //alert(data.amount);
 //return false;
-
                     if(data.message == 'no_number'){
                         alert('수량을 입력 하세요.');
                         return false;
@@ -305,7 +309,7 @@ return false;
                 "imp_uid"               : imp_uid,
                 "merchant_uid"          : order_id, // 예: ORD20180131-0000011
                 "cancel_request_amount" : amount, // 환불금액
-                "reason"                : "부분 환불", // 환불사유
+                "reason"                : "부분환불", // 환불사유
                 "custom_data"           : custom_data,  //필요 데이터
                 "refund_holder"         : "{{ $order_info->od_deposit_name }}", // [가상계좌 환불시 필수입력] 환불 수령계좌 예금주
                 "refund_bank"           : "", // [가상계좌 환불시 필수입력] 환불 수령계좌 은행코드(예: KG이니시스의 경우 신한은행은 88번)
@@ -336,7 +340,6 @@ return false;
         });
     }
 </script>
-
 
 
 
