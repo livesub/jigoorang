@@ -90,9 +90,8 @@
                 else if($od_status == '준비') $od_status4 = 'checked';
                 else if($od_status == '배송') $od_status5 = 'checked';
                 else if($od_status == '완료') $od_status6 = 'checked';
-                else if($od_status == '전체취소') $od_status7 = 'checked';
                 else if($od_status == '부분취소') $od_status8 = 'checked';
-                else if($od_status == '입력수량취소') $od_status9 = 'checked';
+                else if($od_status == '상품취소') $od_status9 = 'checked';
             @endphp
             <input type="radio" name="od_status" value="" id="od_status_all" {{ $od_status1 }}>
             <label for="od_status_all">전체</label>
@@ -106,46 +105,13 @@
             <label for="od_status_dvr">배송</label>
             <input type="radio" name="od_status" value="완료" id="od_status_done" {{ $od_status6 }}>
             <label for="od_status_done">완료</label>
-            <input type="radio" name="od_status" value="전체취소" id="od_status_cancel" {{ $od_status7 }}>
-            <label for="od_status_cancel">전체취소</label>
             <input type="radio" name="od_status" value="부분취소" id="od_status_pcancel" {{ $od_status8 }}>
             <label for="od_status_pcancel">부분취소</label>
-            <input type="radio" name="od_status" value="입력수량취소" id="od_status_pcancel" {{ $od_status9 }}>
-            <label for="od_status_pcancel">입력수량취소</label>
+            <input type="radio" name="od_status" value="상품취소" id="od_status_pcancel" {{ $od_status9 }}>
+            <label for="od_status_pcancel">상품취소</label>
         </td>
     </tr>
-    <tr>
-        <td>결제수단</td>
-        <td>
-            @php
-                $od_settle_case1 = '';
-                $od_settle_case2 = '';
-                $od_settle_case3 = '';
-                $od_settle_case4 = '';
-                $od_settle_case5 = '';
-                $od_settle_case6 = '';
 
-                if($od_settle_case == '') $od_settle_case1 = 'checked';
-                else if($od_settle_case == 'card') $od_settle_case2 = 'checked';
-                else if($od_settle_case == 'phone') $od_settle_case3 = 'checked';
-                else if($od_settle_case == 'trans') $od_settle_case4 = 'checked';
-                else if($od_settle_case == 'kakaopay') $od_settle_case5 = 'checked';
-                else if($od_settle_case == 'naverpay') $od_settle_case6 = 'checked';
-            @endphp
-            <input type="radio" name="od_settle_case" value="" id="od_settle_case01" {{ $od_settle_case1 }}>
-            <label for="od_settle_case01">전체</label>
-            <input type="radio" name="od_settle_case" value="card" id="od_settle_case06" {{ $od_settle_case2 }}>
-            <label for="od_settle_case06">신용카드</label>
-            <input type="radio" name="od_settle_case" value="phone" id="od_settle_case05" {{ $od_settle_case3 }}>
-            <label for="od_settle_case05">휴대폰결제</label>
-            <input type="radio" name="od_settle_case" value="trans" id="od_settle_case09" {{ $od_settle_case4 }}>
-            <label for="od_settle_case09">실시간계좌이체</label>
-            <input type="radio" name="od_settle_case" value="kakaopay" id="od_settle_case07" {{ $od_settle_case5 }}>
-            <label for="od_settle_case07">KAKAOPAY</label>
-            <input type="radio" name="od_settle_case" value="naverpay" id="od_settle_case08" {{ $od_settle_case6 }}>
-            <label for="od_settle_case08">NAVERPAY</label>
-        </td>
-    </tr>
     <tr>
         <td>기타선택</td>
         <td>
@@ -189,17 +155,14 @@
     <tr>
         <td>주문번호</td>
         <td>주문상태</td>
-        <td>결제수단</td>
-        <td>포인트사용여부</td>
         <td>ID</td>
         <td>이름</td>
         <td>받는분전회번호</td>
         <td>주문상품수</td>
         <td>운송장번호</td>
-        <td>배송회사</td>
         <td>주문합계<br>(배송비포함)</td>
         <td>입금합계<br>(주문합계-포인트사용)</td>
-        <td>주문취소</td>
+        <td>취소금액</td>
         <td>보기</td>
     <tr>
 
@@ -240,14 +203,11 @@
     <tr>
         <td>{{ $order->order_id }}</td>
         <td>{{ $order->od_status }}</td>
-        <td>{{ $settle_case_ment }}</td>
-        <td>{{ $receipt_point_ment }}</td>
         <td>{{ $order->user_id }}</td>
         <td>{{ $order->od_deposit_name }}</td>
         <td>{{ $order->ad_hp }}</td>
         <td>{{ $order->od_cart_count }}</td>
         <td>{{ $order->od_invoice }}</td>
-        <td>{{ $order->od_delivery_company }}</td>
         <td>{{ number_format($order->od_receipt_price) }}</td>
         <td>{{ number_format($deposit_hap) }}</td>
         <td>{{ number_format($order->od_cancel_price) }}</td>

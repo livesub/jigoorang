@@ -17,9 +17,9 @@
         $carts = DB::table('shopcarts')->where([['user_id',Auth::user()->user_id],['od_id', $order->order_id]])->get();
         $cancel_ment = '';
         if(count($carts) > 1){
-            $cancel_ment = '부분 취소';
+            $cancel_ment = '부분취소';
         }else{
-            $cancel_ment = '취소';
+            $cancel_ment = '상품취소';
         }
 
     @endphp

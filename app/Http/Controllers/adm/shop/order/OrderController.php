@@ -61,11 +61,11 @@ class OrderController extends Controller
 
         if ($od_status) {   //주문상태
             switch($od_status) {
-                case '전체취소':
-                    $orders->where('od_status', '취소');
+                case '상품취소':
+                    $orders->where('od_status', '상품취소');
                     break;
                 case '부분취소':
-                    $orders->whereRaw("od_status IN('주문', '입금', '준비', '입력수량취소', '배송', '완료') and od_cancel_price > 0");
+                    $orders->whereRaw("od_status IN('주문', '입금', '준비', '부분취소', '배송', '완료') and od_cancel_price > 0");
                     break;
                 default:
                     $orders->where('od_status', $od_status);
@@ -518,14 +518,14 @@ exit;
                 // 장바구니 수량변경
                 $cart_up = DB::table('shopcarts')->where([['id', $custom_data[$k]['ct_id']], ['od_id', $order_id]])->update([
                     'sct_qty'       => $have,
-                    'sct_status'    => '입력수량취소',
+                    'sct_status'    => '부분취소',
                 ]);
 
                 //구입 적립 포인트 회수
                 $chagam_point = $cart_info->sct_point * $custom_data[$k]['minus_qty'];
                 $CustomUtils->insert_point($order_info->user_id, (-1) * $chagam_point, '구매 적립 취소', 9,'', $order_id);
 
-                $mod_history .= $order_info->od_mod_history.date("Y-m-d H:i:s", time()).' '.$cart_info->sct_option.' 입력수량취소 '.$cart_info->sct_qty.' -> '.$have."\n";
+                $mod_history .= $order_info->od_mod_history.date("Y-m-d H:i:s", time()).' '.$cart_info->sct_option.' 부분취소 '.$cart_info->sct_qty.' -> '.$have."\n";
 
                 $qty_price = ($cart_info->sct_price + $cart_info->sio_price) * $custom_data[$k]['minus_qty'];   //취소 금액
 //var_dump("qty_price===> ".$qty_price);
@@ -568,7 +568,7 @@ exit;
                     'od_cancel_price'   => $od_cancel_price,
                     'od_misu'           => $od_misu,
                     'od_mod_history'    => $mod_history,
-                    'od_status'         => '입력수량취소',
+                    'od_status'         => '부분취소',
                 ]);
             }
 
@@ -633,13 +633,13 @@ exit;
             if($custom_data[0] == 0){
                 //전체 취소
                 //한개라도 취소한 상품이 있으면 여기 못들어 오게
-                $exception_cnt = DB::table('shopcarts')->where([['od_id', $order_id], ['user_id', $order_info->user_id], ['sct_select', 1], ['sct_status', '취소']])->count();
+                $exception_cnt = DB::table('shopcarts')->where([['od_id', $order_id], ['user_id', $order_info->user_id], ['sct_select', 1], ['sct_status', '상품취소']])->count();
                 if($exception_cnt > 0){
                     echo "exception";
                     exit;
                 }
 
-                $all_cart_infos = DB::table('shopcarts')->where([['od_id', $order_id], ['user_id', $order_info->user_id], ['sct_select', 1]])->whereRaw('sct_status in (\'입금\', \'준비\', \'배송\', \'배송완료\', \'입력수량취소\', \'반품\')')->get();
+                $all_cart_infos = DB::table('shopcarts')->where([['od_id', $order_id], ['user_id', $order_info->user_id], ['sct_select', 1]])->whereRaw('sct_status in (\'입금\', \'준비\', \'배송\', \'배송완료\', \'부분취소\', \'상품취소\', \'반품\')')->get();
 
                 $mod_history = $order_info->od_mod_history; //히스토리 내역
 
@@ -662,7 +662,7 @@ exit;
                     // 장바구니 수량변경
                     $all_cart_up = DB::table('shopcarts')->where([['id', $all_cart_info->id], ['od_id', $order_id]])->update([
                         'sct_qty'       => 0,
-                        'sct_status'    => '취소',
+                        'sct_status'    => '상품취소',
                     ]);
 
                     $mod_history .= date("Y-m-d H:i:s", time()).' '.$all_cart_info->sct_option.' 주문취소 '.$all_cart_info->sct_qty.' -> 0'."\n";
@@ -688,7 +688,7 @@ exit;
                     //'od_send_cost2'     => 0,
                     //'od_receipt_price'  => 0,
                     'od_mod_history'    => $mod_history,
-                    'od_status'         => '취소',
+                    'od_status'         => '상품취소',
                 ]);
             }else{
                 $mod_history2 = '';
@@ -722,14 +722,14 @@ exit;
 
                     $cart_up = DB::table('shopcarts')->where([['id', $custom_data[$k]], ['od_id', $order_id]])->update([
                         'sct_qty'       => $have,
-                        'sct_status'    => '취소',
+                        'sct_status'    => '상품취소',
                     ]);
 
                     $mod_history2 .= date("Y-m-d H:i:s", time()).' '.$cart_info->sct_option.' 주문취소 '.$cart_info->sct_qty.' -> '.$have."\n";
 
 
                     //포인트 지급전에 개별 배송비가 있다면 포함해서 지급
-                    $cancel_cart_cnt = DB::table('shopcarts')->where([['item_code', $cart_info->item_code],['sct_status', '취소']])->count();
+                    $cancel_cart_cnt = DB::table('shopcarts')->where([['item_code', $cart_info->item_code],['sct_status', '상품취소']])->count();
                     if($item_cnt[$cart_cnt->item_code] == $cancel_cart_cnt){
                         $od_send_cost = $order_info->od_send_cost;  //상품 부분 취소일 경우 상품별 배송비도 같이 포함
                     }
@@ -778,7 +778,7 @@ exit;
                         'od_cancel_price'   => $od_cancel_price,
                         'od_misu'           => $od_misu,
                         //'od_mod_history'    => $mod_history,
-                        'od_status'         => '취소',
+                        'od_status'         => '상품취소',
                     ]);
 
                 }
@@ -790,7 +790,7 @@ exit;
                     $cart_cnt = DB::table('shopcarts')->where('od_id', $order_info->order_id)->count();
 
                     //취소된 주문 상품 총 갯수
-                    $cart_cancel_cnt = DB::table('shopcarts')->where([['od_id', $order_info->order_id], ['sct_status', '취소']])->count();
+                    $cart_cancel_cnt = DB::table('shopcarts')->where([['od_id', $order_info->order_id], ['sct_status', '상품취소']])->count();
 
                     if($cart_cnt == $cart_cancel_cnt){
 

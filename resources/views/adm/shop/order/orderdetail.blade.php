@@ -109,12 +109,14 @@
         <td>
             <input type="hidden" name="chk_cnt" id="chk_cnt" value="{{ $chk_cnt }}">
             <strong>주문 및 장바구니 상태 변경</strong>
+<!--
             <button type="button" onclick="status_change('입금')">입금</button>
             <button type="button" onclick="status_change('준비')">준비</button>
             <button type="button" onclick="status_change('배송')">배송</button>
             <button type="button" onclick="status_change('완료')">배송완료</button>
-            <button type="button" onclick="status_change('입력수량취소')">입력수량취소</button>
-            <button type="button" onclick="status_change('취소')">취소</button>
+-->
+            <button type="button" onclick="status_change('부분취소')">부분취소</button>
+            <button type="button" onclick="status_change('상품취소')">상품취소</button>
             <button type="button" onclick="status_change('반품')">반품</button>
         </td>
     </tr>
@@ -178,7 +180,7 @@
 <script>
     function status_change(status){
         var msg = '';
-        if(status == "취소" || status == "입력수량취소"){
+        if(status == "상품취소" || status == "부분취소"){
             msg = status + '시 자동 환불 처리 되어 복구 할수 없습니다.';
         }else{
             msg = status + '상태를 선택하셨습니다.';
@@ -203,10 +205,10 @@
         }
 
         switch (status) {
-            case '입력수량취소':
+            case '부분취소':
                 var route_link = '{{ route('ajax_orderqtyprocess') }}';
                 break;
-            case '취소':
+            case '상품취소':
                 var route_link = '{{ route('ajax_orderitemprocess') }}';
                 break;
         }
@@ -286,10 +288,10 @@ return false;
 <script>
     function pay_cancel(imp_uid, order_id, amount, custom_data, status){
         switch (status) {
-            case '입력수량취소':
+            case '부분취소':
                 var route_link = '{{ route('ajax_admorderqtypaycancel') }}';
                 break;
-            case '취소':
+            case '상품취소':
                 var route_link = '{{ route('ajax_admorderitempaycancel') }}';
                 break;
         }
