@@ -1,3 +1,5 @@
+// 메인 스와이퍼
+
 var swiper = new Swiper(".mainSwiper", {
   pagination: {
     el: ".swiper-pagination",
@@ -22,9 +24,13 @@ var swiper = new Swiper(".bastSwiper", {
   },
 
   breakpoints: {
+    290: {
+      slidesPerView: 2.1,
+      spaceBetween: 0,
+    },
     360: {
-      slidesPerView: 2.5,
-      spaceBetween: 10,
+      slidesPerView: 2.3,
+      spaceBetween: 0,
     },
     480: {
       slidesPerView: 3.2,
@@ -55,7 +61,7 @@ var swiper = new Swiper(".bastSwiper", {
 
 
 var swiper = new Swiper(".saleSwiper", {
-  slidesPerView: 6,
+  slidesPerView: 5.3,
   spaceBetween: 0,
   slidesPerGroup: 4,
   grabCursor: true,
@@ -69,9 +75,13 @@ var swiper = new Swiper(".saleSwiper", {
   },
 
   breakpoints: {
+    290: {
+      slidesPerView: 2.1,
+      spaceBetween: 5,
+    },
     360: {
       slidesPerView: 2.1,
-      spaceBetween: 10,
+      spaceBetween: 7,
     },
     480: {
       slidesPerView: 3.5,
@@ -86,22 +96,22 @@ var swiper = new Swiper(".saleSwiper", {
       spaceBetween: 10,
     },
     1200: {
-      slidesPerView: 4.5,
+      slidesPerView: 5.3,
       spaceBetween: 10,
     },
     1460: {
-      slidesPerView: 6,
+      slidesPerView: 5.3,
       spaceBetween: 10,
     },
     1600: {
-      slidesPerView: 6,
+      slidesPerView: 5.3,
       spaceBetween: 10,
     },
   }
 });
 
 var swiper = new Swiper(".saleSwiper2", {
-  slidesPerView: 6,
+  slidesPerView: 5.3,
   spaceBetween: 0,
   slidesPerGroup: 4,
   grabCursor: true,
@@ -118,9 +128,13 @@ var swiper = new Swiper(".saleSwiper2", {
 
 
   breakpoints: {
+    290: {
+      slidesPerView: 2.1,
+      spaceBetween: 5,
+    },
     360: {
       slidesPerView: 2.1,
-      spaceBetween: 10,
+      spaceBetween: 7,
     },
     480: {
       slidesPerView: 3.5,
@@ -135,15 +149,15 @@ var swiper = new Swiper(".saleSwiper2", {
       spaceBetween: 10,
     },
     1200: {
-      slidesPerView: 4.5,
+      slidesPerView: 5.3,
       spaceBetween: 10,
     },
     1460: {
-      slidesPerView: 6,
+      slidesPerView: 5.3,
       spaceBetween: 10,
     },
     1600: {
-      slidesPerView: 6,
+      slidesPerView: 5.3,
       spaceBetween: 10,
     },
   }
@@ -164,9 +178,13 @@ var swiper = new Swiper(".saleSwiper3", {
   },
 
   breakpoints: {
+    290: {
+      slidesPerView: 2.1,
+      spaceBetween: 5,
+    },
     360: {
       slidesPerView: 2.1,
-      spaceBetween: 10,
+      spaceBetween: 7,
     },
     480: {
       slidesPerView: 3.5,
@@ -189,3 +207,4 @@ var swiper = new Swiper(".Swiper3", {
   //   prevEl: ".swiper-button-prev",
   // },
 });
+

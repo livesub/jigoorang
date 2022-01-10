@@ -30,6 +30,6 @@ function star(rating, value) {// rating = 별점 값 , value = 순번 (1부터 �
   numberRating.innerText = rating.toFixed(2) + "/5.00"; //총 평점 텍스트 출력
 }
 
-
+star(2.5, 1);// rating = 별점 값 , value = 순번
 
 

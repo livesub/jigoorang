@@ -37,7 +37,7 @@ class StatisticsController extends Controller
             $ua = new UserAgent();
             $agent_info = $ua->detect($_SERVER['HTTP_USER_AGENT']);
         	//print_r($ua->detect($_SERVER['HTTP_USER_AGENT']));
-            $customutils->set_cookie('ck_visit_ip', $_SERVER['REMOTE_ADDR'], 86400); // 하루동안 저장
+            $customutils->set_cookie('ck_visit_ip', $_SERVER['REMOTE_ADDR'], time() + 86400); // 하루동안 저장
 
             $vi_id = visits::max('vi_id') + 1;
 

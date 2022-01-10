@@ -1,96 +1,21 @@
-//const { exists } = require("laravel-mix/src/File");
 
 let imageMap = {};
-function review_save(review_type){
-    var hap = 0;
-    for(var k = 1; k <= 5; k++)
-    {
-        var obj_name = "score" + k;
-
-        if($("#"+obj_name).val() == "" || $("#"+obj_name).val() == "0"){
-            alert($("#ment" + k).text() + "를 평가 하세요.");
-            return false;
-        }
-
-        hap = hap + parseFloat($("#"+obj_name).val());
-    }
-
-    var average = hap / 5;
-
-    if($.trim($("#review_content").val()) == ""){
-        alert("리뷰를 작성하세요\n(최소20자 이상)");
-        $("#review_content").focus();
-        return false;
-    }
-
-    //if(getTextLength($("#review_content").val()) < 20){
-    if($("#review_content").val().length < 20){
-        alert("리뷰를 작성하세요\n(최소20자 이상)");
-        $("#review_content").focus();
-        return false;
-    }
-
-    $("#temporary_yn").val(review_type);
-    $("#average").val(average);
-
-    let formData = new FormData(document.getElementById('review_form'));    //이미지와 form 값을 다 넘길때
+function imageFormData() {
+    let formData = new FormData();
 
     for (let key in imageMap) {
-        //console.log(imageMap[key]);
+        console.log(imageMap[key]);
         formData.append("review_img[]", imageMap[key], imageMap[key].name);
     }
 
     // for (let value of formData.entries()) {
     //   console.log(value);
     // }
-
-    const target = document.getElementById('tmp_save_y');
-    target.disabled = true;
-    const target2 = document.getElementById('tmp_save_n');
-    target2.disabled = true;
-
-    $.ajax({
-        headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-        type : 'post',
-        url: $("#form_route").val(),
-        processData: false,
-        contentType: false,
-        cache : false,
-        data: formData,
-        dataType : 'json',
-        success : function(data){
-
-            if(data.status == "img_error"){
-                alert("이미지 용량이 큽니다\n용량을 줄여서 올려 주세요.");
-                location.reload();
-            }
-
-            if(data.status == "temp_save"){
-                alert("리뷰가 임시 등록되었습니다.");
-                location.href = data.route;
-            }
-
-            if(data.status == "save_ok"){
-                if (confirm("리뷰가 등록되었습니다.\n해당페이지에서 확인하시겠습니까?") == true){    //확인
-                    location.href = data.my_page;
-                }else{   //취소
-                    location.href = data.route;
-                }
-            }
-
-            if(data.status == "error"){
-                alert("잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.");
-                location.href = data.route;
-            }
-        },
-        error: function(result){
-            console.log(result);
-        },
-    });
+    return formData;
 }
 
 // let showimage = ["../../recources/imgs/arrow-option-01.png", "../../recources/imgs/arrow-option-01.png", "../../recources/imgs/arrow-option-01.png", "../../recources/imgs/arrow-option-01.png", "../../recources/imgs/arrow-option-01.png"]; //이미지 값 넣는곳
-// changeWriteFile(showimage); //수정 함수 호출
+// changeWriteFile(showimage); //수정 함수 호출 
 
 function changeWriteFile(uploadedUrls) {
     const view = document.querySelector(".flies");
