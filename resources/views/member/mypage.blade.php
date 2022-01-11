@@ -60,7 +60,7 @@
 
                     <div class="mypage_innerbox_02">
                         <div class="mypage_box solid">
-                            <a href="">
+                            <a href="{{ route('mypage.review_possible_list') }}">
                                 <div class="mypage_box_img03"></div>
                                 <span>제품 평가 및 리뷰</span>
                             </a>

@@ -20,6 +20,5 @@ for (var i = 0; i < tabList.length; i++) {
         // 버튼 클릭시 컨텐츠 전환
         activeCont = this.getAttribute('href');
         document.querySelector(activeCont).style.display = 'block';
-        console.log(activeCont);
     });
 }

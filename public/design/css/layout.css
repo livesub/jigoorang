@@ -222,7 +222,7 @@
 .header .btm .navi li a b {
   font-family: "SBAggrol", "sans-serif";
   color: #ffcd54;
-  line-height: 71px;
+  line-height: 72px;
 }
 .header .btm .navi li.on {
   color: #000;
@@ -363,7 +363,6 @@
 
 .number {
   font-size: 16px;
-  font-family: "SpoqaHanSans-Regular";
   font-weight: 400;
   color: #707070;
   margin: 5px;

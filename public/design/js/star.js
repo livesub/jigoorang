@@ -31,5 +31,3 @@ function star(rating, value) {// rating = 별점 값 , value = 순번 (1부터 �
 }
 
 
-
-

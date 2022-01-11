@@ -90,6 +90,12 @@
             return false;
         }
 
+        if($.trim($("#od_c_hp").val()).length < 10 || $.trim($("#od_c_hp").val()).length > 11){
+            alert("휴대폰번호를 10~11자리로 입력해 주세요.");
+            $("#od_c_hp").focus();
+            return false;
+        }//휴대폰번호 자리수 유효성 추가
+
         var form_var = $("#forderform").serialize();
 
         $.ajax({

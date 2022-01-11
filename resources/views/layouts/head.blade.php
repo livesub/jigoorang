@@ -36,6 +36,8 @@
     <link rel="stylesheet" href="{{ asset('/design/css/layout.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/css/responsive.css') }}">
+    <link rel="stylesheet" href="{{ asset('/design/css/goods.css') }}"> <!-- 추가 css-->
+    <link rel="stylesheet" href="{{ asset('/design/css/goods_responsive.css') }}">  <!-- 추가 css-->
 
     <title>지구랭</title>
 </head>
