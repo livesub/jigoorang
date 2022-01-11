@@ -818,7 +818,7 @@
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li {
         display: block;
     }
-    
+
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(2) {
         width: calc(100% - -4%) !important;
     }
@@ -833,7 +833,7 @@
         top: 2px;
         width: 15%;
      }
-     
+
     /* 주문 배송 내역 */
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .bg_02 {
@@ -3441,7 +3441,7 @@
         position: relative;
         padding: 0 95px 0 0;
     }
-    
+
 
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name li {
         font-size: 13px;
@@ -3458,7 +3458,7 @@
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(1) {
         width: calc(100% - 50%) !important;
     }
-    
+
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(2) input {
         width: 65%;
     }

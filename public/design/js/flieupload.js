@@ -106,6 +106,15 @@ function changeWriteFile(uploadedUrls) {
         return;
     }
 
+    // if(fileUploaderEl.value!=""){
+    //     var fileSize = attatchedFiles[0].size;
+    //     var maxSize = 2 * 1024 * 1024;//2MB
+
+    //     if(fileSize > maxSize){
+    //        alert("첨부파일 사이즈는 2MB 이내로 등록 가능합니다. ");
+    //        return;
+    //     }
+    // }
 
     if (uploadedUrls != undefined) {
         for (const url of uploadedUrls) {
