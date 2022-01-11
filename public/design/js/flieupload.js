@@ -114,7 +114,6 @@ function changeWriteFile(uploadedUrls) {
     } else if (attatchedFiles.length > 0) {
         for (const file of attatchedFiles) {
 
-alert(file.size);
             makePreviewDiv(filesEl, file);
         }
     }
