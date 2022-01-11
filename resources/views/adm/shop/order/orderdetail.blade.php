@@ -231,8 +231,8 @@
                 dataType: 'text',
                 data: form_var,
                 success: function(result) {
-//alert(result);
-//return false;
+alert(result);
+return false;
                     var data = JSON.parse(result);
 //alert(data.amount);
 //return false;
@@ -319,6 +319,12 @@
         }).done(function(result) { // 환불 성공시 로직
 alert(result);
 return false;
+
+            if(result == 'no_cancel'){
+                alert('무료 기본 배송비 이하 상품입니다.\n전체 취소를 선택 하세요.');
+                return false;
+            }
+
             if(result == "exception"){
                 alert("취소된 상품이 있어 전체 처리 할수 없습니다.");
                 location.href = "{!! route('orderdetail', 'order_id='.$order_info->order_id.'&'.$page_move) !!}";

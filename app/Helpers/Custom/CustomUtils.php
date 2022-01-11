@@ -1509,7 +1509,7 @@ $um_value='80/0.5/3'
             ])->exists();
 
         }else{
-            $baesongji_chk = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['ad_zip1', $ad_zip1], ['ad_addr1', $ad_addr1]])->count();
+            $baesongji_chk = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['ad_zip1', $ad_zip1], ['ad_addr1', $ad_addr1], ['ad_addr2', $ad_addr2]])->count();
 
             if(!is_null($ad_default)){
                 //기본 배송지 체크시

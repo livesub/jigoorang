@@ -227,6 +227,8 @@ class OrderController extends Controller
         $card_price = ((int)$order_info->od_receipt_price - (int)$order_info->od_receipt_point) - (int)$order_info->od_cancel_price - (int)$order_info->de_cost_minus;
 
         $amount = 0;
+        $point_amount = 0;
+        $now_point = 0;
         $custom_data = array();
 
         for($i = 0; $i < count($ct_id); $i++){
@@ -259,26 +261,26 @@ class OrderController extends Controller
             $amount = $amount;
         }else{
             //결제 금액 보다 취소금액이 크거나 같을때(신용카드는 일단 돌려 주고)
+            $point_amount = $amount;
             $amount = $card_price;
         }
 
-//var_dump("amountaa====> ".$amount);
-
-
         //기본 배송비무료 정책(3만원)인데 취소 처리
-        //3만원 넘어간 상품만 적용(총 상품 금액에 - 취소 금액 했을때 30000원 이하인지)
         $CustomUtils->set_cookie('de_cost_minus', '', time() - 86400); // 하루동안 저장
-
+        //3만원 넘어간 상품만 적용(총 상품 금액에 - 취소 금액 했을때 30000원 이하인지)
         if($order_info->de_send_cost_free != 0){
+            $now_point = $order_info->od_receipt_point - $order_info->od_return_point;
             //if(총금액(남은금액) - 취소 금액 < 30000(무료정책))
-            if($order_info->od_receipt_point == 0 && ($card_price - $amount) < $order_info->de_send_cost_free){
-//var_dump("aaaaaa");
+            if(($card_price - $amount) < $order_info->de_send_cost_free){
                 //if(취소금액 < 기본 배송비){
                 if($amount < $order_info->de_send_cost){
-                    echo json_encode(['message' => 'no_cencel']);
-                    exit;
+                    if(($now_point - $point_amount) < $order_info->de_send_cost){
+var_dump("JJJJJJJJJJJ==> ".$now_point);
+                        //포인트 사용 금액도 기본 배송비 보다 작다면
+                        echo json_encode(['message' => 'no_cancel']);
+                        exit;
+                    }
                 }else{
-//var_dump("2222222");
                     //무료배송비 정책 이하로 취소시 취소 금액에서 기본 배송비를 빼고 돌려 준다
                     //한번 빼고 돌려 줬는지 디비에 저장 한다.
                     if($order_info->de_cost_minus == 0){
@@ -291,7 +293,6 @@ class OrderController extends Controller
                 }
             }
         }
-//var_dump("amount=====> ".$amount);
 
         if(empty($custom_data)){
             echo json_encode(['message' => 'no_qty']);
@@ -488,12 +489,12 @@ exit;
         $success = '';
 
 var_dump("cancel_request_amount===> ".$cancel_request_amount);
-exit;
+
         if($cancel_request_amount > 0){
             //취소 금액이 0원 보다 클때 Iamport 를 태운다.
-            $cancel_result = Iamport::cancelPayment($imp_uid, $cancel_request_amount, $reason); //실제 취소 이루어 지는 부분
-            $success = $cancel_result->success;
-//$success = true;
+//            $cancel_result = Iamport::cancelPayment($imp_uid, $cancel_request_amount, $reason); //실제 취소 이루어 지는 부분
+//            $success = $cancel_result->success;
+$success = true;
         }else{
             //취소 금액이 0원일때 때문에..
             $success = true;
@@ -501,6 +502,7 @@ exit;
 
         if($success == true){
             $mod_history = '';
+            $now_point = 0;
 
             $order_info = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->first();
 
@@ -508,9 +510,31 @@ exit;
             //$card_price = ((int)$order_info->od_receipt_price - (int)$order_info->od_receipt_point) - (int)$order_info->od_cancel_price;
             //카드 결제 금액(실 결제 금액 = 결제금액(주문금액 + 모든 배송비) - 결제시 사용 포인트) - 취소된 금액이 있는지 - 무료배송비정책금액 이하로 떨어 졌을때 한번 뺴는 칼럼
             $card_price = ((int)$order_info->od_receipt_price - (int)$order_info->od_receipt_point) - (int)$order_info->od_cancel_price - (int)$order_info->de_cost_minus;
+            $now_point = $order_info->od_receipt_point - $order_info->od_return_point;
 
             $hap_qty_price = 0;
             $chagam_point = 0;
+
+            foreach($custom_data as $m=>$t)
+            {
+                $cart_info = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $custom_data[$m]['ct_id']]])->first();
+                $qty_price = ($cart_info->sct_price + $cart_info->sio_price) * $custom_data[$m]['minus_qty'];   //취소 금액
+                $hap_qty_price += $qty_price;
+            }
+
+            if($card_price < $hap_qty_price){   //결제금액 보다 취소 금액이 클때
+                if(($now_point - $hap_qty_price) < $order_info->de_send_cost){
+                    echo 'no_cancel';
+                    exit;
+                }
+            }
+
+
+
+
+
+
+exit;
 
             foreach($custom_data as $k=>$v)
             {
@@ -546,8 +570,21 @@ exit;
 
 //                $mod_history .= $order_info->od_mod_history.date("Y-m-d H:i:s", time()).' '.$cart_info->sct_option.' 부분취소 '.$cart_info->sct_qty.' -> '.$have."\n";
             }
+var_dump("card_price====> ".$card_price);
+            if($card_price <= $cancel_request_amount){   //결제금액 보다 취소 금액이 클때
+                if($order_info->od_receipt_point != 0){
+                    //포인트 사용 되었을때
+                    $now_point = $order_info->od_receipt_point - $order_info->od_return_point;
 
-            if($card_price < $cancel_request_amount){   //결제금액 보다 취소 금액이 클때
+                    if(($now_point - $hap_qty_price) <= $order_info->de_send_cost){
+
+                        //$CustomUtils->insert_point($order_info->user_id, $give_point, '상품 구매 취소', 11,'', $order_id);
+                    }else{
+                        $CustomUtils->insert_point($order_info->user_id, $hap_qty_price, '상품 구매 취소', 11,'', $order_id);
+                    }
+                }else{
+
+                }
 var_dump("chagam_point====> ");
 exit;
 /*
@@ -560,6 +597,8 @@ exit;
                 }
 */
             }else{
+var_dump("PPPPPPPPPPPPPPPPPPPPP");
+exit;
                 $misu = $cancel_request_amount;
                 $od_cancel_price = $order_info->od_cancel_price + $misu; //취소금액
             }
