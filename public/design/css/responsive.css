@@ -781,7 +781,7 @@ background-size: cover;
         border-bottom: solid 2px #ddd;
     }
 
-    
+
     /* 평가단 신청 리스트 */
 
     .eval .board.mypage_list .board_wrap .list {
@@ -973,7 +973,7 @@ background-size: cover;
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li {
         display: block;
     }
-    
+
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(2) {
         width: calc(100% - -4%) !important;
     }
@@ -988,7 +988,7 @@ background-size: cover;
         top: 2px;
         width: 15%;
      }
-     
+
     /* 주문 배송 내역 */
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .bg_02 {
@@ -1237,7 +1237,7 @@ background-size: cover;
 
     .line_15 {
         margin-top: 70px;
-    }  
+    }
     .hot-icon p{
         font-size: 15px;
     }
@@ -1245,14 +1245,15 @@ background-size: cover;
 
     /* 검색창 모달 */
 
+
+
     .modal_sh .modal-dialog {
         width: 100%;
-        height: 100%;
-        max-height: 323px;
+        max-height: 263px;
         background-color: #fff;
         margin: 0;
         position: fixed;
-        top: 16.9%;
+        top: 19%;
         left: 50%;
         transform: translate(-50%, -50%);
     }
@@ -1268,7 +1269,7 @@ background-size: cover;
         font-weight: 900;
         letter-spacing: -1px;
         color: #000000;
-        padding: 40px;
+        padding: 29px;
     }
 
     .modal_sh .modal-dialog .modal-dialog-title .btn-close {
@@ -1280,14 +1281,14 @@ background-size: cover;
         background-size: 48px 48px;
         cursor: pointer;
         background: url("../recources/icons/del.png") no-repeat center;
-        margin-top: 20px;
+        margin-top: 8px;
     }
 
 
     .modal_sh .modal-dialog .modal-dialog-contents {
         width: 100%;
         font-size: 16px;
-        padding: 0 10px 0 10px;
+        padding: 0 10px 15px 10px;
     }
 
     .modal_sh .modal-dialog .modal-dialog-contents .search-wrap {
@@ -1300,7 +1301,7 @@ background-size: cover;
     }
 
     .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search input{
-        width: 78%;
+        width: 81%;
         height: 56px;
         border: solid 6px #3ec4ba;
     }
@@ -1311,8 +1312,9 @@ background-size: cover;
         color: #fff;
         font-size: 16px;
         font-weight: bold;
-        padding: 12px 11px 16px 12px;
-        margin-left: 13px;
+        padding: 16px 11px 16px 12px;
+        margin-left: 5px;
+        border: none;
     }
 
     .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search button span{
@@ -1325,7 +1327,7 @@ background-size: cover;
     }
 
     .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search-inner .sh_terms {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: bold;
         border-bottom: solid 2px #ddd;
         padding: 20px 0 20px 0;
@@ -1335,8 +1337,9 @@ background-size: cover;
         display: inline-block;
         /* padding: 10px; */
         border: solid 1px #ddd;
-        margin: 20px 0 0 10px;
+        margin: 20px 0 0 0px;
         padding-left: 20px;
+        margin-right: 5px;
         padding-top: 5px;
     }
 
@@ -1346,17 +1349,17 @@ background-size: cover;
     }
 
     .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search-inner ul li .btn_list {
-        background: url("../recources/icons/del_bk@3x.png") no-repeat;
-        width: 32px;
-        height: 32px;
-        background-size: 32px 32px;
+        background: url(../recources/icons/del_bk@3x.png) no-repeat;
+        width: 26px;
+        height: 26px;
+        background-size: 26px 26px;
         border: none;
         margin-left: 8px;
     }
 
 
     /* 모달 */
-    
+
 
     .modal .modal-dialog {
         width: 100%;
@@ -1509,11 +1512,11 @@ background-size: cover;
         font-size: 16px;
     }
 
-    
+
     .hot-icon p{
         font-size: 15px;
     }
-    
+
 
     /* 레이아웃 */
     .sub-container {
@@ -2368,7 +2371,7 @@ background-size: cover;
         margin: 5px;
         letter-spacing: -0.5px;
     }
- 
+
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body {
         /* background: url("../recources/imgs/sample_img.png") no-repeat left; */
         /* border-bottom: solid 1px #ddd; */
@@ -2709,7 +2712,7 @@ background-size: cover;
 
     /* 랭킹 리스트 */
 
-        
+
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_01 .rk_num{
         padding: 39px;
     }
@@ -2721,15 +2724,15 @@ background-size: cover;
         height: 22px;
         background-size: 25px 22px;
     }
-    
+
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_01 .rk_num .rk_2{
         background: url('../recources/icons/rk-2@3x.png');
         width: 25px;
         height: 22px;
         background-size: 25px 22px;
     }
-    
-    
+
+
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_01 .rk_num .rk_3{
         background: url('../recources/icons/rk-3@3x.png');
         width: 25px;
@@ -2743,7 +2746,7 @@ background-size: cover;
         font-weight: bold;
     }
 
-    
+
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_01 .pr_title p {
         font-size: 15px;
     }
@@ -2898,7 +2901,7 @@ background-size: cover;
 
 
 
-    
+
     /* 지구록 게시판 */
 
     .eval .board.mypage_list .board_wrap .list .ev_rul {
@@ -2949,11 +2952,133 @@ background-size: cover;
     }
 
 
+
+    /* 검색창 모달 */
+
+
+
+    .modal_sh .modal-dialog {
+        width: 100%;
+        background-color: #fff;
+        margin: 0;
+        position: fixed;
+        top: 19%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .modal_sh .modal-dialog .sh_1200 {
+        width: 100%;
+        /* margin: 0 auto; */
+    }
+
+
+    .modal_sh .modal-dialog .modal-dialog-title {
+        font-size: 16px;
+        font-weight: 900;
+        letter-spacing: -1px;
+        color: #000000;
+        padding: 25px;
+    }
+
+    .modal_sh .modal-dialog .modal-dialog-title .btn-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 36px;
+        height: 36px;
+        background-size: 36px 36px;
+        cursor: pointer;
+        background: url("../recources/icons/del.png") no-repeat center;
+        margin-top: 8px;
+    }
+
+
+    .modal_sh .modal-dialog .modal-dialog-contents {
+        width: 100%;
+        font-size: 16px;
+        padding: 0 10px 15px 10px;
+    }
+
+    .modal_sh .modal-dialog .modal-dialog-contents .search-wrap {
+
+    }
+
+    .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search {
+        width: 100%;
+        text-align: center;
+    }
+
+    .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search input{
+        width: 74%;
+        height: 48px;
+        border: solid 6px #3ec4ba;
+    }
+
+    .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search button{
+        width: 23%;
+        background: #000;
+        color: #fff;
+        font-size: 16px;
+        font-weight: bold;
+        padding: 12px 11px 13px 12px;
+        margin-left: 5px;
+        border: none;
+    }
+
+    .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search button span{
+        top: 1px;
+        font-size: 14px;
+    }
+
+
+    .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search-inner {
+        width: 100%;
+    }
+
+    .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search-inner .sh_terms {
+        font-size: 14px;
+        font-weight: bold;
+        border-bottom: solid 2px #ddd;
+        padding: 15px 0 15px 0;
+    }
+
+
+    .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search-inner ul {
+        margin-top: 6px;
+    }
+
+    .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search-inner ul li {
+        display: inline-block;
+        /* padding: 10px; */
+        border: solid 1px #ddd;
+        margin: 0px;
+        margin-top: 5px;
+        padding-left: 20px;
+        margin-right: 10px;
+        padding-top: 4px;
+    }
+
+    .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search-inner ul li span{
+        top: 2px;
+        font-size: 12px;
+    }
+
+    .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search-inner ul li .btn_list {
+        background: url(../recources/icons/del_bk@3x.png) no-repeat;
+        width: 21px;
+        height: 21px;
+        background-size: 21px 21px;
+        border: none;
+        margin-left: 8px;
+    }
+
+
     /* 상품 주문 리스트 모달 */
 
-    
 
-    
+
+
     .modal .modal-container .modal-container-body .modal-cot .modal-cot-tt li{
         font-size: 13px;
     }
@@ -3479,12 +3604,12 @@ background-size: cover;
     /********** 서브페이지 **********/
 
 
-    
+
 
 
      /* 랭킹 리스트 */
 
-        
+
      .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_01 .rk_num{
         padding: 10px;
         padding-top: 38px;
@@ -3497,15 +3622,15 @@ background-size: cover;
         height: 22px;
         background-size: 25px 22px;
     }
-    
+
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_01 .rk_num .rk_2{
         background: url('../recources/icons/rk-2@3x.png');
         width: 25px;
         height: 22px;
         background-size: 25px 22px;
     }
-    
-    
+
+
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_01 .rk_num .rk_3{
         background: url('../recources/icons/rk-3@3x.png');
         width: 25px;
@@ -3518,7 +3643,7 @@ background-size: cover;
         padding: 7px;
     }
 
-    
+
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_01 .pr_title p {
         font-size: 13px;
     }
@@ -3533,7 +3658,7 @@ background-size: cover;
         display: -webkit-box;
         -webkit-line-clamp: 2; /* 라인수 */
         -webkit-box-orient: vertical;
-        word-wrap:break-word; 
+        word-wrap:break-word;
         line-height: 1.2em;
         height: 2.4em;
     }
@@ -4235,7 +4360,7 @@ background-size: cover;
         position: relative;
         padding: 0 95px 0 0;
     }
-    
+
 
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name li {
         font-size: 13px;
@@ -4252,7 +4377,7 @@ background-size: cover;
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(1) {
         width: calc(100% - 50%) !important;
     }
-    
+
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(2) input {
         width: 65%;
     }
