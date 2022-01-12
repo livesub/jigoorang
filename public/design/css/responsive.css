@@ -1562,6 +1562,8 @@
     .join .join_wrap .join_form .btn-20 {
         margin-top: 0;
         width: 35%;
+        font-size: 13px;
+        top: 0;
     }
 
     .join .join_wrap .join_form .btn-20-active {
@@ -2560,7 +2562,7 @@
     }
 
     .modal-container-body .adress_input label .adress_input03_btn {
-        width: 98px;
+        width: 110px;
         height: 36px;
         border: solid 2px #3ec4ba;
         background: #fff;
@@ -2863,7 +2865,7 @@
     }
 
     .eval .board .board_wrap .information_01 .information-inner-title button {
-        width: 118px;
+        width: 122px;
         height: 25px;
         border: solid 1px #3ec4ba;
         background-color: #fff;
@@ -3070,6 +3072,10 @@
     .eval .board.mypage_list .board_wrap .list .information.user_list li:first-child {
         width: 47%;
         padding-right: 0;
+    }
+
+    .eval .board.mypage_list .board_wrap .secession {
+        font-size: 13px;
     }
 
     /* 1:1 문의내역 (none) */
