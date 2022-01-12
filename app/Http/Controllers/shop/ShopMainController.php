@@ -30,7 +30,10 @@ class ShopMainController extends Controller
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
+        $cate_infos = DB::table('shopcategorys')->where('sca_display', 'Y')->whereRaw('length(sca_id) = 2')->orderby('sca_rank','DESC')->orderby('id','ASC')->get();
+
         return view('shop.main',[
+            'cate_infos'    => $cate_infos,
         ]);
     }
 
