@@ -90,7 +90,7 @@
     .eval .board .board_wrap .scrollmenu .swiper-wrapper.submenu_innr .swiper-slide .active {
         background-color: #000;
         border-radius: 160px;
-        padding: 7px 12px;
+        padding: 7px 5px;
         height: 50px;
         margin: 0 auto;
         color: #fff;
@@ -1135,7 +1135,7 @@
         border-bottom: solid 2px #000;
         width: 100%;
         height: 60px;
-        margin-top: 0;
+        margin-top: 12px;
     }
 
     .eval .board .board_wrap .scrollmenu .swiper-wrapper.submenu_innr li {

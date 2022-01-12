@@ -374,6 +374,17 @@ button.btn-bg-mint {
   border: solid 2px #000000;
 }
 
+
+button.btn-bg-80 {
+  width: 80px;
+  height: 30px;
+  background: #ffffff;
+  color: #000000;
+  border: solid 2px #000000;
+  font-weight: bold;
+  font-size: 16px;
+}
+
 input[type="checkbox"] {
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -685,6 +696,11 @@ input:focus {
 .sol-g-t {
   border-top: solid 2px #ddd;
 }
+
+.sol-g-b {
+  border-bottom: solid 2px #ddd;
+}
+
 
 .sol-b-b {
   border-right: solid 2px #000;
