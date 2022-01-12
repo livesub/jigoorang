@@ -974,7 +974,7 @@ h5 {
     padding: 25px;
 }
 .eval .board .board_wrap .list_view .body .title {
-    max-width: 420px;
+    /* max-width: 420px; */
     font-size: 24px;
     font-weight: bold;
     height: 64px;
