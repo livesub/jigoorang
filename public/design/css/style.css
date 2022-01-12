@@ -193,7 +193,7 @@ h5 {
       left: 290px;
       position: absolute;
     }
-  
+
     .swiper-button-prev {
       background: url(https://cdn-icons-png.flaticon.com/512/254/254442.png)
         no-repeat;
@@ -204,7 +204,7 @@ h5 {
       display: block;
       position: absolute;
     }
-  
+
     .swiper-button-next::after,
     .swiper-button-prev::after {
       display: none;
@@ -787,7 +787,7 @@ h5 {
     width: 30px;
     height: 30px;
   }
-  
+
   .main-container .mbox_1280 .inner .swiper-button-next-2::after,
   .main-container .mbox_1280 .inner .swiper-button-prev-2::after {
     display: none;
@@ -1182,7 +1182,7 @@ h5 {
 }
 
 /* .eval .board .board_wrap .information_02 .information-inner-checkbox{
-  
+
   } */
 
 .eval .board .board_wrap .information_02 .information-inner-subtitle {
@@ -2716,7 +2716,7 @@ input::placeholder {
 .eval .board.mypage_list .board_wrap .terms .hide_cot {
     display: none;
     overflow: hidden;
-    
+
 }
 
 .eval .board.mypage_list .board_wrap .terms .hide_cot ul{
