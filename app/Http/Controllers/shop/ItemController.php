@@ -27,6 +27,12 @@ class ItemController extends Controller
 
         $ca_id          = $request->input('ca_id');
         $length         = strlen($ca_id);
+        $orderby_type   = $request->input('orderby_type');
+
+        if($ca_id == ""){
+            return redirect()->route('shop.index');
+            exit;
+        }
 
         //pgae 관련
         $page       = $request->input('page');
@@ -41,6 +47,8 @@ class ItemController extends Controller
             $start_num = 0;
         }
 
+
+/*
         //검색 처리
         $keymethod      = $request->input('keymethod');
         $keyword        = $request->input('keyword');
@@ -56,21 +64,26 @@ class ItemController extends Controller
         }
 
         if($ca_id == ""){
-            $cate_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr', 'sca_name_en')->where('sca_display','Y')->whereRaw('length(sca_id) = 2')->orderby('sca_rank', 'DESC')->get();
+            $cate_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr')->where('sca_display','Y')->whereRaw('length(sca_id) = 2')->orderby('sca_rank', 'DESC')->get();
 
             $total_count = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id AND b.sca_display = 'Y' {$search_sql} ");
         }else{
             $down_cate = DB::table('shopcategorys')->where('sca_id','like',$ca_id.'%')->count();   //하위 카테고리 갯수
             if($down_cate != 1){
                 $length = $length + 2;
-                $cate_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr', 'sca_name_en')->where('sca_display','Y')->where('sca_id','<>',$ca_id )->whereRaw('length(sca_id) = '.$length)->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'DESC')->get();
+                $cate_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr')->where('sca_display','Y')->where('sca_id','<>',$ca_id )->whereRaw('length(sca_id) = '.$length)->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'DESC')->get();
             }else{  //하위 카테고리가 없을때 처리
-                $cate_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr', 'sca_name_en')->where('sca_display','Y')->where('sca_id','=',$ca_id )->whereRaw('length(sca_id) = '.$length)->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'DESC')->get();
+                $cate_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr')->where('sca_display','Y')->where('sca_id','=',$ca_id )->whereRaw('length(sca_id) = '.$length)->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'DESC')->get();
             }
 
             $total_count = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id AND b.sca_display = 'Y' AND a.sca_id like '{$ca_id}%' {$search_sql} ");
         }
+*/
+        $cate_infos = DB::table('shopcategorys')->where('sca_display','Y')->whereRaw('length(sca_id) = 2')->orderby('sca_rank', 'DESC')->orderby('id', 'asc')->get();
+        $sub_cate_infos = DB::table('shopcategorys')->where('sca_display','Y')->where('sca_id','<>',$ca_id )->whereRaw('length(sca_id) = 4')->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'DESC')->orderby('id', 'ASC')->get();
 
+
+/*
         $total_record   = 0;
         $total_record   = $total_count[0]->cnt; //총 게시물 수
         $total_page     = ceil($total_record / $pageScale);
@@ -95,19 +108,28 @@ class ItemController extends Controller
         $nextLastPage   = $PageSet->nextLast("마지막");
         $listPage       = $PageSet->getPageList();
         $pnPage         = $prevPage.$listPage.$nextPage;
-
+*/
         $CustomUtils = new CustomUtils();
         return view('shop.item_page',[
-            'ca_id'         => $ca_id,
-            'cate_infos'    => $cate_infos,
-            'item_infos'    => $item_infos,
-            'page'          => $page,
-            'pnPage'        => $pnPage,
-            'keymethod'     => $keymethod,
-            'keyword'       => $keyword,
+            'ca_id'             => $ca_id,
+            'orderby_type'      => $orderby_type,
+            'cate_infos'        => $cate_infos,
+            'sub_cate_infos'    => $sub_cate_infos,
+            //'item_infos'    => $item_infos,
+            //'page'          => $page,
+            //'pnPage'        => $pnPage,
+            //'keymethod'     => $keymethod,
+            //'keyword'       => $keyword,
             'CustomUtils'   => $CustomUtils,
         ]);
     }
+
+    public function ajax_subcate(Request $request)
+    {
+        var_dump("KKKKKKKKKKKKKKKKKKK");
+    }
+
+
 
     public function sitemdetail(Request $request)
     {
