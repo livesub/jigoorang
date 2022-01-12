@@ -18,6 +18,162 @@
     <title>지구랭</title>
 </head>
 <body>
+
+
+ <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. -->
+<div class="modal_002 modal fade">
+    <div class="modal-background" onclick="addressclosemodal_001()"></div>
+    <div class="modal-container">
+        <div class="modal-container-body">
+            <div class="modal-container-title">
+                <h4>상품선택</h4>
+                <div class="btn-close" onclick="addressclosemodal_001()"></div>
+            </div>
+
+            <div class="scroll">
+
+                <div class="modal-cot mt-10">
+                    <div class="modal-cot-tt">
+                        <div class="md-cot-inp">
+                            <input type="radio" name="m_rd" id="m_rd_1" checked="checked">
+                            <label for="m_rd_1"></label>
+                        </div>
+                        <div>
+                            <ul>
+                                <li class="cr_04">2021.10.11 </li>
+                            </ul>
+                            <ul class="prd_num">
+                                <li>주문번호</li>
+                                <li>20211201345-00001</li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-inner">
+
+                        <ul class="modal-cot-img">
+                            <li><img src="../../recources/imgs/sample_img.png" alt=""></li>
+                        </ul>
+                        
+                        <ul class="modal-cot-pd">
+                           <h5>
+                            [대나무숲] 요즘 인싸들만 쓴다는 아이템 000칫솔
+                            [대나무숲] 요즘 인싸들만 쓴다는 아이템 000칫솔
+                           </h5> 
+                           <ul class="pd_tt"> 
+                                <li class="cr_04">소형 / 파랑</li>
+                                <li class="pd_pr">6,000원  <span class="ml-10">1개</span></li>
+                            </ul>
+                        </ul>
+
+                    </div>
+
+                    <div class="sol-g-b mt-20 block"></div> 
+                </div>
+
+                <div class="modal-cot mt-10">
+                    <div class="modal-cot-tt">
+                        <div class="md-cot-inp">
+                            <input type="radio" name="m_rd" id="m_rd_2">
+                            <label for="m_rd_2"></label>
+                        </div>
+                        <div>
+                            <ul>
+                                <li class="cr_04">2021.10.11 </li>
+                            </ul>
+                            <ul class="prd_num">
+                                <li>주문번호</li>
+                                <li>20211201345-00001</li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-inner">
+
+                        <ul class="modal-cot-img">
+                            <li><img src="../../recources/imgs/sample_img.png" alt=""></li>
+                        </ul>
+                        
+                        <ul class="modal-cot-pd">
+                           <h5>
+                            [대나무숲] 요즘 인싸들만 쓴다는 아이템 000칫솔
+                            [대나무숲] 요즘 인싸들만 쓴다는 아이템 000칫솔
+                           </h5> 
+                           <ul class="pd_tt"> 
+                                <li class="cr_04">소형 / 파랑</li>
+                                <li class="pd_pr">6,000원  <span class="ml-10">1개</span></li>
+                            </ul>
+                        </ul>
+
+                    </div>
+
+                    <div class="sol-g-b mt-20 block"></div> 
+                </div>
+
+
+                <div class="modal-cot mt-10">
+                    <div class="modal-cot-tt">
+                        <div class="md-cot-inp">
+                            <input type="radio" name="m_rd" id="m_rd_2">
+                            <label for="m_rd_2"></label>
+                        </div>
+                        <div>
+                            <ul>
+                                <li class="cr_04">2021.10.11 </li>
+                            </ul>
+                            <ul class="prd_num">
+                                <li>주문번호</li>
+                                <li>20211201345-00001</li>
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="modal-inner">
+
+                        <ul class="modal-cot-img">
+                            <li><img src="../../recources/imgs/sample_img.png" alt=""></li>
+                        </ul>
+                        
+                        <ul class="modal-cot-pd">
+                           <h5>
+                            [대나무숲] 요즘 인싸들만 쓴다는 아이템 000칫솔
+                            [대나무숲] 요즘 인싸들만 쓴다는 아이템 000칫솔
+                           </h5> 
+                           <ul class="pd_tt"> 
+                                <li class="cr_04">소형 / 파랑</li>
+                                <li class="pd_pr">6,000원  <span class="ml-10">1개</span></li>
+                            </ul>
+                        </ul>
+
+                    </div>
+
+                    <div class="sol-g-b mt-20 block"></div> 
+                </div>
+
+
+            </div>
+        </div>
+
+        <div class="btn btn_2ea">
+            <button class="modal_btn01" onclick="addressclosemodal_001()">
+                취소
+            </button>
+            <button
+                class="modal_btn02"
+                onclick="">
+                확인
+            </button>
+        </div>
+    </div>
+</div>
+<!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. 끝 -->
+
+
+
+
 <div class="wrap">
 
     <!-- 탭바 시작 -->
@@ -179,8 +335,8 @@
                                     <li>
                                         <p>주문번호</p>
                                         <span>
-                                            <input type="text" name="" id="">
-                                            <button class="btn-10">구매상품 선택</button>
+                                            <input type="text" name="" id="" value="0000000" disabled>
+                                            <button class="btn-10" onclick='addressopenmodal_001()'>구매상품 선택</button>
                                         </span>
                                     </li>
                                 </ul>
@@ -255,6 +411,7 @@
 </div>
 <script src="../../js/sidenav.js"></script>
 <script src="../../js/tabar.js"></script>
+<script src="../../js/modal.js"></script>
 
 </body>
 </html>
