@@ -244,7 +244,7 @@
     .eval .board .board_wrap .goods .goods_bottom .right .wishlist {
         width: 23px;
         margin-top: 4px;
-        background: url("../../recources/icons/icon-heart@3x.png") no-repeat;
+        background: url("../recources/icons/icon-heart@3x.png") no-repeat;
         background-size: 23px auto;
         background-position: center;
         display: block;
@@ -281,7 +281,7 @@
 
 
 
-/************ 
+/************
 상품 페이지
  ************/
 
@@ -573,7 +573,7 @@
 
 
 .eval .board .board_wrap .shop_goods_ct {
-  
+
 }
 
 
@@ -684,11 +684,11 @@
  }
 
 .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .sol.block {
-    display: none; 
+    display: none;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .sol.none {
-     display: block; 
+     display: block;
 }
 
 
@@ -751,7 +751,7 @@
 }
 
 .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body {
-   
+
 }
 
 .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list.my_list img {
@@ -1060,6 +1060,17 @@
 }
 
 @media screen and (max-width: 768px) {
+
+
+   .sub-container .serch_data {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      font-size: 16px;
+      padding: 40px;
+  }
+
+
     /* 상품 페이지 */
 
     /* 스크롤메뉴 */
@@ -1183,7 +1194,7 @@
         position: relative;
         margin-top: 20px;
     }
-    
+
 
     .eval .board .board_wrap .filter_bg {
         background: #f8f8f8;
@@ -1293,14 +1304,14 @@
     .eval .board .board_wrap .goods .goods_bottom .right .wishlist {
         width: 23px;
         margin-top: 4px;
-        background: url("../../recources/icons/icon-heart@3x.png") no-repeat;
+        background: url("../recources/icons/icon-heart@3x.png") no-repeat;
         background-size: 20px auto;
         background-position: center;
         display: block;
     }
 
 
-/************ 
+/************
 상품 페이지
  ************/
 
@@ -1310,8 +1321,8 @@
     max-height: 80px;
     margin: 1px;
  }
- 
- 
+
+
  .eval .board .board_wrap .shop_goods .shop_goods_dt_r h3 {
     padding: 20px 20px 0px 0;
     font-size: 20px;
@@ -1329,7 +1340,7 @@
     padding: 20px 20px 20px 20px;
     font-size: 16px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_sec_mn .dt_on{
     background: #3ec4ba;
     font-size: 16px;
@@ -1337,7 +1348,7 @@
     font-weight: bold;
     border: none;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 {
     padding: 0px 30px 0px 30px;
     border: solid 2px #ddd;
@@ -1346,15 +1357,15 @@
     margin-bottom: 20px;
     text-align: left;
  }
- 
- 
+
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .dt_star {
     display: inline-block;
     text-align: left;
     font-size: 20px;
     width: 100%;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .sol {
     border-right: solid 2px #ddd;
     width: 0;
@@ -1363,7 +1374,7 @@
     margin-top: 50px;
     margin-left: 50px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .sol-b {
      border-bottom: solid 2px #ddd;
      width: 100%;
@@ -1373,154 +1384,154 @@
      margin: 0 auto;
      margin-top: 30px;
   }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .sol.block {
-     display: none; 
+     display: none;
   }
-  
+
   .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .sol.none {
-      display: block; 
+      display: block;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_01 {
     padding: 20px 0 0 0;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 {
     padding: 32px 0 25px 0;
     margin-left: 0px;
     text-align: center;
     font-weight: bold;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .number{
     font-size: 20px;
     font-weight: bold;
     color: #fc6a20;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .stars-outer {
     font-size: 1.5rem;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .stars-outer {
     font-size: 2rem;
     margin-top: 17px;
  }
- 
+
 
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 {
      margin-bottom: 40px;
  }
- 
- 
+
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_review .cot_id {
     font-weight: bold;
     font-size: 18px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_review .cot_day {
     font-size: 15px;
     color: #707070;
     top: 3px;
  }
- 
+
  /* 출력별 */
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .stars-outer {
     display: inline-block;
     position: relative;
     font-size: 24px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list {
     padding: 20px 40px;
     border: solid 2px #ddd;
     margin-top: 20px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body {
-    
+
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list.my_list img {
     max-width: 360px;
     max-height: 180px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .info {
     display: inline-block;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_id_day {
     display: flex;
     justify-content: space-between;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box {
     background: #f8f8f8;
     height: auto;
     padding: 0 15px 25px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_01 {
     top: 10px;
     display: flex;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_01 .inline {
     display: flex;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_01 .stars-outer {
     margin-left: 20px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_01 .number {
     margin-top: 11px;
     font-size: 16px;
     color: #000;
     font-weight: bold;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_01 span {
     top: 10px;
     font-weight: bold;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_02 {
     display: flex;
     font-size: 13px;
     flex-direction: column;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_02 span {
     display: flex;
     padding-right: 50px;
     padding-top: 25px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_02 span .text {
     margin-top: 5px;
     margin-right: 10px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_02 span .bold {
     font-size: 18px;
     font-weight: bold;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review_text {
     font-size: 16px;
     padding-top: 20px;
     padding-bottom: 20px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review_text br {
     display: none;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_more {
     width: 100%;
     max-width: 68px;
@@ -1528,14 +1539,14 @@
     color: #3ec4ba;
     background: url("../recources/icons/rectangle_bt.png") no-repeat right;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_photo img {
     width: 100%;
     max-width: 114px;
     height: 95px;
     margin-top: 20px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .btn-sd {
     float: right;
     max-width: 104px;
@@ -1546,7 +1557,7 @@
     padding-left: 2px;
     font-weight: bold;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .info {
     font-size: 20px;
     font-weight: bold;
@@ -1556,9 +1567,9 @@
     text-overflow: ellipsis;
     overflow: hidden;
     max-height: 74px;
- 
+
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .btn-full-sd {
     height: 75px;
     font-weight: bold;
@@ -1567,17 +1578,17 @@
     color: black;
     margin-top: 20px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_img img{
     width: 100%;
     padding-bottom: 20px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_s_con_tt {
     padding: 20px 0 20px 0;
  }
- 
- 
+
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .btn-full-sd {
     height: 75px;
  }
@@ -1672,7 +1683,7 @@
 
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_img {
-   
+
 }
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_img li{
@@ -1849,15 +1860,32 @@
    width: 100%;
 }
 
+/****  검색창  ****/
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .f_tt_more li{
+   font-size: 14px;
+}
 
 
- 
 
-    
 
 }
 
 @media screen and (max-width: 480px) {
+
+   /** 공통 **/
+
+
+   .price {
+      font-size: 13px;
+   }
+
+   .sale-price {
+      font-size: 12px;
+   }
+
+   .number {
+      font-size: 12px;
+   }
 
     /* 상품 페이지 */
 
@@ -2031,7 +2059,7 @@
 
     .eval .board .board_wrap .goods h3 {
         margin: 14px 0 10px;
-        font-size: 15px;
+        font-size: 13px;
     }
 
     .eval .board .board_wrap .goods .sale-price {
@@ -2061,6 +2089,10 @@
         font-size: 14px;
         font-weight: 600;
     }
+
+    .eval .board .board_wrap .goods .goods_left .sale-price {
+     top:2px
+  }
     .eval .board .board_wrap .goods .goods_right {
         font-size: 16px;
         font-weight: 600;
@@ -2079,26 +2111,26 @@
 
     .eval .board .board_wrap .goods .goods_bottom .right {
         float: right;
-        width: 57px;
+        width: 51px;
         display: -webkit-inline-box;
     }
 
     .eval .board .board_wrap .goods .goods_bottom .right p {
-        margin: 5px 6px;
+        margin: 5px 4px;
         font-size: 12px;
     }
 
     .eval .board .board_wrap .goods .goods_bottom .right .wishlist {
-        width: 19px;
-        margin-top: 4px;
-        background: url("../../recources/icons/icon-heart@3x.png") no-repeat;
-        background-size: 19px auto;
-        background-position: center;
-        display: block;
+      width: 14px;
+      margin-top: 2px;
+      background: url(../recources/icons/icon-heart@3x.png) no-repeat;
+      background-size: 14px auto;
+      background-position: center;
+      display: block;
     }
 
 
-/************ 
+/************
 상품 페이지
  ************/
 
@@ -2108,14 +2140,14 @@
     max-height: 51px;
     margin: 1px;
  }
- 
- 
+
+
  .eval .board .board_wrap .shop_goods .shop_goods_dt_r h3 {
     padding: 20px 20px 0px 0;
     font-size: 18px;
     font-family: "SBAggroM", "sans-serif";
  }
- 
+
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_sec_mn li{
     border: solid 2px #f1f1f1;
@@ -2155,7 +2187,7 @@
  .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op {
     padding: 11px;
 }
- 
+
  .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op li{
     font-size: 13px;
  }
@@ -2191,7 +2223,7 @@
     padding: 5px 10px 5px 10px;
     font-size: 12px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_sec_mn .dt_on{
     background: #3ec4ba;
     font-size: 12px;
@@ -2207,7 +2239,7 @@
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .set_tt {
      font-size: 14px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 {
     padding: 16px 39px 0px 39px;
     border: solid 2px #ddd;
@@ -2216,15 +2248,15 @@
     margin-bottom: 20px;
     text-align: left;
  }
- 
- 
+
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .dt_star {
     display: inline-block;
     text-align: left;
     font-size: 14px;
     width: 100%;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .sol {
     border-right: solid 2px #ddd;
     width: 0;
@@ -2233,7 +2265,7 @@
     margin-top: 50px;
     margin-left: 50px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .sol-b {
      border-bottom: solid 2px #ddd;
      width: 100%;
@@ -2243,16 +2275,16 @@
      margin: 0 auto;
      margin-top: 30px;
   }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .sol.block {
-     display: none; 
+     display: none;
   }
-  
+
   .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .sol.none {
-      display: block; 
+      display: block;
  }
- 
- 
+
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_01 {
     padding: 20px 0 0 0;
  }
@@ -2261,101 +2293,101 @@
     top: 7px;
     font-size: 14px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 {
     padding: 32px 0 25px 0;
     margin-left: 0px;
     text-align: center;
     font-weight: bold;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .number{
     font-size: 18px;
     font-weight: bold;
     color: #fc6a20;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .stars-outer {
     font-size: 1rem;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .stars-outer {
     font-size: 1.5rem;
     margin-top: 10px;
  }
- 
+
 
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 {
      margin-bottom: 40px;
  }
- 
- 
+
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_review .cot_id {
     font-weight: bold;
     font-size: 13px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_review .cot_day {
     font-size: 15px;
     color: #707070;
     top: 3px;
  }
- 
+
  /* 출력별 */
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .stars-outer {
     display: inline-block;
     position: relative;
     font-size: 24px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list {
     padding: 0px 15px;
     border: solid 2px #ddd;
     margin-top: 20px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body {
-    
+
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list.my_list img {
     max-width: 360px;
     max-height: 180px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .info {
     display: inline-block;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_id_day {
     display: flex;
     justify-content: space-between;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box {
     background: #f8f8f8;
     height: auto;
     padding: 0 15px 25px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_01 {
     top: 10px;
     display: flex;
     flex-direction: column;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_01 .inline {
     display: flex;
     margin-top: 8px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_01 .stars-outer {
     margin-left: 0px;
     font-size: 1.2rem;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_01 .number {
     margin-top: 10px;
     font-size: 13px;
@@ -2363,47 +2395,47 @@
     font-weight: bold;
     font-family: "Spoqa Han Sans Neo", "sans-serif";
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_01 span {
     top: 10px;
     font-weight: bold;
     font-size: 12px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_02 {
     display: flex;
     font-size: 13px;
     flex-direction: column;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_02 span {
     display: flex;
     padding-right: 50px;
     padding-top: 6px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_02 span .text {
     margin-top: 5px;
     margin-right: 10px;
     font-size: 11px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review .cot_box .cot_rating_02 span .bold {
     font-size: 12px;
     font-weight: bold;
     top: 5px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review_text {
     font-size: 13px;
     padding-top: 20px;
     padding-bottom: 20px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review_text br {
     display: none;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_more {
     width: 100%;
     max-width: 68px;
@@ -2411,14 +2443,14 @@
     color: #3ec4ba;
     background: url("../recources/icons/rectangle_bt.png") no-repeat right;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_photo img {
     width: 100%;
     max-width: 54px;
     height: 45px;
     margin-top: 20px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .btn-sd {
     float: right;
     max-width: 104px;
@@ -2429,7 +2461,7 @@
     padding-left: 2px;
     font-weight: bold;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .info {
     font-size: 20px;
     font-weight: bold;
@@ -2439,9 +2471,9 @@
     text-overflow: ellipsis;
     overflow: hidden;
     max-height: 74px;
- 
+
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .btn-full-sd {
     height: 36px;
     font-weight: bold;
@@ -2451,18 +2483,18 @@
     margin-top: 15px;
     font-family: "Spoqa Han Sans Neo", "sans-serif";
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_img img{
     width: 100%;
     padding-bottom: 20px;
  }
- 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_s_con_tt {
     padding: 20px 0 20px 0;
     font-size: 13px;
  }
- 
- 
+
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .btn-full-sd {
     height: 36px;
  }
@@ -2569,7 +2601,7 @@
 
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_img {
-   
+
 }
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_img li{
@@ -2756,10 +2788,10 @@
 
 
 
-    /****** 
+    /******
 
-      쇼핑 대 카테고리 
-      
+      쇼핑 대 카테고리
+
       ******/
 
     .sub-container .eval .board .board_wrap .ctg_big {

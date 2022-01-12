@@ -1,5 +1,5 @@
-/************ 
-쇼핑 대 카테고리 
+/************
+쇼핑 대 카테고리
 ************/
 
 .sub-container .eval .board .board_wrap .ctg_big {
@@ -52,7 +52,7 @@
     width: 100%;
 }
 
-/************ 
+/************
 상품 리스트
  ************/
 
@@ -288,13 +288,13 @@
 .eval .board .board_wrap .goods .goods_bottom .right .wishlist {
     width: 23px;
     margin-top: 4px;
-    background: url("../../recources/icons/icon-heart@3x.png") no-repeat;
+    background: url("../recources/icons/icon-heart@3x.png") no-repeat;
     background-size: 23px auto;
     background-position: center;
     display: block;
 }
 
-/************ 
+/************
 상품 페이지
  ************/
 
@@ -309,7 +309,7 @@
  }
 
  .eval .board .board_wrap .shop_goods .shop_goods_dt_l .dt_som {
-   
+
  }
 
  .eval .board .board_wrap .shop_goods .shop_goods_dt_l .dt_som .som {
@@ -397,7 +397,7 @@
     position: relative;
     display: inline-block;
   }
-  
+
   .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr .dt_pr_st .dt_not.tooltip .tooltiptext {
     visibility: hidden;
     width: 250px;
@@ -421,14 +421,14 @@
     background-size: 20px 20px;
     bottom: 16px;
     float: right;
-  }  
+  }
   .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr .dt_pr_st .dt_not.tooltip .tooltiptext::after {
     content: "";
     position: absolute;
     top: 100%;
     left: 50%;
   }
-  
+
   .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr .dt_pr_st .dt_not.tooltip:hover .tooltiptext {
     visibility: visible;
     opacity: 1;
@@ -555,7 +555,7 @@
     font-size: 15px;
     font-weight: bold;
  }
- 
+
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_tta .dt_total li:last-child{
    font-size: 28px;
@@ -656,7 +656,7 @@
 
 
 .eval .board .board_wrap .shop_goods_ct {
-   
+
 }
 
 
@@ -763,11 +763,11 @@
 
 
 .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .sol.block {
-   display: inline-block; 
+   display: inline-block;
 }
 
 .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .sol.none {
-    display: none; 
+    display: none;
  }
 
 
@@ -831,7 +831,7 @@
 }
 
 .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body {
-    
+
 }
 
 .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list.my_list img {
@@ -1063,7 +1063,7 @@
 
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_img {
-    
+
 }
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_img li{
@@ -1220,4 +1220,55 @@
     width: 30%;
 }
 
+
+
+
+/****
+    검색페이지
+ ****/
+
+.sub-container .serch_data {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 32px;
+    padding: 70px;
+}
+
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area #tab3 {
+    display: none;
+}
+
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area #tab4 {
+    display: none;
+}
+
+ .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.pd-00 {
+     padding: 0;
+ }
+
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont li {
+    padding: 12px 0 10px 20px;
+    display: flex;
+}
+
+ .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .filter_innner li{
+    display: inline-block;
+    margin: 6px;
+ }
+
+ .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .f_tt_more {
+     border-bottom: solid 2px #000;
+     padding-bottom: 20px;
+ }
+
+ .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .f_tt_more li{
+     display: inline-block;
+     padding: 20px 0 0 0 ;
+ }
+
+ .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .f_tt_more li:nth-child(2){
+   float: right;
+   color: #707070;
+}
 

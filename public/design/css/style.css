@@ -936,7 +936,7 @@ h5 {
     padding: 25px;
 }
 .eval .board .board_wrap .list .body .title {
-    max-width: 473px;
+    /* max-width: 473px; */
     font-size: 24px;
     font-weight: bold;
     max-height: 67px;
@@ -1301,6 +1301,28 @@ h5 {
     width: 150px;
     padding: 13px 13px 12px;
 }
+
+
+.eval .board.mypage_list .paging {
+    /* width: 320px; */
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+    margin: 40px auto 0;
+}
+.eval .board.mypage_list .paging a {
+    max-width: 80px;
+    padding: 13px 13px 12px;
+    border: solid 4px #000;
+    display: inline-block;
+}
+.eval .board.mypage_list .paging div {
+    display: inline-block;
+    width: 150px;
+    padding: 13px 13px 12px;
+}
+
 
 /* board */
 
@@ -1834,6 +1856,10 @@ input::placeholder {
     -webkit-box-orient: vertical;
 }
 
+.eval .board.mypage_list .board_wrap .list .title a {
+    display: block;
+}
+
 .eval .board.mypage_list .board_wrap .list .date {
     width: calc(100% - 120px);
     font-size: 16px;
@@ -1845,7 +1871,7 @@ input::placeholder {
     text-align: right;
     position: absolute;
     right: 0;
-    top: 30%;
+    top: 38%;
     font-size: 18px;
 }
 
@@ -2313,6 +2339,8 @@ input::placeholder {
     text-align: center;
     font-size: 20px;
     padding: 22px;
+    border: 2px solid#f1f1f1;
+    border-bottom: none;
 }
 .eval .board.mypage_list .board_wrap .tab_menu .list_tab .is_on .btn_list {
     color: #fff;
@@ -2321,6 +2349,7 @@ input::placeholder {
     height: 70px;
     text-align: center;
     font-weight: bold;
+    border: none;
 }
 .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont {
     display: block;
