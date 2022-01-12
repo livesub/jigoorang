@@ -231,8 +231,8 @@
                 dataType: 'text',
                 data: form_var,
                 success: function(result) {
-alert(result);
-return false;
+//alert(result);
+//return false;
                     var data = JSON.parse(result);
 //alert(data.amount);
 //return false;

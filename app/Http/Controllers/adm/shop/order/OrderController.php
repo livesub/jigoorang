@@ -274,8 +274,8 @@ class OrderController extends Controller
             if(($card_price - $amount) < $order_info->de_send_cost_free){
                 //if(취소금액 < 기본 배송비){
                 if($amount < $order_info->de_send_cost){
-                    if(($now_point - $point_amount) < $order_info->de_send_cost){
-var_dump("JJJJJJJJJJJ==> ".$now_point);
+                    $card_chk = true;
+                    if($card_chk == true && ($now_point - $point_amount) < $order_info->de_send_cost){
                         //포인트 사용 금액도 기본 배송비 보다 작다면
                         echo json_encode(['message' => 'no_cancel']);
                         exit;
@@ -515,18 +515,41 @@ $success = true;
             $hap_qty_price = 0;
             $chagam_point = 0;
 
+
+
+
+
+
+
             foreach($custom_data as $m=>$t)
             {
                 $cart_info = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $custom_data[$m]['ct_id']]])->first();
                 $qty_price = ($cart_info->sct_price + $cart_info->sio_price) * $custom_data[$m]['minus_qty'];   //취소 금액
                 $hap_qty_price += $qty_price;
             }
-
+var_dump("card_price====> ".$now_point);
             if($card_price < $hap_qty_price){   //결제금액 보다 취소 금액이 클때
+
+//if(($card_price - $amount) < $order_info->de_send_cost_free){
+
+
+                if(($now_point - $hap_qty_price) < $order_info->de_send_cost_free){
+
+//                    echo 'no_cancel';
+//                    exit;
+                }else{
+//                    $aa = $now_point - $hap_qty_price - $order_info->de_send_cost;
+//                    var_dump("aaaa====> ".$aa);
+                }
+
+
+
+/*
                 if(($now_point - $hap_qty_price) < $order_info->de_send_cost){
                     echo 'no_cancel';
                     exit;
                 }
+*/
             }
 
 
