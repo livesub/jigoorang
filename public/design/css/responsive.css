@@ -1562,6 +1562,8 @@
     .join .join_wrap .join_form .btn-20 {
         margin-top: 0;
         width: 35%;
+        font-size: 13px;
+        top: 0;
     }
 
     .join .join_wrap .join_form .btn-20-active {
