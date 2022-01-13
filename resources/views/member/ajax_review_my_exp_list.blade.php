@@ -33,7 +33,7 @@
                                     if($review_save_imgs_cnt > 0) $review_save_imgs_infos = $review_save_imgs->get();
                                 @endphp
 
-                                <div class="cot_body">
+                                <div class="cot_body pd-00">
                                     <p class="cr_04 mb-20">{{ substr($review_saves_exp_info->created_at, 0, 10) }}</p>
                                     <img src="{{ $main_image_name_disp }}" alt="">
                                     <div class="info tab">
@@ -77,6 +77,7 @@
                                                     <p class="number"></p>
                                                 </div>
                                             </div>
+
                                           </div>
                                           <script>
                                             star({{ $dip_score }},{{ $review_saves_exp_info->id }});
@@ -92,6 +93,7 @@
                                             </div>
                                             <div class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}"></div>
                                        </div>
+
 
                                         <div class="cot_photo">
                                         @foreach($review_save_imgs_infos as $review_save_imgs_infos)
@@ -126,13 +128,12 @@
 </script>
 
 <script>
-    $('.box').each(function(cnt){
+   $('.box').each(function(cnt){
         var content = $('#content_'+ cnt);
         var content_txt = content.text();
-        var content_txt_short = content_txt.substr(0,350)+"...";
+        var content_txt_short = content_txt.substr(0,200)+"...";
         var btn_more = $('#cot_more_'+ cnt);
-
-        if(content_txt.length > 350){
+        if(content_txt.length > 200){
             btn_more.html('더보기');
             content.html(content_txt_short);
         }
