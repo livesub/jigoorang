@@ -895,6 +895,19 @@ h5 {
     display: none;
 }
 
+
+/* 지구랭 소개 */
+.eval .board .board_wrap .about{
+    width: 100%;
+    text-align: center;
+}
+
+.eval .board .board_wrap .about img{
+    width: 100%;
+    text-align: center;
+}
+
+
 /* 평가단 */
 .eval {
     width: 100%;
@@ -3428,6 +3441,39 @@ input::placeholder {
 
 /* 모달 시작 */
 
+/* 소개페이지 모달 */
+.modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .mo_01{
+    font-size: 16px;
+    color: #fff;
+    background: #000;
+    max-width: 155px;
+    padding: 5px 0 5px 0;
+    text-align: center;
+}
+
+.modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .mo_02{
+    font-size: 16px;
+    color: #fff;
+    background: #000;
+    max-width: 262px;
+    padding: 5px 0 5px 0;
+    text-align: center;
+}
+
+.modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .about_ft{
+    font-size: 12px;
+}
+
+
+.modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo img{
+    width: 80%;
+
+}
 
 
 /* 검색창 모달 */

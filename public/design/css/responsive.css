@@ -4,6 +4,8 @@
         display: none;
     }
 
+
+
     /* 레이아웃 */
     .wrap {
         padding-top: 60px;
@@ -1284,6 +1286,42 @@ background-size: cover;
     }
     .hot-icon p{
         font-size: 15px;
+    }
+
+
+
+    /* 소개페이지 모달 */
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .mo_01{
+        font-size: 16px;
+        color: #fff;
+        background: #000;
+        max-width: 155px;
+        padding: 5px 0 5px 0;
+        text-align: center;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .mo_02{
+        font-size: 16px;
+        color: #fff;
+        background: #000;
+        max-width: 262px;
+        padding: 5px 0 5px 0;
+        text-align: center;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .about_ft{
+        font-size: 12px;
+    }
+
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo img{
+        width: 100%;
+
     }
 
 
@@ -3006,6 +3044,49 @@ background-size: cover;
         width: 58px;
         height: 22px;
         font-size: 12px;
+    }
+
+
+    /* 소개페이지 모달 */
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo h3 {
+        font-size: 15px;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo p{
+        font-size: 13px;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .mo_01{
+        font-size: 15px;
+        color: #fff;
+        background: #000;
+        max-width: 155px;
+        padding: 5px 0 5px 0;
+        text-align: center;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .mo_02{
+        font-size: 15px;
+        color: #fff;
+        background: #000;
+        max-width: 218px;
+        padding: 5px 0 5px 0;
+        text-align: center;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .about_ft{
+        font-size: 10px;
+    }
+
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo img{
+        width: 100%;
+
     }
 
 
