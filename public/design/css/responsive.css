@@ -660,10 +660,33 @@ background-size: cover;
         padding: 13px 13px 12px;
         border: solid 2px #000;
         display: inline-block;
+        font-size: 13px;
     }
-    .eval .board .paging div {
+
+
+    .eval .board.mypage_list .paging {
+        /* width: 320px; */
+        text-align: center;
+        font-size: 13px;
+        font-weight: bold;
+        color: #000;
+        margin: 40px auto 0;
+    }
+    .eval .board.mypage_list .paging a {
+        max-width: 80px;
+        padding: 13px 13px 12px;
+        border: solid 2px #000;
+        display: inline-block;
+    }
+    .eval .board.mypage_list .paging div {
         display: inline-block;
         width: 120px;
+        padding: 13px 13px 12px;
+    }
+
+    .eval .board .paging div {
+        display: inline-block;
+        width: 60px;
         padding: 13px 13px 12px;
     }
 
