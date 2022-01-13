@@ -1247,10 +1247,11 @@
      padding: 0;
  }
 
-.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont li {
+/* .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont li {
     padding: 12px 0 10px 20px;
     display: flex;
-}
+    flex-direction: column;
+} */
 
  .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .filter_innner li{
     display: inline-block;
