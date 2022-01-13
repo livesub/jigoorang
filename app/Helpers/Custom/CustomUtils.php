@@ -783,20 +783,19 @@ $um_value='80/0.5/3'
     // 상품이미지에 유형 아이콘 출력
     public static function item_icon($item)
     {
-        $icon = "<tr><td>";
-
+        $icon = "";
         switch($item->item_type1) {
             case 1:
-                $icon = '<span class="shop_icon shop_icon_1">NEW</span>';
+                $icon = 'NEW';
                 break;
             case 2:
-                $icon = '<span class="shop_icon shop_icon_2">SALE</span>';
+                $icon = 'SALE';
                 break;
             case 3:
-                $icon = '<span class="shop_icon shop_icon_3">BIG SALE</span>';
+                $icon = 'BIG SALE';
                 break;
             case 4:
-                $icon = '<span class="shop_icon shop_icon_4">HOT</span>';
+                $icon = 'HOT';
                 break;
             default:
                 break;

@@ -21,12 +21,6 @@ Route::get('/sitem', [
     'uses' => 'App\Http\Controllers\shop\ItemController@index',
 ]);
 
-//상품 리스트 페이지 ajax 2차카테고리
-Route::get('/ajax_subcate', [
-    'as' => 'ajax_subcate',
-    'uses' => 'App\Http\Controllers\shop\ItemController@ajax_subcate',
-]);
-
 //상품 리스트 페이지 처리
 Route::get('/sitemdetail', [
     'as' => 'sitemdetail',

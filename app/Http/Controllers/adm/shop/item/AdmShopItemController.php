@@ -317,6 +317,7 @@ class AdmShopItemController extends Controller
         $opt3_subject   = $request->input('opt3_subject');
 
         $option_count = (isset($opt_id) && is_array($opt_id)) ? count($opt_id) : array();
+        $hap_opt_stock_qty = 0;
 
         //선택옵션등록
         if($option_count) {
@@ -353,7 +354,7 @@ class AdmShopItemController extends Controller
                     //'sio_noti_qty'  => $opt_noti_qty[$i], //통보 수량 관련
                     'sio_use'       => $opt_use[$i],
                 );
-
+                $hap_opt_stock_qty += $opt_stock_qty[$i];
                 //저장 처리
                 $optcreate_result = shopitemoptions::create($optdata);
                 $optcreate_result->save();
@@ -403,6 +404,10 @@ class AdmShopItemController extends Controller
 
         /***** 본체 상품 처리  ***/
         if($item_rank == "") $item_rank = 0;
+
+        //옵션 상품에 갯수가 0이면 입력 값으러 아니면 옵션 갯수의 합을 넣는다.
+        if($hap_opt_stock_qty == 0) $item_stock_qty = $item_stock_qty;
+        else $item_stock_qty = $hap_opt_stock_qty;
 
         //DB 저장 배열 만들기
         $data = array(
@@ -1154,6 +1159,7 @@ class AdmShopItemController extends Controller
 
         $option_count = (isset($opt_id) && is_array($opt_id)) ? count($opt_id) : array();
 
+        $hap_opt_stock_qty = 0;
         //선택옵션등록
         if($option_count) {
             // 옵션명
@@ -1189,6 +1195,8 @@ class AdmShopItemController extends Controller
                     //'sio_noti_qty'  => $opt_noti_qty[$i], //통보 수량 관련
                     'sio_use'       => $opt_use[$i],
                 );
+
+                $hap_opt_stock_qty += $opt_stock_qty[$i];
 
                 //저장 처리
                 $optcreate_result = shopitemoptions::create($optdata);
@@ -1241,6 +1249,9 @@ class AdmShopItemController extends Controller
 
         /***** 본체 상품 처리  ***/
         if($item_rank == "") $item_rank = 0;
+        //옵션 상품에 갯수가 0이면 입력 값으러 아니면 옵션 갯수의 합을 넣는다.
+        if($hap_opt_stock_qty == 0) $item_stock_qty = $item_stock_qty;
+        else $item_stock_qty = $hap_opt_stock_qty;
 
         //DB 저장 배열 만들기
         $data = array(

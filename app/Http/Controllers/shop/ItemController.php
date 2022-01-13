@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
 use App\Helpers\Custom\PageSet; //페이지 함수
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;     //각종 함수(str_random)
 
 class ItemController extends Controller
 {
@@ -30,6 +31,9 @@ class ItemController extends Controller
         $length         = strlen($ca_id);
         $orderby_type   = $request->input('orderby_type');
 
+        $orderby_add = '';
+        $total_cnt = 0;
+
         if($ca_id == ""){
             return redirect()->route('shop.index');
             exit;
@@ -37,8 +41,8 @@ class ItemController extends Controller
 
         //pgae 관련
         $page       = $request->input('page');
-        $pageScale  = 10;  //한페이지당 라인수
-        $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
+        $pageScale  = 40;  //한페이지당 라인수
+        $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")
         {
@@ -48,55 +52,91 @@ class ItemController extends Controller
             $start_num = 0;
         }
 
-
-/*
-        //검색 처리
-        $keymethod      = $request->input('keymethod');
-        $keyword        = $request->input('keyword');
-
-        $search_sql = "";
-        if($keymethod != "" && $keyword != ""){
-            $search_sql = " AND a.{$keymethod} LIKE '%{$keyword}%' ";
-        }
-
-        $search_sql = "";
-        if($keymethod != "" && $keyword != ""){
-            $search_sql = " AND a.{$keymethod} LIKE '%{$keyword}%' ";
-        }
-
-        if($ca_id == ""){
-            $cate_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr')->where('sca_display','Y')->whereRaw('length(sca_id) = 2')->orderby('sca_rank', 'DESC')->get();
-
-            $total_count = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id AND b.sca_display = 'Y' {$search_sql} ");
-        }else{
-            $down_cate = DB::table('shopcategorys')->where('sca_id','like',$ca_id.'%')->count();   //하위 카테고리 갯수
-            if($down_cate != 1){
-                $length = $length + 2;
-                $cate_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr')->where('sca_display','Y')->where('sca_id','<>',$ca_id )->whereRaw('length(sca_id) = '.$length)->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'DESC')->get();
-            }else{  //하위 카테고리가 없을때 처리
-                $cate_infos = DB::table('shopcategorys')->select('sca_id', 'sca_name_kr')->where('sca_display','Y')->where('sca_id','=',$ca_id )->whereRaw('length(sca_id) = '.$length)->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'DESC')->get();
-            }
-
-            $total_count = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id AND b.sca_display = 'Y' AND a.sca_id like '{$ca_id}%' {$search_sql} ");
-        }
-*/
         $cate_infos = DB::table('shopcategorys')->where('sca_display','Y')->whereRaw('length(sca_id) = 2')->orderby('sca_rank', 'DESC')->orderby('id', 'asc')->get();
         $sub_cate_infos = DB::table('shopcategorys')->where('sca_display','Y')->whereRaw('length(sca_id) = 4')->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'DESC')->orderby('id', 'ASC')->get();
 
-/*
+        if($ca_id != ""){
+            $item_sql = DB::table('shopitems')->where('item_display','Y')->whereRaw("sca_id like '{$ca_id}%'");
+            $total_cnt = $item_sql->count();
+            //$item_infos = $item_sql->orderby('item_rank', 'DESC')->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
+        }
+
+        if($sub_ca_id != "all" && $sub_ca_id != ""){
+            $item_sql = DB::table('shopitems')->where([['item_display','Y'], ['sca_id', $sub_ca_id]]);
+            $total_cnt = $item_sql->count();
+            //$item_infos = $item_sql->orderby('item_rank', 'DESC')->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
+        }
+
+        if($orderby_type != ""){
+            switch ($orderby_type) {
+                case 'recent':
+                    //$orderby_add = "'id', 'DESC'";
+                    $item_sql->orderby('id','DESC');
+                    $total_cnt = $item_sql->count();
+                    $item_infos= $item_sql->offset($start_num)->limit($pageScale)->get();
+                    break;
+                case 'sale':
+                    //$orderby_add = "'total', 'desc'";
+                    $item_sql = DB::table('shopitems as a')
+                    ->select('a.*', DB::raw('count(b.item_code) as total'))
+                    ->leftjoin('shopcarts as b', function($join) {
+                            $join->on('a.item_code', '=', 'b.item_code')->whereRaw('b.sct_status in (\'입금\', \'준비\', \'배송\', \'완료\')');
+                        });
+                    if($sub_ca_id != "all" && $sub_ca_id != ""){
+                        $item_sql = $item_sql->where([['a.item_display','Y'], ['a.sca_id', $sub_ca_id]]);
+                    }else{
+                        $item_sql = $item_sql->whereRaw("a.sca_id like '{$ca_id}%'");
+                    }
+                    $item_sql = $item_sql->groupBy('a.item_code')->orderBy('total', 'desc');
+
+                    $item_cnt = $item_sql->get();
+
+                    $item_sql = $item_sql->offset($start_num)->limit($pageScale)->get();
+
+                    $item_infos = $item_sql;
+                    $total_cnt = count($item_cnt);
+
+                    break;
+                case 'high_price':
+                    //$orderby_add = "'item_price', 'DESC'";
+                    $item_sql->orderby('item_price','DESC');
+                    $total_cnt = $item_sql->count();
+                    $item_infos= $item_sql->offset($start_num)->limit($pageScale)->get();
+                    break;
+                case 'low_price':
+                    //$orderby_add = "'item_price', 'ASC'";
+                    $item_sql->orderby('item_price','ASC');
+                    $total_cnt = $item_sql->count();
+                    $item_infos= $item_sql->offset($start_num)->limit($pageScale)->get();
+                    break;
+                case 'review':
+                    //$orderby_add = "'review_cnt', 'DESC'";
+                    $item_sql->orderby('review_cnt','DESC');
+                    $total_cnt = $item_sql->count();
+                    $item_infos= $item_sql->offset($start_num)->limit($pageScale)->get();
+                    break;
+                default:
+                    //$orderby_add = "'id', 'DESC'";
+                    $item_sql->orderby('id','DESC');
+                    $total_cnt = $item_sql->count();
+                    $item_infos= $item_sql->offset($start_num)->limit($pageScale)->get();
+            }
+        }else{
+            $item_infos = $item_sql->orderby('item_rank', 'DESC')->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
+        }
+
         $total_record   = 0;
-        $total_record   = $total_count[0]->cnt; //총 게시물 수
+        $total_record   = $total_cnt; //총 게시물 수
+
         $total_page     = ceil($total_record / $pageScale);
         $total_page     = $total_page == 0 ? 1 : $total_page;
-
-        $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' AND a.item_use = 1 AND a.sca_id = b.sca_id AND b.sca_display = 'Y'  AND a.sca_id like '{$ca_id}%' {$search_sql} order by a.item_rank DESC limit {$start_num}, {$pageScale} ");
 
         $virtual_num = $total_record - $pageScale * ($page - 1);
 
         $tailarr = array();
         $tailarr['ca_id'] = $ca_id;    //고정된 전달 파라메터가 있을때 사용
-        $tailarr['keymethod'] = $keymethod;
-        $tailarr['keyword'] = $keyword;
+        $tailarr['sub_ca_id'] = $sub_ca_id;
+        $tailarr['orderby_type'] = $orderby_type;
 
         $PageSet        = new PageSet;
         $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
@@ -108,7 +148,7 @@ class ItemController extends Controller
         $nextLastPage   = $PageSet->nextLast("마지막");
         $listPage       = $PageSet->getPageList();
         $pnPage         = $prevPage.$listPage.$nextPage;
-*/
+
         $CustomUtils = new CustomUtils();
         return view('shop.item_page',[
             'ca_id'             => $ca_id,
@@ -116,21 +156,15 @@ class ItemController extends Controller
             'orderby_type'      => $orderby_type,
             'cate_infos'        => $cate_infos,
             'sub_cate_infos'    => $sub_cate_infos,
-            //'item_infos'    => $item_infos,
-            //'page'          => $page,
-            //'pnPage'        => $pnPage,
+            'item_infos'        => $item_infos,
+            'page'              => $page,
+            'pnPage'            => $pnPage,
+            'total_record'      => $total_record,
             //'keymethod'     => $keymethod,
             //'keyword'       => $keyword,
             'CustomUtils'   => $CustomUtils,
         ]);
     }
-
-    public function ajax_subcate(Request $request)
-    {
-        var_dump("KKKKKKKKKKKKKKKKKKK");
-    }
-
-
 
     public function sitemdetail(Request $request)
     {
