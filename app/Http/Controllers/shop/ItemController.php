@@ -174,6 +174,17 @@ class ItemController extends Controller
 
         $item_info = DB::select("select a.*, b.sca_display from shopitems a, shopcategorys b where a.item_code = '$item_code' and a.sca_id = b.sca_id ");
 
+        //상단 네비세이션 부분 처리
+        $k = 0;
+        $sca_id_len = strlen($item_info[0]->sca_id);
+        for($i = 2; $i <= $sca_id_len; $i += 2){
+            $str_tmp = substr($item_info[0]->sca_id, 0, $i);
+            $cate_name = DB::table('shopcategorys')->where([['sca_display', 'Y'], ['sca_id', $str_tmp]])->first();
+            $disp_sca_id[$k] = $str_tmp;
+            $disp_cate_name[$k] = $cate_name->sca_name_kr;
+            $k++;
+        }
+
         if(count($item_info) == 0){
             return redirect()->back()->with('alert_messages', $Messages::$shop['no_data']);
             exit;
@@ -264,6 +275,8 @@ class ItemController extends Controller
             "is_orderable"      => $is_orderable,   //재고가 있는지 파악 여부
             "option_item"       => $option_item,    //선택 옵션
             "supply_item"       => $supply_item,    //추가 옵션
+            "disp_sca_id"       => $disp_sca_id,
+            "disp_cate_name"    => $disp_cate_name,
         ]);
     }
 
