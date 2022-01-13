@@ -660,10 +660,33 @@ background-size: cover;
         padding: 13px 13px 12px;
         border: solid 2px #000;
         display: inline-block;
+        font-size: 13px;
     }
-    .eval .board .paging div {
+
+
+    .eval .board.mypage_list .paging {
+        /* width: 320px; */
+        text-align: center;
+        font-size: 13px;
+        font-weight: bold;
+        color: #000;
+        margin: 40px auto 0;
+    }
+    .eval .board.mypage_list .paging a {
+        max-width: 80px;
+        padding: 13px 13px 12px;
+        border: solid 2px #000;
+        display: inline-block;
+    }
+    .eval .board.mypage_list .paging div {
         display: inline-block;
         width: 120px;
+        padding: 13px 13px 12px;
+    }
+
+    .eval .board .paging div {
+        display: inline-block;
+        width: 60px;
         padding: 13px 13px 12px;
     }
 
@@ -926,6 +949,12 @@ background-size: cover;
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .info {
         font-size: 18px;
     }
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .info  p {
+    text-overflow: ellipsis;
+    display: unset;
+    }
+
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .info .rm_v {
         width: 100%;
@@ -2241,7 +2270,7 @@ background-size: cover;
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body {
         /* background: url("../recources/imgs/sample_img.png") no-repeat left; */
         /* border-bottom: solid 1px #ddd; */
-        padding: 0;
+        padding-bottom: 70px;
     }
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .info .rm_v {
@@ -2390,7 +2419,8 @@ background-size: cover;
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body {
         /* background: url("../recources/imgs/sample_img.png") no-repeat left; */
         /* border-bottom: solid 1px #ddd; */
-        padding: 20px 0;
+        /* padding: 20px 0; */
+        padding-bottom: 70px;
     }
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .info {
@@ -4222,7 +4252,7 @@ background-size: cover;
     }
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body {
-        padding: 0;
+        padding-bottom: 70px;
     }
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_review {

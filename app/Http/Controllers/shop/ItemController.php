@@ -26,6 +26,7 @@ class ItemController extends Controller
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
         $ca_id          = $request->input('ca_id');
+        $sub_ca_id      = $request->input('sub_ca_id');
         $length         = strlen($ca_id);
         $orderby_type   = $request->input('orderby_type');
 
@@ -80,8 +81,7 @@ class ItemController extends Controller
         }
 */
         $cate_infos = DB::table('shopcategorys')->where('sca_display','Y')->whereRaw('length(sca_id) = 2')->orderby('sca_rank', 'DESC')->orderby('id', 'asc')->get();
-        $sub_cate_infos = DB::table('shopcategorys')->where('sca_display','Y')->where('sca_id','<>',$ca_id )->whereRaw('length(sca_id) = 4')->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'DESC')->orderby('id', 'ASC')->get();
-
+        $sub_cate_infos = DB::table('shopcategorys')->where('sca_display','Y')->whereRaw('length(sca_id) = 4')->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'DESC')->orderby('id', 'ASC')->get();
 
 /*
         $total_record   = 0;
@@ -112,6 +112,7 @@ class ItemController extends Controller
         $CustomUtils = new CustomUtils();
         return view('shop.item_page',[
             'ca_id'             => $ca_id,
+            'sub_ca_id'         => $sub_ca_id,
             'orderby_type'      => $orderby_type,
             'cate_infos'        => $cate_infos,
             'sub_cate_infos'    => $sub_cate_infos,
