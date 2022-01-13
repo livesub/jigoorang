@@ -43,12 +43,18 @@
                     <div class="scrollmenu sub_sol">
                         <div class="swiper submenu_sol">
                             <ul class="swiper-wrapper submenu_innr">
-                              <a href="{{ route('sitem','ca_id=all') }}">
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id=all') }}">
                               <li class="swiper-slide"><span class="active">전체</span></li> <!-- class="active" 클릭시 class 활성-->
                               </a>
                               @foreach($sub_cate_infos as $sub_cate_info)
-                              <a href="{{ route('sitem','ca_id='.$sub_cate_info->sca_id) }}">
-                              <li class="swiper-slide"><span>{{ $sub_cate_info->sca_name_kr }}</span></li>
+                                @php
+                                    $class_chk = '';
+var_dump($sub_ca_id);
+var_dump($sub_cate_info->sca_id);
+                                    if($sub_ca_id == $sub_cate_info->sca_id) $class_chk = 'class="active"';
+                                @endphp
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_cate_info->sca_id) }}">
+                              <li class="swiper-slide"><span {{ $class_chk }}>{{ $sub_cate_info->sca_name_kr }}</span></li>
                               </a>
                               @endforeach
 
