@@ -1,12 +1,12 @@
-const ratings = { //평점 값 넣는곳
-  project_1: 2.82,
-  project_2: 3.30,
-  project_3: 1.90,
-  project_4: 4.30,
-  project_5: 4.20,
-  project_6: 3.30,
-  project_7: 3.50,
-};
+// const ratings = { //평점 값 넣는곳
+//   project_1: 2.82,
+//   project_2: 3.30,
+//   project_3: 1.90,
+//   project_4: 4.30,
+//   project_5: 4.20,
+//   project_6: 3.30,
+//   project_7: 3.50,
+// };
 
 
 

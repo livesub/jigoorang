@@ -118,7 +118,7 @@
 .eval .board .board_wrap .scrollmenu .swiper-button-next {
     width: 45px;
     height: 44px;
-    background: url("../../recources/imgs/icon-s-48-page-right@2x.png") no-repeat;
+    background: url("../recources/imgs/icon-s-48-page-right@2x.png") no-repeat;
     background-size: 100% auto;
     background-position: center;
     background-color: rgba(0, 0, 0, 0.1);
@@ -166,7 +166,7 @@
     width: 45px;
     height: 44px;
     /* border: 4px solid #000; */
-    background: url("../../recources/imgs/invalid-name@3x.png") no-repeat;
+    background: url("../recources/imgs/invalid-name@3x.png") no-repeat;
     background-size: 100% auto;
     background-position: center;
     background-color: #fff;
@@ -294,6 +294,16 @@
     background-position: center;
     display: block;
 }
+
+.eval .board .board_wrap .goods .goods_bottom .right .wishlist_on {
+    width: 23px;
+    margin-top: 4px;
+    background: url("../recources/icons/icon-heart-2@3x.png") no-repeat;
+    background-size: 23px auto;
+    background-position: center;
+    display: block;
+}
+
 
 /************
 상품 페이지
