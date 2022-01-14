@@ -267,7 +267,7 @@
     </div>
     <!-- 메인 컨테이너 끝 -->
 @php
-$aa = 8;
+$aa = 11;
 @endphp
 <input type="hidden" id="tt" value="{{ $aa }}">
 
