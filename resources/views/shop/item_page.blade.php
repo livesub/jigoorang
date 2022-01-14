@@ -174,8 +174,11 @@
                             @endif
 
                             <div class="goods_title">
-
-                                <h3>{{ $item_info->item_name }}</h3>
+                                @php
+                                    if($item_info->item_manufacture == "") $item_manufacture = "";
+                                    else $item_manufacture = "[".$item_info->item_manufacture."]";
+                                @endphp
+                                <h3>{{ $item_manufacture }}{{ $item_info->item_name }}</h3>
 
                                 <span class="goods_left">
                                     <p class="price">{{ $CustomUtils->display_price($item_info->item_price, $item_info->item_tel_inq) }}</p>
