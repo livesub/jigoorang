@@ -53,6 +53,7 @@ var swiper = new Swiper(".submenu_sol", {
     observer: true,	// 추가
     observeParents: true,	// 추가
 
+
     breakpoints: {
           320: {
                slidesPerView: 4,
@@ -87,27 +88,3 @@ var swiper = new Swiper(".submenu_sol", {
 
 });
 
-
-//서브 슬라이드 메뉴 버튼 이벤트
-// let act_btn = document.querySelectorAll(".swiper-wrapper.submenu_innr .swiper-slide");
-
-// function handleClick(event) {
-
-//   if (event.target.classList[1] === "active") {
-//     event.target.classList.remove("active");
-//   } else {
-//     for (var i = 0; i < act_btn.length; i++) {
-//         act_btn[i].classList.remove("active");
-//     }
-
-//     event.target.classList.add("active");
-//   }
-// }
-
-// function init() {
-//   for (var i = 0; i < act_btn.length; i++) {
-//     act_btn[i].addEventListener("click", handleClick);
-//   }
-// }
-
-// init();
