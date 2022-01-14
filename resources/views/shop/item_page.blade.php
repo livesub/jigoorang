@@ -266,6 +266,10 @@
 
     </div>
     <!-- 메인 컨테이너 끝 -->
+@php
+$aa = 8;
+@endphp
+<input type="hidden" id="tt" value="{{ $aa }}">
 
 
 
@@ -274,16 +278,28 @@
 
 
 <script>
+var mySwiper = new Swiper('.swiper-container', { initialSlide: 10 });
+</script>
 
+
+
+<script>
 function sd (num) {
+//alert(num);
+
+//$("#sd_"+num).focus();
+
+/*
     var number_sd = $('sd'+num);
 
-    number_sd.click(function(){
+    //number_sd.click(function(){
         var index = $(this).index();
+
         swiper.slideTo(index + 1);
-    })
+    //})
+*/
 }
-sd();
+sd(23);
 </script>
 
 
