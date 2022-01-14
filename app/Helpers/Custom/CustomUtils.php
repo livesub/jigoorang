@@ -879,16 +879,16 @@ $um_value='80/0.5/3'
                         $disabled = ' disabled="disabled"';
 
                     if($is_div === 'div') {
-                        $str .= '<div class="get_item_options">'.PHP_EOL;
-                        $str .= '<label for="it_option_'.$seq.'" class="label-title">'.$subj[$i].'</label>'.PHP_EOL;
+                        //$str .= '<div class="get_item_options">'.PHP_EOL;
+                        //$str .= '<label for="it_option_'.$seq.'" class="label-title">'.$subj[$i].'</label>'.PHP_EOL;
                     } else {
-                        $str .= '<tr>'.PHP_EOL;
-                        $str .= '<th><label for="it_option_'.$seq.'" class="label-title">'.$subj[$i].'</label></th>'.PHP_EOL;
+                        //$str .= '<tr>'.PHP_EOL;
+                        //$str .= '<th><label for="it_option_'.$seq.'" class="label-title">'.$subj[$i].'</label></th>'.PHP_EOL;
                     }
 
                     $select = '<select id="it_option_'.$seq.'" class="it_option"'.$disabled.'>'.PHP_EOL;
 
-                    $first_option_title = $is_first_option_title ? $subj[$i] : '선택';
+                    $first_option_title = $is_first_option_title ? $subj[$i] : '옵션을 선택하세요';
 
                     $select .= '<option value="">'.$first_option_title.'</option>'.PHP_EOL;
                     for($k=0; $k<$opt_count; $k++) {
@@ -900,25 +900,25 @@ $um_value='80/0.5/3'
                     $select .= '</select>'.PHP_EOL;
 
                     if($is_div === 'div') {
-                        $str .= '<span>'.$select.'</span>'.PHP_EOL;
-                        $str .= '</div>'.PHP_EOL;
+                        $str .= $select.PHP_EOL;
+                        //$str .= '</div>'.PHP_EOL;
                     } else {
-                        $str .= '<td>'.$select.'</td>'.PHP_EOL;
-                        $str .= '</tr>'.PHP_EOL;
+                        $str .= $select.PHP_EOL;
+                        //$str .= '</tr>'.PHP_EOL;
                     }
                 }
             }
         }else{
             if($is_div === 'div') {
-                $str .= '<div class="get_item_options">'.PHP_EOL;
-                $str .= '<label for="it_option_1">'.$subj[0].'</label>'.PHP_EOL;
+                //$str .= '<div class="get_item_options">'.PHP_EOL;
+                //$str .= '<label for="it_option_1">'.$subj[0].'</label>'.PHP_EOL;
             } else {
-                $str .= '<tr>'.PHP_EOL;
-                $str .= '<th><label for="it_option_1">'.$subj[0].'</label></th>'.PHP_EOL;
+                //$str .= '<tr>'.PHP_EOL;
+                //$str .= '<th><label for="it_option_1">'.$subj[0].'</label></th>'.PHP_EOL;
             }
 
             $select = '<select id="it_option_1" class="it_option">'.PHP_EOL;
-            $select .= '<option value="">선택</option>'.PHP_EOL;
+            $select .= '<option value="">옵션을 선택하세요</option>'.PHP_EOL;
 
             foreach($opts as $opt){
                 if($opt->sio_price >= 0) $price = '&nbsp;&nbsp;+ '.number_format($opt->sio_price).'원';
@@ -933,11 +933,11 @@ $um_value='80/0.5/3'
             $select .= '</select>'.PHP_EOL;
 
             if($is_div === 'div') {
-                $str .= '<span>'.$select.'</span>'.PHP_EOL;
-                $str .= '</div>'.PHP_EOL;
+                $str .= $select.PHP_EOL;
+                //$str .= '</div>'.PHP_EOL;
             } else {
-                $str .= '<td>'.$select.'</td>'.PHP_EOL;
-                $str .= '</tr>'.PHP_EOL;
+                $str .= $select.PHP_EOL;
+                //$str .= '</tr>'.PHP_EOL;
             }
         }
 

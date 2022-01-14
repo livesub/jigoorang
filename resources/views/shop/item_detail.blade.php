@@ -81,6 +81,13 @@
                                     </div>
                                 </div>
 
+<form name="fitem" id="fitem" method="post" action="{{ route('ajax_cart_register') }}">
+{!! csrf_field() !!}
+<input type="hidden" name="item_code[]" value="{{ $item_info->item_code }}">
+<input type="hidden" name="ajax_option_url" id="ajax_option_url" value="{{ route('ajax_option_change') }}">
+<input type="hidden" name="sw_direct" id="sw_direct">
+<input type="hidden" name="url" id="url">
+
                                 <div class="shop_goods_dt_r">
                                     @if($item_info->item_type1 != 0)
                                     <div class="hot-icon">
@@ -88,7 +95,11 @@
                                     </div>
                                     @endif
                                     <div class="dt_tt">
-                                        <h3>{{ stripslashes($item_info->item_name) }}</h3>
+                                        @php
+                                            if($item_info->item_manufacture == "") $item_manufacture = "";
+                                            else $item_manufacture = "[".$item_info->item_manufacture."]";
+                                        @endphp
+                                        <h3>{{ $item_manufacture }}{{ stripslashes($item_info->item_name) }}</h3>
                                         <div class="line_14-100-r"></div>
                                         <div class="dt_sub_tt">
                                             <p>{{ $item_info->item_basic }}</p>
@@ -103,6 +114,7 @@
                                             <li><span>{{ $disp_discount_rate }}%할인</span></li>
                                                 @endif
                                             @endif
+                                            <input type="hidden" id="item_price" value="{{ $item_info->item_price }}">
                                         </ul>
                                         @if($item_info->item_cust_price > 0)
                                         <ul class="dt_pr_st">
@@ -129,86 +141,66 @@
                                         </ul>
                                     </div>
 
+                                    @if($option_item)
                                     <div class="dt_sel">
-                                        <select name="" id="" class="">
-                                            <option value="">옵션을 선택하세요</option>
-                                            <option value="">옵션을 선택하세요</option>
-                                            <option value="">옵션을 선택하세요</option>
-                                            <option value="">옵션을 선택하세요</option>
-                                        </select>
-
-                                        <select name="" id="">
-                                            <option value="">옵션을 선택하세요</option>
-                                            <option value="">옵션을 선택하세요</option>
-                                            <option value="">옵션을 선택하세요</option>
-                                            <option value="">옵션을 선택하세요</option>
-                                        </select>
+                                    {!! $option_item !!}
                                     </div>
+                                    @endif
 
+                                    <section id="sit_sel_option">
+                                    @if(!$option_item)
                                     <div class="dt_pr_op">
-
-                                        <ul class="dt_pr_op_tt">
-                                            <li>500ml / 블루</li>
-                                            <li onclick="" class="dt_del"></li>
-                                        </ul>
-
                                         <ul class="dt_pr_op_nm">
-                                            <li>
-                                                <button id="num_up">+</button>
-                                                    <p id="num">1</p>
-                                                <button id="num_down">-</button>
+                                            <li class="sit_opt_list">
+                                                <input type="hidden" name="sio_type[{{ $item_info->item_code }}][]" value="0">
+                                                <input type="hidden" name="sio_id[{{ $item_info->item_code }}][]" value="">
+                                                <input type="hidden" name="sio_value[{{ $item_info->item_code }}][]" value="{{ $item_info->item_name }}">
+                                                <input type="hidden" class="sio_price" value="0">
+                                                <input type="hidden" class="sio_stock" value="{{ $item_info->item_stock_qty}}">
+                                                <button type="button">-</button>
+                                                    <input type="text" name="ct_qty[{{ $item_info->item_code }}][]" value="1" id="ct_qty_11" size="5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                                                <button type="button">+</button>
                                             </li>
-
-                                            <li>8000원</li>
                                         </ul>
-
                                     </div>
-
-                                    <div class="dt_pr_op">
-
-                                        <ul class="dt_pr_op_tt">
-                                            <li>500ml / 블루</li>
-                                            <li onclick="" class="dt_del"></li>
-                                        </ul>
-
-                                        <ul class="dt_pr_op_nm">
-                                            <li>
-                                                <button id="num_up">+</button>
-                                                    <p id="num">1</p>
-                                                <button id="num_down">-</button>
-                                            </li>
-
-                                            <li>8000원</li>
-                                        </ul>
-
-                                    </div>
-
+                                    <script>
+                                        $(function() {
+                                            price_calculate();
+                                        });
+                                    </script>
+                                    @endif
+                                    </section>
 
 
                                     <div class="dt_tta">
                                         <ul class="dt_total">
                                             <li><h4>총 상품금액</h4></li>
-                                            <li class="cr_02">16,000원</li>
+                                            <li class="cr_02" id="sit_tot_price"></li>
                                         </ul>
                                         <ul class="dt_dev">
                                             <li>배송비</li>
                                             <li>
-                                                <span>2,500원</span>
-                                                <p>(도서산간지역  2,500원 추가)</p>
+                                                <span>{{ number_format($de_send_cost) }}원</span>
+                                                @if($item_info->item_sc_price > 0)
+                                                <p>(추가배송비 {{ $sc_method_disp }})</p>
+                                                @endif
                                             </li>
                                         </ul>
                                     </div>
 
                                     <div class="dt_btn_4ea">
-                                        <button class="btn_200_sol">장바구니</button>
-                                        <button class="btn_200_bg">바로구매</button>
-                                        <!-- <button class="btn_200_bg_g">품절</button> -->
-                                        <button class="sns sns_wish">응원하기</button>
+                                        @if($is_orderable == false)
+                                        <button type="button" class="btn_200_bg_g">품절</button>
+                                        @else
+                                        <button type="button" onclick="fitem_submit('cart');" class="btn_200_sol">장바구니</button>
+                                        <button type="button" onclick="fitem_submit('buy');" class="btn_200_bg">바로구매</button>
+                                        @endif
+                                        <button type="button" onclick="item_wish('{{ $item_info->item_code }}');" class="sns sns_wish">응원하기</span><!-- wishlist_on -->
                                         <button class="sns sns_share">공유</button>
                                     </div>
                                 </div>
                             </div>
-
+</form>
 
                         <div class="shop_goods_ct">
 
@@ -670,23 +662,6 @@
 </script>
 
 <script>
-    // 수량 증가 감소
-    const num = document.getElementById('num');
-    const up = document.getElementById('num_up');
-    const down = document.getElementById('num_down');
-
-    up.onclick = () => {
-        const crr = parseInt(num.innerText,10)
-        num.innerText = crr + 1;
-    }
-
-    down.onclick = () => {
-        const crr = parseInt(num.innerText,10)
-        num.innerText = crr - 1;
-    }
-</script>
-
-<script>
     //탭 슬라이드 메뉴
     let scroll_btn = document.querySelectorAll('.dt_sec_mn li');
 
@@ -709,6 +684,149 @@
         }
     });
 </script>
+
+<script>
+    // 바로구매, 장바구니 폼 전송
+    function fitem_submit(type)
+    {
+        if (type == "cart") {   //장바구니
+            $("#sw_direct").val(0);
+        } else { // 바로구매
+            $("#sw_direct").val(1);
+        }
+
+        if($(".sit_opt_list").length < 1) {
+            alert("상품의 선택옵션을 선택해 주십시오.");
+            return false;
+        }
+
+        var val, io_type, result = true;
+        var sum_qty = 0;
+        var $el_type = $("input[name^=sio_type]");
+
+        $("input[name^=ct_qty]").each(function(index) {
+            val = $(this).val();
+
+            if(val.length < 1) {
+                alert("수량을 입력해 주십시오.");
+                result = false;
+                return false;
+            }
+
+            if(val.replace(/[0-9]/g, "").length > 0) {
+                alert("수량은 숫자로 입력해 주십시오.");
+                result = false;
+                return false;
+            }
+
+            if(parseInt(val.replace(/[^0-9]/g, "")) < 1) {
+                alert("수량은 1이상 입력해 주십시오.");
+                result = false;
+                return false;
+            }
+
+            sio_type = $el_type.eq(index).val();
+
+            if(sio_type == "0") sum_qty += parseInt(val);
+        });
+
+        if(!result) {
+            return false;
+        }
+
+        var form_var = $("form[name=fitem]").serialize() ;
+
+        $.ajax({
+            type : 'post',
+            url : '{{ route('ajax_cart_register') }}',
+            data : form_var,
+            dataType : 'text',
+            success : function(result){
+//alert(result);
+//return false;
+                var json = JSON.parse(result);
+//alert(json.message);
+//return false;
+                if(json.message == "no_carts"){
+                    alert("장바구니에 담을 상품을 선택하여 주십시오.");
+                    return false;
+                }
+
+                if(json.message == "no_option"){
+                    alert("상품의 선택옵션을 선택해 주십시오.");
+                    return false;
+                }
+
+                if(json.message == "no_cnt"){
+                    alert("수량은 1 이상 입력해 주십시오.");
+                    return false;
+                }
+
+                if(json.message == "no_items"){
+                    alert("상품정보가 존재하지 않습니다.");
+                    return false;
+                }
+
+                if(json.message == "negative_price"){
+                    alert("구매금액이 음수인 상품은 구매할 수 없습니다.");
+                    return false;
+                }
+
+                if(json.message == "no_qty"){
+                    alert(json.option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.sum_qty + " 개 이며\n\n이미 장바구니에 담겨 있습니다. ");
+                    return false;
+                }
+
+                if(json.message == "no_qty2"){
+                    alert(json.option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.sum_qty + " 개 이며\n\n이미 장바구니에 담겨 있습니다. ");
+                    return false;
+                }
+
+                if(json.message == "yes_mem"){
+                    location.href = "{{ route('orderform','sw_direct=1') }}";
+                }
+
+                if(json.message == "no_mem"){
+                    //goto_url(G5_BBS_URL."/login.php?url=".urlencode(G5_SHOP_URL."/orderform.php?sw_direct=$sw_direct"));
+                    location.href = "";
+                }
+
+                if(json.message == "cart_page"){
+                    location.href = "{{ route('cartlist') }}";
+                }
+            },
+            error: function(result){
+                console.log(result);
+            },
+        });
+    }
+</script>
+
+<script>
+    // wish 상품보관
+    function item_wish(item_code)
+    {
+        $.ajax({
+            type: 'get',
+            url: '{{ route('ajax_wish') }}',
+            dataType: 'text',
+            data: {
+                'item_code' : item_code,
+            },
+            success: function(result) {
+//alert(result);
+//return false;
+                if(result == "no_item"){
+                    alert('죄송합니다. 단종된 상품입니다.');
+                    return false;
+                }
+            },error: function(result) {
+                console.log(result);
+            }
+        });
+    }
+</script>
+
 
 
 @endsection

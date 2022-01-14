@@ -252,7 +252,7 @@ class ItemController extends Controller
         }
 
         //배송비 타입에 따른 변경
-        $sc_method_disp = '무료';
+        $sc_method_disp = '';
         if($item_info[0]->item_sc_price > 0) $sc_method_disp = number_format($item_info[0]->item_sc_price).'원';
 
         // 상품품절체크
