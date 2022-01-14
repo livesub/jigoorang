@@ -272,19 +272,7 @@
 
 <script src="{{ asset('/design/js/sub_menu.js') }}"></script>
 
-<!--
-<script>
 
-function sd (num) {
-    var number_sd = $('sd'+num);
-
-    number_sd.click(function(){
-        var index = $(this).index();
-        swiper.slideTo(index + 1);
-    })
-}
-sd();
-</script>-->
 
 
 

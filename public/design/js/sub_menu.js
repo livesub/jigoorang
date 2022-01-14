@@ -40,6 +40,7 @@ var swiper = new Swiper(".submenu", {
 });
 
 var swiper = new Swiper(".submenu_sol", {
+    initialSlide: $("#tt").val(),
     slidesPerView: 'auto',
     spaceBetween: 10,
     navigation: {
