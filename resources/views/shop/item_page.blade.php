@@ -272,7 +272,7 @@
 
 <script src="{{ asset('/design/js/sub_menu.js') }}"></script>
 
-
+<!--
 <script>
 
 function sd (num) {
@@ -284,7 +284,7 @@ function sd (num) {
     })
 }
 sd();
-</script>
+</script>-->
 
 
 
