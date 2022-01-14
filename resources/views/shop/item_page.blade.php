@@ -211,7 +211,7 @@
                                     <p class="number">{{ $dip_score }}/5.00</p>
                                 </div>
 
-                                 <script>
+                                <script>
                                     star({{ $dip_score }},{{ $item_info->id }});
                                 </script>
 
@@ -271,8 +271,6 @@
 
 
 <script src="{{ asset('/design/js/sub_menu.js') }}"></script>
-
-
 
 
 
