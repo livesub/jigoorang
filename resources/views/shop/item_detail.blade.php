@@ -47,13 +47,17 @@
                                     <div class="dt_som">  <!-- 썸네일 슬라이드 -->
                                         <div class="swiper som">
                                             <div class="swiper-wrapper">
+
                                                 <!-- 슬라이드 -->
-                                                <div class="swiper-slide">
-                                                    <img src="{{ asset('/design/recources/imgs/ctg_07.png') }}" alt="" />
-                                                  </div>
+                                                @if(count($big_img_disp) > 0)
+                                                    @for($k = 0; $k < count($big_img_disp); $k++)
                                                   <div class="swiper-slide">
-                                                    <img src="{{ asset('/design/recources/imgs/ctg_07.png') }}" alt="" />
+                                                    <img src="{{ $big_img_disp[$k] }}" alt="" />
                                                   </div>
+                                                    @endfor
+                                                @else
+                                                    <img src="{{ asset("img/no_img.jpg") }}" alt="" style="width:600px;"/>
+                                                @endif
 
                                             </div>
                                             <!-- 스위퍼 페이지 네이션 -->
@@ -65,13 +69,11 @@
 
                                         <div thumbsSlider="som" class="swiper som_b">
                                             <div class="swiper-wrapper">
+                                              @for($m = 0; $m < count($small_img_disp); $m++)
                                               <div class="swiper-slide">
-                                                <img src="{{ asset('/design/recources/imgs/sample_img.png') }}" alt="" />
+                                                <img src="{{ $small_img_disp[$m] }}" alt="" />
                                               </div>
-                                              <div class="swiper-slide">
-                                                <img src="{{ asset('/design/recources/imgs/ctg_07.png') }}" alt="" />
-                                              </div>
-
+                                              @endfor
                                             </div>
                                           </div>
                                           <!-- <div class="swiper-button-next"></div>
@@ -80,39 +82,50 @@
                                 </div>
 
                                 <div class="shop_goods_dt_r">
+                                    @if($item_info->item_type1 != 0)
                                     <div class="hot-icon">
-                                        <p>HOT</p>
+                                        <p>{!! $CustomUtils->item_icon($item_info) !!}</p>
                                     </div>
-
+                                    @endif
                                     <div class="dt_tt">
-                                        <h3>대나무샵 친환경 욕실 5종 세트(샴푸바 + 린스바 + 누가바 + 램프의 바바 + 소바)</h3>
+                                        <h3>{{ stripslashes($item_info->item_name) }}</h3>
                                         <div class="line_14-100-r"></div>
                                         <div class="dt_sub_tt">
-                                            <p>아주 아주 친환경적이고 저렴한 샴푸바인데 현재 sns에서 난리난 그 제품. 오늘 안사면 두고두고 후회합니다. 바로바로 주문 들어가세요.</p>
+                                            <p>{{ $item_info->item_basic }}</p>
                                         </div>
                                     </div>
 
                                     <div class="dt_pr">
                                         <ul class="dt_pr_tt">
-                                            <li><h5>8,000원</h5></li>
-                                            <li><span>20%할인</span></li>
+                                            <li><h5>{{ $CustomUtils->display_price($item_info->item_price) }}</h5></li>
+                                            @if($item_info->item_cust_price > 0)
+                                                @if($disp_discount_rate != 0)
+                                            <li><span>{{ $disp_discount_rate }}%할인</span></li>
+                                                @endif
+                                            @endif
                                         </ul>
+                                        @if($item_info->item_cust_price > 0)
                                         <ul class="dt_pr_st">
                                             <li>정가 &nbsp;&nbsp;&nbsp; </li>
-                                            <li>10,000원</li>
+                                            <li>{{ $CustomUtils->display_price($item_info->item_cust_price) }}</li>
                                         </ul>
+                                        @endif
+
+                                        @if($item_info->item_point != "0")
                                         <ul class="dt_pr_st">
                                             <li>적립금</li>
-                                            <li onclick="" class="dt_not tooltip">1%
+                                            <li onclick="" class="dt_not tooltip">{{ $item_info->item_point }}%
                                                 <span class="tooltiptext">
                                                     <!-- <div class="del"></div> -->
                                                     최종 적립 금액은 할인, 적립금 사용액, 배송료를 제외한 금액을 기준으로 적립되며 옵션 가격, 수량에 따라 달라질 수 있습니다
                                                 </span>
                                             </li>
                                         </ul>
+                                        @endif
+
                                         <ul class="dt_pr_st">
                                             <li>배송비</li>
-                                            <li>2,500원(도서산간일 경우 추가 배송비 발생)</li>
+                                            <li>{{ number_format($de_send_cost) }}원(도서산간일 경우 추가 배송비 발생)</li>
                                         </ul>
                                     </div>
 
@@ -630,7 +643,7 @@
     var swiper = new Swiper(".som_b", {
         loop: true,
         spaceBetween: 5,
-        slidesPerView: 6,       //상품등록 이미지 갯수
+        slidesPerView: {{ $img_cnt }},   //상품등록 이미지 갯수
         freeMode: true,
         watchSlidesProgress: true,
         navigation: {

@@ -203,7 +203,7 @@ class ItemController extends Controller
         //이미지 처리
         $j = 0;
         $p = 0;
-        $big_img_disp = "";
+        $big_img_disp = array();
         $small_img = array();
         $small_img_disp = array();
         $small_item_img = array();
@@ -211,6 +211,17 @@ class ItemController extends Controller
         for($i=1; $i<=10; $i++) {
             $item_img = "item_img".$i;
 
+            if($item_info[0]->$item_img == "") continue;
+
+            $item_img_cut = explode("@@",$item_info[0]->$item_img);
+
+            //큰이미지 출력
+            $big_img_disp[$p] = "/data/shopitem/".$item_img_cut[1];
+
+            //작은 이미지 출력 배열
+            $small_img_disp[$p] = "/data/shopitem/".$item_img_cut[4];
+            $small_item_img[$p] = $i;
+/*
             if($item_info[0]->$item_img == "") continue;
 
             $j++;
@@ -227,6 +238,7 @@ class ItemController extends Controller
             //작은 이미지 출력 배열
             $small_img_disp[$p] = "/data/shopitem/".$item_img_cut[3];
             $small_item_img[$p] = $i;
+*/
             $p++;
         }
 
@@ -261,6 +273,15 @@ class ItemController extends Controller
             $supply_item = $CustomUtils->get_item_supply($item_info[0]->item_code, $item_info[0]->item_supply_subject, '');
         }
 
+        //시중가격(정가) 계산
+        $disp_discount_rate = 0;
+        if($item_info[0]->item_cust_price > 0){
+            //시중가격 값이 있을때 할인율 계산
+            $discount = (int)$item_info[0]->item_cust_price - (int)$item_info[0]->item_price; //할인액
+            $discount_rate = ($discount / (int)$item_info[0]->item_cust_price) * 100;  //할인율
+            $disp_discount_rate = round($discount_rate);    //반올림
+        }
+
         return view('shop.item_detail',[
             "item_info"         => $item_info[0],
             "big_img_disp"      => $big_img_disp,
@@ -277,6 +298,8 @@ class ItemController extends Controller
             "supply_item"       => $supply_item,    //추가 옵션
             "disp_sca_id"       => $disp_sca_id,
             "disp_cate_name"    => $disp_cate_name,
+            "img_cnt"           => $p,
+            "disp_discount_rate" => $disp_discount_rate,
         ]);
     }
 
