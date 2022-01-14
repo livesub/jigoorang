@@ -83,7 +83,7 @@
     color: #707070;
     text-align: center;
     padding: 14px;
-    width: 180px;
+    /* width: 180px; */
     text-align: center;
     border: solid 4px #ddd;
     padding-top: 45px;
@@ -96,9 +96,9 @@
     border-right: none;
 }
 
-.eval .board .board_wrap .scrollmenu .swiper-wrapper li:last-child {
+/* .eval .board .board_wrap .scrollmenu .swiper-wrapper li:last-child {
     border-right: solid 4px #ddd;
-}
+} */
 
 .eval .board .board_wrap .scrollmenu .swiper-wrapper li:hover {
     border: solid 4px #3ec4ba;
@@ -146,6 +146,7 @@
     font-size: 20px;
     font-weight: bold;
     padding: 10px 0 0;
+    width: 100%;
 }
 
 .eval .board .board_wrap .scrollmenu .swiper-wrapper.submenu_innr .swiper-slide .active {

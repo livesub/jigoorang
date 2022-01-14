@@ -8,9 +8,9 @@ var swiper = new Swiper(".submenu", {
         prevEl: '.swiper-button-prev'
     },
     breakpoints: {
-          200: {
-               slidesPerView: 2,
-               spaceBetween: 0
+        200: {
+            slidesPerView: 2,
+            spaceBetween: 0
           },
         320: {
             slidesPerView: 4,
@@ -40,18 +40,24 @@ var swiper = new Swiper(".submenu", {
 });
 
 var swiper = new Swiper(".submenu_sol", {
-    slidesPerView: 10,
+    slidesPerView: 'auto',
     spaceBetween: 10,
     navigation: {
         nextEl: '.swiper-button-next01',
         prevEl: '.swiper-button-prev01'
     },
+
+    clickable: true,
+    freeMode : false,
+    observer: true,	// 추가
+    observeParents: true,	// 추가
+
     breakpoints: {
           320: {
                slidesPerView: 4,
                spaceBetween: 10
           },
-    
+
           480: {
                slidesPerView: 4,
                spaceBetween: 10
@@ -76,5 +82,31 @@ var swiper = new Swiper(".submenu_sol", {
             slidesPerView: 10,
             spaceBetween: 10
         }
-    }
+    },
+
 });
+
+
+//서브 슬라이드 메뉴 버튼 이벤트
+// let act_btn = document.querySelectorAll(".swiper-wrapper.submenu_innr .swiper-slide");
+
+// function handleClick(event) {
+
+//   if (event.target.classList[1] === "active") {
+//     event.target.classList.remove("active");
+//   } else {
+//     for (var i = 0; i < act_btn.length; i++) {
+//         act_btn[i].classList.remove("active");
+//     }
+
+//     event.target.classList.add("active");
+//   }
+// }
+
+// function init() {
+//   for (var i = 0; i < act_btn.length; i++) {
+//     act_btn[i].addEventListener("click", handleClick);
+//   }
+// }
+
+// init();

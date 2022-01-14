@@ -29,11 +29,12 @@
                     <div class="scrollmenu">
                         <div class="swiper submenu">
                             <ul class="swiper-wrapper submenu_h">
-                            @foreach($cate_infos as $cate_info)
-                            <a href="{{ route('sitem','ca_id='.$cate_info->sca_id) }}">
-                              <li class="swiper-slide">{{ $cate_info->sca_name_kr }}</li>
-                            </a>
-                            @endforeach
+                                @foreach($cate_infos as $cate_info)
+                                <a href="{{ route('sitem','ca_id='.$cate_info->sca_id) }}" class="swiper-slide">
+                                <li>{{ $cate_info->sca_name_kr }}</li>
+                                <!-- class="bct_active" 메뉴활성 -->
+                                </a>
+                                @endforeach
                             </ul>
                                 <div class="swiper-button-next"></div>
                         </div>
@@ -43,28 +44,30 @@
                     <div class="scrollmenu sub_sol">
                         <div class="swiper submenu_sol">
                             <ul class="swiper-wrapper submenu_innr">
+                              <li class="swiper-slide">
                               <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id=all') }}">
                               @php
                                 $class_all = '';
-                                if($sub_ca_id == 'all' || $sub_ca_id == "") $class_all = ' class="active" ';
+                                if($sub_ca_id == 'all' || $sub_ca_id == "")
+                                $class_all = ' class="active" ';
                               @endphp
-                              <li class="swiper-slide"><span {!! $class_all !!}>전체</span></li> <!-- class="active" 클릭시 class 활성-->
-                              </a>
+                              <span {!! $class_all !!}>전체</span> <!-- class="active" 클릭시 class 활성-->
+                              </a></li>
+
                               @foreach($sub_cate_infos as $sub_cate_info)
                                 @php
                                     $class_chk = '';
                                     if($sub_ca_id == $sub_cate_info->sca_id) $class_chk = ' class="active" ';
                                 @endphp
-                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_cate_info->sca_id) }}">
-                              <li class="swiper-slide"><span {!! $class_chk !!}>{{ $sub_cate_info->sca_name_kr }}</span></li>
-                              </a>
+                              <li id="sd_{{ $sub_cate_info->id }}" class="swiper-slide"><a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_cate_info->sca_id) }}">
+                              <span {!! $class_chk !!}>{{ $sub_cate_info->sca_name_kr }}</span></a></li>
+
                               @endforeach
 
                             </ul>
                                 <div class="swiper-button-next01"></div>
                         </div>
                     </div>
-
 
                     <div class="filter_bg block">
                         <ul class="filter_innner">
@@ -178,7 +181,7 @@
                                     if($item_info->item_manufacture == "") $item_manufacture = "";
                                     else $item_manufacture = "[".$item_info->item_manufacture."]";
                                 @endphp
-                                <h3>{{ $item_manufacture }}{{ $item_info->item_name }}</h3>
+                                <h3>{{ $item_manufacture }}{{ stripslashes($item_info->item_name) }}</h3>
 
                                 <span class="goods_left">
                                     <p class="price">{{ $CustomUtils->display_price($item_info->item_price, $item_info->item_tel_inq) }}</p>
@@ -271,32 +274,17 @@
 
 
 <script>
-//서브 슬라이드 메뉴 버튼 이벤트
-let act_btn = document.querySelectorAll(".swiper-wrapper.submenu_innr .swiper-slide span");
 
-function handleClick(event) {
+function sd (num) {
+    var number_sd = $('sd'+num);
 
-  if (event.target.classList[1] === "active") {
-    event.target.classList.remove("active");
-  } else {
-    for (var i = 0; i < act_btn.length; i++) {
-        act_btn[i].classList.remove("active");
-    }
-
-    event.target.classList.add("active");
-  }
+    number_sd.click(function(){
+        var index = $(this).index();
+        swiper.slideTo(index + 1);
+    })
 }
-
-function init() {
-  for (var i = 0; i < act_btn.length; i++) {
-    act_btn[i].addEventListener("click", handleClick);
-  }
-}
-
-init();
-
+sd();
 </script>
-
 
 
 
