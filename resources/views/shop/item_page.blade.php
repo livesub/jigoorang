@@ -198,15 +198,16 @@
                                 @endif
                                 </span>
 
-                                <div class="goods_review project_{{ $item_info->id }}">
+                                <div class="goods_review" id="project_{{ $item_info->id }}">
                                     <div class="stars-outer">
                                         <div class="stars-inner"></div>
                                     </div>
                                     <p class="number">{{ $dip_score }}/5.00</p>
-                                    <script>
-                                        star({{ $dip_score }},{{ $item_info->id }});
-                                    </script>
                                 </div>
+
+                                 <script>
+                                    star({{ $dip_score }},{{ $item_info->id }});
+                                </script>
 
                                 <div class="goods_bottom">
                                     <span class="left">
@@ -264,6 +265,7 @@
 
 
 <script src="{{ asset('/design/js/sub_menu.js') }}"></script>
+
 
 <script>
 //서브 슬라이드 메뉴 버튼 이벤트
