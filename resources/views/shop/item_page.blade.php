@@ -267,7 +267,7 @@
     </div>
     <!-- 메인 컨테이너 끝 -->
 @php
-$aa = 11;
+$aa = 20;
 @endphp
 <input type="hidden" id="tt" value="{{ $aa }}">
 
@@ -277,9 +277,6 @@ $aa = 11;
 <script src="{{ asset('/design/js/sub_menu.js') }}"></script>
 
 
-<script>
-var mySwiper = new Swiper('.swiper-container', { initialSlide: 10 });
-</script>
 
 
 
