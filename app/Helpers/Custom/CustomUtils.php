@@ -1794,21 +1794,26 @@ $um_value='80/0.5/3'
     }
 
     //각 항목 평균 값 구하기
-    public static function item_each_average($item_code){
-
+    public static function item_each_average($item_code, $sca_id){
+        $array_val = array();
         $review_sql = DB::table('review_saves')->where([['item_code', $item_code], ['temporary_yn', 'n'], ['review_blind', 'N']]);
         $review_cnt = $review_sql->count();
         $review_infos = $review_sql->get();
 
-        //$rating_item_sql = DB::table('rating_item')->where('sca_id', $review_info->sca_id)->first();
+        if($review_cnt > 0){
+            $rating_item_info = DB::table('rating_item')->where('sca_id', $sca_id)->first();
 
-        foreach($review_infos as $review_info){
-            $score1 = $review_info->sum('score1');
+            for($i = 1; $i <= 5; $i++){
+                $item_name_tmp = 'item_name'.$i;
+                $array_val['item_name'][$i] = $rating_item_info->$item_name_tmp;
+
+                $score_sum[$i] = $review_sql->sum('score'.$i);
+                $score_avg[$i] = $score_sum[$i] / $review_cnt;
+                $array_val['score'][$i] = round($score_avg[$i], 2);
+            }
         }
-var_dump("aa=====> ".$aa);
-        //for($i = 1; $i<)
-dd($review_info);
 
+        return $array_val;
     }
 }
 

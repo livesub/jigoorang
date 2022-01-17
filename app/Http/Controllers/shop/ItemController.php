@@ -284,7 +284,7 @@ class ItemController extends Controller
 
         //리뷰 관련
         $review_cnt = DB::table('review_saves')->where([['item_code', $item_info[0]->item_code], ['temporary_yn', 'n'], ['review_blind', 'N']])->count();
-        $aa = $CustomUtils->item_each_average($item_info[0]->item_code);
+        $rating_arr = $CustomUtils->item_each_average($item_info[0]->item_code, $item_info[0]->sca_id);
 
         return view('shop.item_detail',[
             "item_info"         => $item_info[0],
@@ -305,8 +305,51 @@ class ItemController extends Controller
             "img_cnt"           => $p,
             "disp_discount_rate" => $disp_discount_rate,
             "review_cnt"        => $review_cnt,
+            "rating_arr"        => $rating_arr,
         ]);
     }
+
+    public function ajax_review_item(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+
+        $page       = $request->input('page');
+        $item_code  = $request->input('item_code');
+
+        $review_sql = DB::table('review_saves')->where([['item_code', $item_code], ['temporary_yn', 'n'], ['review_blind', 'N']]);
+
+        $pageScale  = 5;  //한페이지당 라인수
+
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+            $end_row = $pageScale * $page;
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
+
+        $total_record   = 0;
+        $total_record   = $review_sql->count(); //총 게시물 수
+
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
+
+        $review_infos = $review_sql->orderBy('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
+        $end_cnt = $review_sql->orderBy('id', 'DESC')->offset($end_row)->limit($pageScale)->get();
+
+        $view = view('shop.ajax_review_item',[
+            'CustomUtils'   => $CustomUtils,
+            'review_infos'  => $review_infos,
+            'page'          => $page,
+            'review_end_cnt'    => count($end_cnt),
+        ]);
+
+        return $view;
+
+    }
+
+
 
     //ajax 큰이미지 변환
     public function ajax_big_img_change(Request $request)

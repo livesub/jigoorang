@@ -237,310 +237,68 @@
 
                                         <div class="set1">
 
-                                            <p class="set_tt">정량평가(20)</p>
-                                                <div class="list-none dt_no">
-                                                    <img src="../../recources/imgs/combined-shape@3x.png" alt="">
-                                                    <br><br>
-                                                    <p>평가를 기다리고 있어요</p>
-                                                </div>
+                                            <p class="set_tt">정량평가({{ $review_cnt }})</p>
+
+                                            @if(count($rating_arr) > 0)
 
                                             <div class="dt_con_1">
 
-
-
-
                                                 <div class="dt_star">
 
-                                                    <div class="cot_rating_01" id="project_1">
-                                                        <p>맛에대한 평가를 부탁을 한다오</p>
-                                                        <div class="inline">
-                                                            <div class="stars-outer">
-                                                                <div class="stars-inner"></div>
-                                                            </div>
-                                                            <span class="number"></span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="cot_rating_01" id="project_1">
-                                                        <p>사용후 만족도</p>
+                                                    @for($m = 1; $m <= 5; $m++)
+                                                    <div class="cot_rating_01" id="project_{{ $m }}">
+                                                        <p>{{ $rating_arr["item_name"][$m] }}</p>
                                                         <div class="inline">
                                                             <div class="stars-outer">
                                                                 <div class="stars-inner"></div>
                                                             </div>
                                                             <span class="number">4.10 (20)</span>
+                                                            <span class="number">{{ number_format($rating_arr["score"][$m], 2) }} ({{ $review_cnt }})</span>
                                                         </div>
                                                     </div>
 
+                                                        @if($m % 2 == 0)
                                                 </div>
-
                                                 <div class="dt_star">
+                                                        @endif
 
-                                                    <div class="cot_rating_01" id="project_1">
-                                                        <p>사용후 만족도</p>
-                                                        <div class="inline">
-                                                            <div class="stars-outer">
-                                                                <div class="stars-inner"></div>
-                                                            </div>
-                                                            <span class="number">4.10 (20)</span>
-                                                        </div>
-                                                    </div>
-                                                    <div class="cot_rating_01" id="project_1">
-                                                        <p>사용후 만족도44444</p>
-                                                        <div class="inline">
-                                                            <div class="stars-outer">
-                                                                <div class="stars-inner"></div>
-                                                            </div>
-                                                            <span class="number">4.10 (20)</span>
-                                                        </div>
-                                                    </div>
-
+                                                        @if($m == 4)
                                                 </div>
-
                                                 <div class="sol block"></div>
                                                 <div class="sol-b none"></div>
-
                                                 <div class="dt_star">
-
-                                                    <div class="cot_rating_02" id="project_1">
-
-                                                        <p>사용후 만족도</p>
-                                                        <div class="inline">
-                                                            <div class="stars-outer">
-                                                                <div class="stars-inner"></div>
-                                                            </div>
-                                                            <p class="number">4.10 (20)</p>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
-
-
-
-
-
-
-
+                                                        @endif
+                                                <script>
+                                                    star({{ number_format($rating_arr["score"][$m], 2) }}, {{ $m }});
+                                                </script>
+                                                    @endfor
                                             </div>
+                                            @else
+                                            <div class="list-none dt_no">
+                                                <img src="{{ asset('/design/recources/imgs/combined-shape@3x.png') }}" alt="">
+                                                <br><br>
+                                                <p>평가를 기다리고 있어요</p>
+                                            </div>
+                                            @endif
 
                                             <div class="dt_con_2">
-                                                <p class="set_tt">리뷰보기(20)</p>
-                                                    <div class="list-none dt_no">
-                                                        <img src="../../recources/imgs/combined-shape.png" alt="">
-                                                        <br><br>
-                                                        <p>평가를 기다리고 있어요</p>
-                                                    </div>
+                                                <p class="set_tt">리뷰보기({{ $review_cnt }})</p>
 
-                                                    <div class="cot_list">
-                                                        <div class="cot_body">
+                                                    @if(count($rating_arr) > 0)
+                                                    <!-- 리뷰 리스트 -->
+                                                    <div id="review_list">
 
-                                                          <div class="cot_review mt-20 mb-20">
-                                                              <div class="cot_id_day mb-20">
-                                                                  <p class="cot_id">jig*****</p>
-                                                                  <p class="cot_day">2021-10-10</p>
-                                                              </div>
-                                                              <div class="cot_box">
-                                                                  <div class="cot_rating">
-                                                                    <div class="cot_rating_02">
-                                                                        <span>
-                                                                          <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                                          <p class="bold">3.50</p>
-                                                                        </span>
-                                                                        <span>
-                                                                            <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                                            <p class="bold">3.50</p>
-                                                                        </span>
-                                                                        <span>
-                                                                            <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                                            <p class="bold">3.50</p>
-                                                                        </span>
-                                                                        <span>
-                                                                            <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                                            <p class="bold">3.50</p>
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="cot_rating_01" id="project_1">
-                                                                        <span>사용후 종합 만족도</span>
-                                                                        <div class="inline">
-                                                                            <div class="stars-outer">
-                                                                                <div class="stars-inner"></div>
-                                                                            </div>
-                                                                            <p class="number">1.00</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                              </div>
-
-                                                              <div class="cot_review_text">
-                                                                    <p>포장도 깔끔하고 배송도 빠르고 제품도 맘에 들어요.<br>
-                                                                    향이 너무 좋습니다.
-                                                                    </p>
-
-                                                                <div class="cot_more">
-                                                                    <p>더보기</p>
-                                                                    <span class="arr_bt"></span>
-                                                                </div>
-
-                                                                <div id="toggle" class="toggle">
-                                                                    <p>지난번에 써보고 좋아서 다시 한번 주문했어요. <br>
-                                                                    사람들이 추천하는 이유가 있는듯 합니다.<br>
-                                                                    </p>
-
-                                                                    <div class="cot_photo">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="" onclick="addressopenmodal_001()">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                          </div>
-
-
-                                                        </div>
-                                                    </div>
-                                                    <div class="cot_list">
-
-                                                        <div class="cot_body">
-
-                                                          <div class="cot_review mt-20 mb-20">
-                                                              <div class="cot_id_day mb-20">
-                                                                  <p class="cot_id">jig*****</p>
-                                                                  <p class="cot_day">2021-10-10</p>
-                                                              </div>
-                                                              <div class="cot_box">
-                                                                  <div class="cot_rating">
-                                                                    <div class="cot_rating_02">
-                                                                        <span>
-                                                                          <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                                          <p class="bold">3.50</p>
-                                                                        </span>
-                                                                        <span>
-                                                                            <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                                            <p class="bold">3.50</p>
-                                                                        </span>
-                                                                        <span>
-                                                                            <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                                            <p class="bold">3.50</p>
-                                                                        </span>
-                                                                        <span>
-                                                                            <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                                            <p class="bold">3.50</p>
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="cot_rating_01" id="project_1">
-                                                                        <span>사용후 만족도</span>
-
-                                                                        <div class="inline">
-                                                                            <div class="stars-outer">
-                                                                                <div class="stars-inner"></div>
-                                                                            </div>
-                                                                            <p class="number"></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                              </div>
-
-                                                              <div class="cot_review_text">
-                                                                    <p>포장도 깔끔하고 배송도 빠르고 제품도 맘에 들어요.<br>
-                                                                    향이 너무 좋습니다.
-                                                                    </p>
-
-                                                                <div class="cot_more" onclick="toggle()">
-                                                                    <p>더보기</p>
-                                                                    <span class="arr_bt"></span>
-                                                                </div>
-
-                                                                <div id="toggle" class="toggle">
-                                                                    <p>지난번에 써보고 좋아서 다시 한번 주문했어요. <br>
-                                                                    사람들이 추천하는 이유가 있는듯 합니다.<br>
-                                                                    </p>
-
-                                                                    <div class="cot_photo">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                          </div>
-
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="cot_list">
-
-                                                        <div class="cot_body">
-
-                                                          <div class="cot_review mt-20 mb-20">
-                                                              <div class="cot_id_day mb-20">
-                                                                  <p class="cot_id">jig*****</p>
-                                                                  <p class="cot_day">2021-10-10</p>
-                                                              </div>
-                                                              <div class="cot_box">
-                                                                  <div class="cot_rating">
-                                                                    <div class="cot_rating_02">
-                                                                        <span>
-                                                                          <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                                          <p class="bold">3.50</p>
-                                                                        </span>
-                                                                        <span>
-                                                                            <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                                            <p class="bold">3.50</p>
-                                                                        </span>
-                                                                        <span>
-                                                                            <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                                            <p class="bold">3.50</p>
-                                                                        </span>
-                                                                        <span>
-                                                                            <p class="text">맛에대한 평가를 부탁을한다오</p>
-                                                                            <p class="bold">3.50</p>
-                                                                        </span>
-                                                                    </div>
-                                                                    <div class="cot_rating_01" id="project_1">
-                                                                        <span>사용후 만족도</span>
-
-                                                                        <div class="inline">
-                                                                            <div class="stars-outer">
-                                                                                <div class="stars-inner"></div>
-                                                                            </div>
-                                                                            <p class="number"></p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                              </div>
-
-                                                              <div class="cot_review_text">
-                                                                    <p>포장도 깔끔하고 배송도 빠르고 제품도 맘에 들어요.<br>
-                                                                    향이 너무 좋습니다.
-                                                                    </p>
-
-                                                                <div class="cot_more" onclick="toggle()">
-                                                                    <p>더보기</p>
-                                                                    <span class="arr_bt"></span>
-                                                                </div>
-
-                                                                <div id="toggle" class="toggle">
-                                                                    <p>지난번에 써보고 좋아서 다시 한번 주문했어요. <br>
-                                                                    사람들이 추천하는 이유가 있는듯 합니다.<br>
-                                                                    </p>
-
-                                                                    <div class="cot_photo">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                        <img src="../../recources/imgs/sample_img.png" alt="">
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                          </div>
-
-                                                        </div>
                                                     </div>
 
                                                     <button class="btn-full-sd">리뷰 더보기</button>
+
+                                                    @else
+                                                    <div class="list-none dt_no">
+                                                        <img src="{{ asset('/design/recources/imgs/combined-shape.png') }}" alt="">
+                                                        <br><br>
+                                                        <p>평가를 기다리고 있어요</p>
+                                                    </div>
+                                                    @endif
 
                                                 </div>
                                             </div>
@@ -649,6 +407,11 @@
 
             </div>
             <!-- 메인 컨테이너 끝 -->
+
+
+
+
+
 
 <script>
     // 스와이프 이벤트 (썸네일)
@@ -834,8 +597,8 @@
                 'item_code' : item_code,
             },
             success: function(result) {
-alert(result);
-return false;
+//alert(result);
+//return false;
                 if(result == "ok"){
                     $("#wish_css_"+item_code).css("background-color", "#0000");
                 }
@@ -852,6 +615,33 @@ return false;
                 console.log(result);
             }
         });
+    }
+</script>
+
+
+<script>
+    review_moreList('{{ $item_info->item_code }}'); //함수 호출
+
+    function review_moreList(item_code) {
+        //var page = $("#po_page").val();
+        var page = "";
+		if(page == '') page = 1;
+        else page++;
+
+		$.ajax({
+			type		: "get",
+			url			: "{{ route('ajax_review_item') }}",
+			data		: {
+                'item_code' : item_code,
+                'page'  : page,
+			},
+			success: function(html){
+alert(html);
+                //console.log(html);
+                $("#review_list").append(html);
+                return;
+			}
+		});
     }
 </script>
 

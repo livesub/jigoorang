@@ -39,6 +39,12 @@ Route::get('/sitemdetail_option', [
     'uses' => 'App\Http\Controllers\shop\ItemController@ajax_option_change',
 ]);
 
+//상품 리뷰리스트
+Route::get('/sitemdetail_review', [
+    'as' => 'ajax_review_item',
+    'uses' => 'App\Http\Controllers\shop\ItemController@ajax_review_item',
+]);
+
 //wish 처리
 Route::get('/sitemdetail_wish', [
     'as' => 'ajax_wish',
