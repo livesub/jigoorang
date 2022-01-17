@@ -98,7 +98,6 @@
 
                             <div class="cot_list my_list" id="review_my_exp_list">
                                 <h4 class="mt-20 mb-20">평가단 선정</h4>
-
                             </div>
 
                             <div class="cot_list" id="po_more">
@@ -111,9 +110,11 @@
                             <div class="cot_list" id="review_my_shop_list">
                                 <h4 class="mt-20 mb-20">쇼핑</h4>
                             </div>
+
                             <div class="cot_list" id="shop_more">
                                 <button class="btn-full-sd" type="button" id="addBtn2" onclick="shop_moreList();">내가 쓴 리뷰 더보기</button>
                             </div>
+
                             </div>
 
                             </div>
@@ -127,14 +128,15 @@
     </div>
     <!-- 서브 컨테이너 끝 -->
 
-
 <script>
+
     po_moreList(); //함수 호출
 
     function po_moreList() {
         var page = $("#po_page").val();
 		if(page == '') page = 1;
         else page++;
+
 
 		$.ajax({
 			type		: "get",
@@ -151,7 +153,9 @@
 			}
 		});
     }
+
 </script>
+
 
 <script>
     shop_moreList(); //함수 호출

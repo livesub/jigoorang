@@ -8,9 +8,9 @@ var swiper = new Swiper(".submenu", {
         prevEl: '.swiper-button-prev'
     },
     breakpoints: {
-          200: {
-               slidesPerView: 2,
-               spaceBetween: 0
+        200: {
+            slidesPerView: 2,
+            spaceBetween: 0
           },
         320: {
             slidesPerView: 4,
@@ -40,21 +40,33 @@ var swiper = new Swiper(".submenu", {
 });
 
 var swiper = new Swiper(".submenu_sol", {
-    slidesPerView: 10,
+    //initialSlide: $("#tt").val(),
+    freeMode : false,
+    slideToClickedSlide : $("#tt").val(),
+    watchOverflow : true,
+    slidesPerView: 'auto',
+    //centerInsufficientSlides: true,
     spaceBetween: 10,
     navigation: {
         nextEl: '.swiper-button-next01',
         prevEl: '.swiper-button-prev01'
     },
+
+    clickable: true,
+    freeMode : false,
+    observer: true,	// 추가
+    observeParents: true,	// 추가
+
+
     breakpoints: {
-          320: {
-               slidesPerView: 4,
-               spaceBetween: 10
-          },
-    
-          480: {
-               slidesPerView: 4,
-               spaceBetween: 10
+        320: {
+            slidesPerView: 4.4,
+            spaceBetween: 15
+        },
+
+        480: {
+            slidesPerView: 5.5,
+            spaceBetween: 15
           },
         640: {
             slidesPerView: 5,
@@ -76,5 +88,7 @@ var swiper = new Swiper(".submenu_sol", {
             slidesPerView: 10,
             spaceBetween: 10
         }
-    }
+    },
+
 });
+

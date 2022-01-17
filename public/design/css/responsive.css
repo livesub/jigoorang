@@ -4,6 +4,8 @@
         display: none;
     }
 
+
+
     /* 레이아웃 */
     .wrap {
         padding-top: 60px;
@@ -1287,6 +1289,42 @@ background-size: cover;
     }
 
 
+
+    /* 소개페이지 모달 */
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .mo_01{
+        font-size: 16px;
+        color: #fff;
+        background: #000;
+        max-width: 155px;
+        padding: 5px 0 5px 0;
+        text-align: center;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .mo_02{
+        font-size: 16px;
+        color: #fff;
+        background: #000;
+        max-width: 262px;
+        padding: 5px 0 5px 0;
+        text-align: center;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .about_ft{
+        font-size: 12px;
+    }
+
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo img{
+        width: 100%;
+
+    }
+
+
     /* 검색창 모달 */
 
 
@@ -2229,6 +2267,15 @@ background-size: cover;
     }
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-01 select {
         width: 100%;
+        font-size: 13px;
+    }
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-02 input {
+        font-size: 13px;
+    }
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-02 input::placeholder {
+        font-size: 13px;
     }
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-03 li p {
         width: 25%;
@@ -2249,8 +2296,17 @@ background-size: cover;
         width: 27%;
     }
 
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-04 textarea {
+        font-size: 13px;
+    }
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-04 textarea::placeholder {
+        font-size: 13px;
+    }
+
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.con_02 {
         padding: 30px 0;
+        font-size: 13px;
     }
 
     /* 제품평가 및 리뷰 */
@@ -2271,6 +2327,10 @@ background-size: cover;
         /* background: url("../recources/imgs/sample_img.png") no-repeat left; */
         /* border-bottom: solid 1px #ddd; */
         padding-bottom: 70px;
+    }
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .pd-00 {
+        padding: 0;
     }
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .info .rm_v {
@@ -2423,6 +2483,10 @@ background-size: cover;
         padding-bottom: 70px;
     }
 
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .pd-00 {
+        padding: 0;
+    }
+
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .info {
         /* background: url("../recources/imgs/sample_img.png") no-repeat left; */
         display: inline-block;
@@ -2501,11 +2565,17 @@ background-size: cover;
         font-weight: bold;
     }
 
-    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_review_text {
+    /* .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_review_text {
         font-size: 13px;
         padding-top: 20px;
         padding-bottom: 20px;
+    } */
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_review_text .text_content {
+        width: 100%;
+        word-break: break-all;
     }
+
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_more {
         width: 100%;
@@ -3001,6 +3071,49 @@ background-size: cover;
     }
 
 
+    /* 소개페이지 모달 */
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo h3 {
+        font-size: 15px;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo p{
+        font-size: 13px;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .mo_01{
+        font-size: 15px;
+        color: #fff;
+        background: #000;
+        max-width: 155px;
+        padding: 5px 0 5px 0;
+        text-align: center;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .mo_02{
+        font-size: 15px;
+        color: #fff;
+        background: #000;
+        max-width: 218px;
+        padding: 5px 0 5px 0;
+        text-align: center;
+    }
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo .about_ft{
+        font-size: 10px;
+    }
+
+
+    .modal .modal-dialog .modal-dialog-contents .modal-dialog-contents-title .about_mo img{
+        width: 100%;
+
+    }
+
+
 
     /* 검색창 모달 */
 
@@ -3254,7 +3367,7 @@ background-size: cover;
     .modal .btn.btn_2ea {
         width: 100%;
         max-width: 320px;
-        max-height: 47px;
+        max-height: 48px;
         top: 74%;
     }
 
@@ -4148,6 +4261,7 @@ background-size: cover;
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .btn-50-full {
         width: 100%;
+        font-size: 13px;
     }
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-02 li p {
         width: 100%;
@@ -4230,6 +4344,11 @@ background-size: cover;
         flex-wrap: wrap;
     }
 
+    .eval .board.mypage_list .board_wrap .noties{
+        margin: 15px 0 30px 0;
+        font-size: 13px;
+    }
+
     .eval .board.mypage_list .board_wrap .information.review .flies .img_files {
         padding-top: 20px;
     }
@@ -4253,6 +4372,10 @@ background-size: cover;
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body {
         padding-bottom: 70px;
+    }
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body.pd-00 {
+        padding: 0;
     }
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_review {

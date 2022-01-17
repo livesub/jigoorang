@@ -783,20 +783,19 @@ $um_value='80/0.5/3'
     // 상품이미지에 유형 아이콘 출력
     public static function item_icon($item)
     {
-        $icon = "<tr><td>";
-
+        $icon = "";
         switch($item->item_type1) {
             case 1:
-                $icon = '<span class="shop_icon shop_icon_1">NEW</span>';
+                $icon = 'NEW';
                 break;
             case 2:
-                $icon = '<span class="shop_icon shop_icon_2">SALE</span>';
+                $icon = 'SALE';
                 break;
             case 3:
-                $icon = '<span class="shop_icon shop_icon_3">BIG SALE</span>';
+                $icon = 'BIG SALE';
                 break;
             case 4:
-                $icon = '<span class="shop_icon shop_icon_4">HOT</span>';
+                $icon = 'HOT';
                 break;
             default:
                 break;
@@ -880,16 +879,16 @@ $um_value='80/0.5/3'
                         $disabled = ' disabled="disabled"';
 
                     if($is_div === 'div') {
-                        $str .= '<div class="get_item_options">'.PHP_EOL;
-                        $str .= '<label for="it_option_'.$seq.'" class="label-title">'.$subj[$i].'</label>'.PHP_EOL;
+                        //$str .= '<div class="get_item_options">'.PHP_EOL;
+                        //$str .= '<label for="it_option_'.$seq.'" class="label-title">'.$subj[$i].'</label>'.PHP_EOL;
                     } else {
-                        $str .= '<tr>'.PHP_EOL;
-                        $str .= '<th><label for="it_option_'.$seq.'" class="label-title">'.$subj[$i].'</label></th>'.PHP_EOL;
+                        //$str .= '<tr>'.PHP_EOL;
+                        //$str .= '<th><label for="it_option_'.$seq.'" class="label-title">'.$subj[$i].'</label></th>'.PHP_EOL;
                     }
 
                     $select = '<select id="it_option_'.$seq.'" class="it_option"'.$disabled.'>'.PHP_EOL;
 
-                    $first_option_title = $is_first_option_title ? $subj[$i] : '선택';
+                    $first_option_title = $is_first_option_title ? $subj[$i] : '옵션을 선택하세요';
 
                     $select .= '<option value="">'.$first_option_title.'</option>'.PHP_EOL;
                     for($k=0; $k<$opt_count; $k++) {
@@ -901,25 +900,25 @@ $um_value='80/0.5/3'
                     $select .= '</select>'.PHP_EOL;
 
                     if($is_div === 'div') {
-                        $str .= '<span>'.$select.'</span>'.PHP_EOL;
-                        $str .= '</div>'.PHP_EOL;
+                        $str .= $select.PHP_EOL;
+                        //$str .= '</div>'.PHP_EOL;
                     } else {
-                        $str .= '<td>'.$select.'</td>'.PHP_EOL;
-                        $str .= '</tr>'.PHP_EOL;
+                        $str .= $select.PHP_EOL;
+                        //$str .= '</tr>'.PHP_EOL;
                     }
                 }
             }
         }else{
             if($is_div === 'div') {
-                $str .= '<div class="get_item_options">'.PHP_EOL;
-                $str .= '<label for="it_option_1">'.$subj[0].'</label>'.PHP_EOL;
+                //$str .= '<div class="get_item_options">'.PHP_EOL;
+                //$str .= '<label for="it_option_1">'.$subj[0].'</label>'.PHP_EOL;
             } else {
-                $str .= '<tr>'.PHP_EOL;
-                $str .= '<th><label for="it_option_1">'.$subj[0].'</label></th>'.PHP_EOL;
+                //$str .= '<tr>'.PHP_EOL;
+                //$str .= '<th><label for="it_option_1">'.$subj[0].'</label></th>'.PHP_EOL;
             }
 
             $select = '<select id="it_option_1" class="it_option">'.PHP_EOL;
-            $select .= '<option value="">선택</option>'.PHP_EOL;
+            $select .= '<option value="">옵션을 선택하세요</option>'.PHP_EOL;
 
             foreach($opts as $opt){
                 if($opt->sio_price >= 0) $price = '&nbsp;&nbsp;+ '.number_format($opt->sio_price).'원';
@@ -934,11 +933,11 @@ $um_value='80/0.5/3'
             $select .= '</select>'.PHP_EOL;
 
             if($is_div === 'div') {
-                $str .= '<span>'.$select.'</span>'.PHP_EOL;
-                $str .= '</div>'.PHP_EOL;
+                $str .= $select.PHP_EOL;
+                //$str .= '</div>'.PHP_EOL;
             } else {
-                $str .= '<td>'.$select.'</td>'.PHP_EOL;
-                $str .= '</tr>'.PHP_EOL;
+                $str .= $select.PHP_EOL;
+                //$str .= '</tr>'.PHP_EOL;
             }
         }
 
@@ -1794,6 +1793,28 @@ $um_value='80/0.5/3'
         }
     }
 
+    //각 항목 평균 값 구하기
+    public static function item_each_average($item_code, $sca_id){
+        $array_val = array();
+        $review_sql = DB::table('review_saves')->where([['item_code', $item_code], ['temporary_yn', 'n'], ['review_blind', 'N']]);
+        $review_cnt = $review_sql->count();
+        $review_infos = $review_sql->get();
+
+        if($review_cnt > 0){
+            $rating_item_info = DB::table('rating_item')->where('sca_id', $sca_id)->first();
+
+            for($i = 1; $i <= 5; $i++){
+                $item_name_tmp = 'item_name'.$i;
+                $array_val['item_name'][$i] = $rating_item_info->$item_name_tmp;
+
+                $score_sum[$i] = $review_sql->sum('score'.$i);
+                $score_avg[$i] = $score_sum[$i] / $review_cnt;
+                $array_val['score'][$i] = round($score_avg[$i], 2);
+            }
+        }
+
+        return $array_val;
+    }
 }
 
 

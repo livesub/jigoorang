@@ -88,6 +88,12 @@ function addressopenmodal_001() {
 
 }
 
+function review_big(img_big) {
+    addressopenModal();
+    document.querySelector('.modal.modal_002').classList.add('in');
+    $("#big_img").attr("src", img_big);
+}
+
 function addressclosemodal_001() {
 
     addresscloseModal();

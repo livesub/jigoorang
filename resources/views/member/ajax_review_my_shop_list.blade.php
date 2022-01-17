@@ -29,7 +29,7 @@
 
                                         @endphp
 
-                                <div class="cot_body">
+                                <div class="cot_body pd-00">
                                     <p class="cr_04 mb-20">{{ substr($order_info->created_at, 0, 10) }}</p>
                                         <img src="{{ $image }}" alt="">
                                     <div class="info tab">
@@ -88,6 +88,7 @@
                                             <div class="cot_more" id="cot_more_{{ $review_saves_shop_info->id }}"></div>
                                        </div>
 
+
                                         <div class="cot_photo">
                                         @foreach($review_save_imgs_shop_infos as $review_save_imgs_shop_info)
                                             @php
@@ -120,20 +121,17 @@
     }
 </script>
 
-<script>
+<!--<script>
     $('.box').each(function(cnt){
         var content = $('#content_'+ cnt);
         var content_txt = content.text();
-        var content_txt_short = content_txt.substr(0,350)+"...";
+        var content_txt_short = content_txt.substr(0,150)+"...";
         var btn_more = $('#cot_more_'+ cnt);
-
-        if(content_txt.length > 350){
+        if(content_txt.length > 150){
             btn_more.html('더보기');
             content.html(content_txt_short);
         }
-
         btn_more.click(toggle_content);
-
         function toggle_content(){
         if($(this).hasClass('short')){
             // 접기 상태
@@ -148,6 +146,8 @@
             }
         }
     });
+</script>-->
 
-</script>
+
+
 
