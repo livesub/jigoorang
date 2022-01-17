@@ -2565,11 +2565,11 @@ background-size: cover;
         font-weight: bold;
     }
 
-    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_review_text {
+    /* .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_review_text {
         font-size: 13px;
         padding-top: 20px;
         padding-bottom: 20px;
-    }
+    } */
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_more {
         width: 100%;
