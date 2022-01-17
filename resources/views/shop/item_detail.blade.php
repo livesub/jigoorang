@@ -56,7 +56,9 @@
                                                   </div>
                                                     @endfor
                                                 @else
+                                                  <div class="swiper-slide">
                                                     <img src="{{ asset("img/no_img.jpg") }}" alt="" style="width:600px;"/>
+                                                  </div>
                                                 @endif
 
                                             </div>

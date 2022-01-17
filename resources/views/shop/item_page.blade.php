@@ -59,7 +59,8 @@
                                     $class_chk = '';
                                     if($sub_ca_id == $sub_cate_info->sca_id) $class_chk = ' class="active" ';
                                 @endphp
-                              <li id="sd_{{ $sub_cate_info->id }}" class="swiper-slide"><a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_cate_info->sca_id) }}">
+                              <li id="sd_{{ $sub_cate_info->id }}" class="swiper-slide">
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_cate_info->sca_id) }}">
                               <span {!! $class_chk !!}>{{ $sub_cate_info->sca_name_kr }}</span></a></li>
 
                               @endforeach
