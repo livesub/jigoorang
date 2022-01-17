@@ -60,7 +60,7 @@
 /* 스크롤메뉴 */
 .eval .board .board_wrap .scrollmenu {
     background-color: #fff;
-    overflow: auto;
+    overflow: hidden;
     white-space: nowrap;
     -ms-overflow-style: none;
     /* IE and Edge */
@@ -96,9 +96,9 @@
     border-right: none;
 }
 
-/* .eval .board .board_wrap .scrollmenu .swiper-wrapper li:last-child {
+.eval .board .board_wrap .scrollmenu .swiper-wrapper.submenu_h a:last-child {
     border-right: solid 4px #ddd;
-} */
+}
 
 .eval .board .board_wrap .scrollmenu .swiper-wrapper li:hover {
     border: solid 4px #3ec4ba;
@@ -173,6 +173,7 @@
     background-color: #fff;
     border-radius: 150px;
     opacity: 1;
+    z-index: 1;
 }
 
 .eval .board .board_wrap .submenu_sol .swiper-button-next01::after,
@@ -508,7 +509,7 @@
 }
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_tt .dt_del {
-    background: url('../recources/icons/del_bk@3x.png');
+    background: url("../recources/icons/del_bk@3x.png");
     width: 32px;
     height: 32px;
     background-size: 30px 30px;

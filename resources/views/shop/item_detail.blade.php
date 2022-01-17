@@ -239,7 +239,7 @@
 
                                             <p class="set_tt">정량평가(20)</p>
                                                 <div class="list-none dt_no">
-                                                    <img src="../../recources/imgs/combined-shape.png" alt="">
+                                                    <img src="../../recources/imgs/combined-shape@3x.png" alt="">
                                                     <br><br>
                                                     <p>평가를 기다리고 있어요</p>
                                                 </div>

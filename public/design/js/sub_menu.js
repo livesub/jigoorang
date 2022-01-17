@@ -40,8 +40,12 @@ var swiper = new Swiper(".submenu", {
 });
 
 var swiper = new Swiper(".submenu_sol", {
-    initialSlide: $("#tt").val(),
+    //initialSlide: $("#tt").val(),
+    freeMode : false,
+    slideToClickedSlide : $("#tt").val(),
+    watchOverflow : true,
     slidesPerView: 'auto',
+    //centerInsufficientSlides: true,
     spaceBetween: 10,
     navigation: {
         nextEl: '.swiper-button-next01',
@@ -55,14 +59,14 @@ var swiper = new Swiper(".submenu_sol", {
 
 
     breakpoints: {
-          320: {
-               slidesPerView: 4,
-               spaceBetween: 10
-          },
+        320: {
+            slidesPerView: 4,
+            spaceBetween: 10
+        },
 
-          480: {
-               slidesPerView: 4,
-               spaceBetween: 10
+        480: {
+            slidesPerView: 4,
+            spaceBetween: 10
           },
         640: {
             slidesPerView: 5,
