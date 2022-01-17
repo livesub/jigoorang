@@ -1213,6 +1213,8 @@ h5 {
     font-size: 16px;
 }
 
+
+
 .eval .board .board_wrap .information_01 .information-inner-title-btn span {
     color: #3ec4ba;
 }
@@ -2065,6 +2067,19 @@ input::placeholder {
 
 .eval .board.mypage_list .board_wrap .information.review .flies {
     display: flex;
+}
+
+.eval .board.mypage_list .board_wrap .noties{
+    background: #f8f8f8;
+    border: solid 2px #ddd;
+    padding: 30px 30px;
+    text-align: center;
+    font-size: 1rem;
+    color: #707070;
+    margin: 30px 0 50px 0;
+}
+.eval .board.mypage_list .board_wrap .noties span{
+    color: #f00;
 }
 
 .eval .board.mypage_list .board_wrap .information.review .flies .img_files {
@@ -3895,9 +3910,14 @@ input::placeholder {
     /* padding: 30px 40px 0px 40px; */
 }
 
-
-.modal .modal-container.dt_img_s img{
+.modal .modal-container.dt_img_s {
     width: 100%;
+    max-width: 680px;
+    height: 500px;
+}
+.modal .modal-container.dt_img_s img{
+    width: 680px;
+    height: 500px;
 }
 
 .modal .modal-container.dt_img_s .btn-close{

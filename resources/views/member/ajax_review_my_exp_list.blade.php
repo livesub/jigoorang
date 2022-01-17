@@ -129,7 +129,7 @@
     }
 </script>
 
-<script>
+<!--<script>
  //더보기 토글
     function showplay(cnt) {
         var flag = $('#hidTempSynopsis');
@@ -154,8 +154,8 @@
             $(".cot_more"+con).hide();
         }
     }
-</script>
-<!--<script>
+</script>-->
+<script>
     $('.box').each(function(cnt){
         var content = $('#content_'+ cnt);
         var content_txt = content.text();
@@ -180,5 +180,5 @@
             }
         }
     });
-</script>-->
+</script>
 
