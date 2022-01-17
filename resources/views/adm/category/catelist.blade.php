@@ -2,7 +2,6 @@
 
 @section('content')
 
-
 <table>
     <tr>
         <td><h4>카테고리 관리</h4></td>
