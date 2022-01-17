@@ -2719,6 +2719,11 @@ input::placeholder {
     /* min-height:160px; */
 }
 
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_review_text .text_content {
+    width: 100%;
+    word-break: break-all;
+}
+
 
 /* .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_review_text .text_content {
     width: 100%;
