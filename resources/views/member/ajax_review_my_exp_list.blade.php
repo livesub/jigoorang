@@ -88,7 +88,7 @@
 
                                       <div class="cot_review_text box">
 
-                                            <div class="text_content" id="content_{{ $review_saves_exp_info->id }}">
+                                            <div class="text_content" id="content_{{ $review_saves_exp_info->id }}" style="word-break: break-all;">
                                                 {!! nl2br($review_saves_exp_info->review_content) !!}
                                             </div>
                                             <div class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}">더보기</div>

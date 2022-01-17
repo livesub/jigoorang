@@ -2571,6 +2571,12 @@ background-size: cover;
         padding-bottom: 20px;
     } */
 
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_review_text .text_content {
+        width: 100%;
+        word-break: break-all;
+    }
+
+
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_more {
         width: 100%;
         max-width: 68px;
