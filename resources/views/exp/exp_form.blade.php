@@ -166,6 +166,7 @@
                                 </ul>
                             </div>
                        </div>
+
                        <div class="list_img_btn_area">
                         <button type="submit">평가단 신청</button>
                     </div>
