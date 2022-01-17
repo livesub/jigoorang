@@ -636,7 +636,7 @@
                 'page'  : page,
 			},
 			success: function(html){
-alert(html);
+//alert(html);
                 //console.log(html);
                 $("#review_list").append(html);
                 return;
