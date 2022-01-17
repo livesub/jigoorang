@@ -197,7 +197,15 @@
                                         <button type="button" onclick="fitem_submit('cart');" class="btn_200_sol">장바구니</button>
                                         <button type="button" onclick="fitem_submit('buy');" class="btn_200_bg">바로구매</button>
                                         @endif
-                                        <button type="button" onclick="item_wish('{{ $item_info->item_code }}');" class="sns sns_wish">응원하기</span><!-- wishlist_on -->
+
+                                        @php
+                                            //응원하기 부분
+                                            $wish_chk = DB::table('wishs')->where([['user_id', Auth::user()->user_id], ['item_code', $item_info->item_code]])->count();
+                                            $wish_class = "sns_wish";
+                                            if($wish_chk > 0) $wish_class = "wishlist_on";
+                                        @endphp
+                                        <!-- id 바꾸지 마세요 -->
+                                        <button type="button" id="wish_css_{{ $item_info->item_code }}" onclick="item_wish('{{ $item_info->item_code }}');" class="sns {{ $wish_class }}">응원하기</span><!-- wishlist_on -->
                                         <button class="sns sns_share">공유</button>
                                     </div>
                                 </div>
@@ -209,7 +217,7 @@
                             <div class="shop_goods_dt_b">
 
                                 <ul class="dt_sec_mn">
-                                    <li data-link="#section1" class="dt_on">평가리뷰보기 (999)</li>
+                                    <li data-link="#section1" class="dt_on">평가리뷰보기 ({{ $review_cnt }})</li>
                                     <li data-link="#section2">지구랭 체크</li>
                                     <li data-link="#section3">제품상세소개</li>
                                     <li data-link="#section4">상품문의</li>
@@ -237,6 +245,10 @@
                                                 </div>
 
                                             <div class="dt_con_1">
+
+
+
+
                                                 <div class="dt_star">
 
                                                     <div class="cot_rating_01" id="project_1">
@@ -272,7 +284,7 @@
                                                         </div>
                                                     </div>
                                                     <div class="cot_rating_01" id="project_1">
-                                                        <p>사용후 만족도</p>
+                                                        <p>사용후 만족도44444</p>
                                                         <div class="inline">
                                                             <div class="stars-outer">
                                                                 <div class="stars-inner"></div>
@@ -300,6 +312,12 @@
                                                     </div>
 
                                                 </div>
+
+
+
+
+
+
 
                                             </div>
 
@@ -816,8 +834,16 @@
                 'item_code' : item_code,
             },
             success: function(result) {
-//alert(result);
-//return false;
+alert(result);
+return false;
+                if(result == "ok"){
+                    $("#wish_css_"+item_code).css("background-color", "#0000");
+                }
+
+                if(result == "del"){
+                    $("#wish_css_"+item_code).css("background-color", "none");
+                }
+
                 if(result == "no_item"){
                     alert('죄송합니다. 단종된 상품입니다.');
                     return false;

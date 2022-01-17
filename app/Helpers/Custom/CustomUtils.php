@@ -1793,6 +1793,23 @@ $um_value='80/0.5/3'
         }
     }
 
+    //각 항목 평균 값 구하기
+    public static function item_each_average($item_code){
+
+        $review_sql = DB::table('review_saves')->where([['item_code', $item_code], ['temporary_yn', 'n'], ['review_blind', 'N']]);
+        $review_cnt = $review_sql->count();
+        $review_infos = $review_sql->get();
+
+        //$rating_item_sql = DB::table('rating_item')->where('sca_id', $review_info->sca_id)->first();
+
+        foreach($review_infos as $review_info){
+            $score1 = $review_info->sum('score1');
+        }
+var_dump("aa=====> ".$aa);
+        //for($i = 1; $i<)
+dd($review_info);
+
+    }
 }
 
 

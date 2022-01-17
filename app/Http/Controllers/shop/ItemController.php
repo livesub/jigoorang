@@ -282,6 +282,10 @@ class ItemController extends Controller
             $disp_discount_rate = round($discount_rate);    //반올림
         }
 
+        //리뷰 관련
+        $review_cnt = DB::table('review_saves')->where([['item_code', $item_info[0]->item_code], ['temporary_yn', 'n'], ['review_blind', 'N']])->count();
+        $aa = $CustomUtils->item_each_average($item_info[0]->item_code);
+
         return view('shop.item_detail',[
             "item_info"         => $item_info[0],
             "big_img_disp"      => $big_img_disp,
@@ -300,6 +304,7 @@ class ItemController extends Controller
             "disp_cate_name"    => $disp_cate_name,
             "img_cnt"           => $p,
             "disp_discount_rate" => $disp_discount_rate,
+            "review_cnt"        => $review_cnt,
         ]);
     }
 
