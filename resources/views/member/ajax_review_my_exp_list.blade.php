@@ -91,8 +91,8 @@
                                             <div class="text_content" id="content_{{ $review_saves_exp_info->id }}">
                                                 {!! nl2br($review_saves_exp_info->review_content) !!}
                                             </div>
-                                            <a href="javascript:showplay(this);" class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}">더보기</a>
-                                             <input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">
+                                            <div class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}">더보기</div>
+                                             <!--<input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">-->
 
                                        </div>
 
