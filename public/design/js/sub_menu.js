@@ -60,13 +60,13 @@ var swiper = new Swiper(".submenu_sol", {
 
     breakpoints: {
         320: {
-            slidesPerView: 4,
-            spaceBetween: 10
+            slidesPerView: 4.4,
+            spaceBetween: 15
         },
 
         480: {
-            slidesPerView: 4,
-            spaceBetween: 10
+            slidesPerView: 5.5,
+            spaceBetween: 15
           },
         640: {
             slidesPerView: 5,

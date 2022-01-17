@@ -1954,6 +1954,7 @@
         background-color: rgba(0, 0, 0, 0.1);
         border-radius: 150px;
         opacity: 0.5;
+        top: 63%;
     }
 
     .eval .board .board_wrap .scrollmenu .swiper-button-next::after,

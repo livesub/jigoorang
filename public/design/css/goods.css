@@ -522,6 +522,8 @@
     justify-content: space-between;
     margin-top: 18px;
 }
+
+
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_nm li:first-child {
     display: flex;
 

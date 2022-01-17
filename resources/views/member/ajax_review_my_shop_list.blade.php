@@ -121,7 +121,7 @@
     }
 </script>
 
-<script>
+<!--<script>
     $('.box').each(function(cnt){
         var content = $('#content_'+ cnt);
         var content_txt = content.text();
@@ -146,7 +146,7 @@
             }
         }
     });
-</script>
+</script>-->
 
 
 
