@@ -2267,6 +2267,15 @@ background-size: cover;
     }
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-01 select {
         width: 100%;
+        font-size: 13px;
+    }
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-02 input {
+        font-size: 13px;
+    }
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-02 input::placeholder {
+        font-size: 13px;
     }
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-03 li p {
         width: 25%;
@@ -2287,8 +2296,17 @@ background-size: cover;
         width: 27%;
     }
 
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-04 textarea {
+        font-size: 13px;
+    }
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-04 textarea::placeholder {
+        font-size: 13px;
+    }
+
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.con_02 {
         padding: 30px 0;
+        font-size: 13px;
     }
 
     /* 제품평가 및 리뷰 */
@@ -3343,7 +3361,7 @@ background-size: cover;
     .modal .btn.btn_2ea {
         width: 100%;
         max-width: 320px;
-        max-height: 47px;
+        max-height: 48px;
         top: 74%;
     }
 
@@ -4237,6 +4255,7 @@ background-size: cover;
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .btn-50-full {
         width: 100%;
+        font-size: 13px;
     }
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-02 li p {
         width: 100%;
