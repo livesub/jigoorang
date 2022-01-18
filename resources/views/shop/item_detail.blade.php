@@ -199,13 +199,17 @@
                                         @endif
 
                                         @php
-                                            //응원하기 부분
-                                            $wish_chk = DB::table('wishs')->where([['user_id', Auth::user()->user_id], ['item_code', $item_info->item_code]])->count();
-                                            $wish_class = "sns_wish";
-                                            if($wish_chk > 0) $wish_class = "wishlist_on";
+                                            if(Auth::user() != ""){
+                                                //응원하기 부분
+                                                $wish_chk = DB::table('wishs')->where([['user_id', Auth::user()->user_id], ['item_code', $item_info->item_code]])->count();
+                                                $wish_class = "sns_wish";
+                                                if($wish_chk > 0) $wish_class = "wishlist_on";
+                                            }else{
+                                                $wish_class = "sns_wish";
+                                            }
                                         @endphp
                                         <!-- id 바꾸지 마세요 -->
-                                        <button type="button" id="wish_css_{{ $item_info->item_code }}" onclick="item_wish('{{ $item_info->item_code }}');" class="sns {{ $wish_class }}">응원하기</span><!-- wishlist_on -->
+                                        <button type="button" id="wish_css_{{ $item_info->item_code }}" onclick="item_wish('{{ $item_info->item_code }}', {{ Auth::user() }});" class="sns {{ $wish_class }}">응원하기</span><!-- wishlist_on -->
                                         <button class="sns sns_share">공유</button>
                                     </div>
                                 </div>
@@ -601,34 +605,39 @@
 
 <script>
     // wish 상품보관
-    function item_wish(item_code)
+    function item_wish(item_code, auth)
     {
-        $.ajax({
-            type: 'get',
-            url: '{{ route('ajax_wish') }}',
-            dataType: 'text',
-            data: {
-                'item_code' : item_code,
-            },
-            success: function(result) {
-//alert(result);
-//return false;
-                if(result == "ok"){
-                    $("#wish_css_"+item_code).css("background-color", "#0000");
-                }
+        if(auth == undefined){
+            alert('회원만 이용 가능합니다.\n로그인 후 이용해 주세요');
+            return false;
+        }else{
+            $.ajax({
+                type: 'get',
+                url: '{{ route('ajax_wish') }}',
+                dataType: 'text',
+                data: {
+                    'item_code' : item_code,
+                },
+                success: function(result) {
+    //alert(result);
+    //return false;
+                    if(result == "ok"){
+                        $("#wish_css_"+item_code).css("background-color", "#0000");
+                    }
 
-                if(result == "del"){
-                    $("#wish_css_"+item_code).css("background-color", "none");
-                }
+                    if(result == "del"){
+                        $("#wish_css_"+item_code).css("background-color", "none");
+                    }
 
-                if(result == "no_item"){
-                    alert('죄송합니다. 단종된 상품입니다.');
-                    return false;
+                    if(result == "no_item"){
+                        alert('죄송합니다. 단종된 상품입니다.');
+                        return false;
+                    }
+                },error: function(result) {
+                    console.log(result);
                 }
-            },error: function(result) {
-                console.log(result);
-            }
-        });
+            });
+        }
     }
 </script>
 

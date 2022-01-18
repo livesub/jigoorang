@@ -159,9 +159,14 @@
                                 $dip_score = number_format($item_info->item_average, 2);
 
                                 //응원하기 부분
-                                $wish_chk = DB::table('wishs')->where([['user_id', Auth::user()->user_id], ['item_code', $item_info->item_code]])->count();
-                                $wish_class = "wishlist";
-                                if($wish_chk > 0) $wish_class = "wishlist_on";
+                                if(Auth::user() != ""){
+                                    $wish_chk = DB::table('wishs')->where([['user_id', Auth::user()->user_id], ['item_code', $item_info->item_code]])->count();
+                                    $wish_class = "wishlist";
+                                    if($wish_chk > 0) $wish_class = "wishlist_on";
+                                }else{
+                                    $wish_class = "wishlist";
+                                }
+
                             @endphp
                         <div class="goods">
 
@@ -220,10 +225,10 @@
                                     <span class="left">
                                         <p>리뷰 {{ $item_info->review_cnt }}</p>
                                     </span>
+
                                     <span class="right">
                                         <p>응원하기</p>
-
-                                        <span class="{{ $wish_class }}"></span><!-- <span class="wishlist_on"></span> 활성-->
+                                        <span class="{{ $wish_class }}" id="wish_css_{{ $item_info->item_code }}" onclick="item_wish('{{ $item_info->item_code }}', {{ Auth::user() }});"></span><!-- <span class="wishlist_on"></span> 활성-->
                                     </span>
                                 </div>
                             </div>
@@ -300,6 +305,48 @@ function sd (num) {
 }
 sd(23);
 </script>
+-->
+
+
+<script>
+    // wish 상품보관
+    function item_wish(item_code, auth)
+    {
+        if(auth == undefined){
+            alert('회원만 이용 가능합니다.\n로그인 후 이용해 주세요');
+            return false;
+        }else{
+            $.ajax({
+                type: 'get',
+                url: '{{ route('ajax_wish') }}',
+                dataType: 'text',
+                data: {
+                    'item_code' : item_code,
+                },
+                success: function(result) {
+    //alert(result);
+    //return false;
+                    if(result == "ok"){
+                        $("#wish_css_"+item_code).css("background-color", "#0000");
+                    }
+
+                    if(result == "del"){
+                        $("#wish_css_"+item_code).css("background-color", "none");
+                    }
+
+                    if(result == "no_item"){
+                        alert('죄송합니다. 단종된 상품입니다.');
+                        return false;
+                    }
+                },error: function(result) {
+                    console.log(result);
+                }
+            });
+        }
+    }
+</script>
+
+
 
 
 @endsection
