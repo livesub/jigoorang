@@ -30,8 +30,12 @@
                         <div class="swiper submenu">
                             <ul class="swiper-wrapper submenu_h">
                                 @foreach($cate_infos as $cate_info)
+                                    @php
+                                        $ca_id_class = '';
+                                        if($ca_id == $cate_info->sca_id) $ca_id_class = 'class="bct_active"';
+                                    @endphp
                                 <a href="{{ route('sitem','ca_id='.$cate_info->sca_id) }}" class="swiper-slide">
-                                <li>{{ $cate_info->sca_name_kr }}</li>
+                                <li {{ $ca_id_class }}>{{ $cate_info->sca_name_kr }}</li>
                                 <!-- class="bct_active" 메뉴활성 -->
                                 </a>
                                 @endforeach
@@ -45,11 +49,12 @@
                         <div class="swiper submenu_sol">
                             <ul class="swiper-wrapper submenu_innr">
                               <li class="swiper-slide">
-                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id=all') }}">
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id=all&sub_cate=1') }}">
                               @php
                                 $class_all = '';
                                 if($sub_ca_id == 'all' || $sub_ca_id == "")
                                 $class_all = ' class="active" ';
+                                $sub_cate_num = 2;
                               @endphp
                               <span {!! $class_all !!}>전체</span> <!-- class="active" 클릭시 class 활성-->
                               </a></li>
@@ -60,9 +65,11 @@
                                     if($sub_ca_id == $sub_cate_info->sca_id) $class_chk = ' class="active" ';
                                 @endphp
                               <li id="sd_{{ $sub_cate_info->id }}" class="swiper-slide">
-                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_cate_info->sca_id) }}">
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_cate_info->sca_id.'&sub_cate='.$sub_cate_num) }}">
                               <span {!! $class_chk !!}>{{ $sub_cate_info->sca_name_kr }}</span></a></li>
-
+                                @php
+                                    $sub_cate_num++;
+                                @endphp
                               @endforeach
 
                             </ul>
@@ -273,40 +280,10 @@
     </div>
     <!-- 메인 컨테이너 끝 -->
 
-@php
-$aa = 20;
-@endphp
-<input type="hidden" id="tt" value="{{ $aa }}">
 
+<input type="hidden" id="sub_cate" value="{{ $sub_cate }}">
 
 <script src="{{ asset('/design/js/sub_menu.js') }}"></script>
-
-
-<!--
-<script>
-
-
-
-<script>
-function sd (num) {
-//alert(num);
-
-//$("#sd_"+num).focus();
-
-/*
-    var number_sd = $('sd'+num);
-
-    //number_sd.click(function(){
-        var index = $(this).index();
-
-        swiper.slideTo(index + 1);
-    //})
-*/
-}
-sd(23);
-</script>
--->
-
 
 <script>
     // wish 상품보관
