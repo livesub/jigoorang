@@ -83,12 +83,12 @@
                                     </div>
                                 </div>
 
-<form name="fitem" id="fitem" method="post" action="{{ route('ajax_cart_register') }}">
-{!! csrf_field() !!}
-<input type="hidden" name="item_code[]" value="{{ $item_info->item_code }}">
-<input type="hidden" name="ajax_option_url" id="ajax_option_url" value="{{ route('ajax_option_change') }}">
-<input type="hidden" name="sw_direct" id="sw_direct">
-<input type="hidden" name="url" id="url">
+                                <form name="fitem" id="fitem" method="post" action="{{ route('ajax_cart_register') }}">
+                                {!! csrf_field() !!}
+                                <input type="hidden" name="item_code[]" value="{{ $item_info->item_code }}">
+                                <input type="hidden" name="ajax_option_url" id="ajax_option_url" value="{{ route('ajax_option_change') }}">
+                                <input type="hidden" name="sw_direct" id="sw_direct">
+                                <input type="hidden" name="url" id="url">
 
                                 <div class="shop_goods_dt_r">
                                     @if($item_info->item_type1 != 0)
@@ -210,7 +210,7 @@
                                     </div>
                                 </div>
                             </div>
-</form>
+                            </form>
 
                         <div class="shop_goods_ct">
 
@@ -285,25 +285,26 @@
                                                 <p class="set_tt">리뷰보기({{ $review_cnt }})</p>
 
                                                     @if(count($rating_arr) > 0)
-                                                    <!-- 리뷰 리스트 -->
+                                                    <!-- ajax 리뷰 리스트 -->
+                                                    <input type="hidden" id="review_page">
                                                     <div id="review_list">
 
                                                     </div>
 
-                                                    <button class="btn-full-sd">리뷰 더보기</button>
+                                                    <button class="btn-full-sd" type="button"  id="review_more" onclick="review_moreList('{{ $item_info->item_code }}');">리뷰 더보기</button>
 
                                                     @else
                                                     <div class="list-none dt_no">
                                                         <img src="{{ asset('/design/recources/imgs/combined-shape.png') }}" alt="">
                                                         <br><br>
-                                                        <p>평가를 기다리고 있어요</p>
+                                                        <p>리뷰를 기다리고 있어요</p>
                                                     </div>
                                                     @endif
 
                                                 </div>
                                             </div>
                                         </div>
-
+                                </div>
 
 
 
@@ -319,41 +320,54 @@
                                         <!-- 타이틀 끝 -->
 
                                         <div class="set1">
+                                            @php
+                                                $item_content = str_replace('&nbsp;','', $item_info->item_content);
+                                                $item_content = str_replace('<p>&nbsp;</p>','', $item_info->item_content);
+                                                $item_content2 = str_replace('&nbsp;','', $item_info->item_content2);
+                                                $item_content2 = str_replace('<p>&nbsp;</p>','', $item_info->item_content2);
+                                                $item_content3 = str_replace('&nbsp;','', $item_info->item_content3);
+                                                $item_content3 = str_replace('<p>&nbsp;</p>','', $item_info->item_content3);
+                                                $item_content4 = str_replace('&nbsp;','', $item_info->item_content4);
+                                                $item_content4 = str_replace('<p>&nbsp;</p>','', $item_info->item_content4);
+                                                $item_content5 = str_replace('&nbsp;','', $item_info->item_content5);
+                                                $item_content5 = str_replace('<p>&nbsp;</p>','', $item_info->item_content5);
+                                            @endphp
+                                            @if($item_content2 != "")
 
                                             <div class="dt_s_con">
                                                 <p class="set_tt">진성분</p>
                                                 <div class="dt_s_con_tt">
-                                                    밀가루, 배추, 단백질, 색소, 딸기, 포도, 나트륨, 나무, 풀, 잡초, 밀가루, 배추, 단백질, 색소, 딸기, 포도, 나트륨, 나무, 풀, 잡초,밀가루, 배추, 단백질, 색소, 딸기, 포도, 나트륨, 나무, 풀, 잡초
-                                                    색소, 딸기, 포도, 나트륨, 나무, 풀, 잡초, 밀가루, 배추, 단백질, 색소, 딸기, 포도, 나트륨, 나무, 풀, 잡초,밀가루, 배추, 단백질, 색소, 딸기, 포도, 나트륨, 나무, 풀, 잡초
+                                                    {!! $item_info->item_content2 !!}
                                                 </div>
-                                                <div class="dt_img"><img src="../../recources/imgs/list_img2.jpg" alt=""></div>
                                             </div>
+                                            @endif
 
+                                            @if($item_content3 != "")
                                             <div class="dt_s_con">
                                                 <p class="set_tt">제품포장</p>
                                                 <div class="dt_s_con_tt">
-                                                    아주깔끔한 포장
-                                                    걱정마시길
+                                                    {!! $item_info->item_content3 !!}
                                                 </div>
                                             </div>
+                                            @endif
 
+                                            @if($item_content4 != "")
                                             <div class="dt_s_con">
                                                 <p class="set_tt">분리 배출 방법</p>
                                                 <div class="dt_s_con_tt">
-                                                    분리배출 잘해 주세요<br>
-                                                    부탁
+                                                    {!! $item_info->item_content4 !!}
                                                 </div>
-                                                <div class="dt_img"><img src="../../recources/imgs/list_img2.jpg" alt=""></div>
                                             </div>
+                                            @endif
+
+                                            @if($item_content5 != "")
                                             <div class="dt_s_con">
                                                 <p class="set_tt">사회적 가치</p>
                                                 <div class="dt_s_con_tt">
-                                                    사회적가치를 창출하는 지구랭 상품<br>
-                                                    안쓰면 서운함
+                                                    {!! $item_info->item_content5 !!}
                                                 </div>
-                                                <div class="dt_img"><img src="../../recources/imgs/list_img2.jpg" alt=""></div>
                                             </div>
-
+                                            @endif
                                         </div>
 
                                     </div>
@@ -369,11 +383,11 @@
                                             <div class="line_14-100"></div>
                                         </div>
                                         <!-- 타이틀 끝 -->
-
+                                        @if($item_content != "")
                                         <div class="set1">
-                                            <div class="dt_img"><img src="../../recources/imgs/list_img.jpg" alt=""></div>
+                                            {!! $item_info->item_content !!}
                                         </div>
-
+                                        @endif
                                     </div>
 
 
@@ -389,7 +403,7 @@
                                         <!-- 타이틀 끝 -->
 
                                         <div class="set1">
-                                            <button class="btn-full-sd">1:1 문의 페이지 이동</button>
+                                            <button class="btn-full-sd" type="button" onclick="location.href='{{ route('mypage.qna_list') }}'">1:1 문의 페이지 이동</button>
                                         </div>
 
                                     </div>
@@ -623,8 +637,8 @@
     review_moreList('{{ $item_info->item_code }}'); //함수 호출
 
     function review_moreList(item_code) {
-        //var page = $("#po_page").val();
-        var page = "";
+        var page = $("#review_page").val();
+
 		if(page == '') page = 1;
         else page++;
 
