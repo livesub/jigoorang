@@ -342,6 +342,7 @@ class ItemController extends Controller
             'CustomUtils'   => $CustomUtils,
             'review_infos'  => $review_infos,
             'page'          => $page,
+            'review_page'   => $page,
             'review_end_cnt'    => count($end_cnt),
         ]);
 
