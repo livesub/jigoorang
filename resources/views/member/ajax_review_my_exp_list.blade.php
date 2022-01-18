@@ -88,12 +88,10 @@
 
                                       <div class="cot_review_text box">
 
-                                            <div class="text_content" id="content_{{ $review_saves_exp_info->id }}" style="word-break: break-all;">
+                                            <div class="text_content notshort" id="content_{{ $review_saves_exp_info->id }}" style="word-break: break-all;">
                                                 {!! nl2br($review_saves_exp_info->review_content) !!}
                                             </div>
-                                            <div class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}">더보기</div>
-                                             <!--<input name="hidTempSynopsis" type="hidden" id="hidTempSynopsis" value="0">-->
-
+                                            <div class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}" ></div>
                                        </div>
 
 
@@ -131,52 +129,56 @@
 
 <!--<script>
  //더보기 토글
-    function showplay(cnt) {
+    function showplay() {
         var flag = $('#hidTempSynopsis');
-        var tet_con = $('#content_'+ cnt);
-        var btn_more = $('#cot_more_'+ cnt);
+        var tet_con = $('.text_content');
         var flagValue = flag.val();
         if (flag != null) {
             if (flagValue == "0") {
                 tet_con.css("height", "auto");
                 tet_con.css("display", "block");
-                btn_more.text("닫기");
+                $('.cot_more').text("닫기");
                 flag.val("1");
             }
             else {
                 tet_con.css("height", "41.5px");
                 tet_con.css("display", "-webkit-box");
-                btn_more.text("더보기");
+                $('.cot_more').text("더보기");
                 flag.val("0");
             }
         }
           else {
-            $(".cot_more"+con).hide();
+            $('.cot_more').hide();
         }
     }
 </script>-->
+
 <script>
     $('.box').each(function(cnt){
         var content = $('#content_'+ cnt);
         var content_txt = content.text();
-        var content_txt_short = content_txt.substr(0,150)+"...";
         var btn_more = $('#cot_more_'+ cnt);
-        if(content_txt.length > 150){
+
+        if(content_txt.length > 300){
             btn_more.html('더보기');
-            content.html(content_txt_short);
+            content.addClass('notshort');
         }
+
         btn_more.click(toggle_content);
+
         function toggle_content(){
-        if($(this).hasClass('short')){
+        if(content.hasClass('short')){
             // 접기 상태
-            $(this).html('더보기');
-            content.html(content_txt_short);
-            $(this).removeClass('short');
+            btn_more.html('더보기');
+            //content.html(content_txt_short);
+            content.removeClass('short');
+            content.addClass('notshort');
         }else{
             // 더보기 상태
-            $(this).html('접기');
+            btn_more.html('접기');
             content.html(content_txt);
-            $(this).addClass('short');
+            content.addClass('short');
+            content.removeClass('notshort');
             }
         }
     });
