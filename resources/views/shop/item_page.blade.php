@@ -49,12 +49,12 @@
                         <div class="swiper submenu_sol">
                             <ul class="swiper-wrapper submenu_innr">
                               <li class="swiper-slide">
-                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id=all&sub_cate=1') }}">
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id=all&sub_cate=0') }}">
                               @php
                                 $class_all = '';
                                 if($sub_ca_id == 'all' || $sub_ca_id == "")
                                 $class_all = ' class="active" ';
-                                $sub_cate_num = 2;
+                                $sub_cate_num = 1;
                               @endphp
                               <span {!! $class_all !!}>전체</span> <!-- class="active" 클릭시 class 활성-->
                               </a></li>
