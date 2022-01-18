@@ -2574,6 +2574,12 @@
     background-position-y: 5px;
 }
 
+.wishlist_on {
+   background: url('../recources/icons/icon-heart-2.png') no-repeat center;
+   background-size: 19px 18px;
+   background-position-y: 7px;
+   color: #3ec4ba;
+}
 .btn_200_sol {
     width: 40%;
     height: 48px;
