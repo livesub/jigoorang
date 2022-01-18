@@ -91,7 +91,7 @@
                                             <div class="text_content notshort" id="content_{{ $review_saves_exp_info->id }}" style="word-break: break-all;">
                                                 {!! nl2br($review_saves_exp_info->review_content) !!}
                                             </div>
-                                            <div class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}" ></div>
+                                            <div class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}" >더보기</div>
                                        </div>
 
 
@@ -127,6 +127,39 @@
     }
 </script>
 
+<script>
+
+    $('.box').each(function(cnt){
+        var content = $('#content_'+ cnt);
+        var content_txt = content.text();
+        var btn_more = $('#cot_more_'+ cnt);
+
+        if(content_txt.length < 350){
+            btn_more.hide();
+            content.removeClass('notshort');
+        }
+
+        btn_more.click(toggle_content);
+
+        function toggle_content(){
+        if(content.hasClass('short')){
+            // 접기 상태
+            btn_more.html('더보기');
+            content.removeClass('short');
+            content.addClass('notshort');
+        }else{
+            // 더보기 상태
+            btn_more.html('접기');
+            content.html(content_txt);
+            content.addClass('short');
+            content.removeClass('notshort');
+            }
+        }
+    });
+
+</script>
+
+
 <!--<script>
  //더보기 토글
     function showplay() {
@@ -152,35 +185,4 @@
         }
     }
 </script>-->
-
-<script>
-    $('.box').each(function(cnt){
-        var content = $('#content_'+ cnt);
-        var content_txt = content.text();
-        var btn_more = $('#cot_more_'+ cnt);
-
-        if(content_txt.length > 300){
-            btn_more.html('더보기');
-            content.addClass('notshort');
-        }
-
-        btn_more.click(toggle_content);
-
-        function toggle_content(){
-        if(content.hasClass('short')){
-            // 접기 상태
-            btn_more.html('더보기');
-            //content.html(content_txt_short);
-            content.removeClass('short');
-            content.addClass('notshort');
-        }else{
-            // 더보기 상태
-            btn_more.html('접기');
-            content.html(content_txt);
-            content.addClass('short');
-            content.removeClass('notshort');
-            }
-        }
-    });
-</script>
 

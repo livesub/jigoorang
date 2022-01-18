@@ -74,6 +74,12 @@
     /* Chrome, Safari, Opera*/
 }
 
+.eval .board .board_wrap .scrollmenu .swiper-wrapper .bct_active{
+    border: solid 2px #3ec4ba;
+    color: #3ec4ba;
+}
+
+
 .eval .board .board_wrap .scrollmenu .swiper-wrapper {
     display: inline-flex;
 }
