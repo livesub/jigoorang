@@ -28,6 +28,7 @@ class ItemController extends Controller
 
         $ca_id          = $request->input('ca_id');
         $sub_ca_id      = $request->input('sub_ca_id');
+        $sub_cate       = $request->input('sub_cate');
         $length         = strlen($ca_id);
         $orderby_type   = $request->input('orderby_type');
 
@@ -162,7 +163,8 @@ class ItemController extends Controller
             'total_record'      => $total_record,
             //'keymethod'     => $keymethod,
             //'keyword'       => $keyword,
-            'CustomUtils'   => $CustomUtils,
+            'CustomUtils'       => $CustomUtils,
+            'sub_cate'          => $sub_cate,
         ]);
     }
 
