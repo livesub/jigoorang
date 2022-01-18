@@ -249,6 +249,14 @@
         background-position: center;
         display: block;
     }
+    .eval .board .board_wrap .goods .goods_bottom .right .wishlist_on {
+      width: 23px;
+      margin-top: 4px;
+      background: url("../recources/icons/icon-heart-2.png") no-repeat;
+      background-size: 22px auto;
+      background-position: center;
+      display: block;
+  }
 
     /* 쇼핑 대 카테고리 */
 
@@ -1322,6 +1330,15 @@
         display: block;
     }
 
+    .eval .board .board_wrap .goods .goods_bottom .right .wishlist_on {
+      width: 23px;
+      margin-top: 4px;
+      background: url("../recources/icons/icon-heart-2.png") no-repeat;
+      background-size: 20px auto;
+      background-position: center;
+      display: block;
+  }
+
 
 /************
 상품 페이지
@@ -1948,7 +1965,7 @@
         color: #3ec4ba;
     }
 
-    .eval .board .board_wrap .scrollmenu .swiper-wrapper .bct_active{
+    .eval .board .board_wrap .scrollmenu .swiper-wrapper .wiper-slide .bct_active{
       border: solid 2px #3ec4ba;
       color: #3ec4ba;
   }
@@ -2157,6 +2174,15 @@
       background-position: center;
       display: block;
     }
+
+    .eval .board .board_wrap .goods .goods_bottom .right .wishlist_on {
+      width: 14px;
+      margin-top: 4px;
+      background: url("../recources/icons/icon-heart-2.png") no-repeat;
+      background-size: 13px auto;
+      background-position: center;
+      display: block;
+  }
 
 
 /************

@@ -297,20 +297,20 @@
 .eval .board .board_wrap .goods .goods_bottom .right .wishlist {
     width: 23px;
     margin-top: 4px;
-    background: url("../recources/icons/icon-heart@3x.png") no-repeat;
+    background: url("../recources/icons/sns-heart@3x.png") no-repeat;
     background-size: 23px auto;
     background-position: center;
     display: block;
 }
 
-/* .eval .board .board_wrap .goods .goods_bottom .right .wishlist_on {
+.eval .board .board_wrap .goods .goods_bottom .right .wishlist_on {
     width: 23px;
     margin-top: 4px;
-    background: url("../recources/icons/icon-heart-2@3x.png") no-repeat;
-    background-size: 23px auto;
+    background: url("../recources/icons/icon-heart-2.png") no-repeat;
+    background-size: 22px auto;
     background-position: center;
     display: block;
-} */
+}
 
 
 /************

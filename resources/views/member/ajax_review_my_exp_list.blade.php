@@ -1,3 +1,36 @@
+<script>
+function more(cnt) {
+    $('.box').each(function(){
+        var content = $('#content_'+ cnt);
+        var content_txt = content.text();
+        var btn_more = $('#cot_more_'+ cnt);
+
+        if(content_txt.length < 300){
+            btn_more.hide();
+            content.removeClass('notshort');
+        }
+
+        btn_more.click(toggle_content);
+
+        function toggle_content(){
+            if(content.hasClass('short')){
+                // 접기 상태
+                btn_more.html('더보기');
+                content.removeClass('short');
+                content.addClass('notshort');
+            }else{
+                // 더보기 상태
+                btn_more.html('접기');
+                content.html(content_txt);
+                content.addClass('short');
+                content.removeClass('notshort');
+                }
+            }
+    });
+}
+</script>
+
+
 @if(count($review_saves_exp_infos) > 0)
                                 @foreach($review_saves_exp_infos as $review_saves_exp_info)
 
@@ -93,6 +126,9 @@
                                             </div>
                                             <div class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}" >더보기</div>
                                        </div>
+                                       <script>
+                                        more({{ $review_saves_exp_info->id }});
+                                       </script>
 
 
                                         <div class="cot_photo">
@@ -127,62 +163,5 @@
     }
 </script>
 
-<script>
 
-    $('.box').each(function(cnt){
-        var content = $('#content_'+ cnt);
-        var content_txt = content.text();
-        var btn_more = $('#cot_more_'+ cnt);
-
-        if(content_txt.length < 350){
-            btn_more.hide();
-            content.removeClass('notshort');
-        }
-
-        btn_more.click(toggle_content);
-
-        function toggle_content(){
-            if(content.hasClass('short')){
-                // 접기 상태
-                btn_more.html('더보기');
-                content.removeClass('short');
-                content.addClass('notshort');
-            }else{
-                // 더보기 상태
-                btn_more.html('접기');
-                content.html(content_txt);
-                content.addClass('short');
-                content.removeClass('notshort');
-                }
-            }
-    });
-
-</script>
-
-
-<!--<script>
- //더보기 토글
-    function showplay() {
-        var flag = $('#hidTempSynopsis');
-        var tet_con = $('.text_content');
-        var flagValue = flag.val();
-        if (flag != null) {
-            if (flagValue == "0") {
-                tet_con.css("height", "auto");
-                tet_con.css("display", "block");
-                $('.cot_more').text("닫기");
-                flag.val("1");
-            }
-            else {
-                tet_con.css("height", "41.5px");
-                tet_con.css("display", "-webkit-box");
-                $('.cot_more').text("더보기");
-                flag.val("0");
-            }
-        }
-          else {
-            $('.cot_more').hide();
-        }
-    }
-</script>-->
 
