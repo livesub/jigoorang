@@ -285,7 +285,7 @@
                                                 <p class="set_tt">리뷰보기({{ $review_cnt }})</p>
 
                                                     @if(count($rating_arr) > 0)
-                                                    <!-- 리뷰 리스트 -->
+                                                    <!-- ajax 리뷰 리스트 -->
                                                     <input type="hidden" id="review_page">
                                                     <div id="review_list">
 
