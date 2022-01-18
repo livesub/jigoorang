@@ -142,19 +142,19 @@
         btn_more.click(toggle_content);
 
         function toggle_content(){
-        if(content.hasClass('short')){
-            // 접기 상태
-            btn_more.html('더보기');
-            content.removeClass('short');
-            content.addClass('notshort');
-        }else{
-            // 더보기 상태
-            btn_more.html('접기');
-            content.html(content_txt);
-            content.addClass('short');
-            content.removeClass('notshort');
+            if(content.hasClass('short')){
+                // 접기 상태
+                btn_more.html('더보기');
+                content.removeClass('short');
+                content.addClass('notshort');
+            }else{
+                // 더보기 상태
+                btn_more.html('접기');
+                content.html(content_txt);
+                content.addClass('short');
+                content.removeClass('notshort');
+                }
             }
-        }
     });
 
 </script>
