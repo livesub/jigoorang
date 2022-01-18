@@ -194,8 +194,8 @@
                                         @if($is_orderable == false)
                                         <button type="button" class="btn_200_bg_g">품절</button>
                                         @else
-                                        <button type="button" onclick="fitem_submit('cart');" class="btn_200_sol">장바구니</button>
-                                        <button type="button" onclick="fitem_submit('buy');" class="btn_200_bg">바로구매</button>
+                                        <button type="button" onclick="fitem_submit('cart', {{ Auth::user() }});" class="btn_200_sol">장바구니</button>
+                                        <button type="button" onclick="fitem_submit('buy', {{ Auth::user() }});" class="btn_200_bg">바로구매</button>
                                         @endif
 
                                         @php
@@ -210,7 +210,7 @@
                                         @endphp
                                         <!-- id 바꾸지 마세요 -->
                                         <button type="button" id="wish_css_{{ $item_info->item_code }}" onclick="item_wish('{{ $item_info->item_code }}', {{ Auth::user() }});" class="sns {{ $wish_class }}">응원하기</span><!-- wishlist_on -->
-                                        <button class="sns sns_share">공유</button>
+                                        <button class="sns sns_share" type="button">공유</button>
                                     </div>
                                 </div>
                             </div>
@@ -488,118 +488,123 @@
 
 <script>
     // 바로구매, 장바구니 폼 전송
-    function fitem_submit(type)
+    function fitem_submit(type, auth)
     {
-        if (type == "cart") {   //장바구니
-            $("#sw_direct").val(0);
-        } else { // 바로구매
-            $("#sw_direct").val(1);
-        }
-
-        if($(".sit_opt_list").length < 1) {
-            alert("상품의 선택옵션을 선택해 주십시오.");
+        if(auth == undefined){
+            alert('회원만 이용 가능합니다.\n로그인 후 이용해 주세요');
             return false;
+        }else{
+            if (type == "cart") {   //장바구니
+                $("#sw_direct").val(0);
+            } else { // 바로구매
+                $("#sw_direct").val(1);
+            }
+
+            if($(".sit_opt_list").length < 1) {
+                alert("상품의 선택옵션을 선택해 주십시오.");
+                return false;
+            }
+
+            var val, io_type, result = true;
+            var sum_qty = 0;
+            var $el_type = $("input[name^=sio_type]");
+
+            $("input[name^=ct_qty]").each(function(index) {
+                val = $(this).val();
+
+                if(val.length < 1) {
+                    alert("수량을 입력해 주십시오.");
+                    result = false;
+                    return false;
+                }
+
+                if(val.replace(/[0-9]/g, "").length > 0) {
+                    alert("수량은 숫자로 입력해 주십시오.");
+                    result = false;
+                    return false;
+                }
+
+                if(parseInt(val.replace(/[^0-9]/g, "")) < 1) {
+                    alert("수량은 1이상 입력해 주십시오.");
+                    result = false;
+                    return false;
+                }
+
+                sio_type = $el_type.eq(index).val();
+
+                if(sio_type == "0") sum_qty += parseInt(val);
+            });
+
+            if(!result) {
+                return false;
+            }
+
+            var form_var = $("form[name=fitem]").serialize() ;
+
+            $.ajax({
+                type : 'post',
+                url : '{{ route('ajax_cart_register') }}',
+                data : form_var,
+                dataType : 'text',
+                success : function(result){
+    //alert(result);
+    //return false;
+                    var json = JSON.parse(result);
+    //alert(json.message);
+    //return false;
+                    if(json.message == "no_carts"){
+                        alert("장바구니에 담을 상품을 선택하여 주십시오.");
+                        return false;
+                    }
+
+                    if(json.message == "no_option"){
+                        alert("상품의 선택옵션을 선택해 주십시오.");
+                        return false;
+                    }
+
+                    if(json.message == "no_cnt"){
+                        alert("수량은 1 이상 입력해 주십시오.");
+                        return false;
+                    }
+
+                    if(json.message == "no_items"){
+                        alert("상품정보가 존재하지 않습니다.");
+                        return false;
+                    }
+
+                    if(json.message == "negative_price"){
+                        alert("구매금액이 음수인 상품은 구매할 수 없습니다.");
+                        return false;
+                    }
+
+                    if(json.message == "no_qty"){
+                        alert(json.option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.sum_qty + " 개 이며\n\n이미 장바구니에 담겨 있습니다. ");
+                        return false;
+                    }
+
+                    if(json.message == "no_qty2"){
+                        alert(json.option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.sum_qty + " 개 이며\n\n이미 장바구니에 담겨 있습니다. ");
+                        return false;
+                    }
+
+                    if(json.message == "yes_mem"){
+                        location.href = "{{ route('orderform','sw_direct=1') }}";
+                    }
+
+                    if(json.message == "no_mem"){
+                        //goto_url(G5_BBS_URL."/login.php?url=".urlencode(G5_SHOP_URL."/orderform.php?sw_direct=$sw_direct"));
+                        location.href = "";
+                    }
+
+                    if(json.message == "cart_page"){
+                        location.href = "{{ route('cartlist') }}";
+                    }
+                },
+                error: function(result){
+                    console.log(result);
+                },
+            });
         }
-
-        var val, io_type, result = true;
-        var sum_qty = 0;
-        var $el_type = $("input[name^=sio_type]");
-
-        $("input[name^=ct_qty]").each(function(index) {
-            val = $(this).val();
-
-            if(val.length < 1) {
-                alert("수량을 입력해 주십시오.");
-                result = false;
-                return false;
-            }
-
-            if(val.replace(/[0-9]/g, "").length > 0) {
-                alert("수량은 숫자로 입력해 주십시오.");
-                result = false;
-                return false;
-            }
-
-            if(parseInt(val.replace(/[^0-9]/g, "")) < 1) {
-                alert("수량은 1이상 입력해 주십시오.");
-                result = false;
-                return false;
-            }
-
-            sio_type = $el_type.eq(index).val();
-
-            if(sio_type == "0") sum_qty += parseInt(val);
-        });
-
-        if(!result) {
-            return false;
-        }
-
-        var form_var = $("form[name=fitem]").serialize() ;
-
-        $.ajax({
-            type : 'post',
-            url : '{{ route('ajax_cart_register') }}',
-            data : form_var,
-            dataType : 'text',
-            success : function(result){
-//alert(result);
-//return false;
-                var json = JSON.parse(result);
-//alert(json.message);
-//return false;
-                if(json.message == "no_carts"){
-                    alert("장바구니에 담을 상품을 선택하여 주십시오.");
-                    return false;
-                }
-
-                if(json.message == "no_option"){
-                    alert("상품의 선택옵션을 선택해 주십시오.");
-                    return false;
-                }
-
-                if(json.message == "no_cnt"){
-                    alert("수량은 1 이상 입력해 주십시오.");
-                    return false;
-                }
-
-                if(json.message == "no_items"){
-                    alert("상품정보가 존재하지 않습니다.");
-                    return false;
-                }
-
-                if(json.message == "negative_price"){
-                    alert("구매금액이 음수인 상품은 구매할 수 없습니다.");
-                    return false;
-                }
-
-                if(json.message == "no_qty"){
-                    alert(json.option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.sum_qty + " 개 이며\n\n이미 장바구니에 담겨 있습니다. ");
-                    return false;
-                }
-
-                if(json.message == "no_qty2"){
-                    alert(json.option + " 의 재고수량이 부족합니다.\n\n현재 재고수량 : " + json.sum_qty + " 개 이며\n\n이미 장바구니에 담겨 있습니다. ");
-                    return false;
-                }
-
-                if(json.message == "yes_mem"){
-                    location.href = "{{ route('orderform','sw_direct=1') }}";
-                }
-
-                if(json.message == "no_mem"){
-                    //goto_url(G5_BBS_URL."/login.php?url=".urlencode(G5_SHOP_URL."/orderform.php?sw_direct=$sw_direct"));
-                    location.href = "";
-                }
-
-                if(json.message == "cart_page"){
-                    location.href = "{{ route('cartlist') }}";
-                }
-            },
-            error: function(result){
-                console.log(result);
-            },
-        });
     }
 </script>
 
