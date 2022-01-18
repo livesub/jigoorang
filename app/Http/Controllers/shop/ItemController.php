@@ -53,8 +53,8 @@ class ItemController extends Controller
             $start_num = 0;
         }
 
-        $cate_infos = DB::table('shopcategorys')->where('sca_display','Y')->whereRaw('length(sca_id) = 2')->orderby('sca_rank', 'DESC')->orderby('id', 'asc')->get();
-        $sub_cate_infos = DB::table('shopcategorys')->where('sca_display','Y')->whereRaw('length(sca_id) = 4')->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'DESC')->orderby('id', 'ASC')->get();
+        $cate_infos = DB::table('shopcategorys')->where('sca_display','Y')->whereRaw('length(sca_id) = 2')->orderby('sca_rank', 'ASC')->orderby('id', 'ASC')->get();
+        $sub_cate_infos = DB::table('shopcategorys')->where('sca_display','Y')->whereRaw('length(sca_id) = 4')->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'ASC')->orderby('id', 'ASC')->get();
 
         if($ca_id != ""){
             $item_sql = DB::table('shopitems')->where('item_display','Y')->whereRaw("sca_id like '{$ca_id}%'");
@@ -123,7 +123,7 @@ class ItemController extends Controller
                     $item_infos= $item_sql->offset($start_num)->limit($pageScale)->get();
             }
         }else{
-            $item_infos = $item_sql->orderby('item_rank', 'DESC')->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
+            $item_infos = $item_sql->orderby('item_rank', 'ASC')->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
         }
 
         $total_record   = 0;

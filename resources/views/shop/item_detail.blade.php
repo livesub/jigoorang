@@ -159,9 +159,9 @@
                                                 <input type="hidden" name="sio_value[{{ $item_info->item_code }}][]" value="{{ $item_info->item_name }}">
                                                 <input type="hidden" class="sio_price" value="0">
                                                 <input type="hidden" class="sio_stock" value="{{ $item_info->item_stock_qty}}">
-                                                <button type="button">-</button>
-                                                    <input type="text" name="ct_qty[{{ $item_info->item_code }}][]" value="1" id="ct_qty_11" size="5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                                                 <button type="button">+</button>
+                                                    <input type="text" name="ct_qty[{{ $item_info->item_code }}][]" value="1" id="ct_qty_11" size="5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                                                <button type="button">-</button>
                                             </li>
                                         </ul>
                                     </div>

@@ -430,13 +430,13 @@ class CartController extends Controller
 
         // $s_cart_id 로 현재 장바구니 자료 쿼리
         $cart_infos = DB::table('shopcarts as a')
-            ->select('a.id', 'a.od_id', 'a.item_code', 'a.item_name', 'a.sct_price', 'a.sct_point', 'a.sct_qty', 'a.sct_status', 'a.sct_send_cost', 'a.item_sc_type', 'b.sca_id')
+            ->select('a.*', 'b.sca_id', 'b.item_manufacture', 'b.item_price')
             ->leftjoin('shopitems as b', function($join) {
                     $join->on('a.item_code', '=', 'b.item_code');
                 })
             //->where('a.od_id',$s_cart_id)
             ->where([['a.user_id', Auth::user()->user_id], ['a.sct_status','쇼핑'], ['a.sct_direct','0']])  //장바구니 사라짐 문제
-            ->groupBy('a.item_code')
+            //->groupBy('a.item_code')
             ->orderBy('a.id')
             ->get();
 
