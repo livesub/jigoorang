@@ -279,7 +279,7 @@
                                             </div>
                                             @else
                                             <div class="list-none dt_no">
-                                                <img src="{{ asset('/design/recources/imgs/combined-shape@3x.png') }}" alt="">
+                                                <img src="{{ asset('/design/recources/imgs/combined-shape.png') }}" alt="">
                                                 <br><br>
                                                 <p>평가를 기다리고 있어요</p>
                                             </div>
@@ -428,17 +428,17 @@
 
 
 
-
-
-
 <script>
     // 스와이프 이벤트 (썸네일)
     var swiper = new Swiper(".som_b", {
-        loop: true,
+        loop: false,
         spaceBetween: 5,
-        slidesPerView: {{ $img_cnt }},   //상품등록 이미지 갯수
-        freeMode: true,
+        slidesPerView: 'auto',
+        //slidesPerView: {{ $img_cnt }},   //상품등록 이미지 갯수
+        //freeMode: true,
         watchSlidesProgress: true,
+        //wrapperClass:'row',
+
         navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
@@ -627,11 +627,12 @@
     //alert(result);
     //return false;
                     if(result == "ok"){
-                        $("#wish_css_"+item_code).css("background-color", "#0000");
+                        $("#wish_css_"+item_code).addClass('wishlist_on');
                     }
 
                     if(result == "del"){
-                        $("#wish_css_"+item_code).css("background-color", "none");
+                        $("#wish_css_"+item_code).removeClass('wishlist_on');
+                        $("#wish_css_"+item_code).addClass('sns_wish');
                     }
 
                     if(result == "no_item"){

@@ -265,7 +265,7 @@
                 @if($total_record > 0)
                    <!-- 페이징 시작 -->
                 <div class="paging">
-                    {!! $pnPage !!}
+                    {!! $pnPage !!}더보기
                 </div>
                 <!-- 페이징 끝 -->
                 @endif
@@ -323,7 +323,9 @@
     }
 </script>
 
-
+<script>
+    test('{{ $sub_cate }}');
+</script>
 
 
 @endsection

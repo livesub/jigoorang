@@ -322,6 +322,7 @@
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r {
     margin-left: 0px;
     margin-top: 30px;
+    width: 100%;
 }
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r h3 {
@@ -570,9 +571,20 @@
    background-position-y: 5px;
 }
 
+.wishlist_on {
+   background: url("../recources/icons/icon-heart-2.png") no-repeat center;
+   background-size: 24px 21px;
+   background-position-y: 8px;
+   color: #3ec4ba;
+}
+
 
 
 .eval .board .board_wrap .shop_goods_ct {
+
+}
+
+.eval .board .board_wrap .shop_goods .shop_goods_dt_l .som_b .swiper-slide {
 
 }
 
@@ -1314,6 +1326,11 @@
 /************
 상품 페이지
  ************/
+
+.eval .board .board_wrap .shop_goods .shop_goods_dt_l .som_b .swiper-slide {
+   max-width: 80px;
+   width: 100%;
+}
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_l .dt_sub_som img{
     width: 100%;
@@ -2059,6 +2076,11 @@
         margin-bottom: 20px;
     }
 
+    .eval .board .board_wrap .shop_goods .shop_goods_dt_l .som_b .swiper-slide {
+      max-width: 62px;
+      width: 100%;
+   }
+
     .eval .board .board_wrap .goods .goods_img img {
         width: 100%;
         height: auto;
@@ -2231,12 +2253,14 @@
     font-size: 12px;
  }
 
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_sec_mn .dt_on{
     background: #3ec4ba;
     font-size: 12px;
     color: #fff;
     font-weight: bold;
     border: none;
+    padding-top: 15px;
  }
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 {

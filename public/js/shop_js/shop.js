@@ -428,7 +428,7 @@ function add_sel_option(type, id, option, price, stock)
     opt += "<input type=\"hidden\" class=\"sio_stock\" value=\""+stock+"\">";
     opt += "<ul class='dt_pr_op_tt'>";
     opt += "<li>"+option+"</li>";
-    opt += "<button type=\"button\" class=\"sit_opt_del\">X</button>";
+    opt += "<li><button type=\"button\" class=\"sit_opt_del dt_del\"></button><li>";
     opt += "</ul>";
 
     opt += "<ul class=\"dt_pr_op_nm\">";

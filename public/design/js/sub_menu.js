@@ -39,7 +39,7 @@ var swiper = new Swiper(".submenu", {
     }
 });
 
-var swiper = new Swiper(".submenu_sol", {
+var swiper4 = new Swiper(".submenu_sol", {
     //initialSlide: $("#tt").val(),
     freeMode : false,
     slideToClickedSlide : $("#tt").val(),
@@ -92,3 +92,7 @@ var swiper = new Swiper(".submenu_sol", {
 
 });
 
+
+function test(num) {
+    swiper4.slideTo(num, 1000, false)
+}
