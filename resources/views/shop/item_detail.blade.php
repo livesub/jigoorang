@@ -252,6 +252,7 @@
                                                 <div class="dt_star">
 
                                                     @for($m = 1; $m <= 5; $m++)
+                                                        @if($m < 5)
                                                     <div class="cot_rating_01" id="project_{{ $m }}">
                                                         <p>{{ $rating_arr["item_name"][$m] }}</p>
                                                         <div class="inline">
@@ -262,6 +263,21 @@
                                                             <span class="score cr_04">{{ number_format($rating_arr["score"][$m], 2) }} ({{ $review_cnt }})</span>
                                                         </div>
                                                     </div>
+                                                        @endif
+
+                                                        @if($m == 5)
+                                                    <div class="cot_rating_01" id="project_{{ $m }}">
+                                                        <p>{{ $rating_arr["item_name"][$m] }}</p>
+                                                        <div class="inline">
+                                                            <div class="stars-outer">
+                                                                <div class="stars-inner"></div>
+                                                            </div>
+                                                            <!--<span class="number">4.10 (20)</span>-->
+                                                            <span class="score cr_04">{{ number_format($rating_arr["score"][$m], 2) }} ({{ $review_cnt }})</span>
+                                                        </div>
+                                                    </div>
+
+                                                        @endif
 
                                                         @if($m % 2 == 0)
                                                 </div>
