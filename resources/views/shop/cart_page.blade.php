@@ -152,15 +152,15 @@
                                         <input type="hidden" id="item_price_{{ $cart_info->id }}" value="{{ $cart_info->item_price }}">
                                             <li class="" id="sit_tot_price_{{ $cart_info->id }}">{{ number_format($case_price) }}원</li>
                                             <li><button class="btn-sd">구매하기</button></li>
-                                            <li><span onclick="return dierctdelete({{ $cart_info->id }});">삭제11111</span></li>
+                                            <li><span onclick="return dierctdelete({{ $cart_info->id }});">삭제</span></li>
                                         </ul>
 
                                         <ul class="cart_list_pr_m none">
                                             <li class="" id="sit_tot_price_{{ $cart_info->id }}">{{ number_format($case_price) }}원</li>
 
                                             <li>
-                                                <button class="btn-50">구매하기</button>
-                                                <button class="btn-50">삭제22222222</button>
+                                                <button class="btn-50" type="button">구매하기</button>
+                                                <button class="btn-50" type="button" onclick="return dierctdelete({{ $cart_info->id }});">삭제</button>
                                             </li>
                                         </ul>
                                     </div>
@@ -434,9 +434,9 @@ function form_check(act) {
 
 <script>
 function dierctdelete(cart_id){
-alert(cart_id);
     if (confirm("정말 삭제하시겠습니까?") == true){    //확인
         $.ajax({
+            headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
             type : 'post',
             url : '{{ route('ajax_cart_dierctdelete') }}',
             data: {
@@ -444,22 +444,10 @@ alert(cart_id);
             },
             dataType : 'text',
             success : function(result){
-//alert(result);
-//return false;
-                var json = JSON.parse(result);
-
-                if(json.message == "no_cnt"){
-                    alert("삭제하실 상품을 하나이상 선택해 주십시오.");
-                    return false;
-                }
-
-                if(json.message == "cart_page"){
-                    location.href = "{{ route('cartlist') }}";
-                }
+                location.href = "{{ route('cartlist') }}";
             },
             error: function(result){
-                var json = JSON.parse(result);
-                console.log(json.result);
+                console.log(result);
             },
         });
     }

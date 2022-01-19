@@ -414,6 +414,15 @@ class CartController extends Controller
         }
     }
 
+    public function ajax_cart_dierctdelete(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+        $cart_id = $request->input('cart_id');
+
+        DB::table('shopcarts')->where('id',$cart_id)->delete();   //row 삭제
+        var_dump("GGGGGGGGGGGGGGGGG===> ".$cart_id);
+    }
+
     public function cartlist(Request $request)
     {
         session_start();
