@@ -692,13 +692,13 @@ h5 {
 }
 
 .main-container .mbox_1280 .saleSwiper3 {
-    height: 452px;
+    /* height: 452px; */
     margin-top: 20px;
 }
 
 .main-container .mbox_1280 .saleSwiper3 .swiper-slide {
     width: 290px;
-    height: 422px;
+    /* height: 422px; */
     flex-wrap: wrap;
     text-align: left;
     background-color: #fff;
@@ -789,7 +789,7 @@ h5 {
 }
 
 .main-container .mbox_1280 .main-project-title .main-project-right {
-    float: right;
+    /* float: right; */
     font-size: 22px;
     font-weight: 600;
 }
@@ -3501,7 +3501,7 @@ input::placeholder {
     width: 100%;
     z-index: 99;
     height: 100%;
-    display: none;
+    display: non;
 }
 .n_popup_con .n_popup {
     width: 320px;
