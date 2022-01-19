@@ -305,11 +305,11 @@ $(function() {
 
 
 //디자인 변견 장바구니 스크립트 변경(220118)
-function new_sel_option(cart_id, click){
+function new_sel_option(num, click){
     var mode = click,el_qty,stock,this_qty, max_qty = 9999, min_qty = 1;
 
-    el_qty = $('input[name="qty_ct_tmp['+cart_id+'][]"]');
-    stock = parseInt($('input[class="sio_stock_'+cart_id+'"]').val());
+    el_qty = $('input[name="qty_ct_tmp['+num+']"]');
+    stock = parseInt($('input[class="sio_stock['+num+']"]').val());
 
     switch(mode) {
         case "+":
@@ -332,7 +332,7 @@ function new_sel_option(cart_id, click){
             el_qty.val(this_qty);
             //$this.trigger("sit_sel_option_success", [$this, mode, this_qty]);
 
-            new_price_calculate(cart_id);
+            new_price_calculate(num);
         break;
 
         case "-":
@@ -348,7 +348,7 @@ function new_sel_option(cart_id, click){
 
             el_qty.val(this_qty);
             //$this.trigger("sit_sel_option_success", [$this, mode, this_qty]);
-            new_price_calculate(cart_id);
+            new_price_calculate(num);
         break;
 
         default:
@@ -358,9 +358,9 @@ function new_sel_option(cart_id, click){
 }
 
 //수량직접입력 디자인 변견 장바구니 스크립트 변경(220118)
-function new_ct_qty(cart_id, sct_qty){
-    var el_qty = $('input[name="qty_ct_tmp['+cart_id+'][]"]');
-    var stock = parseInt($('input[class="sio_stock_'+cart_id+'"]').val());
+function new_ct_qty(num, sct_qty){
+    var el_qty = $('input[name="qty_ct_tmp['+num+']"]');
+    var stock = parseInt($('input[class="sio_stock['+num+']"]').val());
 
     if(el_qty.val() == ""){
         el_qty.val(sct_qty);
@@ -377,9 +377,8 @@ function new_ct_qty(cart_id, sct_qty){
         }
     }
 
-    new_price_calculate(cart_id);
+    new_price_calculate(num);
 }
-
 
 
 // 선택옵션 추가처리
@@ -619,44 +618,47 @@ function price_calculate()
 }
 
 //바뀐 장바구니 가격계산
-function new_price_calculate(cart_id)
+function new_price_calculate(num)
 {
-    var item_price = parseInt($("#item_price_"+cart_id).val());
+    var item_price = parseInt($('input[id="item_price['+num+']"]').val());
 
     if(isNaN(item_price))
         return;
 
-    var el_prc = $("input.sio_price_"+cart_id); //옵션 추가 금액
-    var el_qty = $('input[name="qty_ct_tmp['+cart_id+'][]"]');  //수량
-    var el_type = $('input[name="sio_type['+cart_id+'][]"]');  //옵션타입:선택, 추가
+    var el_prc = $('input[id="sio_price['+num+']"]'); //옵션 추가 금액
+    var el_qty = $('input[name="qty_ct_tmp['+num+']"]');  //수량
+    var el_type = $('input[name="sio_type['+num+']"]');  //옵션타입:선택, 추가
+
     var price, type, qty, total = 0;
 
     total = (item_price + parseInt(el_prc.val())) * parseInt(el_qty.val());
 
-    $("#sit_tot_price_"+cart_id).html(number_format(String(total))+"원");
+    $("#sit_tot_price_"+num).html(number_format(String(total))+"원");
+    $("#sit_tot_price_m_"+num).html(number_format(String(total))+"원");
 
-    //var $el_prc = $("input.sio_price");
-    //var $el_qty = $("input[name^=ct_qty]");
-    //var $el_type = $("input[name^=sio_type]");
-    //var price, type, qty, total = 0;
-/*
-    $el_prc.each(function(index) {
-        price = parseInt($(this).val());
-        qty = parseInt($el_qty.eq(index).val());
-        type = $el_type.eq(index).val();
-        if(type == "0") { // 선택옵션
-            total += (item_price + price) * qty;
-        } else { // 추가옵션
-            total += price * qty;
-        }
-    });
-
-    $("#sit_tot_price").empty().html(number_format(String(total))+"원");
-
-    $("#sit_tot_price").trigger("price_calculate", [total]);
-*/
+    hap_price();
 }
 
+function hap_price(){
+    var arr_cnt = $("#arr_cnt").val();
+    var total = 0;
+    var total_cust_price = 0;
+    var principal = 0;
+    for(var k = 0; k < arr_cnt; k++){
+        var item_price = parseInt($('input[id="item_price['+k+']"]').val());
+        var item_cust_price = parseInt($('input[id="item_cust_price['+k+']"]').val());
+        var el_prc = $('input[id="sio_price['+k+']"]'); //옵션 추가 금액
+        var el_qty = $('input[name="qty_ct_tmp['+k+']"]');  //수량
+        total += (item_price + parseInt(el_prc.val())) * parseInt(el_qty.val());
+        if(item_cust_price != 0) principal += item_price * parseInt(el_qty.val());  //추가 금액을 뺀 금액
+        total_cust_price += item_cust_price * parseInt(el_qty.val());
+    }
+
+    var sale_price = total_cust_price - principal;
+
+    $("#total_price").html(number_format(String(total))+"원");
+    $("#total_cust_price").html(number_format(String(sale_price * -1))+"원");
+}
 
 // php chr() 대응
 function chr(code)

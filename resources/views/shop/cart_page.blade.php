@@ -26,10 +26,11 @@
 
         <!-- 고객센터 시작  -->
         <div class="eval">
-<form name="frmcartlist" id="sod_bsk_list" method="post" action="{{ route('ajax_cart_register') }}">
-{!! csrf_field() !!}
-<input type="hidden" name="ajax_option_url" id="ajax_option_url" value="{{ route('ajax_option_change') }}">
-<input type="hidden" id="cart_type" value="new_cart">
+        <form name="frmcartlist" id="sod_bsk_list" method="post" action="{{ route('ajax_cart_register') }}">
+        {!! csrf_field() !!}
+        <input type="hidden" name="ajax_option_url" id="ajax_option_url" value="{{ route('ajax_option_change') }}">
+        <input type="hidden" id="cart_type" value="new_cart">
+        <input type="hidden" id="arr_cnt" value="{{ count($cart_infos) }}">
             <div class="board mypage_list">
                 <!-- 리스트 시작 -->
                 <div class="board_wrap">
@@ -81,6 +82,7 @@
 
                                     // 배송비
                                     $sendcost = $CustomUtils->get_item_sendcost($cart_info->item_code, $sum[0]->price, $sum[0]->qty, $s_cart_id);
+var_dump("배송비 작업 해야 함");
 
                                     if($sendcost == 0) $ct_send_cost = '무료';
                                     else $ct_send_cost = number_format($sendcost).'원';
@@ -137,26 +139,28 @@
                                             @endif
                                             </li>
                                             <li>
-                                                <button type="button" onclick="new_sel_option('{{ $cart_info->id }}', '+')">+</button>
-                                                    <input type="text" name="qty_ct_tmp[{{ $cart_info->id }}][]" value="{{ $item_options->sct_qty }}" id="ct_qty_{{ $num }}" size="5" onKeyup="new_ct_qty({{ $cart_info->id }}, {{ $item_options->sct_qty }});">
-                                                <button type="button" onclick="new_sel_option('{{ $cart_info->id }}', '-')">-</button>
+                                                <button type="button" onclick="new_sel_option('{{ $num }}', '+')">+</button>
+                                                    <input type="text" name="qty_ct_tmp[{{ $num }}]" value="{{ $item_options->sct_qty }}" id="ct_qty_{{ $num }}" size="5" onKeyup="new_ct_qty({{ $num }}, {{ $item_options->sct_qty }});">
+                                                <button type="button" onclick="new_sel_option('{{ $num }}', '-')">-</button>
                                             </li>
                                         </ul>
 
                                         <ul class="cart_list_pr block">
-                                        <input type="hidden" name="sio_type[{{ $cart_info->id }}][]" value="{{ $cart_info->sio_type }}">
-                                        <input type="hidden" name="sio_id[{{ $cart_info->id }}][]" value="{{ $cart_info->sio_id }}">
-                                        <input type="hidden" name="sio_value[{{ $cart_info->id }}][]" value="{{ $cart_info->sct_option }}">
-                                        <input type="hidden" class="sio_price_{{ $cart_info->id }}" value="{{ $cart_info->sio_price }}">
-                                        <input type="hidden" class="sio_stock_{{ $cart_info->id }}" value="{{ $it_stock_qty }}">
-                                        <input type="hidden" id="item_price_{{ $cart_info->id }}" value="{{ $cart_info->item_price }}">
-                                            <li class="" id="sit_tot_price_{{ $cart_info->id }}">{{ number_format($case_price) }}원</li>
+                                        <input type="hidden" name="sio_type[{{ $num }}]" value="{{ $cart_info->sio_type }}">
+                                        <input type="hidden" name="sio_id[{{ $num }}]" value="{{ $cart_info->sio_id }}">
+                                        <input type="hidden" name="sio_value[{{ $num }}]" value="{{ $cart_info->sct_option }}">
+                                        <input type="hidden" id="sio_price[{{ $num }}]" value="{{ $cart_info->sio_price }}">
+                                        <input type="hidden" class="sio_stock[{{ $num }}]" value="{{ $it_stock_qty }}">
+                                        <input type="hidden" id="bbb[]" value="{{ $num }}">
+                                        <input type="hidden" id="item_price[{{ $num }}]" value="{{ $cart_info->item_price }}">
+                                        <input type="hidden" id="item_cust_price[{{ $num }}]" value="{{ $cart_info->item_cust_price }}">
+                                            <li class="" id="sit_tot_price_{{ $num }}">{{ number_format($case_price) }}원</li>
                                             <li><button class="btn-sd">구매하기</button></li>
                                             <li><span onclick="return dierctdelete({{ $cart_info->id }});">삭제</span></li>
                                         </ul>
 
                                         <ul class="cart_list_pr_m none">
-                                            <li class="" id="sit_tot_price_{{ $cart_info->id }}">{{ number_format($case_price) }}원</li>
+                                            <li class="" id="sit_tot_price_m_{{ $num }}">{{ number_format($case_price) }}원</li>
 
                                             <li>
                                                 <button class="btn-50" type="button">구매하기</button>
@@ -170,19 +174,16 @@
                                     $num++;
                                 @endphp
                             @endforeach
-
-
                         </div>
-
 
                         <div class="ct_tot">
                             <ul>
                                 <li>총 상품금액</li>
-                                <li>18,000</li>
+                                <li id="total_price"></li>
                             </ul>
                             <ul>
                                 <li>할인예정금액</li>
-                                <li>-6,000</li>
+                                <li id="total_cust_price"></li>
                             </ul>
                             <ul>
                                 <li>배송비</li>
@@ -194,9 +195,7 @@
                             </ul>
                         </div>
 
-
                         <div class="list_sol_bk"></div>
-
 
                         <div class="ct_btn">
                             <input type="hidden" name="url" value="./orderform.php">
@@ -205,13 +204,11 @@
                             <button class="btn-50" type="button" onclick="location.href='{{ route('sitem') }}'">쇼핑 계속하기</button>
                             <button class="btn-50-bg" type="button" onclick="return form_check('buy');">전체 구매하기</button>
                         </div>
-
                     </div>
-
                 </div>
                 <!-- 고객센터 끝  -->
-</form>
             </div>
+        </form>
         </div>
     </div>
     <!-- 서브 컨테이너 끝 -->
@@ -233,7 +230,9 @@
 
 
 
-
+<script>
+hap_price();
+</script>
 
 <script>
 $(function() {
