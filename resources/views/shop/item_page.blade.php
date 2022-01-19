@@ -235,7 +235,7 @@
 
                                     <span class="right">
                                         <p>응원하기</p>
-                                        <span class="{{ $wish_class }}" id="wish_css_{{ $item_info->item_code }}" onclick="item_wish('{{ $item_info->item_code }}', {{ Auth::user() }});"></span><!-- <span class="wishlist_on"></span> 활성-->
+                                        <span class="sns_wish {{ $wish_class }}" id="wish_css_{{ $item_info->item_code }}" onclick="item_wish('{{ $item_info->item_code }}', {{ Auth::user() }});"></span><!-- <span class="wishlist_on"></span> 활성-->
                                     </span>
                                 </div>
                             </div>
@@ -304,11 +304,12 @@
     //alert(result);
     //return false;
                     if(result == "ok"){
-                        $("#wish_css_"+item_code).css("background-color", "#0000");
+                        $("#wish_css_"+item_code).addClass('wishlist_on');
                     }
 
                     if(result == "del"){
-                        $("#wish_css_"+item_code).css("background-color", "none");
+                        $("#wish_css_"+item_code).removeClass('wishlist_on');
+                        $("#wish_css_"+item_code).addClass('wishlist');
                     }
 
                     if(result == "no_item"){
@@ -323,7 +324,9 @@
     }
 </script>
 
-
+<script>
+    test('{{ $sub_cate }}');
+</script>
 
 
 @endsection

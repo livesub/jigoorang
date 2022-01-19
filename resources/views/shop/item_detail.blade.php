@@ -6,6 +6,7 @@
 <script src="{{ asset('/js/shop_js/shop_override.js') }}"></script>
 
 
+
             <!-- 메인 컨테이너 시작 -->
             <div class="sub-container">
 
@@ -152,7 +153,7 @@
                                     <section id="sit_sel_option">
                                     @if(!$option_item)
                                     <div class="dt_pr_op">
-                                        <ul class="dt_pr_op_nm">
+                                        <ul class="dt_pr_op_nm m-0 ">
                                             <li class="sit_opt_list">
                                                 <input type="hidden" name="sio_type[{{ $item_info->item_code }}][]" value="0">
                                                 <input type="hidden" name="sio_id[{{ $item_info->item_code }}][]" value="">
@@ -163,6 +164,7 @@
                                                     <input type="text" name="ct_qty[{{ $item_info->item_code }}][]" value="1" id="ct_qty_11" size="5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                                                 <button type="button">-</button>
                                             </li>
+                                            <li class="mt-5">{{ $CustomUtils->display_price($item_info->item_price) }}</li>
                                         </ul>
                                     </div>
                                     <script>
@@ -210,7 +212,7 @@
                                         @endphp
                                         <!-- id 바꾸지 마세요 -->
                                         <button type="button" id="wish_css_{{ $item_info->item_code }}" onclick="item_wish('{{ $item_info->item_code }}', {{ Auth::user() }});" class="sns {{ $wish_class }}">응원하기</span><!-- wishlist_on -->
-                                        <button class="sns sns_share" type="button">공유</button>
+                                        <button class="sns sns_share" type="button" onclick="share(); return false;">공유</button>
                                     </div>
                                 </div>
                             </div>
@@ -256,8 +258,8 @@
                                                             <div class="stars-outer">
                                                                 <div class="stars-inner"></div>
                                                             </div>
-                                                            <span class="number">4.10 (20)</span>
-                                                            <span class="number">{{ number_format($rating_arr["score"][$m], 2) }} ({{ $review_cnt }})</span>
+                                                            <!--<span class="number">4.10 (20)</span>-->
+                                                            <span class="score cr_04">{{ number_format($rating_arr["score"][$m], 2) }} ({{ $review_cnt }})</span>
                                                         </div>
                                                     </div>
 
@@ -273,13 +275,14 @@
                                                 <div class="dt_star">
                                                         @endif
                                                 <script>
-                                                    star({{ number_format($rating_arr["score"][$m], 2) }}, {{ $m }});
+                                                    star2({{ number_format($rating_arr["score"][$m], 2) }}, {{ $m }});
                                                 </script>
                                                     @endfor
+                                                </div>
                                             </div>
                                             @else
                                             <div class="list-none dt_no">
-                                                <img src="{{ asset('/design/recources/imgs/combined-shape@3x.png') }}" alt="">
+                                                <img src="{{ asset('/design/recources/imgs/combined-shape.png') }}" alt="">
                                                 <br><br>
                                                 <p>평가를 기다리고 있어요</p>
                                             </div>
@@ -294,6 +297,7 @@
                                                     <div id="review_list">
 
                                                     </div>
+
 
                                                     <button class="btn-full-sd" type="button"  id="review_more" onclick="review_moreList('{{ $item_info->item_code }}');">리뷰 더보기</button>
 
@@ -428,17 +432,17 @@
 
 
 
-
-
-
 <script>
     // 스와이프 이벤트 (썸네일)
     var swiper = new Swiper(".som_b", {
-        loop: true,
+        loop: false,
         spaceBetween: 5,
-        slidesPerView: {{ $img_cnt }},   //상품등록 이미지 갯수
-        freeMode: true,
+        slidesPerView: 'auto',
+        //slidesPerView: {{ $img_cnt }},   //상품등록 이미지 갯수
+        //freeMode: true,
         watchSlidesProgress: true,
+        //wrapperClass:'row',
+
         navigation: {
         nextEl: ".swiper-button-next",
         prevEl: ".swiper-button-prev",
@@ -627,11 +631,12 @@
     //alert(result);
     //return false;
                     if(result == "ok"){
-                        $("#wish_css_"+item_code).css("background-color", "#0000");
+                        $("#wish_css_"+item_code).addClass('wishlist_on');
                     }
 
                     if(result == "del"){
-                        $("#wish_css_"+item_code).css("background-color", "none");
+                        $("#wish_css_"+item_code).removeClass('wishlist_on');
+                        $("#wish_css_"+item_code).addClass('sns_wish');
                     }
 
                     if(result == "no_item"){
@@ -644,6 +649,23 @@
             });
         }
     }
+</script>
+
+<script>
+function share(){
+
+	var url = '';
+	var textarea = document.createElement("textarea");//textarea 생성
+	document.body.appendChild(textarea);//body 하단에 넣기
+	url = window.document.location.href;
+	textarea.value = url;//현재 페이지 url 찾기
+	textarea.select();
+	document.execCommand("copy");
+	document.body.removeChild(textarea);//textarea 지우기
+
+	alert("URL이 복사되었습니다.");
+
+}
 </script>
 
 

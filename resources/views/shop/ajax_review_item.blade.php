@@ -1,4 +1,6 @@
                                                 <script src="{{ asset('/design/js/modal-back02.js') }}"></script>
+                                                <script src="{{ asset('/design/js/text_more_btn.js') }}"></script><!--글자 더보기 스크립트 -->
+
                                                     @php
                                                         $exp_num = $page * 100;
                                                     @endphp
@@ -36,26 +38,35 @@
                                                                             <div class="stars-outer">
                                                                                 <div class="stars-inner"></div>
                                                                             </div>
-                                                                            <p class="number">{{ number_format($review_info->$score, 2) }}</p>
+                                                                           <!-- <p class="number">{{ number_format($review_info->$score, 2) }}</p>-->
                                                                             <p class="number">{{ number_format($review_info->$score, 2) }}</p>
                                                                         </div>
                                                                     </div>
                                                                             @endif
                                                                     <script>
-                                                                        star({{ number_format($review_info->$score, 2) }}, {{ $exp_num }});
+                                                                        star2({{ number_format($review_info->$score, 2) }}, {{ $exp_num }});
                                                                     </script>
                                                                         @endfor
 
                                                                 </div>
                                                               </div>
 
-                                                              <div class="cot_review_text">
-                                                                    <p>{{ $review_info->review_content }}</p>
 
-                                                                <div class="cot_more">
-                                                                    <p>더보기</p>
-                                                                    <span class="arr_bt"></span>
+                                                              <div class="cot_review_text box">
+
+                                                                    <div class="text_content notshort" id="content_{{ $review_info->id }}" style="word-break: break-all;">
+                                                                        <p>{{ $review_info->review_content }}</p>
+                                                                    </div>
+                                                                    <div class="cot_more" id="cot_more_{{ $review_info->id }}">
+                                                                        <p>더보기</p>
+                                                                        <span class="arr_bt"></span>
+                                                                    </div>
+
                                                                 </div>
+                                                               <script>
+                                                                    more({{ $review_info->id }});
+                                                                </script>
+
                                                                 @php
                                                                     $review_imgs = DB::table('review_save_imgs')->where('rs_id', $review_info->id)->orderby('id','asc')->get();
                                                                 @endphp
@@ -79,6 +90,7 @@
                                                           </div>
                                                         </div>
                                                     </div>
+
                                                         @php
                                                             $exp_num++;
                                                         @endphp
