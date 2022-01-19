@@ -975,6 +975,7 @@ h5 {
 .eval .board .board_wrap .list_contents {
     border-bottom: 1px solid #ddd;
     padding-bottom: 56px;
+    word-break: break-all;
 }
 
 .eval .board .board_wrap .list_view {
