@@ -2678,7 +2678,7 @@ input::placeholder {
 }
 
 .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_review .cot_box .cot_rating_01 .number {
-    margin-top: 11px;
+    margin-top: 7px;
     font-size: 16px;
     color: #000;
     font-weight: bold;
@@ -3931,8 +3931,9 @@ input::placeholder {
     height: 500px;
 }
 .modal .modal-container.dt_img_s img{
-    width: 680px;
-    height: 500px;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
 }
 
 .modal .modal-container.dt_img_s .btn-close{

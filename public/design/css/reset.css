@@ -115,7 +115,7 @@ textarea {
   font-family: "Spoqa Han Sans Neo", "sans-serif";
   letter-spacing: -0.5px;
   resize: none;
-  word-break: break-all;
+  /* word-break: break-all; */
 }
 * {
   box-sizing: border-box;
@@ -508,7 +508,12 @@ input:focus {
   outline: none;
 }
 
+
 /* margin */
+
+.mt-5 {
+  margin-top: 5px;
+}
 .mt-10 {
   margin-top: 10px;
 }

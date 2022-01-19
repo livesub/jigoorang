@@ -1,3 +1,36 @@
+<script>
+function more(cnt) {
+    $('.box').each(function(){
+        var content = $('#content_'+ cnt);
+        var content_txt = content.text();
+        var btn_more = $('#cot_more_'+ cnt);
+
+        if(content_txt.length < 200){
+            btn_more.hide();
+            content.removeClass('notshort');
+        }
+
+        btn_more.click(toggle_content);
+
+        function toggle_content(){
+            if(content.hasClass('short')){
+                // 접기 상태
+                btn_more.html('더보기');
+                content.removeClass('short');
+                content.addClass('notshort');
+            }else{
+                // 더보기 상태
+                btn_more.html('접기');
+                content.html(content_txt);
+                content.addClass('short');
+                content.removeClass('notshort');
+                }
+            }
+    });
+}
+</script>
+
+
                                 @if(count($review_saves_shop_infos) > 0)
                                     @foreach($review_saves_shop_infos as $review_saves_shop_info)
                                         @php
@@ -82,11 +115,14 @@
 
                                        <div class="cot_review_text box">
 
-                                            <div class="text_content" id="content_{{ $review_saves_shop_info->id }}">
+                                            <div class="text_content notshort" id="content_{{ $review_saves_shop_info->id }}" style="word-break: break-all;">
                                                 {!! nl2br($review_saves_shop_info->review_content) !!}
                                             </div>
-                                            <div class="cot_more" id="cot_more_{{ $review_saves_shop_info->id }}"></div>
+                                            <div class="cot_more" id="cot_more_{{ $review_saves_shop_info->id }}">더보기</div>
                                        </div>
+                                       <script>
+                                        more({{ $review_saves_shop_info->id }});
+                                       </script>
 
 
                                         <div class="cot_photo">
@@ -120,34 +156,5 @@
         $("#shop_more").hide();
     }
 </script>
-
-<!--<script>
-    $('.box').each(function(cnt){
-        var content = $('#content_'+ cnt);
-        var content_txt = content.text();
-        var content_txt_short = content_txt.substr(0,150)+"...";
-        var btn_more = $('#cot_more_'+ cnt);
-        if(content_txt.length > 150){
-            btn_more.html('더보기');
-            content.html(content_txt_short);
-        }
-        btn_more.click(toggle_content);
-        function toggle_content(){
-        if($(this).hasClass('short')){
-            // 접기 상태
-            $(this).html('더보기');
-            content.html(content_txt_short);
-            $(this).removeClass('short');
-        }else{
-            // 더보기 상태
-            $(this).html('접기');
-            content.html(content_txt);
-            $(this).addClass('short');
-            }
-        }
-    });
-</script>-->
-
-
 
 

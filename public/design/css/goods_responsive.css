@@ -422,7 +422,7 @@
 }
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_tt .dt_del {
-   background: url('../recources/icons/del_bk@3x.png');
+   background: url('../recources/icons/del_bk@3x.png') no-repeat center;
    width: 32px;
    height: 32px;
    background-size: 30px 30px;
@@ -2211,6 +2211,10 @@
     background: #fff;
  }
 
+ .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_sel {
+    font-size: 13px;
+ }
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .dt_hide {
     top: -128px;
  }
@@ -2248,7 +2252,11 @@
  }
 
  .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_tt .dt_del {
-    bottom: 5px;
+   background: url("../recources/icons/del_bk@3x.png") no-repeat center;
+   width: 15px;
+   height: 17px;
+   background-size: 27px 27px;
+   background-position-y: -6px;
 }
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_nm li p {
@@ -2488,6 +2496,11 @@
     padding-top: 20px;
     padding-bottom: 20px;
  }
+
+ .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review_text .text_content.notshort {
+   height: 35.5px;
+}
+
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review_text br {
     display: none;
