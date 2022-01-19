@@ -57,6 +57,12 @@ Route::post('/cartprocess', [
     'uses' => 'App\Http\Controllers\shop\CartController@ajax_cart_register',
 ]);
 
+//장바구니, 다이렉트 삭제 처리
+Route::post('/cart_dierctdelete', [
+    'as' => 'ajax_cart_dierctdelete',
+    'uses' => 'App\Http\Controllers\shop\CartController@ajax_cart_dierctdelete',
+]);
+
 //장바구니
 Route::get('/cart', [
     'as' => 'cartlist',

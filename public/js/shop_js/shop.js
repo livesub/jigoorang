@@ -215,8 +215,7 @@ $(function() {
                 $el_qty.val(this_qty);
                 $this.trigger("sit_sel_option_success", [$this, mode, this_qty]);
 
-                if($("#cart_type").val() == undefined) price_calculate();
-                else new_price_calculate();
+                price_calculate();
 
                 break;
 
@@ -269,7 +268,6 @@ $(function() {
 
     // 수량직접입력
     $(document).on("keyup", "input[name^=ct_qty]", function() {
-
         var $this = $(this),
             val= $this.val(),
             force_val = 0;
@@ -307,101 +305,79 @@ $(function() {
 
 //디자인 변견 장바구니 스크립트 변경(220118)
 function new_sel_option(cart_id, click){
-    var mode = click,el_qty,
-    this_qty, max_qty = 9999, min_qty = 1;
+    var mode = click,el_qty,stock,this_qty, max_qty = 9999, min_qty = 1;
 
-    el_qty = $('input[name="ct_qty['+click+']"]')[2].value;//$("#ct_qty"+)
+    el_qty = $('input[name="qty_ct_tmp['+cart_id+'][]"]');
+    stock = parseInt($('input[class="sio_stock_'+cart_id+'"]').val());
 
+    switch(mode) {
+        case "+":
+            this_qty = parseInt(el_qty.val().replace(/[^0-9]/, "")) + 1;
 
-
-}
-    /*
-        $(document).on("click", "#sit_sel_option button", function() {
-            var $this = $(this);
-    alert($this.val());
-
-            var $this = $(this),
-                mode = $this.text(),
-                this_qty, max_qty = 9999, min_qty = 1,
-                $el_qty = $(this).closest("div").find("input[name^=ct_qty]"),
-                stock = parseInt($(this).closest("div").find("input.sio_stock").val());
-                switch(mode) {
-                case "+":
-                    this_qty = parseInt($el_qty.val().replace(/[^0-9]/, "")) + 1;
-
-                    if(this_qty > stock) {
-                        alert("재고수량 보다 많은 수량을 구매할 수 없습니다.");
-                        this_qty = stock;
-                    }
-
-                    if(this_qty > max_qty) {
-                        this_qty = max_qty;
-                        alert("최대 구매수량은 "+number_format(String(max_qty))+" 입니다.");
-                    }
-
-                    if(isNaN(this_qty)){
-                        this_qty = 1;
-                    }
-
-                    $el_qty.val(this_qty);
-                    $this.trigger("sit_sel_option_success", [$this, mode, this_qty]);
-
-                    if($("#cart_type").val() == undefined) price_calculate();
-                    else new_price_calculate();
-
-                    break;
-
-                case "-":
-                    this_qty = parseInt($el_qty.val().replace(/[^0-9]/, "")) - 1;
-
-                    if(this_qty < min_qty) {
-                        this_qty = min_qty;
-                        alert("최소 구매수량은 "+number_format(String(min_qty))+" 입니다.");
-                    }
-
-                    if(isNaN(this_qty)){
-                        this_qty = 1;
-                    }
-
-                    $el_qty.val(this_qty);
-                    $this.trigger("sit_sel_option_success", [$this, mode, this_qty]);
-                    price_calculate();
-                    break;
-
-                case "X":
-                    if(confirm("선택하신 옵션항목을 삭제하시겠습니까?")) {
-                        var $el = $(this).closest("div");
-                        var del_exec = true;
-                        if($("#sit_sel_option .sit_spl_list").length > 0) {
-                            // 선택옵션이 하나이상인지
-                            if($el.hasClass("sit_opt_list")) {
-                                if($(".sit_opt_list").length <= 1)
-                                    del_exec = false;
-                            }
-                        }
-
-                        if(del_exec) {
-                            // 지우기전에 호출해야 trigger 를 호출해야 합니다.
-                            $this.trigger("sit_sel_option_success", [$this, mode, ""]);
-                            $el.closest("div").remove();
-                            price_calculate();
-                        } else {
-                            alert("선택옵션은 하나이상이어야 합니다.");
-                            return false;
-                        }
-                    }
-                    break;
-
-                default:
-                    alert("올바른 방법으로 이용해 주십시오.");
-                    break;
+            if(this_qty > stock) {
+                alert("재고수량 보다 많은 수량을 구매할 수 없습니다.");
+                this_qty = stock;
             }
 
-        });
-    */
+            if(this_qty > max_qty) {
+                this_qty = max_qty;
+                alert("최대 구매수량은 "+number_format(String(max_qty))+" 입니다.");
+            }
 
+            if(isNaN(this_qty)){
+                this_qty = 1;
+            }
 
+            el_qty.val(this_qty);
+            //$this.trigger("sit_sel_option_success", [$this, mode, this_qty]);
 
+            new_price_calculate(cart_id);
+        break;
+
+        case "-":
+            this_qty = parseInt(el_qty.val().replace(/[^0-9]/, "")) - 1;
+            if(this_qty < min_qty) {
+                this_qty = min_qty;
+                alert("최소 구매수량은 "+number_format(String(min_qty))+" 입니다.");
+            }
+
+            if(isNaN(this_qty)){
+                this_qty = 1;
+            }
+
+            el_qty.val(this_qty);
+            //$this.trigger("sit_sel_option_success", [$this, mode, this_qty]);
+            new_price_calculate(cart_id);
+        break;
+
+        default:
+            alert("올바른 방법으로 이용해 주십시오.");
+        break;
+    }
+}
+
+//수량직접입력 디자인 변견 장바구니 스크립트 변경(220118)
+function new_ct_qty(cart_id, sct_qty){
+    var el_qty = $('input[name="qty_ct_tmp['+cart_id+'][]"]');
+    var stock = parseInt($('input[class="sio_stock_'+cart_id+'"]').val());
+
+    if(el_qty.val() == ""){
+        el_qty.val(sct_qty);
+    }
+
+    if(el_qty.val().replace(/[0-9]/g, "").length > 0) {
+        el_qty.val(sct_qty);
+    }else{
+        var d_val = parseInt(el_qty.val());
+
+        if(d_val > stock) {
+            alert("재고수량 보다 많은 수량을 구매할 수 없습니다.");
+            el_qty.val(stock);
+        }
+    }
+
+    new_price_calculate(cart_id);
+}
 
 
 
@@ -642,18 +618,27 @@ function price_calculate()
 }
 
 //바뀐 장바구니 가격계산
-function new_price_calculate()
+function new_price_calculate(cart_id)
 {
-    var item_price = parseInt($("input#item_price").val());
+    var item_price = parseInt($("#item_price_"+cart_id).val());
 
     if(isNaN(item_price))
         return;
 
-    var $el_prc = $("input.sio_price");
-    var $el_qty = $("input[name^=ct_qty]");
-    var $el_type = $("input[name^=sio_type]");
+    var el_prc = $("input.sio_price_"+cart_id); //옵션 추가 금액
+    var el_qty = $('input[name="qty_ct_tmp['+cart_id+'][]"]');  //수량
+    var el_type = $('input[name="sio_type['+cart_id+'][]"]');  //옵션타입:선택, 추가
     var price, type, qty, total = 0;
 
+    total = (item_price + parseInt(el_prc.val())) * parseInt(el_qty.val());
+
+    $("#sit_tot_price_"+cart_id).html(number_format(String(total))+"원");
+
+    //var $el_prc = $("input.sio_price");
+    //var $el_qty = $("input[name^=ct_qty]");
+    //var $el_type = $("input[name^=sio_type]");
+    //var price, type, qty, total = 0;
+/*
     $el_prc.each(function(index) {
         price = parseInt($(this).val());
         qty = parseInt($el_qty.eq(index).val());
@@ -668,6 +653,7 @@ function new_price_calculate()
     $("#sit_tot_price").empty().html(number_format(String(total))+"원");
 
     $("#sit_tot_price").trigger("price_calculate", [total]);
+*/
 }
 
 

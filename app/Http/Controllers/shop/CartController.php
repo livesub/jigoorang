@@ -51,7 +51,7 @@ class CartController extends Controller
                 })
             //->where('a.od_id',$s_cart_id)
             ->where([['a.user_id', Auth::user()->user_id], ['a.sct_status','쇼핑'], ['a.sct_direct','0']])  //장바구니 사라짐 문제
-            ->groupBy('a.item_code')
+            //->groupBy('a.item_code')
             ->orderBy('a.id')
             ->get();
 
@@ -154,7 +154,7 @@ class CartController extends Controller
                 if($ct_chk) {
                     $item_code = $post_item_codes[$i];
                     if($item_code){
-                        DB::table('shopcarts')->where([['item_code',$item_code], ['od_id',$tmp_cart_id]])->delete();   //row 삭제
+                        DB::table('shopcarts')->where([['id',$item_code], ['od_id',$tmp_cart_id]])->delete();   //row 삭제
                     }
                 }
             }
@@ -430,7 +430,7 @@ class CartController extends Controller
 
         // $s_cart_id 로 현재 장바구니 자료 쿼리
         $cart_infos = DB::table('shopcarts as a')
-            ->select('a.*', 'b.sca_id', 'b.item_manufacture', 'b.item_price')
+            ->select('a.*', 'b.sca_id', 'b.item_manufacture', 'b.item_price', 'b.item_cust_price')
             ->leftjoin('shopitems as b', function($join) {
                     $join->on('a.item_code', '=', 'b.item_code');
                 })

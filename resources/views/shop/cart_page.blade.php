@@ -38,9 +38,9 @@
                         <div class="chek">
                             <label for="">
                                 <input type="checkbox" name="ct_all" value="1" id="ct_all" checked="checked">
-                                  <span>전체선택(2/2)</span>
+                                  <span>전체선택(<span id="choice_cnt">2</span>/{{ count($cart_infos) }})</span>
                             </label>
-                            <button class="btn-bg-mint">선택삭제</button>
+                            <button type="button" class="btn-bg-mint" onclick="return form_check('seldelete');">선택삭제</button>
                         </div>
 
 
@@ -54,9 +54,6 @@
 
 
                         <div class="cot_list">
-                            @php
-                                $i = 0;
-                            @endphp
                             @foreach($cart_infos as $cart_info)
                                 @php
                                     $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_point * sct_qty) as point, SUM(sct_qty) as qty from shopcarts where item_code = '{$cart_info->item_code}' and od_id = '$s_cart_id' ");
@@ -81,21 +78,7 @@
 
                                     if(!$cart_info->sio_id) $it_stock_qty = $CustomUtils->get_item_stock_qty($cart_info->item_code);
                                     else $it_stock_qty = $CustomUtils->get_option_stock_qty($cart_info->item_code, $cart_info->sio_id, $cart_info->sio_type);
-/*
-                                    if($item_options->sio_price > 0) {
-                                        //$str .= '<tr><td>옵션 : '.$item_option->sct_option.' '.$item_option->sct_qty.'개 ('.$price_plus.$this->display_price($item_option->sio_price).')</td></tr>'.PHP_EOL;
-                                        $sct_option = $item_option->sct_option;
-                                        $sct_qty = $item_option->sct_qty;
-                                    }else{
-                                        $str .= '<tr><td>'.$item_option->sct_option.' '.$item_option->sct_qty.'개'.'</td></tr>'.PHP_EOL;
-                                    }
-*/
-/*
-                                    if($item_options) {
-                                        //$mod_options = '<tr><td><div class="sod_option_btn"><button type="button" class="mod_options">선택사항수정</button></div></td></tr>';
-                                        //$item_name .= '<div class="sod_opt">'.$item_options.'</div>';
-                                    }
-*/
+
                                     // 배송비
                                     $sendcost = $CustomUtils->get_item_sendcost($cart_info->item_code, $sum[0]->price, $sum[0]->qty, $s_cart_id);
 
@@ -106,21 +89,41 @@
                                     $sell_price = $sum[0]->price;
                                     $tmp_sendcost = $sendcost;
 
+                                    //개별 상품 가격
+                                    $case_price = ($cart_info->item_price + $cart_info->sio_price) * $item_options->sct_qty;
                                 @endphp
                             <div class="cot_body">
                                 <div class="cart">
                                     <div class="cart_inner">
                                         <ul class="cart_list_img">
-                                            <li><input type="checkbox" name="ct_chk[{{ $num }}]" value="1" id="ct_chk_{{ $num }}" checked="checked"></li>
+                                            <li><input type="checkbox" name="ct_chk[{{ $num }}]" value="1" id="ct_chk_{{ $num }}" checked="checked" onclick="checkbox_click();"></li>
                                             <li><a href="{{ route('sitemdetail','item_code='.$cart_info->item_code) }}"><img src="{{ asset($image_url) }}"></a></li>
                                         </ul>
 
                                         <ul class="cart_list_tt">
+                                            <input type="hidden" name="item_code[{{ $num }}]" id="item_code{{ $num }}" value="{{ $cart_info->id }}">
+                                            <input type="hidden" name="item_name[{{ $num }}]" id="item_name{{ $num }}" value="{{ $cart_info->item_name }}">
                                            <h5><a href="{{ route('sitemdetail','item_code='.$cart_info->item_code) }}">{!! $item_name !!}</a></h5>
                                            <ul class="c_s_tt">
-                                                <li class="price cr_07">30%</li>
-                                                <li class="price">6,000원</li>
-                                                <li class="sale-price">6,000원</li>
+                                                @if($cart_info->item_cust_price > 0)
+                                                    @php
+                                                        //시중가격(정가) 계산
+                                                        $disp_discount_rate = 0;
+                                                        if($cart_info->item_cust_price > 0){
+                                                            //시중가격 값이 있을때 할인율 계산
+                                                            $discount = (int)$cart_info->item_cust_price - (int)$cart_info->item_price; //할인액
+                                                            $discount_rate = ($discount / (int)$cart_info->item_cust_price) * 100;  //할인율
+                                                            $disp_discount_rate = round($discount_rate);    //반올림
+                                                        }
+                                                    @endphp
+                                                <li class="price cr_07">{{ $disp_discount_rate }}%</li>
+                                                @endif
+
+                                                <li class="price">{{ $CustomUtils->display_price($cart_info->item_price) }}</li>
+
+                                                @if($cart_info->item_cust_price > 0)
+                                                <li class="sale-price">{{ $CustomUtils->display_price($cart_info->item_cust_price) }}</li>
+                                                @endif
                                             </ul>
                                         </ul>
 
@@ -135,8 +138,8 @@
                                             </li>
                                             <li>
                                                 <button type="button" onclick="new_sel_option('{{ $cart_info->id }}', '+')">+</button>
-                                                    <input type="text" name="ct_qty[{{ $cart_info->id }}][]" value="{{ $item_options->sct_qty }}" id="ct_qty_{{ $i }}" size="5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
-                                                <button type="button">-</button>
+                                                    <input type="text" name="qty_ct_tmp[{{ $cart_info->id }}][]" value="{{ $item_options->sct_qty }}" id="ct_qty_{{ $num }}" size="5" onKeyup="new_ct_qty({{ $cart_info->id }}, {{ $item_options->sct_qty }});">
+                                                <button type="button" onclick="new_sel_option('{{ $cart_info->id }}', '-')">-</button>
                                             </li>
                                         </ul>
 
@@ -147,47 +150,26 @@
                                         <input type="hidden" class="sio_price_{{ $cart_info->id }}" value="{{ $cart_info->sio_price }}">
                                         <input type="hidden" class="sio_stock_{{ $cart_info->id }}" value="{{ $it_stock_qty }}">
                                         <input type="hidden" id="item_price_{{ $cart_info->id }}" value="{{ $cart_info->item_price }}">
-                                            <li class="">7,000원</li>
+                                            <li class="" id="sit_tot_price_{{ $cart_info->id }}">{{ number_format($case_price) }}원</li>
                                             <li><button class="btn-sd">구매하기</button></li>
-                                            <li><span>삭제</span></li>
+                                            <li><span onclick="return dierctdelete({{ $cart_info->id }});">삭제11111</span></li>
                                         </ul>
 
                                         <ul class="cart_list_pr_m none">
-                                            <li class="">7,000원</li>
+                                            <li class="" id="sit_tot_price_{{ $cart_info->id }}">{{ number_format($case_price) }}원</li>
 
                                             <li>
-                                                <button class="btn-50">삭제</button>
                                                 <button class="btn-50">구매하기</button>
+                                                <button class="btn-50">삭제22222222</button>
                                             </li>
                                         </ul>
                                     </div>
                                 </div>
                             </div>
-                            @php
-                                $i++;
-                            @endphp
+                                @php
+                                    $num++;
+                                @endphp
                             @endforeach
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                         </div>
@@ -217,8 +199,11 @@
 
 
                         <div class="ct_btn">
-                            <button class="btn-50">쇼핑 계속하기</button>
-                            <button class="btn-50-bg">전체 구매하기</button>
+                            <input type="hidden" name="url" value="./orderform.php">
+                            <input type="hidden" name="records" value="{{ $num }}">
+                            <input type="hidden" name="act" id="act" value="">
+                            <button class="btn-50" type="button" onclick="location.href='{{ route('sitem') }}'">쇼핑 계속하기</button>
+                            <button class="btn-50-bg" type="button" onclick="return form_check('buy');">전체 구매하기</button>
                         </div>
 
                     </div>
@@ -248,177 +233,6 @@
 
 
 
-
-<table border=1>
-    <tr>
-        <td><h4>장바구니</h4></td>
-    </tr>
-</table>
-
-<form name="frmcartlist" id="sod_bsk_list" method="post" action="{{ route('ajax_cart_register') }}">
-{!! csrf_field() !!}
-<input type="hidden" name="ajax_option_url" id="ajax_option_url" value="{{ route('ajax_option_change') }}">
-<table border=1>
-    <tr>
-        <td><input type="checkbox" name="ct_all" value="1" id="ct_all" checked="checked"></td>
-        <td>상품명</td>
-        <td>총수량</td>
-        <td>판매가</td>
-        <td>상품별배송비</td>
-        <td>주문금액</td>
-    </tr>
-
-    @php
-        $tot_point = 0;
-        $tot_sell_price = 0;
-        $send_cost = 0;
-        $tot_send_cost = 0;
-    @endphp
-
-    @foreach($cart_infos as $cart_info)
-        @php
-            $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_point * sct_qty) as point, SUM(sct_qty) as qty from shopcarts where item_code = '{$cart_info->item_code}' and od_id = '$s_cart_id' ");
-
-            if ($num == 0) { // 계속쇼핑
-                $continue_ca_id = $cart_info->sca_id;
-            }
-
-            //이미지
-            $image_url = $CustomUtils->get_item_image($cart_info->item_code, 3);
-
-            //제목
-            $item_name = stripslashes($cart_info->item_name);
-
-            //옵션 처리
-            $item_options = $CustomUtils->print_item_options($cart_info->item_code, $s_cart_id);
-
-            if($item_options) {
-                $mod_options = '<tr><td><div class="sod_option_btn"><button type="button" class="mod_options">선택사항수정</button></div></td></tr>';
-                $item_name .= '<div class="sod_opt">'.$item_options.'</div>';
-            }
-
-            // 배송비
-            $sendcost = $CustomUtils->get_item_sendcost($cart_info->item_code, $sum[0]->price, $sum[0]->qty, $s_cart_id);
-
-            if($sendcost == 0) $ct_send_cost = '무료';
-            else $ct_send_cost = number_format($sendcost).'원';
-
-            $point      = $sum[0]->point;
-            $sell_price = $sum[0]->price;
-            $tmp_sendcost = $sendcost;
-
-        @endphp
-    <tr>
-        <td><input type="checkbox" name="ct_chk[{{ $num }}]" value="1" id="ct_chk_{{ $num }}" checked="checked"></td>
-        <td>
-            <table border=1>
-                <tr>
-                    <td><a href="{{ route('sitemdetail','item_code='.$cart_info->item_code) }}"><img src="{{ asset($image_url) }}"></a></td>
-                    <td>
-                        <table>
-                            <tr>
-                                <td>
-                    <input type="hidden" name="item_code[{{ $num }}]" id="item_code{{ $num }}" value="{{ $cart_info->item_code }}">
-                    <input type="hidden" name="item_name[{{ $num }}]" id="item_name{{ $num }}" value="{{ $cart_info->item_name }}">
-                                    <a href="{{ route('sitemdetail','item_code='.$cart_info->item_code) }}">{!! $item_name !!}</a>
-                                    {!! $mod_options !!}
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-            </table>
-        </td>
-        <td>{{ number_format($sum[0]->qty) }}</td>
-        <td>{{ number_format($cart_info->sct_price) }}</td>
-        <td>{{ $ct_send_cost }}</td>
-        <td><span id="sell_price_{{ $num }}" class="total_prc">{{ number_format($sell_price) }}</span></td>
-    </tr>
-        @php
-            $num++;
-            $tot_point      += $point;
-            $tot_sell_price += $sell_price;
-            $tot_send_cost  += $tmp_sendcost;
-        @endphp
-
-    @endforeach
-
-    @php
-
-        if ($num == 0) {
-            echo '<tr><td colspan="7" class="empty_table">장바구니에 담긴 상품이 없습니다.</td></tr>';
-        } else {
-            // 배송비 계산
-            $send_cost = $CustomUtils->get_sendcost($s_cart_id, 0);
-        }
-    @endphp
-</table>
-
-@if($num > 0)
-<table border=1>
-    <tr>
-        <button type="button" onclick="return form_check('seldelete');">선택삭제</button>
-        <button type="button" onclick="return form_check('alldelete');">비우기</button>
-    </tr>
-</table>
-@endif
-
-@php
-    //배송비 무료 정책
-    if($tot_sell_price >= $de_send_cost_free){
-        $tot_price = $tot_sell_price + $tot_send_cost; // 총계 = 주문상품금액합계 + 상품별배송비
-        $free_type = '주문금액 '.number_format($de_send_cost_free).' 원 이상 기본 배송비 무료';
-    }else{
-        $tot_price = $tot_sell_price + $de_send_cost + $tot_send_cost; // 총계 = 주문상품금액합계 + 기본배송비 + 상품별배송비
-        $free_type = number_format($de_send_cost).' 원';
-    }
-@endphp
-
-@if ($tot_price > 0 || $tot_send_cost > 0 || $de_send_cost > 0)
-<table border=1>
-    <tr>
-        <td>주문금액</td>
-        <td><strong>{{ number_format($tot_sell_price) }} </strong> 원</td>
-        @if($de_send_cost > 0)
-        <td>기본배송비</td>
-        <td><strong>{{ $free_type  }}</strong></td>
-        @endif
-
-        @if($tot_send_cost > 0)
-        <td>상품별배송비</td>
-        <td><strong>{{ number_format($tot_send_cost)  }}</strong> 원</td>
-        @endif
-
-        <td>총계 가격</td>
-        <td><strong>{{ number_format($tot_price) }}</strong> 원</td>
-    </tr>
-</table>
-@endif
-
-
-<table>
-    <tr>
-        <td>
-@if($num == 0)
-            <a href="{{ route('index') }}" class="btn01">쇼핑 계속하기</a>
-@else
-            <table>
-                <tr>
-                    <td>
-                        <input type="hidden" name="url" value="./orderform.php">
-                        <input type="hidden" name="records" value="{{ $num }}">
-                        <input type="hidden" name="act" id="act" value="">
-                        <a href="{{ route('sitem','ca_id='.$continue_ca_id) }}">쇼핑 계속하기</a>
-                        <button type="button" onclick="return form_check('buy');" class="btn_submit">주문하기</button>
-                    </td>
-                </tr>
-            </table>
-@endif
-
-        </td>
-    </tr>
-</table>
-</form>
 
 
 <script>
@@ -463,10 +277,10 @@ $(function() {
 
     // 모두선택
     $("input[name=ct_all]").click(function() {
-        if($(this).is(":checked"))
-            $("input[name^=ct_chk]").attr("checked", true);
-        else
-            $("input[name^=ct_chk]").attr("checked", false);
+        if($("#ct_all").is(":checked")) $("input[name^=ct_chk]").prop("checked", true);
+        else $("input[name^=ct_chk]").prop("checked", false);
+
+        getCheckedCnt();
     });
 
     // 옵션수정 닫기
@@ -491,6 +305,7 @@ function fsubmit_check(f) {
 }
 
 function form_check(act) {
+
     var f = document.frmcartlist;
     var cnt = f.records.value;
 
@@ -585,7 +400,6 @@ function form_check(act) {
 
         if (confirm("정말 삭제하시겠습니까?") == true){    //확인
             $("#act").val(act);
-
             var form_var = $("form[name=frmcartlist]").serialize() ;
             $.ajax({
                 type : 'post',
@@ -593,9 +407,10 @@ function form_check(act) {
                 data : form_var,
                 dataType : 'text',
                 success : function(result){
+//alert(result);
+//return false;
                     var json = JSON.parse(result);
-    //alert(result);
-    //return false;
+
                     if(json.message == "no_cnt"){
                         alert("삭제하실 상품을 하나이상 선택해 주십시오.");
                         return false;
@@ -616,6 +431,63 @@ function form_check(act) {
     }
 }
 </script>
+
+<script>
+function dierctdelete(cart_id){
+alert(cart_id);
+    if (confirm("정말 삭제하시겠습니까?") == true){    //확인
+        $.ajax({
+            type : 'post',
+            url : '{{ route('ajax_cart_dierctdelete') }}',
+            data: {
+                'cart_id'   : cart_id,
+            },
+            dataType : 'text',
+            success : function(result){
+//alert(result);
+//return false;
+                var json = JSON.parse(result);
+
+                if(json.message == "no_cnt"){
+                    alert("삭제하실 상품을 하나이상 선택해 주십시오.");
+                    return false;
+                }
+
+                if(json.message == "cart_page"){
+                    location.href = "{{ route('cartlist') }}";
+                }
+            },
+            error: function(result){
+                var json = JSON.parse(result);
+                console.log(json.result);
+            },
+        });
+    }
+}
+</script>
+
+
+<script>
+getCheckedCnt();
+function checkbox_click(){
+     $("input:checkbox[id='ct_all']").attr("checked", false);
+    getCheckedCnt();
+}
+
+function getCheckedCnt()  {
+    // 선택된 목록 가져오기
+    const query = 'input[name^="ct_chk"]:checked';
+    const selectedElements = document.querySelectorAll(query);
+
+    // 선택된 목록의 갯수 세기
+    const selectedElementsCnt = selectedElements.length;
+
+    // 출력
+    $("#choice_cnt").text(selectedElementsCnt);
+}
+</script>
+
+
 
 
 
