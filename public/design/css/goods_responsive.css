@@ -728,7 +728,7 @@
    font-weight: bold;
 }
 
-.eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .number{
+.eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .score{
    font-size: 28px;
    font-weight: bold;
    color: #fc6a20;
@@ -1438,7 +1438,7 @@
     font-weight: bold;
  }
 
- .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .number{
+ .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .score{
     font-size: 20px;
     font-weight: bold;
     color: #fc6a20;
@@ -2366,7 +2366,7 @@
     font-weight: bold;
  }
 
- .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .number{
+ .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .score{
     font-size: 18px;
     font-weight: bold;
     color: #fc6a20;

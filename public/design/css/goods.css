@@ -542,6 +542,11 @@
     background-position-y: -6px;
 }
 
+.eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_tt .dt_del span{
+    display: none;
+    font-size: 20px;
+}
+
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_nm.m-0{
     margin-top: 0;
@@ -709,7 +714,7 @@
 
 
 .eval .board .board_wrap .shop_goods_ct {
-
+    word-break: break-all;
 }
 
 
@@ -836,13 +841,13 @@
 }
 
 .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 {
-    padding: 32px 0 60px 0;
+    padding: 60px 0 60px 0;
     margin-left: 130px;
     text-align: center;
     font-weight: bold;
 }
 
-.eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .number{
+.eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .score{
     font-size: 28px;
     font-weight: bold;
     color: #fc6a20;

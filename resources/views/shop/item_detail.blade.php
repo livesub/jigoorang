@@ -266,14 +266,15 @@
                                                         @endif
 
                                                         @if($m == 5)
-                                                    <div class="cot_rating_01" id="project_{{ $m }}">
+
+                                                    <div class="cot_rating_02" id="project_{{ $m }}">
                                                         <p>{{ $rating_arr["item_name"][$m] }}</p>
                                                         <div class="inline">
                                                             <div class="stars-outer">
                                                                 <div class="stars-inner"></div>
                                                             </div>
                                                             <!--<span class="number">4.10 (20)</span>-->
-                                                            <span class="score cr_04">{{ number_format($rating_arr["score"][$m], 2) }} ({{ $review_cnt }})</span>
+                                                            <p class="score cr_04">{{ number_format($rating_arr["score"][$m], 2) }} ({{ $review_cnt }})</p>
                                                         </div>
                                                     </div>
 
