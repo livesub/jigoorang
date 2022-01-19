@@ -194,6 +194,7 @@ $(function() {
             this_qty, max_qty = 9999, min_qty = 1,
             $el_qty = $(this).closest("div").find("input[name^=ct_qty]"),
             stock = parseInt($(this).closest("div").find("input.sio_stock").val());
+
          switch(mode) {
             case "+":
                 this_qty = parseInt($el_qty.val().replace(/[^0-9]/, "")) + 1;
