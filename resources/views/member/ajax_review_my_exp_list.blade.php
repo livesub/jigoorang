@@ -1,7 +1,6 @@
 <script src="{{ asset('/design/js/text_more_btn.js') }}"></script>
 
-
-@if(count($review_saves_exp_infos) > 0)
+                            @if(count($review_saves_exp_infos) > 0)
                                 @foreach($review_saves_exp_infos as $review_saves_exp_info)
 
                                 @php

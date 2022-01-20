@@ -1,4 +1,5 @@
 <script>
+/*
 function more(cnt) {
     $('.box').each(function(){
         var content = $('#content_'+ cnt);
@@ -28,6 +29,7 @@ function more(cnt) {
             }
     });
 }
+*/
 </script>
 
 
@@ -118,10 +120,10 @@ function more(cnt) {
                                             <div class="text_content notshort" id="content_{{ $review_saves_shop_info->id }}" style="word-break: break-all;">
                                                 {!! nl2br($review_saves_shop_info->review_content) !!}
                                             </div>
-                                            <div class="cot_more" id="cot_more_{{ $review_saves_shop_info->id }}">더보기</div>
+                                            <div class="cot_more" id="shop_cot_more_{{ $review_saves_shop_info->id }}">더보기</div>
                                        </div>
                                        <script>
-                                        more({{ $review_saves_shop_info->id }});
+                                        //more({{ $review_saves_shop_info->id }});
                                        </script>
 
 
