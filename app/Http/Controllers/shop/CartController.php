@@ -74,10 +74,8 @@ class CartController extends Controller
         $item_code = $request->input('item_code');
         $post_item_codes = (isset($item_code) && is_array($item_code)) ? $item_code : array();
 
-        $cart_id = $request->input('cart_id');
-        $post_cart_id = (isset($cart_id) && is_array($cart_id)) ? $cart_id : array();
-var_dump($post_ct_chk);
-exit;
+        $each_buy_cart_id = $request->input('each_buy_cart_id');
+
         if($act == "buy")
         {
             if(!count($post_ct_chk)){
@@ -144,7 +142,40 @@ exit;
                 exit;
             }
         }else if ($act == "each_buy"){
-var_dump("sdvsvsdv");
+            // 선택필드 초기화
+            $up_result = shopcarts::whereid($each_buy_cart_id)->first();
+            $up_result->sct_select = 0;
+            $result_up = $up_result->save();
+
+            // 주문 상품의 재고체크
+            $cart_info = DB::table('shopcarts')->where('id', $each_buy_cart_id)->first();
+
+            //삭제되거나 비출력된 상품인지 파악
+            $item_chk = DB::table('shopitems')->where('item_code', $cart_info->item_code)->first();
+
+            if($item_chk->item_display == 'N' || $item_chk->item_del == 'Y')
+            {
+                echo json_encode(['message' => 'discontinued', 'option' => $item_chk->item_name]);
+                exit;
+            }
+
+            // 재고 구함
+            $sct_qty = $cart_info->sct_qty; //주문수량
+
+            if(!$cart_info->sio_id) $it_stock_qty = $CustomUtils->get_item_stock_qty($cart_info->item_code);
+            else $it_stock_qty = $CustomUtils->get_option_stock_qty($cart_info->item_code, $cart_info->sio_id, $cart_info->sio_type);
+
+            if ($sct_qty > $it_stock_qty)
+            {
+                $item_option = $cart_info->item_name;
+                if($cart_info->sio_id) $item_option .= '('.$cart_info->sct_option.')';
+                echo json_encode(['message' => 'no_qty', 'option' => $item_option, 'sum_qty' => number_format($it_stock_qty)]);
+                exit;
+            }
+
+            $update_result = DB::table('shopcarts')->where([['id', $each_buy_cart_id], ['item_code',$cart_info->item_code]])->update(['sct_select' => '1','sct_select_time' => date("Y-m-d H:i:s", time())]);
+            echo json_encode(['message' => 'mem_order']);
+            exit;
         }else if ($act == "alldelete"){ // 비우기 이면
             DB::table('shopcarts')->where('od_id',$tmp_cart_id)->delete();   //row 삭제
         }else if ($act == "seldelete"){ // 선택삭제

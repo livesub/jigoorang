@@ -146,7 +146,7 @@ var_dump("배송비 작업 해야 함");
                                         </ul>
 
                                         <ul class="cart_list_pr block">
-                                        <input type="hidden" id="cart_id[{{ $num }}]" name="cart_id[{{ $num }}]" value="{{ $cart_info->id }}">
+                                        <input type="hidden" id="cart_id[{{ $num }}]" value="{{ $cart_info->id }}">
                                         <input type="hidden" name="sio_type[{{ $num }}]" value="{{ $cart_info->sio_type }}">
                                         <input type="hidden" name="sio_id[{{ $num }}]" value="{{ $cart_info->sio_id }}">
                                         <input type="hidden" name="sio_value[{{ $num }}]" value="{{ $cart_info->sct_option }}">
@@ -155,7 +155,7 @@ var_dump("배송비 작업 해야 함");
                                         <input type="hidden" id="item_price[{{ $num }}]" value="{{ $cart_info->item_price }}">
                                         <input type="hidden" id="item_cust_price[{{ $num }}]" value="{{ $cart_info->item_cust_price }}">
                                             <li class="" id="sit_tot_price_{{ $num }}">{{ number_format($case_price) }}원</li>
-                                            <li><button class="btn-sd" type="button" onclick="return form_check('each_buy');">구매하기</button></li>
+                                            <li><button class="btn-sd" type="button" onclick="return form_check('each_buy', {{ $cart_info->id }});">구매하기</button></li>
                                             <li><span onclick="return dierctdelete({{ $cart_info->id }});">삭제</span></li>
                                         </ul>
 
@@ -201,8 +201,9 @@ var_dump("배송비 작업 해야 함");
                             <input type="hidden" name="url" value="./orderform.php">
                             <input type="hidden" name="records" value="{{ $num }}">
                             <input type="hidden" name="act" id="act" value="">
+                            <input type="hidden" name="each_buy_cart_id" id="each_buy_cart_id" value="">
                             <button class="btn-50" type="button" onclick="location.href='{{ route('sitem') }}'">쇼핑 계속하기</button>
-                            <button class="btn-50-bg" type="button" onclick="return form_check('buy');">전체 구매하기</button>
+                            <button class="btn-50-bg" type="button" onclick="return form_check('buy', '');">전체 구매하기</button>
                         </div>
                     </div>
                 </div>
@@ -323,7 +324,7 @@ function fsubmit_check(f) {
     return true;
 }
 
-function form_check(act) {
+function form_check(act, cart_id) {
 
     var f = document.frmcartlist;
     var cnt = f.records.value;
@@ -337,6 +338,7 @@ function form_check(act) {
         }
 
         $("#act").val(act);
+        $("#each_buy_cart_id").val(cart_id);
 
         var form_var = $("form[name=frmcartlist]").serialize() ;
         $.ajax({
