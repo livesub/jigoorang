@@ -344,8 +344,8 @@ h5 {
 }
 
 .main-container .mbox_100 .sale {
-    width: calc(var(--vw, 1vw) * 83.2);
-    /* width: calc(100% - 296px); */
+    /* width: calc(var(--vw, 1vw) * 83.2); */
+    /* width: calc(100% - 315px); */
     margin-left: auto;
     padding: 0 0 40px 40px;
     height: 100%;

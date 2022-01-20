@@ -1,4 +1,9 @@
 /* default */
+/*
+body::-webkit-scrollbar {
+  display: none;
+} */
+
 /* 스크롤바 */
 
 ::-webkit-scrollbar {
