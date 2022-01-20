@@ -3629,7 +3629,7 @@ input::placeholder {
     background-color: #fff;
     margin: 0;
     position: fixed;
-    top: 21%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
