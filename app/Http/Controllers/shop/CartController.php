@@ -505,9 +505,12 @@ class CartController extends Controller
             $s_cart_id = $CustomUtils->get_session('ss_cart_id');
 
             // 선택필드 초기화
+/*
             $up_result = shopcarts::whereod_id($s_cart_id)->first();  //update 할때 미리 값을 조회 하고 쓰면 update 구문으로 자동 변경
             $up_result->sct_select = 0;
             $result_up = $up_result->save();
+*/
+            $up_result = DB::table('shopcarts')->where('od_id', $s_cart_id)->update(['sct_select' => '0']);
         }
 
         $setting_info = CustomUtils::setting_infos();

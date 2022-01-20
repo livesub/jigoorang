@@ -79,11 +79,15 @@ class OrderController extends Controller
             ->select('a.id', 'a.item_code', 'a.item_name', 'a.sct_price', 'a.sct_point', 'a.sct_qty', 'a.sct_status', 'a.sct_send_cost', 'a.item_sc_type', 'b.sca_id')
             ->leftjoin('shopitems as b', function($join) {
                     $join->on('a.item_code', '=', 'b.item_code');
-                })
-            ->where([['a.od_id',$tmp_cart_id], ['a.sct_select','1']])
-            ->groupBy('a.item_code')
-            ->orderBy('a.id')
-            ->get();
+                });
+            //->where([['a.od_id',$tmp_cart_id], ['a.sct_select','1']])
+            if($sw_direct){
+                $cart_infos = $cart_infos->where([['a.sct_select','1'],['a.sct_direct', '1']]);
+            }else{
+                $cart_infos = $cart_infos->where([['a.sct_select','1'], ['a.sct_direct', '0']]);
+            }
+            //->groupBy('a.item_code')
+            $cart_infos = $cart_infos->orderBy('a.id')->get();
 
         $user_name = '';
         $user_tel = '';
