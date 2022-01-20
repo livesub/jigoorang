@@ -184,9 +184,11 @@
                             </div>
 
                             @if($item_info->item_type1 != 0)
-                            <div class="new-icon">
-                                <p>{!! $CustomUtils->item_icon($item_info) !!}</p>
-                            </div>
+                                {!! $CustomUtils->item_icon($item_info) !!}
+                            @else
+                                <div class="new-icon">
+                                <p>55555</p>
+                                </div>
                             @endif
 
                             <div class="goods_title">

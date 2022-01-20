@@ -786,16 +786,36 @@ $um_value='80/0.5/3'
         $icon = "";
         switch($item->item_type1) {
             case 1:
-                $icon = 'NEW';
+                $icon = '
+                <div class="new-icon">
+                <p>new</p>
+                </div>
+                ';
+                //$icon = 'NEW';
                 break;
             case 2:
-                $icon = 'SALE';
+                $icon = '
+                <div class="new-icon">
+                <p>SALE</p>
+                </div>
+                ';
+                //$icon = 'SALE';
                 break;
             case 3:
-                $icon = 'BIG SALE';
+                $icon = '
+                <div class="new-icon">
+                <p>BIG SALE</p>
+                </div>
+                ';
+                //$icon = 'BIG SALE';
                 break;
             case 4:
-                $icon = 'HOT';
+                $icon = '
+                <div class="new-icon">
+                <p>new</p>
+                </div>
+                ';
+                //$icon = 'HOT';
                 break;
             default:
                 break;
