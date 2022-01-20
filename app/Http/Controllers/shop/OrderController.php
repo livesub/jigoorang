@@ -76,7 +76,7 @@ class OrderController extends Controller
         $goods_count = -1;
 
         $cart_infos = DB::table('shopcarts as a')
-            ->select('a.id', 'a.item_code', 'a.item_name', 'a.sct_price', 'a.sct_point', 'a.sct_qty', 'a.sct_status', 'a.sct_send_cost', 'a.item_sc_type', 'b.sca_id')
+            ->select('a.*', 'b.sca_id', 'b.item_manufacture', 'b.item_price')
             ->leftjoin('shopitems as b', function($join) {
                     $join->on('a.item_code', '=', 'b.item_code');
                 });
@@ -88,6 +88,11 @@ class OrderController extends Controller
             }
             //->groupBy('a.item_code')
             $cart_infos = $cart_infos->orderBy('a.id')->get();
+
+        if(count($cart_infos) == 0){
+            return redirect()->route('cartlist')->with('alert_messages', '주문 하실 상품이 없습니다.');
+            exit;
+        }
 
         $user_name = '';
         $user_tel = '';
