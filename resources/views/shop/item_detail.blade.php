@@ -131,7 +131,8 @@
                                         @if($item_info->item_point != "0")
                                         <ul class="dt_pr_st">
                                             <li>적립금</li>
-                                            <li onclick="" class="dt_not tooltip">{{ $item_info->item_point }}%
+                                            <li onclick="" class="dt_not tooltip">
+                                                <span class="discount">{{ $item_info->item_point }}%<span>
                                                 <span class="tooltiptext">
                                                     <!-- <div class="del"></div> -->
                                                     최종 적립 금액은 할인, 적립금 사용액, 배송료를 제외한 금액을 기준으로 적립되며 옵션 가격, 수량에 따라 달라질 수 있습니다
