@@ -655,9 +655,10 @@ function hap_price(){
     }
 
     var sale_price = total_cust_price - principal;
-
+    var hap_total = total + 0;  //총 상품 금액 + 배송비 합
     $("#total_price").html(number_format(String(total))+"원");
     $("#total_cust_price").html(number_format(String(sale_price * -1))+"원");
+    $("#hap_total").html(number_format(String(hap_total))+"원");
 }
 
 // php chr() 대응

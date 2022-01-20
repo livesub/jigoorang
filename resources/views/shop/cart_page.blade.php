@@ -191,7 +191,7 @@ var_dump("배송비 작업 해야 함");
                             </ul>
                             <ul class="ct_tot_p">
                                 <li>총 결제 금액</li>
-                                <li>14,500</li>
+                                <li id="hap_total"></li>
                             </ul>
                         </div>
 
@@ -323,8 +323,8 @@ function form_check(act) {
             data : form_var,
             dataType : 'text',
             success : function(result){
-//alert(result);
-//return false;
+alert(result);
+return false;
                 var json = JSON.parse(result);
 //alert(json.message);
 
