@@ -1,34 +1,4 @@
-<script>
-function more(cnt) {
-    $('.box').each(function(){
-        var content = $('#content_'+ cnt);
-        var content_txt = content.text();
-        var btn_more = $('#cot_more_'+ cnt);
-
-        if(content_txt.length < 200){
-            btn_more.hide();
-            content.removeClass('notshort');
-        }
-
-        btn_more.click(toggle_content);
-
-        function toggle_content(){
-            if(content.hasClass('short')){
-                // 접기 상태
-                btn_more.html('더보기');
-                content.removeClass('short');
-                content.addClass('notshort');
-            }else{
-                // 더보기 상태
-                btn_more.html('접기');
-                content.html(content_txt);
-                content.addClass('short');
-                content.removeClass('notshort');
-                }
-            }
-    });
-}
-</script>
+<script src="{{ asset('/design/js/text_more_btn.js') }}"></script>
 
 
                                 @if(count($review_saves_shop_infos) > 0)
@@ -96,7 +66,7 @@ function more(cnt) {
 
                                                     @if($i == 5)
                                             </div>
-                                            <div class="cot_rating_01" id="project_{{ $review_saves_shop_info->id }}">
+                                            <div class="cot_rating_01" id="shop_project_{{ $review_saves_shop_info->id }}">
                                                 <span>{{ $rating_item_info->$tmp }}</span>
                                                 <div class="inline">
                                                     <div class="stars-outer">
@@ -115,15 +85,11 @@ function more(cnt) {
 
                                        <div class="cot_review_text box">
 
-                                            <div class="text_content notshort" id="content_{{ $review_saves_shop_info->id }}" style="word-break: break-all;">
+                                            <div class="text_content notshort" id="shop_content_{{ $review_saves_shop_info->id }}" style="word-break: break-all;">
                                                 {!! nl2br($review_saves_shop_info->review_content) !!}
                                             </div>
-                                            <div class="cot_more" id="cot_more_{{ $review_saves_shop_info->id }}">더보기</div>
+                                            <div class="cot_more" id="shop_cot_more_{{ $review_saves_shop_info->id }}" onclick="shop_more({{ $review_saves_shop_info->id }});">더보기</div>
                                        </div>
-                                       <script>
-                                        more({{ $review_saves_shop_info->id }});
-                                       </script>
-
 
                                         <div class="cot_photo">
                                         @foreach($review_save_imgs_shop_infos as $review_save_imgs_shop_info)
