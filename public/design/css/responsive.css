@@ -4,8 +4,6 @@
         display: none;
     }
 
-
-
     /* 레이아웃 */
     .wrap {
         padding-top: 60px;
@@ -1586,6 +1584,15 @@ background-size: cover;
         font-size: 13px;
     }
 
+
+    /* 리뷰 이미지 모달 */
+
+    .modal .modal-container.dt_img_s {
+        width: 100%;
+        max-width: 500px;
+        height: 500px;
+    }
+
     /* 공통 */
     .title_area.list h2 {
         font-size: 16px;
@@ -2572,8 +2579,13 @@ background-size: cover;
     } */
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_review_text .text_content {
+        font-size: 13px;
         width: 100%;
         word-break: break-all;
+    }
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .cot_review_text .text_content.notshort {
+        height: 35.5px;
     }
 
 
@@ -3270,6 +3282,27 @@ background-size: cover;
         font-size: 13px;
     }
 
+    /* 리뷰 이미지 모달 */
+
+      .modal .modal-container.dt_img_s {
+        width: 100%;
+        max-width: 320px;
+        height: 207px;
+    }
+
+    .modal .modal-container.dt_img_s .btn-close {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 20px;
+        height: 20px;
+        cursor: pointer;
+        background: url(../recources/icons/del_bk.png) no-repeat center;
+        z-index: 1;
+        margin-top: 6px;
+        margin-right: 6px;
+    }
+
 
     /* 모달 */
 
@@ -3560,7 +3593,7 @@ background-size: cover;
         color: #fff;
         font-size: 12px;
         font-weight: bold;
-        padding-top: 2px;
+        padding-top: 4px;
     }
 
     .hot-icon {
@@ -3573,7 +3606,7 @@ background-size: cover;
         color: #fff;
         font-size: 12px;
         font-weight: bold;
-        padding-top: 2px;
+        padding-top: 4px;
     }
 
     .sale-icon {
@@ -3586,7 +3619,7 @@ background-size: cover;
         color: #fff;
         font-size: 12px;
         font-weight: bold;
-        padding-top: 2px;
+        padding-top: 4px;
     }
 
     /* 레이아웃 */
@@ -3761,6 +3794,14 @@ background-size: cover;
 
     .main-container .mbox_100 .slide_btn_2 {
         margin-left: 47px;
+    }
+
+    .main-container .mbox_1280 .stars-outer{
+        font-size: 13px;
+    }
+
+    .main-container .mbox_1280 .number {
+        font-size: 12px;
     }
 
     /********** 서브페이지 **********/

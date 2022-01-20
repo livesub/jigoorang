@@ -786,16 +786,36 @@ $um_value='80/0.5/3'
         $icon = "";
         switch($item->item_type1) {
             case 1:
-                $icon = 'NEW';
+                $icon = '
+                <div class="new-icon">
+                <p>NEW</p>
+                </div>
+                ';
+                //$icon = 'NEW';
                 break;
             case 2:
-                $icon = 'SALE';
+                $icon = '
+                <div class="sale-icon">
+                <p>SALE</p>
+                </div>
+                ';
+                //$icon = 'SALE';
                 break;
             case 3:
-                $icon = 'BIG SALE';
+                $icon = '
+                <div class="sale-icon">
+                <p>BIG SALE</p>
+                </div>
+                ';
+                //$icon = 'BIG SALE';
                 break;
             case 4:
-                $icon = 'HOT';
+                $icon = '
+                <div class="hot-icon">
+                <p>HOT</p>
+                </div>
+                ';
+                //$icon = 'HOT';
                 break;
             default:
                 break;
@@ -1370,6 +1390,40 @@ $um_value='80/0.5/3'
 
         return $str;
     }
+
+    //장바구니 옵션 뿌리기
+    function new_print_item_options($id, $item_code, $cart_id)
+    {
+        $item_option = DB::table('shopcarts')->select('sct_option', 'sct_qty', 'sio_price')->where([['id', $id], ['item_code', $item_code], ['od_id',$cart_id]])->first();
+
+        $str = '';
+        $i = '';
+
+        if($item_option->sio_price > 0) {
+            $price_plus = '+';
+            $str .= '<tr><td>옵션 : '.$item_option->sct_option.' '.$item_option->sct_qty.'개 ('.$price_plus.$this->display_price($item_option->sio_price).')</td></tr>'.PHP_EOL;
+        }else{
+            $str .= '<tr><td>'.$item_option->sct_option.' '.$item_option->sct_qty.'개'.'</td></tr>'.PHP_EOL;
+        }
+
+/*
+        foreach($item_options as $item_option){
+            if($i == 0) $str .= '<ul>'.PHP_EOL;
+            $price_plus = '';
+
+            if($item_option->sio_price > 0) {
+                $price_plus = '+';
+                $str .= '<tr><td>옵션 : '.$item_option->sct_option.' '.$item_option->sct_qty.'개 ('.$price_plus.$this->display_price($item_option->sio_price).')</td></tr>'.PHP_EOL;
+            }else{
+                $str .= '<tr><td>'.$item_option->sct_option.' '.$item_option->sct_qty.'개'.'</td></tr>'.PHP_EOL;
+            }
+        }
+
+
+*/
+        return $str;
+    }
+
 
     // 배송비 구함
     function get_sendcost($cart_id, $selected=1)

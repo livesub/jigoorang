@@ -59,10 +59,10 @@
                 <span class="sit_opt_subj">{{ $cart->sct_option }}</span>
             </div>
             <div class="opt_count">
-                <button type="button" class="sit_qty_minus btn_frmline"><i class="fa fa-minus" aria-hidden="true"></i><span class="sound_only">감소</span></button>
+                <button type="button" class="sit_qty_minus btn_frmline"><i class="fa fa-minus" aria-hidden="true"></i><span class="sound_only">-</span></button>
                 <label for="ct_qty_{{ $i }}" class="sound_only">수량</label>
                 <input type="text" name="ct_qty[{{ $item->item_code }}][]" value="{{ $cart->sct_qty }}" id="ct_qty_{{ $i }}" class="num_input" size="5">
-                <button type="button" class="sit_qty_plus btn_frmline"><i class="fa fa-plus" aria-hidden="true"></i><span class="sound_only">증가</span></button>
+                <button type="button" class="sit_qty_plus btn_frmline"><i class="fa fa-plus" aria-hidden="true"></i><span class="sound_only">+</span></button>
                 <span class="sit_opt_prc">{{ $sio_price }}</span>
                 <button type="button" class="sit_opt_del"><i class="fa fa-times" aria-hidden="true"></i><span class="sound_only">삭제</span></button>
             </div>
@@ -128,6 +128,8 @@ function formcheck(f)
         data : form_var,
         dataType : 'text',
         success : function(result){
+alert(result);
+return false;
             var json = JSON.parse(result);
 //alert(json.message);
 //return false;

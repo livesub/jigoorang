@@ -30,8 +30,12 @@
                         <div class="swiper submenu">
                             <ul class="swiper-wrapper submenu_h">
                                 @foreach($cate_infos as $cate_info)
+                                    @php
+                                        $ca_id_class = '';
+                                        if($ca_id == $cate_info->sca_id) $ca_id_class = 'class="bct_active"';
+                                    @endphp
                                 <a href="{{ route('sitem','ca_id='.$cate_info->sca_id) }}" class="swiper-slide">
-                                <li>{{ $cate_info->sca_name_kr }}</li>
+                                <li {{ $ca_id_class }}>{{ $cate_info->sca_name_kr }}</li>
                                 <!-- class="bct_active" 메뉴활성 -->
                                 </a>
                                 @endforeach
@@ -45,11 +49,12 @@
                         <div class="swiper submenu_sol">
                             <ul class="swiper-wrapper submenu_innr">
                               <li class="swiper-slide">
-                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id=all') }}">
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id=all&sub_cate=0') }}">
                               @php
                                 $class_all = '';
                                 if($sub_ca_id == 'all' || $sub_ca_id == "")
                                 $class_all = ' class="active" ';
+                                $sub_cate_num = 1;
                               @endphp
                               <span {!! $class_all !!}>전체</span> <!-- class="active" 클릭시 class 활성-->
                               </a></li>
@@ -60,9 +65,11 @@
                                     if($sub_ca_id == $sub_cate_info->sca_id) $class_chk = ' class="active" ';
                                 @endphp
                               <li id="sd_{{ $sub_cate_info->id }}" class="swiper-slide">
-                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_cate_info->sca_id) }}">
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_cate_info->sca_id.'&sub_cate='.$sub_cate_num) }}">
                               <span {!! $class_chk !!}>{{ $sub_cate_info->sca_name_kr }}</span></a></li>
-
+                                @php
+                                    $sub_cate_num++;
+                                @endphp
                               @endforeach
 
                             </ul>
@@ -159,9 +166,14 @@
                                 $dip_score = number_format($item_info->item_average, 2);
 
                                 //응원하기 부분
-                                $wish_chk = DB::table('wishs')->where([['user_id', Auth::user()->user_id], ['item_code', $item_info->item_code]])->count();
-                                $wish_class = "wishlist";
-                                if($wish_chk > 0) $wish_class = "wishlist_on";
+                                if(Auth::user() != ""){
+                                    $wish_chk = DB::table('wishs')->where([['user_id', Auth::user()->user_id], ['item_code', $item_info->item_code]])->count();
+                                    $wish_class = "wishlist";
+                                    if($wish_chk > 0) $wish_class = "wishlist_on";
+                                }else{
+                                    $wish_class = "wishlist";
+                                }
+
                             @endphp
                         <div class="goods">
 
@@ -172,9 +184,11 @@
                             </div>
 
                             @if($item_info->item_type1 != 0)
-                            <div class="new-icon">
-                                <p>{!! $CustomUtils->item_icon($item_info) !!}</p>
-                            </div>
+                                {!! $CustomUtils->item_icon($item_info) !!}
+                            @else
+                                <div class="icon_none">
+                                <p></p>
+                                </div>
                             @endif
 
                             <div class="goods_title">
@@ -220,10 +234,10 @@
                                     <span class="left">
                                         <p>리뷰 {{ $item_info->review_cnt }}</p>
                                     </span>
+
                                     <span class="right">
                                         <p>응원하기</p>
-
-                                        <span class="{{ $wish_class }}"></span><!-- <span class="wishlist_on"></span> 활성-->
+                                        <span class="sns_wish {{ $wish_class }}" id="wish_css_{{ $item_info->item_code }}" onclick="item_wish('{{ $item_info->item_code }}', {{ Auth::user() }});"></span><!-- <span class="wishlist_on"></span> 활성-->
                                     </span>
                                 </div>
                             </div>
@@ -268,37 +282,52 @@
     </div>
     <!-- 메인 컨테이너 끝 -->
 
-@php
-$aa = 20;
-@endphp
-<input type="hidden" id="tt" value="{{ $aa }}">
 
+<input type="hidden" id="sub_cate" value="{{ $sub_cate }}">
 
 <script src="{{ asset('/design/js/sub_menu.js') }}"></script>
 
-
-<!--
 <script>
+    // wish 상품보관
+    function item_wish(item_code, auth)
+    {
+        if(auth == undefined){
+            alert('회원만 이용 가능합니다.\n로그인 후 이용해 주세요');
+            return false;
+        }else{
+            $.ajax({
+                type: 'get',
+                url: '{{ route('ajax_wish') }}',
+                dataType: 'text',
+                data: {
+                    'item_code' : item_code,
+                },
+                success: function(result) {
+    //alert(result);
+    //return false;
+                    if(result == "ok"){
+                        $("#wish_css_"+item_code).addClass('wishlist_on');
+                    }
 
+                    if(result == "del"){
+                        $("#wish_css_"+item_code).removeClass('wishlist_on');
+                        $("#wish_css_"+item_code).addClass('wishlist');
+                    }
 
+                    if(result == "no_item"){
+                        alert('죄송합니다. 단종된 상품입니다.');
+                        return false;
+                    }
+                },error: function(result) {
+                    console.log(result);
+                }
+            });
+        }
+    }
+</script>
 
 <script>
-function sd (num) {
-//alert(num);
-
-//$("#sd_"+num).focus();
-
-/*
-    var number_sd = $('sd'+num);
-
-    //number_sd.click(function(){
-        var index = $(this).index();
-
-        swiper.slideTo(index + 1);
-    //})
-*/
-}
-sd(23);
+    test('{{ $sub_cate }}');
 </script>
 
 

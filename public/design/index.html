@@ -22,6 +22,7 @@
                 <link rel="stylesheet" href="./css/responsive.css">
 
                 <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"/>
+                <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
 
                 <script>
                     let vw = window.innerWidth * 0.01;
@@ -76,6 +77,26 @@
                     </div>
 
                 </div>
+
+
+
+                <!-- 공지 팝업 -->
+            <div class="n_popup_con" id="popup">
+                <div class="n_popup-back"></div>
+                <div class="n_popup">
+
+                    <img src="./recources/bg/notie.png"/>
+
+                    <div class="n_btn">
+                        <div class="n_btn_1">
+                        <input type="checkbox" name="pop_today" id="pop_today">
+                        <label for="pop_today">1주일간 보지 않음</label>
+                        </div>
+
+                        <div class="n_btn_2" onclick="daycloseWin();">닫기</div>
+                    </div>
+                </div>
+            </div>
 
 
                 <div class="wrap">
@@ -134,7 +155,7 @@
                             <div class="background"></div>
                             <div id="Sidenav" class="sidenav">
                                 <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
-                                    <img src="../../recources/icons/icon-cls.png" alt="">
+                                    <img src="./recources/icons/icon-cls.png" alt="">
                                 </a>
 
                                 <div class="m-menu">
@@ -880,6 +901,8 @@
 <script src="./js/serach.js"></script>
 <script src="./js/serch_modal.js"></script>
 <script src="./js/sidenav.js"></script>
+<script src="./js/notie_pop.js"></script>
+
 </body>
 
 </html>

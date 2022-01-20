@@ -1,3 +1,6 @@
+<script src="{{ asset('/design/js/text_more_btn.js') }}"></script>
+
+
                                 @if(count($review_saves_shop_infos) > 0)
                                     @foreach($review_saves_shop_infos as $review_saves_shop_info)
                                         @php
@@ -63,7 +66,7 @@
 
                                                     @if($i == 5)
                                             </div>
-                                            <div class="cot_rating_01" id="project_{{ $review_saves_shop_info->id }}">
+                                            <div class="cot_rating_01" id="shop_project_{{ $review_saves_shop_info->id }}">
                                                 <span>{{ $rating_item_info->$tmp }}</span>
                                                 <div class="inline">
                                                     <div class="stars-outer">
@@ -74,7 +77,7 @@
                                             </div>
                                         </div>
                                         <script>
-                                            star({{ $dip_score }},{{ $review_saves_shop_info->id }});
+                                            shop_star({{ $dip_score }},{{ $review_saves_shop_info->id }});
                                         </script>
                                                     @endif
                                                 @endfor
@@ -82,12 +85,14 @@
 
                                        <div class="cot_review_text box">
 
-                                            <div class="text_content" id="content_{{ $review_saves_shop_info->id }}">
+                                            <div class="text_content notshort" id="shop_content_{{ $review_saves_shop_info->id }}" style="word-break: break-all;">
                                                 {!! nl2br($review_saves_shop_info->review_content) !!}
                                             </div>
-                                            <div class="cot_more" id="cot_more_{{ $review_saves_shop_info->id }}"></div>
+                                            <div class="cot_more" id="shop_cot_more_{{ $review_saves_shop_info->id }}" onclick="shop_more({{ $review_saves_shop_info->id }});">더보기</div>
                                        </div>
-
+                                       <script>
+                                       shop_btn({{ $review_saves_shop_info->id }});
+                                       </script>
 
                                         <div class="cot_photo">
                                         @foreach($review_save_imgs_shop_infos as $review_save_imgs_shop_info)
@@ -120,34 +125,5 @@
         $("#shop_more").hide();
     }
 </script>
-
-<!--<script>
-    $('.box').each(function(cnt){
-        var content = $('#content_'+ cnt);
-        var content_txt = content.text();
-        var content_txt_short = content_txt.substr(0,150)+"...";
-        var btn_more = $('#cot_more_'+ cnt);
-        if(content_txt.length > 150){
-            btn_more.html('더보기');
-            content.html(content_txt_short);
-        }
-        btn_more.click(toggle_content);
-        function toggle_content(){
-        if($(this).hasClass('short')){
-            // 접기 상태
-            $(this).html('더보기');
-            content.html(content_txt_short);
-            $(this).removeClass('short');
-        }else{
-            // 더보기 상태
-            $(this).html('접기');
-            content.html(content_txt);
-            $(this).addClass('short');
-            }
-        }
-    });
-</script>-->
-
-
 
 

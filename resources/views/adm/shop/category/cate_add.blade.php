@@ -37,7 +37,7 @@
             <input type="radio" name="sca_display" id="sca_display_no" value="N">출력안함
         </td>
         <td>출력순서</td>
-        <td><input type="text" name="sca_rank" id="sca_rank" maxlength="3" size="3"  onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><br>※ 숫자만 입력 하세요. 숫자가 높을 수록 먼저 출력 됩니다. </td>
+        <td><input type="text" name="sca_rank" id="sca_rank" maxlength="4" size="4" value="9999" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><br>※ 숫자만 입력 하세요. 숫자가 높을 수록 먼저 출력 됩니다. </td>
     </tr>
     <tr>
         <td>이미지</td>

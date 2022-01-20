@@ -79,11 +79,15 @@ class OrderController extends Controller
             ->select('a.id', 'a.item_code', 'a.item_name', 'a.sct_price', 'a.sct_point', 'a.sct_qty', 'a.sct_status', 'a.sct_send_cost', 'a.item_sc_type', 'b.sca_id')
             ->leftjoin('shopitems as b', function($join) {
                     $join->on('a.item_code', '=', 'b.item_code');
-                })
-            ->where([['a.od_id',$tmp_cart_id], ['a.sct_select','1']])
-            ->groupBy('a.item_code')
-            ->orderBy('a.id')
-            ->get();
+                });
+            //->where([['a.od_id',$tmp_cart_id], ['a.sct_select','1']])
+            if($sw_direct){
+                $cart_infos = $cart_infos->where([['a.sct_select','1'],['a.sct_direct', '1']]);
+            }else{
+                $cart_infos = $cart_infos->where([['a.sct_select','1'], ['a.sct_direct', '0']]);
+            }
+            //->groupBy('a.item_code')
+            $cart_infos = $cart_infos->orderBy('a.id')->get();
 
         $user_name = '';
         $user_tel = '';
@@ -617,6 +621,11 @@ class OrderController extends Controller
         $imp_card_quota     = $request->input('imp_card_quota');   //카드사에서 전달 받는 값(할부개월수)
         $imp_card_number    = $request->input('imp_card_number');   //카드사에서 전달 받는 값(카드번호)
 
+        //예외 처리
+        if($imp_apply_num == "" || $imp_apply_num == "0" || $imp_paid_amount == "" || $imp_paid_amount == "0" || $imp_merchant_uid == "" || $imp_merchant_uid == "0" || $imp_uid == "" || $imp_uid == "0"){
+            return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.-3');
+            exit;
+        }
 /*
 //데스트 위함
 $imp_paid_amount = 7500;

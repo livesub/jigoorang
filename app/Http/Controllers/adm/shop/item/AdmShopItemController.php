@@ -54,7 +54,7 @@ class AdmShopItemController extends Controller
         }
 
         //검색 selectbox 만들기
-        $search_selectboxs = DB::table('shopcategorys')->where('sca_display', 'Y')->orderby('sca_id','ASC')->orderby('sca_rank','DESC')->get();
+        $search_selectboxs = DB::table('shopcategorys')->where('sca_display', 'Y')->orderby('sca_id','ASC')->orderby('sca_rank','ASC')->get();
 
         //검색 처리
         $ca_id          = $request->input('ca_id');

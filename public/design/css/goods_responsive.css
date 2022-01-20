@@ -249,6 +249,14 @@
         background-position: center;
         display: block;
     }
+    .eval .board .board_wrap .goods .goods_bottom .right .wishlist_on {
+      width: 23px;
+      margin-top: 4px;
+      background: url("../recources/icons/icon-heart-2.png") no-repeat;
+      background-size: 22px auto;
+      background-position: center;
+      display: block;
+  }
 
     /* 쇼핑 대 카테고리 */
 
@@ -322,6 +330,7 @@
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r {
     margin-left: 0px;
     margin-top: 30px;
+    width: 100%;
 }
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r h3 {
@@ -385,6 +394,10 @@
    margin-left: 30px;
 }
 
+.eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr .dt_pr_st .discount {
+   top:5px;
+}
+
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_sel {
    width: 100%;
    margin-bottom: 10px;
@@ -413,7 +426,7 @@
 }
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_tt .dt_del {
-   background: url('../recources/icons/del_bk@3x.png');
+   background: url('../recources/icons/del_bk@3x.png') no-repeat center;
    width: 32px;
    height: 32px;
    background-size: 30px 30px;
@@ -568,11 +581,23 @@
    background: url('../recources/icons/sns_share@3x.png') no-repeat center;
    background-size: 24px 24px;
    background-position-y: 5px;
+   border-left: none;
+}
+
+.wishlist_on {
+   background: url("../recources/icons/icon-heart-2.png") no-repeat center;
+   background-size: 24px 21px;
+   background-position-y: 8px;
+   color: #3ec4ba;
 }
 
 
 
 .eval .board .board_wrap .shop_goods_ct {
+
+}
+
+.eval .board .board_wrap .shop_goods .shop_goods_dt_l .som_b .swiper-slide {
 
 }
 
@@ -601,7 +626,6 @@
    padding: 20px;
    width: 25%;
    text-align: center;
-   border-right: none;
    border-bottom: none;
    font-size: 20px;
    background: #fff;
@@ -613,10 +637,11 @@
    color: #fff;
    font-weight: bold;
    border: none;
+   padding-top: 22px;
 }
 
 .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_sec_mn li:last-child{
-   border-right: solid 2px #f1f1f1;
+   /* border-right: solid 2px #f1f1f1; */
 }
 
 .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot {
@@ -708,7 +733,7 @@
    font-weight: bold;
 }
 
-.eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .number{
+.eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .score{
    font-size: 28px;
    font-weight: bold;
    color: #fc6a20;
@@ -1165,6 +1190,9 @@
         margin: 0 auto;
         color: #fff;
     }
+    .eval .board .board_wrap .scrollmenu .swiper-wrapper.submenu_h a:last-child {
+      border-right: solid 3px #ddd;
+  }
 
     .eval .board .board_wrap .submenu_sol .swiper-button-next01 {
         float: right;
@@ -1310,10 +1338,24 @@
         display: block;
     }
 
+    .eval .board .board_wrap .goods .goods_bottom .right .wishlist_on {
+      width: 23px;
+      margin-top: 4px;
+      background: url("../recources/icons/icon-heart-2.png") no-repeat;
+      background-size: 20px auto;
+      background-position: center;
+      display: block;
+  }
+
 
 /************
 상품 페이지
  ************/
+
+.eval .board .board_wrap .shop_goods .shop_goods_dt_l .som_b .swiper-slide {
+   max-width: 80px;
+   width: 100%;
+}
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_l .dt_sub_som img{
     width: 100%;
@@ -1331,13 +1373,14 @@
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_sec_mn li{
     border: solid 2px #f1f1f1;
-    padding: 30px 20px 20px 20px;
+    /* padding: 30px 20px 20px 20px; */
     font-size: 16px;
     background: #fff;
+    border-bottom: none;
  }
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_sec_mn li:first-child{
-    padding: 20px 20px 20px 20px;
+    /* padding: 20px 20px 20px 20px; */
     font-size: 16px;
  }
 
@@ -1404,7 +1447,7 @@
     font-weight: bold;
  }
 
- .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .number{
+ .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .score{
     font-size: 20px;
     font-weight: bold;
     color: #fc6a20;
@@ -1887,6 +1930,10 @@
       font-size: 12px;
    }
 
+   button.btn-full-sd {
+      font-size: 13px;
+   }
+
     /* 상품 페이지 */
 
     /* 스크롤메뉴 */
@@ -1931,7 +1978,7 @@
         color: #3ec4ba;
     }
 
-    .eval .board .board_wrap .scrollmenu .swiper-wrapper .bct_active{
+    .eval .board .board_wrap .scrollmenu .swiper-wrapper .wiper-slide .bct_active{
       border: solid 2px #3ec4ba;
       color: #3ec4ba;
   }
@@ -1979,6 +2026,10 @@
     .eval .board .board_wrap .scrollmenu .swiper-wrapper.submenu_innr .swiper-slide .active {
         padding: 6px 12px;
     }
+
+    .eval .board .board_wrap .scrollmenu .swiper-wrapper.submenu_h a:last-child {
+      border-right: solid 2px #ddd;
+  }
 
     .eval .board .board_wrap .submenu_sol .swiper-button-next01 {
         float: right;
@@ -2059,6 +2110,11 @@
         margin-bottom: 20px;
     }
 
+    .eval .board .board_wrap .shop_goods .shop_goods_dt_l .som_b .swiper-slide {
+      max-width: 62px;
+      width: 100%;
+   }
+
     .eval .board .board_wrap .goods .goods_img img {
         width: 100%;
         height: auto;
@@ -2136,6 +2192,15 @@
       display: block;
     }
 
+    .eval .board .board_wrap .goods .goods_bottom .right .wishlist_on {
+      width: 14px;
+      margin-top: 4px;
+      background: url("../recources/icons/icon-heart-2.png") no-repeat;
+      background-size: 13px auto;
+      background-position: center;
+      display: block;
+  }
+
 
 /************
 상품 페이지
@@ -2157,10 +2222,16 @@
 
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_sec_mn li{
-    border: solid 2px #f1f1f1;
-    padding: 11px 5px 0px 5px;
+    border: solid 1px #f1f1f1;
+    padding: 11px 0px 0px 0px;
+    padding-top: 18px;
     font-size: 12px;
     background: #fff;
+    border-bottom: none;
+ }
+
+ .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_sel {
+    font-size: 13px;
  }
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .dt_hide {
@@ -2190,6 +2261,10 @@
     font-size: 13px;
  }
 
+ .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr .dt_pr_st .dt_not {
+   background-position-y: 3px;
+ }
+
 
  .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op {
     padding: 11px;
@@ -2200,7 +2275,11 @@
  }
 
  .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_tt .dt_del {
-    bottom: 5px;
+   background: url("../recources/icons/del_bk@3x.png") no-repeat center;
+   width: 15px;
+   height: 17px;
+   background-size: 27px 27px;
+   background-position-y: -6px;
 }
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_nm li p {
@@ -2227,9 +2306,11 @@
 }
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_sec_mn li:first-child{
-    padding: 5px 10px 5px 10px;
+    /* padding: 5px 10px 5px 10px; */
+    padding: 10px;
     font-size: 12px;
  }
+
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_sec_mn .dt_on{
     background: #3ec4ba;
@@ -2237,10 +2318,12 @@
     color: #fff;
     font-weight: bold;
     border: none;
+    padding-top: 19px;
  }
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 {
     padding-top: 15px;
+    font-size: 13px;
  }
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .set_tt {
@@ -2308,7 +2391,7 @@
     font-weight: bold;
  }
 
- .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .number{
+ .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_1 .cot_rating_02 .score{
     font-size: 18px;
     font-weight: bold;
     color: #fc6a20;
@@ -2336,7 +2419,7 @@
  }
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_review .cot_day {
-    font-size: 15px;
+    font-size: 13px;
     color: #707070;
     top: 3px;
  }
@@ -2439,6 +2522,11 @@
     padding-bottom: 20px;
  }
 
+ .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review_text .text_content.notshort {
+   height: 35.5px;
+}
+
+
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review_text br {
     display: none;
  }
@@ -2509,7 +2597,7 @@
  .sns {
     font-size: 10px;
     padding-top: 25px;
-    width: 20%;
+    width: 23%;
     height: 48px;
 }
 .sns_wish {
@@ -2522,8 +2610,15 @@
     background: url('../recources/icons/sns_share@3x.png') no-repeat center;
     background-size: 20px 21px;
     background-position-y: 5px;
+    border-left: none;
 }
 
+.wishlist_on {
+   background: url('../recources/icons/icon-heart-2.png') no-repeat center;
+   background-size: 19px 18px;
+   background-position-y: 7px;
+   color: #3ec4ba;
+}
 .btn_200_sol {
     width: 40%;
     height: 48px;
