@@ -3796,6 +3796,14 @@ background-size: cover;
         margin-left: 47px;
     }
 
+    .main-container .mbox_1280 .stars-outer{
+        font-size: 13px;
+    }
+
+    .main-container .mbox_1280 .number {
+        font-size: 12px;
+    }
+
     /********** 서브페이지 **********/
 
 
