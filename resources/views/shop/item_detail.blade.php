@@ -458,6 +458,7 @@
         //slidesPerView: {{ $img_cnt }},   //상품등록 이미지 갯수
         //freeMode: true,
         watchSlidesProgress: true,
+        touchRatio: 0,
         //wrapperClass:'row',
 
         navigation: {
