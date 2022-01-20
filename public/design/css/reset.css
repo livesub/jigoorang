@@ -485,6 +485,8 @@ input[type="checkbox"]:checked::after {
 input {
   padding: 10px;
   color: #aeaeae;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
 }
 
 textarea {
