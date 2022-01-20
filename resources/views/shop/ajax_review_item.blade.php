@@ -54,17 +54,17 @@
 
                                                               <div class="cot_review_text box">
 
-                                                                    <div class="text_content notshort" id="content_{{ $review_info->id }}" style="word-break: break-all;">
+                                                                    <div class="text_content notshort" id="shop_content_{{ $review_info->id }}" style="word-break: break-all;">
                                                                         <p>{{ $review_info->review_content }}</p>
                                                                     </div>
-                                                                    <div class="cot_more" id="cot_more_{{ $review_info->id }}">
+                                                                    <div class="cot_more" id="shop_cot_more_{{ $review_info->id }}" onclick="shop_more({{ $review_info->id }});">
                                                                         <p>더보기</p>
                                                                         <span class="arr_bt"></span>
                                                                     </div>
 
                                                                 </div>
-                                                               <script>
-                                                                    more({{ $review_info->id }});
+                                                                <script>
+                                                                    shop_btn({{ $review_info->id }});
                                                                 </script>
 
                                                                 @php

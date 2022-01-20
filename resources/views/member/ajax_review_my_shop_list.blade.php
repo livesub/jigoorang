@@ -77,7 +77,7 @@
                                             </div>
                                         </div>
                                         <script>
-                                            star({{ $dip_score }},{{ $review_saves_shop_info->id }});
+                                            shop_star({{ $dip_score }},{{ $review_saves_shop_info->id }});
                                         </script>
                                                     @endif
                                                 @endfor
@@ -90,6 +90,9 @@
                                             </div>
                                             <div class="cot_more" id="shop_cot_more_{{ $review_saves_shop_info->id }}" onclick="shop_more({{ $review_saves_shop_info->id }});">더보기</div>
                                        </div>
+                                       <script>
+                                       shop_btn({{ $review_saves_shop_info->id }});
+                                       </script>
 
                                         <div class="cot_photo">
                                         @foreach($review_save_imgs_shop_infos as $review_save_imgs_shop_info)
