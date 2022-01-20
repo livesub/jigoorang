@@ -74,6 +74,10 @@ class CartController extends Controller
         $item_code = $request->input('item_code');
         $post_item_codes = (isset($item_code) && is_array($item_code)) ? $item_code : array();
 
+        $cart_id = $request->input('cart_id');
+        $post_cart_id = (isset($cart_id) && is_array($cart_id)) ? $cart_id : array();
+var_dump($post_ct_chk);
+exit;
         if($act == "buy")
         {
             if(!count($post_ct_chk)){
@@ -128,6 +132,7 @@ class CartController extends Controller
                     }
 
                     $update_result = DB::table('shopcarts')->where([['od_id', $tmp_cart_id], ['item_code',$item_code]])->update(['sct_select' => '1','sct_select_time' => date("Y-m-d H:i:s", time())]);
+
                 }
             }
 
@@ -138,6 +143,8 @@ class CartController extends Controller
                 echo json_encode(['message' => 'no_mem_order']);
                 exit;
             }
+        }else if ($act == "each_buy"){
+var_dump("sdvsvsdv");
         }else if ($act == "alldelete"){ // 비우기 이면
             DB::table('shopcarts')->where('od_id',$tmp_cart_id)->delete();   //row 삭제
         }else if ($act == "seldelete"){ // 선택삭제
@@ -152,9 +159,11 @@ class CartController extends Controller
                 $ct_chk = isset($post_ct_chk[$i]) ? 1 : 0;
 
                 if($ct_chk) {
-                    $item_code = $post_item_codes[$i];
-                    if($item_code){
-                        DB::table('shopcarts')->where([['id',$item_code], ['od_id',$tmp_cart_id]])->delete();   //row 삭제
+                    //$item_code = $post_item_codes[$i];
+                    $cart_id = $post_cart_id[$i];
+                    //if($item_code){
+                    if($cart_id){
+                        DB::table('shopcarts')->where([['id',$cart_id], ['od_id',$tmp_cart_id]])->delete();   //row 삭제
                     }
                 }
             }

@@ -103,7 +103,7 @@ var_dump("배송비 작업 해야 함");
                                         </ul>
 
                                         <ul class="cart_list_tt">
-                                            <input type="hidden" name="item_code[{{ $num }}]" id="item_code{{ $num }}" value="{{ $cart_info->id }}">
+                                            <input type="hidden" name="item_code[{{ $num }}]" id="item_code{{ $num }}" value="{{ $cart_info->item_code }}">
                                             <input type="hidden" name="item_name[{{ $num }}]" id="item_name{{ $num }}" value="{{ $cart_info->item_name }}">
                                            <h5><a href="{{ route('sitemdetail','item_code='.$cart_info->item_code) }}">{!! $item_name !!}</a></h5>
                                            <ul class="c_s_tt">
@@ -146,7 +146,7 @@ var_dump("배송비 작업 해야 함");
                                         </ul>
 
                                         <ul class="cart_list_pr block">
-                                        <input type="hidden" id="cart_id[{{ $num }}]" value="{{ $cart_info->id }}">
+                                        <input type="hidden" id="cart_id[{{ $num }}]" name="cart_id[{{ $num }}]" value="{{ $cart_info->id }}">
                                         <input type="hidden" name="sio_type[{{ $num }}]" value="{{ $cart_info->sio_type }}">
                                         <input type="hidden" name="sio_id[{{ $num }}]" value="{{ $cart_info->sio_id }}">
                                         <input type="hidden" name="sio_value[{{ $num }}]" value="{{ $cart_info->sct_option }}">
@@ -155,7 +155,7 @@ var_dump("배송비 작업 해야 함");
                                         <input type="hidden" id="item_price[{{ $num }}]" value="{{ $cart_info->item_price }}">
                                         <input type="hidden" id="item_cust_price[{{ $num }}]" value="{{ $cart_info->item_cust_price }}">
                                             <li class="" id="sit_tot_price_{{ $num }}">{{ number_format($case_price) }}원</li>
-                                            <li><button class="btn-sd">구매하기</button></li>
+                                            <li><button class="btn-sd" type="button" onclick="return form_check('each_buy');">구매하기</button></li>
                                             <li><span onclick="return dierctdelete({{ $cart_info->id }});">삭제</span></li>
                                         </ul>
 
@@ -328,14 +328,16 @@ function form_check(act) {
     var f = document.frmcartlist;
     var cnt = f.records.value;
 
-    if (act == "buy")
-    {
-        if($("input[name^=ct_chk]:checked").length < 1) {
-            alert("주문하실 상품을 하나이상 선택해 주십시오.");
-            return false;
+    if (act == "buy" || act == "each_buy"){
+        if(act == "buy"){
+            if($("input[name^=ct_chk]:checked").length < 1) {
+                alert("주문하실 상품을 하나이상 선택해 주십시오.");
+                return false;
+            }
         }
 
         $("#act").val(act);
+
         var form_var = $("form[name=frmcartlist]").serialize() ;
         $.ajax({
             type : 'post',
@@ -382,9 +384,7 @@ return false;
 
 //        f.act.value = act;
 //        f.submit();
-    }
-    else if (act == "alldelete")
-    {
+    }else if (act == "alldelete"){
         if (confirm("정말 비우시겠습니까?") == true){    //확인
             $("#act").val(act);
 
@@ -409,9 +409,7 @@ return false;
             });
         }
         //f.submit();
-    }
-    else if (act == "seldelete")
-    {
+    }else if (act == "seldelete"){
         if($("input[name^=ct_chk]:checked").length < 1) {
             alert("삭제하실 상품을 하나이상 선택해 주십시오.");
             return false;
@@ -426,8 +424,6 @@ return false;
                 data : form_var,
                 dataType : 'text',
                 success : function(result){
-//alert(result);
-//return false;
                     var json = JSON.parse(result);
 
                     if(json.message == "no_cnt"){
