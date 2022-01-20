@@ -788,14 +788,14 @@ $um_value='80/0.5/3'
             case 1:
                 $icon = '
                 <div class="new-icon">
-                <p>new</p>
+                <p>NEW</p>
                 </div>
                 ';
                 //$icon = 'NEW';
                 break;
             case 2:
                 $icon = '
-                <div class="new-icon">
+                <div class="sale-icon">
                 <p>SALE</p>
                 </div>
                 ';
@@ -803,7 +803,7 @@ $um_value='80/0.5/3'
                 break;
             case 3:
                 $icon = '
-                <div class="new-icon">
+                <div class="sale-icon">
                 <p>BIG SALE</p>
                 </div>
                 ';
@@ -811,8 +811,8 @@ $um_value='80/0.5/3'
                 break;
             case 4:
                 $icon = '
-                <div class="new-icon">
-                <p>new</p>
+                <div class="hot-icon">
+                <p>HOT</p>
                 </div>
                 ';
                 //$icon = 'HOT';

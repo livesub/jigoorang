@@ -92,10 +92,12 @@
                                 <input type="hidden" name="url" id="url">
 
                                 <div class="shop_goods_dt_r">
-                                    @if($item_info->item_type1 != 0)
-                                    <div class="hot-icon">
-                                        <p>{!! $CustomUtils->item_icon($item_info) !!}</p>
-                                    </div>
+                                   @if($item_info->item_type1 != 0)
+                                    {!! $CustomUtils->item_icon($item_info) !!}
+                                    @else
+                                        <div class="icon_none">
+                                        <p></p>
+                                        </div>
                                     @endif
                                     <div class="dt_tt">
                                         @php
