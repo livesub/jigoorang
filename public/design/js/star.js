@@ -28,3 +28,19 @@ function star2(rating, value) {// rating = 별점 값 , value = 순번 (1부터 
 }
 
 
+
+
+//출력 별 (쇼핑)
+
+//총 별개수
+var shopStarTotal = 5;
+
+function shop_star(rating, value) {// rating = 별점 값 , value = 순번 (1부터 시작)
+  rating_id = "shop_project_" + value; // 별점 class
+  const starPercentage = (rating / shopStarTotal) * 100;
+  const starPercentageRounded = `${(Math.round(starPercentage / 10) * 10)}%`;// 별점 채우기
+  numberRating = document.querySelector(`#${rating_id} .number`); //총 평점 텍스트 출력
+  document.querySelector(`#${rating_id} .stars-inner`).style.width = starPercentageRounded; //칠해지는 별class
+  numberRating.innerText = rating.toFixed(2) + "/5.00"; //총 평점 텍스트 출력
+}
+

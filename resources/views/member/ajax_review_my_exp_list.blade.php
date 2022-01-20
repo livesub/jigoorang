@@ -96,6 +96,10 @@
                                             <div class="cot_more" id="cot_more_{{ $review_saves_exp_info->id }}" onclick="more({{ $review_saves_exp_info->id }});">더보기</div>
                                        </div>
 
+                                        <script>
+                                       btn({{ $review_saves_exp_info->id }});
+                                       </script>
+
                                         <div class="cot_photo">
                                         @foreach($review_save_imgs_infos as $review_save_imgs_infos)
                                             @php

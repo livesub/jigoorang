@@ -3593,7 +3593,7 @@ background-size: cover;
         color: #fff;
         font-size: 12px;
         font-weight: bold;
-        padding-top: 2px;
+        padding-top: 4px;
     }
 
     .hot-icon {
@@ -3606,7 +3606,7 @@ background-size: cover;
         color: #fff;
         font-size: 12px;
         font-weight: bold;
-        padding-top: 2px;
+        padding-top: 4px;
     }
 
     .sale-icon {
@@ -3619,7 +3619,7 @@ background-size: cover;
         color: #fff;
         font-size: 12px;
         font-weight: bold;
-        padding-top: 2px;
+        padding-top: 4px;
     }
 
     /* 레이아웃 */
