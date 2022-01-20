@@ -3501,7 +3501,7 @@ input::placeholder {
     width: 100%;
     z-index: 99;
     height: 100%;
-    display: non;
+    display: none;
 }
 .n_popup_con .n_popup {
     width: 320px;
