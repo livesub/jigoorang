@@ -87,15 +87,12 @@ class CartController extends Controller
             $result_up = $up_result->save();
 
             $fldcnt = count($post_item_codes);
-
             for($i=0; $i<$fldcnt; $i++) {
                 $ct_chk = isset($post_ct_chk[$i]) ? 1 : 0;
 
                 if($ct_chk) {
-
                     $item_code = $post_item_codes[$i];
-                    var_dump($item_code);
-/*
+
                     if( !$item_code ) continue;
 
                     // 주문 상품의 재고체크
@@ -131,10 +128,9 @@ class CartController extends Controller
                     }
 
                     $update_result = DB::table('shopcarts')->where([['od_id', $tmp_cart_id], ['item_code',$item_code]])->update(['sct_select' => '1','sct_select_time' => date("Y-m-d H:i:s", time())]);
-*/
                 }
             }
-exit;
+
             if(Auth::user() != ""){     // 회원인 경우
                 echo json_encode(['message' => 'mem_order']);
                 exit;
@@ -424,8 +420,18 @@ exit;
         $cart_id = $request->input('cart_id');
 
         DB::table('shopcarts')->where('id',$cart_id)->delete();   //row 삭제
-        var_dump("GGGGGGGGGGGGGGGGG===> ".$cart_id);
     }
+
+    //장바구니 기획 변경으로 수량 변경 재 작업
+    public function ajax_cart_qty_modify(Request $request)
+    {
+        $CustomUtils = new CustomUtils;
+        $cart_id = $request->input('cart_id');
+        $qty = $request->input('qty');
+
+        $update_result = DB::table('shopcarts')->where('id', $cart_id)->update(['sct_qty' => $qty]);
+    }
+
 
     public function cartlist(Request $request)
     {

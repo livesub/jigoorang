@@ -363,7 +363,7 @@ function new_ct_qty(num, sct_qty){
     var stock = parseInt($('input[class="sio_stock['+num+']"]').val());
 
     if(el_qty.val() == ""){
-        el_qty.val(sct_qty);
+        el_qty.val(1);
     }
 
     if(el_qty.val().replace(/[0-9]/g, "").length > 0) {
@@ -645,10 +645,14 @@ function hap_price(){
     var total_cust_price = 0;
     var principal = 0;
     for(var k = 0; k < arr_cnt; k++){
+        var cart_id = $('input[id="cart_id['+k+']"]').val(); //장바구니 순번
         var item_price = parseInt($('input[id="item_price['+k+']"]').val());
         var item_cust_price = parseInt($('input[id="item_cust_price['+k+']"]').val());
         var el_prc = $('input[id="sio_price['+k+']"]'); //옵션 추가 금액
         var el_qty = $('input[name="qty_ct_tmp['+k+']"]');  //수량
+
+        ajax_cart_qty_modify(cart_id, el_qty); //수량 변경에 따른 DB 장바구니 수량 변경
+
         total += (item_price + parseInt(el_prc.val())) * parseInt(el_qty.val());
         if(item_cust_price != 0) principal += item_price * parseInt(el_qty.val());  //추가 금액을 뺀 금액
         total_cust_price += item_cust_price * parseInt(el_qty.val());

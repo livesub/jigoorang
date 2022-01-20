@@ -63,6 +63,12 @@ Route::post('/cart_dierctdelete', [
     'uses' => 'App\Http\Controllers\shop\CartController@ajax_cart_dierctdelete',
 ]);
 
+//장바구니, 수량 변경 처리
+Route::post('/ajax_cart_qty_modify', [
+    'as' => 'ajax_cart_qty_modify',
+    'uses' => 'App\Http\Controllers\shop\CartController@ajax_cart_qty_modify',
+]);
+
 //장바구니
 Route::get('/cart', [
     'as' => 'cartlist',

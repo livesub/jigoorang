@@ -32,6 +32,15 @@
     <link rel="canonical" href="http://jigoorang.com/">
     <meta name="description" content="지구랭은 사용자들의 실사용 리뷰와 평가 점수를 통한 랭킹을 산출하여 지구를 위한 친환경 제품의 소비를 지향하는 플랫폼 입니다.">
 
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8DZ8MQSET7"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-8DZ8MQSET7');
+    </script>
+
     <link rel="stylesheet" href="{{ asset('/design/css/reset.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/css/layout.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/css/style.css') }}">

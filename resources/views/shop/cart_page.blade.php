@@ -146,12 +146,12 @@ var_dump("배송비 작업 해야 함");
                                         </ul>
 
                                         <ul class="cart_list_pr block">
+                                        <input type="hidden" id="cart_id[{{ $num }}]" value="{{ $cart_info->id }}">
                                         <input type="hidden" name="sio_type[{{ $num }}]" value="{{ $cart_info->sio_type }}">
                                         <input type="hidden" name="sio_id[{{ $num }}]" value="{{ $cart_info->sio_id }}">
                                         <input type="hidden" name="sio_value[{{ $num }}]" value="{{ $cart_info->sct_option }}">
                                         <input type="hidden" id="sio_price[{{ $num }}]" value="{{ $cart_info->sio_price }}">
                                         <input type="hidden" class="sio_stock[{{ $num }}]" value="{{ $it_stock_qty }}">
-                                        <input type="hidden" id="bbb[]" value="{{ $num }}">
                                         <input type="hidden" id="item_price[{{ $num }}]" value="{{ $cart_info->item_price }}">
                                         <input type="hidden" id="item_cust_price[{{ $num }}]" value="{{ $cart_info->item_cust_price }}">
                                             <li class="" id="sit_tot_price_{{ $num }}">{{ number_format($case_price) }}원</li>
@@ -232,6 +232,26 @@ var_dump("배송비 작업 해야 함");
 
 <script>
 hap_price();
+
+function ajax_cart_qty_modify(cart_id, qty){
+
+    $.ajax({
+        headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+        type : 'post',
+        url : '{{ route('ajax_cart_qty_modify') }}',
+        data: {
+            'cart_id'   : cart_id,
+            'qty'       : qty.val(),
+        },
+        dataType : 'text',
+        success : function(result){
+//alert(result);
+        },
+        error: function(result){
+            console.log(result);
+        },
+    });
+}
 </script>
 
 <script>
@@ -452,7 +472,6 @@ function dierctdelete(cart_id){
     }
 }
 </script>
-
 
 <script>
 getCheckedCnt();
