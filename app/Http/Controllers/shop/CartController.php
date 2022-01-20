@@ -504,12 +504,10 @@ class CartController extends Controller
             $CustomUtils->set_session('ss_cart_id', $cart_infos[0]->od_id);
             $s_cart_id = $CustomUtils->get_session('ss_cart_id');
 
+            //기본 배송비 구하기
+            $de_send_cost = DB::table('shopcarts')->where('od_id',$s_cart_id)->max('de_send_cost');
+
             // 선택필드 초기화
-/*
-            $up_result = shopcarts::whereod_id($s_cart_id)->first();  //update 할때 미리 값을 조회 하고 쓰면 update 구문으로 자동 변경
-            $up_result->sct_select = 0;
-            $result_up = $up_result->save();
-*/
             $up_result = DB::table('shopcarts')->where('od_id', $s_cart_id)->update(['sct_select' => '0']);
         }
 
@@ -520,7 +518,7 @@ class CartController extends Controller
             's_cart_id'         => $s_cart_id,
             'cart_infos'        => $cart_infos,
             'CustomUtils'       => $CustomUtils,
-            'de_send_cost'      => $setting_info->de_send_cost,
+            'de_send_cost'      => $de_send_cost,
             'de_send_cost_free' => $setting_info->de_send_cost_free,
         ]);
     }

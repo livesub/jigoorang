@@ -645,6 +645,10 @@ function hap_price(){
     var total_cust_price = 0;
     var principal = 0;
     var sc_price_total = 0;
+    var hap_total = 0;
+    var baesongbi = 0;
+    var sale_price = 0;
+
     for(var k = 0; k < arr_cnt; k++){
         var cart_id = $('input[id="cart_id['+k+']"]').val(); //장바구니 순번
         var item_price = parseInt($('input[id="item_price['+k+']"]').val());
@@ -662,14 +666,25 @@ function hap_price(){
         total_cust_price += item_cust_price * parseInt(el_qty.val());
     }
 
-    alert(sc_price_total);
+    sale_price = total_cust_price - principal;
+
+    var de_send_cost = $("#de_send_cost").val();    //기본 배송비
+    var de_send_cost_free = $("#de_send_cost_free").val();    //무료배송비 정책
 
 
-    var sale_price = total_cust_price - principal;
-    var hap_total = total + 0;  //총 상품 금액 + 배송비 합
+    //무료배송비 정책 보다 상품 금액이 크거나 같을때  무료 배송비 제외
+    if(de_send_cost_free <= total){
+        baesongbi = parseInt(sc_price_total);
+    }else{
+        baesongbi = parseInt(sc_price_total) + parseInt(de_send_cost);
+    }
+
+    hap_total = total + baesongbi;  //총 상품 금액 + 배송비 합
+
     $("#total_price").html(number_format(String(total))+"원");
     $("#total_cust_price").html(number_format(String(sale_price * -1))+"원");
     $("#hap_total").html(number_format(String(hap_total))+"원");
+    $("#baesongbi").html(number_format(String(baesongbi))+"원");
 }
 
 // php chr() 대응

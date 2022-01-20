@@ -31,6 +31,8 @@
         <input type="hidden" name="ajax_option_url" id="ajax_option_url" value="{{ route('ajax_option_change') }}">
         <input type="hidden" id="cart_type" value="new_cart">
         <input type="hidden" id="arr_cnt" value="{{ count($cart_infos) }}">
+        <input type="hidden" id="de_send_cost" value="{{ $de_send_cost }}">
+        <input type="hidden" id="de_send_cost_free" value="{{ $de_send_cost_free }}">
             <div class="board mypage_list">
                 <!-- 리스트 시작 -->
                 <div class="board_wrap">
@@ -82,7 +84,6 @@
 
                                     // 배송비
                                     $sendcost = $CustomUtils->get_item_sendcost($cart_info->item_code, $sum[0]->price, $sum[0]->qty, $s_cart_id);
-var_dump("배송비 작업 해야 함");
 
                                     if($sendcost == 0) $ct_send_cost = '무료';
                                     else $ct_send_cost = number_format($sendcost).'원';
@@ -188,7 +189,7 @@ var_dump("배송비 작업 해야 함");
                             </ul>
                             <ul>
                                 <li>배송비</li>
-                                <li>2,500</li>
+                                <li id="baesongbi"></li>
                             </ul>
                             <ul class="ct_tot_p">
                                 <li>총 결제 금액</li>
