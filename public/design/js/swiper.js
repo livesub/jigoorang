@@ -78,6 +78,7 @@ var swiper = new Swiper(".saleSwiper", {
     290: {
       slidesPerView: 2.1,
       spaceBetween: 5,
+      slidesOffsetBefore: 0,
     },
     360: {
       slidesPerView: 2.1,
@@ -86,26 +87,32 @@ var swiper = new Swiper(".saleSwiper", {
     480: {
       slidesPerView: 3.5,
       spaceBetween: 10,
+      slidesOffsetBefore: 0,
     },
     980: {
       slidesPerView: 3.5,
       spaceBetween: 10,
+      slidesOffsetBefore: 0,
     },
     1024: {
       slidesPerView: 4.5,
       spaceBetween: 10,
+      slidesOffsetBefore: 0,
     },
     1200: {
       slidesPerView: 5.3,
       spaceBetween: 10,
+      slidesOffsetBefore: 0,
     },
     1460: {
       slidesPerView: 5.3,
       spaceBetween: 10,
+      slidesOffsetBefore: 200,
     },
     1600: {
       slidesPerView: 5.3,
       spaceBetween: 10,
+      slidesOffsetBefore: 320,
     },
   }
 });
