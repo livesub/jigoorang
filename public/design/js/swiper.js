@@ -204,6 +204,8 @@ var swiper = new Swiper(".saleSwiper3", {
   }
 });
 
+
+
 var swiper = new Swiper(".Swiper3", {
   pagination: {
     el: ".swiper-pagination",
