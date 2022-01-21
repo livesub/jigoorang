@@ -131,41 +131,6 @@ class CartController extends Controller
                     }
 
                     $update_result = DB::table('shopcarts')->where([['id', $cart_id], ['item_code',$cart_info->item_code]])->update(['sct_select' => '1','sct_select_time' => date("Y-m-d H:i:s", time())]);
-/*
-                    // 주문 상품의 재고체크
-                    $cart_infos = DB::table('shopcarts')->where([['od_id', $tmp_cart_id], ['item_code',$item_code]])->get();
-
-                    foreach($cart_infos as $cart_info){
-                        //$sum_qty = DB::table('shopcarts')->where([['od_id','<>',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$cart_info->sio_id], ['sio_type',$cart_info->sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty');    //<-- 장바구니에 있으면 수량을 가지고 있어 다른 사람이 주문 하지 못함
-                        //$sum_qty = DB::table('shopcarts')->where([['od_id',$tmp_cart_id], ['item_code',$item_code], ['sio_id',$cart_info->sio_id], ['sio_type',$cart_info->sio_type], ['sct_stock_use','0'], ['sct_status','쇼핑'], ['sct_select','1']])->sum('sct_qty');   //주문된 것만 수량 차감
-                        //$sum_qty = $sum['cnt'];
-
-                        //삭제되거나 비출력된 상품인지 파악
-                        $item_chk = DB::table('shopitems')->where('item_code', $item_code)->first();
-
-                        if($item_chk->item_display == 'N' || $item_chk->item_del == 'Y')
-                        {
-                            echo json_encode(['message' => 'discontinued', 'option' => $item_chk->item_name]);
-                            exit;
-                        }
-
-                        // 재고 구함
-                        $sct_qty = $cart_info->sct_qty; //주문수량
-
-                        if(!$cart_info->sio_id) $it_stock_qty = $CustomUtils->get_item_stock_qty($item_code);
-                        else $it_stock_qty = $CustomUtils->get_option_stock_qty($item_code, $cart_info->sio_id, $cart_info->sio_type);
-
-                        if ($sct_qty > $it_stock_qty)
-                        {
-                            $item_option = $cart_info->item_name;
-                            if($cart_info->sio_id) $item_option .= '('.$cart_info->sct_option.')';
-                            echo json_encode(['message' => 'no_qty', 'option' => $item_option, 'sum_qty' => number_format($it_stock_qty)]);
-                            exit;
-                        }
-                    }
-
-                    $update_result = DB::table('shopcarts')->where([['od_id', $tmp_cart_id], ['item_code',$item_code]])->update(['sct_select' => '1','sct_select_time' => date("Y-m-d H:i:s", time())]);
-*/
                 }
             }
 

@@ -2,6 +2,9 @@
 
 @section('content')
 
+<script src="{{ asset('/design/js/button.js') }}"></script> <!-- 배송지 입력버튼 js -->
+<script src="{{ asset('/design/js/modal-back02.js') }}"></script>
+
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <script src="{{ asset('/js/zip.js') }}"></script>
 
@@ -54,19 +57,20 @@
                                 @php
                                     $hap_sendcost = 0;
                                     $tot_price = 0;
+                                    $goods = "";
                                 @endphp
                                 @foreach($cart_infos as $cart_info)
                                     @php
                                         $i = 0;
                                         //$sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_point * sct_qty) as point, SUM(sct_qty) as qty from shopcarts where item_code = '{$cart_info->item_code}' and od_id = '$s_cart_id' ");
                                         $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_point * sct_qty) as point, SUM(sct_qty) as qty from shopcarts where sct_select = 1 and id='$cart_info->id' and od_id = '$s_cart_id' ");
-                                /*
+
                                         if (!$goods)
                                         {
                                             $goods = preg_replace("/\'|\"|\||\,|\&|\;/", "", $cart_info->item_name);
                                             $goods_item_code = $cart_info->item_code;
                                         }
-
+                                /*
                                         $goods_count++;
                                 */
                                         $image = $CustomUtils->get_item_image($cart_info->item_code, 3);
@@ -149,6 +153,42 @@
                                 </div>
                             </div>
 
+<form name="forderform" id="forderform" method="post" action="{{ route('orderpayment') }}" autocomplete="off">
+{!! csrf_field() !!}
+<!-- 배송지 관련 -->
+<input type="hidden" id="od_b_name" name="ad_name">
+<input type="hidden" id="od_b_hp" name="ad_hp">
+<input type="hidden" id="od_b_zip" name="ad_zip1">
+<input type="hidden" id="od_b_addr1" name="ad_addr1">
+<input type="hidden" id="od_b_addr2" name="ad_addr2">
+<input type="hidden" id="od_b_addr3" name="ad_addr3">
+<input type="hidden" id="od_b_addr_jibeon" name="ad_jibeon">
+
+<input type="hidden" name="order_id" id="order_id" value="{{ $order_id }}"> <!-- 주문번호 -->
+<input type="hidden" name="od_id" id="od_id" value="{{ $s_cart_id }}"> <!-- 장바구니번호 -->
+<input type="hidden" name="de_send_cost" id="de_send_cost" value="{{ $de_send_cost }}"> <!-- 기본배송비 -->
+<input type="hidden" name="de_send_cost_free" id="de_send_cost_free" value="{{ $de_send_cost_free }}"> <!-- 기본배송비 무료정책 -->
+<input type="hidden" name="od_send_cost" id="od_send_cost" value="{{ $hap_sendcost }}">  <!-- 각 상품 배송비 -->
+<input type="hidden" name="od_send_cost2" id="od_send_cost2" value="0"> <!-- 추가배송비 -->
+<input type="hidden" name="od_price" id="od_price" value="{{ $tot_sell_price }}">  <!-- 주문금액 -->
+<input type="hidden" name="org_od_price" id="org_od_price" value="{{ $tot_sell_price }}"> <!-- original 주문금액 -->
+<input type="hidden" name="od_goods_name" id="od_goods_name" value="{{ $goods }}">  <!-- 상품명 -->
+<input type="hidden" name="cart_count" id="cart_count" value="{{ $cart_count }}">  <!-- 장바구니 상품 개수 -->
+
+<input type="hidden" name="method" id="method">
+<input type="hidden" name="pg" id="pg">
+<input type="hidden" name="user_point" id="user_point" value="{{ Auth::user()->user_point }}">
+<input type="hidden" name="imp_uid" id="imp_uid">
+<input type="hidden" name="apply_num" id="apply_num">   <!-- 카드 승인 번호 -->
+<input type="hidden" name="paid_amount" id="paid_amount">   <!-- 카드사에서 전달 받는 값(총 결제 금액) -->
+<input type="hidden" name="imp_merchant_uid" id="imp_merchant_uid">   <!-- 주문번호 -->
+<input type="hidden" name="pg_provider" id="pg_provider">   <!-- 결제승인/시도된 PG사 -->
+
+<input type="hidden" name="imp_card_name" id="imp_card_name">   <!-- 카드사에서 전달 받는 값(카드사명칭)) -->
+<input type="hidden" name="imp_card_quota" id="imp_card_quota">   <!-- 카드사에서 전달 받는 값(할부개월수)) -->
+<input type="hidden" name="imp_card_number" id="imp_card_number">   <!-- 카드사에서 전달 받는 값(카드번호) -->
+
+
                             <div class="list ev_rul inner od sol-g-t">
                                 <div class="sub_title">
                                     <h4>주문자 정보</h4>
@@ -158,17 +198,17 @@
 
                                         <ul class="oder_name col">
                                             <li>수령인</li>
-                                            <li>지구룡</li>
+                                            <li>{{ Auth::user()->user_name }}</li>
                                         </ul>
 
                                         <ul class="oder_name col">
                                             <li>연락처</li>
-                                            <li>010-1234-1234</li>
+                                            <li>{{ Auth::user()->user_phone }}</li>
                                         </ul>
 
                                         <ul class="oder_name col">
                                             <li>이메일</li>
-                                            <li>g9ryong@g9ryong.com</li>
+                                            <li>{{ Auth::user()->user_id }}</li>
                                         </ul>
 
                                     </div>
@@ -179,47 +219,48 @@
                                 <div class="information information_01">
                                     <div class="information-inner-title">
                                         <h4>배송지</h4>
-                                        <button onclick='addressopenmodal_001()'>배송지 입력 +
-                                        </button>
+                                        @if(empty($address))
+                                        <button type="button" onclick='addressopenmodal_001()'>배송지 입력 + </button>
+
+                                        @else
+                                        <button type="button" id="btn" onclick='addressopenmodal_001(); baesongji();'>배송지 설정 / 변경</button>
+                                        @endif
                                         <!-- 배송지 입력버튼 -->
                                         <!-- <button id="btn" onclick='changeBtnName()'>배송지 설정 / 변경</button> -->
                                         <!-- 클릭햇을때 배송지 입력버튼 -->
                                     </div>
-
+                                    @if(empty($address))
                                     <div class="information-inner-title-btn" id="hide">
                                         등록된 배송지가 없습니다.<br>
                                         <span>'배송지 입력'</span>
                                         버튼을 눌러 배송지를 추가해 주세요.
                                     </div>
-
+                                    @else
                                     <div class="information-inner-01">
                                         <ul class="information-name">
-                                            <li>
-                                                수령인</li>
-                                            <li>
-                                                지구룡</li>
+                                            <li>수령인</li>
+                                            <li id="ad_name">{{ $address->ad_name}}</li>
                                         </ul>
                                         <ul class="information-phon">
-                                            <li>
-                                                휴대폰</li>
-                                            <li>
-                                                010-1354-1235</li>
+                                            <li>휴대폰</li>
+                                            <li id="ad_hp"> {{ $address->ad_hp }}</li>
                                         </ul>
                                         <ul class="information-address od">
+                                            <li>주소</li>
                                             <li>
-                                                주소</li>
-                                            <li>
-                                                <div>13458) 경기도 지구시 지구길(지구동, 지구아파트)</div>
-                                                <div>101/101</div>
+                                                <div id="ad_addr">{{ $address->ad_zip1 }}){{ $address->ad_addr1 }}</div>
+                                                <div id="ad_addr6">{{ $address->ad_addr2 }}{{ $address->ad_addr3 }}</div>
+
                                                 <!-- div 추가 -->
                                             </li>
                                         </ul>
                                         <ul class="information-input">
                                             <li>
                                                 배송메모</li>
-                                            <input type="text" name="" id="" placeholder="배송시 남길 메세지를 입력해 주세요"></input>
+                                            <input type="text" name="od_memo" id="od_memo" placeholder="배송시 남길 메세지를 입력해 주세요">
                                         </ul>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
 
@@ -342,7 +383,8 @@
 
                             <div class="list_img_btn_area">
                               <a href="#"><button>결제하기</button></a>
-                          </div>
+                            </div>
+                        </form>
                         </div>
                         <!-- 리스트 끝 -->
 
@@ -354,12 +396,66 @@
             </div>
             <!-- 서브 컨테이너 끝 -->
 
+    <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. -->
+    <form name="forderform" id="forderform">
+    {!! csrf_field() !!}
+    <div class="modal modal_002 fade" id="disp_baesongi"></div>
+    </form>
+    <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. 끝 -->
+
+<script>
+    function baesongji(){
+        setCookie("order_01", $("#od_memo").val(), "1") //변수, 변수값, 저장기
+        $.ajax({
+            type : 'get',
+            url : '{{ route('ajax_baesongji') }}',
+            data : {
+            },
+            dataType : 'text',
+            success : function(result){
+//alert(result);
+//return false;
+                if(result == "no_mem"){
+                    alert("회원이시라면 회원로그인 후 이용해 주십시오.");
+                    return false;
+                }
+
+                $("#disp_baesongi").html(result);
+            },
+            error: function(result){
+                console.log(result);
+            },
+        });
+    }
+
+    function calculate_sendcost(){
+        //히든 값으로 가져온 값을 해당 태그에 html이나 text로 넣어준다.
+        $('#ad_name').text($("#od_b_name").val());
+        $('#ad_hp').text($("#od_b_hp").val());
+        let $ad_addrs = $("#od_b_zip").val()+") "+$("#od_b_addr1").val()+" ";
+        let $ad_addrs6 =$("#od_b_addr2").val() +$("#od_b_addr3").val() ; //상세주소 참조메모
+        //let $ad_addrs7 = $("#od_b_addr3").val();
+        $('#ad_addr').text($ad_addrs);
+        $('#ad_addr6').text($ad_addrs6);
+        //$('#ad_addr7').text($ad_addrs7);
+
+        //창닫기
+        //lay_close();
+        addressinputclose();
+        document.querySelector('.modal.modal_002').classList.remove('in');
+        //보여주던 부분을 숨기고 display none 값들을 보여준다.
+        //$("#show_address").show();
+        //$("#none_address").hide();
+    }
+</script>
 
 
-
-
-
-
+<script>
+    loading_read_order();
+    function loading_read_order(){
+        $("#od_memo").val(getCookie("order_01"));
+    }
+</script>
 
 
 

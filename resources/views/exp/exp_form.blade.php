@@ -295,7 +295,7 @@
         //히든 값으로 가져온 값을 해당 태그에 html이나 text로 넣어준다.
         $('#ad_name').text($("#od_b_name").val());
         $('#ad_hp').text($("#od_b_hp").val());
-        let $ad_addrs = $("#od_b_zip").val()+") "+$("#od_b_addr1").val()+" "
+        let $ad_addrs = $("#od_b_zip").val()+") "+$("#od_b_addr1").val()+" ";
         let $ad_addrs6 =$("#od_b_addr2").val() +$("#od_b_addr3").val() ; //상세주소 참조메모
         //let $ad_addrs7 = $("#od_b_addr3").val();
         $('#ad_addr').text($ad_addrs);

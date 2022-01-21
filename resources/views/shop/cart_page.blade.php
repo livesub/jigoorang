@@ -205,7 +205,7 @@
                             <input type="hidden" name="act" id="act" value="">
                             <input type="hidden" name="each_buy_cart_id" id="each_buy_cart_id" value="">
                             <button class="btn-50" type="button" onclick="location.href='{{ route('sitem') }}'">쇼핑 계속하기</button>
-                            <button class="btn-50-bg" type="button" onclick="return form_check('buy', '');">전체 구매하기</button>
+                            <button class="btn-50-bg" type="button" onclick="return form_check('buy', '');">구매하기</button>
                         </div>
                     </div>
                 </div>

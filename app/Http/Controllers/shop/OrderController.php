@@ -145,6 +145,12 @@ class OrderController extends Controller
             //$addr_list .= '<input type="radio" name="ad_sel_addr" value="new" id="od_sel_addr_new">'.PHP_EOL;
             //$addr_list .= '<label for="od_sel_addr_new">신규배송지</label>'.PHP_EOL;
 
+
+
+            //배송지
+            $address = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['ad_default','1']])->first();
+
+
             $addr_list .= '<button type="button" onclick="baesongji();">배송지 목록</button>';
         }else{
             // 주문자와 동일
@@ -175,6 +181,7 @@ class OrderController extends Controller
             'tot_sell_price'    => $tot_sell_price,
             'send_cost'         => 0,
             'cart_count'        => $cart_count,
+            'address'           => $address,
         ]);
     }
 
