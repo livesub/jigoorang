@@ -719,6 +719,11 @@ background-size: cover;
         /*수직 정렬*/
     }
 
+    .eval .board .board_wrap .information .information-input li:nth-child(1) {
+       margin-bottom: 10px;
+    }
+
+
     .eval .board .board_wrap .information .information-input textarea {
         width: 100%;
         height: 145px;

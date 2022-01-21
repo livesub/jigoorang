@@ -61,7 +61,7 @@ var swiper = new Swiper(".bastSwiper", {
 
 
 var swiper = new Swiper(".saleSwiper", {
-  slidesPerView: 5.3,
+  slidesPerView: 5.5,
   spaceBetween: 0,
   slidesPerGroup: 4,
   grabCursor: true,
@@ -106,15 +106,28 @@ var swiper = new Swiper(".saleSwiper", {
       slidesOffsetBefore: 0,
     },
     1460: {
-      slidesPerView: 5.3,
+      slidesPerView: 6.5,
       spaceBetween: 10,
       slidesOffsetBefore: 120,
     },
     1600: {
-      slidesPerView: 5.3,
+      slidesPerView: 6.5,
       spaceBetween: 10,
-      slidesOffsetBefore: 320,
+      slidesOffsetBefore: 200,
     },
+
+    1800: {
+      slidesPerView: 6.5,
+      spaceBetween: 10,
+      slidesOffsetBefore: 300,
+    },
+
+    1900: {
+      slidesPerView: 6.5,
+      spaceBetween: 10,
+      slidesOffsetBefore: 315,
+    },
+
   }
 });
 
@@ -167,14 +180,25 @@ var swiper = new Swiper(".saleSwiper2", {
       slidesOffsetBefore: 0,
     },
     1460: {
-      slidesPerView: 5.3,
+      slidesPerView: 6.5,
       spaceBetween: 10,
       slidesOffsetBefore: 120,
     },
     1600: {
-      slidesPerView: 5.3,
+      slidesPerView: 6.5,
       spaceBetween: 10,
-      slidesOffsetBefore: 320,
+      slidesOffsetBefore: 200,
+    },
+
+    1800: {
+      slidesPerView: 6.5,
+      spaceBetween: 10,
+      slidesOffsetBefore: 300,
+    },
+    1900: {
+      slidesPerView: 6.5,
+      spaceBetween: 10,
+      slidesOffsetBefore: 315,
     },
   }
 });
