@@ -447,12 +447,14 @@
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_nm li:first-child button{
    font-size: 20px;
    color: #707070;
+   text-align: center;
 }
 
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_nm li:last-child {
    font-size: 20px;
    font-weight: bold;
+   text-align: center;
 }
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_nm li button{
    border:solid 2px #ddd;
