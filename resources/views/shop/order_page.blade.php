@@ -153,42 +153,6 @@
                                 </div>
                             </div>
 
-<form name="forderform" id="forderform" method="post" action="{{ route('orderpayment') }}" autocomplete="off">
-{!! csrf_field() !!}
-<!-- 배송지 관련 -->
-<input type="hidden" id="od_b_name" name="ad_name">
-<input type="hidden" id="od_b_hp" name="ad_hp">
-<input type="hidden" id="od_b_zip" name="ad_zip1">
-<input type="hidden" id="od_b_addr1" name="ad_addr1">
-<input type="hidden" id="od_b_addr2" name="ad_addr2">
-<input type="hidden" id="od_b_addr3" name="ad_addr3">
-<input type="hidden" id="od_b_addr_jibeon" name="ad_jibeon">
-
-<input type="hidden" name="order_id" id="order_id" value="{{ $order_id }}"> <!-- 주문번호 -->
-<input type="hidden" name="od_id" id="od_id" value="{{ $s_cart_id }}"> <!-- 장바구니번호 -->
-<input type="hidden" name="de_send_cost" id="de_send_cost" value="{{ $de_send_cost }}"> <!-- 기본배송비 -->
-<input type="hidden" name="de_send_cost_free" id="de_send_cost_free" value="{{ $de_send_cost_free }}"> <!-- 기본배송비 무료정책 -->
-<input type="hidden" name="od_send_cost" id="od_send_cost" value="{{ $hap_sendcost }}">  <!-- 각 상품 배송비 -->
-<input type="hidden" name="od_send_cost2" id="od_send_cost2" value="0"> <!-- 추가배송비 -->
-<input type="hidden" name="od_price" id="od_price" value="{{ $tot_sell_price }}">  <!-- 주문금액 -->
-<input type="hidden" name="org_od_price" id="org_od_price" value="{{ $tot_sell_price }}"> <!-- original 주문금액 -->
-<input type="hidden" name="od_goods_name" id="od_goods_name" value="{{ $goods }}">  <!-- 상품명 -->
-<input type="hidden" name="cart_count" id="cart_count" value="{{ $cart_count }}">  <!-- 장바구니 상품 개수 -->
-
-<input type="hidden" name="method" id="method">
-<input type="hidden" name="pg" id="pg">
-<input type="hidden" name="user_point" id="user_point" value="{{ Auth::user()->user_point }}">
-<input type="hidden" name="imp_uid" id="imp_uid">
-<input type="hidden" name="apply_num" id="apply_num">   <!-- 카드 승인 번호 -->
-<input type="hidden" name="paid_amount" id="paid_amount">   <!-- 카드사에서 전달 받는 값(총 결제 금액) -->
-<input type="hidden" name="imp_merchant_uid" id="imp_merchant_uid">   <!-- 주문번호 -->
-<input type="hidden" name="pg_provider" id="pg_provider">   <!-- 결제승인/시도된 PG사 -->
-
-<input type="hidden" name="imp_card_name" id="imp_card_name">   <!-- 카드사에서 전달 받는 값(카드사명칭)) -->
-<input type="hidden" name="imp_card_quota" id="imp_card_quota">   <!-- 카드사에서 전달 받는 값(할부개월수)) -->
-<input type="hidden" name="imp_card_number" id="imp_card_number">   <!-- 카드사에서 전달 받는 값(카드번호) -->
-
-
                             <div class="list ev_rul inner od sol-g-t">
                                 <div class="sub_title">
                                     <h4>주문자 정보</h4>
@@ -264,6 +228,42 @@
                                 </div>
                             </div>
 
+<form name="orderform" id="orderform" method="post" action="{{ route('orderpayment') }}" autocomplete="off">
+{!! csrf_field() !!}
+<!-- 배송지 관련 -->
+<input type="hidden" id="od_b_name" name="ad_name">
+<input type="hidden" id="od_b_hp" name="ad_hp">
+<input type="hidden" id="od_b_zip" name="ad_zip1" value="{{ $user_zip }}">
+<input type="hidden" id="od_b_addr1" name="ad_addr1">
+<input type="hidden" id="od_b_addr2" name="ad_addr2">
+<input type="hidden" id="od_b_addr3" name="ad_addr3">
+<input type="hidden" id="od_b_addr_jibeon" name="ad_jibeon">
+
+<input type="hidden" name="order_id" id="order_id" value="{{ $order_id }}"> <!-- 주문번호 -->
+<input type="hidden" name="od_id" id="od_id" value="{{ $s_cart_id }}"> <!-- 장바구니번호 -->
+<input type="hidden" name="de_send_cost" id="de_send_cost" value="{{ $de_send_cost }}"> <!-- 기본배송비 -->
+<input type="hidden" name="de_send_cost_free" id="de_send_cost_free" value="{{ $de_send_cost_free }}"> <!-- 기본배송비 무료정책 -->
+<input type="hidden" name="od_send_cost" id="od_send_cost" value="{{ $hap_sendcost }}">  <!-- 각 상품 배송비 -->
+<input type="hidden" name="od_send_cost2" id="od_send_cost2" value="0"> <!-- 추가배송비 -->
+<input type="hidden" name="od_price" id="od_price" value="{{ $tot_sell_price }}">  <!-- 주문금액 -->
+<input type="hidden" name="org_od_price" id="org_od_price" value="{{ $tot_sell_price }}"> <!-- original 주문금액 -->
+<input type="hidden" name="od_goods_name" id="od_goods_name" value="{{ $goods }}">  <!-- 상품명 -->
+<input type="hidden" name="cart_count" id="cart_count" value="{{ $cart_count }}">  <!-- 장바구니 상품 개수 -->
+<input type="hidden" name="tot_price" id="tot_price" value="{{ $tot_price }}">  <!-- 주문서에 담긴 총 금액(상품가격+배송비(무료정책포함), 산간배송비 비포함) -->
+
+<input type="hidden" name="method" id="method">
+<input type="hidden" name="pg" id="pg">
+<input type="hidden" name="user_point" id="user_point" value="{{ Auth::user()->user_point }}">
+<input type="hidden" name="imp_uid" id="imp_uid">
+<input type="hidden" name="apply_num" id="apply_num">   <!-- 카드 승인 번호 -->
+<input type="hidden" name="paid_amount" id="paid_amount">   <!-- 카드사에서 전달 받는 값(총 결제 금액) -->
+<input type="hidden" name="imp_merchant_uid" id="imp_merchant_uid">   <!-- 주문번호 -->
+<input type="hidden" name="pg_provider" id="pg_provider">   <!-- 결제승인/시도된 PG사 -->
+
+<input type="hidden" name="imp_card_name" id="imp_card_name">   <!-- 카드사에서 전달 받는 값(카드사명칭)) -->
+<input type="hidden" name="imp_card_quota" id="imp_card_quota">   <!-- 카드사에서 전달 받는 값(할부개월수)) -->
+<input type="hidden" name="imp_card_number" id="imp_card_number">   <!-- 카드사에서 전달 받는 값(카드번호) -->
+
                             <div class="list ev_rul inner od sol-g-t">
                                 <div class="sub_title">
                                     <h4>포인트 정보</h4>
@@ -273,20 +273,22 @@
 
                                         <ul class="oder_name wt-00 mb-20">
                                             <li>보유포인트</li>
-                                            <li>6,000P</li>
+                                            <li>{{ number_format(Auth::user()->user_point) }}P</li>
                                         </ul>
-
+                                        @if(Auth::user()->user_point > 0)
                                         <ul class="oder_point">
                                             <li>사용포인트</li>
                                             <li>
                                             <div class="oder_point_box">
-                                              <input type="number" name="" id="" >
+                                              <input type="text" name="od_temp_point" value="0" id="od_temp_point" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');all_point_use(false);">
                                               <span>P</span>
-                                              <button class="btn-10-p">전액 사용</button>
+
+                                              <button type="button" class="btn-10-p" onclick="all_point_use(true);">전액 사용</button>
                                             </div>
+                                            (최소 결제 금액은 1,000원 입니다.)
                                             </li>
                                         </ul>
-
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="pdt-20">
@@ -296,23 +298,23 @@
                                         </ul>
                                         <ul>
                                             <li>상품금액</li>
-                                            <li class="cr_06">6,000원</li>
+                                            <li class="cr_06">{{ $CustomUtils->display_price($tot_sell_price) }}</li>
                                         </ul>
                                         <ul>
                                           <li>배송비</li>
-                                          <li class="cr_06">2,500원</li>
+                                          <li class="cr_06">{{ $CustomUtils->display_price($hap_sendcost) }}</li>
                                         </ul>
                                         <ul>
                                           <li class="icon_od"><span class="ml-20">도서산간 추가비용</span></li>
-                                          <li class="cr_06">0원</li>
+                                          <li class="cr_06" id="od_send_cost3">0원</li>
                                         </ul>
                                         <ul>
                                           <li>포인트 할인</li>
-                                          <li class="cr_06">-1,000P</li>
+                                          <li class="cr_06" id="use_point">0P</li>
                                         </ul>
                                         <ul>
                                           <li class="cr_06 bold">총 결제 금액</li>
-                                          <li class="cr_07 bold">7,500원</li>
+                                          <li class="cr_07 bold" id="last_tot_price"></li>
                                         </ul>
                                     </div>
                                 </div>
@@ -382,7 +384,7 @@
                             </div>
 
                             <div class="list_img_btn_area">
-                              <a href="#"><button>결제하기</button></a>
+                              <button type="button">결제하기</button>
                             </div>
                         </form>
                         </div>
@@ -405,7 +407,12 @@
 
 <script>
     function baesongji(){
-        setCookie("order_01", $("#od_memo").val(), "1") //변수, 변수값, 저장기
+        if($.trim($("#od_memo").val()) != ""){
+            setCookie("order_01", $("#od_memo").val(), "1"); //변수, 변수값, 저장기
+        }else{
+            setCookie("order_01", "", "1");
+        }
+
         $.ajax({
             type : 'get',
             url : '{{ route('ajax_baesongji') }}',
@@ -413,8 +420,6 @@
             },
             dataType : 'text',
             success : function(result){
-//alert(result);
-//return false;
                 if(result == "no_mem"){
                     alert("회원이시라면 회원로그인 후 이용해 주십시오.");
                     return false;
@@ -427,6 +432,45 @@
             },
         });
     }
+</script>
+
+<script>
+    function add_baesong_price(code){
+        //산간지역 배송비 계산
+        $("#od_temp_point").val(0);
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+            type : 'post',
+            url : '{{ route('ajax_ordersendcost') }}',
+            data : {
+                zipcode : code
+            },
+            dataType : 'text',
+            success : function(data){
+                if(data != "no_sendcost"){
+                    const result = jQuery.parseJSON(data);
+                    $("input[name=od_send_cost2]").val(result.sc_price);
+                    $("#od_send_cost3").text(numberWithCommas(String(result.sc_price))+'원');
+
+                    //calculate_order_price();
+                }else{
+                    var ori_ct_tot_price = $("#ori_ct_tot_price").val();
+                    //$("input[name=od_send_cost2]").val(ori_ct_tot_price);
+                    $("input[name=od_send_cost2]").val(0);
+                    $("#od_send_cost3").text(0+'원');
+                    //$("#print_price").text(numberWithCommas(String(ori_ct_tot_price))+'원');
+                }
+            },
+            error: function(result){
+                console.log(result);
+            },
+        });
+
+    }
+</script>
+
+<script>
+    add_baesong_price($("#od_b_zip").val());
 
     function calculate_sendcost(){
         //히든 값으로 가져온 값을 해당 태그에 html이나 text로 넣어준다.
@@ -439,6 +483,8 @@
         $('#ad_addr6').text($ad_addrs6);
         //$('#ad_addr7').text($ad_addrs7);
 
+        add_baesong_price($("#od_b_zip").val());
+
         //창닫기
         //lay_close();
         addressinputclose();
@@ -449,13 +495,85 @@
     }
 </script>
 
-
 <script>
     loading_read_order();
     function loading_read_order(){
         $("#od_memo").val(getCookie("order_01"));
     }
 </script>
+
+
+<script>
+    function numberWithCommas(x) {
+        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+</script>
+
+<script>
+    function last_price(tot_price, od_send_cost2, use_point){
+        var last_tot_price = (tot_price + od_send_cost2) - use_point;
+        $("#last_tot_price").text(numberWithCommas(last_tot_price) + '원');
+    }
+</script>
+
+<script>
+    all_point_use(false);
+    function all_point_use(type){
+        var user_point = parseInt($("#user_point").val());
+        var od_temp_point = parseInt($("#od_temp_point").val());  //직접입력
+        var tot_price = parseInt($("#tot_price").val());
+        var od_send_cost2 = parseInt($("#od_send_cost2").val());    //도서 산간 배송비
+        var tot_price_tmp = (tot_price + od_send_cost2) - 1000;   //카드 결제 최하 금액이 1000원 까지라 1000원 은 무조건 카드 결제 해야함
+        $("#use_point").text(0);
+
+        if(user_point <= 0){
+            alert('사용할 포인트가 부족 합니다');
+            return false;
+        }
+
+        if(type == true){
+            if(tot_price_tmp < user_point){
+                $("#od_temp_point").val(tot_price_tmp);
+                $("#use_point").text(numberWithCommas(tot_price_tmp * -1) + 'P');
+                last_price(tot_price, od_send_cost2, tot_price_tmp);
+                return false;
+            }else{
+                $("#od_temp_point").val(user_point);
+                $("#use_point").text(numberWithCommas(user_point * -1) + 'P');
+                last_price(tot_price, od_send_cost2, user_point);
+                return false;
+            }
+        }else{
+            if(tot_price_tmp < od_temp_point){
+                $("#od_temp_point").val(tot_price_tmp);
+                $("#use_point").text(numberWithCommas(tot_price_tmp * -1) + 'P');
+                last_price(tot_price, od_send_cost2, tot_price_tmp);
+                return false;
+            }else{
+                if(user_point < od_temp_point){
+                    $("#od_temp_point").val(user_point);
+                    $("#use_point").text(numberWithCommas(user_point * -1) + 'P');
+                    last_price(tot_price, od_send_cost2, user_point);
+                    return false;
+                }
+            }
+        }
+
+        if(isNaN(od_temp_point)){
+            $("#use_point").text(0 + 'P');
+            od_temp_point = 0;
+        }else{
+            if(od_temp_point == 0){
+                $("#use_point").text(numberWithCommas(od_temp_point) + 'P');
+            }else{
+                $("#use_point").text(numberWithCommas(od_temp_point * -1) + 'P');
+            }
+        }
+
+        last_price(tot_price, od_send_cost2, od_temp_point);
+    }
+</script>
+
 
 
 

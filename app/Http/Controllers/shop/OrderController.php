@@ -160,7 +160,8 @@ class OrderController extends Controller
 
         $setting_info = DB::table('shopsettings')->select('de_send_cost','de_send_cost_free')->first(); //기본 배송비 구하기
 
-        $cart_count = DB::table('shopcarts')->select('item_code')->where([['od_id',$tmp_cart_id], ['sct_select','1']])->distinct('item_code')->count(); //장바구니 상품 개수
+        //$cart_count = DB::table('shopcarts')->select('item_code')->where([['od_id',$tmp_cart_id], ['sct_select','1']])->distinct('item_code')->count(); //장바구니 상품 개수
+        $cart_count = DB::table('shopcarts')->select('item_code')->where([['od_id',$tmp_cart_id], ['sct_select','1']])->count(); //장바구니 상품 개수
 
         return view('shop.order_page',[
             's_cart_id'         => $s_cart_id,
