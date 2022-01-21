@@ -1,7 +1,14 @@
 @charset "UTF-8";
 @media screen and (max-width: 1024px) {
+
+    body {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
+
     body::-webkit-scrollbar {
         display: none;
+        width: 0 !important;
     }
 
     /* 레이아웃 */
@@ -9,6 +16,7 @@
         padding-top: 60px;
         /* padding-bottom: 70px; */
     }
+
     .header .top {
         max-width: 100%;
         height: 60px;
@@ -3015,6 +3023,7 @@ background-size: cover;
         display: block;
     }
 
+
     /* .show {
     display: none;
   }
@@ -3031,6 +3040,7 @@ background-size: cover;
     .stars-outer {
         font-size: 11.7px;
     }
+
 
 
 

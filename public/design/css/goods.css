@@ -331,6 +331,7 @@
 
  }
 
+
  .eval .board .board_wrap .shop_goods .shop_goods_dt_l .dt_som .som {
     width: 100%;
     max-width: 600px;
@@ -1046,6 +1047,10 @@
 .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_s_con_tt {
     padding: 20px 0 20px 0;
     font-size: 16px;
+}
+
+.eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_s_con_tt img{
+    width: 100%;
 }
 
 
