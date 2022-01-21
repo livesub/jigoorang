@@ -74,6 +74,9 @@ class CartController extends Controller
         $item_code = $request->input('item_code');
         $post_item_codes = (isset($item_code) && is_array($item_code)) ? $item_code : array();
 
+        $cart_id = $request->input('cart_id');
+        $post_cart_id = (isset($cart_id) && is_array($cart_id)) ? $cart_id : array();
+
         $each_buy_cart_id = $request->input('each_buy_cart_id');
 
         if($act == "buy")
@@ -86,17 +89,49 @@ class CartController extends Controller
             // 선택필드 초기화
             $up_result = shopcarts::whereod_id($tmp_cart_id)->first();
             $up_result->sct_select = 0;
+            $up_result->sct_select_time = '';
             $result_up = $up_result->save();
 
-            $fldcnt = count($post_item_codes);
+            //$fldcnt = count($post_item_codes);
+            $fldcnt = count($post_cart_id);
             for($i=0; $i<$fldcnt; $i++) {
                 $ct_chk = isset($post_ct_chk[$i]) ? 1 : 0;
 
                 if($ct_chk) {
                     $item_code = $post_item_codes[$i];
+                    $cart_id = $post_cart_id[$i];
 
-                    if( !$item_code ) continue;
 
+                    if( !$cart_id ) continue;
+
+                    // 주문 상품의 재고체크
+                    $cart_info = DB::table('shopcarts')->where([['id', $cart_id], ['item_code',$item_code]])->first();
+
+                    //삭제되거나 비출력된 상품인지 파악
+                    $item_chk = DB::table('shopitems')->where('item_code', $cart_info->item_code)->first();
+
+                    if($item_chk->item_display == 'N' || $item_chk->item_del == 'Y')
+                    {
+                        echo json_encode(['message' => 'discontinued', 'option' => $item_chk->item_name]);
+                        exit;
+                    }
+
+                    // 재고 구함
+                    $sct_qty = $cart_info->sct_qty; //주문수량
+
+                    if(!$cart_info->sio_id) $it_stock_qty = $CustomUtils->get_item_stock_qty($cart_info->item_code);
+                    else $it_stock_qty = $CustomUtils->get_option_stock_qty($cart_info->item_code, $cart_info->sio_id, $cart_info->sio_type);
+
+                    if ($sct_qty > $it_stock_qty)
+                    {
+                        $item_option = $cart_info->item_name;
+                        if($cart_info->sio_id) $item_option .= '('.$cart_info->sct_option.')';
+                        echo json_encode(['message' => 'no_qty', 'option' => $item_option, 'sum_qty' => number_format($it_stock_qty)]);
+                        exit;
+                    }
+
+                    $update_result = DB::table('shopcarts')->where([['id', $cart_id], ['item_code',$cart_info->item_code]])->update(['sct_select' => '1','sct_select_time' => date("Y-m-d H:i:s", time())]);
+/*
                     // 주문 상품의 재고체크
                     $cart_infos = DB::table('shopcarts')->where([['od_id', $tmp_cart_id], ['item_code',$item_code]])->get();
 
@@ -130,7 +165,7 @@ class CartController extends Controller
                     }
 
                     $update_result = DB::table('shopcarts')->where([['od_id', $tmp_cart_id], ['item_code',$item_code]])->update(['sct_select' => '1','sct_select_time' => date("Y-m-d H:i:s", time())]);
-
+*/
                 }
             }
 
@@ -145,6 +180,7 @@ class CartController extends Controller
             // 선택필드 초기화
             $up_result = shopcarts::whereid($each_buy_cart_id)->first();
             $up_result->sct_select = 0;
+            $up_result->sct_select_time = '';
             $result_up = $up_result->save();
 
             // 주문 상품의 재고체크
@@ -192,6 +228,7 @@ class CartController extends Controller
                 if($ct_chk) {
                     //$item_code = $post_item_codes[$i];
                     $cart_id = $post_cart_id[$i];
+
                     //if($item_code){
                     if($cart_id){
                         DB::table('shopcarts')->where([['id',$cart_id], ['od_id',$tmp_cart_id]])->delete();   //row 삭제
@@ -499,6 +536,7 @@ class CartController extends Controller
             ->orderBy('a.id')
             ->get();
 
+        $de_send_cost = 0;
         if(count($cart_infos) > 0){
             //장바구니 사라짐 문제 때문에 다시 세션 구움
             $CustomUtils->set_session('ss_cart_id', $cart_infos[0]->od_id);
@@ -508,7 +546,7 @@ class CartController extends Controller
             $de_send_cost = DB::table('shopcarts')->where('od_id',$s_cart_id)->max('de_send_cost');
 
             // 선택필드 초기화
-            $up_result = DB::table('shopcarts')->where('od_id', $s_cart_id)->update(['sct_select' => '0']);
+            $up_result = DB::table('shopcarts')->where('od_id', $s_cart_id)->update(['sct_select' => '0', 'sct_select_time' => '']);
         }
 
         $setting_info = CustomUtils::setting_infos();

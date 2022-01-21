@@ -1369,6 +1369,22 @@ $um_value='80/0.5/3'
         return $sendcost;
     }
 
+    // 상품별 배송비
+    public static function new_get_item_sendcost($cart_id, $price, $qty, $s_cart_id)
+    {
+        $ct = DB::table('shopcarts')->select('item_code', 'item_sc_type', 'item_sc_method', 'item_sc_price', 'item_sc_minimum', 'item_sc_qty')->where([['id', $cart_id],['od_id',$s_cart_id]])->orderby('id', 'asc')->first();
+
+        if(!$ct->item_code) return 0;
+
+        if($ct->item_sc_price > 0){
+            $sendcost = $ct->item_sc_price * $qty;  //상품 갯수 만큼 배송비가 붙가 함(220121)
+        }else{
+            $sendcost = 0;
+        }
+
+        return $sendcost;
+    }
+
     //장바구니 옵션 뿌리기
     function print_item_options($item_code, $cart_id)
     {

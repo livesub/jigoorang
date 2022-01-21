@@ -51,13 +51,16 @@
                                 <div class="sub_title">
                                     <h4>주문상품 정보</h4>
                                 </div>
-
+                                @php
+                                    $hap_sendcost = 0;
+                                    $tot_price = 0;
+                                @endphp
                                 @foreach($cart_infos as $cart_info)
                                     @php
                                         $i = 0;
+                                        //$sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_point * sct_qty) as point, SUM(sct_qty) as qty from shopcarts where item_code = '{$cart_info->item_code}' and od_id = '$s_cart_id' ");
+                                        $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_point * sct_qty) as point, SUM(sct_qty) as qty from shopcarts where sct_select = 1 and id='$cart_info->id' and od_id = '$s_cart_id' ");
                                 /*
-                                        $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_point * sct_qty) as point, SUM(sct_qty) as qty from shopcarts where item_code = '{$cart_info->item_code}' and od_id = '$s_cart_id' ");
-
                                         if (!$goods)
                                         {
                                             $goods = preg_replace("/\'|\"|\||\,|\&|\;/", "", $cart_info->item_name);
@@ -78,24 +81,11 @@
                                         //옵션 처리
                                         //$item_options = $CustomUtils->new_print_item_options($cart_info->id, $cart_info->item_code, $s_cart_id);
                                         $item_options = DB::table('shopcarts')->select('sct_option', 'sct_qty', 'sio_price')->where([['id', $cart_info->id], ['item_code', $cart_info->item_code], ['od_id',$s_cart_id]])->first();
-                                /*
-                                        $item_name = '<b>' . stripslashes($cart_info->item_name) . '</b>';
-                                        $item_options = $CustomUtils->print_item_options($cart_info->item_code, $s_cart_id);
-                                        if($item_options) {
-                                            $item_name .= '<div class="sod_opt">'.$item_options.'</div>';
-                                        }
 
-                                        if ($goods_count) $goods .= ' 외 '.$goods_count.'건';
-
-                                        $point      = $sum[0]->point;
                                         $sell_price = $sum[0]->price;
 
                                         // 배송비
-                                        $sendcost = $CustomUtils->get_item_sendcost($cart_info->item_code, $sum[0]->price, $sum[0]->qty, $s_cart_id);
-
-                                        if($sendcost == 0) $ct_send_cost = '무료';
-                                        else $ct_send_cost = number_format($sendcost).'원';
-                                */
+                                        $sendcost = $CustomUtils->new_get_item_sendcost($cart_info->id, $sum[0]->price, $sum[0]->qty, $s_cart_id);
                                     @endphp
                                 <div class="pr_body pd-00">
                                     <div class="pr-t pd-00">
@@ -119,7 +109,23 @@
                                         </div>
                                     </div>
                                 </div>
+                                    @php
+                                        $i++;
+                                        $tot_sell_price += $sell_price;
+                                        $hap_sendcost += $sendcost;
+                                    @endphp
                                 @endforeach
+
+                                @php
+                                    //무료 배송비 정책에 따른 기본 배송비 추가,삭제
+                                    if($tot_sell_price >= $de_send_cost_free){
+                                        $hap_sendcost = $hap_sendcost;
+                                    }else{
+                                        $hap_sendcost = $hap_sendcost + $de_send_cost;
+                                    }
+                                    //총결제금액 = 상품 총금액 + 배송비
+                                    $tot_price = $tot_sell_price + $hap_sendcost;
+                                @endphp
 
 
                                 <div class="pdt-20">
@@ -127,17 +133,17 @@
 
                                         <ul>
                                             <li>상품금액</li>
-                                            <li class="cr_06">6,000</li>
+                                            <li class="cr_06">{{ $CustomUtils->display_price($tot_sell_price) }}</li>
                                         </ul>
 
                                         <ul>
                                             <li>배송비</li>
-                                            <li class="cr_06">2,500</li>
+                                            <li class="cr_06">{{ $CustomUtils->display_price($hap_sendcost) }}</li>
                                         </ul>
 
                                         <ul>
                                             <li class="cr_06 bold">총 결제 금액</li>
-                                            <li class="cr_07 bold">8,500원</li>
+                                            <li class="cr_07 bold">{{ $CustomUtils->display_price($tot_price) }}</li>
                                         </ul>
                                     </div>
                                 </div>

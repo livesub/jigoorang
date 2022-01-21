@@ -41,7 +41,7 @@
                         <div class="chek">
                             <label for="">
                                 <input type="checkbox" name="ct_all" value="1" id="ct_all" checked="checked">
-                                  <span>전체선택(<span id="choice_cnt">2</span>/{{ count($cart_infos) }})</span>
+                                  <span>전체선택(<span id="choice_cnt"></span>/{{ count($cart_infos) }})</span>
                             </label>
                             <button type="button" class="btn-bg-mint" onclick="return form_check('seldelete');">선택삭제</button>
                         </div>
@@ -147,7 +147,7 @@
                                         </ul>
 
                                         <ul class="cart_list_pr block">
-                                        <input type="hidden" id="cart_id[{{ $num }}]" value="{{ $cart_info->id }}">
+                                        <input type="hidden" id="cart_id[{{ $num }}]" name="cart_id[{{ $num }}]" value="{{ $cart_info->id }}">
                                         <input type="hidden" name="sio_type[{{ $num }}]" value="{{ $cart_info->sio_type }}">
                                         <input type="hidden" name="sio_id[{{ $num }}]" value="{{ $cart_info->sio_id }}">
                                         <input type="hidden" name="sio_value[{{ $num }}]" value="{{ $cart_info->sct_option }}">
@@ -298,11 +298,15 @@ $(function() {
     });
 
     // 모두선택
+    $("input[name^=ct_all]").prop("checked", true); //초기 로딩시 다 선택 되있게
+    $("input[name^=ct_chk]").prop("checked", true); //초기 로딩시 다 선택 되있게
+
     $("input[name=ct_all]").click(function() {
         if($("#ct_all").is(":checked")) $("input[name^=ct_chk]").prop("checked", true);
         else $("input[name^=ct_chk]").prop("checked", false);
 
         getCheckedCnt();
+        hap_price();
     });
 
     // 옵션수정 닫기
@@ -314,7 +318,6 @@ $(function() {
         $("#mod_option_frm").remove();
         $(".mod_options").eq(close_btn_idx).focus();
     });
-
 });
 
 function fsubmit_check(f) {
@@ -327,7 +330,6 @@ function fsubmit_check(f) {
 }
 
 function form_check(act, cart_id) {
-
     var f = document.frmcartlist;
     var cnt = f.records.value;
 
@@ -376,7 +378,6 @@ function form_check(act, cart_id) {
                 if(json.message == "no_mem_order"){  //비회원 주문
                     location.href = "{{ route('login.index','url='.urlencode(route('orderform'))) }}";
                 }
-
 //return false;
             },
             error: function(result){
@@ -384,8 +385,6 @@ function form_check(act, cart_id) {
                 console.log(json.result);
             },
         });
-
-
 //        f.act.value = act;
 //        f.submit();
     }else if (act == "alldelete"){
@@ -428,6 +427,8 @@ function form_check(act, cart_id) {
                 data : form_var,
                 dataType : 'text',
                 success : function(result){
+alert(result);
+return false;
                     var json = JSON.parse(result);
 
                     if(json.message == "no_cnt"){
@@ -475,21 +476,18 @@ function dierctdelete(cart_id){
 
 <script>
 getCheckedCnt();
+hap_price();
 function checkbox_click(){
      $("input:checkbox[id='ct_all']").attr("checked", false);
     getCheckedCnt();
+    hap_price();
 }
 
-function getCheckedCnt()  {
-    // 선택된 목록 가져오기
-    const query = 'input[name^="ct_chk"]:checked';
-    const selectedElements = document.querySelectorAll(query);
-
-    // 선택된 목록의 갯수 세기
-    const selectedElementsCnt = selectedElements.length;
+function getCheckedCnt(){
+    var check = $("input:checkbox[name^=ct_chk]:checked").length;
 
     // 출력
-    $("#choice_cnt").text(selectedElementsCnt);
+    $("#choice_cnt").text(check);
 }
 </script>
 

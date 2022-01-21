@@ -641,6 +641,7 @@ function new_price_calculate(num)
 
 function hap_price(){
     var arr_cnt = $("#arr_cnt").val();
+    //var arr_cnt = $("input[name^=ct_chk]:checked").length;
     var total = 0;
     var total_cust_price = 0;
     var principal = 0;
@@ -648,29 +649,36 @@ function hap_price(){
     var hap_total = 0;
     var baesongbi = 0;
     var sale_price = 0;
+    var de_send_cost = 0;    //기본 배송비
+    var de_send_cost_free = 0;    //무료배송비 정책
+    var chk_arr = $("input:checkbox[name^=ct_chk]");
+    var check = $("input:checkbox[name^=ct_chk]:checked").length;
 
     for(var k = 0; k < arr_cnt; k++){
-        var cart_id = $('input[id="cart_id['+k+']"]').val(); //장바구니 순번
-        var item_price = parseInt($('input[id="item_price['+k+']"]').val());
-        var item_cust_price = parseInt($('input[id="item_cust_price['+k+']"]').val());
-        var el_prc = $('input[id="sio_price['+k+']"]'); //옵션 추가 금액
-        var el_qty = $('input[name="qty_ct_tmp['+k+']"]');  //수량
-        var sc_price = $('input[id="item_sc_price['+k+']"]').val();  //각 상품 배송비
+        if( chk_arr[k].checked == true ) {
+            var cart_id = $('input[id="cart_id['+k+']"]').val(); //장바구니 순번
+            var item_price = parseInt($('input[id="item_price['+k+']"]').val());
+            var item_cust_price = parseInt($('input[id="item_cust_price['+k+']"]').val());
+            var el_prc = $('input[id="sio_price['+k+']"]'); //옵션 추가 금액
+            var el_qty = $('input[name="qty_ct_tmp['+k+']"]');  //수량
+            var sc_price = $('input[id="item_sc_price['+k+']"]').val();  //각 상품 배송비
 
-        ajax_cart_qty_modify(cart_id, el_qty); //수량 변경에 따른 DB 장바구니 수량 변경
+            ajax_cart_qty_modify(cart_id, el_qty); //수량 변경에 따른 DB 장바구니 수량 변경
 
-        total += (item_price + parseInt(el_prc.val())) * parseInt(el_qty.val());
-        sc_price_total += sc_price * el_qty.val();
+            total += (item_price + parseInt(el_prc.val())) * parseInt(el_qty.val());
+            sc_price_total += sc_price * el_qty.val();
 
-        if(item_cust_price != 0) principal += item_price * parseInt(el_qty.val());  //추가 금액을 뺀 금액
-        total_cust_price += item_cust_price * parseInt(el_qty.val());
+            if(item_cust_price != 0) principal += item_price * parseInt(el_qty.val());  //추가 금액을 뺀 금액
+            total_cust_price += item_cust_price * parseInt(el_qty.val());
+        }
     }
 
     sale_price = total_cust_price - principal;
 
-    var de_send_cost = $("#de_send_cost").val();    //기본 배송비
-    var de_send_cost_free = $("#de_send_cost_free").val();    //무료배송비 정책
-
+    if(check > 0){
+        de_send_cost = $("#de_send_cost").val();    //기본 배송비
+        de_send_cost_free = $("#de_send_cost_free").val();    //무료배송비 정책
+    }
 
     //무료배송비 정책 보다 상품 금액이 크거나 같을때  무료 배송비 제외
     if(de_send_cost_free <= total){
