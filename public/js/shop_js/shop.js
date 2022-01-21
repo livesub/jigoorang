@@ -644,19 +644,26 @@ function hap_price(){
     var total = 0;
     var total_cust_price = 0;
     var principal = 0;
+    var sc_price_total = 0;
     for(var k = 0; k < arr_cnt; k++){
         var cart_id = $('input[id="cart_id['+k+']"]').val(); //장바구니 순번
         var item_price = parseInt($('input[id="item_price['+k+']"]').val());
         var item_cust_price = parseInt($('input[id="item_cust_price['+k+']"]').val());
         var el_prc = $('input[id="sio_price['+k+']"]'); //옵션 추가 금액
         var el_qty = $('input[name="qty_ct_tmp['+k+']"]');  //수량
+        var sc_price = $('input[id="item_sc_price['+k+']"]').val();  //각 상품 배송비
 
         ajax_cart_qty_modify(cart_id, el_qty); //수량 변경에 따른 DB 장바구니 수량 변경
 
         total += (item_price + parseInt(el_prc.val())) * parseInt(el_qty.val());
+        sc_price_total += sc_price * el_qty.val();
+
         if(item_cust_price != 0) principal += item_price * parseInt(el_qty.val());  //추가 금액을 뺀 금액
         total_cust_price += item_cust_price * parseInt(el_qty.val());
     }
+
+    alert(sc_price_total);
+
 
     var sale_price = total_cust_price - principal;
     var hap_total = total + 0;  //총 상품 금액 + 배송비 합
