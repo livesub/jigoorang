@@ -292,6 +292,7 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'mypage.qna_view',
         'uses' => 'App\Http\Controllers\member\QnaController@qna_view',
     ]);
+
  });
 
 /* 이메일 확인 리턴(외부에서 접속 해야 하기에 밖으로 뺌) */

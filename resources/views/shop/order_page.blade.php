@@ -94,6 +94,7 @@
 
                                         // 배송비
                                         $sendcost = $CustomUtils->new_get_item_sendcost($cart_info->id, $sum[0]->price, $sum[0]->qty, $s_cart_id);
+
                                     @endphp
                                 <div class="pr_body pd-00">
                                     <div class="pr-t pd-00">
@@ -241,13 +242,14 @@
 <form name="orderform" id="orderform" method="post" action="{{ route('orderpayment') }}" autocomplete="off">
 {!! csrf_field() !!}
 <!-- 배송지 관련 -->
-<input type="hidden" id="od_b_name" name="ad_name">
-<input type="hidden" id="od_b_hp" name="ad_hp">
-<input type="hidden" id="od_b_zip" name="ad_zip1" value="{{ $user_zip }}">
-<input type="hidden" id="od_b_addr1" name="ad_addr1">
-<input type="hidden" id="od_b_addr2" name="ad_addr2">
-<input type="hidden" id="od_b_addr3" name="ad_addr3">
-<input type="hidden" id="od_b_addr_jibeon" name="ad_jibeon">
+<input type="hidden" name="od_b_name" id="od_b_name" value="{{ $user_name }}">
+<input type="hidden" name="od_b_hp" id="od_b_hp" value="{{ $user_phone }}">
+<input type="hidden" name="od_b_zip" id="od_b_zip"  value="{{ $user_zip }}">
+<input type="hidden" name="od_b_addr1" id="od_b_addr1" value="{{ $user_addr1 }}">
+<input type="hidden" name="od_b_addr2" id="od_b_addr2" value="{{ $user_addr2 }}">
+<input type="hidden" name="od_b_addr3" id="od_b_addr3" value="{{ $user_addr3 }}">
+<input type="hidden" name="od_b_addr_jibeon" id="od_b_addr_jibeon" value="{{ $user_addr_jibeon }}">
+
 
 <input type="hidden" name="order_id" id="order_id" value="{{ $order_id }}"> <!-- 주문번호 -->
 <input type="hidden" name="od_id" id="od_id" value="{{ $s_cart_id }}"> <!-- 장바구니번호 -->
@@ -273,6 +275,7 @@
 <input type="hidden" name="imp_card_name" id="imp_card_name">   <!-- 카드사에서 전달 받는 값(카드사명칭)) -->
 <input type="hidden" name="imp_card_quota" id="imp_card_quota">   <!-- 카드사에서 전달 받는 값(할부개월수)) -->
 <input type="hidden" name="imp_card_number" id="imp_card_number">   <!-- 카드사에서 전달 받는 값(카드번호) -->
+
 
                             <div class="list ev_rul inner od sol-g-t">
                                 <div class="sub_title">
@@ -645,7 +648,6 @@
     }
 
     function forderform_check(){
-
         // 재고체크
         var stock_msg = order_stock_check();
 
@@ -769,8 +771,8 @@
         }
 
         //결제전 검증 수단으로 temp 테이블에 저장
-        //order_temp(total_price);
-
+        order_temp(total_price);
+//return false;
 //$("#forderform").submit();  //테스트로 함
 
 
@@ -815,7 +817,6 @@ return false;
     function requestPay(pg, method, price, point=0) {
         var tot_pay = price - point;
         var merchant_uid = "{{ $order_id }}";
-
         var IMP = window.IMP; // 생략 가능
         IMP.init("imp62273646"); // 예: imp00000000
       // IMP.request_pay(param, callback) 결제창 호출
@@ -832,6 +833,8 @@ return false;
             buyer_postcode: "{{ Auth::user()->user_zip }}",
             //confirm_url : '{{ route('ajax_ordercomfirm') }}', //실제 서버에서 동작 함 나중에 바꿔 줘야함
         }, function (rsp) { // callback
+//alert(rsp.success);
+//return false;
             if (rsp.success) {
                 $("#imp_uid").val(rsp.imp_uid); //카드사에서 전달 받는 값(아임포트 코드)
                 $("#apply_num").val(rsp.apply_num); //카드사에서 전달 받는 값(카드 승인번호)
@@ -841,8 +844,10 @@ return false;
                 $("#imp_card_name").val(rsp.card_name); //카드사에서 전달 받는 값(카드사명칭))
                 $("#imp_card_quota").val(rsp.card_quota); //카드사에서 전달 받는 값(할부개월수))
                 $("#imp_card_number").val(rsp.card_number); //카드사에서 전달 받는 값(카드번호)
+
+                setCookie("order_01", "", "1");
 //alert("성공");
-                $("#forderform").submit();
+                $("#orderform").submit();
             } else {
                 // 결제 실패 시 로직,
                 alert("결제에 실패하였습니다.\n내용: " +  rsp.error_msg);
@@ -887,7 +892,7 @@ return false;
                 'tot_item_point'    : '{{ $tot_point }}',
             },
             success : function(data){
-alert(data);
+//alert(data);
             },
             error: function(result){
                 console.log(result);

@@ -82,9 +82,9 @@ class OrderController extends Controller
                 });
             //->where([['a.od_id',$tmp_cart_id], ['a.sct_select','1']])
             if($sw_direct){
-                $cart_infos = $cart_infos->where([['a.sct_select','1'],['a.sct_direct', '1']]);
+                $cart_infos = $cart_infos->where([['a.sct_select','1'],['a.sct_direct', '1'], ['a.sct_status','쇼핑']]);
             }else{
-                $cart_infos = $cart_infos->where([['a.sct_select','1'], ['a.sct_direct', '0']]);
+                $cart_infos = $cart_infos->where([['a.sct_select','1'], ['a.sct_direct', '0'], ['a.sct_status','쇼핑']]);
             }
             //->groupBy('a.item_code')
             $cart_infos = $cart_infos->orderBy('a.id')->get();
@@ -574,6 +574,7 @@ class OrderController extends Controller
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
+        /*
         //기본 배송지 처리
         $ad_default         = $request->input('ad_default'); //기본 배송지 체크여부
         $ad_subject         = $request->input('ad_subject'); //배송지명
@@ -588,6 +589,7 @@ class OrderController extends Controller
 
         $CustomUtils->baesongji_process($ad_default, $ad_subject, $od_b_name, $od_b_tel, $od_b_hp, $od_b_zip, $od_b_addr1, $od_b_addr2, $od_b_addr3, $od_b_addr_jibeon);
         //기본 배송지 처리 끝
+        */
 
         //변수 받기
         $order_id           = $request->input('order_id');
@@ -706,7 +708,7 @@ $imp_apply_num= '12345678';
                     $CustomUtils->insert_point(Auth::user()->user_id, $tot_item_point, "구매 적립", 8, '', $order_id);
                 }
 
-                return redirect()->route('orderview');
+                return redirect()->route('mypage.orderview');
                 exit;
             }
         }

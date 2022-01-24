@@ -30,7 +30,7 @@ class CreateShopordersTable extends Migration
             $table->text('od_memo')->nullable()->comment('전하실말씀');
             $table->integer('od_cart_count')->default(0)->comment('장바구니 상품 개수');
             $table->integer('od_cart_price')->default(0)->comment('주문상품 총금액');
-            $table->integer('de_send_cost')->default(0)->comment('기본 배송비');
+            $table->integer('de_send_cost')->default(0)->comment('기본 배송비(3만원이하 취소시 기본 배송비를 알기 위함-계산 안함)');
             $table->integer('de_send_cost_free')->default(0)->comment('기본 배송비 무료 정책');
             $table->integer('od_send_cost')->default(0)->comment('각 상품 배송비');
             $table->integer('od_send_cost2')->default(0)->comment('추가배송비');
