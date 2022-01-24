@@ -37,6 +37,7 @@ class CreateShopordersTable extends Migration
             $table->integer('od_receipt_price')->default(0)->comment('결제금액');
             $table->integer('od_cancel_price')->default(0)->comment('취소금액');
             $table->integer('od_receipt_point')->default(0)->comment('결제시 사용 포인트');
+            $table->integer('real_card_price')->default(0)->comment('실제 카드 결제금액');
             $table->integer('od_return_point')->default(0)->comment('취소시 반환 포인트');
             $table->integer('od_refund_price')->default(0)->comment('반품, 품절 금액');
             $table->string('od_receipt_time')->comment('결제일시');

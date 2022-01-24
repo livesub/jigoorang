@@ -648,8 +648,9 @@ $imp_uid = 'imp_1212';
 $imp_apply_num= '12345678';
 */
         //예외 처리(카드사에서 보내온 결제 금액과 order에 저장 되는 결제금액이 같은가?)
-        $tot_price          = $od_receipt_price - $od_receipt_point;
-        if($imp_paid_amount != $tot_price){
+        $real_card_price    = $od_receipt_price - $od_receipt_point;
+
+        if($imp_paid_amount != $real_card_price){
             return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.-1');
             exit;
         }else{
@@ -675,6 +676,7 @@ $imp_apply_num= '12345678';
                 'od_send_cost2'     => (int)$od_send_cost2,
                 'od_receipt_price'  => (int)$od_receipt_price,
                 'od_receipt_point'  => (int)$od_receipt_point,
+                'real_card_price'   => (int)$real_card_price,
                 'od_receipt_time'   => $od_receipt_time,
                 'od_shop_memo'      => $od_shop_memo,
                 'od_status'         => $od_status,
@@ -712,54 +714,6 @@ $imp_apply_num= '12345678';
                 exit;
             }
         }
-    }
-
-    public function orderview(Request $request){
-        //r관리자 배송 상태에 따라 추가 변경 해 줘야 함@!!!!
-        $CustomUtils = new CustomUtils;
-        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
-
-        $page       = $request->input('page');
-        $pageScale  = 1;  //한페이지당 라인수
-        $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
-
-        if($page != "")
-        {
-            $start_num = $pageScale * ($page - 1);
-        }else{
-            $page = 1;
-            $start_num = 0;
-        }
-
-        $orders = DB::table('shoporders')->where([['user_id',Auth::user()->user_id],['od_status', '입금']]);
-
-        $total_record   = 0;
-        $total_record   = $orders->count(); //총 게시물 수
-        $total_page     = ceil($total_record / $pageScale);
-        $total_page     = $total_page == 0 ? 1 : $total_page;
-
-        $order_rows = $orders->orderby('id', 'desc')->offset($start_num)->limit($pageScale)->get();
-
-        $tailarr = array();
-        //$tailarr['AA'] = 'AA';    //고정된 전달 파라메터가 있을때 사용
-        //$tailarr['bb'] = 'bb';
-
-        $PageSet        = new PageSet;
-        $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
-        $prevPage       = $PageSet->getPrevPage("이전");
-        $nextPage       = $PageSet->getNextPage("다음");
-        $pre10Page      = $PageSet->pre10("이전10");
-        $next10Page     = $PageSet->next10("다음10");
-        $preFirstPage   = $PageSet->preFirst("처음");
-        $nextLastPage   = $PageSet->nextLast("마지막");
-        $listPage       = $PageSet->getPageList();
-        $pnPage         = $prevPage.$listPage.$nextPage;
-
-        return view('shop.orderview',[
-            'orders'        => $order_rows,
-            'CustomUtils'   => $CustomUtils,
-            'pnPage'        => $pnPage,
-        ]);
     }
 
 

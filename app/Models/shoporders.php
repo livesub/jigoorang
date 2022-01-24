@@ -42,6 +42,7 @@ class shoporders extends Model
         'od_receipt_price',
         'od_cancel_price',
         'od_receipt_point',
+        'real_card_price',
         'od_return_point',
         'od_refund_price',
         'od_receipt_time',

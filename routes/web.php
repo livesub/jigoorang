@@ -293,6 +293,12 @@ Route::group(['middleware' => ['auth']], function () {
         'uses' => 'App\Http\Controllers\member\QnaController@qna_view',
     ]);
 
+    //주문 배송 내역
+    Route::get('member/orderview', [
+        'as' => 'mypage.orderview',
+        'uses' => 'App\Http\Controllers\member\OrderviewController@orderview',
+    ]);
+
  });
 
 /* 이메일 확인 리턴(외부에서 접속 해야 하기에 밖으로 뺌) */
