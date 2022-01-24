@@ -126,6 +126,18 @@ body {
   max-width: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
+  touch-action: none;
+  -webkit-overflow-scrolling: none;
+  /* 이외의 브라우저 */
+  overscroll-behavior: none;
+
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+
+body::-webkit-scrollbar {
+  display: none;
 }
 
 
@@ -495,6 +507,8 @@ input {
 
 textarea {
   padding: 10px;
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
 }
 
 input:focus {
