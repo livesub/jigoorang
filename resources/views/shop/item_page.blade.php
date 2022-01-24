@@ -196,12 +196,14 @@
                                     if($item_info->item_manufacture == "") $item_manufacture = "";
                                     else $item_manufacture = "[".$item_info->item_manufacture."]";
                                 @endphp
-                                <h3>{{ $item_manufacture }}{{ stripslashes($item_info->item_name) }}</h3>
+                                <a href="{{ route('sitemdetail') }}?item_code={{ $item_info->item_code }}"><h3>{{ $item_manufacture }}{{ stripslashes($item_info->item_name) }}</h3></a>
 
                                 <span class="goods_left">
                                     <p class="price">{{ $CustomUtils->display_price($item_info->item_price, $item_info->item_tel_inq) }}</p>
                                     @if($item_info->item_cust_price != 0)
                                     <p class="sale-price">{{ $CustomUtils->display_price($item_info->item_cust_price) }}</p>
+                                    @else
+                                    <p class="sale-price"></p>
                                     @endif
                                 </span>
 
@@ -216,6 +218,8 @@
                                     @if($disp_discount_rate != 0)
                                     <p>{{ $disp_discount_rate }}%</p>
                                     @endif
+                                     @else
+                                    <p class="pct_list"></p>
                                 @endif
                                 </span>
 
@@ -232,7 +236,7 @@
 
                                 <div class="goods_bottom">
                                     <span class="left">
-                                        <p>리뷰 {{ $item_info->review_cnt }}</p>
+                                        <a href="{{ route('sitemdetail') }}?item_code={{ $item_info->item_code }}#section1"><p>리뷰 {{ $item_info->review_cnt }}</p></a>
                                     </span>
 
                                     <span class="right">

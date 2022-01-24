@@ -134,6 +134,7 @@
      appearance:none;
      background:url('../recources/icons/arrow-option@3x.png') no-repeat right 9px center;
      background-size: 24px 24px;
+     color: #000;
      }
 
     .eval .board .board_wrap .filter_bg {
@@ -219,6 +220,10 @@
         font-weight: 600;
         margin-left: 0px;
     }
+
+    .eval .board .board_wrap .goods .goods_right .pct_list {
+      height: 52px;
+  }
 
     .eval .board .board_wrap .goods .goods_bottom p {
         float: left;
@@ -1286,7 +1291,7 @@
 
     .eval .board .board_wrap .goods .goods_title {
         position: relative;
-        margin: 0 16px;
+        margin: 0;
         word-break: break-all;
     }
 
@@ -1296,7 +1301,8 @@
 
     .eval .board .board_wrap .goods .goods_left {
         float: left;
-        margin: 0 20px 0 0;
+        /* margin: 0 20px 0 0; */
+        width: 100%;
     }
 
     .eval .board .board_wrap .goods .goods_left .price {
@@ -1309,6 +1315,10 @@
         font-weight: 600;
         margin-left: 0;
     }
+    .eval .board .board_wrap .goods .goods_right .pct_list {
+      height: 54px;
+  }
+
 
     .eval .board .board_wrap .goods .goods_bottom p {
         float: left;
@@ -2136,7 +2146,7 @@
 
     .eval .board .board_wrap .goods .goods_title {
         position: relative;
-        margin: 0 16px;
+        margin: 0;
         word-break: break-all;
     }
 
@@ -2146,7 +2156,8 @@
 
     .eval .board .board_wrap .goods .goods_left {
         float: left;
-        margin: 0 20px 0 0;
+        /* margin: 0 20px 0 0; */
+        width: 100%;
     }
 
     .eval .board .board_wrap .goods .goods_left .price {
@@ -2163,6 +2174,14 @@
         font-weight: 600;
         margin-left: 0;
     }
+
+    .eval .board .board_wrap .goods .goods_right .pct_list {
+      height: 47px;
+  }
+
+  .eval .board .board_wrap .goods .goods_bottom{
+     width: 90%;
+  }
 
     .eval .board .board_wrap .goods .goods_bottom p {
         float: left;

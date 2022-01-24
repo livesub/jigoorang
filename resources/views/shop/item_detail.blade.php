@@ -120,6 +120,7 @@
                                                 @endif
                                             @endif
                                             <input type="hidden" id="item_price" value="{{ $item_info->item_price }}">
+                                            <!--<p id="item_price" class="">{{ $item_info->item_price }}</p>-->
                                         </ul>
                                         @if($item_info->item_cust_price > 0)
                                         <ul class="dt_pr_st">
