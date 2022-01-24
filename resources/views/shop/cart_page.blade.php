@@ -39,9 +39,9 @@
                     <div class="cart_list">
 
                         <div class="chek">
-                            <label for="">
+                            <label for="전체선택">
                                 <input type="checkbox" name="ct_all" value="1" id="ct_all" checked="checked">
-                                  <span>전체선택(<span id="choice_cnt"></span>/{{ count($cart_infos) }})</span>
+                                  <span class="all">전체선택(<span id="choice_cnt"></span>/{{ count($cart_infos) }})</span>
                             </label>
                             <button type="button" class="btn-bg-mint" onclick="return form_check('seldelete');">선택삭제</button>
                         </div>
@@ -95,7 +95,7 @@
                                     //개별 상품 가격
                                     $case_price = ($cart_info->item_price + $cart_info->sio_price) * $item_options->sct_qty;
                                 @endphp
-                            <div class="cot_body">
+                            <div class="cot_body mb-20">
                                 <div class="cart">
                                     <div class="cart_inner">
                                         <ul class="cart_list_img">

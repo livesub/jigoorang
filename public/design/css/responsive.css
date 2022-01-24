@@ -3986,7 +3986,7 @@ background-size: cover;
     }
 
     .eval .board .board_wrap .information_01 .information-inner-01 .information-address {
-        display: block;
+        /* display: block; */
         position: relative;
     }
 
@@ -4625,6 +4625,7 @@ background-size: cover;
 
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(1) {
         width: calc(100% - 50%) !important;
+        padding-bottom: 10px;
     }
 
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(2) input {

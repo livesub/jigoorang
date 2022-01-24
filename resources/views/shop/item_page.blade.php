@@ -32,10 +32,10 @@
                                 @foreach($cate_infos as $cate_info)
                                     @php
                                         $ca_id_class = '';
-                                        if($ca_id == $cate_info->sca_id) $ca_id_class = 'class="bct_active"';
+                                        if($ca_id == $cate_info->sca_id) $ca_id_class = "bct_active";
                                     @endphp
                                 <a href="{{ route('sitem','ca_id='.$cate_info->sca_id) }}" class="swiper-slide">
-                                <li {{ $ca_id_class }}>{{ $cate_info->sca_name_kr }}</li>
+                                <li class="{{ $ca_id_class }}">{{ $cate_info->sca_name_kr }}</li>
                                 <!-- class="bct_active" 메뉴활성 -->
                                 </a>
                                 @endforeach

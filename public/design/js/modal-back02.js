@@ -59,6 +59,39 @@ function detilclosemodal_001() {
 
 
 
+// 개인정보 처리방침 모달
+function detil2openModal() {
+
+    document.querySelector('body').classList.add('modal-open')
+
+}
+
+function detil2closeModal() {
+
+    document.querySelector('body').classList.remove('modal-open')
+
+}
+
+function detil2openmodal_001() {
+
+    detil2openModal();
+
+    document.querySelector('.modal.modal_001_1').classList.add('in');
+
+}
+
+function detil2closemodal_001() {
+
+    detil2closeModal();
+
+    document.querySelector('.modal.modal_001_1').classList.remove('in');
+
+}
+
+
+
+
+
 
 
 
