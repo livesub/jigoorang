@@ -30,12 +30,12 @@ Route::get('/', [
     'as' => 'main.index',
     'uses' => 'App\Http\Controllers\MainController@index',
 ]);
-
+*/
 Route::get('/home', [
     'as' => 'home.index',
     'uses' => 'App\Http\Controllers\MainController@index',
 ]);
-*/
+
 
 /** 체험단 미리 오픈을 위해 라우터 변경(나중에 위에로 변경)-211207 */
 

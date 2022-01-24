@@ -130,18 +130,32 @@
             </div>
             <!-- 모바일 메뉴 끝 -->
 
-            <!-- <ul class="menu">
-                <li class="search"><a href="#"><span>검색</span></a></li>
-                <li class="cart">
-                    <a class="conunt"><p id="">0</p></a>
-                    <a><span>장바구니</span></a>
-                </li>
-                <li class="my"><a><span>마이페이지</span></a></li>
-                <li class="login"><a href="/page/login/login.html"><span>로그인</span></a></li>
-                <li class="loginout"><a href=""><span>로그아웃</span></a></li>
-            </ul> -->
+            <!-- 수정껀 생길때 또 막음 -->
+                <ul class="menu">
+                    <li class="search" onclick="openmodal_001()"><a href="#"><span>검색</span></a></li>
+                    @if(!auth()->user())
+                    <li class="my"><a href="{{ route('login.index') }}"><span>마이페이지</span></a></li>
+                    <li class="login">
+                        <a href="{{ route('login.index') }}"><span>로그인</span></a>
+                    </li>
+                    @else
+                        @php
+                            $cart_cnt = 0;
+                            if(Auth::user()){
+                                //장바구니 갯수 처리
+                                $cart_cnt = DB::table('shopcarts as a')->where([['a.user_id', Auth::user()->user_id], ['a.sct_status','쇼핑'], ['a.sct_direct','0']])->count();
+                            }
+                        @endphp
 
-            <!-- 오픈전 메뉴 -->
+                    <li class="cart"> <a href="{{ route('cartlist') }}" class="conunt"><p id="">{{ $cart_cnt }}</p><span>장바구니</span></a></li>
+                    <li class="my"><a href="{{ route('mypage.index') }}"><span>마이페이지</span></a></li>
+                    <li class="login">
+                        <a href="{{ route('logout.destroy') }}"><span>로그아웃</span></a>
+                    </li>
+
+                    @endif
+
+            <!-- 오픈전 메뉴
             <ul class="menu2">
             @if(!auth()->user())
                 <li class="my"><a href="{{ route('login.index') }}">
@@ -165,6 +179,7 @@
                     <p class="ml-7">로그아웃</p>
                 </a></li>
             @endif
+             -->
             </ul>
 
         </div>
@@ -181,6 +196,51 @@
         </div>
     </div>
     <!-- 헤더 끝 -->
+
+
+                <!-- 검색창 모달 -->
+                <div class="modal_001 modal_sh fade">
+                    <div class="modal-background" onclick="closemodal_001()"></div>
+
+                    <div class="modal-dialog">
+
+                        <div class="sh_1200">
+                            <div class="modal-dialog-title">
+                                <div class="btn-close" onclick="closemodal_001()"></div>
+                            </div>
+
+                            <div class="modal-dialog-contents">
+
+                                <!-- 최근 검색어 -->
+                                <div class="search-wrap">
+                                    <form id="search-form" class="search" action="{{ route('cartlist') }}">
+                                        <input required maxlength="25" type="text" placeholder="검색어를 입력해 주세요">
+                                        <button type="submit">
+                                            <span>검색</span>
+                                        </button>
+                                    </form>
+
+                                    <div class="search-inner">
+                                        <div class="sh_terms">최근 검색어</div>
+                                        <ul id="search-list"></ul>
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+
+
+
 
     {{-- 각 내용 뿌리기 --}}
     @yield('content')

@@ -18,7 +18,7 @@ use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
 //use App\Helpers\Custom\Messages_kr;    //error 메세지 모음
 use Illuminate\Support\Facades\DB;
 use App\Models\User;    //모델 정의
-use Illuminate\Support\Facades\Hash; //비밀번호 함수
+use Illuminate\Support\Facades\Auth;    //인증
 
 class MainController extends Controller
 {
@@ -59,6 +59,7 @@ class MainController extends Controller
 
         //하단 배너 관리
         $bottombanner_infos = DB::table('banners')->where([['b_display', 'Y'], ['b_type', 2]])->get();
+
 
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
         return view('main',[
