@@ -427,8 +427,8 @@ function form_check(act, cart_id) {
                 data : form_var,
                 dataType : 'text',
                 success : function(result){
-alert(result);
-return false;
+//alert(result);
+//return false;
                     var json = JSON.parse(result);
 
                     if(json.message == "no_cnt"){
