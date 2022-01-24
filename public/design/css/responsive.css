@@ -8,7 +8,6 @@
 
     body::-webkit-scrollbar {
         display: none;
-        width: 0 !important;
     }
 
     /* 레이아웃 */
@@ -2212,7 +2211,7 @@ background-size: cover;
     }
 
     .eval .board.mypage_list .board_wrap .list .result {
-        font-size: 15px;
+        font-size: 13px;
     }
 
     /* 회원정보 수정 */
@@ -2236,9 +2235,13 @@ background-size: cover;
 
     /* 1:1 문의내역 (none) */
 
+    .eval .board.mypage_list .board_wrap .serch {
+        margin-bottom: 16px;
+    }
+
     .eval .board.mypage_list .board_wrap .serch input {
         width: 100%;
-        max-width: 260px;
+        max-width: 229px;
         height: 48px;
         border: solid 2px #ddd;
         caret-color: #ddd;
@@ -4234,7 +4237,7 @@ background-size: cover;
 
     .eval .board.mypage_list .board_wrap .serch input {
         width: 100%;
-        max-width: 229px;
+        max-width: 186px;
         height: 36px;
         border: solid 2px #ddd;
         caret-color: #ddd;
