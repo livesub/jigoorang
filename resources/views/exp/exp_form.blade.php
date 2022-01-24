@@ -126,15 +126,15 @@
                                 <p id="ad_addr">
                                 {{ $address->ad_zip1 }})
                                 {{ $address->ad_addr1 }}</p>
-                                <p id="ad_addr6">{{ $address->ad_addr2 }}</p>
+                                <span id="ad_addr6">{{ $address->ad_addr2 }}</span>
 
-                                <p id="ad_addr7">{{ $address->ad_addr3 }}</p>
+                                <span id="ad_addr7">{{ $address->ad_addr3 }}</span>
                                 </li>
 
                             </ul>
 
                             <ul class="information-input">
-                                <li> 배송메모</li>
+                                <li>배송메모</li>
                                 <input type="hidden" id="ad_jibeon_view" name="ad_jibeon_view" value="{{ $address->ad_jibeon }}">
                                 <input type="text" id="ship_memo" name="ship_memo" placeholder="배송시 남길 메세지를 입력해 주세요">
                             </ul>

@@ -719,6 +719,11 @@ background-size: cover;
         /*수직 정렬*/
     }
 
+    .eval .board .board_wrap .information .information-input li:nth-child(1) {
+       margin-bottom: 10px;
+    }
+
+
     .eval .board .board_wrap .information .information-input textarea {
         width: 100%;
         height: 145px;
@@ -960,8 +965,17 @@ background-size: cover;
     }
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .info  p {
-    text-overflow: ellipsis;
-    display: unset;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .info.tab  p {
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
     }
 
 
@@ -2344,6 +2358,10 @@ background-size: cover;
         /* background: url("../recources/imgs/sample_img.png") no-repeat left; */
         /* border-bottom: solid 1px #ddd; */
         padding-bottom: 70px;
+    }
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body.pos {
+        padding: 0;
     }
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .pd-00 {
