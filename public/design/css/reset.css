@@ -121,11 +121,17 @@ textarea {
   box-sizing: border-box;
 }
 
+html {
+  overflow-x: hidden;
+  touch-action: pan-y;
+}
+
 body {
   font-size: 16px;
   max-width: 100%;
   overflow-x: hidden;
   overflow-y: scroll;
+  touch-action: pan-y;
 
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
