@@ -18,9 +18,9 @@
 </style>
 <!-- datepicker -->
 
-<!-- smarteditor2 사용 -->
+<!-- smarteditor2 사용
 <script type="text/javascript" src="{{ asset('/smarteditor2/js/HuskyEZCreator.js') }}" charset="utf-8"></script>
-<!-- smarteditor2 사용 -->
+smarteditor2 사용 -->
 
 <table>
     <tr>
@@ -29,47 +29,39 @@
 </table>
 
 <table border=1>
-<form name="pop_create_form" id="pop_create_form" method="post" action="{{ route('adm.pop.createsave') }}">
+<form name="pop_create_form" id="pop_create_form" method="post" action="{{ route('adm.pop.createsave') }}" enctype="multipart/form-data">
 {!! csrf_field() !!}
+<!--
     <tr>
         <td>시간</td>
         <td><input type="text" name="pop_disable_hours" id="pop_disable_hours" size="3" value="24">시간
         <br>※고객이 다시 보지 않음을 선택할 시 몇 시간동안 팝업레이어를 보여주지 않을지 설정합니다.</td>
     </tr>
-    <tr>
-        <td>시작일시</td>
-        <td><input type="text" name="pop_start_time" id="pop_start_time" value="{{ date('Y-m-d') }}" readonly></td>
-    </tr>
-    <tr>
-        <td>종료일시</td>
-        <td><input type="text" name="pop_end_time" id="pop_end_time" value="{{ date('Y-m-d',time()+(60*60*24*7)) }}" readonly>
-        <br>※기본 오늘 날짜의 7일 후로
-        </td>
-    </tr>
-    <tr>
-        <td>팝업레이어 좌측 위치</td>
-        <td><input type="text" name="pop_left" id="pop_left" size="3" maxlength="3" value="10">px</td>
-    </tr>
-    <tr>
-        <td>팝업레이어 상단 위치</td>
-        <td><input type="text" name="pop_top" id="pop_top" size="3" maxlength="3" value="10">px</td>
-    </tr>
-    <tr>
-        <td>팝업레이어 넓이</td>
-        <td><input type="text" name="pop_width" id="pop_width" size="3" maxlength="3" value="450">px</td>
-    </tr>
-    <tr>
-        <td>팝업레이어 높이</td>
-        <td><input type="text" name="pop_height" id="pop_height" size="3" maxlength="3" value="500">px</td>
-    </tr>
+-->
     <tr>
         <td>팝업 제목</td>
         <td><input type="text" name="pop_subject" id="pop_subject"></td>
     </tr>
     <tr>
-        <td>팝업 내용</td>
-        <td><textarea name="pop_content" id="pop_content"></textarea></td>
+        <td>팝업이미지(필수)</td>
+        <td><input type="file" name="pop_img" id="pop_img"></td>
     </tr>
+    <tr>
+        <td>경로</td>
+        <td>
+            <input type="text" name="pop_url" id="pop_url">
+        </td>
+    </tr>
+
+    <tr>
+        <td>타겟</td>
+        <td>
+            <input type="radio" name="pop_target" id="pop_target_no" value="N" checked>현재창
+            <input type="radio" name="pop_target" id="pop_target_yes" value="Y">새창
+        </td>
+    </tr>
+
+
     <tr>
         <td>출력 유무</td>
         <td>
@@ -143,6 +135,7 @@
 
 
 <script type="text/javascript">
+/*
     var oEditors = [];
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: oEditors,
@@ -157,13 +150,14 @@
             //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
         }, //boolean
     });
+*/
 </script>
 
 
 <script>
     function pop_create(elClickedObj){
-        oEditors.getById["pop_content"].exec("UPDATE_CONTENTS_FIELD", []);
-        var pop_content = $("#pop_content").val();
+//        oEditors.getById["pop_content"].exec("UPDATE_CONTENTS_FIELD", []);
+//        var pop_content = $("#pop_content").val();
 
         if($.trim($("#pop_subject").val()) == ""){
             alert("제목을 입력 하세요.");
@@ -171,6 +165,12 @@
             return false;
         }
 
+        if($("#pop_img").val() == ""){
+            alert("팝업이미지를 첨부 하세요.");
+            $("#pop_img").focus();
+            return false;
+        }
+/*
         if( pop_content == ""  || pop_content == null || pop_content == '&nbsp;' || pop_content == '<p>&nbsp;</p>')  {
              alert("내용을 입력하세요.");
              oEditors.getById["pop_content"].exec("FOCUS"); //포커싱
@@ -178,6 +178,8 @@
         }try {
             $("#pop_create_form").submit();
         } catch(e) {}
+*/
+        $("#pop_create_form").submit();
     }
 </script>
 

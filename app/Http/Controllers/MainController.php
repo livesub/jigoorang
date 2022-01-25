@@ -60,12 +60,34 @@ class MainController extends Controller
         //하단 배너 관리
         $bottombanner_infos = DB::table('banners')->where([['b_display', 'Y'], ['b_type', 2]])->get();
 
+        //팝업 관리
+        $pop_info = DB::table('popups')->where('pop_display', 'Y')->orderBy('id', 'desc')->limit(1)->first();
+
+        //추천 랭킹 쿼리
+        $recommend_ranks = DB::table('shopcategorys')->where([['sca_display', 'Y'], ['sca_rank_dispaly', 'Y']])->whereRaw('length(sca_id) = 4')->inRandomOrder()->get();
+
+        //기획전 멘트 관리자 변경 가져 오기
+        $sett = $CustomUtils->setting_infos();
+        $special_one_ment = $sett->de_ment_change;
+        $special_two_ment = $sett->de_ment_change2;
+
+        //기획전 쿼리
+        $special_ones = DB::table('shopitems')->where([['item_del', 'N'], ['item_display', 'Y'], ['item_soldout', '0'], ['item_special', '1']])->orderBy('item_rank','asc')->orderBy('id','desc')->get();
+        $special_twos = DB::table('shopitems')->where([['item_del', 'N'], ['item_display', 'Y'], ['item_soldout', '0'], ['item_special2', '1']])->orderBy('item_rank','asc')->orderBy('id','desc')->get();
+        $new_arrivals = DB::table('shopitems')->where([['item_del', 'N'], ['item_display', 'Y'], ['item_soldout', '0'], ['item_new_arrival', '1']])->orderBy('item_rank','asc')->orderBy('id','desc')->get();
 
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
         return view('main',[
             'topbanner_infos'       => $topbanner_infos,
             'bottombanner_infos'    => $bottombanner_infos,
             'CustomUtils'           => $CustomUtils,
+            'recommend_ranks'       => $recommend_ranks,
+            'special_one_ment'      => $special_one_ment,
+            'special_two_ment'      => $special_two_ment,
+            'special_ones'          => $special_ones,
+            'special_twos'          => $special_twos,
+            'new_arrivals'          => $new_arrivals,
+            'pop_info'              => $pop_info,
         ],$Messages::$main['main']);
     }
 }

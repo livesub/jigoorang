@@ -20,7 +20,7 @@ class CreateShopordersTable extends Migration
             $table->string('user_id')->comment('아이디');
             $table->string('od_deposit_name')->comment('입금자');
             $table->string('ad_name')->comment('받으시는 분 이름');
-            $table->string('ad_tel')->comment('받으시는 분 전화번호');
+            $table->string('ad_tel')->nullable()->comment('받으시는 분 전화번호');
             $table->string('ad_hp')->comment('받으시는 분 휴대폰번호');
             $table->string('ad_zip1')->comment('받으시는 분 우편번호');
             $table->string('ad_addr1')->comment('받으시는 분 기본주소');

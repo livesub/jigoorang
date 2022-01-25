@@ -29,6 +29,11 @@ class popups extends Model
         'pop_height',
         'pop_subject',
         'pop_content',
+        'pop_url',
+        'pop_target',
+        'pop_display',
+        'pop_img',
+        'pop_img_name',
     ];
 
     protected $hidden = [
