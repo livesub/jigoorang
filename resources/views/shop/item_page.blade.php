@@ -331,7 +331,7 @@
 </script>
 
 <script>
-    test('{{ $sub_cate }}');
+    sub_m_slide('{{ $sub_cate }}');
 </script>
 
 

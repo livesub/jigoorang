@@ -2822,6 +2822,9 @@ input::placeholder {
     padding: 10px 0px 10px 0px;
 }
 
+
+
+
 .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body {
     padding: 10px 0px 10px 0px;
 }
@@ -2841,6 +2844,19 @@ input::placeholder {
     width: calc(100% - 24px) !important;
 }
 
+.eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pr_tt{
+    width: 100%;
+    /* max-width: 581px; */
+    font-size: 20px;
+    font-weight: bold;
+    height: 50px;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
 .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_name li{
     display: inline-block;
 }
@@ -2858,6 +2874,7 @@ input::placeholder {
 .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(1) {
     color: #707070;
     width: calc(100% - 87%) !important;
+    margin-bottom: 10px;
 }
 
 .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(2) {

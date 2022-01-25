@@ -97,8 +97,8 @@
                                         <div class="pr_name pdl-20">
                                             <ul>
                                                 <a href="">
-                                                    <li>
-                                                        <h4 class="mt-10">{{ $item_name }}</h4>
+                                                    <li class="pr_tt">
+                                                        {{ $item_name }}
                                                     </li>
                                                 </a>
                                                 <li>
