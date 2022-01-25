@@ -1114,14 +1114,19 @@ background-size: cover;
         color: #000;
     }
 
+
     .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .pr_name .oder_name.col li:nth-child(1) {
-        width: calc(100% - 73%) !important;
+        width: calc(100% - 84%) !important;
         color: #000;
     }
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .pr_name .oder_name.col li:nth-child(2) {
         width: calc(100% - 30%) !important;
         color: #000;
+    }
+
+    .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_name li:nth-child(1) {
+        width: calc(100% - 83%) !important;
     }
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .oder {
@@ -2737,6 +2742,21 @@ background-size: cover;
         height: 36px;
     }
 
+    .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .pr_name .oder_name.col li:nth-child(1) {
+        width: calc(100% - 73%) !important;
+        color: #000;
+    }
+
+    .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_name li:nth-child(1) {
+        width: calc(100% - 71%) !important;
+    }
+
+    .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pr_tt{
+        font-size: 16px;
+        height: 43px;
+    }
+
+
     /* 주문 배송 내역 */
 
     .eval .board.mypage_list .board_wrap .list.ev_rul a {
@@ -2784,7 +2804,7 @@ background-size: cover;
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .pr_name {
         width: 100%;
-        margin-left: 20px;
+        /* margin-left: 20px; */
     }
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .pr_name ul {
@@ -3986,7 +4006,7 @@ background-size: cover;
     }
 
     .eval .board .board_wrap .information_01 .information-inner-01 .information-address {
-        display: block;
+        /* display: block; */
         position: relative;
     }
 
@@ -4615,8 +4635,14 @@ background-size: cover;
         font-size: 13px;
     }
 
+
+    .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pr_tt{
+        font-size: 13px;
+        height: 38px;
+    }
+
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_name li:nth-child(1) {
-        width: calc(100% - 70%) !important;
+        width: calc(100% - 61%) !important;
     }
 
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(2) {
@@ -4625,6 +4651,7 @@ background-size: cover;
 
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(1) {
         width: calc(100% - 50%) !important;
+        padding-bottom: 10px;
     }
 
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(2) input {
@@ -4698,6 +4725,10 @@ background-size: cover;
         font-size: 13px;
     }
 
+    /* .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pr_tt{
+        font-size: 14px;
+    } */
+
     .eval .board.mypage_list .board_wrap .list.ev_rul h4 {
         font-size: 14px;
     }
@@ -4709,6 +4740,7 @@ background-size: cover;
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .pr_name {
         font-size: 13px;
+        margin-left: 0;
     }
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .btn_re .re_li li:nth-child(1) span {
@@ -4730,8 +4762,11 @@ background-size: cover;
         color: #000;
         font-size: 13px;
     }
+    .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .pr_name .oder_name.col li:nth-child(1){
+        width: calc(100% - 62%) !important;
+    }
     .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .pr_name .oder_name.col li:nth-child(2) {
-        width: calc(100% - 30%) !important;
+        width: calc(100% - 58%) !important;
         color: #000;
         font-size: 13px;
     }

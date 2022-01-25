@@ -93,6 +93,6 @@ var swiper4 = new Swiper(".submenu_sol", {
 });
 
 
-function test(num) {
+function sub_m_slide(num) {
     swiper4.slideTo(num, 1000, false)
 }

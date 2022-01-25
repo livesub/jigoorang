@@ -1,6 +1,7 @@
-const searchForm = document.querySelector('#search-form');
-const searchInput = searchForm.querySelector('input');
+//const searchForm = document.querySelector('#search-form');
+const searchInput = document.querySelector('#search-input');
 const searchList = document.querySelector('#search-list');
+//const btn = document.querySelector('#serach_btn');
 const SEARCH_KEY = "search";
 
 let search = new Array();
@@ -16,6 +17,17 @@ function deleteSearch(e) { //각각의 item을 삭제
     search = search.filter((search) => search.id !== parseInt(li.id));
     saveSearch();
 };
+
+
+
+function deleteli() { //각각의 item을 삭제 (5개이상일때)
+    const li = document.querySelector("li");
+    li.remove();
+    search = search.filter((search) => search.id !== parseInt(li.id));
+    saveSearch();
+};
+
+
 
 function paintSearch(newSearch) { //화면에 뿌림
     const { id, text } = newSearch;
@@ -33,34 +45,34 @@ function paintSearch(newSearch) { //화면에 뿌림
 };
 
 
+function handleSearchSubmit() {
+    //event.preventDefault();
+    const newSearchItem = searchInput.value;
+    searchInput.value = '';
+    const newSearchObj = {
+        id: Date.now(),
+        text: newSearchItem
+    };
 
-function handleSearchSubmit(event) { //form 전송
     if (search.length > 4){
-        // alert("5개만 가능해");
-        console.log("search");
+       deleteli();
+       search.push(newSearchObj);
+       paintSearch(newSearchObj);
+       saveSearch();
     }else{
-        event.preventDefault();
-        const newSearchItem = searchInput.value;
-        searchInput.value = '';
-        const newSearchObj = {
-            id: Date.now(),
-            text: newSearchItem
-        };
+        //alert("12");
         search.push(newSearchObj);
         paintSearch(newSearchObj);
         saveSearch();
     }
-
 };
 
 
-
-searchForm.addEventListener('submit', handleSearchSubmit);
-
+//searchForm.addEventListener('submit', handleSearchSubmit);
 
 const savedSearch = JSON.parse(localStorage.getItem(SEARCH_KEY));
 if (savedSearch !== null) {
-    Search = savedSearch //전에 있던 items들을 계속 가지고 있기
+    search = savedSearch //전에 있던 items들을 계속 가지고 있기
     savedSearch.forEach(paintSearch);
-    console.log(Search);
+    console.log(search);
 }

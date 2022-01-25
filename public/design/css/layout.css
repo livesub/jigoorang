@@ -131,9 +131,22 @@ body::-webkit-scrollbar {
   background: url("../recources/icons/icon-48-search.png") no-repeat top center;
   background-size: 100%;
 }
+.header .top .menu .search p {
+  font-size: 11px;
+  width: 59px;
+  margin-top: 50px;
+  text-align: center;
+}
 .header .top .menu .cart {
   background: url("../recources/icons/icon-48-cart.png") no-repeat top center;
   background-size: 100%;
+}
+
+.header .top .menu .cart .block {
+  font-size: 11px;
+  width: 58px;
+  margin-top: 50px;
+  text-align: center;
 }
 
 .header .top .menu .conunt {
@@ -144,6 +157,8 @@ body::-webkit-scrollbar {
   position: absolute;
   margin-left: 24px;
   margin-top: 2px;
+  color: #fff;
+  text-align: left;
 }
 
 .header .top .menu .conunt p {
@@ -168,6 +183,13 @@ body::-webkit-scrollbar {
   background: url("../recources/icons/icon-48-login.png") no-repeat top center;
   background-size: 100%;
 }
+
+.header .top .menu .login p {
+  font-size: 11px;
+  width: 52px;
+  margin-top: 50px;
+}
+
 .header .top .menu li a {
   width: 48px;
   height: 48px;

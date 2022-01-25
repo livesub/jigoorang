@@ -97,8 +97,8 @@
                                         <div class="pr_name pdl-20">
                                             <ul>
                                                 <a href="">
-                                                    <li>
-                                                        <h4 class="mt-10">{{ $item_name }}</h4>
+                                                    <li class="pr_tt">
+                                                        {{ $item_name }}
                                                     </li>
                                                 </a>
                                                 <li>
@@ -321,7 +321,7 @@
                                           <li class="cr_06 bold">총 결제 금액</li>
                                           <li class="cr_07 bold" id="last_tot_price"></li>
                                         </ul>
-                                        (최소 결제 금액은 1,000원 입니다.)
+                                        <p>(최소 결제 금액은 1,000원 입니다.)</p>
                                     </div>
                                 </div>
                             </div>

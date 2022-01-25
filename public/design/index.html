@@ -57,9 +57,9 @@
 
                                 <!-- 최근 검색어 -->
                                 <div class="search-wrap">
-                                    <form id="search-form" class="search" action="">
-                                        <input required maxlength="25" type="text" placeholder="검색어를 입력해 주세요">
-                                        <button type="submit">
+                                    <form class="search" action="../design/page/serch/serch.html" onsubmit="handleSearchSubmit();">
+                                        <input required maxlength="25" type="text" placeholder="검색어를 입력해 주세요" id="search-input" >
+                                        <button type="submit" id="serach_btn">
                                             <span>검색</span>
                                         </button>
                                     </form>
@@ -208,11 +208,31 @@
                             <!-- 모바일 메뉴 끝 -->
 
                             <ul class="menu">
-                                <li class="search" onclick="openmodal_001()"><a href="#"><span>검색</span></a></li>
-                                <li class="cart"> <a class="conunt"><p id="">0</p></a> <a><span>장바구니</span></a></li>
-                                <li class="my"><a><span>마이페이지</span></a></li>
+                                <li class="search" onclick="openmodal_001()">
+                                    <a href="#">
+                                        <span>검색</span>
+                                        <p class="block">검색</p>
+                                    </a>
+                                </li>
+                                <li class="cart"> <a class="conunt"><p id="">0</p></a>
+                                    <a>
+                                        <span>장바구니</span>
+                                        <p class="block">장바구니</p>
+                                    </a>
+                                </li>
+                                <li class="my">
+                                        <a>
+                                            <span>마이페이지</span>
+
+                                            <p class="block">마이페이지</p>
+                                            <p class="none">MY</p>
+                                        </a>
+                                </li>
                                 <li class="login">
-                                    <a href="/page/login/login.html"><span>로그인</span></a>
+                                    <a href="/page/login/login.html">
+                                        <span>로그인</span>
+                                        <p>로그인/가입</p>
+                                    </a>
                                 </li>
                             <!-- <li class="loginout"><a href=""><span>로그아웃</span></a></li> </ul>-->
 

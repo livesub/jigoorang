@@ -1139,6 +1139,11 @@
         border-right: none;
     }
 
+    .eval .board .board_wrap .scrollmenu .swiper-wrapper .bct_active {
+      border: solid 3px #3ec4ba;
+      color: #3ec4ba;
+    }
+
     .eval .board .board_wrap .scrollmenu .swiper-wrapper li:last-child {
         /* border-right: solid 4px #ddd; */
     }
@@ -2794,7 +2799,7 @@
    border:solid 2px #ddd;
    background-color: white;
    width: 30px;
-   height: 30px;
+   height: 25px;
 }
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_op li p{
@@ -2805,6 +2810,10 @@
    border-right: none;
    border-left: none;
    text-align: center;
+}
+
+.eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_op li:nth-child(2) input {
+   height: 25px;
 }
 
 
@@ -2847,7 +2856,7 @@
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_pr_m li button:nth-child(1){
    border-right: none;
-   border:solid 2px #ddd;
+   /* border:solid 2px #ddd; */
    color: #707070;
    font-weight: normal;
 }
