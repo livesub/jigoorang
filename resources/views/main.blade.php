@@ -7,11 +7,16 @@
             @if($pop_info != "")
                 @php
                     $pop_img = explode("@@",$pop_info->pop_img);
+                    $target = '';
+                    if($pop_info->pop_target == 'N') $target = '_self';
+                    else $target = '_blank';
                 @endphp
             <div class="n_popup_con" id="popup">
                 <div class="n_popup-back"></div>
                 <div class="n_popup">
+                    <a href="{{ $pop_info->pop_url }}" target="{{ $target }}">
                     <img src="{{ asset('data/popup/'.$pop_img[0]) }}"/>
+                    </a>
                     <div class="n_btn">
                         <div class="n_btn_1">
                         <input type="checkbox" name="pop_today" id="pop_today" class="hd_pops_reject">

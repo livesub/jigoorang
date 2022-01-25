@@ -198,41 +198,41 @@
     <!-- 헤더 끝 -->
 
 
-                <!-- 검색창 모달 -->
-                <div class="modal_001 modal_sh fade">
-                    <div class="modal-background" onclick="closemodal_001()"></div>
+    <!-- 검색창 모달 -->
+    <div class="modal_001 modal_sh fade">
+        <div class="modal-background" onclick="closemodal_001()"></div>
 
-                    <div class="modal-dialog">
+        <div class="modal-dialog">
 
-                        <div class="sh_1200">
-                            <div class="modal-dialog-title">
-                                <div class="btn-close" onclick="closemodal_001()"></div>
-                            </div>
+            <div class="sh_1200">
+                <div class="modal-dialog-title">
+                    <div class="btn-close" onclick="closemodal_001()"></div>
+                </div>
 
-                            <div class="modal-dialog-contents">
+                <div class="modal-dialog-contents">
 
-                                <!-- 최근 검색어 -->
-                                <div class="search-wrap">
-                                    <form id="search-form" class="search" action="{{ route('cartlist') }}">
-                                        <input required maxlength="25" type="text" placeholder="검색어를 입력해 주세요">
-                                        <button type="submit">
-                                            <span>검색</span>
-                                        </button>
-                                    </form>
+                    <!-- 최근 검색어 -->
+                    <div class="search-wrap">
+                        <form class="search" action="../design/page/serch/serch.html" onsubmit="handleSearchSubmit();">
+                            <input required maxlength="25" type="text" placeholder="검색어를 입력해 주세요" id="search-input" >
+                            <button type="submit" id="serach_btn">
+                                <span>검색</span>
+                            </button>
+                        </form>
 
-                                    <div class="search-inner">
-                                        <div class="sh_terms">최근 검색어</div>
-                                        <ul id="search-list"></ul>
-                                    </div>
-
-                                </div>
-
-                            </div>
+                        <div class="search-inner">
+                            <div class="sh_terms">최근 검색어</div>
+                            <ul id="search-list"></ul>
                         </div>
 
                     </div>
 
                 </div>
+            </div>
+
+        </div>
+
+    </div>
 
 
 
