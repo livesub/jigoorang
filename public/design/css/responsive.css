@@ -1313,6 +1313,11 @@ background-size: cover;
         font-size: 15px;
     }
 
+    /* 메인 팝업 */
+
+    .n_popup_con .n_popup {
+        top: 43%;
+    }
 
 
     /* 소개페이지 모달 */
@@ -1687,6 +1692,8 @@ background-size: cover;
         height: auto;
     }
 
+
+
     .main-container .mbox_100 .saleSwiper {
         height: auto;
         margin-top: 0;
@@ -1702,6 +1709,7 @@ background-size: cover;
         max-width: 768px;
         padding: 0 20px 10px 0;
     }
+
 
     .main-container .mbox_100 .inner,
     .main-container .mbox_1280 {
@@ -3735,6 +3743,11 @@ background-size: cover;
         display: block;
         padding: 0 20px 0 0;
     }
+
+    .main-container .mbox_1280 .sub_banner .swiper-pagination {
+        padding-bottom: 0px;
+    }
+
 
     .main-container .mbox_1280 .swiper .swiper-slide .sub-img {
         width: 136px;

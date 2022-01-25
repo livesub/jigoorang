@@ -204,15 +204,15 @@
                                             @endif
                                         @endif
                                             </span>
-                                            <div class="project project_{{ $special_one->id }}">
+                                            <div class="project" id="shop_project_{{ $special_one->id }}">
                                                 <div class="stars-outer">
                                                     <div class="stars-inner"></div>
                                                 </div>
-                                                <p class="number">{{ $dip_score }}</p>
+                                                <p class="number">{{ $dip_score }}/5.00</p>
                                             </div>
 
                                             <script>
-                                                star({{ $dip_score }},{{ $special_one->id }});
+                                                shop_star({{ $dip_score }},{{ $special_one->id }});
                                             </script>
 
                                             <div class="main-project-bottom">
@@ -326,12 +326,16 @@
                                     @endif
 
 
-                                    <div class="project project_{{ $special_one->id }}">
+                                    <div class="project" id="shop_project3_{{ $special_two->id }}">
                                         <div class="stars-outer">
                                             <div class="stars-inner"></div>
                                         </div>
-                                        <p class="number">{{ $dip_score }}</p>
+                                        <p class="number">{{ $dip_score }}/5.00</p>
                                     </div>
+                                     <script>
+                                        shop_star3({{ $dip_score }},{{ $special_two->id }});
+                                    </script>
+
                                     <div class="main-project-bottom">
                                         <span class="left">
                                             <p>리뷰 {{ $special_two->review_cnt }}</p>
@@ -435,14 +439,14 @@
                                     @endif
                                 @endif
                                     </span>
-                                    <div class="project project_{{ $new_arrival->id }}">
+                                    <div class="project" id="shop_project2_{{ $new_arrival->id }}">
                                         <div class="stars-outer">
                                             <div class="stars-inner"></div>
                                         </div>
-                                        <p class="number">{{ $dip_score }}</p>
+                                        <p class="number">{{ $dip_score }}/5.00</p>
                                     </div>
                                     <script>
-                                        star({{ $dip_score }},{{ $new_arrival->id }});
+                                        shop_star2({{ $dip_score }},{{ $new_arrival->id }});
                                     </script>
                                     <div class="main-project-bottom">
                                         <span class="left">
@@ -481,7 +485,7 @@
                                         $bott_b_pc_img_disp = asset("img/no_img.jpg");
                                     }else{
                                         $bott_b_pc_img_cut = explode("@@",$bottombanner_info->b_pc_img);
-                                        $bott_b_pc_img_disp = "/data/banner/".$bott_b_pc_img_cut[1];
+                                        $bott_b_pc_img_disp = "/data/banner/".$bott_b_pc_img_cut[0];
                                     }
 
                                     $target = '';
@@ -492,7 +496,7 @@
                                         $bott_b_mobile_img_disp = asset("img/no_img.jpg");
                                     }else{
                                         $bott_b_mobile_img_cut = explode("@@",$bottombanner_info->b_mobile_img);
-                                        $bott_b_mobile_img_disp = "/data/banner/".$bott_b_mobile_img_cut[1];
+                                        $bott_b_mobile_img_disp = "/data/banner/".$bott_b_mobile_img_cut[0];
                                     }
                                 @endphp
                             <div class="swiper-slide">
@@ -502,7 +506,7 @@
                             @endforeach
 
                             </div>
-                            <div class="swiper-pagination"></div>
+                            <div class="swiper-pagination main_pg"></div>
                             </div>
                         </div>
                     </div>
@@ -529,12 +533,12 @@
     //alert(result);
     //return false;
                     if(result == "ok"){
-                        $(".wish_class_"+item_code).addClass('wishlist_on');
+                        $(".wish_class_" + item_code).addClass('wishlist_on');
                     }
 
                     if(result == "del"){
-                        $(".wish_class_"+item_code).removeClass('wishlist_on');
-                        $(".wish_class_"+item_code).addClass('wishlist');
+                        $(".wish_class_" + item_code).removeClass('wishlist_on');
+                        $(".wish_class_" + item_code).addClass('wishlist');
                     }
 
                     if(result == "no_item"){
@@ -555,7 +559,6 @@
 <script src="{{ asset('/design/js/swiper.js') }}"></script>
 <script src="{{ asset('/design/js/serach.js') }}"></script>
 <script src="{{ asset('/design/js/serch_modal.js') }}"></script>
-<script src="{{ asset('/design/js/sidenav.js') }}"></script>
 <script src="{{ asset('/design/js/notie_pop.js') }}"></script>
 
 
