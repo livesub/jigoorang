@@ -474,4 +474,34 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'as' => 'adm.qna_answer_save',
         'uses' => 'App\Http\Controllers\adm\qna\QnaController@qna_answer_save',
     ]);
+
+    Route::get('notice', [
+        'as' => 'adm.notice',
+        'uses' => 'App\Http\Controllers\adm\notice\NoticeController@notice_list',
+    ]);
+
+    Route::get('notice_write', [
+        'as' => 'adm.notice_write',
+        'uses' => 'App\Http\Controllers\adm\notice\NoticeController@notice_write',
+    ]);
+
+    Route::post('notice_write_save', [
+        'as' => 'adm.notice_write_save',
+        'uses' => 'App\Http\Controllers\adm\notice\NoticeController@notice_write_save',
+    ]);
+
+    Route::post('notice_write_del', [
+        'as' => 'adm.notice_write_del',
+        'uses' => 'App\Http\Controllers\adm\notice\NoticeController@notice_write_del',
+    ]);
+
+    Route::post('notice_modify', [
+        'as' => 'adm.notice_modify',
+        'uses' => 'App\Http\Controllers\adm\notice\NoticeController@notice_modify',
+    ]);
+
+    Route::post('notice_modify_save', [
+        'as' => 'adm.notice_modify_save',
+        'uses' => 'App\Http\Controllers\adm\notice\NoticeController@notice_modify_save',
+    ]);
 });

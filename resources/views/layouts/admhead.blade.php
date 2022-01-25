@@ -50,6 +50,11 @@ header('Pragma: public');
                     <tr>
                         <td><a href="{{ route('adm.popup.index') }}">팝업 관리</a></td>
                     </tr>
+
+                    <tr>
+                        <td><a href="{{ route('adm.notice') }}">지구록 관리</a></td>
+                    </tr>
+
 <!--
                     <tr>
                         <td><a href="{{ route('adm.boardmanage.index') }}">게시판 관리</a></td>
