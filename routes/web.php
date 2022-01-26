@@ -410,6 +410,20 @@ Route::get('search', [
     'uses' => 'App\Http\Controllers\search\SearchController@index',
 ]);
 
+Route::get('search_shop', [
+    'as' => 'search_shop',
+    'uses' => 'App\Http\Controllers\search\SearchController@search_shop',
+]);
+
+Route::get('search_notice', [
+    'as' => 'search_notice',
+    'uses' => 'App\Http\Controllers\search\SearchController@search_notice',
+]);
+
+Route::get('search_exp', [
+    'as' => 'search_exp',
+    'uses' => 'App\Http\Controllers\search\SearchController@search_exp',
+]);
 
 /*** 프론트 메뉴 관리 */
 //일반 페이지(html) 처리
