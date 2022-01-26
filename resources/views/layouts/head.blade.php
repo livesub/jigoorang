@@ -54,9 +54,6 @@
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="{{ asset('/design/js/star.js') }}"></script>
-    <script src="{{ asset('/design/js/serach.js') }}"></script>
-    <script src="{{ asset('/design/js/serch_modal.js') }}"></script>
-    <script src="{{ asset('/design/js/sidenav.js') }}"></script>
     <title>지구랭</title>
 </head>
 <body>
@@ -134,12 +131,45 @@
 
             <!-- 수정껀 생길때 또 막음 -->
                 <ul class="menu">
-                    <li class="search" onclick="openmodal_001()"><span>검색</span></li>
-                    @if(!auth()->user())
-                    <li class="my"><a href="{{ route('login.index') }}"><span>마이페이지</span></a></li>
-                    <li class="login">
-                        <a href="{{ route('login.index') }}"><span>로그인</span></a>
+                    <li class="search" onclick="openmodal_001()">
+                        <a>
+                            <span>검색</span>
+                            <p class="block">검색</p>
+                            <p class="none">검색</p>
+                        </a>
                     </li>
+
+                    @if(!auth()->user())
+                     @php
+                            $cart_cnt = 0;
+                            if(Auth::user()){
+                                //장바구니 갯수 처리
+                                $cart_cnt = DB::table('shopcarts as a')->where([['a.user_id', Auth::user()->user_id], ['a.sct_status','쇼핑'], ['a.sct_direct','0']])->count();
+                            }
+                        @endphp
+
+                    <li class="cart">
+                        <a href="{{ route('cartlist') }}">
+                            <p id="" class="conunt">{{ $cart_cnt }}</p>
+                            <span>장바구니</span>
+                            <p class="block">장바구니</p>
+                            <p class="none">장바구니</p>
+                        </a>
+                    </li>
+                    <li class="my">
+                        <a href="{{ route('login.index') }}">
+                            <span>마이페이지</span>
+                            <p>마이페이지</p>
+                            <p class="none">MY</p>
+                        </a>
+                    </li>
+                    <li class="login">
+                        <a href="{{ route('login.index') }}">
+                            <span>로그인</span>
+                            <p>로그인/가입</p>
+                        </a>
+                    </li>
+
                     @else
                         @php
                             $cart_cnt = 0;
@@ -149,10 +179,26 @@
                             }
                         @endphp
 
-                    <li class="cart"> <a href="{{ route('cartlist') }}" class="conunt"><p id="">{{ $cart_cnt }}</p><span>장바구니</span></a></li>
-                    <li class="my"><a href="{{ route('mypage.index') }}"><span>마이페이지</span></a></li>
+                    <li class="cart">
+                        <a href="{{ route('cartlist') }}">
+                            <p id="" class="conunt">{{ $cart_cnt }}</p>
+                            <span>장바구니</span>
+                            <p class="block">장바구니</p>
+                            <p class="none">장바구니</p>
+                        </a>
+                    </li>
+                    <li class="my">
+                        <a href="{{ route('mypage.index') }}">
+                            <span>마이페이지</span>
+                            <p class="block">마이페이지</p>
+                            <p class="none">MY</p>
+                        </a>
+                    </li>
                     <li class="login">
-                        <a href="{{ route('logout.destroy') }}"><span>로그아웃</span></a>
+                        <a href="{{ route('logout.destroy') }}">
+                        <span>로그아웃</span>
+                        <p>로그아웃</p>
+                        </a>
                     </li>
 
                     @endif
@@ -236,6 +282,8 @@
 
     </div>
 
+    <script src="{{ asset('/design/js/serach.js') }}"></script>
+    <script src="{{ asset('/design/js/serch_modal.js') }}"></script>
 
 
 
@@ -320,6 +368,7 @@
 
 
     @yield('script')
+
 
 </body>
 </html>

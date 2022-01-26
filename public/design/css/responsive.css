@@ -138,13 +138,13 @@
 
     .header .top .menu {
         position: absolute;
-        right: 15px;
-        top: 15px;
+        right: 28px;
+        top: 10px;
         width: 90px;
         display: flex;
     }
     .header .top .menu li {
-        margin-right: 0;
+        margin-right: 10px;
     }
     .header .top .menu li a {
         width: 30px;
@@ -158,12 +158,40 @@
         display: none;
     }
 
+    .header .top .menu .search p {
+        font-size: 10px;
+        width: 38px;
+        margin-top: 29px;
+        text-align: center;
+    }
+
+    .header .top .menu .cart .none {
+        font-size: 10px;
+        width: 35px;
+        margin-top: 29px;
+        text-align: center;
+    }
+
+    .header .top .menu .login p {
+        font-size: 10px;
+        width: 38px;
+        margin-top: 29px;
+    }
+
+    .header .top .menu .my p {
+        font-size: 10px;
+        width: 30px;
+        margin-top: 29px;
+        text-align: center;
+      }
+
     .header .top .menu .conunt {
         width: 16px;
         height: 16px;
         position: absolute;
         margin-left: 18px;
         margin-top: 2px;
+        font-size: 10px;
     }
 
     .header .top .menu .conunt p {
@@ -172,6 +200,7 @@
         margin-left: 5px;
         margin-top: 0;
     }
+
 
     /* 오픈전 메뉴 */
     .header .top .menu2 {
@@ -1775,10 +1804,19 @@ background-size: cover;
     }
 
     .main-container .mbox_100 .main-project-bottom .right .wishlist {
-        width: 23px;
-        margin-top: 4px;
+        width: 18px;
+        margin-top: 1px;
         background: url("../recources/icons/icon-heart@3x.png") no-repeat;
-        background-size: 23px auto;
+        background-size: 18px auto;
+        background-position: center;
+        display: block;
+    }
+
+    .main-container .mbox_100 .main-project-bottom .right .wishlist_on {
+        width: 18px;
+        margin-top: 0px;
+        background: url("../recources/icons/icon-heart-2.png") no-repeat;
+        background-size: 18px auto;
         background-position: center;
         display: block;
     }
@@ -1805,6 +1843,14 @@ background-size: cover;
         margin: 0 auto;
         width: 100%;
         padding: 10px;
+    }
+
+    .main-container .mbox_100 .main-project-title .main-project-bottom a {
+        width: 30%;
+    }
+
+    .main-container .mbox_1280 .swiper-slide .main-project-title .main-project-bottom a {
+        width: 30%;
     }
     .main-container .mbox_1280 .swiper-slide .main-project-left .price {
         display: inline-block;
@@ -1854,13 +1900,24 @@ background-size: cover;
     }
 
     .main-container .mbox_1280 .main-project-bottom .right .wishlist {
-        width: 23px;
-        margin-top: 4px;
+        width: 18px;
+        margin-top: 1px;
         background: url("../recources/icons/icon-heart@3x.png") no-repeat;
-        background-size: 23px auto;
+        background-size: 18px auto;
         background-position: center;
         display: block;
     }
+
+    .main-container .mbox_1280 .main-project-bottom .right .wishlist_on {
+        width: 18px;
+        margin-top: 0px;
+        background: url(../recources/icons/icon-heart-2.png) no-repeat;
+        background-size: 18px auto;
+        background-position: center;
+        display: block;
+    }
+
+
 
     .main-container .mbox_1280 .slide_btn_2 {
         margin-left: 47px;
@@ -3697,7 +3754,7 @@ background-size: cover;
     .main-container .visual {
         position: relative;
         width: 100%;
-        height: 420px;
+        height: auto;
         overflow: hidden;
         padding-bottom: 100%;
     }
@@ -3713,7 +3770,12 @@ background-size: cover;
     }
     .main-container .visual .test .swiper {
         width: 100%;
-        height: 420px;
+        height: 100%;
+        /* max-height: 420px; */
+    }
+
+    .main-container .visual .test .swiper-slide img {
+        height: auto;
     }
 
     .main-container .visual .test .swiper-slide .pc {
