@@ -216,7 +216,7 @@
                                             </script>
 
                                             <div class="main-project-bottom">
-                                                <a href="">
+                                                 <a href="{{ route('sitemdetail') }}?item_code={{ $special_one->item_code }}#section1">
                                                     <span class="left">
                                                         <p>리뷰 {{ $special_one->review_cnt }}</p>
                                                     </span>
@@ -339,9 +339,11 @@
                                     </script>
 
                                     <div class="main-project-bottom">
-                                        <span class="left">
-                                            <p>리뷰 {{ $special_two->review_cnt }}</p>
-                                        </span>
+                                        <a href="{{ route('sitemdetail') }}?item_code={{ $special_two->item_code }}#section1">
+                                            <span class="left">
+                                                <p>리뷰 {{ $special_two->review_cnt }}</p>
+                                            </span>
+                                        </a>
                                         <span class="right">
                                             <p>응원하기</p>
                                             <span class="wish_class_{{ $special_two->item_code }} {{ $wish_class }}" onclick="item_wish('{{ $special_two->item_code }}', {{ Auth::user() }});"></span>
@@ -451,9 +453,11 @@
                                         shop_star2({{ $dip_score }},{{ $new_arrival->id }});
                                     </script>
                                     <div class="main-project-bottom">
-                                        <span class="left">
-                                            <p>리뷰 {{ $new_arrival->review_cnt }}</p>
-                                        </span>
+                                        <a href="{{ route('sitemdetail') }}?item_code={{ $new_arrival->item_code }}#section1">
+                                            <span class="left">
+                                                <p>리뷰 {{ $new_arrival->review_cnt }}</p>
+                                            </span>
+                                        </a>
                                         <span class="right">
                                             <p>응원하기</p>
                                             <span class="wish_class_{{ $new_arrival->item_code }} {{ $wish_class }}" onclick="item_wish('{{ $new_arrival->item_code }}', {{ Auth::user() }});"></span>

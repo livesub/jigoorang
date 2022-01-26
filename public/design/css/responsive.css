@@ -1701,6 +1701,7 @@ background-size: cover;
 
     .main-container .mbox_100 .saleSwiper .swiper-slide {
         height: auto;
+        padding-bottom: 0px;
     }
 
     .main-container .mbox_1280 .sub_banner .swiper-slide .pc {
@@ -1746,7 +1747,7 @@ background-size: cover;
     }
 
     .main-container .mbox_100 .main-project-title .main-project-right {
-        clear: both;
+        float: none;
         font-size: 16px;
         font-weight: 600;
     }
@@ -1789,6 +1790,7 @@ background-size: cover;
 
     .main-container .mbox_100 .saleSwiper2 .swiper-slide {
         height: auto;
+        padding-bottom: 0px;
     }
 
     /* 1280 */
@@ -1823,7 +1825,7 @@ background-size: cover;
     }
 
     .main-container .mbox_1280 .main-project-title .main-project-right {
-        clear: both;
+        float: none;
         font-size: 16px;
         font-weight: 600;
         margin-left: 0;
@@ -3799,10 +3801,19 @@ background-size: cover;
     }
 
     .main-container .mbox_1280 .main-project-bottom .right .wishlist {
-        width: 19px;
+        width: 17px;
         margin-top: 0;
         background: url("../recources/icons/icon-heart@3x.png") no-repeat;
-        background-size: 18px auto;
+        background-size: 17px auto;
+        background-position: center;
+        display: block;
+    }
+
+    .main-container .mbox_1280 .main-project-bottom .right .wishlist_on {
+        width: 17px;
+        margin-top: 3px;
+        background: url(../recources/icons/icon-heart-2.png) no-repeat;
+        background-size: 17px auto;
         background-position: center;
         display: block;
     }
@@ -3828,6 +3839,11 @@ background-size: cover;
         font-weight: 600;
     }
 
+    .main-container .mbox_100 .main-project-title .main-project-bottom a {
+        width: 30%;
+    }
+
+
     .main-container .mbox_100 .main-project-bottom p {
         float: left;
         font-size: 12px;
@@ -3850,10 +3866,19 @@ background-size: cover;
     }
 
     .main-container .mbox_100 .main-project-bottom .right .wishlist {
-        width: 19px;
+        width: 17px;
         margin-top: 0;
         background: url("../recources/icons/icon-heart@3x.png") no-repeat;
-        background-size: 18px auto;
+        background-size: 17px auto;
+        background-position: center;
+        display: block;
+    }
+
+    .main-container .mbox_100 .main-project-bottom .right .wishlist_on {
+        width: 17px;
+        margin-top: 3px;
+        background: url(../recources/icons/icon-heart-2.png) no-repeat;
+        background-size: 17px auto;
         background-position: center;
         display: block;
     }
