@@ -216,9 +216,11 @@
                                             </script>
 
                                             <div class="main-project-bottom">
-                                                <span class="left">
-                                                    <p>리뷰 {{ $special_one->review_cnt }}</p>
-                                                </span>
+                                                <a href="">
+                                                    <span class="left">
+                                                        <p>리뷰 {{ $special_one->review_cnt }}</p>
+                                                    </span>
+                                                </a>
                                                 <span class="right">
                                                     <p>응원하기</p>
                                                     <span class="wish_class_{{ $special_one->item_code }} {{ $wish_class }}" onclick="item_wish('{{ $special_one->item_code }}', {{ Auth::user() }});"></span>
@@ -533,6 +535,7 @@
     //alert(result);
     //return false;
                     if(result == "ok"){
+                        $(".wish_class_" + item_code).removeClass('wishlist');
                         $(".wish_class_" + item_code).addClass('wishlist_on');
                     }
 
@@ -557,8 +560,6 @@
 
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
 <script src="{{ asset('/design/js/swiper.js') }}"></script>
-<script src="{{ asset('/design/js/serach.js') }}"></script>
-<script src="{{ asset('/design/js/serch_modal.js') }}"></script>
 <script src="{{ asset('/design/js/notie_pop.js') }}"></script>
 
 

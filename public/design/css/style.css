@@ -479,6 +479,10 @@ h5 {
     font-weight: 400;
 }
 
+.main-container .mbox_100 .main-project-title .main-project-bottom a {
+    width: 50%;
+}
+
 .main-container .mbox_100 .main-project-bottom .left p {
     margin: 5px 0;
 }
