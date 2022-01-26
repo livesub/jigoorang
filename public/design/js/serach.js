@@ -24,7 +24,8 @@ function deleteli() { //각각의 item을 삭제 (5개이상일때)
     const li = document.querySelector("li");
     li.remove();
     search = search.filter((search) => search.id !== parseInt(li.id));
-    saveSearch();
+    search.shift();
+    //saveSearch();
 };
 
 
@@ -46,13 +47,21 @@ function paintSearch(newSearch) { //화면에 뿌림
 
 
 function handleSearchSubmit() {
+
     if($.trim($('input[name=search_w]').val()) == ""){
+
         alert("검색어를 입력해 주세요");
+
         $('input[name=search_w]').val("");
+
         $("#search-input").focus();
+
         return false;
+
     }else{
+
         $('input[name=search_w]').val($.trim($('input[name=search_w]').val()));
+
     }
 
     //event.preventDefault();
@@ -65,6 +74,7 @@ function handleSearchSubmit() {
 
     if (search.length > 4){
        deleteli();
+       //alert("11");
        search.push(newSearchObj);
        paintSearch(newSearchObj);
        saveSearch();

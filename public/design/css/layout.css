@@ -158,7 +158,9 @@ body::-webkit-scrollbar {
   margin-left: 24px;
   margin-top: 2px;
   color: #fff;
-  text-align: left;
+  text-align: center;
+  font-weight: bold;
+  padding: 2px;
 }
 
 .header .top .menu .conunt p {
@@ -176,7 +178,8 @@ body::-webkit-scrollbar {
 .header .top .menu .my p {
   font-size: 11px;
   width: 52px;
-  margin-top: 50px;
+  margin-top: 51px;
+  text-align: center;
 }
 
 .header .top .menu .login {
@@ -186,8 +189,9 @@ body::-webkit-scrollbar {
 
 .header .top .menu .login p {
   font-size: 11px;
-  width: 52px;
-  margin-top: 50px;
+  width: 57px;
+  margin-top: 51px;
+  text-align: center;
 }
 
 .header .top .menu li a {
