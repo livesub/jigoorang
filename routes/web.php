@@ -425,6 +425,17 @@ Route::get('search_exp', [
     'uses' => 'App\Http\Controllers\search\SearchController@search_exp',
 ]);
 
+//지구를 구하는 기록
+Route::get('notice', [
+    'as' => 'notice',
+    'uses' => 'App\Http\Controllers\notice\NoticeController@notice',
+]);
+
+Route::get('notice_view', [
+    'as' => 'notice_view',
+    'uses' => 'App\Http\Controllers\notice\NoticeController@notice_view',
+]);
+
 /*** 프론트 메뉴 관리 */
 //일반 페이지(html) 처리
 //Route::get('/defalut_html/{pg_name}/{pg_code}', [

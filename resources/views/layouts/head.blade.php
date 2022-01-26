@@ -237,7 +237,7 @@
                 <li><a href="javascript:alert('22 년 2 월 OPEN  예정');">지구랭 소개</a></li>
                 <li><a href="javascript:alert('22 년 2 월 OPEN  예정');"><b>지</b>구를 <b>구</b>하는 <b>랭</b>킹</a></li>
                 <li><a href="javascript:alert('22 년 2 월 OPEN  예정');"><b>지</b>구를 <b>구</b>하는 <b>쇼</b>핑</a></li>
-                <li><a href="javascript:alert('22 년 2 월 OPEN  예정');"><b>지</b>구를 <b>구</b>하는 기<b>록</b></a></li>
+                <li><a href="{{ route('notice') }}"><b>지</b>구를 <b>구</b>하는 기<b>록</b></a></li>
                 <li {!! $menu_exp !!}><a href="{{ route('exp.list') }}">정직한 평가단</a></li>
                 <li {!! $menu_center !!}><a href="{{ route('customer_center') }}">고객센터</a></li>
             </ul>

@@ -228,7 +228,7 @@
                             <div class="f_tt_more mb-20">
                                 <ul>
                                     <li class="bold">소식 ({{ number_format(count($notice_infos)) }})</li>
-                                    <li><a href="">더보기 +</a></li>
+                                    <li><a href="{{ route('notice') }}">더보기 +</a></li>
                                 </ul>
                             </div>
 
