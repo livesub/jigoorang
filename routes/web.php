@@ -436,6 +436,13 @@ Route::get('notice_view', [
     'uses' => 'App\Http\Controllers\notice\NoticeController@notice_view',
 ]);
 
+//지구를 구하는 랭킹 관련
+Route::get('ranking_list', [
+    'as' => 'ranking_list',
+    'uses' => 'App\Http\Controllers\ranking\RankingController@ranking_list',
+]);
+
+
 /*** 프론트 메뉴 관리 */
 //일반 페이지(html) 처리
 //Route::get('/defalut_html/{pg_name}/{pg_code}', [
