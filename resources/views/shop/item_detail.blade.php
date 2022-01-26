@@ -109,6 +109,7 @@
                                         <div class="dt_sub_tt">
                                             <p>{{ $item_info->item_basic }}</p>
                                         </div>
+                                        <div class="sol-g-b mb-20"></div>
                                     </div>
 
                                     <div class="dt_pr">

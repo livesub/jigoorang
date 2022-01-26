@@ -430,6 +430,14 @@ h5 {
 .main-container .mbox_100 .sale h3 {
     margin: 14px 0 10px;
     font-size: 18px;
+    white-space: normal;
+    line-height: 1.2;
+    height: 2.4em;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .main-container .mbox_100 .swiper-slide .main-project-title {
@@ -740,7 +748,7 @@ h5 {
 
 .main-container .mbox_1280 .saleSwiper3 {
     /* height: 452px; */
-    margin-top: 20px;
+    margin-top: 40px;
 }
 
 .main-container .mbox_1280 .saleSwiper3 .swiper-slide {
@@ -809,6 +817,14 @@ h5 {
 .main-container .mbox_1280 .sale h3 {
     margin: 14px 0 10px;
     font-size: 18px;
+    white-space: normal;
+    line-height: 1.2;
+    height: 2.4em;
+    text-align: left;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 
@@ -2884,6 +2900,8 @@ input::placeholder {
 
 
 .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pr_img img {
+    width: 100%;
+    height: 100%;
     max-width: 160px;
     max-height: 140px;
 }
@@ -3704,11 +3722,11 @@ input::placeholder {
     width: 100%;
     height: 100%;
     /* height: auto; */
-    max-height: 323px;
+    max-height: 362px;
     background-color: #fff;
     margin: 0;
     position: fixed;
-    top: 20%;
+    top: 180px;
     left: 50%;
     transform: translate(-50%, -50%);
 }

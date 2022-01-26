@@ -342,6 +342,7 @@
    padding: 20px 20px 0px 0;
    font-size: 28px;
    font-family: "SBAggroM", "sans-serif";
+   height: 3.4em;
 }
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .line_14-100-r {
@@ -355,8 +356,8 @@
    font-size: 16px;
    margin-top: 20px;
    margin-bottom: 20px;
-   padding-bottom: 20px;
-   border-bottom: solid 1px #ddd;
+   /* padding-bottom: 20px; */
+   /* border-bottom: solid 1px #ddd; */
 }
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr {
@@ -606,6 +607,10 @@
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_l .som_b .swiper-slide {
    /* width: 16%; */
+}
+
+.eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_no img {
+   /* width: 10%; */
 }
 
 
@@ -1654,6 +1659,9 @@
  }
 
 
+ .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_no img {
+   width: 8%;
+}
 
 
  /**** 장바구니 ****/
@@ -2798,6 +2806,7 @@
    width: 30px;
    height: 25px;
    color: #707070;
+   padding: 0;
 }
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_op li p{
