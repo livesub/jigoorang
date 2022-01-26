@@ -54,7 +54,9 @@
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="{{ asset('/design/js/star.js') }}"></script>
-
+    <script src="{{ asset('/design/js/serach.js') }}"></script>
+    <script src="{{ asset('/design/js/serch_modal.js') }}"></script>
+    <script src="{{ asset('/design/js/sidenav.js') }}"></script>
     <title>지구랭</title>
 </head>
 <body>
@@ -131,7 +133,7 @@
             <!-- 모바일 메뉴 끝 -->
 
             <!-- 수정껀 생길때 또 막음 -->
-                <ul class="menu">
+                <ul class="menu">1111
                     <li class="search" onclick="openmodal_001()"><a href="#"><span>검색</span></a></li>
                     @if(!auth()->user())
                     <li class="my"><a href="{{ route('login.index') }}"><span>마이페이지</span></a></li>

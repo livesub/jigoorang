@@ -35,7 +35,7 @@
 
     <tr>
         <td>{{ $virtual_num }}</td>
-        <td><img src="{{ asset('/data/notice/'.$n_img[3]) }}"></td>
+        <td><img src="{{ asset('/data/notice/'.$n_img[2]) }}"></td>
         <td>{{ stripslashes($notice->n_subject) }}</td>
         <td>{{ stripslashes($notice->n_explain) }}</td>
         <td>
