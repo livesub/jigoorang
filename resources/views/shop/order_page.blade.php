@@ -69,6 +69,7 @@
                                         $goods_count++;
 
                                         $image = $CustomUtils->get_item_image($cart_info->item_code, 3);
+                                        if($image == "") $image = asset("img/no_img.jpg");
 
                                         //제조사
                                         if($cart_info->item_manufacture == "") $item_manufacture = "";
