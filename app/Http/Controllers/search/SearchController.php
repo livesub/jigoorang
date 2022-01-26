@@ -75,7 +75,7 @@ class SearchController extends Controller
                     $item_cnt = $item_sql->count();
             }
         }else{
-            $item_sql = $item_sql->orderby('id','DESC')->get();
+            $item_sql = $item_sql->orderby('item_rank', 'ASC')->orderby('id','DESC')->get();
             $item_cnt = $item_sql->count();
         }
 
@@ -103,59 +103,113 @@ class SearchController extends Controller
 
         $search_w       = $request->input('search_w');
         $orderby_type   = $request->input('orderby_type');
+        $page       = $request->input('page');
 
         $item_cnt = 0;
+
+        $pageScale  = 1;  //한페이지당 라인수
+        $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
+
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
+
         $item_sql = DB::table('shopitems')->where([['item_display', 'Y'], ['item_name', 'LIKE', "%$search_w%"]]);
+
+        $total_record   = 0;
+        $total_record   = $item_sql->count(); //총 게시물 수
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
 
         if($orderby_type != ""){
             switch ($orderby_type) {
                 case 'recent':
-                    $item_sql = $item_sql->orderby('id','DESC')->get();
+                    $item_sql = $item_sql->orderby('id','DESC');
                     $item_cnt = $item_sql->count();
+                    $item_infos= $item_sql->offset($start_num)->limit($pageScale)->get();
                     break;
                 case 'sale':
-                    //$orderby_add = "'total', 'desc'";
                     $item_sql = DB::table('shopitems as a')
                     ->select('a.*', DB::raw('count(b.item_code) as total'))
                     ->leftjoin('shopcarts as b', function($join) {
                             $join->on('a.item_code', '=', 'b.item_code')->whereRaw('b.sct_status in (\'입금\', \'준비\', \'배송\', \'완료\')');
                         });
                     $item_sql = $item_sql->whereRaw("a.item_name like '%{$search_w}%'");
-                    $item_sql = $item_sql->groupBy('a.item_code')->orderBy('total', 'desc')->get();
-                    $item_cnt = $item_sql->count();
+                    $item_sql = $item_sql->groupBy('a.item_code')->orderBy('total', 'desc');
+                    $item_cnt_tmp = $item_sql->get();
+                    $item_cnt = count($item_cnt_tmp);
+                    $item_sql = $item_sql->offset($start_num)->limit($pageScale)->get();
+                    $item_infos = $item_sql;
                     break;
                 case 'high_price':
-                    //$orderby_add = "'item_price', 'DESC'";
-                    $item_sql = $item_sql->orderby('item_price','DESC')->get();
+                    $item_sql = $item_sql->orderby('item_price','DESC');
                     $item_cnt = $item_sql->count();
+                    $item_infos = $item_sql->offset($start_num)->limit($pageScale)->get();
                     break;
                 case 'low_price':
-                    //$orderby_add = "'item_price', 'ASC'";
-                    $item_sql = $item_sql->orderby('item_price','ASC')->get();
+                    $item_sql = $item_sql->orderby('item_price','ASC');
                     $item_cnt = $item_sql->count();
+                    $item_infos = $item_sql->offset($start_num)->limit($pageScale)->get();
                     break;
                 case 'review':
-                    //$orderby_add = "'review_cnt', 'DESC'";
-                    $item_sql = $item_sql->orderby('review_cnt','DESC')->get();
+                    $item_sql = $item_sql->orderby('review_cnt','DESC');
                     $item_cnt = $item_sql->count();
+                    $item_infos= $item_sql->offset($start_num)->limit($pageScale)->get();
                     break;
                 default:
-                    //$orderby_add = "'id', 'DESC'";
-                    $item_sql = $item_sql->orderby('id','DESC')->get();
+                    $item_sql = $item_sql->orderby('id','DESC');
                     $item_cnt = $item_sql->count();
+                    $item_infos= $item_sql->offset($start_num)->limit($pageScale)->get();
             }
         }else{
-            $item_sql = $item_sql->orderby('id','DESC')->get();
+            $item_infos = $item_sql->orderby('item_rank', 'ASC')->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
             $item_cnt = $item_sql->count();
         }
 
+        $date = date("Y-m-d", time());
+        $notice_sql = DB::table('notices')->where('n_subject', 'LIKE', "%$search_w%")->get();
+        $exp_sql = DB::table('exp_list')->where([['title', 'LIKE', "%$search_w%"], ['exp_review_end', '>=', $date]])->get();
+
+        $total_cnt = $item_cnt + count($notice_sql) + count($exp_sql);
+
+        $total_record   = 0;
+        $total_record   = $item_cnt; //총 게시물 수
+
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
+
+        $virtual_num = $total_record - $pageScale * ($page - 1);
+
+        $tailarr = array();
+        $tailarr['search_w'] = $search_w;    //고정된 전달 파라메터가 있을때 사용
+        $tailarr['orderby_type'] = $orderby_type;
+
+        $PageSet        = new PageSet;
+        $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
+        $prevPage       = $PageSet->getPrevPage("이전");
+        $nextPage       = $PageSet->getNextPage("다음");
+        $pre10Page      = $PageSet->pre10("이전10");
+        $next10Page     = $PageSet->next10("다음10");
+        $preFirstPage   = $PageSet->preFirst("처음");
+        $nextLastPage   = $PageSet->nextLast("마지막");
+        $listPage       = $PageSet->getPageList();
+        $pnPage         = $prevPage.$listPage.$nextPage;
+
         return view('search.search_shop',[
-            'item_infos'    => $item_sql,
+            'item_infos'    => $item_infos,
+            'notice_infos'  => $notice_sql,
+            'exp_infos'     => $exp_sql,
             'search_w'      => $search_w,
             'total_cnt'     => $total_cnt,
             'item_cnt'      => $item_cnt,
             'orderby_type'  => $orderby_type,
             'CustomUtils'   => $CustomUtils,
+            'page'          => $page,
+            'pnPage'        => $pnPage,
         ]);
     }
 

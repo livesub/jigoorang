@@ -24,10 +24,10 @@
                 <div class="board_wrap">
                     <div class="tab_menu">
                         <ul class="list_tab">
-                            <li class="is_on">
+                            <li>
                                 <a href="{{ route('search', 'search_w='.$search_w) }}" class="btn_list">전체 ({{ number_format($total_cnt) }})</a>
                             </li>
-                            <li>
+                            <li class="is_on">
                                 <a href="{{ route('search_shop', 'search_w='.$search_w) }}" class="btn_list">쇼핑 ({{ number_format($item_cnt) }})</a>
                             </li>
                             <li>
@@ -39,7 +39,7 @@
                         </ul>
 
                         <div class="cont_area">
-                            <div id="tab1" class="cont pd-00">
+                            <div class="cont pd-00">
                                 <div class="filter_bg block">
                                     <ul class="filter_innner">
                                     @php
@@ -91,16 +91,16 @@
                                                 $selected_chk1 = 'selected';
                                             }
                                     @endphp
-                                        <li class="{{ $class_chk1 }}" onclick="location.href='{{ route('search', 'search_w='.$search_w.'&orderby_type=recent') }}'"><span>{{ $mark_chk1 }}</span> 등록순(최신순)</li> <!-- class="fil_on" 활성-->
-                                        <li class="{{ $class_chk2 }}" onclick="location.href='{{ route('search', 'search_w='.$search_w.'&orderby_type=sale') }}'"><span>{{ $mark_chk2 }}</span>판매량순</li><!-- class="fil_off" 비활성-->
-                                        <li class="{{ $class_chk3 }}" onclick="location.href='{{ route('search', 'search_w='.$search_w.'&orderby_type=high_price') }}'"><span>{{ $mark_chk3 }}</span>높은가격순</li>
-                                        <li class="{{ $class_chk4 }}" onclick="location.href='{{ route('search', 'search_w='.$search_w.'&orderby_type=low_price') }}'"><span>{{ $mark_chk4 }}</span>낮은가격순</li>
-                                        <li class="{{ $class_chk5 }}" onclick="location.href='{{ route('search', 'search_w='.$search_w.'&orderby_type=review') }}'"><span>{{ $mark_chk5 }}</span>후기숫자순</li>
+                                        <li class="{{ $class_chk1 }}" onclick="location.href='{{ route('search_shop', 'search_w='.$search_w.'&orderby_type=recent') }}'"><span>{{ $mark_chk1 }}</span> 등록순(최신순)</li> <!-- class="fil_on" 활성-->
+                                        <li class="{{ $class_chk2 }}" onclick="location.href='{{ route('search_shop', 'search_w='.$search_w.'&orderby_type=sale') }}'"><span>{{ $mark_chk2 }}</span>판매량순</li><!-- class="fil_off" 비활성-->
+                                        <li class="{{ $class_chk3 }}" onclick="location.href='{{ route('search_shop', 'search_w='.$search_w.'&orderby_type=high_price') }}'"><span>{{ $mark_chk3 }}</span>높은가격순</li>
+                                        <li class="{{ $class_chk4 }}" onclick="location.href='{{ route('search_shop', 'search_w='.$search_w.'&orderby_type=low_price') }}'"><span>{{ $mark_chk4 }}</span>낮은가격순</li>
+                                        <li class="{{ $class_chk5 }}" onclick="location.href='{{ route('search_shop', 'search_w='.$search_w.'&orderby_type=review') }}'"><span>{{ $mark_chk5 }}</span>후기숫자순</li>
                                     </ul>
                                 </div>
 
                                 <div class="filter_sel none">
-                                    <select class="filter_innner" onchange="location.href='{{ route('search', 'search_w='.$search_w.'&orderby_type=') }}'+this.value">
+                                    <select class="filter_innner" onchange="location.href='{{ route('search_shop', 'search_w='.$search_w.'&orderby_type=') }}'+this.value">
                                         <option value="recent" {{ $selected_chk1 }}>등록순(최신순)</option>
                                         <option value="sale" {{ $selected_chk2 }}>판매량순</option>
                                         <option value="high_price" {{ $selected_chk3 }}>높은가격순</option>
@@ -109,392 +109,120 @@
                                     </select>
                                 </div>
 
-
-
-                            <div id="tab2" class="cont pd-00">
-
-
-                                <div class="filter_bg block">
-                                    <ul class="filter_innner">
-                                        <li class="fil_on" onclick=""><span>✔</span> 등록순(최신순)</li>
-                                        <!-- class="fil_on" 활성-->
-                                        <li class="fil_off" onclick=""><span>⦁</span>판매량순</li>
-                                        <!-- class="fil_off" 비활성-->
-                                        <li class="fil_off" onclick=""><span>⦁</span>높은가격순</li>
-                                        <li class="fil_off" onclick=""><span>⦁</span>낮은가격순</li>
-                                        <li class="fil_off" onclick=""><span>⦁</span>후기숫자순</li>
-                                    </ul>
-                                </div>
-
-                                <div class="filter_sel none">
-                                    <select class="filter_innner">
-                                        <option>등록순(최신순)</option> <!-- class="fil_on" 활성-->
-                                        <option>판매량순</option><!-- class="fil_off" 비활성-->
-                                        <option>높은가격순</option>
-                                        <option>낮은가격순</option>
-                                        <option>후기숫자순</option>
-                                    </select>
-                                </div>
-
-
+                                @if(count($item_infos) > 0)
                                 <div class="goods_list">
+                                    @foreach($item_infos as $item_info)
+                                        @php
+                                            if($item_info->item_img1 == "") {
+                                                $item_img_disp = asset("img/no_img.jpg");
+                                            }else{
+                                                $item_img_cut = explode("@@",$item_info->item_img1);
+
+                                                if(count($item_img_cut) == 1) $item_img = $item_img_cut[0];
+                                                else $item_img = $item_img_cut[2];
+
+                                                $item_img_disp = "/data/shopitem/".$item_img;
+                                            }
+
+                                            $dip_score = number_format($item_info->item_average, 2);
+
+                                            //응원하기 부분
+                                            if(Auth::user() != ""){
+                                                $wish_chk = DB::table('wishs')->where([['user_id', Auth::user()->user_id], ['item_code', $item_info->item_code]])->count();
+                                                $wish_class = "wishlist";
+                                                if($wish_chk > 0) $wish_class = "wishlist_on";
+                                            }else{
+                                                $wish_class = "wishlist";
+                                            }
+
+                                        @endphp
                                     <div class="goods">
-
                                         <div class="goods_img">
-                                            <img src="../../recources/imgs/img-01.png" alt="">
+                                        <a href="{{ route('sitemdetail') }}?item_code={{ $item_info->item_code }}">
+                                            <img src="{{ $item_img_disp }}" alt="">
+                                        </a>
                                         </div>
 
-                                        <div class="new-icon">
-                                            <p>NEW</p>
-                                        </div>
+                                        @if($item_info->item_type1 != 0)
+                                            {!! $CustomUtils->item_icon($item_info) !!}
+                                        @else
+                                            <div class="icon_none">
+                                            <p></p>
+                                            </div>
+                                        @endif
 
                                         <div class="goods_title">
-
-                                            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
+                                        @php
+                                            if($item_info->item_manufacture == "") $item_manufacture = "";
+                                            else $item_manufacture = "[".$item_info->item_manufacture."]";
+                                        @endphp
+                                            <a href="{{ route('sitemdetail') }}?item_code={{ $item_info->item_code }}"><h3>{{ $item_manufacture }}{{ stripslashes($item_info->item_name) }}</h3></a>
 
                                             <span class="goods_left">
-                                                <p class="price">7,000원</p>
-                                                <p class="sale-price">10,000원</p>
+                                                <p class="price">{{ $CustomUtils->display_price($item_info->item_price, $item_info->item_tel_inq) }}</p>
+                                                @if($item_info->item_cust_price != 0)
+                                                <p class="sale-price">{{ $CustomUtils->display_price($item_info->item_cust_price) }}</p>
+                                                @else
+                                                <p class="sale-price"></p>
+                                                @endif
                                             </span>
 
                                             <span class="goods_right">
-                                                <p>30%</p>
+                                            @if($item_info->item_cust_price != 0)
+                                                @php
+                                                    //시중가격 값이 있을때 할인율 계산
+                                                    $discount = (int)$item_info->item_cust_price - (int)$item_info->item_price; //할인액
+                                                    $discount_rate = ($discount / (int)$item_info->item_cust_price) * 100;  //할인율
+                                                    $disp_discount_rate = round($discount_rate);    //반올림
+                                                @endphp
+                                                @if($disp_discount_rate != 0)
+                                                <p>{{ $disp_discount_rate }}%</p>
+                                                @endif
+                                            @else
+                                                <p class="pct_list"></p>
+                                            @endif
                                             </span>
 
-                                            <div class="goods_review project_1">
+                                            <div class="goods_review" id="project_{{ $item_info->id }}">
                                                 <div class="stars-outer">
                                                     <div class="stars-inner"></div>
                                                 </div>
-                                                <p class="number">4.10/5.00</p>
+                                                <p class="number">{{ $dip_score }}/5.00</p>
                                             </div>
+
+                                            <script>
+                                                star({{ $dip_score }},{{ $item_info->id }});
+                                            </script>
 
                                             <div class="goods_bottom">
                                                 <span class="left">
-                                                    <p>리뷰 200</p>
+                                                    <a href="{{ route('sitemdetail') }}?item_code={{ $item_info->item_code }}#section1"><p>리뷰 {{ $item_info->review_cnt }}</p></a>
                                                 </span>
                                                 <span class="right">
                                                     <p>응원하기</p>
-                                                    <span class="wishlist"></span>
+                                                    <span class="sns_wish {{ $wish_class }}" id="wish_css_{{ $item_info->item_code }}" onclick="item_wish('{{ $item_info->item_code }}', {{ Auth::user() }});"></span>
                                                     <!-- <span class="wishlist_on"></span> 활성-->
                                                 </span>
                                             </div>
                                         </div>
-
                                     </div>
-
-                                    <div class="goods">
-
-                                        <div class="goods_img">
-                                            <img src="../../recources/imgs/img-01.png" alt="">
-                                        </div>
-
-                                        <div class="new-icon">
-                                            <p>NEW</p>
-                                        </div>
-
-                                        <div class="goods_title">
-
-                                            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-
-                                            <span class="goods_left">
-                                                <p class="price">7,000원</p>
-                                                <p class="sale-price">10,000원</p>
-                                            </span>
-
-                                            <span class="goods_right">
-                                                <p>30%</p>
-                                            </span>
-
-                                            <div class="goods_review project_1">
-                                                <div class="stars-outer">
-                                                    <div class="stars-inner"></div>
-                                                </div>
-                                                <p class="number">4.10/5.00</p>
-                                            </div>
-
-                                            <div class="goods_bottom">
-                                                <span class="left">
-                                                    <p>리뷰 200</p>
-                                                </span>
-                                                <span class="right">
-                                                    <p>응원하기</p>
-                                                    <span class="wishlist"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="goods">
-
-                                        <div class="goods_img">
-                                            <img src="../../recources/imgs/img-01.png" alt="">
-                                        </div>
-
-                                        <div class="new-icon">
-                                            <p>NEW</p>
-                                        </div>
-
-                                        <div class="goods_title">
-
-                                            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-
-                                            <span class="goods_left">
-                                                <p class="price">7,000원</p>
-                                                <p class="sale-price">10,000원</p>
-                                            </span>
-
-                                            <span class="goods_right">
-                                                <p>30%</p>
-                                            </span>
-
-                                            <div class="goods_review project_1">
-                                                <div class="stars-outer">
-                                                    <div class="stars-inner"></div>
-                                                </div>
-                                                <p class="number">4.10/5.00</p>
-                                            </div>
-
-                                            <div class="goods_bottom">
-                                                <span class="left">
-                                                    <p>리뷰 200</p>
-                                                </span>
-                                                <span class="right">
-                                                    <p>응원하기</p>
-                                                    <span class="wishlist"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="goods">
-
-                                        <div class="goods_img">
-                                            <img src="../../recources/imgs/img-01.png" alt="">
-                                        </div>
-
-                                        <div class="new-icon">
-                                            <p>NEW</p>
-                                        </div>
-
-                                        <div class="goods_title">
-
-                                            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-
-                                            <span class="goods_left">
-                                                <p class="price">7,000원</p>
-                                                <p class="sale-price">10,000원</p>
-                                            </span>
-
-                                            <span class="goods_right">
-                                                <p>30%</p>
-                                            </span>
-
-                                            <div class="goods_review project_1">
-                                                <div class="stars-outer">
-                                                    <div class="stars-inner"></div>
-                                                </div>
-                                                <p class="number">4.10/5.00</p>
-                                            </div>
-
-                                            <div class="goods_bottom">
-                                                <span class="left">
-                                                    <p>리뷰 200</p>
-                                                </span>
-                                                <span class="right">
-                                                    <p>응원하기</p>
-                                                    <span class="wishlist"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="goods">
-
-                                        <div class="goods_img">
-                                            <img src="../../recources/imgs/img-01.png" alt="">
-                                        </div>
-
-                                        <div class="new-icon">
-                                            <p>NEW</p>
-                                        </div>
-
-                                        <div class="goods_title">
-
-                                            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-
-                                            <span class="goods_left">
-                                                <p class="price">7,000원</p>
-                                                <p class="sale-price">10,000원</p>
-                                            </span>
-
-                                            <span class="goods_right">
-                                                <p>30%</p>
-                                            </span>
-
-                                            <div class="goods_review project_1">
-                                                <div class="stars-outer">
-                                                    <div class="stars-inner"></div>
-                                                </div>
-                                                <p class="number">4.10/5.00</p>
-                                            </div>
-
-                                            <div class="goods_bottom">
-                                                <span class="left">
-                                                    <p>리뷰 200</p>
-                                                </span>
-                                                <span class="right">
-                                                    <p>응원하기</p>
-                                                    <span class="wishlist"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="goods">
-
-                                        <div class="goods_img">
-                                            <img src="../../recources/imgs/img-01.png" alt="">
-                                        </div>
-
-                                        <div class="new-icon">
-                                            <p>NEW</p>
-                                        </div>
-
-                                        <div class="goods_title">
-
-                                            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-
-                                            <span class="goods_left">
-                                                <p class="price">7,000원</p>
-                                                <p class="sale-price">10,000원</p>
-                                            </span>
-
-                                            <span class="goods_right">
-                                                <p>30%</p>
-                                            </span>
-
-                                            <div class="goods_review project_1">
-                                                <div class="stars-outer">
-                                                    <div class="stars-inner"></div>
-                                                </div>
-                                                <p class="number">4.10/5.00</p>
-                                            </div>
-
-                                            <div class="goods_bottom">
-                                                <span class="left">
-                                                    <p>리뷰 200</p>
-                                                </span>
-                                                <span class="right">
-                                                    <p>응원하기</p>
-                                                    <span class="wishlist"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-
-                                    <div class="goods">
-
-                                        <div class="goods_img">
-                                            <img src="../../recources/imgs/img-01.png" alt="">
-                                        </div>
-
-                                        <div class="new-icon">
-                                            <p>NEW</p>
-                                        </div>
-
-                                        <div class="goods_title">
-
-                                            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-
-                                            <span class="goods_left">
-                                                <p class="price">7,000원</p>
-                                                <p class="sale-price">10,000원</p>
-                                            </span>
-
-                                            <span class="goods_right">
-                                                <p>30%</p>
-                                            </span>
-
-                                            <div class="goods_review project_1">
-                                                <div class="stars-outer">
-                                                    <div class="stars-inner"></div>
-                                                </div>
-                                                <p class="number">4.10/5.00</p>
-                                            </div>
-
-                                            <div class="goods_bottom">
-                                                <span class="left">
-                                                    <p>리뷰 200</p>
-                                                </span>
-                                                <span class="right">
-                                                    <p>응원하기</p>
-                                                    <span class="wishlist"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <div class="goods">
-
-                                        <div class="goods_img">
-                                            <img src="../../recources/imgs/img-01.png" alt="">
-                                        </div>
-
-                                        <div class="new-icon">
-                                            <p>NEW</p>
-                                        </div>
-
-                                        <div class="goods_title">
-
-                                            <h3>[SOAPURI]MINT SHAMPOOBAR10EA(1SET)</h3>
-
-                                            <span class="goods_left">
-                                                <p class="price">7,000원</p>
-                                                <p class="sale-price">10,000원</p>
-                                            </span>
-
-                                            <span class="goods_right">
-                                                <p>30%</p>
-                                            </span>
-
-                                            <div class="goods_review project_1">
-                                                <div class="stars-outer">
-                                                    <div class="stars-inner"></div>
-                                                </div>
-                                                <p class="number">4.10/5.00</p>
-                                            </div>
-
-                                            <div class="goods_bottom">
-                                                <span class="left">
-                                                    <p>리뷰 200</p>
-                                                </span>
-                                                <span class="right">
-                                                    <p>응원하기</p>
-                                                    <span class="wishlist"></span>
-                                                </span>
-                                            </div>
-                                        </div>
-
-                                    </div>
+                                    @endforeach
                                 </div>
+
+                                @else
+                                <div class="list-none">
+                                    <img src="{{ asset('/design/recources/imgs/combined-shape.png') }}" alt="">
+                                    <br><br>
+                                    <p>검색 결과가 없습니다.</p>
+                                </div>
+                                @endif
+
 
                                 <!-- 페이징 시작 -->
                                 <div class="paging">
-                                    <a href="#">이전</a>
-                                    <div>1 / 20</div>
-                                    <a href="#">다음</a>
+                                    {!! $pnPage !!}
                                 </div>
                                 <!-- 페이징 끝 -->
-
                             </div>
 
 
@@ -582,9 +310,7 @@
 
                                 <!-- 페이징 시작 -->
                                 <div class="paging">
-                                    <a href="#">이전</a>
-                                    <div>1 / 20</div>
-                                    <a href="#">다음</a>
+                                    {!! $pnPage !!}
                                 </div>
                                 <!-- 페이징 끝 -->
 
