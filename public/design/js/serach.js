@@ -46,6 +46,15 @@ function paintSearch(newSearch) { //화면에 뿌림
 
 
 function handleSearchSubmit() {
+    if($.trim($('input[name=search_w]').val()) == ""){
+        alert("검색어를 입력해 주세요");
+        $('input[name=search_w]').val("");
+        $("#search-input").focus();
+        return false;
+    }else{
+        $('input[name=search_w]').val($.trim($('input[name=search_w]').val()));
+    }
+
     //event.preventDefault();
     const newSearchItem = searchInput.value;
     searchInput.value = '';

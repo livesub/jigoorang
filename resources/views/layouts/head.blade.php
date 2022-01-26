@@ -133,8 +133,8 @@
             <!-- 모바일 메뉴 끝 -->
 
             <!-- 수정껀 생길때 또 막음 -->
-                <ul class="menu">1111
-                    <li class="search" onclick="openmodal_001()"><a href="#"><span>검색</span></a></li>
+                <ul class="menu">
+                    <li class="search" onclick="openmodal_001()"><span>검색</span></li>
                     @if(!auth()->user())
                     <li class="my"><a href="{{ route('login.index') }}"><span>마이페이지</span></a></li>
                     <li class="login">
@@ -215,8 +215,8 @@
 
                     <!-- 최근 검색어 -->
                     <div class="search-wrap">
-                        <form class="search" action="../design/page/serch/serch.html" onsubmit="handleSearchSubmit();">
-                            <input required maxlength="25" type="text" placeholder="검색어를 입력해 주세요" id="search-input" >
+                        <form class="search" action="{{ route('search') }}" onsubmit="return handleSearchSubmit();">
+                            <input required maxlength="25" name="search_w" type="text" placeholder="검색어를 입력해 주세요" id="search-input" >
                             <button type="submit" id="serach_btn">
                                 <span>검색</span>
                             </button>

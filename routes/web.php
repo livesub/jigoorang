@@ -404,6 +404,12 @@ Route::get('privacy', [  //개인정보
     'uses' => 'App\Http\Controllers\info\InfoController@privacy',
 ]);
 
+//검색 관련
+Route::get('search', [
+    'as' => 'search',
+    'uses' => 'App\Http\Controllers\search\SearchController@index',
+]);
+
 
 /*** 프론트 메뉴 관리 */
 //일반 페이지(html) 처리
