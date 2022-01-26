@@ -534,6 +534,7 @@ h5 {
     font-size: 0.7rem;
 }
 
+
 .main-container .mbox_100 .clicked {
     background: url("../recources/icons/icon-heart-2.png") no-repeat;
     background-size: 24px 21px;
@@ -765,14 +766,14 @@ h5 {
 .main-container .mbox_1280 .stars-outer {
     display: inline-block;
     position: relative;
-    font-size: 16px;
+    /* font-size: 16px; */
     margin-top: 4px;
     /* font-family: "Font Awesome 5 free"; */
     /* letter-spacing: 1px; */
 }
 
 .main-container .mbox_1280 .stars-outer::before {
-    content: "★★★★★";
+    content: "★ ★ ★ ★ ★";
     font-weight: 900;
     color: #cccccc;
 }
@@ -787,7 +788,7 @@ h5 {
 }
 
 .main-container .mbox_1280 .stars-inner::before {
-    content: "★★★★★";
+    content: "★ ★ ★ ★ ★";
     /* content: "\f005 \f005 \f005 \f005 \f005"; */
     color: #3ec4ba;
     font-weight: 900;
@@ -878,7 +879,7 @@ h5 {
 
 .main-container .mbox_1280 .project {
     font-size: 0.7rem;
-    margin: 0 16px 10px 0;
+    margin: 0 10px 10px 0;
 }
 
 .main-container .mbox_1280 .slide_btn_2 {
@@ -3618,7 +3619,7 @@ input::placeholder {
     height: auto;
     border: 1px solid #ddd;
     text-align: center;
-    padding: 8px 7px 8px 0;
+    padding: 11px 7px 8px 0;
 }
 
 .n_popup_con .n_popup .n_btn_2 {
@@ -3636,7 +3637,7 @@ input::placeholder {
 }
 
 .n_popup_con .n_popup .n_btn label{
-    top: 5px;
+    top: 2px;
 }
 
 

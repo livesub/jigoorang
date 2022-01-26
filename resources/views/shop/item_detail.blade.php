@@ -457,7 +457,7 @@
     // 스와이프 이벤트 (썸네일)
     var swiper = new Swiper(".som_b", {
         loop: false,
-        spaceBetween: 5,
+        spaceBetween: 0,
         slidesPerView: 'auto',
         //slidesPerView: {{ $img_cnt }},   //상품등록 이미지 갯수
         //freeMode: true,

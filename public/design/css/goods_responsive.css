@@ -464,7 +464,7 @@
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_nm li button{
    border:solid 2px #ddd;
    background-color: white;
-   width: 30px;
+   width: 40px;
    height: 30px;
 }
 
@@ -605,7 +605,7 @@
 }
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_l .som_b .swiper-slide {
-
+   /* width: 16%; */
 }
 
 
@@ -1023,7 +1023,7 @@
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_op li button{
    border:solid 2px #ddd;
    background-color: white;
-   width: 30px;
+   width: 40px;
    height: 30px;
 }
 
@@ -1140,7 +1140,7 @@
     }
 
     .eval .board .board_wrap .scrollmenu .swiper-wrapper .bct_active {
-      border: solid 3px #3ec4ba;
+      border: solid 2px #3ec4ba;
       color: #3ec4ba;
     }
 
@@ -1357,7 +1357,7 @@
 
     .eval .board .board_wrap .goods .goods_bottom .right .wishlist_on {
       width: 23px;
-      margin-top: 4px;
+      margin-top: 3px;
       background: url("../recources/icons/icon-heart-2.png") no-repeat;
       background-size: 20px auto;
       background-position: center;
@@ -1370,15 +1370,15 @@
  ************/
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_l .som_b .swiper-slide {
-   max-width: 80px;
-   width: 100%;
+   /* max-width: 80px; */
+   /* width: 19%; */
 }
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_l .dt_sub_som img{
     width: 100%;
-    max-width: 82px;
-    max-height: 80px;
-    margin: 1px;
+    /* max-width: 82px;
+    max-height: 80px; */
+    padding: 2px;
  }
 
 
@@ -1822,7 +1822,7 @@
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_op li button{
    border:solid 2px #ddd;
    background-color: white;
-   width: 30px;
+   width: 40px;
    height: 30px;
 }
 
@@ -2128,8 +2128,8 @@
     }
 
     .eval .board .board_wrap .shop_goods .shop_goods_dt_l .som_b .swiper-slide {
-      max-width: 62px;
-      width: 100%;
+      /* max-width: 59px; */
+      /* width: 20%; */
    }
 
     .eval .board .board_wrap .goods .goods_img img {
@@ -2234,9 +2234,9 @@
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_l .dt_sub_som img{
     width: 100%;
-    max-width: 61px;
-    max-height: 51px;
-    margin: 1px;
+    /* max-width: 61px;
+    max-height: 51px; */
+   padding: 2px;
  }
 
 
@@ -2549,7 +2549,7 @@
  }
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review_text .text_content.notshort {
-   height: 35.5px;
+   height: 34.5px;
 }
 
 
@@ -2800,6 +2800,7 @@
    background-color: white;
    width: 30px;
    height: 25px;
+   color: #707070;
 }
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_op li p{
