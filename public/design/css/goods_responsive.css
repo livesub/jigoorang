@@ -464,7 +464,7 @@
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_nm li button{
    border:solid 2px #ddd;
    background-color: white;
-   width: 40px;
+   width: 30px;
    height: 30px;
 }
 
@@ -1755,9 +1755,6 @@
    margin-right: 10px;
 }
 
-.eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_img img{
-   width:100%;
-}
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_tt {
    width: calc(100% - 47%);
@@ -2549,7 +2546,7 @@
  }
 
  .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .dt_con_2 .cot_list .cot_body .cot_review_text .text_content.notshort {
-   height: 34.5px;
+   height: 34px;
 }
 
 

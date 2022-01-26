@@ -3787,7 +3787,7 @@ background-size: cover;
     }
 
     .main-container .mbox_1280 .swiper {
-        margin-top: 0px;
+        margin-top: 20px;
     }
 
     .main-container .mbox_1280 .swiper .swiper-slide .slide-best {
@@ -3854,7 +3854,7 @@ background-size: cover;
 
     .main-container .mbox_1280 .main-project-bottom .right {
         float: right;
-        width: 75px;
+        width: 65px;
         display: -webkit-inline-box;
     }
 

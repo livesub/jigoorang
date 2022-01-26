@@ -256,7 +256,7 @@
 .eval .board .board_wrap .goods .goods_title h3{
     white-space: normal;
     line-height: 1.2;
-    height: 2.6em;
+    height: 2.4em;
     text-align: left;
     display: -webkit-box;
     -webkit-line-clamp: 2;
@@ -826,6 +826,10 @@
 .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 {
     padding-top: 50px;
     font-size: 16px;
+    width: 100%;
+}
+.eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 img{
+    width: 100%;
 }
 .eval .board .board_wrap .shop_goods_ct .shop_goods_dt_b .dt_cot .set1 .set_tt {
     font-size: 20px;
@@ -1209,6 +1213,9 @@
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_img img{
     width:100%;
+    height: 100%;
+    max-width: 160px;
+    max-height: 140px;
 }
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_tt {
