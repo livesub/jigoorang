@@ -80,8 +80,8 @@ class SearchController extends Controller
         }
 
         $date = date("Y-m-d", time());
-        $notice_sql = DB::table('notices')->where('n_subject', 'LIKE', "%$search_w%")->get();
-        $exp_sql = DB::table('exp_list')->where([['title', 'LIKE', "%$search_w%"], ['exp_review_end', '>=', $date]])->get();
+        $notice_sql = DB::table('notices')->where('n_subject', 'LIKE', "%$search_w%")->orderby('id', 'desc')->get();
+        $exp_sql = DB::table('exp_list')->where([['title', 'LIKE', "%$search_w%"], ['exp_review_end', '>=', $date]])->orderby('id', 'desc')->get();
 
         $total_cnt = $item_cnt + count($notice_sql) + count($exp_sql);
 
@@ -107,7 +107,7 @@ class SearchController extends Controller
 
         $item_cnt = 0;
 
-        $pageScale  = 1;  //한페이지당 라인수
+        $pageScale  = 20;  //한페이지당 라인수
         $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")
@@ -119,11 +119,6 @@ class SearchController extends Controller
         }
 
         $item_sql = DB::table('shopitems')->where([['item_display', 'Y'], ['item_name', 'LIKE', "%$search_w%"]]);
-
-        $total_record   = 0;
-        $total_record   = $item_sql->count(); //총 게시물 수
-        $total_page     = ceil($total_record / $pageScale);
-        $total_page     = $total_page == 0 ? 1 : $total_page;
 
         if($orderby_type != ""){
             switch ($orderby_type) {
@@ -166,8 +161,8 @@ class SearchController extends Controller
                     $item_infos= $item_sql->offset($start_num)->limit($pageScale)->get();
             }
         }else{
-            $item_infos = $item_sql->orderby('item_rank', 'ASC')->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
             $item_cnt = $item_sql->count();
+            $item_infos = $item_sql->orderby('item_rank', 'ASC')->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
         }
 
         $date = date("Y-m-d", time());
@@ -213,72 +208,143 @@ class SearchController extends Controller
         ]);
     }
 
-
-
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function search_notice(Request $request)
     {
-        //
+        $CustomUtils = new CustomUtils;
+
+        $search_w       = $request->input('search_w');
+        $orderby_type   = $request->input('orderby_type');
+        $page       = $request->input('page');
+
+        $item_cnt = 0;
+
+        $pageScale  = 20;  //한페이지당 라인수
+        $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
+
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
+
+        $item_sql = DB::table('shopitems')->where([['item_display', 'Y'], ['item_name', 'LIKE', "%$search_w%"]])->get();
+
+        $notice_sql = DB::table('notices')->where('n_subject', 'LIKE', "%$search_w%");
+        $notice_cnt = $notice_sql->count();
+        $notice_infos = $notice_sql->orderby('id', 'desc')->offset($start_num)->limit($pageScale)->get();
+
+        $date = date("Y-m-d", time());
+        $exp_sql = DB::table('exp_list')->where([['title', 'LIKE', "%$search_w%"], ['exp_review_end', '>=', $date]])->orderby('id', 'desc')->get();
+
+        $total_cnt = count($item_sql) + $notice_cnt + count($exp_sql);
+
+        $total_record   = 0;
+        $total_record   = $notice_cnt; //총 게시물 수
+
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
+
+        $virtual_num = $total_record - $pageScale * ($page - 1);
+
+        $tailarr = array();
+        $tailarr['search_w'] = $search_w;    //고정된 전달 파라메터가 있을때 사용
+        $tailarr['orderby_type'] = $orderby_type;
+
+        $PageSet        = new PageSet;
+        $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
+        $prevPage       = $PageSet->getPrevPage("이전");
+        $nextPage       = $PageSet->getNextPage("다음");
+        $pre10Page      = $PageSet->pre10("이전10");
+        $next10Page     = $PageSet->next10("다음10");
+        $preFirstPage   = $PageSet->preFirst("처음");
+        $nextLastPage   = $PageSet->nextLast("마지막");
+        $listPage       = $PageSet->getPageList();
+        $pnPage         = $prevPage.$listPage.$nextPage;
+
+        return view('search.search_notice',[
+            'item_infos'    => $item_sql,
+            'notice_cnt'    => $notice_cnt,
+            'notice_infos'  => $notice_infos,
+            'exp_infos'     => $exp_sql,
+            'search_w'      => $search_w,
+            'total_cnt'     => $total_cnt,
+            'item_cnt'      => $item_cnt,
+            'orderby_type'  => $orderby_type,
+            'CustomUtils'   => $CustomUtils,
+            'page'          => $page,
+            'pnPage'        => $pnPage,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function search_exp(Request $request)
     {
-        //
+        $CustomUtils = new CustomUtils;
+
+        $search_w       = $request->input('search_w');
+        $orderby_type   = $request->input('orderby_type');
+        $page       = $request->input('page');
+
+        $item_cnt = 0;
+
+        $pageScale  = 20;  //한페이지당 라인수
+        $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
+
+        if($page != "")
+        {
+            $start_num = $pageScale * ($page - 1);
+        }else{
+            $page = 1;
+            $start_num = 0;
+        }
+
+        $item_sql = DB::table('shopitems')->where([['item_display', 'Y'], ['item_name', 'LIKE', "%$search_w%"]])->get();
+        $notice_sql = DB::table('notices')->where('n_subject', 'LIKE', "%$search_w%")->get();
+
+        $date = date("Y-m-d", time());
+        $exp_sql = DB::table('exp_list')->where([['title', 'LIKE', "%$search_w%"], ['exp_review_end', '>=', $date]]);
+        $exp_cnt = $exp_sql->count();
+        $exp_infos = $exp_sql->orderby('id', 'desc')->offset($start_num)->limit($pageScale)->get();
+        $total_cnt = count($item_sql) + count($notice_sql) + $exp_cnt;
+
+        $total_record   = 0;
+        $total_record   = $exp_cnt; //총 게시물 수
+
+        $total_page     = ceil($total_record / $pageScale);
+        $total_page     = $total_page == 0 ? 1 : $total_page;
+
+        $virtual_num = $total_record - $pageScale * ($page - 1);
+
+        $tailarr = array();
+        $tailarr['search_w'] = $search_w;    //고정된 전달 파라메터가 있을때 사용
+        $tailarr['orderby_type'] = $orderby_type;
+
+        $PageSet        = new PageSet;
+        $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
+        $prevPage       = $PageSet->getPrevPage("이전");
+        $nextPage       = $PageSet->getNextPage("다음");
+        $pre10Page      = $PageSet->pre10("이전10");
+        $next10Page     = $PageSet->next10("다음10");
+        $preFirstPage   = $PageSet->preFirst("처음");
+        $nextLastPage   = $PageSet->nextLast("마지막");
+        $listPage       = $PageSet->getPageList();
+        $pnPage         = $prevPage.$listPage.$nextPage;
+
+        return view('search.search_exp',[
+            'item_infos'    => $item_sql,
+            'exp_cnt'       => $exp_cnt,
+            'notice_infos'  => $notice_sql,
+            'exp_infos'     => $exp_infos,
+            'search_w'      => $search_w,
+            'total_cnt'     => $total_cnt,
+            'item_cnt'      => $item_cnt,
+            'orderby_type'  => $orderby_type,
+            'CustomUtils'   => $CustomUtils,
+            'page'          => $page,
+            'pnPage'        => $pnPage,
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }
