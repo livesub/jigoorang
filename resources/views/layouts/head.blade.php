@@ -262,7 +262,7 @@
 
                     <!-- 최근 검색어 -->
                     <div class="search-wrap">
-                        <form class="search" action="{{ route('search') }}" onsubmit="return handleSearchSubmit();">
+                        <form class="search" method="get" action="{{ route('search') }}" onsubmit="return handleSearchSubmit();">
                             <input required maxlength="25" name="search_w" type="text" placeholder="검색어를 입력해 주세요" id="search-input" >
                             <button type="submit" id="serach_btn">
                                 <span>검색</span>
