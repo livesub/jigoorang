@@ -41,7 +41,9 @@
                             @endphp
                     <div class="list">
                         <div class="thumb">
+                        <a href="{{ route('notice_view','id='.$notice_info->id.'&page='.$page) }}">
                             <img src="{{ asset('/data/notice/'.$n_img[1]) }}" >
+                        </a>
                         </div>
                         <div class="ev_rul">
                             <div class="title_bord"><a href="{{ route('notice_view','id='.$notice_info->id.'&page='.$page) }}">{{ stripslashes($notice_info->n_subject) }}</a></div>
