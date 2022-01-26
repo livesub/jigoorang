@@ -3619,7 +3619,7 @@ input::placeholder {
     height: auto;
     border: 1px solid #ddd;
     text-align: center;
-    padding: 8px 7px 8px 0;
+    padding: 11px 7px 8px 0;
 }
 
 .n_popup_con .n_popup .n_btn_2 {
@@ -3637,7 +3637,7 @@ input::placeholder {
 }
 
 .n_popup_con .n_popup .n_btn label{
-    top: 5px;
+    top: 2px;
 }
 
 
