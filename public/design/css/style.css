@@ -762,6 +762,9 @@ h5 {
     height: 100%;
 }
 
+.main-container .mbox_1280 .swiper-slide img {
+    width: 100%;
+}
 /* 출력별 */
 .main-container .mbox_1280 .stars-outer {
     display: inline-block;
