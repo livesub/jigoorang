@@ -124,7 +124,7 @@
                                     break;
                                 default:
                                     $class_chk1 = 'fil_on';
-                                    $mark_chk1 = '⦁';
+                                    $mark_chk1 = '✔';
                                     $selected_chk1 = 'selected';
                                 }
                         @endphp
@@ -218,7 +218,7 @@
                                     @if($disp_discount_rate != 0)
                                     <p>{{ $disp_discount_rate }}%</p>
                                     @endif
-                                     @else
+                                @else
                                     <p class="pct_list"></p>
                                 @endif
                                 </span>

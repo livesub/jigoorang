@@ -31,9 +31,70 @@ class SearchController extends Controller
     {
         $CustomUtils = new CustomUtils;
 
-        $search_w   = $request->input('search_w');
+        $search_w       = $request->input('search_w');
+        $orderby_type   = $request->input('orderby_type');
 
-        dd($search_w);
+        $item_cnt = 0;
+        $item_sql = DB::table('shopitems')->where([['item_display', 'Y'], ['item_name', 'LIKE', "%$search_w%"]]);
+
+        if($orderby_type != ""){
+            switch ($orderby_type) {
+                case 'recent':
+                    $item_sql = $item_sql->orderby('id','DESC')->get();
+                    $item_cnt = $item_sql->count();
+                    break;
+                case 'sale':
+                    //$orderby_add = "'total', 'desc'";
+                    $item_sql = DB::table('shopitems as a')
+                    ->select('a.*', DB::raw('count(b.item_code) as total'))
+                    ->leftjoin('shopcarts as b', function($join) {
+                            $join->on('a.item_code', '=', 'b.item_code')->whereRaw('b.sct_status in (\'입금\', \'준비\', \'배송\', \'완료\')');
+                        });
+                    $item_sql = $item_sql->whereRaw("a.item_name like '%{$search_w}%'");
+                    $item_sql = $item_sql->groupBy('a.item_code')->orderBy('total', 'desc')->get();
+                    $item_cnt = $item_sql->count();
+                    break;
+                case 'high_price':
+                    //$orderby_add = "'item_price', 'DESC'";
+                    $item_sql = $item_sql->orderby('item_price','DESC')->get();
+                    $item_cnt = $item_sql->count();
+                    break;
+                case 'low_price':
+                    //$orderby_add = "'item_price', 'ASC'";
+                    $item_sql = $item_sql->orderby('item_price','ASC')->get();
+                    $item_cnt = $item_sql->count();
+                    break;
+                case 'review':
+                    //$orderby_add = "'review_cnt', 'DESC'";
+                    $item_sql = $item_sql->orderby('review_cnt','DESC')->get();
+                    $item_cnt = $item_sql->count();
+                    break;
+                default:
+                    //$orderby_add = "'id', 'DESC'";
+                    $item_sql = $item_sql->orderby('id','DESC')->get();
+                    $item_cnt = $item_sql->count();
+            }
+        }else{
+            $item_sql = $item_sql->orderby('id','DESC')->get();
+            $item_cnt = $item_sql->count();
+        }
+
+        $date = date("Y-m-d", time());
+        $notice_sql = DB::table('notices')->where('n_subject', 'LIKE', "%$search_w%")->get();
+        $exp_sql = DB::table('exp_list')->where([['title', 'LIKE', "%$search_w%"], ['exp_review_end', '>=', $date]])->get();
+
+        $total_cnt = $item_cnt + count($notice_sql) + count($exp_sql);
+
+        return view('search.search_all',[
+            'item_infos'    => $item_sql,
+            'notice_infos'  => $notice_sql,
+            'exp_infos'     => $exp_sql,
+            'search_w'      => $search_w,
+            'total_cnt'     => $total_cnt,
+            'item_cnt'      => $item_cnt,
+            'orderby_type'  => $orderby_type,
+            'CustomUtils'   => $CustomUtils,
+        ]);
     }
 
     /**
