@@ -436,6 +436,13 @@ Route::get('notice_view', [
     'uses' => 'App\Http\Controllers\notice\NoticeController@notice_view',
 ]);
 
+//지구랭 소개
+Route::get('company', [
+    'as' => 'company',
+    'uses' => 'App\Http\Controllers\company\CompanyController@index',
+]);
+
+
 //지구를 구하는 랭킹 관련
 Route::get('ranking_list', [
     'as' => 'ranking_list',
