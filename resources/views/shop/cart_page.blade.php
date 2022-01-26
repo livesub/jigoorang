@@ -67,6 +67,9 @@
 
                                     //이미지
                                     $image_url = $CustomUtils->get_item_image($cart_info->item_code, 3);
+                                    if($image_url == ""){
+                                        $image_url = asset("img/no_img.jpg");
+                                    }
 
                                     //제조사
                                     if($cart_info->item_manufacture == "") $item_manufacture = "";

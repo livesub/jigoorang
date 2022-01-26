@@ -21,6 +21,7 @@
 <input type="hidden" name="length" id="length">
 <input type="hidden" name="last_choice_ca_id" id="last_choice_ca_id">
 <input type="hidden" name="item_code" id="item_code" value="{{ $item_code }}">
+<input type="hidden" name="item_use" id="item_use" value="1">
 
 <table border=1 width="900px;">
     <tr>
