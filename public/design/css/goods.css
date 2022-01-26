@@ -400,8 +400,12 @@
   }
 
  .eval .board .board_wrap .shop_goods .shop_goods_dt_l .som_b .swiper-slide {
-    max-width: 114px;
-    width: 100%;
+    /* max-width: 114px; */
+    width: 19%;
+  }
+
+  .eval .board .board_wrap .shop_goods .shop_goods_dt_l .som_b .swiper-slide:nth-child(5) {
+      margin-right: 0;
   }
 
   .eval .board .board_wrap .shop_goods .shop_goods_dt_l .som_b .swiper-slide:last-child {
@@ -410,8 +414,8 @@
 
  .eval .board .board_wrap .shop_goods .shop_goods_dt_l .dt_sub_som img{
     width: 100%;
-    max-width: 114px;
-    max-height: 98px;
+    /* max-width: 114px;
+    max-height: 98px; */
     margin: 3px 0 0 0;
  }
 

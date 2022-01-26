@@ -159,7 +159,7 @@
                     <li class="my">
                         <a href="{{ route('login.index') }}">
                             <span>마이페이지</span>
-                            <p>마이페이지</p>
+                            <p class="block">마이페이지</p>
                             <p class="none">MY</p>
                         </a>
                     </li>
