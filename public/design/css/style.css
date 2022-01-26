@@ -468,6 +468,7 @@ h5 {
     font-size: 22px;
     font-weight: 600;
     margin-left: 25px;
+    float: right;
 }
 
 .main-container .mbox_100 .main-project-title .main-project-right p {}
@@ -509,6 +510,10 @@ h5 {
     background-size: 23px auto;
     background-position: center;
     display: block;
+}
+
+.main-container .mbox_1280 .swiper-slide .main-project-title .main-project-bottom a {
+    width: 50%;
 }
 
 .main-container .mbox_100 .main-project-bottom .right p {
@@ -830,12 +835,12 @@ h5 {
 }
 
 .main-container .mbox_1280 .main-project-title .main-project-left {
-    float: left;
+    /* float: left; */
     margin: 0 20px 0 0;
 }
 
 .main-container .mbox_1280 .main-project-title .main-project-right {
-    /* float: right; */
+    float: right;
     font-size: 22px;
     font-weight: 600;
 }
