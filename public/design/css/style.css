@@ -241,6 +241,10 @@ h5 {
     background: #fff;
 }
 
+.main-container .mbox_1280 .swiper .swiper-slide a{
+   width: 100%;
+}
+
 .main-container .mbox_1280 .swiper .swiper-slide .slide-best {
     display: block;
     width: 100%;
@@ -435,6 +439,10 @@ h5 {
     word-break: break-all;
 }
 
+.main-container .mbox_100 .swiper-slide .main-project-title a{
+    width: 100%;
+}
+
 .main-container .mbox_100 .swiper-slide .main-project-title p {
     display: inline-block;
 }
@@ -471,6 +479,10 @@ h5 {
     font-weight: 400;
 }
 
+.main-container .mbox_100 .main-project-title .main-project-bottom a {
+    width: 50%;
+}
+
 .main-container .mbox_100 .main-project-bottom .left p {
     margin: 5px 0;
 }
@@ -479,6 +491,24 @@ h5 {
     float: right;
     width: 88px;
     display: -webkit-inline-box;
+}
+
+.main-container .mbox_100 .main-project-bottom .right .wishlist_on {
+    width: 23px;
+    margin-top: 4px;
+    background: url("../recources/icons/icon-heart-2.png") no-repeat;
+    background-size: 23px auto;
+    background-position: center;
+    display: block;
+}
+
+.main-container .mbox_1280 .main-project-bottom .right .wishlist_on {
+    width: 23px;
+    margin-top: 4px;
+    background: url("../recources/icons/icon-heart-2.png") no-repeat;
+    background-size: 23px auto;
+    background-position: center;
+    display: block;
 }
 
 .main-container .mbox_100 .main-project-bottom .right p {
@@ -760,7 +790,7 @@ h5 {
 
 .main-container .mbox_1280 .number {
     font-size: 16px;
-    font-family: "SpoqaHanSans-Regular";
+    /* font-family: "SpoqaHanSans-Regular"; */
     font-weight: 400;
     color: #707070;
     margin: 5px;
@@ -772,10 +802,15 @@ h5 {
     font-size: 18px;
 }
 
+
 .main-container .mbox_1280 .swiper-slide .main-project-title {
     position: relative;
     margin: 0 16px;
     word-break: break-all;
+}
+
+.main-container .mbox_1280 .swiper-slide .main-project-title a {
+    width: 100%;
 }
 
 .main-container .mbox_1280 .swiper-slide .main-project-title p {
@@ -893,6 +928,10 @@ h5 {
 .main-container .mbox_1280 .sub_banner .swiper-slide .mo {
     display: none;
     width: 100%;
+}
+
+.main-container .mbox_1280 .sub_banner .swiper-pagination {
+    padding-bottom: 24px;
 }
 
 .main-container .mbox_1280 .sub_banner .swiper-pagination-bullet-active {
@@ -3539,7 +3578,7 @@ input::placeholder {
     height: auto;
     z-index:100;
     margin: 0;
-    top: 50%;
+    top: 38%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
