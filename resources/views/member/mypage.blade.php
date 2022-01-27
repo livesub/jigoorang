@@ -68,7 +68,7 @@
 
 
                         <div class="mypage_box solid sol">
-                            <a href="javascript:alert('22 년 2 월 OPEN  예정');">
+                            <a href="{{ route('mypage.wish_list') }}">
                                 <div class="mypage_box_img04"></div>
                                 <span>응원한 상품</span>
                             </a>
