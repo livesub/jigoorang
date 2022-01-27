@@ -57,13 +57,13 @@ class ItemController extends Controller
         $sub_cate_infos = DB::table('shopcategorys')->where('sca_display','Y')->whereRaw('length(sca_id) = 4')->whereRaw("sca_id like '{$ca_id}%'")->orderby('sca_rank', 'ASC')->orderby('id', 'ASC')->get();
 
         if($ca_id != ""){
-            $item_sql = DB::table('shopitems')->where('item_display','Y')->whereRaw("sca_id like '{$ca_id}%'");
+            $item_sql = DB::table('shopitems')->where([['item_del', 'N'], ['item_display','Y']])->whereRaw("sca_id like '{$ca_id}%'");
             $total_cnt = $item_sql->count();
             //$item_infos = $item_sql->orderby('item_rank', 'DESC')->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
         }
 
         if($sub_ca_id != "all" && $sub_ca_id != ""){
-            $item_sql = DB::table('shopitems')->where([['item_display','Y'], ['sca_id', $sub_ca_id]]);
+            $item_sql = DB::table('shopitems')->where([['item_del', 'N'], ['item_display','Y'], ['sca_id', $sub_ca_id]]);
             $total_cnt = $item_sql->count();
             //$item_infos = $item_sql->orderby('item_rank', 'DESC')->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
         }
@@ -84,7 +84,7 @@ class ItemController extends Controller
                             $join->on('a.item_code', '=', 'b.item_code')->whereRaw('b.sct_status in (\'입금\', \'준비\', \'배송\', \'완료\')');
                         });
                     if($sub_ca_id != "all" && $sub_ca_id != ""){
-                        $item_sql = $item_sql->where([['a.item_display','Y'], ['a.sca_id', $sub_ca_id]]);
+                        $item_sql = $item_sql->where([['item_del', 'N'], ['a.item_display','Y'], ['a.sca_id', $sub_ca_id]]);
                     }else{
                         $item_sql = $item_sql->whereRaw("a.sca_id like '{$ca_id}%'");
                     }
@@ -121,6 +121,7 @@ class ItemController extends Controller
                     $item_sql->orderby('id','DESC');
                     $total_cnt = $item_sql->count();
                     $item_infos= $item_sql->offset($start_num)->limit($pageScale)->get();
+                    break;
             }
         }else{
             $item_infos = $item_sql->orderby('item_rank', 'ASC')->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();

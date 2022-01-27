@@ -82,6 +82,11 @@ class shopitems extends Model
         'item_stock_qty',
         'item_tel_inq',
         'item_del',
+        'avg_score1',
+        'avg_score2',
+        'avg_score3',
+        'avg_score4',
+        'avg_score5',
         'item_average',
         'review_cnt',
     ];

@@ -248,7 +248,7 @@
 
                                         <div class="set1">
 
-                                            <p class="set_tt">정량평가({{ $review_cnt }})</p>
+                                            <p class="set_tt">정량평가({{ $item_info->review_cnt }})</p>
 
                                             @if(count($rating_arr) > 0)
 
@@ -257,6 +257,9 @@
                                                 <div class="dt_star">
 
                                                     @for($m = 1; $m <= 5; $m++)
+                                                        @php
+                                                            $avg_score = "avg_score".$m;
+                                                        @endphp
                                                         @if($m < 5)
                                                     <div class="cot_rating_01" id="project_{{ $m }}">
                                                         <p>{{ $rating_arr["item_name"][$m] }}</p>
@@ -264,8 +267,7 @@
                                                             <div class="stars-outer">
                                                                 <div class="stars-inner"></div>
                                                             </div>
-                                                            <!--<span class="number">4.10 (20)</span>-->
-                                                            <span class="score cr_04">{{ number_format($rating_arr["score"][$m], 2) }} ({{ $review_cnt }})</span>
+                                                            <span class="score cr_04">{{ number_format($item_info->$avg_score, 2) }} ({{ $item_info->review_cnt }})</span>
                                                         </div>
                                                     </div>
                                                         @endif
@@ -279,7 +281,7 @@
                                                                 <div class="stars-inner"></div>
                                                             </div>
                                                             <!--<span class="number">4.10 (20)</span>-->
-                                                            <p class="score cr_04">{{ number_format($rating_arr["score"][$m], 2) }} ({{ $review_cnt }})</p>
+                                                            <p class="score cr_04">{{ number_format($item_info->$avg_score, 2) }} ({{ $item_info->review_cnt }})</p>
                                                         </div>
                                                     </div>
 
@@ -297,7 +299,7 @@
                                                 <div class="dt_star">
                                                         @endif
                                                 <script>
-                                                    star2({{ number_format($rating_arr["score"][$m], 2) }}, {{ $m }});
+                                                    star2({{ number_format($item_info->$avg_score, 2) }}, {{ $m }});
                                                 </script>
                                                     @endfor
                                                 </div>

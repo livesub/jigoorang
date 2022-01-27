@@ -101,11 +101,11 @@
 
                                 <div class="filter_sel none">
                                     <select class="filter_innner" onchange="location.href='{{ route('search_shop', 'search_w='.$search_w.'&orderby_type=') }}'+this.value">
-                                        <option value="recent" {{ $selected_chk1 }}>등록순(최신순)</option>
-                                        <option value="sale" {{ $selected_chk2 }}>판매량순</option>
-                                        <option value="high_price" {{ $selected_chk3 }}>높은가격순</option>
-                                        <option value="low_price" {{ $selected_chk4 }}>낮은가격순</option>
-                                        <option value="review" {{ $selected_chk5 }}>후기숫자순</option>
+                                        <option class="{{ $class_chk1 }}" value="recent" {{ $selected_chk1 }}>등록순(최신순)</option>
+                                        <option class="{{ $class_chk2 }}" value="sale" {{ $selected_chk2 }}>판매량순</option>
+                                        <option class="{{ $class_chk3 }}" value="high_price" {{ $selected_chk3 }}>높은가격순</option>
+                                        <option class="{{ $class_chk4 }}" value="low_price" {{ $selected_chk4 }}>낮은가격순</option>
+                                        <option class="{{ $class_chk5 }}" value="review" {{ $selected_chk5 }}>후기숫자순</option>
                                     </select>
                                 </div>
 
@@ -124,7 +124,8 @@
                                                 $item_img_disp = "/data/shopitem/".$item_img;
                                             }
 
-                                            $dip_score = number_format($item_info->item_average, 2);
+                                            //$dip_score = number_format($item_info->item_average, 2);
+                                            $dip_score = number_format($item_info->avg_score5, 2);
 
                                             //응원하기 부분
                                             if(Auth::user() != ""){

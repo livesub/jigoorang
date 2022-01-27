@@ -148,7 +148,8 @@
                                             $item_img_disp = "/data/shopitem/".$item_img;
                                         }
 
-                                        $dip_score = number_format($special_one->item_average, 2);
+                                        //$dip_score = number_format($special_one->item_average, 2);
+                                        $dip_score = number_format($special_one->avg_score5, 2);
 
                                         //응원하기 부분
                                         if(Auth::user() != ""){
@@ -270,7 +271,8 @@
                                         $item_img_disp = "/data/shopitem/".$item_img;
                                     }
 
-                                    $dip_score = number_format($special_two->item_average, 2);
+                                    //$dip_score = number_format($special_two->item_average, 2);
+                                    $dip_score = number_format($special_two->avg_score5, 2);
 
                                     //응원하기 부분
                                     if(Auth::user() != ""){
@@ -387,7 +389,8 @@
                                         $item_img_disp = "/data/shopitem/".$item_img;
                                     }
 
-                                    $dip_score = number_format($new_arrival->item_average, 2);
+                                    //$dip_score = number_format($new_arrival->item_average, 2);
+                                    $dip_score = number_format($new_arrival->avg_score5, 2);
 
                                     //응원하기 부분
                                     if(Auth::user() != ""){

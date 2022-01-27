@@ -126,6 +126,7 @@
                                     $class_chk1 = 'fil_on';
                                     $mark_chk1 = '✔';
                                     $selected_chk1 = 'selected';
+                                    break;
                                 }
                         @endphp
                             <li class="{{ $class_chk1 }}" onclick="location.href='{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_ca_id.'&orderby_type=recent') }}'"><span>{{ $mark_chk1 }}</span> 등록순(최신순)</li> <!-- class="fil_on" 활성-->
@@ -163,7 +164,8 @@
                                     $item_img_disp = "/data/shopitem/".$item_img;
                                 }
 
-                                $dip_score = number_format($item_info->item_average, 2);
+                                //$dip_score = number_format($item_info->item_average, 2);
+                                $dip_score = number_format($item_info->avg_score5, 2);
 
                                 //응원하기 부분
                                 if(Auth::user() != ""){

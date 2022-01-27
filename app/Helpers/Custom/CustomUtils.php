@@ -1847,16 +1847,46 @@ $um_value='80/0.5/3'
         $review_cnt = $review_info->count();
 
         $review_sum = 0;
+        $score1_sum = 0;
+        $score2_sum = 0;
+        $score3_sum = 0;
+        $score4_sum = 0;
+        $score5_sum = 0;
         $item_cal = 0;
         $item_average = 0;
 
         if($review_cnt > 0){
+            $score1_sum = $review_info->sum('score1');
+            $score1_cal = $score1_sum / $review_cnt;
+            $avg_score1 = round($score1_cal, 2);
+
+            $score2_sum = $review_info->sum('score2');
+            $score2_cal = $score2_sum / $review_cnt;
+            $avg_score2 = round($score2_cal, 2);
+
+            $score3_sum = $review_info->sum('score3');
+            $score3_cal = $score3_sum / $review_cnt;
+            $avg_score3 = round($score3_cal, 2);
+
+            $score4_sum = $review_info->sum('score4');
+            $score4_cal = $score4_sum / $review_cnt;
+            $avg_score4 = round($score4_cal, 2);
+
+            $score5_sum = $review_info->sum('score5');
+            $score5_cal = $score5_sum / $review_cnt;
+            $avg_score5 = round($score5_cal, 2);
+
             $review_sum = $review_info->sum('average');
             $item_cal = $review_sum / $review_cnt;
             $item_average = round($item_cal, 2);
 
             //상품 테이블에 평균값 저장
             $up_result = DB::table('shopitems')->where('item_code', $item_code)->update([
+                'avg_score1'    => $avg_score1,
+                'avg_score2'    => $avg_score2,
+                'avg_score3'    => $avg_score3,
+                'avg_score4'    => $avg_score4,
+                'avg_score5'    => $avg_score5,
                 'item_average'  => $item_average,
                 'review_cnt'    => (int)$review_cnt,
             ]);
@@ -1876,10 +1906,10 @@ $um_value='80/0.5/3'
             for($i = 1; $i <= 5; $i++){
                 $item_name_tmp = 'item_name'.$i;
                 $array_val['item_name'][$i] = $rating_item_info->$item_name_tmp;
-
-                $score_sum[$i] = $review_sql->sum('score'.$i);
-                $score_avg[$i] = $score_sum[$i] / $review_cnt;
-                $array_val['score'][$i] = round($score_avg[$i], 2);
+                //직접 계산 방식 보다 shopitem 테이블에 각 평균을 저장 함(220127)
+                //$score_sum[$i] = $review_sql->sum('score'.$i);
+                //$score_avg[$i] = $score_sum[$i] / $review_cnt;
+                //$array_val['score'][$i] = round($score_avg[$i], 2);
             }
         }
 

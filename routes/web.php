@@ -442,13 +442,16 @@ Route::get('company', [
     'uses' => 'App\Http\Controllers\company\CompanyController@index',
 ]);
 
-
 //지구를 구하는 랭킹 관련
 Route::get('ranking_list', [
     'as' => 'ranking_list',
     'uses' => 'App\Http\Controllers\ranking\RankingController@ranking_list',
 ]);
 
+Route::get('ranking_view', [
+    'as' => 'ranking_view',
+    'uses' => 'App\Http\Controllers\ranking\RankingController@ranking_view',
+]);
 
 /*** 프론트 메뉴 관리 */
 //일반 페이지(html) 처리
@@ -551,3 +554,9 @@ Route::fallback(function () {
     //return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
     return redirect()->route('main.index');
 });
+
+//실제 서버에서 한번 돌리고 막는다
+Route::get('avg_test', [
+    'as' => 'avg_test',
+    'uses' => 'App\Http\Controllers\ranking\RankingController@avg_test',
+]);

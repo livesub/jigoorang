@@ -75,6 +75,11 @@ class CreateShopitemsTable extends Migration
             $table->text('item_img10')->nullable()->comment('상품 변경파일이름10(원본@@썸네일1@@썸네일2..)');
             $table->string('item_ori_img10')->nullable()->comment('상품 원본파일이름10');
             $table->enum('item_del', ['N', 'Y'])->length(2)->default('N')->comment('상품삭제:Y=>삭제');
+            $table->float('avg_score1')->comment('정량 평가 1항목 평균');
+            $table->float('avg_score2')->comment('정량 평가 2항목 평균');
+            $table->float('avg_score3')->comment('정량 평가 3항목 평균');
+            $table->float('avg_score4')->comment('정량 평가 4항목 평균');
+            $table->float('avg_score5')->comment('정량 평가 5항목 평균');
             $table->float('item_average')->comment('정량평가 평균점수');
             $table->integer('review_cnt')->default(0)->comment('리뷰 갯수');
             $table->timestamps();
