@@ -1843,7 +1843,7 @@ $um_value='80/0.5/3'
 
     public static function item_average($item_code)
     {
-        $review_info = DB::table('review_saves')->where([['item_code', $item_code], ['review_blind', 'N']])->get();
+        $review_info = DB::table('review_saves')->where([['item_code', $item_code], ['temporary_yn', 'n'], ['review_blind', 'N']])->get();
         $review_cnt = $review_info->count();
 
         $review_sum = 0;

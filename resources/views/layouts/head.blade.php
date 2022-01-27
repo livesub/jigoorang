@@ -110,10 +110,10 @@
                     </ul>
 
                     <ul class="m-menu-child">
-                        <a href="javascript:alert('22 년 2 월 OPEN  예정');">
+                        <a href="{{ route('company') }}">
                             <li>지구랭 소개</li>
                         </a>
-                        <a href="javascript:alert('22 년 2 월 OPEN  예정');">
+                        <a href="{{ route('ranking_list') }}">
                                 <li><b>지</b>구를 <b>구</b>하는 <b>랭</b>킹 </li>
                         </a>
                         <a href="javascript:alert('22 년 2 월 OPEN  예정');">
@@ -235,7 +235,7 @@
         <div class="btm">
             <ul class="navi">
                 <li><a href="{{ route('company') }}">지구랭 소개</a></li>
-                <li><a href="javascript:alert('22 년 2 월 OPEN  예정');"><b>지</b>구를 <b>구</b>하는 <b>랭</b>킹</a></li>
+                <li><a href="{{ route('ranking_list') }}"><b>지</b>구를 <b>구</b>하는 <b>랭</b>킹</a></li>
                 <li><a href="javascript:alert('22 년 2 월 OPEN  예정');"><b>지</b>구를 <b>구</b>하는 <b>쇼</b>핑</a></li>
                 <li><a href="{{ route('notice') }}"><b>지</b>구를 <b>구</b>하는 기<b>록</b></a></li>
 

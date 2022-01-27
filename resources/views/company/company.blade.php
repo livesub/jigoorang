@@ -78,7 +78,7 @@
                         <h3 class="mo_01">광고성 체험단 No!</h3>
                         <p class="mt-10">직접 사용한 분들이 남긴 양질의 리뷰가 쌓여 만들어집니다</p>
 
-                        <img src="../../recources/imgs/img_about01@3x.png" alt="" class="mt-20 mb-20">
+                        <img src="{{ asset('/design/recources/imgs/img_about01@3x.png') }}" alt="" class="mt-20 mb-20">
 
                         <p>지구를 아끼는 마음으로 친환경 제품을 <span class="cr_02">[실제 구매한 분들(상시)]과 [정직한 평가단(비정기)]</span>의 <br>
                            평가 결과가 쌓여 만들어집니다</p>
@@ -89,7 +89,7 @@
                         <p class="mt-10">총 5가지 중 관심있는 기준을 선택해서 볼 수 있습니다<br>
                             사용 후 자유롭게 작성된 리뷰를 함께 볼 수 있습니다</p>
 
-                        <img src="../../recources/imgs/img_about02@3x.png" alt="" class="mt-20 mb-20">
+                        <img src="{{ asset('/design/recources/imgs/img_about02@3x.png') }}" alt="" class="mt-20 mb-20">
 
                         <p class="about_ft">※  지구랭은 평가 및 결과에 대해 일체 개입하지 않습니다.<br>
                             다만, 악의적/광고적 평가 리뷰로 판단시 통보 없이 삭제될 수 있습니다 .
