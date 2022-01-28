@@ -1249,6 +1249,18 @@
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_tt h5{
     font-size: 20px;
     font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    word-wrap: break-word;
+    line-height: 1.2em;
+    height: 2.4em;
+}
+
+.eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_tt h5 a {
+    display: block;
 }
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_tt li{

@@ -192,6 +192,7 @@
         margin-left: 18px;
         margin-top: 2px;
         font-size: 10px;
+        padding: 1px;
     }
 
     .header .top .menu .conunt p {
@@ -654,6 +655,7 @@ background-size: cover;
     .eval .board .board_wrap .list_view .list_img_text {
         padding: 40px 0 0;
     }
+    
 
     .eval .board .board_wrap .list_view .body .title {
         /* max-width: 360px; */
@@ -1652,7 +1654,6 @@ background-size: cover;
     .modal .modal-container.dt_img_s {
         width: 100%;
         max-width: 500px;
-        height: 500px;
     }
 
     /* 공통 */
@@ -3197,8 +3198,12 @@ background-size: cover;
         margin-top: 10px;
     }
 
+    .eval .board .board_wrap .list_view .list_img_text p {
+        font-size: 13px;
+    }
+
     button.btn-bg-80 {
-        width: 58px;
+        width: 68px;
         height: 22px;
         font-size: 12px;
     }
@@ -3231,7 +3236,7 @@ background-size: cover;
         font-size: 15px;
         color: #fff;
         background: #000;
-        max-width: 218px;
+        max-width: 230px;
         padding: 5px 0 5px 0;
         text-align: center;
     }
@@ -3410,7 +3415,6 @@ background-size: cover;
       .modal .modal-container.dt_img_s {
         width: 100%;
         max-width: 320px;
-        height: 207px;
     }
 
     .modal .modal-container.dt_img_s .btn-close {

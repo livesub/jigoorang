@@ -109,7 +109,10 @@
                                         <ul class="cart_list_tt">
                                             <input type="hidden" name="item_code[{{ $num }}]" id="item_code{{ $num }}" value="{{ $cart_info->item_code }}">
                                             <input type="hidden" name="item_name[{{ $num }}]" id="item_name{{ $num }}" value="{{ $cart_info->item_name }}">
-                                           <h5><a href="{{ route('sitemdetail','item_code='.$cart_info->item_code) }}">{!! $item_name !!}</a></h5>
+                                           <h5>
+                                               <a href="{{ route('sitemdetail','item_code='.$cart_info->item_code) }}">
+                                               {!! $item_name !!}</a>
+                                            </h5>
                                            <ul class="c_s_tt">
                                                 @if($cart_info->item_cust_price > 0)
                                                     @php

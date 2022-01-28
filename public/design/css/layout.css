@@ -160,7 +160,7 @@ body::-webkit-scrollbar {
   color: #fff;
   text-align: center;
   font-weight: bold;
-  padding: 2px;
+  padding: 0px;
 }
 
 .header .top .menu .conunt p {
