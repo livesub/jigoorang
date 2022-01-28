@@ -19,6 +19,7 @@ class CreateNoticesTable extends Migration
             $table->string('n_explain')->comment('설명글');
             $table->text('n_img')->comment('원본@@썸네일1@@썸네일2..');
             $table->string('n_img_name')->comment('이미지파일이름');
+            $table->integer('n_view_cnt')->default(0)->comment('조회수');
             $table->text('n_content')->comment('내용');
 
             $table->timestamps();

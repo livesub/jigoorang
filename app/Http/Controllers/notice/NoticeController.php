@@ -19,6 +19,7 @@ use App\Helpers\Custom\CustomUtils; //사용자 공동 함수
 use App\Helpers\Custom\PageSet; //페이지 함수
 use Illuminate\Support\Facades\Auth;    //인증
 use Illuminate\Support\Facades\DB;
+use App\Models\notices;
 
 class NoticeController extends Controller
 {
@@ -87,6 +88,11 @@ class NoticeController extends Controller
         if($notice_info == ""){
             return redirect(route('notice'))->with('alert_messages', '잘못된 경로 입니다.');  //치명적인 에러가 있을시
         }
+
+        //조회수
+        $n_up = notices::whereid($id)->first();  //update 할때 미리 값을 조회 하고 쓰면 update 구문으로 자동 변경
+        $n_up->n_view_cnt = $n_up->n_view_cnt + 1;
+        $result_up = $n_up->save();
 
         $pre = DB::select(" select id from notices where id =(select max(id) from notices where id < $id) ");
         $next = DB::select(" select id from notices where id =(select min(id) from notices where id > $id) ");

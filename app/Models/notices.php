@@ -15,6 +15,7 @@ class notices extends Model
         'n_img',
         'n_img_name',
         'n_content',
+        'n_view_cnt',
     ];
 
     protected $hidden = [
