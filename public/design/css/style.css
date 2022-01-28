@@ -2229,7 +2229,8 @@ input::placeholder {
     font-weight: bold;
 }
 
-.eval .board.mypage_list .board_wrap a {
+
+.eval .board.mypage_list .board_wrap h5 {
     width: 100%;
 }
 
@@ -3040,6 +3041,10 @@ input::placeholder {
     height: 2.4em;
 }
 
+.eval .board.mypage_list .board_wrap .list .ev_rul .title_bord a {
+    display: block;
+}
+
 .eval .board.mypage_list .board_wrap .list .ev_rul .sub_tt {
     color: #707070;
     font-size: 16px;
@@ -3065,6 +3070,10 @@ input::placeholder {
     height: 100%;
     max-height: 180px;
     margin-bottom: 15px;
+}
+
+.eval .board .board_wrap .list_view .body.bd_tt .notice_bd {
+    width: 81%;
 }
 
 .eval .board .board_wrap .list_view .body.bd_tt .title_bd {
@@ -4097,14 +4106,16 @@ input::placeholder {
 }
 
 .modal .modal-container.dt_img_s {
-    width: 100%;
-    max-width: 680px;
-    height: 500px;
+    width: auto;
+    height: auto;
+    max-width: 1000px;
+    max-height: 700px;
 }
 .modal .modal-container.dt_img_s img{
-    width: 100%;
-    height: 100%;
-    background-size: cover;
+    width: auto;
+    height: auto;
+    max-width: 1000px;
+    max-height: 700px;
 }
 
 .modal .modal-container.dt_img_s .btn-close{

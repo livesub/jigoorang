@@ -30,13 +30,13 @@
                 <div class="board_wrap">
                     <div class="list_view">
                         <div class="body bd_tt">
-                        <div>
+                        <div class="notice_bd">
                            <div class="title_bd">{{ stripslashes($notice_info->n_subject) }}</div>
                             <div class="date cr_04 mt-10 mb-20">{{ $notice_info->created_at }}</div>
                         </div>
 
                             <div class="url_btn">
-                                <button class="btn-bg-80">url 복사</button>
+                                <button class="btn-bg-80" onclick="share(); return false;">url 복사</button>
                             </div>
 
                         </div>
@@ -76,6 +76,23 @@
 
 
 </div><!-- 메인 컨테이너 끝 -->
+
+<script>
+function share(){
+
+	var url = '';
+	var textarea = document.createElement("textarea");//textarea 생성
+	document.body.appendChild(textarea);//body 하단에 넣기
+	url = window.document.location.href;
+	textarea.value = url;//현재 페이지 url 찾기
+	textarea.select();
+	document.execCommand("copy");
+	document.body.removeChild(textarea);//textarea 지우기
+
+	alert("URL이 복사되었습니다.");
+
+}
+</script>
 
 
 
