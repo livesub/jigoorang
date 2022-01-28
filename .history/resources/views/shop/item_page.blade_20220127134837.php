@@ -262,7 +262,7 @@
                             [고객센터 > 1:1문의]</p>
                     </div>
                     <div class="btn_area">
-                        <a href="{{ route('customer_center') }}">
+                        <a href="{{ route('mypage.qna_list') }}">
                             <button class="btn-20-bg">1:1 문의</button>
                         </a>
                     </div>

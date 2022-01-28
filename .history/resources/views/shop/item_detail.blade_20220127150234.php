@@ -435,7 +435,7 @@
                                         <!-- 타이틀 끝 -->
 
                                         <div class="set1">
-                                            <button class="btn-full-sd" type="button" onclick="location.href='{{ route('customer_center') }}'">1:1 문의 페이지 이동</button>
+                                            <button class="btn-full-sd" type="button" onclick="location.href='{{ route('mypage.qna_list') }}'">1:1 문의 페이지 이동</button>
                                         </div>
 
                                     </div>
