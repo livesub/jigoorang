@@ -43,15 +43,12 @@ class Withdraw_90day extends Command
         $user_infos = DB::table('users')->where([['user_type', 'Y'], ['withdraw_dispose', 'N']])->whereRaw("now() > DATE_ADD(withdraw_date, INTERVAL 90 DAY)")->get();
         foreach($user_infos as $user_info){
             $chang_id = $user_info->user_id."_del";
-            $chang_phone = $user_info->user_phone."_del";
-
             //중복 탈퇴 처리
             $user_duplicate = DB::table('users')->where('user_id', $chang_id)->count();
 
-            if($user_duplicate != 0) {
-                $chang_id = $user_info->user_id."_del($user_duplicate)";
-                $chang_phone = $user_info->user_phone."_del($user_duplicate)";
-            }
+            if($user_duplicate != 0) $chang_id = $user_info->user_id."_del($user_duplicat)";
+
+            $chang_phone = $user_info->user_phone."_del";
 
             $up_user = DB::table('users')->where('user_id', $user_info->user_id)->update(['user_id' => $chang_id, 'user_phone' => $chang_phone, 'withdraw_dispose' => 'Y']);    //회원
             $up_shopcarts = DB::table('shopcarts')->where('user_id', $user_info->user_id)->update(['user_id' => $chang_id]);    //장바구니

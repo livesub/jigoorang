@@ -40,7 +40,7 @@ class Withdraw_90day extends Command
     public function handle()
     {
         //90일이 지난으면 전체 테이블에서 user_id (_del)  붙이고 업데이트(회원 테이블 아이디와 전화 번호도)
-        $user_infos = DB::table('users')->where([['user_type', 'Y'], ['withdraw_dispose', 'N']])->whereRaw("now() > DATE_ADD(withdraw_date, INTERVAL 90 DAY)")->get();
+        $user_infos = DB::table('users')->where([['user_type', 'Y'], ['withdraw_dispose', 'Y']])->whereRaw("now() > DATE_ADD(withdraw_date, INTERVAL 90 DAY)")->get();
         foreach($user_infos as $user_info){
             $chang_id = $user_info->user_id."_del";
             $chang_phone = $user_info->user_phone."_del";

@@ -49,8 +49,8 @@ class Withdraw_90day extends Command
             $user_duplicate = DB::table('users')->where('user_id', $chang_id)->count();
 
             if($user_duplicate != 0) {
-                $chang_id = $user_info->user_id."_del($user_duplicate)";
-                $chang_phone = $user_info->user_phone."_del($user_duplicate)";
+                $chang_id = $user_info->user_id."_del($user_duplicat)";
+                $chang_phone = $user_info->user_phone."_del($user_duplicat)";
             }
 
             $up_user = DB::table('users')->where('user_id', $user_info->user_id)->update(['user_id' => $chang_id, 'user_phone' => $chang_phone, 'withdraw_dispose' => 'Y']);    //회원
