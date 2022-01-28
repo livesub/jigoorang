@@ -1112,12 +1112,6 @@ h5 {
     letter-spacing: -0.5px;
 }
 
-.eval .board .board_wrap .list_view .list_img_text {
-    margin: 0 auto;
-    padding: 10px 0 0;
-    letter-spacing: -0.5px;
-}
-
 .eval .board .board_wrap .list_view .list_img_text p img {
     width: 100%;
     /* max-width: 300px; */

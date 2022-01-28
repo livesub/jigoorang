@@ -42,6 +42,9 @@
                         </div>
                 <!-- 리스트 끝 -->
                 <div class="list_contents">
+                    <div class="list_img">
+                        <img src="../../recources/imgs/sample_dt.png" alt="">
+                    </div>
                     <div class="list_img_text">
                     <p>{!! $notice_info->n_content !!}
                     </p>

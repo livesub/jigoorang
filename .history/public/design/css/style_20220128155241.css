@@ -1090,14 +1090,12 @@ h5 {
 .eval .board .board_wrap .list_view .list_img {
     width: 100%;
     max-width: 1200px;
-    height: auto;
 }
 
 .eval .board .board_wrap .list_view .list_img img {
     text-align: center;
     width: 100%;
     max-width: 1200px;
-    height: 100%;
 }
 
 .eval .board .board_wrap .list_view .list_img iframe {
@@ -1106,15 +1104,9 @@ h5 {
     max-width: 1200px;
 }
 
-.eval .board .board_wrap .list_view .list_img_text.list_img {
-    margin: 0 auto;
-    padding: 50px 30px 0;
-    letter-spacing: -0.5px;
-}
-
 .eval .board .board_wrap .list_view .list_img_text {
     margin: 0 auto;
-    padding: 10px 0 0;
+    padding: 0px 30px 0;
     letter-spacing: -0.5px;
 }
 
@@ -3067,7 +3059,7 @@ input::placeholder {
 }
 
 .eval .board.mypage_list .board_wrap .list .ev_rul .date {
-    padding-top: 11px;
+    padding-top: 17px;
 }
 
 /* 지구록 상세 */
