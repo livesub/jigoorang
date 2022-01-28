@@ -46,7 +46,7 @@ class Withdraw_90day extends Command
             $chang_phone = $user_info->user_phone."_del";
 
             //전체 테이블 찾아서 추가!!
-            $up_user = DB::table('users')->where('user_id', $user_info->user_id)->update(['user_id' => $chang_id, 'user_phone' => $chang_phone, 'withdraw_dispose' => 'Y']);
+            //$up_user = DB::table('users')->where('user_id', $user_info->user_id)->update(['user_id' => $chang_id, 'user_phone' => $chang_phone]);
 
 
         }

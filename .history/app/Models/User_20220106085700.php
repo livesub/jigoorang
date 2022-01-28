@@ -56,7 +56,6 @@ class User extends Authenticatable
         'blacklist',
         'site_access_no',
         'withdraw_date',
-        'withdraw_dispose',
     ];
 
     /**

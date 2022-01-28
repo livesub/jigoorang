@@ -13,7 +13,7 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        '\App\Console\Commands\Withdraw_90day',
+        //
     ];
 
     /**
@@ -25,8 +25,6 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        //->daily();
-        $schedule->command('withdraw:day')->everyMinute();
     }
 
     /**
