@@ -1106,15 +1106,9 @@ h5 {
     max-width: 1200px;
 }
 
-.eval .board .board_wrap .list_view .list_img_text.list_img {
-    margin: 0 auto;
-    padding: 50px 30px 0;
-    letter-spacing: -0.5px;
-}
-
 .eval .board .board_wrap .list_view .list_img_text {
     margin: 0 auto;
-    padding: 10px 0 0;
+    padding: 0px 30px 0;
     letter-spacing: -0.5px;
 }
 

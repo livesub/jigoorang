@@ -32,7 +32,7 @@
                         <div class="body bd_tt">
                         <div class="notice_bd">
                            <div class="title_bd">{{ stripslashes($notice_info->n_subject) }}</div>
-                            <div class="date cr_04 mt-10 mb-20">{{ $notice_info->created_at }}</div>
+                            <div class="date cr_04 mt-10">{{ $notice_info->created_at }}</div>
                         </div>
 
                             <div class="url_btn">
