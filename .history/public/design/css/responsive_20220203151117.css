@@ -1890,14 +1890,14 @@ background-size: cover;
     .main-container .mbox_100 .main-project-bottom .right .wishlist_on {
         width: 18px;
         margin-top: 0px;
-        background: url("../recources/icons/icon-heart-m@3x.png") no-repeat;
+        background: url("../recources/icons/icon-heart-2.png") no-repeat;
         background-size: 18px auto;
         background-position: center;
         display: block;
     }
 
     .main-container .mbox_100 .clicked {
-        background: url("../recources/icons/icon-heart-m@3x.png") no-repeat;
+        background: url("../recources/icons/icon-heart-2.png") no-repeat;
         background-size: 24px 21px;
     }
 
@@ -1988,7 +1988,7 @@ background-size: cover;
     .main-container .mbox_1280 .main-project-bottom .right .wishlist_on {
         width: 18px;
         margin-top: 0px;
-        background: url("../recources/icons/icon-heart-m@3x.png") no-repeat;
+        background: url(../recources/icons/icon-heart-2.png) no-repeat;
         background-size: 18px auto;
         background-position: center;
         display: block;
@@ -2001,7 +2001,7 @@ background-size: cover;
     }
 
     .main-container .mbox_1280 .clicked {
-        background: url("../recources/icons/icon-heart-m@3x.png") no-repeat;
+        background: url("../recources/icons/icon-heart-2.png") no-repeat;
         background-size: 24px 21px;
     }
 
@@ -3994,7 +3994,7 @@ background-size: cover;
 
     .main-container .mbox_1280 .main-project-bottom .right {
         float: right;
-        width: 70px;
+        width: 65px;
         display: -webkit-inline-box;
     }
 
@@ -4013,7 +4013,7 @@ background-size: cover;
 
     .main-container .mbox_1280 .main-project-bottom .right .wishlist_on {
         width: 17px;
-        /* margin-top: 3px; */
+        margin-top: 3px;
         background: url("../recources/icons/icon-heart-m@3x.png") no-repeat;
         background-size: 17px auto;
         background-position: center;
@@ -4059,7 +4059,7 @@ background-size: cover;
 
     .main-container .mbox_100 .main-project-bottom .right {
         float: right;
-        width: 70px;
+        width: 75px;
         display: -webkit-inline-box;
     }
 
@@ -4079,7 +4079,7 @@ background-size: cover;
     .main-container .mbox_100 .main-project-bottom .right .wishlist_on {
         width: 17px;
         /* margin-top: 3px; */
-        background: url("../recources/icons/icon-heart-m@3x.png") no-repeat;
+        background: url(../recources/icons/icon-heart-m@3x.png) no-repeat;
         background-size: 17px auto;
         background-position: center;
         display: block;
@@ -4833,7 +4833,7 @@ background-size: cover;
     }
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .heart .wishlist_on {
-        width: 29px;
+        width: 29;
         height: 17px;
         background: url("../recources/icons/icon-heart-m@3x.png") no-repeat;
         background-size: 18px auto;

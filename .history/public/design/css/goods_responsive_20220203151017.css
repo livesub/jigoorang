@@ -2218,7 +2218,7 @@
     .eval .board .board_wrap .goods .goods_bottom .right .wishlist {
       width: 14px;
       margin-top: 2px;
-      background: url("../recources/icons/icon-heart@3x.png") no-repeat;
+      background: url(../recources/icons/icon-heart@3x.png) no-repeat;
       background-size: 14px auto;
       background-position: center;
       display: block;
@@ -2646,8 +2646,8 @@
 }
 
 .wishlist_on {
-   background: url('../recources/icons/icon-heart-m@3x.png') no-repeat center;
-   background-size: 18px auto;
+   background: url('../recources/icons/icon-heart-2.png') no-repeat center;
+   background-size: 19px 18px;
    background-position-y: 7px;
    color: #3ec4ba;
 }
