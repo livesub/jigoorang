@@ -582,21 +582,21 @@ $success = true;
             }
 
 
-$cancel_request_amount= 18000;
+/*
             if($card_price <= $cancel_request_amount){   //카드금액 보다 취소 금액이 클때
-
+                //여기에 receipt_price ===> 로직
 var_dump("sdvsdv");
-                $misu = $cancel_request_amount - $card_price;
+                $misu = $cancel_request_amount;
                 $od_cancel_price = $order_info->od_cancel_price + $misu; //취소금액
             }else{
                 $misu = $cancel_request_amount;
                 $od_cancel_price = $order_info->od_cancel_price + $misu; //취소금액
             }
+*/
 
 
 
 
-/*
             if($receipt_price < $hap_qty_price){   //결제금액 보다 취소 금액이 클때
                 $misu = $hap_qty_price - $receipt_price;
                 $od_cancel_price = $order_info->od_cancel_price + $misu; //취소금액
@@ -604,7 +604,7 @@ var_dump("sdvsdv");
                 $misu = $cancel_request_amount;
                 $od_cancel_price = $order_info->od_cancel_price + $misu; //취소금액
             }
-*/
+
 //            $CustomUtils->insert_point($order_info->user_id, ($hap_qty_price - $cancel_request_amount), '상품구매부분취소', 10,'', $order_id);
 
 

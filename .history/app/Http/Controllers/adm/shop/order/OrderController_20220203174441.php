@@ -582,9 +582,9 @@ $success = true;
             }
 
 
-$cancel_request_amount= 18000;
+$cancel_request_amount= 16000;
             if($card_price <= $cancel_request_amount){   //카드금액 보다 취소 금액이 클때
-
+                //여기에 receipt_price ===> 로직
 var_dump("sdvsdv");
                 $misu = $cancel_request_amount - $card_price;
                 $od_cancel_price = $order_info->od_cancel_price + $misu; //취소금액

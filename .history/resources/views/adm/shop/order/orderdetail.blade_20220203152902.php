@@ -14,8 +14,15 @@
         <td>현재 주문상태 : {{ $order_info->od_status }}</td>
         <td>주문일시 : {{ substr($order_info->od_receipt_time, 0, 16) }} ({{ $CustomUtils->get_yoil($order_info->od_receipt_time) }})</td>
         <td>
-        결제금액 : {{ number_format(((int)$order_info->od_receipt_price - (int)$order_info->od_receipt_point) - (int)$order_info->od_cancel_price) }}</strong>원
+        결제금액 : {{ number_format((int)$order_info->od_receipt_price - (int)$order_info->od_receipt_point) - (int)$order_info->od_cancel_price)) }}</strong>원
         </td>
+<!--
+            @if($order_info->de_send_cost_free == 0)
+            결제금액 : {{ number_format(((int)$order_info->od_cart_price + (int)$order_info->de_send_cost + (int)$order_info->od_send_cost + (int)$order_info->od_send_cost2) - (int)$order_info->od_receipt_point) }}</strong>원</td>
+            @else
+            결제금액 : {{ number_format(((int)$order_info->od_cart_price + (int)$order_info->od_send_cost + (int)$order_info->od_send_cost2) - (int)$order_info->od_receipt_point) }}</strong>원</td>
+            @endif
+-->
     </tr>
 </table>
 
