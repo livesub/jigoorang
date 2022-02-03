@@ -612,7 +612,7 @@ exit;
 //var_dump("JJJJJJJJJJJ");
 //exit;
 */
-            $CustomUtils->insert_point($order_info->user_id, (-1) * $chagam_point, '구매 적립 취소', 9,'', $order_id);
+//            $CustomUtils->insert_point($order_info->user_id, (-1) * $chagam_point, '구매 적립 취소', 9,'', $order_id);
 
             //order 업데이트
             $od_cart_price = $order_info->od_cart_price - $misu;   //총금액 - 취소 금액

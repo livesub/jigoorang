@@ -563,9 +563,9 @@ exit;
 //var_dump("chagam_point====> ".$chagam_point);
 //var_dump("card_price====> ".$card_price);
 //var_dump("cancel_request_amount====> ".$cancel_request_amount);
-//var_dump("hap_qty_price===> ".$hap_qty_price);
+var_dump("hap_qty_price===> ".$hap_qty_price);
 
-//exit;
+exit;
 
             if($card_price < $hap_qty_price){   //결제금액 보다 취소 금액이 클때
                 $misu = $hap_qty_price - $card_price;
