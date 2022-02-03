@@ -11,7 +11,7 @@
             <ul>
                 <li><a href="/">홈</a></li>
                 <li><a href="{{ route('mypage.index') }}">마이페이지</a></li>
-                <li><a href="mypage.user_point_list">포인트 현황</a></li>
+                <li><a href="{{ route('mypage.user_point_list') }}">포인트 현황</a></li>
             </ul>
         </div>
         <!-- 위치 끝 -->
@@ -22,7 +22,7 @@
 
             <div class="point_num">
                 <h4>보유포인트</h4>
-                <span>{{ number_format($CustomUtils->get_point_sum(Auth::user()->user_id)) }}P</span>
+                <span>{{ number_format(Auth::user()->user_point) }}P</span>
             </div>
         </div>
         <!-- 타이틀 끝 -->
@@ -35,10 +35,10 @@
                 <div class="board_wrap">
                     <div class="tab_menu">
                         <ul class="list_tab">
-                            <li class="is_on">
+                            <li>
                                 <a href="{{ route('mypage.user_point_list') }}" class="btn_list">포인트 누적</a>
                             </li>
-                            <li>
+                            <li class="is_on">
                                 <a href="{{ route('mypage.user_use_point_list') }}" class="btn_list">포인트 사용</a>
                             </li>
                         </ul>
@@ -66,7 +66,7 @@
                                 <div class="list-none">
                                     <img src="{{ asset('/design/recources/imgs/combined-shape.png') }}" alt="">
                                     <br><br>
-                                    <p>포인트 내역이 없습니다.</p>
+                                    <p>포인트 사용 내역이 없습니다.</p>
                                 </div>
                                 @endif
                             </div>
@@ -88,7 +88,6 @@
        </div>
    </div>
   <!-- 서브 컨테이너 끝 -->
-
 
 
 

@@ -269,7 +269,9 @@
 <input type="hidden" name="imp_card_name" id="imp_card_name">   <!-- 카드사에서 전달 받는 값(카드사명칭)) -->
 <input type="hidden" name="imp_card_quota" id="imp_card_quota">   <!-- 카드사에서 전달 받는 값(할부개월수)) -->
 <input type="hidden" name="imp_card_number" id="imp_card_number">   <!-- 카드사에서 전달 받는 값(카드번호) -->
-
+@php
+    $CustomUtils->get_point_sum(Auth::user()->user_id);
+@endphp
 
                             <div class="list ev_rul inner od sol-g-t">
                                 <div class="sub_title">

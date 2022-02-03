@@ -22,7 +22,7 @@
 
             <div class="point_num">
                 <h4>보유포인트</h4>
-                <span>{{ number_format($CustomUtils->get_point_sum(Auth::user()->user_id)) }}P</span>
+                <span>{{ number_format(Auth::user()->user_point) }}P</span>
             </div>
         </div>
         <!-- 타이틀 끝 -->

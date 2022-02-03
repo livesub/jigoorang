@@ -259,7 +259,7 @@
 
 <input type="hidden" name="method" id="method" value="card">
 <input type="hidden" name="pg" id="pg" value="html5_inicis">
-<input type="hidden" name="user_point" id="user_point" value="{{ $CustomUtils->get_point_sum(Auth::user()->user_id) }}">
+<input type="hidden" name="user_point" id="user_point" value="{{ Auth::user()->user_point }}">
 <input type="hidden" name="imp_uid" id="imp_uid">
 <input type="hidden" name="apply_num" id="apply_num">   <!-- 카드 승인 번호 -->
 <input type="hidden" name="paid_amount" id="paid_amount">   <!-- 카드사에서 전달 받는 값(총 결제 금액) -->
@@ -280,9 +280,9 @@
 
                                         <ul class="oder_name wt-00 mb-20">
                                             <li>보유포인트</li>
-                                            <li>{{ number_format($CustomUtils->get_point_sum(Auth::user()->user_id)) }}P</li>
+                                            <li>{{ number_format(Auth::user()->user_point) }}P</li>
                                         </ul>
-                                        @if($CustomUtils->get_point_sum(Auth::user()->user_id) > 0)
+                                        @if(Auth::user()->user_point > 0)
                                         <ul class="oder_point">
                                             <li>사용포인트</li>
                                             <li>

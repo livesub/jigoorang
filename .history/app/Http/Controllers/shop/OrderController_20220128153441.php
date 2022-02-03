@@ -448,7 +448,7 @@ class OrderController extends Controller
         }
 
         // 결제포인트가 상이함
-        if($i_temp_point > $CustomUtils->get_point_sum(Auth::user()->user_id)){
+        if($i_temp_point > Auth::user()->user_point){
             $error1 = '보유 적립금 보다 많이 결제할 수 없습니다.';
             $CustomUtils->add_order_post_log($request->input(), $error1);
             //$result = json_encode(['reason' => $error1], JSON_PRETTY_PRINT);

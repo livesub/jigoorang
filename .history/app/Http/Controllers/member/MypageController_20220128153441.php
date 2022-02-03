@@ -39,8 +39,6 @@ class MypageController extends Controller
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
-        $CustomUtils = new CustomUtils;
-
         $data = $Messages::$mypage['mypage'];
 
         $array_make = array(
@@ -51,8 +49,7 @@ class MypageController extends Controller
             "user_imagepath" => Auth::user()->user_imagepath,
             "user_ori_imagepath" => Auth::user()->user_ori_imagepath,
             "user_thumb_name" => Auth::user()->user_thumb_name,
-            "created_at" => Auth::user()->created_at->format('Y-m-d H:i:s'),
-            "CustomUtils"   => $CustomUtils,
+            "created_at" => Auth::user()->created_at->format('Y-m-d H:i:s')
         );
 
         $data = array_merge($data, $array_make);
