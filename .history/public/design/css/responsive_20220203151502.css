@@ -4833,7 +4833,7 @@ background-size: cover;
     }
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .heart .wishlist_on {
-        width: 29px;
+        width: 29;
         height: 17px;
         background: url("../recources/icons/icon-heart-m@3x.png") no-repeat;
         background-size: 18px auto;

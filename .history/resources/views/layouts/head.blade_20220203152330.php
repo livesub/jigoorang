@@ -71,7 +71,7 @@
             <li><a href="/">홈</a></li>
             <li><a href="{{ route('ranking_list') }}">랭킹</a></li>
             <li><a href="javascript:alert('22 년 2 월 OPEN  예정');">쇼핑</a></li>
-            <li><a href="{{ route('notice') }}">소식</a></li>
+            <li><a href="javascript:alert('22 년 2 월 OPEN  예정');">소식</a></li>
         </ul>
     </div>
     <!-- 탭바 끝 -->

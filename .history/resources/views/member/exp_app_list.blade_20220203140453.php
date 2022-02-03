@@ -46,9 +46,9 @@
                                     //$exp_ment = "<span class='cr_02 line bold' onclick=\"alert('평가단 제품 수령 및 사용 후\\n[마이페이지] - [제품 평가 및 리뷰]에서\\n정직한 평가를 작성해주세요');\">선정되었어요</span>";
                                     $exp_ment = "<span class='cr_02 line bold' onclick=\"if(confirm('평가단 제품 수령 및 사용 후\\n[마이페이지] - [제품 평가 및 리뷰]에서\\n정직한 평가를 작성해주세요') == true){ location.href='".route('mypage.review_possible_list')."' }else{ return false; }\">선정되었어요</span>";
                                 }
-                                else $exp_ment = "<span class='cr_04'>다음에 만나요</span>";
+                                else $exp_ment = "<span class='cr_06'">다음에 만나요</span>";
                             }else{
-                                if($now_date <= $exp_list->exp_release_date) $exp_ment = "<span>신청중</span>";
+                                if($now_date <= $exp_list->exp_release_date) $exp_ment = '신청중';
                                 else $exp_ment = "<span class='cr_06'onclick=\"alert('기간이 만료되어 확인이 불가합니다');\">다음에 만나요</span>";
                             }
 

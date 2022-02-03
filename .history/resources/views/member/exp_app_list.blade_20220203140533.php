@@ -48,7 +48,7 @@
                                 }
                                 else $exp_ment = "<span class='cr_04'>다음에 만나요</span>";
                             }else{
-                                if($now_date <= $exp_list->exp_release_date) $exp_ment = "<span>신청중</span>";
+                                if($now_date <= $exp_list->exp_release_date) $exp_ment = "<span class='cr_04'>다음에 만나요</span>";
                                 else $exp_ment = "<span class='cr_06'onclick=\"alert('기간이 만료되어 확인이 불가합니다');\">다음에 만나요</span>";
                             }
 
