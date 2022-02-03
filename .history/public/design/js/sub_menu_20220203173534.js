@@ -43,7 +43,7 @@ var swiper4 = new Swiper(".submenu_sol", {
     //initialSlide: $("#tt").val(),
     freeMode : false,
     slideToClickedSlide : $("#tt").val(),
-    watchOverflow : true,
+    // watchOverflow : true,
     slidesPerView: 'auto',
     //centerInsufficientSlides: true,
     spaceBetween: 0,

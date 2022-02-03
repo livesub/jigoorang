@@ -60,7 +60,7 @@ var swiper4 = new Swiper(".submenu_sol", {
 
     breakpoints: {
         320: {
-            slidesPerView: 3,
+            slidesPerView: 4,
             spaceBetween: 0
         },
 

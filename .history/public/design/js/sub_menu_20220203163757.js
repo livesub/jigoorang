@@ -46,7 +46,7 @@ var swiper4 = new Swiper(".submenu_sol", {
     watchOverflow : true,
     slidesPerView: 'auto',
     //centerInsufficientSlides: true,
-    spaceBetween: 0,
+    spaceBetween: 10,
     navigation: {
         nextEl: '.swiper-button-next01',
         prevEl: '.swiper-button-prev01'
@@ -54,19 +54,17 @@ var swiper4 = new Swiper(".submenu_sol", {
 
     clickable: true,
     freeMode : false,
-    observer: true,	// 추가
-    observeParents: true,	// 추가
 
 
     breakpoints: {
         320: {
-            slidesPerView: 3,
+            slidesPerView: 4.4,
             spaceBetween: 0
         },
 
         480: {
             slidesPerView: 5.5,
-            spaceBetween: 15
+            spaceBetween: 0
           },
         640: {
             slidesPerView: 5,
@@ -93,6 +91,9 @@ var swiper4 = new Swiper(".submenu_sol", {
 });
 
 
-function sub_m_slide(num) {
-    swiper4.slideTo(num, 1000, false)
-}
+// function sub_m_slide(num) {
+//     swiper4.slideTo(num, 1000, false)
+// }
+
+$('a').click(function(){ var index = $(this).index(); 
+    swiper4.slideTo(index + 1); })

@@ -45,8 +45,9 @@ var swiper4 = new Swiper(".submenu_sol", {
     slideToClickedSlide : $("#tt").val(),
     watchOverflow : true,
     slidesPerView: 'auto',
+    
     //centerInsufficientSlides: true,
-    spaceBetween: 0,
+    spaceBetween: 10,
     navigation: {
         nextEl: '.swiper-button-next01',
         prevEl: '.swiper-button-prev01'
@@ -60,7 +61,7 @@ var swiper4 = new Swiper(".submenu_sol", {
 
     breakpoints: {
         320: {
-            slidesPerView: 3,
+            slidesPerView: 4.4,
             spaceBetween: 0
         },
 

@@ -85,7 +85,7 @@
         font-size: 16px;
         font-weight: bold;
         padding: 10px 0 0;
-        margin-right: 15px;
+        mar
     }
 
     .eval .board .board_wrap .scrollmenu .swiper-wrapper.submenu_innr .swiper-slide .active {
@@ -2048,7 +2048,7 @@
     }
 
     .eval .board .board_wrap .scrollmenu .swiper-wrapper.submenu_innr .swiper-slide .active {
-        padding: 6px 9px;
+        padding: 6px 12px;
     }
 
     .eval .board .board_wrap .scrollmenu .swiper-wrapper.submenu_h a:last-child {
