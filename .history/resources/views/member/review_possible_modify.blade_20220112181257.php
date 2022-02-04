@@ -31,7 +31,7 @@ function star_modi(num) {
         <div class="title_area list">
             <h2>리뷰작성</h2>
             <img src="{{ asset('/design/recources/imgs/review_wt.png') }}" alt="" class="block">
-            <img src="{{ asset('/design/recources/imgs/review_wt_m@3x.png') }}" alt="" class="none">
+            <img src="{{ asset('/design/recources/imgs/review_wt_m.png') }}" alt="" class="none">
             <div class="line_14-100"></div>
         </div>
         <!-- 타이틀 끝 -->

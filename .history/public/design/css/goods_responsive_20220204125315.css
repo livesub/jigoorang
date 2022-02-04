@@ -2236,9 +2236,9 @@
 
     .eval .board .board_wrap .goods .goods_bottom .right .wishlist_on {
       width: 14px;
-      margin-top: 1px;
+      margin-top: 4px;
       background: url("../recources/icons/icon-heart-m@3x.png") no-repeat;
-      background-size: 14px auto;
+      background-size: 13px auto;
       background-position: center;
       display: block;
   }

@@ -3,10 +3,6 @@
 var swiper3 = new Swiper(".submenu", {
     slidesPerView: 10,
     spaceBetween: 0,
-
-    observer: true, 
-    observeParents: true,
-
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev'

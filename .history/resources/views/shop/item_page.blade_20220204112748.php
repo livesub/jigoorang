@@ -333,8 +333,8 @@
 </script>
 
 <script>
-    sub_m_slide('{{ $sub_cate }}');
-    sub_slide(0) //메뉴 대카테고리 슬라이드 (위와 같이 순번 넣어 주세요)
+    sub_m_slide(0,'{{ $sub_cate }}');
+    sub_slide(3) //메뉴 대카테고리 슬라이드 (위와 같이 순번 넣어 주세요)
 </script>
 
 

@@ -4,9 +4,9 @@ var swiper3 = new Swiper(".submenu", {
     slidesPerView: 10,
     spaceBetween: 0,
 
-    observer: true, 
-    observeParents: true,
+    observer: true, observeParents: true,
 
+출처: https://pm1122dev.tistory.com/59 [pm1122dev의 개발노트]
     navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev'
