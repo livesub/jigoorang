@@ -538,6 +538,7 @@ var_dump("cancel_request_amount===> ".$cancel_request_amount);
             $card_price = ((int)$order_info->od_receipt_price - (int)$order_info->od_receipt_point) - (int)$order_info->od_cancel_price;
             $receipt_price = (int)$order_info->od_receipt_price - (int)$order_info->od_cancel_price;
 
+
             $hap_qty_price = 0;
             $chagam_point = 0;
             $hap_misu = 0;
@@ -548,6 +549,7 @@ var_dump("cancel_request_amount===> ".$cancel_request_amount);
             foreach($custom_data as $k=>$v)
             {
                 $cart_info = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $custom_data[$k]['ct_id']]])->first();
+                //$now_order_info = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->first();
 
                 //남은 수량 계산
                 $have = $cart_info->sct_qty - $custom_data[$k]['minus_qty'];
@@ -587,24 +589,89 @@ var_dump("cancel_request_amount===> ".$cancel_request_amount);
             }
 
 
-//var_dump("de_send_cost====> ".$de_send_cost);
+var_dump("de_send_cost====> ".$de_send_cost);
 
             if(($card_price + $de_send_cost) < ($hap_qty_price + $de_send_cost)){
-//$aa = $hap_qty_price - $card_price;
-//var_dump("포인트 돌려줌====================".$aa);
+$aa = $hap_qty_price - $card_price;
+var_dump("포인트 돌려줌====================".$aa);
                 $misu = $hap_qty_price;
-                $od_cancel_price = $order_info->od_cancel_price + $cancel_request_amount + $de_send_cost; //취소금액
-                if($card_price > 0){
-                    $CustomUtils->insert_point($order_info->user_id, $hap_qty_price - $card_price, '상품구매부분취소', 10,'', $order_id);
-                }else{
-                    $CustomUtils->insert_point($order_info->user_id, $hap_qty_price, '상품구매부분취소', 10,'', $order_id);
-                }
-
+                $od_cancel_price = $order_info->od_cancel_price + $cancel_request_amount + $de_send_cost + $misu; //취소금액
+//                $CustomUtils->insert_point($order_info->user_id, ($hap_qty_price - $card_price), '상품구매부분취소', 10,'', $order_id);
             }else{
-//var_dump("22222222222");
+var_dump("22222222222");
                 $misu = $hap_qty_price;
                 $od_cancel_price = $order_info->od_cancel_price + $cancel_request_amount + $de_send_cost; //취소금액
             }
+
+
+            /*
+            if($card_price <= $cancel_request_amount){   //카드금액 보다 취소 금액이 클때
+var_dump("1111");
+                $misu = $cancel_request_amount - $card_price;
+                $od_cancel_price = $order_info->od_cancel_price + $misu; //취소금액
+            }else{
+var_dump("2222");
+                $misu = $cancel_request_amount;
+                $od_cancel_price = $order_info->od_cancel_price + $misu; //취소금액
+            }
+
+            if($CustomUtils->get_cookie('de_cost_minus') == 'yes'){
+var_dump("3333333333333");
+                $misu = $misu + $order_info->de_send_cost;
+                $od_cancel_price = $order_info->od_cancel_price + $misu; //취소금액
+            }
+            */
+
+            /*
+            if($receipt_price < $hap_qty_price){   //결제금액 보다 취소 금액이 클때
+                $misu = $hap_qty_price - $receipt_price;
+                $od_cancel_price = $order_info->od_cancel_price + $misu; //취소금액
+            }else{
+                $misu = $cancel_request_amount;
+                $od_cancel_price = $order_info->od_cancel_price + $misu; //취소금액
+            }
+            */
+            //$CustomUtils->insert_point($order_info->user_id, ($hap_qty_price - $cancel_request_amount), '상품구매부분취소', 10,'', $order_id);
+
+
+
+            /*
+            if($card_price <= $cancel_request_amount){   //결제금액 보다 취소 금액이 클때
+                if($order_info->od_receipt_point != 0){
+                    //포인트 사용 되었을때
+                    $now_point = $order_info->od_receipt_point - $order_info->od_return_point;
+var_dump("now_point===> ".$now_point);
+exit;
+                    if(($now_point - $hap_qty_price) <= $order_info->de_send_cost){
+
+                        //$CustomUtils->insert_point($order_info->user_id, $give_point, '상품 구매 취소', 11,'', $order_id);
+                    }else{
+//                        $CustomUtils->insert_point($order_info->user_id, $hap_qty_price, '상품 구매 취소', 11,'', $order_id);
+                    }
+                }else{
+var_dump("RRRRRRRRRRRRR");
+                }
+//var_dump("chagam_point====> ");
+exit;
+
+                if($order_info->od_misu  == 0){
+                    //처음 수량 취소 일때 카드값 전부 돌려 주고, 상품값 - 신용카드값 을 포인트로 지급
+                    $misu = $qty_price - $now_card_price;
+                }else{
+                    //두번쨰 부터는
+                    $misu = $qty_price;
+                }
+
+            }else{
+//var_dump("PPPPPPPPPPPPPPPPPPPPP");
+//exit;
+                $misu = $cancel_request_amount;
+                $od_cancel_price = $order_info->od_cancel_price + $misu; //취소금액
+            }
+//var_dump("JJJJJJJJJJJ");
+//exit;
+            */
+
 
 
 //            $CustomUtils->insert_point($order_info->user_id, (-1) * $chagam_point, '구매 적립 취소', 9,'', $order_id);
@@ -613,7 +680,7 @@ var_dump("cancel_request_amount===> ".$cancel_request_amount);
             $od_cart_price = $order_info->od_cart_price - $misu;   //총금액 - 취소 금액
             $od_misu = $order_info->od_misu + ((-1) * $misu); //미수금액(누적)
 
-/*
+
 var_dump("card_price(카드금액)====> ".$card_price);
 var_dump("chagam_point====> ".$chagam_point);
 var_dump("receipt_price(원결제금액)====> ".$receipt_price);
@@ -623,7 +690,7 @@ var_dump("od_cancel_price(누적 취소금액)===> ".$od_cancel_price);
 var_dump("od_cart_price(상품 총금액)===> ".$od_cart_price);
 var_dump("od_misu(누적미수)===> ".$od_misu);
 exit;
-*/
+
 
             //무료배송비 정책 이하로 취소시 취소 금액에서 기본 배송비를 빼고 돌려 준다
             //한번 빼고 돌려 줬는지 디비에 저장 한다.

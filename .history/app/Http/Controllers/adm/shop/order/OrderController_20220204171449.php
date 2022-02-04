@@ -594,12 +594,8 @@ var_dump("cancel_request_amount===> ".$cancel_request_amount);
 //var_dump("포인트 돌려줌====================".$aa);
                 $misu = $hap_qty_price;
                 $od_cancel_price = $order_info->od_cancel_price + $cancel_request_amount + $de_send_cost; //취소금액
-                if($card_price > 0){
-                    $CustomUtils->insert_point($order_info->user_id, $hap_qty_price - $card_price, '상품구매부분취소', 10,'', $order_id);
-                }else{
-                    $CustomUtils->insert_point($order_info->user_id, $hap_qty_price, '상품구매부분취소', 10,'', $order_id);
-                }
 
+                $CustomUtils->insert_point($order_info->user_id, $hap_qty_price, '상품구매부분취소', 10,'', $order_id);
             }else{
 //var_dump("22222222222");
                 $misu = $hap_qty_price;
