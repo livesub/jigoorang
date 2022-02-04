@@ -1399,12 +1399,6 @@ background-size: cover;
         font-size: 13px;
     }
 
-    .btn-50 {
-        height: 36px;
-        font-size: 13px;
-    }
-
-
     /* 메인 팝업 */
 
     .n_popup_con .n_popup {
@@ -2330,20 +2324,6 @@ background-size: cover;
         height: 48px;
     }
 
-    .join .join_wrap form label {
-        top:1px;
-        font-size: 13px;
-    }
-
-    .join .join_wrap form .bold {
-        font-size: 13px;
-    }
-
-    .join .join_wrap form .agree_box_all span {
-        font-size: 13px;
-    }
-
-
     /* 로그인 */
 
     .login .login_wrap form .checkbox_login .ip_find {
@@ -2844,10 +2824,6 @@ background-size: cover;
         color: #aeaeae;
     }
 
-    .eval .board.mypage_list .board_wrap .information.review .tt_sub_02 {
-        font-size: 13px;
-    }
-
     .eval .board.mypage_list .board_wrap .information.review .tt_sub .file_uploader {
         width: 80px;
         height: 24px;
@@ -3279,16 +3255,6 @@ background-size: cover;
     .stars-outer {
         font-size: 11.7px;
     }
-
-    
-    p{
-        font-size: 13px;
-    }
-
-    button.btn-full {
-        font-size: 13px;
-    }
-
 
 
 
