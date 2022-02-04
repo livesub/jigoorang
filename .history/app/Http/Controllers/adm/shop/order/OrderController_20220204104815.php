@@ -672,7 +672,7 @@ exit;
 
 
 
-            $CustomUtils->insert_point($order_info->user_id, (-1) * $chagam_point, '구매 적립 취소', 9,'', $order_id);
+//            $CustomUtils->insert_point($order_info->user_id, (-1) * $chagam_point, '구매 적립 취소', 9,'', $order_id);
 
             //order 업데이트
             $od_cart_price = $order_info->od_cart_price - $misu;   //총금액 - 취소 금액
@@ -693,12 +693,14 @@ var_dump("od_misu===> ".$od_misu);
             //무료배송비 정책 이하로 취소시 취소 금액에서 기본 배송비를 빼고 돌려 준다
             //한번 빼고 돌려 줬는지 디비에 저장 한다.
             if($CustomUtils->get_cookie('de_cost_minus') == "yes"){
+/*
                 $de_send_cost_up = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->update([
                     'de_cost_minus' => $order_info->de_send_cost,
                 ]);
+*/
                 $CustomUtils->set_cookie('de_cost_minus', '', time() - 86400);
             }
-
+exit;
             $order_up = DB::table('shoporders')->where([['order_id', $order_id], ['imp_uid', $imp_uid]])->update([
                 'od_cart_price'     => $od_cart_price,
                 'od_cancel_price'   => $od_cancel_price,
