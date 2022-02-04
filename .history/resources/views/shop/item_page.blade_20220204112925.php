@@ -29,21 +29,15 @@
                     <div class="scrollmenu">
                         <div class="swiper submenu">
                             <ul class="swiper-wrapper submenu_h">
-                                @php
-                                    $cate_num = 0;
-                                @endphp
                                 @foreach($cate_infos as $cate_info)
                                     @php
                                         $ca_id_class = '';
                                         if($ca_id == $cate_info->sca_id) $ca_id_class = "bct_active";
                                     @endphp
-                                <a href="{{ route('sitem','ca_id='.$cate_info->sca_id.'&cate='.$cate_num) }}" class="swiper-slide">
+                                <a href="{{ route('sitem','ca_id='.$cate_info->sca_id) }}" class="swiper-slide">
                                 <li class="{{ $ca_id_class }}">{{ $cate_info->sca_name_kr }}</li>
                                 <!-- class="bct_active" 메뉴활성 -->
                                 </a>
-                                    @php
-                                        $cate_num++;
-                                    @endphp
                                 @endforeach
                             </ul>
                                 <div class="swiper-button-next"></div>
@@ -55,7 +49,7 @@
                         <div class="swiper submenu_sol">
                             <ul class="swiper-wrapper submenu_innr">
                               <li class="swiper-slide">
-                              <a href="{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id=all&sub_cate=0') }}">
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id=all&sub_cate=0') }}">
                               @php
                                 $class_all = '';
                                 if($sub_ca_id == 'all' || $sub_ca_id == "")
@@ -71,7 +65,7 @@
                                     if($sub_ca_id == $sub_cate_info->sca_id) $class_chk = ' class="active" ';
                                 @endphp
                               <li id="sd_{{ $sub_cate_info->id }}" class="swiper-slide">
-                              <a href="{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_cate_info->sca_id.'&sub_cate='.$sub_cate_num) }}">
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_cate_info->sca_id.'&sub_cate='.$sub_cate_num) }}">
                               <span {!! $class_chk !!}>{{ $sub_cate_info->sca_name_kr }}</span></a></li>
                                 @php
                                     $sub_cate_num++;
@@ -135,16 +129,16 @@
                                     break;
                                 }
                         @endphp
-                            <li class="{{ $class_chk1 }}" onclick="location.href='{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_ca_id.'&sub_cate='.$sub_cate.'&orderby_type=recent') }}'"><span>{{ $mark_chk1 }}</span> 등록순(최신순)</li> <!-- class="fil_on" 활성-->
-                            <li class="{{ $class_chk2 }}" onclick="location.href='{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_ca_id.'&sub_cate='.$sub_cate.'&orderby_type=sale') }}'"><span>{{ $mark_chk2 }}</span>판매량순</li><!-- class="fil_off" 비활성-->
-                            <li class="{{ $class_chk3 }}" onclick="location.href='{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_ca_id.'&sub_cate='.$sub_cate.'&orderby_type=high_price') }}'"><span>{{ $mark_chk3 }}</span>높은가격순</li>
-                            <li class="{{ $class_chk4 }}" onclick="location.href='{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_ca_id.'&sub_cate='.$sub_cate.'&orderby_type=low_price') }}'"><span>{{ $mark_chk4 }}</span>낮은가격순</li>
-                            <li class="{{ $class_chk5 }}" onclick="location.href='{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_ca_id.'&sub_cate='.$sub_cate.'&orderby_type=review') }}'"><span>{{ $mark_chk5 }}</span>후기숫자순</li>
+                            <li class="{{ $class_chk1 }}" onclick="location.href='{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_ca_id.'&orderby_type=recent') }}'"><span>{{ $mark_chk1 }}</span> 등록순(최신순)</li> <!-- class="fil_on" 활성-->
+                            <li class="{{ $class_chk2 }}" onclick="location.href='{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_ca_id.'&orderby_type=sale') }}'"><span>{{ $mark_chk2 }}</span>판매량순</li><!-- class="fil_off" 비활성-->
+                            <li class="{{ $class_chk3 }}" onclick="location.href='{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_ca_id.'&orderby_type=high_price') }}'"><span>{{ $mark_chk3 }}</span>높은가격순</li>
+                            <li class="{{ $class_chk4 }}" onclick="location.href='{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_ca_id.'&orderby_type=low_price') }}'"><span>{{ $mark_chk4 }}</span>낮은가격순</li>
+                            <li class="{{ $class_chk5 }}" onclick="location.href='{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_ca_id.'&orderby_type=review') }}'"><span>{{ $mark_chk5 }}</span>후기숫자순</li>
                         </ul>
                     </div>
 
                     <div class="filter_sel none">
-                        <select class="filter_innner" onchange="location.href='{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_ca_id.'&orderby_type=') }}'+this.value">
+                        <select class="filter_innner" onchange="location.href='{{ route('sitem','ca_id='.$ca_id.'&sub_ca_id='.$sub_ca_id.'&orderby_type=') }}'+this.value">
                             <option value="recent" {{ $selected_chk1 }}>등록순(최신순)</option>
                             <option value="sale" {{ $selected_chk2 }}>판매량순</option>
                             <option value="high_price" {{ $selected_chk3 }}>높은가격순</option>
@@ -340,7 +334,7 @@
 
 <script>
     sub_m_slide('{{ $sub_cate }}');
-    sub_slide(0) //메뉴 대카테고리 슬라이드 (위와 같이 순번 넣어 주세요)
+    sub_slide(10) //메뉴 대카테고리 슬라이드 (위와 같이 순번 넣어 주세요)
 </script>
 
 

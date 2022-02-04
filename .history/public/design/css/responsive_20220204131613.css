@@ -2815,9 +2815,7 @@ background-size: cover;
         padding: 0;
     }
 
-    .eval .board.mypage_list .board_wrap .information.review .wt_text textarea {
-        font-size: 13px;
-    }
+    .eval .board.mypage_list .board_wrap .information.review .wt_text textarea
 
     .eval .board.mypage_list .board_wrap .information.review .wt_text textarea::placeholder {
         font-size: 13px;
