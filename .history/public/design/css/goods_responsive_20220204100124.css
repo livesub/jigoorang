@@ -1,5 +1,4 @@
 @charset "UTF-8";
-
 @media screen and (max-width: 1024px) {
 
     /* 상품페이지 */
@@ -13,8 +12,7 @@
         /* IE and Edge */
         scrollbar-width: none;
         /* Firefox */
-        height: 100%;
-        max-height: 107px;
+        height: 107px;
     }
 
     .eval .board .board_wrap .scrollmenu::-webkit-scrollbar {
@@ -42,7 +40,16 @@
     .eval .board .board_wrap .scrollmenu .swiper-wrapper li:last-child {
         /* border-right: solid 4px #ddd; */
     }
-    
+
+    /* .eval .board .board_wrap .scrollmenu .swiper-wrapper li:hover {
+        border: solid 4px #3ec4ba;
+        color: #3ec4ba;
+    } */
+
+    .eval .board .board_wrap .scrollmenu .swiper-wrapper li:hover {
+       display: none;
+    }
+
     .eval .board .board_wrap .scrollmenu .swiper {
         width: 100%;
     }
@@ -89,7 +96,7 @@
     .eval .board .board_wrap .scrollmenu .swiper-wrapper.submenu_innr .swiper-slide .active {
         background-color: #000;
         border-radius: 160px;
-        padding: 7px 12px;
+        padding: 7px 5px;
         height: 50px;
         margin: 0 auto;
         color: #fff;
@@ -221,7 +228,7 @@
     }
 
     .eval .board .board_wrap .goods .goods_right .pct_list {
-      height: 58px;
+      height: 52px;
   }
 
     .eval .board .board_wrap .goods .goods_bottom p {
@@ -1215,7 +1222,7 @@
 
     .eval .board .board_wrap .submenu_sol .swiper-button-next01 {
         float: right;
-        bottom: 46px;
+        bottom: 56px;
     }
 
     .eval .board .board_wrap .submenu_sol .swiper-button-next01 {
@@ -1227,8 +1234,7 @@
         background-position: center;
         background-color: #fff;
         border-radius: 150px;
-        opacity: 0.9;
-        margin-right: 4px;
+        opacity: 1;
     }
 
     .eval .board .board_wrap .submenu_sol .swiper-button-next01::after,
@@ -1329,7 +1335,7 @@
         margin-left: 0;
     }
     .eval .board .board_wrap .goods .goods_right .pct_list {
-      height: 60px;
+      height: 54px;
   }
 
 
@@ -2065,7 +2071,7 @@
 
     .eval .board .board_wrap .submenu_sol .swiper-button-next01 {
         float: right;
-        bottom: 38px;
+        bottom: 45px;
     }
 
     .eval .board .board_wrap .submenu_sol .swiper-button-next01 {
@@ -2077,8 +2083,7 @@
         background-position: center;
         background-color: #fff;
         border-radius: 150px;
-        opacity: 0.9;
-        margin-right:8px
+        opacity: 1;
     }
 
     .eval .board .board_wrap .submenu_sol .swiper-button-next01::after,
@@ -2947,17 +2952,15 @@
     .sub-container .eval .board .board_wrap .ctg_big {
         text-align: left;
         width: 100%;
-        height: 100%;
     }
 
     .sub-container .eval .board .board_wrap .ctg_big .box_menu {
         width: 49%;
-        max-height: 166px;
+        max-height: 160px;
         margin-right: 0;
-        margin-top: 20px;
+        margin-top: 15px;
         text-align: center;
         display: inline-block;
-        padding-bottom: 20px;
     }
 
     .sub-container .eval .board .board_wrap .ctg_big .box_menu img {
@@ -2972,7 +2975,7 @@
     .sub-container .eval .board .board_wrap .ctg_big .box_menu span {
         font-size: 15px;
         font-weight: bold;
-        top: 7px;
+        top: 5px;
     }
 
     .sub-container .eval .board .board_wrap .btn_area .btn-20-bg {

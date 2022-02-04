@@ -2164,9 +2164,8 @@ background-size: cover;
         display: block;
     }
     .eval .board .board_wrap .list .thumb a {
-        width: 100%;
+        
     }
-    
     .eval .board .board_wrap .list .thumb img {
         width: 100%;
         /* height: 180px; */

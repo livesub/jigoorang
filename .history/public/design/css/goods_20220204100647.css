@@ -113,8 +113,8 @@
 
 @media (hover: hover) {
 	.eval .board .board_wrap .scrollmenu .swiper-wrapper li:hover {
-            border: solid 4px #3ec4ba;
-            color: #3ec4ba;
+        border: solid 4px #3ec4ba;
+        color: #3ec4ba;
         }
 }
 

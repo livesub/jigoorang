@@ -39,8 +39,8 @@ var swiper3 = new Swiper(".submenu", {
     }
 });
 
-function sub_slide(cot) {
-    swiper3.slideTo(cot, 800, true)
+function sub_m_slide(num) {
+    swiper4.slideTo(num, 800, true)
 }
 
 

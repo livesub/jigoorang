@@ -1,6 +1,6 @@
 // 서브카테고리
 
-var swiper3 = new Swiper(".submenu", {
+var swiper = new Swiper(".submenu", {
     slidesPerView: 10,
     spaceBetween: 0,
     navigation: {
@@ -39,11 +39,6 @@ var swiper3 = new Swiper(".submenu", {
     }
 });
 
-function sub_slide(cot) {
-    swiper3.slideTo(cot, 800, true)
-}
-
-
 var swiper4 = new Swiper(".submenu_sol", {
     //initialSlide: $("#tt").val(),
     freeMode : false,
@@ -71,7 +66,7 @@ var swiper4 = new Swiper(".submenu_sol", {
 
         480: {
             slidesPerView: 5.5,
-            spaceBetween: 0
+            spaceBetween: 15
           },
         640: {
             slidesPerView: 5,
@@ -99,5 +94,5 @@ var swiper4 = new Swiper(".submenu_sol", {
 
 
 function sub_m_slide(num) {
-    swiper4.slideTo(num, 800, true)
+    swiper4.slideTo(num, 1000, false)
 }

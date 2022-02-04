@@ -40,7 +40,7 @@ var swiper3 = new Swiper(".submenu", {
 });
 
 function sub_slide(cot) {
-    swiper3.slideTo(cot, 800, true)
+    swiper3.slideTo(cont, 800, true)
 }
 
 

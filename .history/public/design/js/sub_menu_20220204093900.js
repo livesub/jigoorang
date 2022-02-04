@@ -39,10 +39,9 @@ var swiper3 = new Swiper(".submenu", {
     }
 });
 
-function sub_slide(cot) {
-    swiper3.slideTo(cot, 800, true)
+function sub_m_slide(num) {
+    swiper3.slideTo(num, 800, true)
 }
-
 
 var swiper4 = new Swiper(".submenu_sol", {
     //initialSlide: $("#tt").val(),

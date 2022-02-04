@@ -34,7 +34,7 @@
                                         $ca_id_class = '';
                                         if($ca_id == $cate_info->sca_id) $ca_id_class = "bct_active";
                                     @endphp
-                                <a href="{{ route('sitem','ca_id='.$cate_info->sca_id) }}" class="swiper-slide">
+                                <a href="{{ route('sitem','ca_id='.$cate_info->sca_id.'&sub_cate='.$sub_cate_num) }}" class="swiper-slide">
                                 <li class="{{ $ca_id_class }}">{{ $cate_info->sca_name_kr }}</li>
                                 <!-- class="bct_active" 메뉴활성 -->
                                 </a>
@@ -334,7 +334,6 @@
 
 <script>
     sub_m_slide('{{ $sub_cate }}');
-    sub_slide(3) //메뉴 대카테고리 슬라이드 (위와 같이 순번 넣어 주세요)
 </script>
 
 
