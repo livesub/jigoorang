@@ -109,7 +109,7 @@
                           </div>
 
 
-                          <div class="upload pdb-20">
+                          <div class="upload pdb-40">
                             <p>- 최소 1개 이상의 사진을 등록해주세요</p>
                             <p>- 상품과 무관한 사진을 첨부한 리뷰는  통보 없이 삭제 및 적립 혜택이 회수됩니다.</p>
                           </div>

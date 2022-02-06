@@ -1404,6 +1404,7 @@ background-size: cover;
         font-size: 13px;
     }
 
+    
 
     /* 메인 팝업 */
 
@@ -2329,20 +2330,6 @@ background-size: cover;
         width: 100%;
         height: 48px;
     }
-
-    .join .join_wrap form label {
-        top:1px;
-        font-size: 13px;
-    }
-
-    .join .join_wrap form .bold {
-        font-size: 13px;
-    }
-
-    .join .join_wrap form .agree_box_all span {
-        font-size: 13px;
-    }
-
 
     /* 로그인 */
 
@@ -3279,16 +3266,6 @@ background-size: cover;
     .stars-outer {
         font-size: 11.7px;
     }
-
-    
-    p{
-        font-size: 13px;
-    }
-
-    button.btn-full {
-        font-size: 13px;
-    }
-
 
 
 

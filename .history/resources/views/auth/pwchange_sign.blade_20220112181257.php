@@ -33,7 +33,7 @@
                         5분 후 재설정 시 다시 재설정 링크를 받으셔야 합니다.
                   </div>
                   </div>
-                  <div class="line_14-100"></div>
+                  <div class="line_14 bk"></div>
 
 
                     <form form name="chagePw" id="changePw" method='POST' action='{{ route('resetPw') }}' role='form' class='form__auth' onsubmit="return check_submit()">

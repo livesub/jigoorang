@@ -30,7 +30,7 @@
                   <div class="text_04">
                     <h2>지구랭 서비스 약관 동의</h2>
                   </div>
-                  <div class="line_14-100"></div>
+                  <div class="line_14 bk"></div>
 
                   <!-- 약관동의 시작 -->
                   <form name=Join action="{{ route('join.create', 'Y') }}"  onSubmit="return CheckForm(this)" class="join_agree">

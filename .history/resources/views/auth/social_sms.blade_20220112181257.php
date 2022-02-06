@@ -30,7 +30,7 @@
                   <div class="text_04">
                     <h2>휴대폰 인증</h2>
                   </div>
-                  <div class="line_14-100"></div>
+                  <div class="line_14 bk"></div>
                     <form action="{{ route('social_save_member') }}" method='POST' role='form' class='join_form' onsubmit="return sms_certification()">
                     {!! csrf_field() !!}
                     <input name='user_id' id='user_id' type='hidden' class="@error('user_id') is-invalid @enderror" value="{{ $create_result['user_id'] }}" >

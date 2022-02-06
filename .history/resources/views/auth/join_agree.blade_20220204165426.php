@@ -30,18 +30,18 @@
                   <div class="text_04">
                     <h2>지구랭 서비스 약관 동의</h2>
                   </div>
-                  <div class="line_14-100"></div>
+                  <div class="line_14 bk"></div>
 
                   <!-- 약관동의 시작 -->
                   <form name=Join action="{{ route('join.create', 'Y') }}"  onSubmit="return CheckForm(this)" class="join_agree">
 
                     <div class="agree_01">
                         <input name="check" type="checkbox" value="" id="check1" onclick='checkSelectAll()'/>
-                            <label for="check1">만 14세 이상입니다. <span class="point">(필수)</span></label>
+                            <label for="약관동의">만 14세 이상입니다. <span class="point">(필수)</span></label>
 
                             <div class="block">
                                 <input name="check" type="checkbox" value="" id="check2" onclick='checkSelectAll()' />
-                                <label for="check2">약관 동의 <span class="point">(필수)</span></label>
+                                <label for="약관동의">약관 동의 <span class="point">(필수)</span></label>
                             </div>
 
                             <div class="agree_box">
@@ -397,8 +397,8 @@
                         </div>
                         <div class="agree_01">
 
-                            <input name="check" type="checkbox" value="" id="check3"  onclick='checkSelectAll()'/>
-                            <label for="check3">개인정보 처리방침 <span class="point">(필수)</span></label>
+                            <label for="개인정보 처리방침"><input name="check" type="checkbox" value="" id="check3"  onclick='checkSelectAll()'/>
+                            개인정보 처리방침 <span class="point">(필수)</span></label>
 
                             <div class="agree_box">
                             <p>< 지구랭 >('jigoorang.com'이하 '지구랭')은 「개인정보 보호법」 제30조에 따라 정보주체의 개인정보를 보호하고 이와 관련한 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 다음과 같이 개인정보 처리방침을 수립·공개합니다.<br>

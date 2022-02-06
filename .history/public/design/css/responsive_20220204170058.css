@@ -2331,16 +2331,7 @@ background-size: cover;
     }
 
     .join .join_wrap form label {
-        top:1px;
-        font-size: 13px;
-    }
-
-    .join .join_wrap form .bold {
-        font-size: 13px;
-    }
-
-    .join .join_wrap form .agree_box_all span {
-        font-size: 13px;
+        top:0px
     }
 
 
@@ -3282,10 +3273,6 @@ background-size: cover;
 
     
     p{
-        font-size: 13px;
-    }
-
-    button.btn-full {
         font-size: 13px;
     }
 

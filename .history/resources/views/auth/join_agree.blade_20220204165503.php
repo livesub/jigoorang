@@ -30,18 +30,18 @@
                   <div class="text_04">
                     <h2>지구랭 서비스 약관 동의</h2>
                   </div>
-                  <div class="line_14-100"></div>
+                  <div class="line_14 bk"></div>
 
                   <!-- 약관동의 시작 -->
                   <form name=Join action="{{ route('join.create', 'Y') }}"  onSubmit="return CheckForm(this)" class="join_agree">
 
                     <div class="agree_01">
                         <input name="check" type="checkbox" value="" id="check1" onclick='checkSelectAll()'/>
-                            <label for="check1">만 14세 이상입니다. <span class="point">(필수)</span></label>
+                            <label for="약관동의">만 14세 이상입니다. <span class="point">(필수)</span></label>
 
                             <div class="block">
                                 <input name="check" type="checkbox" value="" id="check2" onclick='checkSelectAll()' />
-                                <label for="check2">약관 동의 <span class="point">(필수)</span></label>
+                                <label for="약관동의">약관 동의 <span class="point">(필수)</span></label>
                             </div>
 
                             <div class="agree_box">

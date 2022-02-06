@@ -28,7 +28,7 @@
                   <div class="text_04">
                     <h2>정보입력</h2>
                   </div>
-                  <div class="line_14-100"></div>
+                  <div class="line_14 bk"></div>
                   <form action='{{ route('join.store') }}' method='POST' role='form' class='join_form' onsubmit="return check_submit()">
                   {!! csrf_field() !!}
 

@@ -35,7 +35,7 @@
                       링크 발송 후 5분 이내에 접속하시기 바랍니다.
                   </div>
                   </div>
-                  <div class="line_14-100"></div>
+                  <div class="line_14 bk"></div>
 
                   <div class="pw-timeout">
                     <a href="javascript:page_move()"><button type="button" class="btn-full">아이디/비번 찾기 페이지 이동</button></a>

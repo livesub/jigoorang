@@ -85,5 +85,5 @@ const savedSearch = JSON.parse(localStorage.getItem(SEARCH_KEY));
 if (savedSearch !== null) {
     search = savedSearch //전에 있던 items들을 계속 가지고 있기
     savedSearch.forEach(paintSearch);
-   //console.log(search);
+    console.log(search);
 }
