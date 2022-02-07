@@ -490,7 +490,6 @@ class OrderController extends Controller
         $od_receipt_price   = (int)$request->input('od_receipt_price');
         $od_temp_point      = (int)$request->input('od_temp_point');
         $od_b_zip           = $request->input('od_b_zip');
-        $item_give_point    = $request->input('item_give_point');
 
         //20220204일 결제 금액 - 사용 포인트 * 환경 설정 적립률로 바꿈 !!!!
         //$tot_item_point     = (int)$request->input('tot_item_point');
@@ -508,8 +507,7 @@ class OrderController extends Controller
 
         //20220204일 주문 금액 - 사용 포인트 * 환경 설정 적립률로 바꿈 !!!!
         $setting_info = CustomUtils::setting_infos();
-        //220207 (상품 금액 - 적립금 미제공 금액) - 사용포인트
-        $tmp1 = ($od_cart_price - $item_give_point) - $od_temp_point;
+        $tmp1 = $od_cart_price - $od_temp_point;
         if($tmp1 > 0){
             $tot_item_point = $tmp1 * ($setting_info->tot_item_point / 100);
         }else{

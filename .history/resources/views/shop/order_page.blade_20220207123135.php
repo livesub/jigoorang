@@ -240,7 +240,7 @@
                                 </div>
                             </div>
 
-<form name="orderform" id="orderform" method="post" action="{{ route('orderpayment') }}" autocomplete="off">
+<form name="orderform" id="orderform" method="post" action="{{ route('orderpayment') }}">
 {!! csrf_field() !!}
 <!-- 배송지 관련 -->
 <input type="hidden" name="od_b_name" id="od_b_name" value="{{ $user_name }}">
@@ -1064,32 +1064,24 @@
       </div>
       <!-- 상세 모달 끝 -->
 
-<script>
-document.orderform.addEventListener("keydown", evt => {
-    if ((evt.keyCode || evt.which) === 13) {
-        evt.preventDefault();
-    }
-});
-</script>
+        <script>
 
+          //하단 약관동의 이벤트
+          let more_arr = document.getElementsByClassName("hide_con");
+          let i;
 
-<script>
-    //하단 약관동의 이벤트
-    let more_arr = document.getElementsByClassName("hide_con");
-    let i;
+            for (i = 0; i < more_arr.length; i++) {
+              more_arr[i].addEventListener("click", function() {
 
-    for (i = 0; i < more_arr.length; i++) {
-        more_arr[i].addEventListener("click", function() {
-
-        let cot = this.nextElementSibling;
-        if (cot.style.display === "block") {
-            cot.style.display = "none";
-        } else {
-            cot.style.display = "block";
-        }
-        });
-    }
-</script>
+                let cot = this.nextElementSibling;
+                if (cot.style.display === "block") {
+                  cot.style.display = "none";
+                } else {
+                  cot.style.display = "block";
+                }
+              });
+            }
+        </script>
 
 
 <script>

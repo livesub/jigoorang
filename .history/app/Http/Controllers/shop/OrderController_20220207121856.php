@@ -508,8 +508,9 @@ class OrderController extends Controller
 
         //20220204일 주문 금액 - 사용 포인트 * 환경 설정 적립률로 바꿈 !!!!
         $setting_info = CustomUtils::setting_infos();
-        //220207 (상품 금액 - 적립금 미제공 금액) - 사용포인트
         $tmp1 = ($od_cart_price - $item_give_point) - $od_temp_point;
+var_dump($tmp1);
+exit;
         if($tmp1 > 0){
             $tot_item_point = $tmp1 * ($setting_info->tot_item_point / 100);
         }else{

@@ -66,7 +66,7 @@
                                             $goods = preg_replace("/\'|\"|\||\,|\&|\;/", "", $cart_info->item_name);
                                             $goods_item_code = $cart_info->item_code;
                                         }
-
+var_dump($cart_info->item_give_point);
                                         $goods_count++;
 
                                         $image = $CustomUtils->get_item_image($cart_info->item_code, 3);
@@ -116,14 +116,15 @@
                                     @php
                                         $i++;
                                         $tot_sell_price += $sell_price;
-                                        $hap_sendcost   += $sendcost;
+                                        $hap_sendcost += $sendcost;
                                         $tot_point      += $point;  //각 상품의 포인트 합
 
-                                        //적립금 제공 여부에 따른 적립금 금액(220207 추가)
+                                        //적립금 제공 여부에 따른 적립금 금액
                                         if($cart_info->item_give_point == 'N'){
-                                            //상품 금액에 적립금을 제공 하지 않는 상품 가격을 빼기 위해
                                             $item_give_point = $item_give_point + $sell_price;
                                         }
+
+var_dump("EEEE====> ".$item_give_point);
                                     @endphp
                                 @endforeach
 
@@ -1064,32 +1065,24 @@
       </div>
       <!-- 상세 모달 끝 -->
 
-<script>
-document.orderform.addEventListener("keydown", evt => {
-    if ((evt.keyCode || evt.which) === 13) {
-        evt.preventDefault();
-    }
-});
-</script>
+        <script>
 
+          //하단 약관동의 이벤트
+          let more_arr = document.getElementsByClassName("hide_con");
+          let i;
 
-<script>
-    //하단 약관동의 이벤트
-    let more_arr = document.getElementsByClassName("hide_con");
-    let i;
+            for (i = 0; i < more_arr.length; i++) {
+              more_arr[i].addEventListener("click", function() {
 
-    for (i = 0; i < more_arr.length; i++) {
-        more_arr[i].addEventListener("click", function() {
-
-        let cot = this.nextElementSibling;
-        if (cot.style.display === "block") {
-            cot.style.display = "none";
-        } else {
-            cot.style.display = "block";
-        }
-        });
-    }
-</script>
+                let cot = this.nextElementSibling;
+                if (cot.style.display === "block") {
+                  cot.style.display = "none";
+                } else {
+                  cot.style.display = "block";
+                }
+              });
+            }
+        </script>
 
 
 <script>
@@ -1416,7 +1409,6 @@ document.orderform.addEventListener("keydown", evt => {
                 'od_temp_point'     : $("#od_temp_point").val(),
                 'od_b_zip'          : $("#od_b_zip").val(),
                 'tot_item_point'    : '{{ $tot_point }}',
-                'item_give_point'   : '{{ $item_give_point }}',
             },
             success : function(data){
 //alert(data);

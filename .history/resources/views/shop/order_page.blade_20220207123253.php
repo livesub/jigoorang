@@ -283,27 +283,10 @@
                                     <h4>포인트 정보</h4>
                                 </div>
                                 <div class="pr_body pd-00">
-                                    <div class="pt_name m-00">
 
-                                        <ul class="oder_name wt-00 mb-20">
-                                            <li>보유포인트</li>
-                                            <li>{{ number_format($CustomUtils->get_point_sum(Auth::user()->user_id)) }}P</li>
-                                        </ul>
-                                        @if($CustomUtils->get_point_sum(Auth::user()->user_id) > 0)
-                                        <ul class="oder_point">
-                                            <li>사용포인트</li>
-                                            <li>
-                                            <div class="oder_point_box">
                                               <input type="text" name="od_temp_point" value="0" id="od_temp_point" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');all_point_use(false);">
                                               <span>P</span>
 
-                                              <button type="button" class="btn-10-p" onclick="all_point_use(true);">전액 사용</button>
-                                            </div>
-                                            </li>
-                                        </ul>
-                                        @endif
-                                    </div>
-                                </div>
                                 <div class="pdt-20">
                                     <div class="oder">
                                         <ul class="cr_06">
@@ -1064,32 +1047,24 @@
       </div>
       <!-- 상세 모달 끝 -->
 
-<script>
-document.orderform.addEventListener("keydown", evt => {
-    if ((evt.keyCode || evt.which) === 13) {
-        evt.preventDefault();
-    }
-});
-</script>
+        <script>
 
+          //하단 약관동의 이벤트
+          let more_arr = document.getElementsByClassName("hide_con");
+          let i;
 
-<script>
-    //하단 약관동의 이벤트
-    let more_arr = document.getElementsByClassName("hide_con");
-    let i;
+            for (i = 0; i < more_arr.length; i++) {
+              more_arr[i].addEventListener("click", function() {
 
-    for (i = 0; i < more_arr.length; i++) {
-        more_arr[i].addEventListener("click", function() {
-
-        let cot = this.nextElementSibling;
-        if (cot.style.display === "block") {
-            cot.style.display = "none";
-        } else {
-            cot.style.display = "block";
-        }
-        });
-    }
-</script>
+                let cot = this.nextElementSibling;
+                if (cot.style.display === "block") {
+                  cot.style.display = "none";
+                } else {
+                  cot.style.display = "block";
+                }
+              });
+            }
+        </script>
 
 
 <script>

@@ -281,8 +281,8 @@ class AdmShopItemController extends Controller
         $item_cust_price        = (int)$request->input('item_cust_price');
         $item_price             = (int)$request->input('item_price');
         $item_point_type        = (int)$request->input('item_point_type');
+dd($item_point_type);
         $item_point             = (int)$request->input('item_point');
-        $item_give_point        = $request->input('item_give_point');   //적립금 제공 여부(220207 추가)
         $item_supply_point      = (int)$request->input('item_supply_point');
         $item_use               = (int)$request->input('item_use');
         $item_nocoupon          = (int)$request->input('item_nocoupon');
@@ -439,7 +439,6 @@ class AdmShopItemController extends Controller
             'item_price'            => $item_price,
             //'item_point_type'       => $item_point_type,
             'item_point'            => $item_point,
-            'item_give_point'       => $item_give_point,
             'item_supply_point'     => $item_supply_point,
             'item_use'              => $item_use,
             //'item_nocoupon'         => $item_nocoupon,
@@ -1124,7 +1123,6 @@ class AdmShopItemController extends Controller
         $item_price             = (int)$request->input('item_price');
         $item_point_type        = (int)$request->input('item_point_type');
         $item_point             = (int)$request->input('item_point');
-        $item_give_point        = $request->input('item_give_point');
         $item_supply_point      = (int)$request->input('item_supply_point');
         //$item_use               = (int)$request->input('item_use');
         $item_use               = 1;
@@ -1286,7 +1284,6 @@ class AdmShopItemController extends Controller
             'item_price'            => $item_price,
             //'item_point_type'       => $item_point_type,
             'item_point'            => $item_point,
-            'item_give_point'       => $item_give_point,
             'item_supply_point'     => $item_supply_point,
             'item_use'              => $item_use,
             //'item_nocoupon'         => $item_nocoupon,

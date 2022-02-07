@@ -351,14 +351,8 @@
     <tr>
         <td>적립금 제공 여부</td>
         <td>
-            @php
-                $select_chk1 = "";
-                $select_chk2 = "";
-                if($item_info->item_give_point == 'Y') $select_chk1 = "checked";
-                else $select_chk2 = "checked";
-            @endphp
-            <input type="radio" name="item_give_point" value="Y" {{ $select_chk1 }}>적립금 제공
-            <input type="radio" name="item_give_point" value="N" {{ $select_chk2 }}>적립금 제공 안함
+            <input type="radio" name="item_point_type" value="1" checked>적립금 제공
+            <input type="radio" name="item_point_type" value="0">적립금 제공 안함
         </td>
     </tr>
 

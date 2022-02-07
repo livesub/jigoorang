@@ -243,14 +243,6 @@
 <form name="orderform" id="orderform" method="post" action="{{ route('orderpayment') }}" autocomplete="off">
 {!! csrf_field() !!}
 <!-- 배송지 관련 -->
-<input type="hidden" name="od_b_name" id="od_b_name" value="{{ $user_name }}">
-<input type="hidden" name="od_b_hp" id="od_b_hp" value="{{ $user_phone }}">
-<input type="hidden" name="od_b_zip" id="od_b_zip"  value="{{ $user_zip }}">
-<input type="hidden" name="od_b_addr1" id="od_b_addr1" value="{{ $user_addr1 }}">
-<input type="hidden" name="od_b_addr2" id="od_b_addr2" value="{{ $user_addr2 }}">
-<input type="hidden" name="od_b_addr3" id="od_b_addr3" value="{{ $user_addr3 }}">
-<input type="hidden" name="od_b_addr_jibeon" id="od_b_addr_jibeon" value="{{ $user_addr_jibeon }}">
-
 
 <input type="hidden" name="order_id" id="order_id" value="{{ $order_id }}"> <!-- 주문번호 -->
 <input type="hidden" name="od_id" id="od_id" value="{{ $s_cart_id }}"> <!-- 장바구니번호 -->
@@ -1064,32 +1056,24 @@
       </div>
       <!-- 상세 모달 끝 -->
 
-<script>
-document.orderform.addEventListener("keydown", evt => {
-    if ((evt.keyCode || evt.which) === 13) {
-        evt.preventDefault();
-    }
-});
-</script>
+        <script>
 
+          //하단 약관동의 이벤트
+          let more_arr = document.getElementsByClassName("hide_con");
+          let i;
 
-<script>
-    //하단 약관동의 이벤트
-    let more_arr = document.getElementsByClassName("hide_con");
-    let i;
+            for (i = 0; i < more_arr.length; i++) {
+              more_arr[i].addEventListener("click", function() {
 
-    for (i = 0; i < more_arr.length; i++) {
-        more_arr[i].addEventListener("click", function() {
-
-        let cot = this.nextElementSibling;
-        if (cot.style.display === "block") {
-            cot.style.display = "none";
-        } else {
-            cot.style.display = "block";
-        }
-        });
-    }
-</script>
+                let cot = this.nextElementSibling;
+                if (cot.style.display === "block") {
+                  cot.style.display = "none";
+                } else {
+                  cot.style.display = "block";
+                }
+              });
+            }
+        </script>
 
 
 <script>

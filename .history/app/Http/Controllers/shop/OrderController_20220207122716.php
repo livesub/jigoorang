@@ -515,7 +515,8 @@ class OrderController extends Controller
         }else{
             $tot_item_point = 0;
         }
-
+var_dump("tot_item_point====> ".$tot_item_point);
+exit;
         if($ordertemp_cnt == 0){
             $create_result = shopordertemps::create([
                 'order_id'          => $order_id,

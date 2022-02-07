@@ -1064,32 +1064,24 @@
       </div>
       <!-- 상세 모달 끝 -->
 
-<script>
-document.orderform.addEventListener("keydown", evt => {
-    if ((evt.keyCode || evt.which) === 13) {
-        evt.preventDefault();
-    }
-});
-</script>
+        <script>
 
+          //하단 약관동의 이벤트
+          let more_arr = document.getElementsByClassName("hide_con");
+          let i;
 
-<script>
-    //하단 약관동의 이벤트
-    let more_arr = document.getElementsByClassName("hide_con");
-    let i;
+            for (i = 0; i < more_arr.length; i++) {
+              more_arr[i].addEventListener("click", function() {
 
-    for (i = 0; i < more_arr.length; i++) {
-        more_arr[i].addEventListener("click", function() {
-
-        let cot = this.nextElementSibling;
-        if (cot.style.display === "block") {
-            cot.style.display = "none";
-        } else {
-            cot.style.display = "block";
-        }
-        });
-    }
-</script>
+                let cot = this.nextElementSibling;
+                if (cot.style.display === "block") {
+                  cot.style.display = "none";
+                } else {
+                  cot.style.display = "block";
+                }
+              });
+            }
+        </script>
 
 
 <script>
@@ -1416,7 +1408,6 @@ document.orderform.addEventListener("keydown", evt => {
                 'od_temp_point'     : $("#od_temp_point").val(),
                 'od_b_zip'          : $("#od_b_zip").val(),
                 'tot_item_point'    : '{{ $tot_point }}',
-                'item_give_point'   : '{{ $item_give_point }}',
             },
             success : function(data){
 //alert(data);

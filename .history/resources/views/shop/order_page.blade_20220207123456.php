@@ -240,42 +240,6 @@
                                 </div>
                             </div>
 
-<form name="orderform" id="orderform" method="post" action="{{ route('orderpayment') }}" autocomplete="off">
-{!! csrf_field() !!}
-<!-- 배송지 관련 -->
-<input type="hidden" name="od_b_name" id="od_b_name" value="{{ $user_name }}">
-<input type="hidden" name="od_b_hp" id="od_b_hp" value="{{ $user_phone }}">
-<input type="hidden" name="od_b_zip" id="od_b_zip"  value="{{ $user_zip }}">
-<input type="hidden" name="od_b_addr1" id="od_b_addr1" value="{{ $user_addr1 }}">
-<input type="hidden" name="od_b_addr2" id="od_b_addr2" value="{{ $user_addr2 }}">
-<input type="hidden" name="od_b_addr3" id="od_b_addr3" value="{{ $user_addr3 }}">
-<input type="hidden" name="od_b_addr_jibeon" id="od_b_addr_jibeon" value="{{ $user_addr_jibeon }}">
-
-
-<input type="hidden" name="order_id" id="order_id" value="{{ $order_id }}"> <!-- 주문번호 -->
-<input type="hidden" name="od_id" id="od_id" value="{{ $s_cart_id }}"> <!-- 장바구니번호 -->
-<input type="hidden" name="de_send_cost" id="de_send_cost" value="{{ $de_send_cost }}"> <!-- 기본배송비 -->
-<input type="hidden" name="de_send_cost_free" id="de_send_cost_free" value="{{ $de_send_cost_free }}"> <!-- 기본배송비 무료정책 -->
-<input type="hidden" name="od_send_cost" id="od_send_cost" value="{{ $hap_sendcost }}">  <!-- 각 상품 배송비 -->
-<input type="hidden" name="od_send_cost2" id="od_send_cost2" value="0"> <!-- 추가배송비 -->
-<input type="hidden" name="od_price" id="od_price" value="{{ $tot_sell_price }}">  <!-- 주문금액 -->
-<input type="hidden" name="org_od_price" id="org_od_price" value="{{ $tot_sell_price }}"> <!-- original 주문금액 -->
-<input type="hidden" name="od_goods_name" id="od_goods_name" value="{{ $goods }}">  <!-- 상품명 -->
-<input type="hidden" name="cart_count" id="cart_count" value="{{ $cart_count }}">  <!-- 장바구니 상품 개수 -->
-<input type="hidden" name="tot_price" id="tot_price" value="{{ $tot_price }}">  <!-- 주문서에 담긴 총 금액(상품가격+배송비(무료정책포함), 산간배송비 비포함) -->
-
-<input type="hidden" name="method" id="method" value="card">
-<input type="hidden" name="pg" id="pg" value="html5_inicis">
-<input type="hidden" name="user_point" id="user_point" value="{{ $CustomUtils->get_point_sum(Auth::user()->user_id) }}">
-<input type="hidden" name="imp_uid" id="imp_uid">
-<input type="hidden" name="apply_num" id="apply_num">   <!-- 카드 승인 번호 -->
-<input type="hidden" name="paid_amount" id="paid_amount">   <!-- 카드사에서 전달 받는 값(총 결제 금액) -->
-<input type="hidden" name="imp_merchant_uid" id="imp_merchant_uid">   <!-- 주문번호 -->
-<input type="hidden" name="pg_provider" id="pg_provider">   <!-- 결제승인/시도된 PG사 -->
-
-<input type="hidden" name="imp_card_name" id="imp_card_name">   <!-- 카드사에서 전달 받는 값(카드사명칭)) -->
-<input type="hidden" name="imp_card_quota" id="imp_card_quota">   <!-- 카드사에서 전달 받는 값(할부개월수)) -->
-<input type="hidden" name="imp_card_number" id="imp_card_number">   <!-- 카드사에서 전달 받는 값(카드번호) -->
 
 
                             <div class="list ev_rul inner od sol-g-t">
@@ -400,7 +364,7 @@
                             <div class="list_img_btn_area">
                               <button type="button" onclick="forderform_check();">결제하기</button>
                             </div>
-                        </form>
+
                         </div>
                         <!-- 리스트 끝 -->
 
@@ -1064,32 +1028,24 @@
       </div>
       <!-- 상세 모달 끝 -->
 
-<script>
-document.orderform.addEventListener("keydown", evt => {
-    if ((evt.keyCode || evt.which) === 13) {
-        evt.preventDefault();
-    }
-});
-</script>
+        <script>
 
+          //하단 약관동의 이벤트
+          let more_arr = document.getElementsByClassName("hide_con");
+          let i;
 
-<script>
-    //하단 약관동의 이벤트
-    let more_arr = document.getElementsByClassName("hide_con");
-    let i;
+            for (i = 0; i < more_arr.length; i++) {
+              more_arr[i].addEventListener("click", function() {
 
-    for (i = 0; i < more_arr.length; i++) {
-        more_arr[i].addEventListener("click", function() {
-
-        let cot = this.nextElementSibling;
-        if (cot.style.display === "block") {
-            cot.style.display = "none";
-        } else {
-            cot.style.display = "block";
-        }
-        });
-    }
-</script>
+                let cot = this.nextElementSibling;
+                if (cot.style.display === "block") {
+                  cot.style.display = "none";
+                } else {
+                  cot.style.display = "block";
+                }
+              });
+            }
+        </script>
 
 
 <script>

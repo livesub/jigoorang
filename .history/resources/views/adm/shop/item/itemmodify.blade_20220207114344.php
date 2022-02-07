@@ -355,7 +355,7 @@
                 $select_chk1 = "";
                 $select_chk2 = "";
                 if($item_info->item_give_point == 'Y') $select_chk1 = "checked";
-                else $select_chk2 = "checked";
+                else $select_chk2 = "";
             @endphp
             <input type="radio" name="item_give_point" value="Y" {{ $select_chk1 }}>적립금 제공
             <input type="radio" name="item_give_point" value="N" {{ $select_chk2 }}>적립금 제공 안함

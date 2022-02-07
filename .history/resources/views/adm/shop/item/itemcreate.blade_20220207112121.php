@@ -278,8 +278,8 @@
     <tr>
         <td>적립금 제공 여부</td>
         <td>
-            <input type="radio" name="item_give_point" value="Y" checked>적립금 제공
-            <input type="radio" name="item_give_point" value="N">적립금 제공 안함
+            <input type="radio" name="item_point_type" value="1">적립금 제공
+            <input type="radio" name="item_point_type" value="0">적립금 제공 안함
         </td>
     </tr>
 
