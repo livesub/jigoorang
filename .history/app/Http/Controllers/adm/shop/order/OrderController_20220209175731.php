@@ -1139,7 +1139,7 @@ exit;
         $cart_num   = $request->input('cart_num');
 
         $order_info = DB::table('shoporders')->where('order_id', $order_id)->first();
-        $carts = DB::table('shopcarts')->where('id', $cart_num)->first();
+        $carts = DB::table('shopcarts')->where('id', $cart_num)->get();
 /*
         if(isset($order_info) || isset($carts)){
             echo "
