@@ -79,7 +79,6 @@
                                         //제목
                                         $item_name = $item_manufacture.stripslashes($cart_info->item_name);
 
-
                                         //옵션 처리
                                         //$item_options = $CustomUtils->new_print_item_options($cart_info->id, $cart_info->item_code, $s_cart_id);
                                         $item_options = DB::table('shopcarts')->select('sct_option', 'sct_qty', 'sio_price')->where([['id', $cart_info->id], ['item_code', $cart_info->item_code], ['od_id',$s_cart_id]])->first();
