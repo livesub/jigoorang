@@ -54,6 +54,7 @@
                                     $goods_count = -1;
                                     $tot_point = 0;
                                     $item_give_point = 0;
+dd($cart_infos);
                                 @endphp
                                 @foreach($cart_infos as $cart_info)
                                     @php
@@ -78,6 +79,7 @@
 
                                         //제목
                                         $item_name = $item_manufacture.stripslashes($cart_info->item_name);
+
 
                                         //옵션 처리
                                         //$item_options = $CustomUtils->new_print_item_options($cart_info->id, $cart_info->item_code, $s_cart_id);

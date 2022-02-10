@@ -82,13 +82,13 @@ class OrderController extends Controller
                 });
             //->where([['a.od_id',$tmp_cart_id], ['a.sct_select','1']])
             if($sw_direct){
-                $cart_infos = $cart_infos->where([['a.od_id', $tmp_cart_id], ['a.sct_select','1'],['a.sct_direct', '1'], ['a.sct_status','쇼핑'], ['a.user_id', Auth::user()->user_id]]);
+                $cart_infos = $cart_infos->where([['a.sct_select','1'],['a.sct_direct', '1'], ['a.sct_status','쇼핑']]);
             }else{
-                $cart_infos = $cart_infos->where([['a.od_id', $tmp_cart_id], ['a.sct_select','1'], ['a.sct_direct', '0'], ['a.sct_status','쇼핑'], ['a.user_id', Auth::user()->user_id]]);
+                $cart_infos = $cart_infos->where([['a.sct_select','1'], ['a.sct_direct', '0'], ['a.sct_status','쇼핑']]);
             }
             //->groupBy('a.item_code')
             $cart_infos = $cart_infos->orderBy('a.id')->get();
-
+dd($cart_infos);
         if(count($cart_infos) == 0){
             return redirect()->route('cartlist')->with('alert_messages', '주문 하실 상품이 없습니다.');
             exit;

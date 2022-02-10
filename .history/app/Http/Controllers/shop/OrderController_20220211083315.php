@@ -82,9 +82,9 @@ class OrderController extends Controller
                 });
             //->where([['a.od_id',$tmp_cart_id], ['a.sct_select','1']])
             if($sw_direct){
-                $cart_infos = $cart_infos->where([['a.od_id', $tmp_cart_id], ['a.sct_select','1'],['a.sct_direct', '1'], ['a.sct_status','쇼핑'], ['a.user_id', Auth::user()->user_id]]);
+                $cart_infos = $cart_infos->where([['a.od_id',$tmp_cart_id], ['a.sct_select','1'],['a.sct_direct', '1'], ['a.sct_status','쇼핑'], ['a.user_id', Auth::user()->user_id]]);
             }else{
-                $cart_infos = $cart_infos->where([['a.od_id', $tmp_cart_id], ['a.sct_select','1'], ['a.sct_direct', '0'], ['a.sct_status','쇼핑'], ['a.user_id', Auth::user()->user_id]]);
+                $cart_infos = $cart_infos->where([['a.od_id',$tmp_cart_id], ['a.sct_select','1'], ['a.sct_direct', '0'], ['a.sct_status','쇼핑'], ['a.user_id', Auth::user()->user_id]]);
             }
             //->groupBy('a.item_code')
             $cart_infos = $cart_infos->orderBy('a.id')->get();

@@ -54,13 +54,14 @@
                                     $goods_count = -1;
                                     $tot_point = 0;
                                     $item_give_point = 0;
+
                                 @endphp
                                 @foreach($cart_infos as $cart_info)
                                     @php
                                         $i = 0;
                                         //$sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_point * sct_qty) as point, SUM(sct_qty) as qty from shopcarts where item_code = '{$cart_info->item_code}' and od_id = '$s_cart_id' ");
                                         $sum = DB::select("select SUM(IF(sio_type = 1, (sio_price * sct_qty), ((sct_price + sio_price) * sct_qty))) as price, SUM(sct_point * sct_qty) as point, SUM(sct_qty) as qty from shopcarts where sct_select = 1 and id='$cart_info->id' and od_id = '$s_cart_id' ");
-
+var_dump($sum);
                                         if (!$goods)
                                         {
                                             $goods = preg_replace("/\'|\"|\||\,|\&|\;/", "", $cart_info->item_name);
@@ -78,6 +79,7 @@
 
                                         //제목
                                         $item_name = $item_manufacture.stripslashes($cart_info->item_name);
+
 
                                         //옵션 처리
                                         //$item_options = $CustomUtils->new_print_item_options($cart_info->id, $cart_info->item_code, $s_cart_id);
