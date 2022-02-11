@@ -162,20 +162,14 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
 
     //주문확인/결제 완료 되돌리기
     Route::post('order_check', [
-        'as' => 'ajax_order_check',
-        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@ajax_order_check',
+        'as' => 'order_check',
+        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@order_check',
     ]);
 
     //주문 list에서 주문취소
     Route::post('order_cancel', [
-        'as' => 'ajax_order_cancel',
-        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@ajax_order_cancel',
-    ]);
-
-    //발송
-    Route::post('order_send', [
-        'as' => 'ajax_order_send',
-        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@ajax_order_send',
+        'as' => 'order_cancel',
+        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@order_cancel',
     ]);
 
     Route::get('orderdetail', [

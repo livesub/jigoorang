@@ -441,7 +441,7 @@
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
                 type : 'post',
-                url : '{{ route('ajax_order_cancel') }}',
+                url : '{{ route('order_cancel') }}',
                 data : form_var,
                 dataType : 'text',
                 success : function(result){

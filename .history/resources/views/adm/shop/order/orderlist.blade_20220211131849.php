@@ -220,14 +220,14 @@
         @endphp
 
     <tr>
-        <td><input type="checkbox" name="ct_chk[]" id="ct_chk" value="{{ $order->order_id }}"></td>
+        <td><input type="checkbox" name="ct_chk[]" value="{{ $order->order_id }}"></td>
         <td>{{ $order->created_at }}({{ $CustomUtils->get_yoil($order->created_at) }})</td>
         <td><a href="{{ route('orderdetail','order_id='.$order->order_id.$page_move) }}">{{ $order->order_id }}</a></td>
         <td>
             @if($od_status == "입금")
             {{ $order->od_invoice }}
             @elseif($od_status == "준비")
-            <input type="text" name="od_invoice" id="od_invoice_{{ $order->order_id }}">
+            <input type="text" name="od_invoice" id="od_invoice">
             @endif
         </td>
         <td>
@@ -408,7 +408,7 @@
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
                 type : 'post',
-                url : '{{ route('ajax_order_check') }}',
+                url : '{{ route('order_check') }}',
                 data : form_var,
                 dataType : 'text',
                 success : function(result){
@@ -441,7 +441,7 @@
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
                 type : 'post',
-                url : '{{ route('ajax_order_cancel') }}',
+                url : '{{ route('order_cancel') }}',
                 data : form_var,
                 dataType : 'text',
                 success : function(result){
@@ -460,48 +460,6 @@
                 },
             });
         }
-    }
-</script>
-
-<script>
-    function order_send_check(){
-        if($("input[name^=ct_chk]:checked").length < 1) {
-            alert("발송처리할 주문건을 하나이상 선택해 주십시오.");
-            return false;
-        }
-
-        $("input[name^=ct_chk]:checked").each(function(){
-            var order_id = $(this).val();
-            if($.trim($("#od_invoice_"+order_id).val()) == ""){
-                alert("송장 번호를 입력 하세요");
-                $("#od_invoice_"+order_id).focus();
-                return false;
-            }
-        });
-
-        if (confirm("선택된 주문건을 발송 단계로 변경합니다.") == true){    //확인
-            var form_var = $("#order_check_from").serialize();
-            $.ajax({
-                headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-                type : 'post',
-                url : '{{ route('ajax_order_check') }}',
-                data : form_var,
-                dataType : 'text',
-                success : function(result){
-//alert(result);
-//return false;
-                    if(result == "ok"){
-                        alert(check_type + " 처리 되었습니다");
-                        location.href = "{{ route('orderlist') }}?{!! $sort_page_move !!}"+"&order_sort="+"{{ $order_sort }}";
-                    }
-                },
-                error: function(result){
-                    console.log(result);
-                },
-            });
-        }
-
-
     }
 </script>
 

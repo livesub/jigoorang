@@ -227,7 +227,7 @@
             @if($od_status == "입금")
             {{ $order->od_invoice }}
             @elseif($od_status == "준비")
-            <input type="text" name="od_invoice" id="od_invoice_{{ $order->order_id }}">
+            <input type="text" name="od_invoice" id="od_invoice">
             @endif
         </td>
         <td>
@@ -408,7 +408,7 @@
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
                 type : 'post',
-                url : '{{ route('ajax_order_check') }}',
+                url : '{{ route('order_check') }}',
                 data : form_var,
                 dataType : 'text',
                 success : function(result){
@@ -441,7 +441,7 @@
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
                 type : 'post',
-                url : '{{ route('ajax_order_cancel') }}',
+                url : '{{ route('order_cancel') }}',
                 data : form_var,
                 dataType : 'text',
                 success : function(result){
@@ -470,38 +470,20 @@
             return false;
         }
 
-        $("input[name^=ct_chk]:checked").each(function(){
-            var order_id = $(this).val();
-            if($.trim($("#od_invoice_"+order_id).val()) == ""){
-                alert("송장 번호를 입력 하세요");
-                $("#od_invoice_"+order_id).focus();
+        for (i = 0; i < $("input[name^=ct_chk]:checked").length; i++) {
+alert($("input[name=ct_chk[]]:checked").val());
+/*
+            if($('#ct_chk_'+i).is(':checked') == true){
+                check = true;
+            }
+
+            if($("#sct_qty_"+i).val() == ""){
+                alert("수량을 입력 하세요.");
+                $("#sct_qty_"+i).focus();
                 return false;
             }
-        });
-
-        if (confirm("선택된 주문건을 발송 단계로 변경합니다.") == true){    //확인
-            var form_var = $("#order_check_from").serialize();
-            $.ajax({
-                headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-                type : 'post',
-                url : '{{ route('ajax_order_check') }}',
-                data : form_var,
-                dataType : 'text',
-                success : function(result){
-//alert(result);
-//return false;
-                    if(result == "ok"){
-                        alert(check_type + " 처리 되었습니다");
-                        location.href = "{{ route('orderlist') }}?{!! $sort_page_move !!}"+"&order_sort="+"{{ $order_sort }}";
-                    }
-                },
-                error: function(result){
-                    console.log(result);
-                },
-            });
+*/
         }
-
-
     }
 </script>
 
