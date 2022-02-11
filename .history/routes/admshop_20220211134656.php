@@ -172,11 +172,7 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@ajax_order_cancel',
     ]);
 
-    //발송
-    Route::post('order_send', [
-        'as' => 'ajax_order_send',
-        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@ajax_order_send',
-    ]);
+
 
     Route::get('orderdetail', [
         'as' => 'orderdetail',

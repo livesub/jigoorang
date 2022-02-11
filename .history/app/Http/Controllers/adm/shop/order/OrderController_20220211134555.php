@@ -198,7 +198,7 @@ class OrderController extends Controller
         exit;
     }
 
-    public function ajax_order_cancel(Request $request)
+    public function order_cancel(Request $request)
     {
         $CustomUtils = new CustomUtils;
 
