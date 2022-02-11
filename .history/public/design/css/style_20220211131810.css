@@ -2526,6 +2526,7 @@ input::placeholder {
     border: solid 2px #ddd;
     text-align: left;
     font-size: 16px;
+    
 }
 
 
@@ -2850,7 +2851,7 @@ input::placeholder {
     width: calc(95% - 350px);
     text-overflow: ellipsis;
     overflow: hidden;
-    max-height: 84px;
+    max-height: 74px;
 
 }
 

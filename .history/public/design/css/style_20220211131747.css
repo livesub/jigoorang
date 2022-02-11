@@ -2528,6 +2528,7 @@ input::placeholder {
     font-size: 16px;
 }
 
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-02 input:
 
 .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-03 li p {
     width: 25%;
@@ -2850,7 +2851,7 @@ input::placeholder {
     width: calc(95% - 350px);
     text-overflow: ellipsis;
     overflow: hidden;
-    max-height: 84px;
+    max-height: 74px;
 
 }
 

@@ -2526,8 +2526,8 @@ input::placeholder {
     border: solid 2px #ddd;
     text-align: left;
     font-size: 16px;
+    font-family: "Spoqa Han Sans Neo", "sans-serif";
 }
-
 
 .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-03 li p {
     width: 25%;
@@ -2850,7 +2850,7 @@ input::placeholder {
     width: calc(95% - 350px);
     text-overflow: ellipsis;
     overflow: hidden;
-    max-height: 84px;
+    max-height: 74px;
 
 }
 

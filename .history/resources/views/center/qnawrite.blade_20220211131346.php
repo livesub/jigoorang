@@ -39,9 +39,7 @@
                   <div class="modal-inner">
 
                       <ul class="modal-cot-img">
-                          <li>
-                            <img src="{{ asset('/design/recources/imgs/sample_img.png') }}" alt="">
-                          </li>
+                          <li><img src="../../recources/imgs/sample_img.png" alt=""></li>
                       </ul>
                       
                       <ul class="modal-cot-pd">

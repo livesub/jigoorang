@@ -6,7 +6,7 @@
 
 
 
- <!-- 상품 내역 모달 시작 -->
+ <!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. -->
  <div class="modal_002 modal fade">
   <div class="modal-background" onclick="addressclosemodal_001()"></div>
   <div class="modal-container">
@@ -39,9 +39,7 @@
                   <div class="modal-inner">
 
                       <ul class="modal-cot-img">
-                          <li>
-                            <img src="{{ asset('/design/recources/imgs/sample_img.png') }}" alt="">
-                          </li>
+                          <li><img src="../../recources/imgs/sample_img.png" alt=""></li>
                       </ul>
                       
                       <ul class="modal-cot-pd">
@@ -81,7 +79,7 @@
                   <div class="modal-inner">
 
                       <ul class="modal-cot-img">
-                          <li><img src="{{ asset('/design/recources/imgs/sample_img.png') }}" alt=""></li>
+                          <li><img src="../../recources/imgs/sample_img.png" alt=""></li>
                       </ul>
                       
                       <ul class="modal-cot-pd">
@@ -122,7 +120,7 @@
                   <div class="modal-inner">
 
                       <ul class="modal-cot-img">
-                          <li><img src="{{ asset('/design/recources/imgs/sample_img.png') }}" alt=""></li>
+                          <li><img src="../../recources/imgs/sample_img.png" alt=""></li>
                       </ul>
                       
                       <ul class="modal-cot-pd">
@@ -157,7 +155,7 @@
       </div>
   </div>
 </div>
-<!-- 상품 내역 모달 끝 -->
+<!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. 끝 -->
 
 
     <!-- 서브 컨테이너 시작 -->
@@ -237,15 +235,15 @@
                                 </li>
                               </ul>
 
-                              <ul class="tab-03">
+                              {{-- <!--<ul class="tab-03">
                                     <li>
                                         <p>주문번호</p>
                                         <span>
                                             <input type="text" value="0000000" disabled>
-                                            <button type="button" class="btn-10" onclick='addressopenmodal_001()'>구매상품 선택</button>
+                                            <button class="btn-10" onclick='addressopenmodal_001()'>구매상품 선택</button>
                                         </span>
                                     </li>
-                              </ul>
+                              </ul>--> --}}
 
                               <ul class="tab-04">
                                 <li>

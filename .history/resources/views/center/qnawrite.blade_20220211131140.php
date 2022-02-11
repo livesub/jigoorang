@@ -39,9 +39,7 @@
                   <div class="modal-inner">
 
                       <ul class="modal-cot-img">
-                          <li>
-                            <img src="{{ asset('/design/recources/imgs/sample_img.png') }}" alt="">
-                          </li>
+                          <li><img src="../../recources/imgs/sample_img.png" alt=""></li>
                       </ul>
                       
                       <ul class="modal-cot-pd">
@@ -81,7 +79,7 @@
                   <div class="modal-inner">
 
                       <ul class="modal-cot-img">
-                          <li><img src="{{ asset('/design/recources/imgs/sample_img.png') }}" alt=""></li>
+                          <li><img src="../../recources/imgs/sample_img.png" alt=""></li>
                       </ul>
                       
                       <ul class="modal-cot-pd">
@@ -122,7 +120,7 @@
                   <div class="modal-inner">
 
                       <ul class="modal-cot-img">
-                          <li><img src="{{ asset('/design/recources/imgs/sample_img.png') }}" alt=""></li>
+                          <li><img src="../../recources/imgs/sample_img.png" alt=""></li>
                       </ul>
                       
                       <ul class="modal-cot-pd">
@@ -157,7 +155,7 @@
       </div>
   </div>
 </div>
-<!-- 상품 내역 모달 끝 -->
+<!-- 배송지 모달 (주소) // 등록된 배송지가 없습니다. 끝 -->
 
 
     <!-- 서브 컨테이너 시작 -->
