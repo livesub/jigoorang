@@ -470,12 +470,14 @@
             return false;
         }
 
+        var check = true;
         $("input[name^=ct_chk]:checked").each(function(){
             var order_id = $(this).val();
             if($.trim($("#od_invoice_"+order_id).val()) == ""){
                 alert("송장 번호를 입력 하세요");
                 $("#od_invoice_"+order_id).focus();
-                return;
+
+                return false;
             }
         });
 

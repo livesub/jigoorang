@@ -3,7 +3,7 @@
                                             @foreach($orders as $order)
                                                 @php
                                                     $image = $CustomUtils->get_item_image($order->item_code, 3);
-                                                    if($image == "") $image = asset("img/no_img.jpg");
+                                                    $main_image_name_disp = asset("img/no_img.jpg");
                                                     $kk = substr($order->regi_date, 0, 10);
                                                     //$review_temporary_yn = DB::table('review_saves')->where([['cart_id', $order->id], ['item_code', $order->item_code], ['user_id', Auth::user()->user_id], ['temporary_yn', 'n']])->count();
                                                 @endphp

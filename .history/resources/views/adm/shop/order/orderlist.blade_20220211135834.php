@@ -475,7 +475,7 @@
             if($.trim($("#od_invoice_"+order_id).val()) == ""){
                 alert("송장 번호를 입력 하세요");
                 $("#od_invoice_"+order_id).focus();
-                return;
+                return false;
             }
         });
 
