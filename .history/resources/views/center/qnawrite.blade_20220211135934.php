@@ -254,7 +254,8 @@
                                 </li>
                             </ul>
                             <div class="btn_area_50">
-                             <button type="button" class="btn-50-full" onclick="qna_form_submit();">등록</button>
+                             <button type="button" class="btn-50-full
+                             " onclick="qna_form_submit();">등록</button>
                             </div>
                           </form>
                           </div>
