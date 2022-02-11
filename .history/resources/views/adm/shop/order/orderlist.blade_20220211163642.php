@@ -127,7 +127,7 @@
         <td><button type="button" onclick="order_return();">주문확인</button></td>
         @endif
 
-        <td><button type="button" onclick="excel_down();">엑셀다운로드</button></td>
+        <td><button type="button">엑셀다운로드</button></td>
         <td>
             <select name="order_sort" id="order_sort" onchange="order_sort();">
                 <option value="desc" {{ $sort_selected1 }}>주문일순(최신순)</option>
@@ -543,11 +543,7 @@
     }
 </script>
 
-<script>
-    function excel_down(){
-alert("작업중");
-    }
-</script>
+
 
 
 @endsection

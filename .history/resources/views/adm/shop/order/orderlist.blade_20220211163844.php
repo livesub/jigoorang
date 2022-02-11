@@ -543,11 +543,7 @@
     }
 </script>
 
-<script>
-    function excel_down(){
-alert("작업중");
-    }
-</script>
+
 
 
 @endsection

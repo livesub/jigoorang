@@ -123,11 +123,9 @@
         @elseif($od_status == "준비")
         <td><button type="button" onclick="order_check('결제완료');">결제완료</button></td>
         <td><button type="button" onclick="order_send_check();">발송</button></td>
-        @elseif($od_status == "배송")
-        <td><button type="button" onclick="order_return();">주문확인</button></td>
         @endif
 
-        <td><button type="button" onclick="excel_down();">엑셀다운로드</button></td>
+        <td><button type="button">엑셀다운로드</button></td>
         <td>
             <select name="order_sort" id="order_sort" onchange="order_sort();">
                 <option value="desc" {{ $sort_selected1 }}>주문일순(최신순)</option>
@@ -175,7 +173,6 @@
             $i = 0;
             foreach($cart_infos as $cart_info){
                 $item_info = DB::table('shopitems')->where('item_code', $cart_info->item_code)->first();
-                $user_info = DB::table('users')->where('user_id', $cart_info->user_id)->first();
                 if($i == 0){
                     $image = $CustomUtils->get_item_image($cart_info->item_code, 3);
                     if($image == "") $image = asset("img/no_img.jpg");
@@ -227,7 +224,7 @@
         <td>{{ $order->created_at }}({{ $CustomUtils->get_yoil($order->created_at) }})</td>
         <td><a href="{{ route('orderdetail','order_id='.$order->order_id.$page_move) }}">{{ $order->order_id }}</a></td>
         <td>
-            @if($od_status == "입금" || $od_status == "배송" || $od_status == "완료")
+            @if($od_status == "입금" || $od_status == "배송")
             {{ $order->od_invoice }}
             @elseif($od_status == "준비")
             <input type="text" name="od_invoice[{{ $order->order_id }}]" id="od_invoice_{{ $order->order_id }}">
@@ -251,7 +248,7 @@
                 </tr>
             </table>
         </td>
-        <td>{{ $order->od_deposit_name }}<br>{{ $user_info->user_id }}<br>{{ $user_info->user_phone }}</td>
+        <td>{{ $order->od_deposit_name }}</td>
         <td>{{ number_format($order->od_receipt_price) }}</td>
         <td>{{ number_format($order->real_card_price) }}</td>
         <td>{{ number_format($order->od_cancel_price) }}</td>
@@ -278,8 +275,6 @@
         @elseif($od_status == "준비")
         <td><button type="button" onclick="order_check('결제완료');">결제완료</button></td>
         <td><button type="button" onclick="order_send_check();">발송</button></td>
-        @elseif($od_status == "배송")
-        <td><button type="button" onclick="order_return();">주문확인</button></td>
         @endif
     </tr>
 </table>
@@ -499,7 +494,7 @@
     //alert(result);
     //return false;
                         if(result == "ok"){
-                            alert("발송 처리 되었습니다");
+                            alert(check_type + " 처리 되었습니다");
                             location.href = "{{ route('orderlist') }}?{!! $sort_page_move !!}"+"&order_sort="+"{{ $order_sort }}";
                         }
                     },
@@ -509,43 +504,7 @@
                 });
             }
         }
-    }
-</script>
 
-<script>
-    function order_return(){
-        if($("input[name^=ct_chk]:checked").length < 1) {
-            alert("주문확인할 주문건을 하나이상 선택해 주십시오.");
-            return false;
-        }
-
-        if (confirm("선택된 주문건을 주문확인 단계로 변경합니다.") == true){    //확인
-            var form_var = $("#order_check_from").serialize();
-            $.ajax({
-                headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-                type : 'post',
-                url : '{{ route('ajax_order_return') }}',
-                data : form_var,
-                dataType : 'text',
-                success : function(result){
-//alert(result);
-//return false;
-                    if(result == "ok"){
-                        alert("주문확인 처리 되었습니다");
-                        location.href = "{{ route('orderlist') }}?{!! $sort_page_move !!}"+"&order_sort="+"{{ $order_sort }}";
-                    }
-                },
-                error: function(result){
-                    console.log(result);
-                },
-            });
-        }
-    }
-</script>
-
-<script>
-    function excel_down(){
-alert("작업중");
     }
 </script>
 

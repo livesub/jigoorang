@@ -248,8 +248,8 @@ class OrderviewController extends Controller
         $order_id       = $request->input('order_id');
         $cart_num       = $request->input('cart_num');
 
-        $order_info = DB::table('shoporders')->where([['order_id', $order_id], ['user_id', Auth::user()->user_id]])->whereRaw('od_status in (\'준비\', \'배송\', \'완료\')')->first();
-        $cart = DB::table('shopcarts')->where([['user_id', Auth::user()->user_id],['od_id', $order_info->order_id], ['id', $cart_num]])->whereRaw('sct_status in (\'준비\', \'배송\', \'완료\')')->first();
+        $order_info = DB::table('shoporders')->where([['order_id', $order_id], ['user_id', Auth::user()->user_id]])->whereRaw('od_status in (\'준비\', \'배송\', \'배송완료\')')->first();
+        $cart = DB::table('shopcarts')->where([['user_id', Auth::user()->user_id],['od_id', $order_info->order_id], ['id', $cart_num]])->whereRaw('sct_status in (\'준비\', \'배송\', \'배송완료\')')->first();
 
         if($order_info == "" || $cart == ""){
             return redirect()->back()->with('alert_messages', '잘못된 경로 입니다.');
@@ -317,8 +317,8 @@ class OrderviewController extends Controller
         $return_story       = $request->input('return_story');
         $return_story_content   = $request->input('return_story_content');
 
-        $order_info = DB::table('shoporders')->where([['order_id', $order_id], ['user_id', Auth::user()->user_id]])->whereRaw('od_status in (\'준비\', \'배송\', \'완료\')')->first();
-        $cart = DB::table('shopcarts')->where([['user_id', Auth::user()->user_id],['od_id', $order_info->order_id], ['id', $cart_num]])->whereRaw('sct_status in (\'준비\', \'배송\', \'완료\')')->first();
+        $order_info = DB::table('shoporders')->where([['order_id', $order_id], ['user_id', Auth::user()->user_id]])->whereRaw('od_status in (\'준비\', \'배송\', \'배송완료\')')->first();
+        $cart = DB::table('shopcarts')->where([['user_id', Auth::user()->user_id],['od_id', $order_info->order_id], ['id', $cart_num]])->whereRaw('sct_status in (\'준비\', \'배송\', \'배송완료\')')->first();
 
         if($order_info == "" || $cart == ""){
             echo "error";
@@ -335,13 +335,7 @@ class OrderviewController extends Controller
             'return_story_content'  => $return_story_content,
             'return_regi_date'      => date("Y-m-d H:i:s", time()),
         ]);
-/*
-        $return_up = DB::table('shoporders')->where([['id', $cart_num], ['od_id', $order_id], ['user_id', Auth::user()->user_id]])->update([
-            'return_story'          => $return_story,
-            'return_story_content'  => $return_story_content,
-            'return_regi_date'      => date("Y-m-d H:i:s", time()),
-        ]);
-*/
+
         echo "ok";
         exit;
     }

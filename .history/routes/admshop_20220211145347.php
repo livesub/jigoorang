@@ -179,9 +179,9 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
     ]);
 
     //주문확인으로 되돌리기
-    Route::post('order_return', [
-        'as' => 'ajax_order_return',
-        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@ajax_order_return',
+    Route::post('order_send', [
+        'as' => 'ajax_order_send',
+        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@ajax_order_send',
     ]);
 
     Route::get('orderdetail', [

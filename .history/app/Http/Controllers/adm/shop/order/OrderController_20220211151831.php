@@ -279,19 +279,7 @@ class OrderController extends Controller
 
     public function send_complete()
     {
-        $CustomUtils = new CustomUtils;
-        $order_infos = DB::table('shoporders')->where([['od_status', '배송'], ['send_complete_chk', 'N']])->whereRaw("now() >= DATE_ADD(created_at, INTERVAL 9 DAY)")->get();
-
-        foreach($order_infos as $order_info){
-            $cart_up = DB::table('shopcarts')->where([['user_id', $order_info->user_id], ['od_id', $order_info->order_id]])->update([
-                'sct_status'    => "완료",
-            ]);
-
-            $order_up = DB::table('shoporders')->where('order_id', $order_info->order_id)->update([
-                'od_status'         => "완료",
-                'send_complete_chk' => 'Y',
-            ]);
-        }
+        var_dump("auto~~~");
     }
 
     public function deposit_function($data)
@@ -920,7 +908,7 @@ exit;
                     exit;
                 }
 
-                $all_cart_infos = DB::table('shopcarts')->where([['od_id', $order_id], ['user_id', $order_info->user_id], ['sct_select', 1]])->whereRaw('sct_status in (\'입금\', \'준비\', \'배송\', \'완료\', \'부분취소\', \'상품취소\', \'반품\')')->get();
+                $all_cart_infos = DB::table('shopcarts')->where([['od_id', $order_id], ['user_id', $order_info->user_id], ['sct_select', 1]])->whereRaw('sct_status in (\'입금\', \'준비\', \'배송\', \'배송완료\', \'부분취소\', \'상품취소\', \'반품\')')->get();
 
                 $mod_history = $order_info->od_mod_history; //히스토리 내역
 
@@ -1186,7 +1174,7 @@ exit;
                 $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
             }
 
-            $all_cart_infos = DB::table('shopcarts')->where([['od_id', $order_id], ['user_id', $order_info->user_id], ['sct_select', 1]])->whereRaw('sct_status in (\'입금\', \'준비\', \'배송\', \'완료\', \'부분취소\', \'상품취소\', \'반품\', \'교환\')')->get();
+            $all_cart_infos = DB::table('shopcarts')->where([['od_id', $order_id], ['user_id', $order_info->user_id], ['sct_select', 1]])->whereRaw('sct_status in (\'입금\', \'준비\', \'배송\', \'배송완료\', \'부분취소\', \'상품취소\', \'반품\', \'교환\')')->get();
 
             foreach($all_cart_infos as $all_cart_info){
                 $item_info = DB::table('shopitems')->where('item_code', $all_cart_info->item_code)->first();

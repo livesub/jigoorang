@@ -335,13 +335,7 @@ class OrderviewController extends Controller
             'return_story_content'  => $return_story_content,
             'return_regi_date'      => date("Y-m-d H:i:s", time()),
         ]);
-/*
-        $return_up = DB::table('shoporders')->where([['id', $cart_num], ['od_id', $order_id], ['user_id', Auth::user()->user_id]])->update([
-            'return_story'          => $return_story,
-            'return_story_content'  => $return_story_content,
-            'return_regi_date'      => date("Y-m-d H:i:s", time()),
-        ]);
-*/
+
         echo "ok";
         exit;
     }
