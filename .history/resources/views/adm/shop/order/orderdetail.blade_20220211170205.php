@@ -706,7 +706,6 @@ return false;
                         alert("주문 수량 보다 교환 수량이 클수 없습니다\n수량을 확인 하세요");
                         return false;
                     }
-
                     if(result == 'all_cancel'){
                         alert("처리할 자료를 하나 이상 선택해 주십시오.");
                         //alert('전체 주문 취소 상태 입니다.');

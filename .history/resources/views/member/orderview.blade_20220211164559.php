@@ -42,7 +42,7 @@
                             <div class="btn_re point01">
                                 <ul class="re_li">
                                     <li>
-                                        @if($order->od_status == "입금" || $order->od_status == "준비")
+                                        @if($order->od_status == "입금")
 
                                         <button type="button" onclick="items_cancel('{{ $order->imp_uid }}', '{{ $order->order_id }}', '{{ $order->real_card_price }}', '{{ $order->od_deposit_name }}')">전체주문취소</button>
                                         @endif
