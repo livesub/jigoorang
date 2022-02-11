@@ -2850,7 +2850,7 @@ input::placeholder {
     width: calc(95% - 350px);
     text-overflow: ellipsis;
     overflow: hidden;
-    max-height: 84px;
+    max-height: 74px;
 
 }
 

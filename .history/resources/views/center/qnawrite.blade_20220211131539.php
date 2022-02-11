@@ -40,8 +40,7 @@
 
                       <ul class="modal-cot-img">
                           <li>
-                            <img src="{{ asset('/design/recources/imgs/sample_img.png') }}" alt="">
-                          </li>
+                            <img src="{{ asset('/design/recources/imgs/sample_img.png') }}" alt=""></li>
                       </ul>
                       
                       <ul class="modal-cot-pd">
