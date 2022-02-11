@@ -43,10 +43,10 @@ var swiper3 = new Swiper(".submenu", {
     }
 });
 
-// window.onload=function sub_slide() {
-//     alert("1111");
-//     swiper3.slideTo(1)
-// }
+window.onload=function sub_slide() {
+    alert("1111");
+    swiper3.slideTo({{ $sub_cate }})
+}
 
 
 var swiper4 = new Swiper(".submenu_sol", {

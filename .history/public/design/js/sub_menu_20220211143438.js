@@ -103,6 +103,6 @@ var swiper4 = new Swiper(".submenu_sol", {
 });
 
 
-function sub_m_slide(num) {
-    swiper4.slideTo(num, 800, true)
-}
+// function sub_m_slide(num) {
+//     swiper4.slideTo(num, 800, true)
+// }

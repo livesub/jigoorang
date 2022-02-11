@@ -339,11 +339,15 @@
 </script>
 
 <script>
-    window.onload=function sub_slide() { //대 카테고리
+    window.onload=function sub_slide() {
         swiper3.slideTo('{{ $cate }}');
     }
 
-    sub_m_slide('{{ $sub_cate }}'); // 서브 카테고리
+    //sub_m_slide('{{ $sub_cate }}');
+
+    window.onload=function sub_m_slide() {
+        swiper4.slideTo('{{ $sub_cate }}')
+    }
 </script>
 
 
