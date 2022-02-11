@@ -35,7 +35,7 @@
                                     if($review_save_imgs_cnt > 0) $review_save_imgs_infos = $review_save_imgs->get();
                                 @endphp
 
-                                <div class="cot_body pos pd-00">
+                                <div class="cot_body pd-00">
                                     <p class="cr_04 mb-20">{{ substr($review_saves_exp_info->created_at, 0, 10) }}</p>
                                     <img src="{{ $main_image_name_disp }}" alt="">
                                     <div class="info tab">
