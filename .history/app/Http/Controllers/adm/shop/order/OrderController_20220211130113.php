@@ -186,11 +186,11 @@ class OrderController extends Controller
             $order_info = DB::table('shoporders')->where('order_id', $ct_chk[$i])->first();
 
             $cart_up = DB::table('shopcarts')->where([['user_id', $order_info->user_id], ['od_id', $order_info->order_id]])->update([
-                'sct_status'    => $ment,
+                'sct_status'    => '준비',
             ]);
 
             $order_up = DB::table('shoporders')->where('order_id', $order_info->order_id)->update([
-                'od_status'         => $ment,
+                'od_status'         => '준비',
             ]);
         }
 

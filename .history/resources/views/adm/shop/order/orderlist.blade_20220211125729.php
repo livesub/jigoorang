@@ -121,7 +121,7 @@
         <td><button type="button" onclick="order_cancel();">주문취소</button></td>
         <td><button type="button" onclick="order_check('주문확인');">주문확인</button></td>
         @elseif($od_status == "준비")
-        <td><button type="button" onclick="order_check('결제완료');">결제완료</button></td>
+        <td><button type="button" onclick="">결제완료</button></td>
         <td><button type="button" onclick="">발송</button></td>
         @endif
 
@@ -263,13 +263,8 @@
 @if($od_status == "입금")
 <table border="1">
     <tr>
-        @if($od_status == "입금")
         <td><button type="button" onclick="order_cancel();">주문취소</button></td>
         <td><button type="button" onclick="order_check('주문확인');">주문확인</button></td>
-        @elseif($od_status == "준비")
-        <td><button type="button" onclick="order_check('결제완료');">결제완료</button></td>
-        <td><button type="button" onclick="">발송</button></td>
-        @endif
     </tr>
 </table>
 @endif
@@ -406,8 +401,8 @@
                 data : form_var,
                 dataType : 'text',
                 success : function(result){
-//alert(result);
-//return false;
+alert(result);
+return false;
                     if(result == "ok"){
                         alert(check_type + " 처리 되었습니다");
                         location.href = "{{ route('orderlist') }}?{!! $sort_page_move !!}"+"&order_sort="+"{{ $order_sort }}";

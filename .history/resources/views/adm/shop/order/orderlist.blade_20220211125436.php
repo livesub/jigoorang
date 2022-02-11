@@ -121,7 +121,7 @@
         <td><button type="button" onclick="order_cancel();">주문취소</button></td>
         <td><button type="button" onclick="order_check('주문확인');">주문확인</button></td>
         @elseif($od_status == "준비")
-        <td><button type="button" onclick="order_check('결제완료');">결제완료</button></td>
+        <td><button type="button" onclick="">결제완료</button></td>
         <td><button type="button" onclick="">발송</button></td>
         @endif
 
@@ -137,7 +137,6 @@
 
 <form name="order_check_from" id="order_check_from" method="post" action="">
 {!! csrf_field() !!}
-<input type="hidden" name="check_type" id="check_type">
 <table border=1>
     <tr>
         <td><input type="checkbox" name="ct_all" id="ct_all" value="1"></td>
@@ -263,13 +262,8 @@
 @if($od_status == "입금")
 <table border="1">
     <tr>
-        @if($od_status == "입금")
         <td><button type="button" onclick="order_cancel();">주문취소</button></td>
         <td><button type="button" onclick="order_check('주문확인');">주문확인</button></td>
-        @elseif($od_status == "준비")
-        <td><button type="button" onclick="order_check('결제완료');">결제완료</button></td>
-        <td><button type="button" onclick="">발송</button></td>
-        @endif
     </tr>
 </table>
 @endif
@@ -397,7 +391,6 @@
         }
 
         if (confirm("선택된 주문건을 "+ check_type +" 단계로 변경합니다.") == true){    //확인
-            $("#check_type").val(check_type);
             var form_var = $("#order_check_from").serialize();
             $.ajax({
                 headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
@@ -406,8 +399,6 @@
                 data : form_var,
                 dataType : 'text',
                 success : function(result){
-//alert(result);
-//return false;
                     if(result == "ok"){
                         alert(check_type + " 처리 되었습니다");
                         location.href = "{{ route('orderlist') }}?{!! $sort_page_move !!}"+"&order_sort="+"{{ $order_sort }}";

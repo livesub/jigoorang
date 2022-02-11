@@ -406,8 +406,8 @@
                 data : form_var,
                 dataType : 'text',
                 success : function(result){
-//alert(result);
-//return false;
+alert(result);
+return false;
                     if(result == "ok"){
                         alert(check_type + " 처리 되었습니다");
                         location.href = "{{ route('orderlist') }}?{!! $sort_page_move !!}"+"&order_sort="+"{{ $order_sort }}";
