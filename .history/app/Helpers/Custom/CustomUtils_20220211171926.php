@@ -1901,8 +1901,8 @@ $um_value='80/0.5/3'
         $review_infos = $review_sql->get();
 
         if($review_cnt > 0){
-            $rating_item_info = DB::table('rating_item')->where('sca_id', $sca_id)->first();
-            
+            $rating_item_info = DB::table('rating_item')->where('sca_id', 'asdv')->first();
+            var_dump($rating_item_info);
             if($rating_item_info != ""){
                 for($i = 1; $i <= 5; $i++){
                     $item_name_tmp = 'item_name'.$i;

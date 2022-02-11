@@ -1901,19 +1901,15 @@ $um_value='80/0.5/3'
         $review_infos = $review_sql->get();
 
         if($review_cnt > 0){
-            $rating_item_info = DB::table('rating_item')->where('sca_id', $sca_id)->first();
-            
-            if($rating_item_info != ""){
-                for($i = 1; $i <= 5; $i++){
-                    $item_name_tmp = 'item_name'.$i;
-                    $array_val['item_name'][$i] = $rating_item_info->$item_name_tmp;
-                    //직접 계산 방식 보다 shopitem 테이블에 각 평균을 저장 함(220127)
-                    //$score_sum[$i] = $review_sql->sum('score'.$i);
-                    //$score_avg[$i] = $score_sum[$i] / $review_cnt;
-                    //$array_val['score'][$i] = round($score_avg[$i], 2);
-                }
-            }else{
-                $array_val = "error"; 
+            $rating_item_info = DB::table('rating_item')->where('sca_id', 'asdv')->first();
+            var_dump("svsvsd");
+            for($i = 1; $i <= 5; $i++){
+                $item_name_tmp = 'item_name'.$i;
+                $array_val['item_name'][$i] = $rating_item_info->$item_name_tmp;
+                //직접 계산 방식 보다 shopitem 테이블에 각 평균을 저장 함(220127)
+                //$score_sum[$i] = $review_sql->sum('score'.$i);
+                //$score_avg[$i] = $score_sum[$i] / $review_cnt;
+                //$array_val['score'][$i] = round($score_avg[$i], 2);
             }
         }
 

@@ -2615,6 +2615,13 @@ input::placeholder {
     color: #000;
 }
 
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body img{
+    width: 100%;
+    height: 100%;
+    max-width: 160px;
+    max-height: 1;
+}
+
 .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .info.tab {
     padding-top: 0;
 }
@@ -2699,14 +2706,11 @@ input::placeholder {
     padding: 20px 0;
 }
 
-.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body.pos img{
+
+.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list.my_list img {
+    /* width: 20%; */
     max-width: 360px;
     max-height: 180px;
-}
-
-.eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body img {
-    max-width: 160px;
-    max-height: 140px;
 }
 
 .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .info {
@@ -2845,14 +2849,6 @@ input::placeholder {
     font-weight: bold;
 }
 
-/* .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body img{
-    width: 100%;
-    height: 100%;
-    max-width: 160px;
-    max-height: 140px;
-} */
-
-
 .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body .info {
     font-size: 20px;
     font-weight: bold;
@@ -2862,6 +2858,7 @@ input::placeholder {
     text-overflow: ellipsis;
     overflow: hidden;
     max-height: 84px;
+
 }
 
 .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .btn-full-sd {

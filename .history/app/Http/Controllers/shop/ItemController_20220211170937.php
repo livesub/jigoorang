@@ -291,12 +291,9 @@ class ItemController extends Controller
 
         //리뷰 관련
         $review_cnt = DB::table('review_saves')->where([['item_code', $item_info[0]->item_code], ['temporary_yn', 'n'], ['review_blind', 'N']])->count();
+var_dump($item_info[0]->item_code);
+exit;        
         $rating_arr = $CustomUtils->item_each_average($item_info[0]->item_code, $item_info[0]->sca_id);
-
-        if($rating_arr == "error"){
-            return redirect()->back()->with('alert_messages', "입력된 정량 평가가 없습니다");
-            exit;
-        }
 
         return view('shop.item_detail',[
             "item_info"         => $item_info[0],
