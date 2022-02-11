@@ -469,8 +469,7 @@
             alert("발송처리할 주문건을 하나이상 선택해 주십시오.");
             return false;
         }
-
-        var check = true;
+var check = true;
         $("input[name^=ct_chk]:checked").each(function(){
             var order_id = $(this).val();
             if($.trim($("#od_invoice_"+order_id).val()) == ""){
@@ -478,6 +477,7 @@
                 $("#od_invoice_"+order_id).focus();
                 check = false;
                 return false;
+
             }
         });
 
@@ -491,8 +491,8 @@
                     data : form_var,
                     dataType : 'text',
                     success : function(result){
-    //alert(result);
-    //return false;
+    alert(result);
+    return false;
                         if(result == "ok"){
                             alert(check_type + " 처리 되었습니다");
                             location.href = "{{ route('orderlist') }}?{!! $sort_page_move !!}"+"&order_sort="+"{{ $order_sort }}";

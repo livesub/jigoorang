@@ -229,19 +229,16 @@ class OrderController extends Controller
         for($i = 0; $i < count($ct_chk); $i++){
             $order_info = DB::table('shoporders')->where('order_id', $ct_chk[$i])->first();
 
-            $setting = $CustomUtils->setting_infos();
 
+/*
             $cart_up = DB::table('shopcarts')->where([['user_id', $order_info->user_id], ['od_id', $order_info->order_id]])->update([
                 'sct_status'    => "배송",
             ]);
 
             $order_up = DB::table('shoporders')->where('order_id', $order_info->order_id)->update([
                 'od_status'     => "배송",
-                'od_invoice'    => $od_invoice[$ct_chk[$i]],
-                'od_delivery_tel'   => $setting->send_company_tel,
-                'od_delivery_company'   => $setting->send_company_name,
-                'od_delivery_url'   => $setting->send_company_url,
             ]);
+*/
         }
     }
 

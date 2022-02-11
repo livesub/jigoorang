@@ -227,7 +227,7 @@
             @if($od_status == "입금")
             {{ $order->od_invoice }}
             @elseif($od_status == "준비")
-            <input type="text" name="od_invoice[{{ $order->order_id }}]" id="od_invoice_{{ $order->order_id }}">
+            <input type="text" name="od_invoice" id="od_invoice_{{ $order->order_id }}">
             @endif
         </td>
         <td>
@@ -469,8 +469,7 @@
             alert("발송처리할 주문건을 하나이상 선택해 주십시오.");
             return false;
         }
-
-        var check = true;
+var check = true;
         $("input[name^=ct_chk]:checked").each(function(){
             var order_id = $(this).val();
             if($.trim($("#od_invoice_"+order_id).val()) == ""){
@@ -478,6 +477,7 @@
                 $("#od_invoice_"+order_id).focus();
                 check = false;
                 return false;
+
             }
         });
 
