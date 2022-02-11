@@ -343,7 +343,7 @@
         swiper3.slideTo('{{ $cate }}');
     }
 
-    sub_m_slide('{{ $sub_cate }}'); // 서브 카테고리
+    //sub_m_slide('{{ $sub_cate }}'); // 서브 카테고리
 </script>
 
 

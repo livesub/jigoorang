@@ -2,6 +2,7 @@
 
 @section('content')
 
+
     <!-- 메인 컨테이너 시작 -->
     <div class="sub-container">
 
@@ -339,11 +340,7 @@
 </script>
 
 <script>
-    window.onload=function sub_slide() { //대 카테고리
-        swiper3.slideTo('{{ $cate }}');
-    }
-
-    sub_m_slide('{{ $sub_cate }}'); // 서브 카테고리
+    sub_m_slide('{{ $sub_cate }}');
 </script>
 
 

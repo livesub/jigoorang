@@ -339,11 +339,8 @@
 </script>
 
 <script>
-    window.onload=function sub_slide() { //대 카테고리
-        swiper3.slideTo('{{ $cate }}');
-    }
-
-    sub_m_slide('{{ $sub_cate }}'); // 서브 카테고리
+    sub_slide('{{ $cate_num }}'); //메뉴 대카테고리 슬라이드 (위와 같이 순번 넣어 주세요)
+    sub_m_slide('{{ $sub_cate }}');
 </script>
 
 
