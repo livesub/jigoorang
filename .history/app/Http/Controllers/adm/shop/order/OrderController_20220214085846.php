@@ -1335,8 +1335,10 @@ exit;
                 $cart_info = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $ct_id[$i]]])->first();
                 $item_info = DB::table('shopitems')->where('item_code', $cart_info->item_code)->first();
 
+                var_dump("cart_info->sct_qty====> ".$cart_info->sct_qty);
+                var_dump("sct_qty[$i]====> ".$sct_qty[$i]);
                 if($cart_info->sct_qty < $sct_qty[$i]){
-                    echo "big_qty";
+                    echo "big";
                     $qty_chk = false;
                     exit;
                 }
@@ -1346,57 +1348,64 @@ exit;
         if($qty_chk == true){
             for($i = 0; $i < count($ct_id); $i++){
                 if(isset($ct_chk[$i])){
-                    if($cart_info->return_story == ""){
+    /*
+                    if($cart_info->sct_qty != $sct_qty[$i]){
+                        if($cart_info->sct_qty > $sct_qty[$i]){
+                            if($cart_info->return_story == ""){
 
-                        $cart_up = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $ct_id[$i]]])->update([
-                            'return_story'  => '그 외 기타사유',
-                            'return_story_content' => '관리자 직접 처리',
-                            'return_process' => 'Y',
-                            'return_process_date'  => date("Y-m-d H:i:s", time()),
-                        ]);
-                    }else{
-                        $cart_up = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $ct_id[$i]]])->update([
-                            'return_process' => 'Y',
-                            'return_process_date'  => date("Y-m-d H:i:s", time()),
-                        ]);
+                                $cart_up = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $ct_id[$i]]])->update([
+                                    'return_story'  => '그 외 기타사유',
+                                    'return_story_content' => '관리자 직접 처리',
+                                    'return_process' => 'Y',
+                                    'return_process_date'  => date("Y-m-d H:i:s", time()),
+                                ]);
+                            }else{
+                                $cart_up = DB::table('shopcarts')->where([['od_id', $order_id], ['id', $ct_id[$i]]])->update([
+                                    'return_process' => 'Y',
+                                    'return_process_date'  => date("Y-m-d H:i:s", time()),
+                                ]);
+                            }
+
+                            //$sct_option = mb_substr($cart_info->sct_option, 0, 20, 'utf-8');
+                            if(strpos($cart_info->sct_option, " / ") !== false) {
+                                $item_options = $cart_info->sct_option;
+                            } else {
+                                $item_options = "";
+                            }
+
+                            //제조사및 상품명 찾기
+                            if($item_info->item_manufacture == "") $item_manufacture = "";
+                            else $item_manufacture = "[".$item_info->item_manufacture."]";
+                            //제목
+                            $item_name = $item_manufacture.stripslashes($item_info->item_name);
+
+                            $yoil = $CustomUtils->get_yoil(date("Y-m-d H:i:s", time()));
+
+                            $mod_history .= '
+                            <tr>
+                                <td>'.date("Y-m-d H:i:s", time()).' ('.$yoil.')</td>
+                                <td class="prod_name">
+                                    <div>'.$item_name.'</div>
+                                    <div>'.$item_options.'</div>
+                                </td>
+                                <td>교환</td>
+                                <td>'.$sct_qty[$i].'</td>
+                                <td>'.$cart_info->sct_qty_cancel.'</td>
+                                <td class="buyer">
+                                    <div>'.$user_name.'</div>
+                                    <div>'.$user_id.'</div>
+                                </td>
+                            </tr>
+                            ';
+                            //$mod_history .= date("Y-m-d H:i:s", time()).' '.$sct_option_name.' 교환 '.$cart_info->sct_qty.' -> '.$sct_qty[$i].'  '.$user_name."   ".$user_id."\n";
+                        }
                     }
-
-                    //$sct_option = mb_substr($cart_info->sct_option, 0, 20, 'utf-8');
-                    if(strpos($cart_info->sct_option, " / ") !== false) {
-                        $item_options = $cart_info->sct_option;
-                    } else {
-                        $item_options = "";
-                    }
-
-                    //제조사및 상품명 찾기
-                    if($item_info->item_manufacture == "") $item_manufacture = "";
-                    else $item_manufacture = "[".$item_info->item_manufacture."]";
-                    //제목
-                    $item_name = $item_manufacture.stripslashes($item_info->item_name);
-
-                    $yoil = $CustomUtils->get_yoil(date("Y-m-d H:i:s", time()));
-
-                    $mod_history .= '
-                    <tr>
-                        <td>'.date("Y-m-d H:i:s", time()).' ('.$yoil.')</td>
-                        <td class="prod_name">
-                            <div>'.$item_name.'</div>
-                            <div>'.$item_options.'</div>
-                        </td>
-                        <td>교환</td>
-                        <td>'.$sct_qty[$i].'</td>
-                        <td>'.$cart_info->sct_qty_cancel.'</td>
-                        <td class="buyer">
-                            <div>'.$user_name.'</div>
-                            <div>'.$user_id.'</div>
-                        </td>
-                    </tr>
-                    ';
-                    //$mod_history .= date("Y-m-d H:i:s", time()).' '.$sct_option_name.' 교환 '.$cart_info->sct_qty.' -> '.$sct_qty[$i].'  '.$user_name."   ".$user_id."\n";
+    */
                 }
+
             }
         }
-
+exit;
         $order_up = DB::table('shoporders')->where('order_id', $order_id)->update([
             'od_mod_history'    => $mod_history,
         ]);
