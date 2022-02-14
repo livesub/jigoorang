@@ -19,7 +19,7 @@
                                                     if($review == '1') $btn_ment = '임시저장중';
                                                     else $btn_ment = '리뷰작성';
                                                 @endphp
-                                        <div class="cot_body">
+                                        <div class="cot_body pos">
                                             <p class="cr_04 mb-20">{{ substr($exp_appinfo->regi_date, 0, 10) }}</p>
                                             <img src="{{ $main_image_name_disp }}" alt="">
                                             <div class="info">

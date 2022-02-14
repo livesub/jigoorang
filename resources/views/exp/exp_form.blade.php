@@ -126,15 +126,15 @@
                                 <p id="ad_addr">
                                 {{ $address->ad_zip1 }})
                                 {{ $address->ad_addr1 }}</p>
-                                <p id="ad_addr6">{{ $address->ad_addr2 }}</p>
+                                <span id="ad_addr6">{{ $address->ad_addr2 }}</span>
 
-                                <p id="ad_addr7">{{ $address->ad_addr3 }}</p>
+                                <span id="ad_addr7">{{ $address->ad_addr3 }}</span>
                                 </li>
 
                             </ul>
 
                             <ul class="information-input">
-                                <li> 배송메모</li>
+                                <li>배송메모</li>
                                 <input type="hidden" id="ad_jibeon_view" name="ad_jibeon_view" value="{{ $address->ad_jibeon }}">
                                 <input type="text" id="ship_memo" name="ship_memo" placeholder="배송시 남길 메세지를 입력해 주세요">
                             </ul>
@@ -295,7 +295,7 @@
         //히든 값으로 가져온 값을 해당 태그에 html이나 text로 넣어준다.
         $('#ad_name').text($("#od_b_name").val());
         $('#ad_hp').text($("#od_b_hp").val());
-        let $ad_addrs = $("#od_b_zip").val()+") "+$("#od_b_addr1").val()+" "
+        let $ad_addrs = $("#od_b_zip").val()+") "+$("#od_b_addr1").val()+" ";
         let $ad_addrs6 =$("#od_b_addr2").val() +$("#od_b_addr3").val() ; //상세주소 참조메모
         //let $ad_addrs7 = $("#od_b_addr3").val();
         $('#ad_addr').text($ad_addrs);

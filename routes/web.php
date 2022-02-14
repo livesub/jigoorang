@@ -31,12 +31,11 @@ Route::get('/', [
     'as' => 'main.index',
     'uses' => 'App\Http\Controllers\MainController@index',
 ]);
-
+*/
 Route::get('/home', [
     'as' => 'home.index',
     'uses' => 'App\Http\Controllers\MainController@index',
 ]);
- */
 
 /** 체험단 미리 오픈을 위해 라우터 변경(나중에 위에로 변경)-211207 */
 
@@ -293,6 +292,42 @@ Route::group(['middleware' => ['auth']], function () {
         'as' => 'mypage.qna_view',
         'uses' => 'App\Http\Controllers\member\QnaController@qna_view',
     ]);
+
+    //주문 배송 내역
+    Route::get('member/orderview', [
+        'as' => 'mypage.orderview',
+        'uses' => 'App\Http\Controllers\member\OrderviewController@orderview',
+    ]);
+
+    //주문 취소
+    Route::post('member/ajax_itemspaycancel', [
+        'as' => 'mypage.ajax_itemspaycancel',
+        'uses' => 'App\Http\Controllers\member\OrderviewController@ajax_itemspaycancel',
+    ]);
+
+    //주문 취소
+    Route::get('member/orderview_detail', [
+        'as' => 'mypage.orderview_detail',
+        'uses' => 'App\Http\Controllers\member\OrderviewController@orderview_detail',
+    ]);
+
+    //취소/교환/환불 안내
+    Route::post('member/return_sign_up', [
+        'as' => 'mypage.return_sign_up',
+        'uses' => 'App\Http\Controllers\member\OrderviewController@return_sign_up',
+    ]);
+
+    //저장
+    Route::post('member/return_sign_up_regi', [
+        'as' => 'mypage.return_sign_up_regi',
+        'uses' => 'App\Http\Controllers\member\OrderviewController@return_sign_up_regi',
+    ]);
+
+    //취소/교환/환불 안내
+    Route::get('member/cancel_return_info', [
+        'as' => 'mypage.cancel_return_info',
+        'uses' => 'App\Http\Controllers\member\OrderviewController@cancel_return_info',
+    ]);
  });
 
 /* 이메일 확인 리턴(외부에서 접속 해야 하기에 밖으로 뺌) */
@@ -398,6 +433,54 @@ Route::get('privacy', [  //개인정보
     'uses' => 'App\Http\Controllers\info\InfoController@privacy',
 ]);
 
+//검색 관련
+Route::get('search', [
+    'as' => 'search',
+    'uses' => 'App\Http\Controllers\search\SearchController@index',
+]);
+
+Route::get('search_shop', [
+    'as' => 'search_shop',
+    'uses' => 'App\Http\Controllers\search\SearchController@search_shop',
+]);
+
+Route::get('search_notice', [
+    'as' => 'search_notice',
+    'uses' => 'App\Http\Controllers\search\SearchController@search_notice',
+]);
+
+Route::get('search_exp', [
+    'as' => 'search_exp',
+    'uses' => 'App\Http\Controllers\search\SearchController@search_exp',
+]);
+
+//지구를 구하는 기록
+Route::get('notice', [
+    'as' => 'notice',
+    'uses' => 'App\Http\Controllers\notice\NoticeController@notice',
+]);
+
+Route::get('notice_view', [
+    'as' => 'notice_view',
+    'uses' => 'App\Http\Controllers\notice\NoticeController@notice_view',
+]);
+
+//지구랭 소개
+Route::get('company', [
+    'as' => 'company',
+    'uses' => 'App\Http\Controllers\company\CompanyController@index',
+]);
+
+//지구를 구하는 랭킹 관련
+Route::get('ranking_list', [
+    'as' => 'ranking_list',
+    'uses' => 'App\Http\Controllers\ranking\RankingController@ranking_list',
+]);
+
+Route::get('ranking_view', [
+    'as' => 'ranking_view',
+    'uses' => 'App\Http\Controllers\ranking\RankingController@ranking_view',
+]);
 
 /*** 프론트 메뉴 관리 */
 //일반 페이지(html) 처리
@@ -502,3 +585,9 @@ Route::fallback(function () {
     //return redirect()->route('main.index')->with('alert_messages', __('auth.failed_to_limit_time'));
     return redirect()->route('main.index');
 });
+
+//실제 서버에서 한번 돌리고 막는다
+Route::get('avg_test', [
+    'as' => 'avg_test',
+    'uses' => 'App\Http\Controllers\ranking\RankingController@avg_test',
+]);

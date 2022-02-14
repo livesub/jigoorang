@@ -61,7 +61,7 @@ var swiper = new Swiper(".bastSwiper", {
 
 
 var swiper = new Swiper(".saleSwiper", {
-  slidesPerView: 5.3,
+  slidesPerView: 5.5,
   spaceBetween: 0,
   slidesPerGroup: 4,
   grabCursor: true,
@@ -78,35 +78,56 @@ var swiper = new Swiper(".saleSwiper", {
     290: {
       slidesPerView: 2.1,
       spaceBetween: 5,
+      slidesOffsetBefore: 0,
     },
     360: {
       slidesPerView: 2.1,
       spaceBetween: 7,
+      slidesOffsetBefore: 0,
     },
     480: {
       slidesPerView: 3.5,
       spaceBetween: 10,
+      slidesOffsetBefore: 0,
     },
     980: {
       slidesPerView: 3.5,
       spaceBetween: 10,
+      slidesOffsetBefore: 0,
     },
     1024: {
       slidesPerView: 4.5,
       spaceBetween: 10,
+      slidesOffsetBefore: 0,
     },
     1200: {
       slidesPerView: 5.3,
       spaceBetween: 10,
+      slidesOffsetBefore: 0,
     },
     1460: {
-      slidesPerView: 5.3,
+      slidesPerView: 6.5,
       spaceBetween: 10,
+      slidesOffsetBefore: 120,
     },
     1600: {
-      slidesPerView: 5.3,
+      slidesPerView: 6.5,
       spaceBetween: 10,
+      slidesOffsetBefore: 200,
     },
+
+    1800: {
+      slidesPerView: 6.5,
+      spaceBetween: 10,
+      slidesOffsetBefore: 300,
+    },
+
+    1900: {
+      slidesPerView: 6.5,
+      spaceBetween: 10,
+      slidesOffsetBefore: 315,
+    },
+
   }
 });
 
@@ -131,34 +152,53 @@ var swiper = new Swiper(".saleSwiper2", {
     290: {
       slidesPerView: 2.1,
       spaceBetween: 5,
+      slidesOffsetBefore: 0,
     },
     360: {
       slidesPerView: 2.1,
       spaceBetween: 7,
+      slidesOffsetBefore: 0,
     },
     480: {
       slidesPerView: 3.5,
       spaceBetween: 10,
+      slidesOffsetBefore: 0,
     },
     980: {
       slidesPerView: 3.5,
       spaceBetween: 10,
+      slidesOffsetBefore: 0,
     },
     1024: {
       slidesPerView: 4.5,
       spaceBetween: 10,
+      slidesOffsetBefore: 0,
     },
     1200: {
       slidesPerView: 5.3,
       spaceBetween: 10,
+      slidesOffsetBefore: 0,
     },
     1460: {
-      slidesPerView: 5.3,
+      slidesPerView: 6.5,
       spaceBetween: 10,
+      slidesOffsetBefore: 120,
     },
     1600: {
-      slidesPerView: 5.3,
+      slidesPerView: 6.5,
       spaceBetween: 10,
+      slidesOffsetBefore: 200,
+    },
+
+    1800: {
+      slidesPerView: 6.5,
+      spaceBetween: 10,
+      slidesOffsetBefore: 300,
+    },
+    1900: {
+      slidesPerView: 6.5,
+      spaceBetween: 10,
+      slidesOffsetBefore: 315,
     },
   }
 });
@@ -198,6 +238,7 @@ var swiper = new Swiper(".saleSwiper3", {
 });
 
 
+
 var swiper = new Swiper(".Swiper3", {
   pagination: {
     el: ".swiper-pagination",
@@ -207,4 +248,6 @@ var swiper = new Swiper(".Swiper3", {
   //   prevEl: ".swiper-button-prev",
   // },
 });
+
+
 

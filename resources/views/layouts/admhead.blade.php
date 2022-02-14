@@ -46,10 +46,16 @@ header('Pragma: public');
                     </tr>
 
                     @if(auth()->user()->user_level < 2) <!-- 총관리자만 보는 메뉴 -->
-<!--
+
                     <tr>
                         <td><a href="{{ route('adm.popup.index') }}">팝업 관리</a></td>
                     </tr>
+
+                    <tr>
+                        <td><a href="{{ route('adm.notice') }}">지구록 관리</a></td>
+                    </tr>
+
+<!--
                     <tr>
                         <td><a href="{{ route('adm.boardmanage.index') }}">게시판 관리</a></td>
                     </tr>

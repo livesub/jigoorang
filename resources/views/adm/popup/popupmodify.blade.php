@@ -29,50 +29,54 @@
 </table>
 
 <table border=1>
-<form name="pop_modi_form" id="pop_modi_form" method="post" action="{{ route('adm.pop.modifysave') }}">
+<form name="pop_modi_form" id="pop_modi_form" method="post" action="{{ route('adm.pop.modifysave') }}" enctype="multipart/form-data">
 {!! csrf_field() !!}
 <input type="hidden" name="num" id="num" value="{{ $popup_info->id }}">
 <input type="hidden" name="page" id="page" value="{{ $page }}">
-
+<!--
     <tr>
         <td>시간</td>
         <td><input type="text" name="pop_disable_hours" id="pop_disable_hours" size="3" value="{{ $popup_info->pop_disable_hours }}">시간
         <br>※고객이 다시 보지 않음을 선택할 시 몇 시간동안 팝업레이어를 보여주지 않을지 설정합니다.</td>
     </tr>
-    <tr>
-        <td>시작일시</td>
-        <td><input type="text" name="pop_start_time" id="pop_start_time" value="{{ $popup_info->pop_start_time }}" readonly></td>
-    </tr>
-    <tr>
-        <td>종료일시</td>
-        <td><input type="text" name="pop_end_time" id="pop_end_time" value="{{ $popup_info->pop_end_time }}" readonly>
-        <br>※기본 오늘 날짜의 7일 후로
-        </td>
-    </tr>
-    <tr>
-        <td>팝업레이어 좌측 위치</td>
-        <td><input type="text" name="pop_left" id="pop_left" size="3" maxlength="3" value="{{ $popup_info->pop_left }}">px</td>
-    </tr>
-    <tr>
-        <td>팝업레이어 상단 위치</td>
-        <td><input type="text" name="pop_top" id="pop_top" size="3" maxlength="3" value="{{ $popup_info->pop_top }}">px</td>
-    </tr>
-    <tr>
-        <td>팝업레이어 넓이</td>
-        <td><input type="text" name="pop_width" id="pop_width" size="3" maxlength="3" value="{{ $popup_info->pop_width }}">px</td>
-    </tr>
-    <tr>
-        <td>팝업레이어 높이</td>
-        <td><input type="text" name="pop_height" id="pop_height" size="3" maxlength="3" value="{{ $popup_info->pop_height }}">px</td>
-    </tr>
+-->
     <tr>
         <td>팝업 제목</td>
         <td><input type="text" name="pop_subject" id="pop_subject" value="{{ stripslashes($popup_info->pop_subject) }}"></td>
     </tr>
     <tr>
-        <td>팝업 내용</td>
-        <td><textarea name="pop_content" id="pop_content">{{ $popup_info->pop_content }}</textarea></td>
+        <td>팝업이미지(필수)</td>
+        <td>
+            <input type="file" name="pop_img" id="pop_img">
+            <br>{{ $popup_info->pop_img_name }}<br>
+            <input type='checkbox' name="file_chk1" id="file_chk1" value='1'>수정,삭제,새로 등록시 체크 하세요.
+        </td>
     </tr>
+
+    <tr>
+        <td>경로</td>
+        <td>
+            <input type="text" name="pop_url" id="pop_url" value="{{ $popup_info->pop_url }}">
+        </td>
+    </tr>
+
+    <tr>
+        <td>타겟</td>
+        <td>
+        @php
+            if($popup_info->pop_target == 'N'){
+                $pop_target_no_chk = "checked";
+                $pop_target_yes_chk = "";
+            }else{
+                $pop_target_no_chk = "";
+                $pop_target_yes_chk = "checked";
+            }
+        @endphp
+            <input type="radio" name="pop_target" id="pop_target_no" value="N" {{ $pop_target_no_chk }}>현재창
+            <input type="radio" name="pop_target" id="pop_target_yes" value="Y" {{ $pop_target_yes_chk }}>새창
+        </td>
+    </tr>
+
     <tr>
         <td>출력 유무</td>
         <td>
@@ -155,6 +159,7 @@
 
 
 <script type="text/javascript">
+/*
     var oEditors = [];
     nhn.husky.EZCreator.createInIFrame({
         oAppRef: oEditors,
@@ -169,20 +174,29 @@
             //aAdditionalFontList : aAdditionalFontSet,		// 추가 글꼴 목록
         }, //boolean
     });
+*/
 </script>
 
 
 <script>
     function pop_modi(elClickedObj){
+/*
         oEditors.getById["pop_content"].exec("UPDATE_CONTENTS_FIELD", []);
         var pop_content = $("#pop_content").val();
-
+*/
         if($.trim($("#pop_subject").val()) == ""){
             alert("제목을 입력 하세요.");
             $("#pop_subject").focus();
             return false;
         }
-
+/*
+        if($("#pop_img").val() == ""){
+            alert("팝업이미지를 첨부 하세요.");
+            $("#pop_img").focus();
+            return false;
+        }
+*/
+/*
         if( pop_content == ""  || pop_content == null || pop_content == '&nbsp;' || pop_content == '<p>&nbsp;</p>')  {
              alert("내용을 입력하세요.");
              oEditors.getById["pop_content"].exec("FOCUS"); //포커싱
@@ -190,6 +204,9 @@
         }try {
             $("#pop_modi_form").submit();
         } catch(e) {}
+*/
+
+        $("#pop_modi_form").submit();
     }
 </script>
 
