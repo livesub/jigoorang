@@ -1141,11 +1141,10 @@ background-size: cover;
         top: 30%;
         font-size: 18px;
     }
-
+/* 
     .eval .board.mypage_list .board_wrap .list.ev_rul .btn_re .re_li li:nth-child(1) {
-        /* background: url("../recources/icons/arrow-option-01.png") no-repeat right; */
-        height: 25px;
-    }
+        background: url("../recources/icons/arrow-option-01.png") no-repeat right;
+    } */
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .btn_re .re_li li:nth-child(1) span {
         margin-right: 10px;
