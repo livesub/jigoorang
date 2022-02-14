@@ -1142,9 +1142,9 @@ document.orderform.addEventListener("keydown", evt => {
         var od_send_cost2 = parseInt($("#od_send_cost2").val());    //도서 산간 배송비
         var tot_price_tmp = (tot_price + od_send_cost2) - 1000;   //카드 결제 최하 금액이 1000원 까지라 1000원 은 무조건 카드 결제 해야함
         $("#use_point").text(0);
-
+alert(user_point);
         if(user_point <= 0){
-            //alert('사용할 포인트가 부족 합니다');
+            alert('사용할 포인트가 부족 합니다');
             return false;
         }
 

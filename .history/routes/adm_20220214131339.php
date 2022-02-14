@@ -462,11 +462,6 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'uses' => 'App\Http\Controllers\adm\review\AdmReviewMangerController@review_modi',
     ]);
 
-    Route::post('review_modi_save', [
-        'as' => 'adm.review.review_modi_save',
-        'uses' => 'App\Http\Controllers\adm\review\AdmReviewMangerController@review_modi_save',
-    ]);
-
 /*** 관리자 1:1 문의 관리 */
     //mypage 1:1 문의
     Route::get('qna_list', [

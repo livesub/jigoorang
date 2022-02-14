@@ -206,7 +206,31 @@ $("#block_1").show();
 
 <script>
     function review_modi(num){
-        location.href = "{{ route('adm.review.review_modi') }}?num="+num;
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            type : "post",
+            url : "{{ route('adm.review.review_modi') }}",
+            data : {
+                'num' : num,
+            },
+            dataType : 'text',
+            success : function(result){
+//alert(result);
+//return false;
+                if(result == 'blind_ok'){
+                    alert('블라인드(blind) 처리 되었습니다.');
+                    location.reload();
+                }
+
+                if(result == 'blind_no'){
+                    alert('블라인드(blind) 해제 처리 되었습니다.');
+                    location.reload();
+                }
+            },
+            error: function(result){
+                console.log(result);
+            },
+        });
     }
 </script>
 

@@ -204,11 +204,7 @@ $("#block_1").show();
     }
 </script>
 
-<script>
-    function review_modi(num){
-        location.href = "{{ route('adm.review.review_modi') }}?num="+num;
-    }
-</script>
+
 
 
 

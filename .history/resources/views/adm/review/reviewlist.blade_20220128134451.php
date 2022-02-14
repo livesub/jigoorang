@@ -67,7 +67,6 @@ else if($seach_3 == 'user_name') $seach_3_name_selected = 'selected';
         <td>체험단명</td>
         <td>상품명</td>
         <td>블라인드처리</td>
-        <td>수정</td>
     </tr>
     @foreach($review_save_rows as $review_save_row)
         @php
@@ -116,7 +115,6 @@ else if($seach_3 == 'user_name') $seach_3_name_selected = 'selected';
         <td>{{ $title_ment }}</td>
         <td>{{ $item_info->item_name }}</td>
         <td><button type="button" onclick="review_blind('{{ $review_save_row->id }}', '{{ $review_save_row->review_blind }}')">{{ $blind_ment }}</button></td>
-        <td><button type="button" onclick="review_modi('{{ $review_save_row->id }}')">수정</button></td>
     </tr>
     <tr>
         <td colspan=5>{{ $review_save_row->review_content }}</td>
@@ -204,11 +202,7 @@ $("#block_1").show();
     }
 </script>
 
-<script>
-    function review_modi(num){
-        location.href = "{{ route('adm.review.review_modi') }}?num="+num;
-    }
-</script>
+
 
 
 
