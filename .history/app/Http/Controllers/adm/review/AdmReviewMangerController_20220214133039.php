@@ -194,10 +194,10 @@ class AdmReviewMangerController extends Controller
 
         $id = $request->input('num');
         $review_save = DB::table('review_saves')->where('id', $id)->first();
-        $review_save_imgs = DB::table('review_save_imgs')->where('rs_id', $review_save->id)->get();
+        //$review_save_imgs = DB::table('review_save_imgs')->where('rs_id', $review_save->id)->get();
+
+
         $exp_info = DB::table('exp_list')->select('title')->where('id', $review_save->exp_id)->first(); //체험단명 찾기
-        $item_info = DB::table('shopitems')->select('item_name')->where('item_code', $review_save->item_code)->first(); //상품명 찾기
-        $rating_item_info = DB::table('rating_item')->where('sca_id', $review_save->sca_id)->first();
 
         if(is_null($exp_info)){
             $title_ment = '';
@@ -208,15 +208,17 @@ class AdmReviewMangerController extends Controller
         if($review_save->review_blind == 'N') $review_blind = "노출";
         else $review_blind = "블라인드";
 
+        $item_info = DB::table('shopitems')->select('item_name')->where('item_code', $review_save->item_code)->first(); //상품명 찾기
+        $rating_item_info = DB::table('rating_item')->where('sca_id', $review_save->sca_id)->first();
         //rating 있는 지 파악
-        $dip_name = "";
         for($i = 1; $i <= 5; $i++){
             $tmp = "item_name".$i;
             $score_tmp = "score".$i;
 
-            $dip_name .= $rating_item_info->$tmp." ".number_format($review_save->$score_tmp, 2)." 점 / ";
+            $dip_name .= $rating_item_info->$tmp." ".number_format($review_save_row->$score_tmp, 2)." 점 / ";
         }
         $dip_name = substr($dip_name, 0, -2);
+
 
         return view('adm.review.review_modi',[
             'CustomUtils'       => $CustomUtils,
@@ -225,9 +227,8 @@ class AdmReviewMangerController extends Controller
             'item_name'         => stripslashes($item_info->item_name),
             'review_blind'      => $review_blind,
             'dip_name'          => $dip_name,
-            'review_content'    => $review_save->review_content,
-            'review_save_imgs'  => $review_save_imgs,
         ]);
+var_dump($id);
     }
 
 }
