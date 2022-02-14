@@ -1143,6 +1143,7 @@ document.orderform.addEventListener("keydown", evt => {
         var tot_price_tmp = (tot_price + od_send_cost2) - 1000;   //카드 결제 최하 금액이 1000원 까지라 1000원 은 무조건 카드 결제 해야함
         $("#use_point").text(0);
 
+user_point = 0;
         if(user_point <= 0){
             //alert('사용할 포인트가 부족 합니다');
             return false;
