@@ -545,7 +545,7 @@
 
 <script>
     function excel_down(){
-        location.href = "{{ route('order_excel',) }}?{!! $sort_page_move !!}"+"&order_sort="+"{{ $order_sort }}";
+        location.href = "{{ route('order_excel', $sort_page_move) }};
 alert("작업중");
     }
 </script>

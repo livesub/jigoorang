@@ -250,11 +250,14 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
     ]);
 
     //주문서 엑셀 다운로드
-    Route::get('order_excel', [
-        'as' => 'order_excel',
-        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@order_excel',
+    Route::get('return_popup', [
+        'as' => 'return_popup',
+        'uses' => 'App\Http\Controllers\adm\shop\order\OrderController@return_popup',
     ]);
 
+
     /* 체험단 관리 */
+
+
 });
 
