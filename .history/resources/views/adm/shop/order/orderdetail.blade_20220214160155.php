@@ -40,7 +40,7 @@
         <td>결제금액 : {{ number_format($order_info->real_card_price) }}</strong>원</td>
         <td>송장번호 : {{ $order_info->od_invoice }}</td>
     </tr>
-    @if($order_info->od_status != "상품취소")
+    @if($order_info->od_status == "상품취소")
     <tr>
         <td><button type="button" onclick="items_cancel('상품취소')">취소</button></td>
     </tr>
