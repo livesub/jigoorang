@@ -253,10 +253,9 @@ class AdmReviewMangerController extends Controller
                     $review_save_cnt = DB::table('review_save_imgs')->where('id', "$review_id")->count();
                     if($review_save_cnt > 0){
                         //디비 이미지 삭제
-var_dump("del!!!!!!!!");
                     }
-
-
+var_dump("dddd====> ".$review_save_imgs);
+//                    var_dump("del!!!!!!!!");
                 }
             }
 

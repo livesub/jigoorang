@@ -247,16 +247,10 @@ class AdmReviewMangerController extends Controller
 
             if($file_chk == 1){
                 if($review_img != ""){
-                    //var_dump($file_chk);
+                    var_dump($file_chk);
                 }else{
                     //체크 박스에 체크는 되고 이미지를 첨부 안했을땐 이미지 삭제
-                    $review_save_cnt = DB::table('review_save_imgs')->where('id', "$review_id")->count();
-                    if($review_save_cnt > 0){
-                        //디비 이미지 삭제
-var_dump("del!!!!!!!!");
-                    }
-
-
+                    var_dump("del!!!!!!!!");
                 }
             }
 
@@ -266,5 +260,6 @@ var_dump("del!!!!!!!!");
 
 
         }
+        //dd($review_img);
     }
 }

@@ -239,32 +239,14 @@ class AdmReviewMangerController extends Controller
         for($i = 1; $i <= 5; $i++){
             $id_tmp = "review_id_".$i;
             $img_tmp = "review_img_".$i;
-            $file_chk_tmp = "file_chk_".$i;
+            $review_id = $request->input($id_tmp);
 
-            $review_id = $request->input($id_tmp);  //수정된 id 값
-            $review_img = $request->file($img_tmp); //이미지 첨부
-            $file_chk = $request->input($file_chk_tmp); //체크 여부
-
-            if($file_chk == 1){
-                if($review_img != ""){
-                    //var_dump($file_chk);
-                }else{
-                    //체크 박스에 체크는 되고 이미지를 첨부 안했을땐 이미지 삭제
-                    $review_save_cnt = DB::table('review_save_imgs')->where('id', "$review_id")->count();
-                    if($review_save_cnt > 0){
-                        //디비 이미지 삭제
-var_dump("del!!!!!!!!");
-                    }
+            $review_img_cnt = $request->file($img_tmp);
 
 
-                }
-            }
 
-/*
-
-*/
-
-
+var_dump($review_img_cnt);
         }
+        //dd($review_img);
     }
 }

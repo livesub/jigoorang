@@ -45,7 +45,7 @@
         <td>
             <table border=1>
                 @php
-                    $k = 1;
+                    $k = 0;
                 @endphp
                 @foreach($review_save_imgs as $review_save_img)
                     @php
@@ -57,23 +57,20 @@
                     @endphp
                 <tr>
                     <td>
-                        <input type="hidden" name="review_id_{{ $k }}" value="{{ $review_save_img->id }}">
+                        <input type="hidden" name="review_id" value="{{ $review_save_img->id }}">
                         <input type="file" name="review_img_{{ $k }}" id="review_img_{{ $k }}">
                         <br><img src="{{ asset('/data/review/'.$img_src) }}">
                         <br><input type='checkbox' name="file_chk_{{ $k }}" id="file_chk_{{ $k }}" value='1'>수정,삭제,새로 등록시 체크 하세요.
                     </td>
                 </tr>
-                @php
-                    $k++;
-                @endphp
                 @endforeach
 
                 @for($i = count($review_save_imgs)+1; $i <= 5; $i++)
                 <tr>
                     <td>
-                        <input type="file" name="review_img_{{ $i }}" id="review_img_{{ $i }}">
+                        <input type="file" name="review_img" id="review_img_{{ $i }}">
                         <br>
-                        <br><input type='checkbox' name="file_chk_{{ $i }}" id="file_chk_{{ $i }}" value='1'>수정,삭제,새로 등록시 체크 하세요.
+                        <br><input type='checkbox' name="file_chk{{ $i }}" id="file_chk{{ $i }}" value='1'>수정,삭제,새로 등록시 체크 하세요.
                     </td>
                 </tr>
                 @endfor
