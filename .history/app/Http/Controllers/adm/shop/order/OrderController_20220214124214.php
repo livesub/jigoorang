@@ -1490,7 +1490,7 @@ exit;
         $cart_num   = $request->input('cart_num');
         $return_process   = $request->input('return_process');
         $cancel_qty   = $request->input('cancel_qty');
-
+dd($return_process);
         $order_info = DB::table('shoporders')->where('order_id', $order_id)->first();
         $cart_info = DB::table('shopcarts')->where('id', $cart_num)->first();
         $item_info = DB::table('shopitems')->where('item_code', $cart_info->item_code)->first();

@@ -52,35 +52,27 @@ class OrderController extends Controller
         $fr_date            = $request->input('fr_date');
         $to_date            = $request->input('to_date');
         $order_sort         = $request->input('order_sort');
-        $return_proc        = $request->input('return_proc');
 
         //배송 완료는 결제후 9일후에 자동으로 배송완료로 변환 해 준다
         $send_complete = $this->send_complete();
 
         if($od_status == "") $od_status = "입금";
+/*
+        $data = array(
+            'sel_field'          => $request->input('sel_field'),
+            'search'             => $request->input('search'),
+            'od_status'          => $request->input('od_status'),
+            'od_settle_case'     => $request->input('od_settle_case'),
+            'od_cancel_price'    => $request->input('od_cancel_price'),
+            'od_refund_price'    => $request->input('od_refund_price'),
+            'od_receipt_point'   => $request->input('od_receipt_point'),
+            'fr_date'            => $request->input('fr_date'),
+            'to_date'            => $request->input('to_date'),
+            'page'               => $request->input('page'),
+        );
+*/
 
-
-        if($od_status != "교환"){
-            $orders = DB::table('shoporders')->where('od_status', $od_status);
-        }else{
-            $orders = DB::table('shoporders as a')
-            ->select('a.*', 'b.return_process')
-            ->leftjoin('shopcarts as b', function($join) {
-                    $join->on('a.order_id', '=', 'b.od_id');
-                })
-            ->where('a.exchange_item_chk', 'Y');
-
-            if($return_proc == "N"){
-                $orders = $orders->where('b.return_process','N');
-            }elseif($return_proc == "Y"){
-                $orders = $orders->where('b.return_process','Y');
-            }
-
-            $orders = $orders->groupBy('a.order_id');
-            //->orderBy('a.id')
-            //$orders = $orders->get();
-            //$orders = DB::table('shoporders');
-        }
+        $orders = DB::table('shoporders')->where('od_status', $od_status);
 
         if ($search != "") {    //검색
             if ($sel_field != "") {
@@ -91,10 +83,6 @@ class OrderController extends Controller
         if ($fr_date && $to_date) {
             $orders->whereBetween('od_receipt_time', [$fr_date.' 00:00:00', $to_date.' 23:59:59']);
         }
-
-//        if($od_status == "교환"){
-            //$orders->where('exchange_item_chk', 'Y');
-        //}
 
         $page       = $request->input('page');
         $pageScale  = 10;  //한페이지당 라인수
@@ -129,8 +117,6 @@ class OrderController extends Controller
         $tailarr['od_receipt_point']    = $od_receipt_point;
         $tailarr['fr_date']             = $od_receipt_point;
         $tailarr['to_date']             = $to_date;
-        $tailarr['return_proc']         = $return_proc;
-
 
         $PageSet        = new PageSet;
         $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
@@ -151,7 +137,7 @@ class OrderController extends Controller
         $orders_cnt2 = DB::table('shoporders')->where('od_status', '준비')->count();    //준비 건
         $orders_cnt3 = DB::table('shoporders')->where('od_status', '배송')->count();    //배송 건
         $orders_cnt4 = DB::table('shoporders')->where('od_status', '완료')->count();    //완료 건
-        $orders_cnt5 = DB::table('shoporders')->where('exchange_item_chk', 'Y')->count();    //교환 건
+        $orders_cnt5 = DB::table('shoporders')->where('od_status', '교환')->count();    //교환 건
         $orders_cnt6 = DB::table('shoporders')->where('od_status', '상품취소')->count();    //취소 건
 
         return view('adm.shop.order.orderlist',[
@@ -185,7 +171,6 @@ class OrderController extends Controller
             'orders_cnt4'       => $orders_cnt4,
             'orders_cnt5'       => $orders_cnt5,
             'orders_cnt6'       => $orders_cnt6,
-            'return_proc'       => $return_proc,
         ]);
     }
 

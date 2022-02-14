@@ -78,7 +78,7 @@ class OrderController extends Controller
 
             $orders = $orders->groupBy('a.order_id');
             //->orderBy('a.id')
-            //$orders = $orders->get();
+            $orders = $orders->get();
             //$orders = DB::table('shoporders');
         }
 

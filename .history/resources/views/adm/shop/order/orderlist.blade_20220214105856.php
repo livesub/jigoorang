@@ -34,7 +34,7 @@
         <td><a href="{{ route('orderlist', 'od_status=준비') }}">주문확인({{ $orders_cnt2 }})</a></td>
         <td><a href="{{ route('orderlist', 'od_status=배송') }}">발송({{ $orders_cnt3 }})</a></td>
         <td><a href="{{ route('orderlist', 'od_status=완료') }}">배송완료({{ $orders_cnt4 }})</a></td>
-        <td><a href="{{ route('orderlist', 'od_status=교환') }}">교환({{ $orders_cnt5 }})</a></td>
+        <td><a href="{{ route('orderlist', 'od_status=교환') }}">교환반품({{ $orders_cnt5 }})</a></td>
         <td><a href="{{ route('orderlist', 'od_status=상품취소') }}">주문취소({{ $orders_cnt6 }})</a></td>
     </tr>
 </table>
@@ -101,22 +101,14 @@
         </td>
     </tr>
     @if($od_status == "교환")
-        @php
-            $return_checked1 = "";
-            $return_checked2 = "";
-            $return_checked3 = "";
-            if($return_proc == "N") $return_checked1 = "checked";
-            else if($return_proc == "Y") $return_checked2 = "checked";
-            else if($return_proc == "A" || $return_proc == "") $return_checked3 = "checked";
-        @endphp
     <tr>
         <td colspan="8">
             <table border=1>
                 <tr>
                     <td>교환</td>
-                    <td><input type="radio" name="return_proc" value="N" {{ $return_checked1 }}>미완료</td>
-                    <td><input type="radio" name="return_proc" value="Y" {{ $return_checked2 }}>완료</td>
-                    <td><input type="radio" name="return_proc" value="A" {{ $return_checked3 }}>전체</td>
+                    <td><input type="radio" name="return_proc" value="N">미완료</td>
+                    <td><input type="radio" name="return_proc" value="Y">완료</td>
+                    <td><input type="radio" name="return_proc" value="A" checked>전체</td>
                 </tr>
             </table>
         </td>
@@ -193,12 +185,11 @@
     @foreach($orders as $order)
         @php
             $cart_infos = DB::table('shopcarts')->where('od_id', $order->order_id);
-/*
             if($od_status == "교환"){
                 if($return_proc == 'Y') $cart_infos = $cart_infos->where('return_process', 'Y');
                 else if($return_proc == 'N') $cart_infos = $cart_infos->where('return_process', 'N');
             }
-*/
+
             $cart_infos = $cart_infos->get();
 
             $etc_qty = "";
@@ -209,7 +200,8 @@
             $item_name = "";
             $user_info = array();
             $user_id = array();
-
+var_dump("FFFFFFFFFFFFFFFF====> ".count($cart_infos));
+exit;
             foreach($cart_infos as $cart_info){
 
                 $item_info = DB::table('shopitems')->where('item_code', $cart_info->item_code)->first();
@@ -230,7 +222,7 @@
                 }
 
                 //교환 완료건
-                if($cart_info->return_process == "Y"){
+                if($cart_info->return_process == "Y" || $cart_info->return_process == "T"){
                     $return_process_num++;
                 }
                 $i++;
@@ -259,7 +251,7 @@
                 break;
             }
         @endphp
-        @if(count($cart_infos) > 0)
+
     <tr>
         <td><input type="checkbox" name="ct_chk[]" id="ct_chk" value="{{ $order->order_id }}"></td>
         <td>{{ $order->created_at }}({{ $CustomUtils->get_yoil($order->created_at) }})</td>
@@ -303,7 +295,6 @@
             배송메세지 : {{ stripslashes($order->od_memo) }}
         </td>
     </tr>
-        @endif
     @endforeach
 </table>
 </form>

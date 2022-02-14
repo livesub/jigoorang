@@ -34,7 +34,7 @@
         <td><a href="{{ route('orderlist', 'od_status=준비') }}">주문확인({{ $orders_cnt2 }})</a></td>
         <td><a href="{{ route('orderlist', 'od_status=배송') }}">발송({{ $orders_cnt3 }})</a></td>
         <td><a href="{{ route('orderlist', 'od_status=완료') }}">배송완료({{ $orders_cnt4 }})</a></td>
-        <td><a href="{{ route('orderlist', 'od_status=교환') }}">교환({{ $orders_cnt5 }})</a></td>
+        <td><a href="{{ route('orderlist', 'od_status=교환') }}">교환반품({{ $orders_cnt5 }})</a></td>
         <td><a href="{{ route('orderlist', 'od_status=상품취소') }}">주문취소({{ $orders_cnt6 }})</a></td>
     </tr>
 </table>
@@ -232,6 +232,7 @@
                 //교환 완료건
                 if($cart_info->return_process == "Y"){
                     $return_process_num++;
+var_dump("return_process_num=====> ".$return_process_num);
                 }
                 $i++;
             }

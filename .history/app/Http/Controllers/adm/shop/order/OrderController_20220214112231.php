@@ -64,24 +64,20 @@ class OrderController extends Controller
             $orders = DB::table('shoporders')->where('od_status', $od_status);
         }else{
             $orders = DB::table('shoporders as a')
-            ->select('a.*', 'b.return_process')
+            ->select('a.*')
             ->leftjoin('shopcarts as b', function($join) {
                     $join->on('a.order_id', '=', 'b.od_id');
                 })
-            ->where('a.exchange_item_chk', 'Y');
-
-            if($return_proc == "N"){
-                $orders = $orders->where('b.return_process','N');
-            }elseif($return_proc == "Y"){
-                $orders = $orders->where('b.return_process','Y');
-            }
-
-            $orders = $orders->groupBy('a.order_id');
+            ->where('a.exchange_item_chk', 'Y')
+            ->groupBy('a.order_id')
             //->orderBy('a.id')
-            //$orders = $orders->get();
+            ->get();
+
+
+
             //$orders = DB::table('shoporders');
         }
-
+dd($orders);
         if ($search != "") {    //검색
             if ($sel_field != "") {
                 $orders->where($sel_field, 'like', '%'.$search.'%');
@@ -92,9 +88,9 @@ class OrderController extends Controller
             $orders->whereBetween('od_receipt_time', [$fr_date.' 00:00:00', $to_date.' 23:59:59']);
         }
 
-//        if($od_status == "교환"){
-            //$orders->where('exchange_item_chk', 'Y');
-        //}
+        if($od_status == "교환"){
+            $orders->where('exchange_item_chk', 'Y');
+        }
 
         $page       = $request->input('page');
         $pageScale  = 10;  //한페이지당 라인수

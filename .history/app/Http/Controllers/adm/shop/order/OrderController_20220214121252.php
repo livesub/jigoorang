@@ -72,16 +72,16 @@ class OrderController extends Controller
 
             if($return_proc == "N"){
                 $orders = $orders->where('b.return_process','N');
-            }elseif($return_proc == "Y"){
-                $orders = $orders->where('b.return_process','Y');
             }
-
+            //if($return_proc == "N"){
+              //  $orders = $orders->where('b.return_process', 'N');
+            //}
             $orders = $orders->groupBy('a.order_id');
             //->orderBy('a.id')
-            //$orders = $orders->get();
+            ->get();
             //$orders = DB::table('shoporders');
         }
-
+dd($orders);
         if ($search != "") {    //검색
             if ($sel_field != "") {
                 $orders->where($sel_field, 'like', '%'.$search.'%');

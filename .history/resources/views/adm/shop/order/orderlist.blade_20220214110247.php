@@ -34,7 +34,7 @@
         <td><a href="{{ route('orderlist', 'od_status=준비') }}">주문확인({{ $orders_cnt2 }})</a></td>
         <td><a href="{{ route('orderlist', 'od_status=배송') }}">발송({{ $orders_cnt3 }})</a></td>
         <td><a href="{{ route('orderlist', 'od_status=완료') }}">배송완료({{ $orders_cnt4 }})</a></td>
-        <td><a href="{{ route('orderlist', 'od_status=교환') }}">교환({{ $orders_cnt5 }})</a></td>
+        <td><a href="{{ route('orderlist', 'od_status=교환') }}">교환반품({{ $orders_cnt5 }})</a></td>
         <td><a href="{{ route('orderlist', 'od_status=상품취소') }}">주문취소({{ $orders_cnt6 }})</a></td>
     </tr>
 </table>
@@ -114,9 +114,9 @@
             <table border=1>
                 <tr>
                     <td>교환</td>
-                    <td><input type="radio" name="return_proc" value="N" {{ $return_checked1 }}>미완료</td>
-                    <td><input type="radio" name="return_proc" value="Y" {{ $return_checked2 }}>완료</td>
-                    <td><input type="radio" name="return_proc" value="A" {{ $return_checked3 }}>전체</td>
+                    <td><input type="radio" name="return_proc" value="N">미완료</td>
+                    <td><input type="radio" name="return_proc" value="Y">완료</td>
+                    <td><input type="radio" name="return_proc" value="A" checked>전체</td>
                 </tr>
             </table>
         </td>
@@ -193,12 +193,11 @@
     @foreach($orders as $order)
         @php
             $cart_infos = DB::table('shopcarts')->where('od_id', $order->order_id);
-/*
             if($od_status == "교환"){
                 if($return_proc == 'Y') $cart_infos = $cart_infos->where('return_process', 'Y');
                 else if($return_proc == 'N') $cart_infos = $cart_infos->where('return_process', 'N');
             }
-*/
+
             $cart_infos = $cart_infos->get();
 
             $etc_qty = "";
@@ -230,7 +229,7 @@
                 }
 
                 //교환 완료건
-                if($cart_info->return_process == "Y"){
+                if($cart_info->return_process == "Y" || $cart_info->return_process == "T"){
                     $return_process_num++;
                 }
                 $i++;

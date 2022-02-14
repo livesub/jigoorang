@@ -71,7 +71,11 @@ class OrderController extends Controller
             ->where('a.exchange_item_chk', 'Y');
 
             if($return_proc == "N"){
-                $orders = $orders->where('b.return_process','N');
+
+
+                $orders = $orders->whereRaw("if(b.return_story != '', 'b.return_process','N')");
+
+                //$orders = $orders->where('b.return_process','N');
             }elseif($return_proc == "Y"){
                 $orders = $orders->where('b.return_process','Y');
             }
