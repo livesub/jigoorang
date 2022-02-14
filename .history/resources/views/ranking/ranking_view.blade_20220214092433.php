@@ -158,7 +158,8 @@
                                             $wish_class = "wishlist";
                                         }
                                     @endphp
-                                    
+
+                        <div></div>
 
                             <div class="list ev_rul pd-00">
                                 <div class="wsl_lt pd-00">
