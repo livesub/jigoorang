@@ -52,7 +52,7 @@ class UserPointController extends Controller
 
         $shoppoint_rows = $shoppoints->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
 
-        $tailarr = array();
+	$tailarr = array();
         //$tailarr['AA'] = 'AA';    //고정된 전달 파라메터가 있을때 사용
 
         $PageSet        = new PageSet;
