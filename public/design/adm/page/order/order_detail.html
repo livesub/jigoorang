@@ -1,0 +1,706 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta property="og:title" content="지구랭">
+    <meta property="og:description" content="지구랭">
+    <meta property="og:image" content="../../resources/logo.png">  
+        
+    <title>지구랭</title>
+    <link rel="icon" href="../../img/sym.png">    
+    
+    <!-- css-->
+    <link rel="stylesheet" href="../../css/reset_adm.css">
+    <link rel="stylesheet" href="../../css/layout_adm.css"> 
+    <link rel="stylesheet" href="../../css/style_adm.css"> 
+
+    <!-- script -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    <script id="rendered-js" >
+        /* lnb */
+        (function ($) {
+
+            var lnbUI = {
+                click: function (target, speed) {
+                    var _self = this,
+                        $target = $(target);
+                    _self.speed = speed || 300;
+
+                    $target.each(function () {
+                        if (findChildren($(this))) {
+                            return;
+                        }
+                        $(this).addClass('noDepth');
+                    });
+
+                    function findChildren(obj) {
+                        return obj.find('> ul').length > 0;
+                    }
+
+                    $target.on('click', 'a', function (e) {
+                        e.stopPropagation();
+                        var $this = $(this),
+                            $depthTarget = $this.next(),
+                            $siblings = $this.parent().siblings();
+
+                        $this.parent('li').find('ul li').removeClass('on');
+                        $siblings.removeClass('on');
+                        $siblings.find('ul').slideUp(250);
+
+                        if ($depthTarget.css('display') == 'none') {
+                            _self.activeOn($this);
+                            $depthTarget.slideDown(_self.speed);
+                        } else {
+                            $depthTarget.slideUp(_self.speed);
+                            _self.activeOff($this);
+                        }
+
+                    });
+
+                },
+                activeOff: function ($target) {
+                    $target.parent().removeClass('on');
+                },
+                activeOn: function ($target) {
+                    $target.parent().addClass('on');
+                } };
+
+
+
+            // Call lnbUI
+            $(function () {
+                lnbUI.click('.lnb li', 300);
+            });
+
+
+        })(jQuery);
+        //# sourceURL=pen.js
+        
+    </script>
+    <script>
+        function openModal(){
+            document.querySelector('body').classList.add('modal-open')
+        }
+        function closeModal() {
+            document.querySelector('body').classList.remove('modal-open')
+        }
+        function openmodal_001() {
+            openModal();
+            document.querySelector('.modal.modal_001').classList.add('in');
+        }        
+        function closemodal_001(){
+            closeModal();
+            document.querySelector('.modal.modal_001').classList.remove('in');
+        }
+        function openmodal_002() {
+            openModal();
+            document.querySelector('.modal.modal_001').classList.add('in');
+        }        
+        function closemodal_002(){
+            closeModal();
+            document.querySelector('.modal.modal_001').classList.remove('in');
+        }
+        function openmodal_003() {
+            openModal();
+            document.querySelector('.modal.modal_003').classList.add('in');
+        }        
+        function closemodal_003(){
+            closeModal();
+            document.querySelector('.modal.modal_003').classList.remove('in');
+        }
+    </script>
+
+</head>
+<body>
+<div class="wrap">
+    
+    <!-- 헤더 시작 -->
+    <div class="header"> 
+        <a href="../../login.html" class="log">로그아웃</a>           
+        <div class="left_menu">
+            <a href="../../index.html" class="logo_sm">
+                <h1>지구랭</h1>
+            </a>
+            <div class="lnb">
+                <ul>
+                    <li>
+                        <a href="#none">상품관리</a>
+                        <ul>
+                            <li>
+                                <a href="../../page/product/category.html">대분류/소분류 관리</a>
+                            </li>
+                            <li>
+                                <a href="../../page/product/product.html">상품관리</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../../page/order/order_01.html">주문관리</a>                      
+                    </li>            
+                    <li>
+                        <a href="#none">평가단관리</a>
+                        <ul>
+                            <li>
+                                <a href="../../page/experience/experience.html">평가단 리스트</a>
+                            </li>
+                            <li>
+                                <a href="../../page/experience/experience_choice.html">평가단 선정</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#none">리뷰 관리</a>
+                        <ul>
+                            <li><a href="../../page/review/review.html">리뷰 관리</a></li>
+                            <li><a href="../../page/review/review_item.html">정량평가 항목 관리</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../../page/qna/qna.html">1:1 문의 관리</a>                        
+                    </li>                    
+                    <li>
+                        <a href="#none">컨텐츠 관리</a>
+                        <ul>
+                            <li><a href="#none">디스플레이관리</a>
+                                <ul>
+                                    <li><a href="../../page/contents/banner_top.html">상단배너</a></li>
+                                    <li><a href="../../page/contents/banner_btm.html">하단배너</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="../../page/contents/jigoorok.html">지구록 관리</a>
+                            </li>
+                            <li>
+                                <a href="../../page/contents/pop.html">팝업 관리</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../../page/member/member.html">회원관리</a>
+                    </li>
+                    <li>
+                        <a href="#none">설정</a>
+                        <ul>
+                            <li><a href="../../page/set/basic.html">기본 설정</a></li>
+                            <li><a href="../../page/set/del_price.html">추가 배송비 설정</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 헤더 끝 -->
+
+    
+    <!-- 컨테이너 시작 -->
+    <div class="container">
+       
+        <!-- 타이틀 영역 -->
+        <div class="top"> 
+            <div class="title">
+                <h2>주문 상세처리</h2> 
+            </div>            
+        </div>
+        
+        <!-- 컨텐츠 영역 시작 -->
+        <div class="contents_area order">
+
+            <form>
+
+                <!-- 주문상품 목록 시작 -->     
+                <h3 class="line">주문상품 목록</h3>
+                <div class="box_cont">  
+                    <div class="row">
+                        <div class="col">주문상태</div>
+                        <div class="col"><b>배송완료</b></div>
+                    </div> 
+                    <div class="row">
+                        <div class="col">주문일시</div>
+                        <div class="col">2021-12-20 13:13:13 (수)</div>
+                    </div>  
+                    <div class="row">
+                        <div class="col">결제금액</div>
+                        <div class="col">30,300원</div>
+                    </div>  
+                    <div class="row">
+                        <div class="col">송장번호</div>
+                        <div class="col">123456123456123 (2021-12-12 15:13:13(수))</div>
+                    </div>  
+                    <div class="row">
+                        <div class="col">교환 요청 및 처리</div>
+                        <div class="col"><b class="t_red">2  / 4 (건)</b></div>
+                    </div>  
+                    <div class="row">
+                        <div class="col">주문 취소</div>
+                        <div class="col"><a class="t_gry line" href="#">취소하기</a></div>
+                    </div>    
+                    <div class="row">
+                        <div class="col100">
+                            <!-- 교환 상세 내역 시작 -->
+                            <table class="ord_detail_table1">
+                                <colgroup>
+                                    <col style="width: 80px;">
+                                    <col style="width: auto;">
+                                    <col style="width: 40px;">
+                                    <col style="width: 240px;">
+                                    <col style="width: 80px;">
+                                    <col style="width: 80px;">
+                                    <col style="width: 150px;">
+                                    <col style="width: 120px;">
+                                    <col style="width: 120px;">
+                                    <col style="width: 120px;">
+                                </colgroup>
+                                <thead>
+                                    <tr>
+                                        <th>교환</th>
+                                        <th>상품명</th>
+                                        <th><input type="checkbox" class="mg00" id=""></th>
+                                        <th>옵션</th>
+                                        <th>주문수량</th>
+                                        <th>구매수량</th>
+                                        <th>교환 수량 입력</th>
+                                        <th>판매가</th>
+                                        <th>소개</th>
+                                        <th>포인트 적립</th>
+                                    </tr>
+                                </thead>
+                                <!-- 리스트 시작 -->
+                                <tbody>
+                                    <tr>
+                                        <td class="cs">
+                                            <div onclick="openmodal_001()">요청</div>
+                                            <div>미완료</div>
+                                        </td>
+                                        <td class="prod_name">
+                                            <div>
+                                                <div>
+                                                    <img src="../../img/img_prod_01.png">
+                                                </div>                                    
+                                                <div>
+                                                    [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫
+                                                    친환경칫솔친환경칫솔친환경칫
+                                                </div>
+                                            </div>                                
+                                        </td>
+                                        <td><input type="checkbox" class="mg00" id=""></td>
+                                        <td class="prd_option">
+                                            <input type="checkbox" class="mg00" id="">
+                                            <label>
+                                                사이즈 : M<br>
+                                                컬러 : 빨강
+                                            </label>
+                                        </td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td class="change_num">
+                                            <input type="number" name="" placeholder="">                                            
+                                        </td>
+                                        <td>10,000</td>
+                                        <td>0</td>
+                                        <td>0P</td>
+                                    </tr>                                    
+                                </tbody>
+                                <!-- 리스트 끝 -->
+                                <!-- 리스트 시작 -->
+                                <tbody>
+                                    <tr>
+                                        <td class="cs">
+                                            <div onclick="openmodal_001()">요청</div>
+                                            <div class="acc">완료</div>
+                                        </td>
+                                        <td class="prod_name" rowspan="2">
+                                            <div>
+                                                <div>
+                                                    <img src="../../img/img_prod_01.png">
+                                                </div>                                    
+                                                <div>
+                                                    [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫
+                                                    친환경칫솔친환경칫솔친환경칫
+                                                </div>
+                                            </div>                                
+                                        </td>
+                                        <td rowspan="2">
+                                            <input type="checkbox" class="mg00" id="">
+                                        </td>
+                                        <td class="prd_option">
+                                            <input type="checkbox" class="mg00" id="">
+                                            <label>
+                                                사이즈 : M<br>
+                                                컬러 : 빨강
+                                            </label>
+                                        </td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td class="change_num">
+                                            <input type="number" name="" placeholder="">                                            
+                                        </td>
+                                        <td>10,000</td>
+                                        <td>0</td>
+                                        <td>0P</td>
+                                    </tr> 
+                                    <tr>
+                                        <td class="cs">
+                                            <div onclick="openPrivacyPolicyModal()">요청</div>
+                                            <div class="acc">완료</div>
+                                        </td>                                       
+                                        <td class="prd_option">
+                                            <input type="checkbox" class="mg00" id="">
+                                            <label>
+                                                사이즈 : M<br>
+                                                컬러 : 빨강
+                                            </label>
+                                        </td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td class="change_num">
+                                            <input type="number" name="" placeholder="">                                            
+                                        </td>
+                                        <td>10,000</td>
+                                        <td>0</td>
+                                        <td>0P</td>
+                                    </tr>                                    
+                                </tbody>
+                                <!-- 리스트 끝 -->
+                                <!-- 리스트 시작 -->
+                                <tbody>
+                                    <tr>
+                                        <td class="cs">
+                                            <div onclick="openmodal_001()">요청</div>
+                                            <div>미완료</div>
+                                        </td>
+                                        <td class="prod_name">
+                                            <div>
+                                                <div>
+                                                    <img src="../../img/img_prod_01.png">
+                                                </div>                                    
+                                                <div>
+                                                    [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫
+                                                    친환경칫솔친환경칫솔친환경칫
+                                                </div>
+                                            </div>                                
+                                        </td>
+                                        <td><input type="checkbox" class="mg00" id=""></td>
+                                        <td class="prd_option">
+                                            <input type="checkbox" class="mg00" id="">
+                                            <label>
+                                                사이즈 : M<br>
+                                                컬러 : 빨강
+                                            </label>
+                                        </td>
+                                        <td>1</td>
+                                        <td>0</td>
+                                        <td class="change_num">
+                                            <input type="number" name="" placeholder="">                                            
+                                        </td>
+                                        <td>10,000</td>
+                                        <td>0</td>
+                                        <td>0P</td>
+                                    </tr>                                    
+                                </tbody>
+                                <!-- 리스트 끝 -->
+                            </table>
+                            <!-- 교환 상세내역 끝 -->
+                        </div>
+                    </div>  
+                    <div class="row">
+                        <div class="col">교환 처리</div>
+                        <div class="col">
+                            <div class="file_att">
+                                <p class="t_mint">선택한 상품의 입력된 수량을 교환건으로 처리 합니다.</p>                      
+                                <div class="btn_file">
+                                    <button type="button" class="btn-ln blk-ln mr05" onclick="">교환</button>                                 
+                                </div>  
+                            </div>     
+                        </div>
+                    </div>      
+                </div>           
+                <!-- 주문상품 목록 끝 -->
+                
+                <!-- 주문 처리 상세 내역 시작 -->   
+                <h3 class="line">주문 처리 상세 내역</h3>
+                <div class="box_cont">  
+                    <table class="ord_detail_table2">
+                        <colgroup>
+                            <col style="width: 200px;">
+                            <col style="width: auto;">
+                            <col style="width: 150px;">
+                            <col style="width: 150px;">
+                            <col style="width: 150px;">
+                            <col style="width: 330px;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>날짜/시간</th>
+                                <th>상품명</th>
+                                <th>변경 내역</th>
+                                <th>변경 수량</th>
+                                <th>구매 수량</th>
+                                <th>변경자</th>
+                            </tr>
+                        </thead>
+                        <tbody>                            
+                            <tr>
+                                <td>2021-12-31 12:18:12 (월)</td>
+                                <td class="prod_name">
+                                    <div>
+                                        [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫
+                                    </div> 
+                                    <div>
+                                        사이즈 : M / 컬러 : 빨강
+                                    </div>                               
+                                </td>
+                                <td>교환</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td class="buyer">
+                                    <a href="../../page/member/member_detail.html">
+                                        <div>지구랭</div>
+                                        <div>jigoorang12345@gmail.com</div>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2021-12-31 12:18:12 (월)</td>
+                                <td class="prod_name">
+                                    <div>
+                                        [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫
+                                    </div> 
+                                    <div>
+                                        사이즈 : M / 컬러 : 빨강
+                                    </div>                               
+                                </td>
+                                <td>교환</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td class="buyer">
+                                    <a href="../../page/member/member_detail.html">
+                                        <div>김치맨</div>
+                                        <div>jigoorang12345@gmail.com</div>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2021-12-31 12:18:12 (월)</td>
+                                <td class="prod_name">
+                                    <div>
+                                       전체
+                                    </div>                
+                                </td>
+                                <td>교환</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td class="buyer">
+                                    <a href="../../page/member/member_detail.html">
+                                        <div>김치맨</div>
+                                        <div>jigoorang12345@gmail.com</div>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                
+                </div>                     
+                <!-- 주문 처리 상세 내역 끝-->
+                
+               
+                <!-- 주문결제 내역 시작 -->
+                <h3 class="line">주문 결제 내역</h3>
+                <div class="box_cont"> 
+                    <table class="ord_detail_table3">
+                        <colgroup>
+                            <col style="width: auto;">
+                            <col style="width: auto;">
+                            <col style="width: 150px;">
+                            <col style="width: 150px;">
+                            <col style="width: 150px;">
+                            <col style="width: 150px;">
+                            <col style="width: 150px;">
+                            <col style="width: 150px;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th>주문번호</th>
+                                <th>결제 방법</th>
+                                <th>결제자</th>
+                                <th>주문 총액</th>
+                                <th>배송비</th>
+                                <th>포인트 결제</th>
+                                <th>실결제 금액</th>
+                                <th>주문취소 금액</th>
+                            </tr>
+                        </thead>
+                        <tbody>  
+                            <tr>
+                                <td>202112151321542154</td>
+                                <td>신용카드</td>
+                                <td>김치맨</td>
+                                <td>20,000</td>
+                                <td>2,500</td>
+                                <td>1,000P</td>
+                                <td>21,500</td>
+                                <td>0</td>
+                            </tr>                 
+                        </tbody>
+                    </table> 
+                </div>              
+                <!-- 주문결제 내역 끝 --> 
+
+                <!-- 메모 시작 --> 
+                <h3 class="line">메모</h3>
+                <div class="box_cont">
+                    <div class="memo">
+                        <textarea></textarea>
+                        <button type="button" class="btn_memo blk-ln" onclick="">저장</button>
+                    </div>                   
+                </div>
+                <!-- 메모 끝 --> 
+
+                <!-- 주문자정보 시작 --> 
+                <h3 class="line">주문자 정보</h3>
+                <div class="box_cont">  
+                    <div class="row">
+                        <div class="col">주문상태</div>
+                        <div class="col"><b>배송완료</b></div>
+                    </div> 
+                    <div class="row">
+                        <div class="col">전화번호</div>
+                        <div class="col">01012351234</div>
+                    </div> 
+                    <div class="row">
+                        <div class="col">아이디(이메일)</div>
+                        <div class="col">abc@gmail.com</div>
+                    </div> 
+                </div>
+                <!-- 주문자정보 끝 --> 
+
+                <!-- 배송지정보 시작 --> 
+                <h3 class="line">배송지 정보</h3>
+                <div class="box_cont"> 
+                    <div class="row">
+                        <div class="col">이름</div>
+                        <div class="col">
+                            <input type="text" name="" placeholder=""> 
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col">전화번호</div>
+                        <div class="col">
+                            <input class="aln_left" type="number" name="" placeholder=""> 
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col">우편번호</div>
+                        <div class="col">
+                            <div class="post_num">
+                                <div>
+                                    <input type="number" name="" placeholder=""> 
+                                    <button type="button" class="btn ddd-ln" onclick="">우편번호검색</button>
+                                </div>
+                                <div>
+                                    <input type="text" name="" placeholder=""> 
+                                </div>
+                                <div>
+                                    <input type="text" name="" placeholder=""> 
+                                </div>
+                                <div>
+                                    <input type="text" name="" placeholder=""> 
+                                </div>  
+                            </div>                          
+                        </div>                        
+                    </div>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <button type="button" class="btn blk-ln" onclick="">변경</button>
+                            <!-- <button type="button" class="btn ddd-ln">변경</button> 버튼 비활성화시 -->
+                        </div>                        
+                    </div>
+                </div>
+                <!-- 배송지정보 끝 --> 
+
+            </form> 
+
+            <!-- 모달 시작-->   
+            <div class="modal_001 modal fade">
+                <div class="modal-background" onclick="closemodal_001()"></div>
+                <div class="modal-dialog">
+                    <div class="top_close" onclick="closemodal_001()"></div>
+                    <div class="modal_area">
+                        <h3 class="line">교환 요청</h3>
+                        <div class="box_cont">
+                            <div class="row">
+                                <div class="col">작성일자</div>
+                                <div class="col">
+                                    2021-12-21 15:15:15(월)
+                                </div>                        
+                            </div>
+                            <div class="row">
+                                <div class="col">처리일자</div>
+                                <div class="col">
+                                    2021-12-21 15:15:15(월)
+                                </div>                        
+                            </div>
+                            <div class="row">
+                                <div class="col">사유</div>
+                                <div class="col">
+                                    파손 및 불량
+                                </div>                        
+                            </div>
+                            <div class="row">
+                                <div class="col">상세사유</div>
+                                <div class="col">
+                                    <p>
+                                    개봉하니 제품이 다 망가져서 왔어요. 그냥 반품 처리 할게요. 당장 오늘 필요했던거라 교환할 시간이 없네요빠른처리 부탁드립니다. 
+                                    개봉하니 제품이 다 망가져서 왔어요. 그냥 반품 처리 할게요. 당장 오늘 필요했던거라 교환할 시간이 없네요빠른처리 부탁드립니다. 
+                                    </p>
+                                </div>                        
+                            </div>
+                            <div class="row">
+                                <div class="col">상태</div>
+                                <div class="col">
+                                    미처리
+                                </div>                        
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col">처리</div>
+                                <div class="col">
+                                    <select>
+                                        <option>미처리</option>
+                                        <option>교환</option>
+                                        <option>교환 불가</option>
+                                    </select>
+                                </div>                        
+                            </div>
+                            <div class="row">
+                                <div class="col">현재수량</div>
+                                <div class="col">
+                                    3
+                                </div>                        
+                            </div>
+                            <div class="row">
+                                <div class="col">교환 수량 입력</div>
+                                <div class="col">
+                                    <input type="number" name="" placeholder=""> 개
+                                </div>                        
+                            </div>
+                        </div>
+                        <button type="button" class="btn wd-100" onclick="closemodal_001()">확인</button>  
+                        <!-- 버튼 비활성화시 사용 <button type="button" class="btn wd-100 ddd">확인</button> -->
+                    </div>
+                </div>
+            </div>
+            <!-- 모달 끝 --> 
+
+        </div>
+        <!-- 컨텐츠 영역 끝 -->
+
+    </div>
+    <!-- 컨테이너 끝 -->
+
+</div>
+</body>
+</html>
