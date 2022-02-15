@@ -261,6 +261,8 @@ class AdmReviewMangerController extends Controller
 
             $review_save = DB::table('review_save_imgs')->where('id', $review_id)->first();
 
+
+
             if($file_chk == 1){
                 if($review_img != ""){
                     $file_type = $review_img->getClientOriginalExtension();    //이미지 확장자 구함
@@ -270,11 +272,9 @@ class AdmReviewMangerController extends Controller
                     $max_size_mb = $upload_max_filesize * 1024;   //라라벨은 kb 단위라 함
 
                     if($review_save != ""){
-                        //이미지가 있을땐 수정
-                        $attachment_result = CustomUtils::attachment_save($review_img, $path); //위의 패스로 이미지 저장됨
+                        $attachment_result = CustomUtils::attachment_save($review_img[$i],$path); //위의 패스로 이미지 저장됨
 
-                    }else{
-                        //이미지가 없을땐 insert
+
                     }
                 }else{
                     //체크 박스에 체크는 되고 이미지를 첨부 안했을땐 이미지 삭제
