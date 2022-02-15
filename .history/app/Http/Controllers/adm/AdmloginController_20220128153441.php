@@ -74,7 +74,7 @@ class AdmloginController extends Controller
             exit;
         }
 
-        return redirect()->route('adm.dashboard.index')->with('alert_messages', $Messages::$adm_login_chk['login_chk']['login_ok']);
+        return redirect()->route('adm.member.index')->with('alert_messages', $Messages::$adm_login_chk['login_chk']['login_ok']);
     }
 
 }

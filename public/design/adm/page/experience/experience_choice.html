@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta property="og:title" content="지구랭">
+    <meta property="og:description" content="지구랭">
+    <meta property="og:image" content="../../resources/logo.png">  
+        
+    <title>지구랭</title>
+    <link rel="icon" href="../../img/sym.png">    
+    
+    <!-- css-->
+    <link rel="stylesheet" href="../../css/reset_adm.css">
+    <link rel="stylesheet" href="../../css/layout_adm.css"> 
+    <link rel="stylesheet" href="../../css/style_adm.css"> 
+
+    <!-- script -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    <script id="rendered-js" >
+        /* lnb */
+        (function ($) {
+
+            var lnbUI = {
+                click: function (target, speed) {
+                    var _self = this,
+                        $target = $(target);
+                    _self.speed = speed || 300;
+
+                    $target.each(function () {
+                        if (findChildren($(this))) {
+                            return;
+                        }
+                        $(this).addClass('noDepth');
+                    });
+
+                    function findChildren(obj) {
+                        return obj.find('> ul').length > 0;
+                    }
+
+                    $target.on('click', 'a', function (e) {
+                        e.stopPropagation();
+                        var $this = $(this),
+                            $depthTarget = $this.next(),
+                            $siblings = $this.parent().siblings();
+
+                        $this.parent('li').find('ul li').removeClass('on');
+                        $siblings.removeClass('on');
+                        $siblings.find('ul').slideUp(250);
+
+                        if ($depthTarget.css('display') == 'none') {
+                            _self.activeOn($this);
+                            $depthTarget.slideDown(_self.speed);
+                        } else {
+                            $depthTarget.slideUp(_self.speed);
+                            _self.activeOff($this);
+                        }
+
+                    });
+
+                },
+                activeOff: function ($target) {
+                    $target.parent().removeClass('on');
+                },
+                activeOn: function ($target) {
+                    $target.parent().addClass('on');
+                } };
+
+
+
+            // Call lnbUI
+            $(function () {
+                lnbUI.click('.lnb li', 300);
+            });
+
+
+        })(jQuery);
+        //# sourceURL=pen.js
+    </script>
+
+</head>
+<body>
+<div class="wrap">
+    
+    <!-- 헤더 시작 -->
+    <div class="header"> 
+        <a href="../../login.html" class="log">로그아웃</a>           
+        <div class="left_menu">
+            <a href="../../index.html" class="logo_sm">
+                <h1>지구랭</h1>
+            </a>
+            <div class="lnb">
+                <ul>
+                    <li>
+                        <a href="#none">상품관리</a>
+                        <ul>
+                            <li>
+                                <a href="../../page/product/category.html">대분류/소분류 관리</a>
+                            </li>
+                            <li>
+                                <a href="../../page/product/product.html">상품관리</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../../page/order/order_01.html">주문관리</a>                      
+                    </li>            
+                    <li>
+                        <a href="#none">평가단관리</a>
+                        <ul>
+                            <li>
+                                <a href="../../page/experience/experience.html">평가단 리스트</a>
+                            </li>
+                            <li>
+                                <a href="../../page/experience/experience_choice.html">평가단 선정</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#none">리뷰 관리</a>
+                        <ul>
+                            <li><a href="../../page/review/review.html">리뷰 관리</a></li>
+                            <li><a href="../../page/review/review_item.html">정량평가 항목 관리</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../../page/qna/qna.html">1:1 문의 관리</a>                        
+                    </li>                    
+                    <li>
+                        <a href="#none">컨텐츠 관리</a>
+                        <ul>
+                            <li><a href="#none">디스플레이관리</a>
+                                <ul>
+                                    <li><a href="../../page/contents/banner_top.html">상단배너</a></li>
+                                    <li><a href="../../page/contents/banner_btm.html">하단배너</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="../../page/contents/jigoorok.html">지구록 관리</a>
+                            </li>
+                            <li>
+                                <a href="../../page/contents/pop.html">팝업 관리</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../../page/member/member.html">회원관리</a>
+                    </li>
+                    <li>
+                        <a href="#none">설정</a>
+                        <ul>
+                            <li><a href="../../page/set/basic.html">기본 설정</a></li>
+                            <li><a href="../../page/set/del_price.html">추가 배송비 설정</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 헤더 끝 -->
+
+    
+    <!-- 컨테이너 시작 -->
+    <div class="container">
+       
+        <!-- 타이틀 영역 -->
+        <div class="top"> 
+            <div class="title">
+                <h2>평가단 선정</h2> 
+                <div class="button_box">                    
+                    <button type="button" onclick="location.href='#'">평가단 선정</button>
+                </div>                               
+            </div>            
+        </div>
+        
+        <!-- 컨텐츠 영역 시작 -->
+        <div class="contents_area expr">
+            <form>
+                <div class="box_cont">
+                    <div class="row">
+                        <div class="col">평가단 리스트</div>
+                        <div class="col">
+                            <select class="wd800">
+                                <option>겨울맞이 평가단</option>
+                                <option>아싸 좋다 평가단</option>
+                            </select>
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col">평가단명</div>
+                        <div class="col">
+                            겨울맞이 특별 평가단 모집
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col">모집인원</div>
+                        <div class="col">
+                            100
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col">신청인원</div>
+                        <div class="col">
+                            500
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col">모집기간</div>
+                        <div class="col">
+                            2021-12-01 ~ 2021-12-15
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col">평가가능기간</div>
+                        <div class="col">
+                            2021-12-25 ~ 2021-12-31
+                        </div>
+                    </div> 
+                    <div class="row">
+                        <div class="col">발표일</div>
+                        <div class="col">
+                            2022-01-01
+                        </div>
+                    </div> 
+                
+                </div>
+
+                <!-- 검색창 시작 -->
+                <div class="box_search">
+                    <ul>                                    
+                        <li>분류</li>
+                        <li>
+                            <select>
+                                <option>이름</option>
+                                <option>아이디(이메일)</option>
+                                <option>휴대폰 번호</option>
+                            </select>
+                            <input class="wd250" type="text" name="" placeholder="">
+                        </li>
+                    </ul>
+                    <button type="button" onclick="">검색</button>
+                </div>           
+                <!-- 검색창 끝-->
+                
+                <!-- 보드 시작 -->
+                <div class="board">
+                    <!-- 상단 버튼영역 시작 -->
+                    <div class="btn_area">
+                        <div>
+                            0 / 100
+                        </div>
+                        <div class="right">
+                            <button type="button" class="btn-ln" onclick="">엑셀다운로드</button>                            
+                        </div>
+                    </div>
+                    <!-- 상단 버튼영역 끝 -->
+
+                    <!-- 평가단 선정 리스트 시작 -->
+                    <table class="ord_table">
+                        <colgroup>
+                            <col style="width: 40px;">
+                            <col style="width: 60px;">
+                            <col style="width: 200px;">
+                            <col style="width: 130px;">
+                            <col style="width: 130px;">
+                            <col style="width: auto;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th rowspan="2"><input type="checkbox" class="mg00" id=""></th>
+                                <th rowspan="2">번호</th>
+                                <th rowspan="2">아이디</th>
+                                <th rowspan="2">이름</th>
+                                <th rowspan="2">휴대폰번호</th>
+                                <th rowspan="2">평가단참여 이유</th>                                
+                            </tr>
+                        </thead>                        
+                        <!-- 리스트 시작 -->
+                        <tbody>
+                            <tr>
+                                <td rowspan="2"><input type="checkbox" class="mg00" id=""></td>
+                                <td>10</td>
+                                <td>kim9ryong@gmail.com</td>
+                                <td>지구랭</td>
+                                <td>01021219898</td>
+                                <td class="usertxt">
+                                    일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공
+                                </td>                                                                
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="delivery">                                    
+                                    <div>배송지 정보</div>
+                                    <ul>
+                                        <li><span>이름</span>지구랭</li>
+                                        <li><span>주소</span>경기도 지구시 지구10길 111동 100호(지구동, 지구아파트)</li>
+                                        <li><span>연락처</span>01012359875</li>
+                                        <li><span>배송메세지</span>안녕!</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!-- 리스트 끝 --> 
+                        <!-- 리스트 시작 -->
+                        <tbody>
+                            <tr>
+                                <td rowspan="2"><input type="checkbox" class="mg00" id=""></td>
+                                <td>9</td>
+                                <td>kim9ryong@gmail.com</td>
+                                <td>지구랭</td>
+                                <td>01021219898</td>
+                                <td class="usertxt">
+                                    1213213154545452312312132123131 23231231231321313
+                                </td>                                                                
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="delivery">                                    
+                                    <div>배송지 정보</div>
+                                    <ul>
+                                        <li><span>이름</span>지구랭</li>
+                                        <li><span>주소</span>경기도 지구시 지구10길 111동 100호(지구동, 지구아파트)</li>
+                                        <li><span>연락처</span>01012359875</li>
+                                        <li><span>배송메세지</span>안녕!</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!-- 리스트 끝 --> 
+                        <!-- 리스트 시작 -->
+                        <tbody>
+                            <tr>
+                                <td rowspan="2"><input type="checkbox" class="mg00" id=""></td>
+                                <td>8</td>
+                                <td>kim9ryong@gmail.com</td>
+                                <td>지구랭</td>
+                                <td>01021219898</td>
+                                <td class="usertxt">
+                                    일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공
+                                </td>                                                                
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="delivery">                                    
+                                    <div>배송지 정보</div>
+                                    <ul>
+                                        <li><span>이름</span>지구랭</li>
+                                        <li><span>주소</span>경기도 지구시 지구10길 111동 100호(지구동, 지구아파트)</li>
+                                        <li><span>연락처</span>01012359875</li>
+                                        <li><span>배송메세지</span>안녕!</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!-- 리스트 끝 --> 
+                        <!-- 리스트 시작 -->
+                        <tbody>
+                            <tr>
+                                <td rowspan="2"><input type="checkbox" class="mg00" id=""></td>
+                                <td>7</td>
+                                <td>kim9ryong@gmail.com</td>
+                                <td>지구랭</td>
+                                <td>01021219898</td>
+                                <td class="usertxt">
+                                    일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공
+                                </td>                                                                
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="delivery">                                    
+                                    <div>배송지 정보</div>
+                                    <ul>
+                                        <li><span>이름</span>지구랭</li>
+                                        <li><span>주소</span>경기도 지구시 지구10길 111동 100호(지구동, 지구아파트)</li>
+                                        <li><span>연락처</span>01012359875</li>
+                                        <li><span>배송메세지</span>안녕!</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!-- 리스트 끝 -->  
+                        <!-- 리스트 시작 -->
+                        <tbody>
+                            <tr>
+                                <td rowspan="2"><input type="checkbox" class="mg00" id=""></td>
+                                <td>6</td>
+                                <td>kim9ryong@gmail.com</td>
+                                <td>지구랭</td>
+                                <td>01021219898</td>
+                                <td class="usertxt">
+                                    일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공
+                                </td>                                                                
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="delivery">                                    
+                                    <div>배송지 정보</div>
+                                    <ul>
+                                        <li><span>이름</span>지구랭</li>
+                                        <li><span>주소</span>경기도 지구시 지구10길 111동 100호(지구동, 지구아파트)</li>
+                                        <li><span>연락처</span>01012359875</li>
+                                        <li><span>배송메세지</span>안녕!</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!-- 리스트 끝 -->    
+                        <!-- 리스트 시작 -->
+                        <tbody>
+                            <tr>
+                                <td rowspan="2"><input type="checkbox" class="mg00" id=""></td>
+                                <td>5</td>
+                                <td>kim9ryong@gmail.com</td>
+                                <td>지구랭</td>
+                                <td>01021219898</td>
+                                <td class="usertxt">
+                                    일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공
+                                </td>                                                                
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="delivery">                                    
+                                    <div>배송지 정보</div>
+                                    <ul>
+                                        <li><span>이름</span>지구랭</li>
+                                        <li><span>주소</span>경기도 지구시 지구10길 111동 100호(지구동, 지구아파트)</li>
+                                        <li><span>연락처</span>01012359875</li>
+                                        <li><span>배송메세지</span>안녕!</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!-- 리스트 끝 -->     
+                        <!-- 리스트 시작 -->
+                        <tbody>
+                            <tr>
+                                <td rowspan="2"><input type="checkbox" class="mg00" id=""></td>
+                                <td>4</td>
+                                <td>kim9ryong@gmail.com</td>
+                                <td>지구랭</td>
+                                <td>01021219898</td>
+                                <td class="usertxt">
+                                    일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공일이삼사오륙칠팔구공
+                                </td>                                                                
+                            </tr>
+                            <tr>
+                                <td colspan="5" class="delivery">                                    
+                                    <div>배송지 정보</div>
+                                    <ul>
+                                        <li><span>이름</span>지구랭</li>
+                                        <li><span>주소</span>경기도 지구시 지구10길 111동 100호(지구동, 지구아파트)</li>
+                                        <li><span>연락처</span>01012359875</li>
+                                        <li><span>배송메세지</span>안녕!</li>
+                                    </ul>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <!-- 리스트 끝 -->                
+                    </table>
+                    <!-- 평가단 선정 리스트 끝 -->
+
+                </div>
+                <!-- 보드 끝 -->            
+            </form>
+        </div>
+        <!-- 컨텐츠 영역 끝 -->
+
+    </div>
+    <!-- 컨테이너 끝 -->
+
+</div>
+</body>
+</html>

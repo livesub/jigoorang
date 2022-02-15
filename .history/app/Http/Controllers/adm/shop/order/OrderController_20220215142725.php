@@ -1626,7 +1626,7 @@ exit;
         header( "Content-Description: PHP4 Generated Data" );
 
         $dsp_html = '
-        <table border=1>
+        <table class="ord_table" border=1>
         <colgroup>
             <col style="width: 40px;">
             <col style="width: 100px;">
@@ -1744,13 +1744,13 @@ exit;
                 <tr>
                     <td rowspan="2">'.$k.'</td>
                     <td>'.$order->created_at.' ('.$CustomUtils->get_yoil($order->created_at).')</td>
-                    <td style="mso-number-format:\'\@\'">
+                    <td class="order_num" style=mso-number-format:'\@'>
                         '.$order->order_id.'
                     </td>
-                    <td style="mso-number-format:\'\@\'">
+                    <td class="tracking">
                         '.$order->od_invoice.'
                     </td>
-                    <td >
+                    <td class="prod_name2">
                         <div>
                             <div>
                                 <img src="'.$image.'" style="width:50px;height:50px;">
@@ -1758,7 +1758,7 @@ exit;
                             <div>
                                 <div>'.$item_name.'</div>
                                 <div>'.$option_subject.'</div>
-                                <div style="mso-number-format:\'\@\'">'.$etc_qty.'</div>
+                                <div>'.$etc_qty.'</div>
                             </div>
                         </div>
                     </td>
@@ -1766,17 +1766,17 @@ exit;
                     <td>'.$ment.'</td>
                     <td>'.$return_story_num.'</td>
                     <td>'.$return_process_num.'</td>
-                    <td >
+                    <td class="buyer">
                         <div>'.$order->od_deposit_name.'</div>
                         <div>'.$user_info->user_id.'</div>
-                        <div style="mso-number-format:\'\@\'">'.$user_info->user_phone.'</div>
+                        <div>'.$user_info->user_phone.'</div>
                     </td>
                     <td>'.number_format($order->od_receipt_price).'</td>
                     <td>'.number_format($order->real_card_price).'</td>
                     <td>'.number_format($order->od_cancel_price).'</td>
 
                     <td>'.$order->ad_name.'</td>
-                    <td style="mso-number-format:\'\@\'">'.$order->ad_hp.'</td>
+                    <td>'.$order->ad_hp.'</td>
                     <td>'.$order->ad_zip1.") ".$order->ad_addr1." ".$order->ad_addr2." ".$order->ad_addr3.'</td>
                     <td>'.stripslashes($order->od_memo).'</td>
                 </tr>

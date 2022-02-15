@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta property="og:title" content="지구랭">
+    <meta property="og:description" content="지구랭">
+    <meta property="og:image" content="../../resources/logo.png">  
+        
+    <title>지구랭</title>
+    <link rel="icon" href="../../img/sym.png">    
+    
+    <!-- css-->
+    <link rel="stylesheet" href="../../css/reset_adm.css">
+    <link rel="stylesheet" href="../../css/layout_adm.css"> 
+    <link rel="stylesheet" href="../../css/style_adm.css"> 
+
+    <!-- script -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js'></script>
+    <script id="rendered-js" >
+        /* lnb */
+        (function ($) {
+
+            var lnbUI = {
+                click: function (target, speed) {
+                    var _self = this,
+                        $target = $(target);
+                    _self.speed = speed || 300;
+
+                    $target.each(function () {
+                        if (findChildren($(this))) {
+                            return;
+                        }
+                        $(this).addClass('noDepth');
+                    });
+
+                    function findChildren(obj) {
+                        return obj.find('> ul').length > 0;
+                    }
+
+                    $target.on('click', 'a', function (e) {
+                        e.stopPropagation();
+                        var $this = $(this),
+                            $depthTarget = $this.next(),
+                            $siblings = $this.parent().siblings();
+
+                        $this.parent('li').find('ul li').removeClass('on');
+                        $siblings.removeClass('on');
+                        $siblings.find('ul').slideUp(250);
+
+                        if ($depthTarget.css('display') == 'none') {
+                            _self.activeOn($this);
+                            $depthTarget.slideDown(_self.speed);
+                        } else {
+                            $depthTarget.slideUp(_self.speed);
+                            _self.activeOff($this);
+                        }
+
+                    });
+
+                },
+                activeOff: function ($target) {
+                    $target.parent().removeClass('on');
+                },
+                activeOn: function ($target) {
+                    $target.parent().addClass('on');
+                } };
+
+
+
+            // Call lnbUI
+            $(function () {
+                lnbUI.click('.lnb li', 300);
+            });
+
+
+        })(jQuery);
+        //# sourceURL=pen.js
+    </script>
+
+</head>
+<body>
+<div class="wrap">
+    
+    <!-- 헤더 시작 -->
+    <div class="header"> 
+        <a href="../../login.html" class="log">로그아웃</a>           
+        <div class="left_menu">
+            <a href="../../index.html" class="logo_sm">
+                <h1>지구랭</h1>
+            </a>
+            <div class="lnb">
+                <ul>
+                    <li>
+                        <a href="#none">상품관리</a>
+                        <ul>
+                            <li>
+                                <a href="../../page/product/category.html">대분류/소분류 관리</a>
+                            </li>
+                            <li>
+                                <a href="../../page/product/product.html">상품관리</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../../page/order/order_01.html">주문관리</a>                      
+                    </li>            
+                    <li>
+                        <a href="#none">평가단관리</a>
+                        <ul>
+                            <li>
+                                <a href="../../page/experience/experience.html">평가단 리스트</a>
+                            </li>
+                            <li>
+                                <a href="../../page/experience/experience_choice.html">평가단 선정</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#none">리뷰 관리</a>
+                        <ul>
+                            <li><a href="../../page/review/review.html">리뷰 관리</a></li>
+                            <li><a href="../../page/review/review_item.html">정량평가 항목 관리</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../../page/qna/qna.html">1:1 문의 관리</a>                        
+                    </li>                    
+                    <li>
+                        <a href="#none">컨텐츠 관리</a>
+                        <ul>
+                            <li><a href="#none">디스플레이관리</a>
+                                <ul>
+                                    <li><a href="../../page/contents/banner_top.html">상단배너</a></li>
+                                    <li><a href="../../page/contents/banner_btm.html">하단배너</a></li>
+                                </ul>
+                            </li>
+                            <li>
+                                <a href="../../page/contents/jigoorok.html">지구록 관리</a>
+                            </li>
+                            <li>
+                                <a href="../../page/contents/pop.html">팝업 관리</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="../../page/member/member.html">회원관리</a>
+                    </li>
+                    <li>
+                        <a href="#none">설정</a>
+                        <ul>
+                            <li><a href="../../page/set/basic.html">기본 설정</a></li>
+                            <li><a href="../../page/set/del_price.html">추가 배송비 설정</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- 헤더 끝 -->
+
+
+    <!-- 컨테이너 시작 -->
+    <div class="container">
+       
+        <!-- 타이틀 영역 -->
+        <div class="top"> 
+            <div class="title">
+                <h2>회원 관리</h2> 
+                <div class="button_box">                    
+                    <button type="button" onclick="">탈퇴/가입 처리</button>
+                    <button type="button" class="gray" onclick="location.href='../../page/member/member_rgst.html'">회원등록</button>
+                </div>                               
+            </div>            
+        </div>
+        
+        <!-- 컨텐츠 영역 시작 -->
+        <div class="contents_area member">
+
+            <!-- 가이드 문구 시작 -->
+            <div class="box_guide">
+                <ul>
+                    <li>총회원 : 500명</li>
+                    <li>탈퇴회원 : 10명</li>
+                    <li>평가단 블랙리스트 : 10명</li>
+                    <li>사이트 블랙리스트 : 10명</li>
+                </ul>
+            </div>
+            <!-- 가이드 문구 끝-->
+
+            <form>    
+                            
+                <!-- 검색창 시작 -->
+                <div class="box_search">
+                    <ul>
+                        <li>분류</li>
+                        <li>
+                            <select>
+                                <option>전체</option>
+                                <option>회원</option>
+                                <option>탈퇴회원</option>
+                                <option>체험단 블랙리스트</option>
+                                <option>사이트 블랙리스트</option>
+                            </select>
+                            <select>
+                                <option>아이디</option>
+                                <option>이름</option>
+                                <option>휴대폰 번호</option>                                
+                            </select>
+                            <input type="text" name="" placeholder="">
+                        </li>                       
+                    </ul>
+                    <button type="button" onclick="">검색</button>
+                </div>           
+                <!-- 검색창 끝-->
+                
+                <!-- 보드 시작 -->
+                <div class="board">                    
+                    <!-- 회원 리스트 시작 -->
+                    <table class="member_table">
+                        <colgroup>
+                            <col style="width: 40px;">
+                            <col style="width: 80px;">
+                            <col style="width: 150px;">
+                            <col style="width: auto;">
+                            <col style="width: 160px;">
+                            <col style="width: 120px;">
+                            <col style="width: 80px;">
+                            <col style="width: 80px;">
+                            <col style="width: 60px;">
+                            <col style="width: 140px;">
+                            <col style="width: 140px;">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" class="mg00" id=""></th>
+                                <th>번호</th>
+                                <th>이름</th>
+                                <th>아이디</th>
+                                <th>가입일</th>
+                                <th>휴대폰 번호</th>  
+                                <th>가입경로</th>  
+                                <th>포인트</th>    
+                                <th>상태</th>   
+                                <th>평가단 블랙리스트</th>   
+                                <th>사이트 블랙리스트</th>                               
+                            </tr>
+                        </thead>                        
+                        <!-- 리스트 시작 -->
+                        <tbody>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>10</td>
+                                <td><a href="../../page/member/member_detail.html">지구랭</a></td>
+                                <td>g9g9g9@g9r.com</td>
+                                <td>2021-11-01 13:13:12</td>
+                                <td>01021543265</td>
+                                <td>회원가입</td>
+                                <td>5,000</td> 
+                                <td>가입</td>                                                            
+                                <td>X</td>
+                                <td>X</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>10</td>
+                                <td><a href="../../page/member/member_detail.html">지구랭</a></td>
+                                <td>g9g9g9@g9r.com</td>
+                                <td>2021-11-01 13:13:12</td>
+                                <td>01021543265</td>
+                                <td>회원가입</td>
+                                <td>5,000</td> 
+                                <td>가입</td>                                                            
+                                <td>X</td>
+                                <td>X</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>10</td>
+                                <td><a href="../../page/member/member_detail.html">지구랭</a></td>
+                                <td>g9g9g9@g9r.com</td>
+                                <td>2021-11-01 13:13:12</td>
+                                <td>01021543265</td>
+                                <td>카카오</td>
+                                <td>5,000</td> 
+                                <td>가입</td>                                                            
+                                <td>X</td>
+                                <td>X</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>10</td>
+                                <td><a href="../../page/member/member_detail.html">지구랭</a></td>
+                                <td>g9g9g9@g9r.com</td>
+                                <td>2021-11-01 13:13:12</td>
+                                <td>01021543265</td>
+                                <td>네이버</td>
+                                <td>5,000</td> 
+                                <td>가입</td>                                                            
+                                <td>X</td>
+                                <td>X</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>10</td>
+                                <td><a href="../../page/member/member_detail.html">지구랭</a></td>
+                                <td>g9g9g9@g9r.com</td>
+                                <td>2021-11-01 13:13:12</td>
+                                <td>01021543265</td>
+                                <td>회원가입</td>
+                                <td>5,000</td> 
+                                <td>탈퇴</td>                                                            
+                                <td>X</td>
+                                <td>Y</td>
+                            </tr>
+                        </tbody>
+                        <!-- 리스트 끝 -->                         
+                                               
+                    </table>
+                    <!-- 리뷰 리스트 끝 -->
+
+                    <!-- 페이지네이션 시작 -->
+                    <div class="paging_box">
+                        <div class="paging">
+                            <a class="wide">처음</a>
+                            <a class="wide">이전</a>
+                            <a class="on">1</a>
+                            <a>2</a>
+                            <a>3</a>
+                            <a>4</a>
+                            <a>5</a>
+                            <a>6</a>
+                            <a>7</a>
+                            <a>8</a>
+                            <a>9</a>
+                            <a>10</a>
+                            <a class="wide">다음</a>
+                            <a class="wide">마지막</a>
+                        </div>
+                    </div>
+                    <!-- 페이지네이션 끝 -->                    
+
+                </div>
+                <!-- 보드 끝 -->   
+
+            </form>
+
+        </div>
+        <!-- 컨텐츠 영역 끝 -->
+
+    </div>
+    <!-- 컨테이너 끝 -->
+
+</div>
+</body>
+</html>

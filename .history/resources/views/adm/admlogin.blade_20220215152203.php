@@ -26,6 +26,7 @@ header('Pragma: public');
     <link rel="stylesheet" href="{{ asset('/design/adm/css/layout_adm.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/adm/css/style_adm.css') }}">
 
+
 </head>
 <body>
 <div class="wrap log_wrap">

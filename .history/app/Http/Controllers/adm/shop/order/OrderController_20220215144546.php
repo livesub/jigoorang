@@ -1744,10 +1744,10 @@ exit;
                 <tr>
                     <td rowspan="2">'.$k.'</td>
                     <td>'.$order->created_at.' ('.$CustomUtils->get_yoil($order->created_at).')</td>
-                    <td style="mso-number-format:\'\@\'">
+                    <td style="mso-number-format:\@">
                         '.$order->order_id.'
                     </td>
-                    <td style="mso-number-format:\'\@\'">
+                    <td style="mso-number-format:\@">
                         '.$order->od_invoice.'
                     </td>
                     <td >
@@ -1758,7 +1758,7 @@ exit;
                             <div>
                                 <div>'.$item_name.'</div>
                                 <div>'.$option_subject.'</div>
-                                <div style="mso-number-format:\'\@\'">'.$etc_qty.'</div>
+                                <div style="mso-number-format:\@">'.$etc_qty.'</div>
                             </div>
                         </div>
                     </td>
@@ -1769,14 +1769,14 @@ exit;
                     <td >
                         <div>'.$order->od_deposit_name.'</div>
                         <div>'.$user_info->user_id.'</div>
-                        <div style="mso-number-format:\'\@\'">'.$user_info->user_phone.'</div>
+                        <div style="mso-number-format:\@">'.$user_info->user_phone.'</div>
                     </td>
                     <td>'.number_format($order->od_receipt_price).'</td>
                     <td>'.number_format($order->real_card_price).'</td>
                     <td>'.number_format($order->od_cancel_price).'</td>
 
                     <td>'.$order->ad_name.'</td>
-                    <td style="mso-number-format:\'\@\'">'.$order->ad_hp.'</td>
+                    <td style="mso-number-format:\@">'.$order->ad_hp.'</td>
                     <td>'.$order->ad_zip1.") ".$order->ad_addr1." ".$order->ad_addr2." ".$order->ad_addr3.'</td>
                     <td>'.stripslashes($order->od_memo).'</td>
                 </tr>

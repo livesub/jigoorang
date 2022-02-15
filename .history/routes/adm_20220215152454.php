@@ -30,7 +30,7 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
     /* 로그인후 dashboard 연결 */
     Route::get('dashboard', [
         'as' => 'adm.dashboard.index',
-        'uses' => 'App\Http\Controllers\adm\dashboard\DashboardController@index',
+        'uses' => 'App\Http\Controllers\adm\member\MemberlistController@index',
     ]);
 
     /* 회원 리스트 */

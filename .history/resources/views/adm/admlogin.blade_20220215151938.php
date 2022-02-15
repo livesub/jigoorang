@@ -26,19 +26,21 @@ header('Pragma: public');
     <link rel="stylesheet" href="{{ asset('/design/adm/css/layout_adm.css') }}">
     <link rel="stylesheet" href="{{ asset('/design/adm/css/style_adm.css') }}">
 
+
 </head>
 <body>
 <div class="wrap log_wrap">
+<form action='{{ route('adm.login.store') }}' method='POST' role='form'>
+{!! csrf_field() !!}
     <!-- login 시작 -->
     <div class="log_box">
         <div class="logo"></div>
         <div class="title">관리자 로그인</div>
-        <form action='{{ route('adm.login.store') }}' method='POST' role='form'>
-        {!! csrf_field() !!}
+        <form>
             <div>
             <input name='user_id' id='user_id' type='text' value='{{ old('user_id') }}' placeholder='아이디' autofocus>
                 @error('user_id')
-                <br><span role='alert'>
+                <span role='alert'>
                     <strong>{{ $message }}</strong>
                 </span>
                 @enderror
@@ -51,10 +53,11 @@ header('Pragma: public');
                     </span>
                 @enderror
             </div>
-            <button class="btn wd-100" type='submit'>로그인</button>
+            <button class="btn wd-100" type='submit'>{{ $submit_login }}</button>
         </form>
     </div>
     <!-- login 끝 -->
+</form>
 </div>
 
     {{-- alert_messages Error --}}

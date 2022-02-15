@@ -5,7 +5,6 @@ header('Cache-Control: pre-check=0, post-check=0, max-age=0, max-stale = 0', fal
 header('Pragma: public');
 @endphp
 
-
 <!DOCTYPE html>
 <html lang='en'>
 <head>
