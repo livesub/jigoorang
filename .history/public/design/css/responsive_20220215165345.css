@@ -1414,11 +1414,6 @@ background-size: cover;
         font-size: 13px;
     }
 
-    .btn-50-bg {
-        height: 36px;
-        font-size: 13px;
-    }
-
 
     /* 메인 팝업 */
 
@@ -1738,10 +1733,6 @@ background-size: cover;
     }
     .title_area h2 {
         font-size: 16px;
-    }
-
-    .ft_sz {
-        font-size: 13px;
     }
 
 
@@ -2640,6 +2631,11 @@ background-size: cover;
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_review {
         height: 384px;
         border: solid 2px #ddd;
+    }
+
+
+    .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list .cot_body.pos img {
+        
     }
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont.cont_wrap .cot_list.my_list img {

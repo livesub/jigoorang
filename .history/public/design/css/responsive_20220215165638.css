@@ -1395,7 +1395,7 @@ background-size: cover;
     }
 
     .line_15 {
-        margin-top: 25px;
+        margin-top: px;
     }
     .hot-icon p{
         font-size: 15px;
@@ -1410,11 +1410,6 @@ background-size: cover;
     }
 
     .btn-50 {
-        height: 36px;
-        font-size: 13px;
-    }
-
-    .btn-50-bg {
         height: 36px;
         font-size: 13px;
     }
@@ -1738,10 +1733,6 @@ background-size: cover;
     }
     .title_area h2 {
         font-size: 16px;
-    }
-
-    .ft_sz {
-        font-size: 13px;
     }
 
 

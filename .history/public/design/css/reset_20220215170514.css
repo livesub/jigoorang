@@ -806,20 +806,12 @@ input:focus {
 
 /* font */
 
-.ft_sz {
-  font-size: 16px;
-}
-
-.ft-12 {
-  font-size: 12px;
-}
-
 .ft-13 {
   font-size: 13px;
 }
 
-.ft-15 {
-  font-size: 15px;
+.ft-16 {
+  font-size: 16px;
 }
 
 .ft-16 {

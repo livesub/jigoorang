@@ -107,7 +107,7 @@
                                                 {{ $item_options->sct_option }}
                                                 @endif
                                                 </li>
-                                                <li class="price_pd">{{ $CustomUtils->display_price(($cart_info->item_price + $item_options->sio_price)) }} X {{ number_format($cart_info->sct_qty) }}개</li>
+                                                <li class="price_pd">상품금액 : {{ $CustomUtils->display_price(($cart_info->item_price + $item_options->sio_price)) }} X 주문수량 : {{ number_format($cart_info->sct_qty) }}개</li>
                                             </ul>
                                         </div>
                                     </div>
