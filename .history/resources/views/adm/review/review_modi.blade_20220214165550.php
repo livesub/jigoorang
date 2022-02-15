@@ -71,9 +71,9 @@
                 @for($i = count($review_save_imgs)+1; $i <= 5; $i++)
                 <tr>
                     <td>
-                        <input type="file" name="review_img_{{ $i }}" id="review_img_{{ $i }}">
+                        <input type="file" name="review_img" id="review_img_{{ $i }}">
                         <br>
-                        <br><input type='checkbox' name="file_chk_{{ $i }}" id="file_chk_{{ $i }}" value='1'>수정,삭제,새로 등록시 체크 하세요.
+                        <br><input type='checkbox' name="file_chk{{ $i }}" id="file_chk{{ $i }}" value='1'>수정,삭제,새로 등록시 체크 하세요.
                     </td>
                 </tr>
                 @endfor

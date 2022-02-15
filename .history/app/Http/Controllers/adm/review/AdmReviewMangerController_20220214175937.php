@@ -261,6 +261,8 @@ class AdmReviewMangerController extends Controller
 
             $review_save = DB::table('review_save_imgs')->where('id', $review_id)->first();
 
+
+
             if($file_chk == 1){
                 if($review_img != ""){
                     $file_type = $review_img->getClientOriginalExtension();    //이미지 확장자 구함

@@ -235,20 +235,6 @@ class AdmReviewMangerController extends Controller
         $CustomUtils = new CustomUtils;
 
         $review_img = $request->file('review_img');
-        $review_content = $request->input('review_content');
-
-        $path = 'data/review';     //첨부물 저장 경로
-        $upload_max_filesize = ini_get('upload_max_filesize');  //서버 설정 파일 용량 제한
-        $upload_max_filesize = substr($upload_max_filesize, 0, -1); //2M (뒤에 M자르기)
-
-        //DB 저장 배열 만들기
-        $data = array(
-            'review_content'      => $review_content,
-        );
-
-        $thumb_name = "";
-        $thumb_name2 = "";
-        $photo_flag = false;
 
         for($i = 1; $i <= 5; $i++){
             $id_tmp = "review_id_".$i;
@@ -259,39 +245,22 @@ class AdmReviewMangerController extends Controller
             $review_img = $request->file($img_tmp); //이미지 첨부
             $file_chk = $request->input($file_chk_tmp); //체크 여부
 
-            $review_save = DB::table('review_save_imgs')->where('id', $review_id)->first();
-
             if($file_chk == 1){
                 if($review_img != ""){
-                    $file_type = $review_img->getClientOriginalExtension();    //이미지 확장자 구함
-                    $file_size = $review_img->getSize();  //첨부 파일 사이즈 구함
-
-                    //서버 php.ini 설정에 따른 첨부 용량 확인(php.ini에서 바꾸기)
-                    $max_size_mb = $upload_max_filesize * 1024;   //라라벨은 kb 단위라 함
-
-                    if($review_save != ""){
-                        //이미지가 있을땐 수정
-                        $attachment_result = CustomUtils::attachment_save($review_img, $path); //위의 패스로 이미지 저장됨
-
-                    }else{
-                        //이미지가 없을땐 insert
-                    }
+                    //var_dump($file_chk);
                 }else{
                     //체크 박스에 체크는 되고 이미지를 첨부 안했을땐 이미지 삭제
-                    if($review_save != ""){
+                    $review_save_cnt = DB::table('review_save_imgs')->where('id', "$review_id")->first();
+
+var_dump($review_save_cnt);
+
+exit;
+                    if($review_save_cnt > 0){
                         //디비 이미지 삭제
-                        $file_cnt = explode('@@', $review_save->review_img);
-                        for($j = 0; $j < count($file_cnt); $j++){
-                            $img_path = "";
-                            $img_path = $path.'/'.$file_cnt[$j];
-
-                            if (file_exists($img_path)) {
-                                @unlink($img_path); //이미지 삭제
-                            }
-                        }
-
-                        DB::table('review_save_imgs')->where('id', $review_id)->delete();
+var_dump("del!!!!!!!!");
                     }
+
+
                 }
             }
 
