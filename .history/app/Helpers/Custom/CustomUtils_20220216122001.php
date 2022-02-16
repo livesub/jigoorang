@@ -1927,24 +1927,25 @@ $um_value='80/0.5/3'
         $option_subject = "";
 
         if($sio_id != ""){
-            if($item_info->item_option_subject != null){
+var_dump("rrrrr====> ".$item_info->item_option_subject);
+            if(!is_null($item_info->item_option_subject)){
                 $subject_cut = explode(",", $item_info->item_option_subject);
                 $sio_id_cut = explode("/", $sio_id);
 
-                if(count($subject_cut) == count($sio_id_cut)){
-                    for($i = 0; $i < count($subject_cut); $i++){
-                        $subject_mk .= $subject_cut[$i].":".$sio_id_cut[$i]." / ";
-                    }
-                    $option_subject = substr($subject_mk, 0, -3);
-                }else{
-                    $option_subject = "";
+                for($i = 0; $i < count($subject_cut); $i++){
+
+                    $subject_mk .= $subject_cut[$i].":".$sio_id_cut[$i]." / ";
+
                 }
+                var_dump(count($sio_id_cut));
+                exit;
+                $option_subject = substr($subject_mk, 0, -3);
             }else{
                 $option_subject = "";
             }
         }
-	
-	return $option_subject;
+
+        return $option_subject;
     }
 }
 
