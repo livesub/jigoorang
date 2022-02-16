@@ -84,12 +84,12 @@
                         <div><a href="{{ route('adm.member.index') }}">{{ number_format($members_cnt) }}명</a></div>
                     </li>
                     <li>
-                        <div>신규가입({{ $now_date }})</div>
-                        <div><a href="{{ route('adm.member.index') }}">{{ number_format($new_members_cnt) }}명</a></div>
+                        <div>신규가입</div>
+                        <div><a href="./page/member/member.html">24명</a></div>
                     </li>
                     <li>
                         <div>탈퇴</div>
-                        <div><a href="{{ route('adm.member.index') }}">{{ number_format($member_draw) }}명</a></div>
+                        <div><a href="./page/member/member.html">38명</a></div>
                     </li>
                 </ul>
             </div>

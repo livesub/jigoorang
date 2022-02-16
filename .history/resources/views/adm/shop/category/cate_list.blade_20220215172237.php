@@ -133,11 +133,7 @@
                                 @endif
                             </td>
                             <td><button type="button" class="btn-sm-ln" onclick="cate_type('{{ $scate_info->sca_id }}','modi');">수정</button></td>
-                            <td>
-                                @if($de_scate_info == 1 && $de_item_info == 0)
-                                <button type="button" class="btn-sm-ln" onclick="cate_del('{{ $scate_info->id }}','{{ $scate_info->sca_id }}');">삭제</button>
-                                @endif
-                            </td>
+                            <td><button type="button" class="btn-sm-ln" onclick="location.href='#'">삭제</button></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -146,8 +142,6 @@
                 <!-- 페이지네이션 시작 -->
                 <div class="paging_box">
                     <div class="paging">
-                        {!! $pnPage !!}
-<!--
                         <a class="wide">처음</a>
                         <a class="wide">이전</a>
                         <a class="on">1</a>
@@ -162,7 +156,6 @@
                         <a>10</a>
                         <a class="wide">다음</a>
                         <a class="wide">마지막</a>
--->
                     </div>
                 </div>
                 <!-- 페이지네이션 끝 -->

@@ -60,94 +60,84 @@
                         </tr>
                     </thead>
                     <tbody>
-
-
-                    @foreach($scate_infos as $scate_info)
-                        @php
-                            $blank = "";
-                            $mark = "";
-                            $level = strlen($scate_info->sca_id) / 2 - 1;
-
-                            $x_sca_rank = "";
-                            $s_sca_rank = "";
-                            if($level == 0) {
-                                $level_ment = "대분류";
-                                $x_sca_rank = $scate_info->sca_rank;
-                            }else{
-                                $level_ment = "소분류";
-                                $s_sca_rank = $scate_info->sca_rank;
-                            }
-
-                            for($i = 0; $i < $level; $i++){
-                                $blank .= "&nbsp&nbsp";
-                            }
-
-                            if($level != 0){
-                                $mark = "└";
-                            }
-
-                            if($scate_info->sca_display == "Y"){
-                                $tr_bg = "";
-                                $disp_ment = "노출";
-                            }else{
-                                $disp_ment = "비노출";
-                                $tr_bg = " bgcolor='red' ";
-                            }
-
-                            //랭킹 츌력 여부
-                            if($scate_info->sca_rank_dispaly == 'Y') $rank_checked = 'checked';
-                            else $rank_checked = '';
-
-                            if($scate_info->sca_img == "") $img = asset("img/no_img.jpg");
-                            else{
-                                $img_cut = explode("@@", $scate_info->sca_img);
-                                $img = asset("/data/shopcate/".$img_cut[2]);
-                            }
-
-                            $de_scate_info = DB::table('shopcategorys')->where('sca_id','like',$scate_info->sca_id.'%')->count();   //하위 카테고리 갯수
-                            $de_item_info = DB::table('shopitems')->where('sca_id','like',$scate_info->sca_id.'%')->count();   //상품 갯수
-                        @endphp
                         <tr>
-                            <td>{{ $virtual_num-- }}</td>
-                            <td class="group">{{ $scate_info->sca_id }}</td>
+                            <td>20</td>
+                            <td class="group">10</td>
                             <td class="cate_name">
                                 <div>
-                                    {!! $blank !!}{{ $mark }} {{ $scate_info->sca_name_kr }}
+                                    욕실
                                 </div>
                             </td>
-                            <td class="thumb"><img src="{{ $img }}"></td>
-                            <td>{{ $level_ment }}</td>
-                            <td>{{ $disp_ment }}</td>
-                            <td>{{ $x_sca_rank }}</td>
-                            <td>{{ $s_sca_rank }}</td>
-                            <td>
-                                @if($level+1 == 2)   <!-- 2단계에서만 랭킹 등록 -->
-                                <label>
-                                    <input type="checkbox" name="sca_rank_dispaly{{ $scate_info->id }}" id="sca_rank_dispaly{{ $scate_info->id }}" onclick="rank_type('{{ $scate_info->id }}')" {{ $rank_checked }}>출력
-                                </label>
-                                @endif
-                            </td>
-                            <td>
-                                @if($level+2 < 3)   <!-- 2단계까지 저장 -->
-                                <button type="button" class="btn-sm-ln" onclick="cate_type('{{ $scate_info->sca_id }}','add');">추가</button>
-                                @endif
-                            </td>
-                            <td><button type="button" class="btn-sm-ln" onclick="cate_type('{{ $scate_info->sca_id }}','modi');">수정</button></td>
-                            <td>
-                                @if($de_scate_info == 1 && $de_item_info == 0)
-                                <button type="button" class="btn-sm-ln" onclick="cate_del('{{ $scate_info->id }}','{{ $scate_info->sca_id }}');">삭제</button>
-                                @endif
-                            </td>
+                            <td class="thumb"><img src="../../img/img_prod_01.png"></td>
+                            <td>대분류</td>
+                            <td>노출</td>
+                            <td>1</td>
+                            <td></td>
+                            <td></td>
+                            <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/category_rgst_sm.html'">추가</button></td>
+                            <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/category_rgst.html'">수정</button></td>
+                            <td></td>
                         </tr>
-                        @endforeach
+                        <tr>
+                            <td>19</td>
+                            <td class="group">1010</td>
+                            <td class="cate_name">└ 치약</td>
+                            <td class="thumb"><img src="../../img/img_prod_01.png"></td>
+                            <td>소분류</td>
+                            <td>노출</td>
+                            <td></td>
+                            <td>1</td>
+                            <td>
+                                <label>
+                                    <input type="checkbox" id="">출력
+                                </label>
+                            </td>
+                            <td></td>
+                            <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/category_rgst_sm.html'">수정</button></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>18</td>
+                            <td class="group">1020</td>
+                            <td class="cate_name">└ 칫솔</td>
+                            <td class="thumb"><img src="../../img/img_prod_01.png"></td>
+                            <td>소분류</td>
+                            <td>노출</td>
+                            <td></td>
+                            <td>2</td>
+                            <td>
+                                <label>
+                                    <input type="checkbox" id="">출력
+                                </label>
+                            </td>
+                            <td></td>
+                            <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/category_rgst_sm.html'">수정</button></td>
+                            <td></td>
+                        </tr>
+                        <tr>
+                            <td>17</td>
+                            <td class="group">1030</td>
+                            <td class="cate_name">└ 샴푸바</td>
+                            <td class="thumb"><img src="../../img/img_prod_01.png"></td>
+                            <td>소분류</td>
+                            <td>노출</td>
+                            <td></td>
+                            <td>0</td>
+                            <td>
+                                <label>
+                                    <input type="checkbox" id="">출력
+                                </label>
+                            </td>
+                            <td></td>
+                            <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/category_rgst_sm.html'">수정</button></td>
+                            <td><button type="button" class="btn-sm-ln" onclick="location.href='#'">삭제</button></td>
+                        </tr>
                     </tbody>
                 </table>
 
                 <!-- 페이지네이션 시작 -->
                 <div class="paging_box">
                     <div class="paging">
-                        {!! $pnPage !!}
-<!--
                         <a class="wide">처음</a>
                         <a class="wide">이전</a>
                         <a class="on">1</a>
@@ -162,7 +152,6 @@
                         <a>10</a>
                         <a class="wide">다음</a>
                         <a class="wide">마지막</a>
--->
                     </div>
                 </div>
                 <!-- 페이지네이션 끝 -->
@@ -175,73 +164,6 @@
 
     </div>
     <!-- 컨테이너 끝 -->
-
-
-<form name="cate_form" id="cate_form" method="get" action="">
-    <input type="hidden" name="id" id="id">
-    <input type="hidden" name="sca_id" id="sca_id">
-    <input type="hidden" name="page" id="page" value="{{ $page }}">
-</form>
-
-<script>
-    function cate_type(sca_id, type){
-        $("#sca_id").val(sca_id);
-        if(type == "add"){
-            $("#cate_form").attr("action", "{{ route('shop.cate.cate_add') }}");
-        }else if(type == "modi"){
-            $("#cate_form").attr("action", "{{ route('shop.cate.cate_modi') }}");
-        }
-
-        $("#cate_form").submit();
-    }
-</script>
-
-<script>
-    function cate_del(id,sca_id){
-        $("#id").val(id);
-        $("#sca_id").val(sca_id);
-
-        if (confirm("상품이 있을 경우 상품 부터 삭제 하세요.\n정말 삭제하시겠습니까?") == true){
-            $("#cate_form").attr("action", "{{ route('shop.cate.cate_delete') }}");
-            $("#cate_form").submit();
-        }else{
-            return false;
-        }
-    }
-</script>
-
-<script>
-    function rank_type(id){
-        var sca_rank_dispaly = '';
-        if($('#sca_rank_dispaly'+id).is(':checked') === true)
-        {
-            sca_rank_dispaly = 'Y';
-        }else{
-            sca_rank_dispaly = 'N';
-        }
-
-        $.ajax({
-            type : 'get',
-            url : '{{ route('shop.cate.ajax_rank_choice') }}',
-            data : {
-                'id'                : id,
-                'sca_rank_dispaly'  : sca_rank_dispaly,
-            },
-            dataType : 'text',
-            success : function(result){
-//alert(result);
-            },
-            error: function(result){
-                console.log(result);
-            },
-        });
-
-    }
-</script>
-
-
-
-
 
 
 

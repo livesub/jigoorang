@@ -89,7 +89,7 @@
                     </li>
                     <li>
                         <div>탈퇴</div>
-                        <div><a href="{{ route('adm.member.index') }}">{{ number_format($member_draw) }}명</a></div>
+                        <div><a href="./page/member/member.html">38명</a></div>
                     </li>
                 </ul>
             </div>

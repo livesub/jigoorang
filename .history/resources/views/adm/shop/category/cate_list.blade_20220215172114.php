@@ -103,9 +103,6 @@
                                 $img_cut = explode("@@", $scate_info->sca_img);
                                 $img = asset("/data/shopcate/".$img_cut[2]);
                             }
-
-                            $de_scate_info = DB::table('shopcategorys')->where('sca_id','like',$scate_info->sca_id.'%')->count();   //하위 카테고리 갯수
-                            $de_item_info = DB::table('shopitems')->where('sca_id','like',$scate_info->sca_id.'%')->count();   //상품 갯수
                         @endphp
                         <tr>
                             <td>{{ $virtual_num-- }}</td>
@@ -133,11 +130,7 @@
                                 @endif
                             </td>
                             <td><button type="button" class="btn-sm-ln" onclick="cate_type('{{ $scate_info->sca_id }}','modi');">수정</button></td>
-                            <td>
-                                @if($de_scate_info == 1 && $de_item_info == 0)
-                                <button type="button" class="btn-sm-ln" onclick="cate_del('{{ $scate_info->id }}','{{ $scate_info->sca_id }}');">삭제</button>
-                                @endif
-                            </td>
+                            <td></td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -146,8 +139,6 @@
                 <!-- 페이지네이션 시작 -->
                 <div class="paging_box">
                     <div class="paging">
-                        {!! $pnPage !!}
-<!--
                         <a class="wide">처음</a>
                         <a class="wide">이전</a>
                         <a class="on">1</a>
@@ -162,7 +153,6 @@
                         <a>10</a>
                         <a class="wide">다음</a>
                         <a class="wide">마지막</a>
--->
                     </div>
                 </div>
                 <!-- 페이지네이션 끝 -->

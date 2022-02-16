@@ -62,7 +62,7 @@ class AdmShopCategoryController extends Controller
         $preFirstPage   = $PageSet->preFirst("처음");
         $nextLastPage   = $PageSet->nextLast("마지막");
         $listPage       = $PageSet->getPageList();
-        $pnPage         = $preFirstPage.$prevPage.$listPage.$nextPage.$nextLastPage;
+        $pnPage         = $prevPage.$listPage.$nextPage;
 
         return view('adm.shop.category.cate_list',[
             'virtual_num'       => $virtual_num,

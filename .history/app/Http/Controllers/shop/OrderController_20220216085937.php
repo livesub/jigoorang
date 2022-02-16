@@ -151,7 +151,6 @@ class OrderController extends Controller
             'send_cost'         => 0,
             'cart_count'        => $cart_count,
             'address'           => $address,
-            'user_point'        => $user_point,
         ]);
     }
 

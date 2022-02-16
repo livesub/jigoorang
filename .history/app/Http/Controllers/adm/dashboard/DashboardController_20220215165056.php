@@ -63,7 +63,6 @@ class DashboardController extends Controller
 
         $members_cnt = DB::table('users')->where('user_level','>','2')->count(); //총회원수
         $new_members_cnt = DB::table('users')->where('user_level','>','2')->whereBetween('created_at', [$now_date.' 00:00:00', $now_date.' 23:59:59'])->count(); //신규회원
-        $member_draw = DB::table('users')->where([['user_level','>','2'], ['user_type', 'Y']])->count();    //탈퇴 회원
 
         return view('adm.dashboard.dashboard',[
             'orders_cnt1'   => $orders_cnt1,
@@ -77,8 +76,6 @@ class DashboardController extends Controller
             'now_date'      => $now_date,
             'review_now_cnt' => $review_now_cnt,
             'members_cnt'   => $members_cnt,
-            'new_members_cnt'   => $new_members_cnt,
-            'member_draw'   => $member_draw,
         ]);
 
     }

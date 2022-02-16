@@ -1133,6 +1133,7 @@ document.orderform.addEventListener("keydown", evt => {
 <script>
     function last_price(tot_price, od_send_cost2, use_point){
         var last_tot_price = (tot_price + od_send_cost2) - use_point;
+alert(last_tot_price);
         $("#last_tot_price").text(numberWithCommas(last_tot_price) + '원');
     }
 </script>
@@ -1164,25 +1165,21 @@ document.orderform.addEventListener("keydown", evt => {
                 return false;
             }
         }else{
+alert("tot_price_tmp===> "+tot_price_tmp);
+alert("od_temp_point===> "+od_temp_point);
             if(tot_price_tmp < od_temp_point){
+alert("aaaaaaaaaaaaaa");
+                $("#od_temp_point").val(tot_price_tmp);
                 if(user_point < od_temp_point){
-                    if(user_point >= tot_price_tmp){
-                        //보유포인트가 1000원 빠진 상품 포인트 보다 크거나 같으면
-                        $("#use_point").text(numberWithCommas(tot_price_tmp * -1) + 'P');
-                        var proc_use_point = tot_price_tmp;
-                    }else{
-                        $("#use_point").text(numberWithCommas(user_point * -1) + 'P');
-                        var proc_use_point = user_point;
-                    }
+                    $("#use_point").text(numberWithCommas(user_point * -1) + 'P');
                 }else{
                     $("#use_point").text(numberWithCommas(tot_price_tmp * -1) + 'P');
-                    var proc_use_point = tot_price_tmp;
                 }
 
-                $("#od_temp_point").val(proc_use_point);
-                last_price(tot_price, od_send_cost2, proc_use_point);
+                last_price(tot_price, od_send_cost2, user_point);
                 return false;
             }else{
+alert("bbbbbbbb");
                 if(user_point < od_temp_point){
                     $("#od_temp_point").val(user_point);
                     $("#use_point").text(numberWithCommas(user_point * -1) + 'P');

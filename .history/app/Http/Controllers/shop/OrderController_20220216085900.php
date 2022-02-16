@@ -115,7 +115,7 @@ class OrderController extends Controller
             if(Auth::user()->user_addr2 != "") $user_addr2 = $user_info->user_addr2;
             if(Auth::user()->user_addr3 != "") $user_addr3 = $user_info->user_addr3;
             if(Auth::user()->user_addr_jibeon != "") $user_addr_jibeon = $user_info->user_addr_jibeon;
-            $user_point = $user_info->user_point;
+
             //배송지
             $address = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['ad_default','1']])->first();
 
@@ -151,7 +151,6 @@ class OrderController extends Controller
             'send_cost'         => 0,
             'cart_count'        => $cart_count,
             'address'           => $address,
-            'user_point'        => $user_point,
         ]);
     }
 

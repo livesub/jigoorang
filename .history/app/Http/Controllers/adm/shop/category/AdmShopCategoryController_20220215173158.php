@@ -55,7 +55,7 @@ class AdmShopCategoryController extends Controller
 
         $PageSet        = new PageSet;
         $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
-        $prevPage       = $PageSet->getPrevPage("이전");
+        $prevPage       = $PageSet->getPrevPage("<class='wide'>이전");
         $nextPage       = $PageSet->getNextPage("다음");
         $pre10Page      = $PageSet->pre10("이전10");
         $next10Page     = $PageSet->next10("다음10");

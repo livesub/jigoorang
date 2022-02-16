@@ -172,9 +172,9 @@ header('Pragma: public');
     </div>
     <!-- 헤더 끝 -->
 
-<div style="left:200px;">
+
     @yield('content')
-</div>
+
 
 
 <!--

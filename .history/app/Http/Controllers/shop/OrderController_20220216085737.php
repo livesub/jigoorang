@@ -105,17 +105,16 @@ class OrderController extends Controller
         $addr_list = "";
 
         if(Auth::user()){
-            $user_info = DB::table('users')->where('user_id', Auth::user()->user_id)->first();
+            $user_infos = DB::table('users')->where('user_id', Auth::user()->user_id)->first();
+            if(Auth::user()->user_name != "") $user_name = Auth::user()->user_name;
+            if(Auth::user()->user_tel != "") $user_tel = Auth::user()->user_tel;
+            if(Auth::user()->user_phone != "") $user_phone = Auth::user()->user_phone;
+            if(Auth::user()->user_zip != "") $user_zip = Auth::user()->user_zip;
+            if(Auth::user()->user_addr1 != "") $user_addr1 = Auth::user()->user_addr1;
+            if(Auth::user()->user_addr2 != "") $user_addr2 = Auth::user()->user_addr2;
+            if(Auth::user()->user_addr3 != "") $user_addr3 = Auth::user()->user_addr3;
+            if(Auth::user()->user_addr_jibeon != "") $user_addr_jibeon = Auth::user()->user_addr_jibeon;
 
-            if(Auth::user()->user_name != "") $user_name = $user_info->user_name;
-            if(Auth::user()->user_tel != "") $user_tel = $user_info->user_tel;
-            if(Auth::user()->user_phone != "") $user_phone = $user_info->user_phone;
-            if(Auth::user()->user_zip != "") $user_zip = $user_info->user_zip;
-            if(Auth::user()->user_addr1 != "") $user_addr1 = $user_info->user_addr1;
-            if(Auth::user()->user_addr2 != "") $user_addr2 = $user_info->user_addr2;
-            if(Auth::user()->user_addr3 != "") $user_addr3 = $user_info->user_addr3;
-            if(Auth::user()->user_addr_jibeon != "") $user_addr_jibeon = $user_info->user_addr_jibeon;
-            $user_point = $user_info->user_point;
             //배송지
             $address = DB::table('baesongjis')->where([['user_id', Auth::user()->user_id], ['ad_default','1']])->first();
 
@@ -151,7 +150,6 @@ class OrderController extends Controller
             'send_cost'         => 0,
             'cart_count'        => $cart_count,
             'address'           => $address,
-            'user_point'        => $user_point,
         ]);
     }
 

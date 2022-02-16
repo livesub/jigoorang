@@ -1165,15 +1165,10 @@ document.orderform.addEventListener("keydown", evt => {
             }
         }else{
             if(tot_price_tmp < od_temp_point){
+alert("sdsvsdv");
                 if(user_point < od_temp_point){
-                    if(user_point >= tot_price_tmp){
-                        //보유포인트가 1000원 빠진 상품 포인트 보다 크거나 같으면
-                        $("#use_point").text(numberWithCommas(tot_price_tmp * -1) + 'P');
-                        var proc_use_point = tot_price_tmp;
-                    }else{
-                        $("#use_point").text(numberWithCommas(user_point * -1) + 'P');
-                        var proc_use_point = user_point;
-                    }
+                    $("#use_point").text(numberWithCommas(user_point * -1) + 'P');
+                    var proc_use_point = user_point;
                 }else{
                     $("#use_point").text(numberWithCommas(tot_price_tmp * -1) + 'P');
                     var proc_use_point = tot_price_tmp;

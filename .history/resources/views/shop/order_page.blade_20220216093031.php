@@ -1165,7 +1165,9 @@ document.orderform.addEventListener("keydown", evt => {
             }
         }else{
             if(tot_price_tmp < od_temp_point){
+alert("sdsvsdv");
                 if(user_point < od_temp_point){
+alert("tot_price_tmp====> "+tot_price_tmp);
                     if(user_point >= tot_price_tmp){
                         //보유포인트가 1000원 빠진 상품 포인트 보다 크거나 같으면
                         $("#use_point").text(numberWithCommas(tot_price_tmp * -1) + 'P');

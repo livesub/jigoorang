@@ -287,9 +287,9 @@
 
                                         <ul class="oder_name wt-00 mb-20">
                                             <li>보유포인트</li>
-                                            <li>{{ number_format($user_point) }}P</li>
+                                            <li>{{ number_format($CustomUtils->get_point_sum(Auth::user()->user_id)) }}P</li>
                                         </ul>
-                                        @if($user_point > 0)
+                                        @if($CustomUtils->get_point_sum(Auth::user()->user_id) > 0)
                                         <ul class="oder_point">
                                             <li>사용포인트</li>
                                             <li>
@@ -1132,6 +1132,7 @@ document.orderform.addEventListener("keydown", evt => {
 
 <script>
     function last_price(tot_price, od_send_cost2, use_point){
+alert(use_point);
         var last_tot_price = (tot_price + od_send_cost2) - use_point;
         $("#last_tot_price").text(numberWithCommas(last_tot_price) + '원');
     }
@@ -1145,12 +1146,12 @@ document.orderform.addEventListener("keydown", evt => {
         var od_send_cost2 = parseInt($("#od_send_cost2").val());    //도서 산간 배송비
         var tot_price_tmp = (tot_price + od_send_cost2) - 1000;   //카드 결제 최하 금액이 1000원 까지라 1000원 은 무조건 카드 결제 해야함
         $("#use_point").text(0);
-/*
+
         if(user_point <= 0){
             //alert('사용할 포인트가 부족 합니다');
             return false;
         }
-*/
+
         if(type == true){
             if(tot_price_tmp < user_point){
                 $("#od_temp_point").val(tot_price_tmp);
@@ -1165,22 +1166,9 @@ document.orderform.addEventListener("keydown", evt => {
             }
         }else{
             if(tot_price_tmp < od_temp_point){
-                if(user_point < od_temp_point){
-                    if(user_point >= tot_price_tmp){
-                        //보유포인트가 1000원 빠진 상품 포인트 보다 크거나 같으면
-                        $("#use_point").text(numberWithCommas(tot_price_tmp * -1) + 'P');
-                        var proc_use_point = tot_price_tmp;
-                    }else{
-                        $("#use_point").text(numberWithCommas(user_point * -1) + 'P');
-                        var proc_use_point = user_point;
-                    }
-                }else{
-                    $("#use_point").text(numberWithCommas(tot_price_tmp * -1) + 'P');
-                    var proc_use_point = tot_price_tmp;
-                }
-
-                $("#od_temp_point").val(proc_use_point);
-                last_price(tot_price, od_send_cost2, proc_use_point);
+                $("#od_temp_point").val(tot_price_tmp);
+                $("#use_point").text(numberWithCommas(tot_price_tmp * -1) + 'P');
+                last_price(tot_price, od_send_cost2, tot_price_tmp);
                 return false;
             }else{
                 if(user_point < od_temp_point){

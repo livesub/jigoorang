@@ -55,16 +55,17 @@ class PageSet extends Controller
 		{
 			if($this->page == $dPage)
 			{
+var_dump("1111111111");
                 //블록의 갯수로 디자인 바꿈(211104)
                 if($this->blockScale > 1){
-                    //$pShowPage .= "<div>$dPage</div>";
-                    $pShowPage .= "<a href='javascript:void(0);' class='on'>$dPage</a>";
+                    $pShowPage .= "<div>$dPage</div>";
                 }else{
                     $pShowPage = "<div>$dPage / $this->totalPage</div>";
                 }
 			}
 			else
 			{
+                var_dump("222222222222");
 				if($this->perinfo)
 				{
 					$pShowPage .= "<a href='?$this->perinfo&page=$dPage&$this->tails'>$dPage</a>";

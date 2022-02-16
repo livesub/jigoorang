@@ -146,8 +146,6 @@
                 <!-- 페이지네이션 시작 -->
                 <div class="paging_box">
                     <div class="paging">
-                        {!! $pnPage !!}
-<!--
                         <a class="wide">처음</a>
                         <a class="wide">이전</a>
                         <a class="on">1</a>
@@ -162,7 +160,6 @@
                         <a>10</a>
                         <a class="wide">다음</a>
                         <a class="wide">마지막</a>
--->
                     </div>
                 </div>
                 <!-- 페이지네이션 끝 -->
