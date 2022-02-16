@@ -172,9 +172,9 @@ header('Pragma: public');
     </div>
     <!-- 헤더 끝 -->
 
-    <div class="container">
+<div class="container">
     @yield('content')
-    </div>
+</div>
 
 
     {{-- alert_messages Error --}}
