@@ -50,19 +50,26 @@
                         <div class="col">출력순서</div>
                         <div class="col">
                             <p>*숫자만 입력하세요. 숫자가 낮을수록 먼저 출력 됩니다.</p>
-                            <input type="number" name="sca_rank" id="sca_rank" maxlength="4" size="4" value="9999" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="">
+                            <input type="number" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">카테고리 이미지</div>
                         <div class="col">
                             <div class="file_att">
+                                <p class="t_mint">이미지 사이즈 230*230(460*460)</p>
                                 <div class="btn_file">
                                     <label>
                                         파일선택
-                                        <input type="file"  name="sca_img" id="sca_img" accept="image/*">
+                                        <input type="file" id="" accept="image/*">
                                     </label>
+                                    asdfasdf.png
                                     <!-- 선택된 파일이 없습니다. -->
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
                                 </div>
                            </div>
                         </div>
@@ -73,21 +80,6 @@
 
         </div>
         <!-- 컨텐츠 영역 끝 -->
-
-<script>
-    function add_cate(){
-        if($.trim($("#sca_name_kr").val()) == ""){
-            alert("카테고리명을 입력 하세요.");
-            $("#sca_name_kr").focus();
-            return false;
-        }
-
-        $("#cate_create_form").submit();
-    }
-</script>
-
-
-
 
 
 
