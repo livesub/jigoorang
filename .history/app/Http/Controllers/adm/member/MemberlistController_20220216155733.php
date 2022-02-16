@@ -562,8 +562,12 @@ Auth::attempt($credentials) 응 통해 비교 했다가 비교 했던 아이디�
             exit;
         }
 
+
+
+
+
+
         return view('adm.member.member_point', [
-            'members'   => $members,
         ]);
 
 

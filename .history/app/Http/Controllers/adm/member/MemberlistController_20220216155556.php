@@ -555,15 +555,14 @@ Auth::attempt($credentials) 응 통해 비교 했다가 비교 했던 아이디�
 
         $id = $request->input('num');
 
-        $members = DB::table('users')->where([['user_level','>','2'], ['id', $id]])->first();
+        $members = DB::table('users')->where([['user_level','>','2'], ['id', 122]])->first();
 
-        if($members == ""){
-            return redirect()->route('adm.member.index')->with('alert_messages', '잘못된 경로 입니다.');
-            exit;
-        }
+
+var_dump($members);
+
+
 
         return view('adm.member.member_point', [
-            'members'   => $members,
         ]);
 
 
