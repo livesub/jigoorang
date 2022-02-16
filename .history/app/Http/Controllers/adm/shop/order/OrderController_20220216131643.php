@@ -1694,6 +1694,7 @@ exit;
                 $user_info = DB::table('users')->where('user_id', $cart_info->user_id)->first();
 
                 if($i == 0){
+var_dump("HHHHHHHHHHHH");
                     $option_subject = $CustomUtils->item_option_subject($item_info, $cart_info->sct_option);  //옵션 있을때 사이즈:M / 컬러:파랑 표현 하기
                     $image = $CustomUtils->get_item_image($cart_info->item_code, 3);
                     if($image == "") $image = asset("img/no_img.jpg");

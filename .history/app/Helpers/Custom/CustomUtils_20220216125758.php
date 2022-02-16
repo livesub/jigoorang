@@ -1930,7 +1930,7 @@ $um_value='80/0.5/3'
             if($item_info->item_option_subject != null){
                 $subject_cut = explode(",", $item_info->item_option_subject);
                 $sio_id_cut = explode("/", $sio_id);
-
+var_dump(count($sio_id_cut));
                 if(count($subject_cut) == count($sio_id_cut)){
                     for($i = 0; $i < count($subject_cut); $i++){
                         $subject_mk .= $subject_cut[$i].":".$sio_id_cut[$i]." / ";

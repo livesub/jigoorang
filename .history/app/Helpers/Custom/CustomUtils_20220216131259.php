@@ -1925,7 +1925,7 @@ $um_value='80/0.5/3'
     {
         $subject_mk = "";
         $option_subject = "";
-
+var_dump("#############");
         if($sio_id != ""){
             if($item_info->item_option_subject != null){
                 $subject_cut = explode(",", $item_info->item_option_subject);
