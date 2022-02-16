@@ -150,7 +150,7 @@
                     <div class="row">
                         <div class="col">상태</div>
                         <div class="col">
-                            {{ $user_status }} 만들어야 함!!!!!
+                            {{ $user_status }}
                             <select>
                                 <option>가입</option>
                                 <option>탈퇴</option>
@@ -160,57 +160,46 @@
                     <div class="row">
                         <div class="col">포인트</div>
                         <div class="col">
-                            {{ number_format($user_point) }}P
-                            <button type="button" class="btn blk-ln ht34" onclick="location.href='{{ route('adm.member.member_point','num='.$num) }}'">관리</button>
+                            3,000P
+                            <button type="button" class="btn blk-ln ht34" onclick="location.href='point_save.html'">관리</button>
                         </div>
                     </div>
                     <div class="row">
-                    @php
-                        if($user_platform_type == '') $platform_type = '회원가입';
-                        else if($user_platform_type == 'kakao') $platform_type = '카카오';
-                        else if($user_platform_type == 'naver') $platform_type = '네이버';
-                    @endphp
                         <div class="col">가입경로</div>
                         <div class="col">
-                           {{ $platform_type }}
+                           네이버
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">탈퇴일자</div>
                         <div class="col">
-                            {{ $withdraw_date }}
+                            2021-12-19 18:59:54
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">탈퇴사유</div>
                         <div class="col">
-                            {{ $withdraw_type }}
+                            기타(직접입력)
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">탈퇴내용</div>
                         <div class="col">
-                            {{ $withdraw_content }}
+                            자주 사용하지 않아 탈퇴합니다.
                         </div>
                     </div>
                     <div class="row">
-                    @php
-                        $blacklist_chk = '';
-                        $site_access_no_chk = '';
-                        if($blacklist == 'y') $blacklist_chk = 'checked';
-                        if($site_access_no == 'y') $site_access_no_chk = 'checked';
-                    @endphp
                         <div class="col">블랙리스트</div>
                         <div class="col">
                             <p>평가단 블랙리스트는 체험단 이용이 불가하고 사이트 블랙리스트는 강제 탈퇴 후 사이트 로그인, 재가입 이 불가 합니다</p>
                             <div class="dp">
                                 <label>
-                                    <input type="checkbox" name="blacklist" id="blacklist" value="y" {{ $blacklist_chk }}>평가단 블랙리스트
+                                    <input type="checkbox" id="">평가단 블랙리스트
                                 </label>
                             </div>
                             <div class="dp">
                                 <label>
-                                    <input type="checkbox" name="site_access_no" id="site_access_no" value="y" {{ $site_access_no_chk }}>사이트 블랙리스트
+                                    <input type="checkbox" id="">사이트 블랙리스트
                                 </label>
                             </div>
                         </div>

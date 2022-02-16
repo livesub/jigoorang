@@ -194,23 +194,17 @@
                         </div>
                     </div>
                     <div class="row">
-                    @php
-                        $blacklist_chk = '';
-                        $site_access_no_chk = '';
-                        if($blacklist == 'y') $blacklist_chk = 'checked';
-                        if($site_access_no == 'y') $site_access_no_chk = 'checked';
-                    @endphp
                         <div class="col">블랙리스트</div>
                         <div class="col">
                             <p>평가단 블랙리스트는 체험단 이용이 불가하고 사이트 블랙리스트는 강제 탈퇴 후 사이트 로그인, 재가입 이 불가 합니다</p>
                             <div class="dp">
                                 <label>
-                                    <input type="checkbox" name="blacklist" id="blacklist" value="y" {{ $blacklist_chk }}>평가단 블랙리스트
+                                    <input type="checkbox" id="">평가단 블랙리스트
                                 </label>
                             </div>
                             <div class="dp">
                                 <label>
-                                    <input type="checkbox" name="site_access_no" id="site_access_no" value="y" {{ $site_access_no_chk }}>사이트 블랙리스트
+                                    <input type="checkbox" id="">사이트 블랙리스트
                                 </label>
                             </div>
                         </div>

@@ -105,23 +105,21 @@
                         <div class="col">레벨</div>
                         <div class="col">
                             {!! $select_disp !!}
+                            <select>
+                                <option>회원</option>
+                                <option>관리자</option>
+                            </select>
                         </div>
                     </div>
                     <div class="row">
-                    @php
-                        $user_gender_M_chk = '';
-                        $user_gender_W_chk = '';
-                        if($user_gender == "M") $user_gender_M_chk = "checked";
-                        else if($user_gender == "W" || $user_gender == "") $user_gender_W_chk = "checked";
-                    @endphp
                         <div class="col">성별</div>
                         <div class="col">
                             <div class="prt">
                                 <label>
-                                    <input type='radio' name="user_gender" id="user_gender_M" value="M" {{ $user_gender_M_chk }}> 남
+                                    <input type="radio" id="" name="gender" checked="checked" > 남
                                 </label>
                                 <label>
-                                    <input type='radio' name="user_gender" id="user_gender_W" value="W" {{ $user_gender_W_chk }}> 여
+                                    <input type="radio" id="" name="gender" > 여
                                 </label>
                             </div>
                         </div>
@@ -130,92 +128,10 @@
                         <div class="col">생년월일</div>
                         <div class="col">
                             <p>예)840705</p>
-                            <input type="text" name="user_birth" id="user_birth" value="{{ $user_birth }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" maxlength="6">
-                            @error('user_birth')
-                                <br><span role='alert'>
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                            @enderror
+                            <input class="aln_left" type="number" name="" placeholder="">
                         </div>
                     </div>
 
-
-                    @if ($mode == 'modi')
-                    <div class="row">
-                        <div class="col">가입일</div>
-                        <div class="col">
-                            {{ $created_at }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">상태</div>
-                        <div class="col">
-                            {{ $user_status }} 만들어야 함!!!!!
-                            <select>
-                                <option>가입</option>
-                                <option>탈퇴</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">포인트</div>
-                        <div class="col">
-                            {{ number_format($user_point) }}P
-                            <button type="button" class="btn blk-ln ht34" onclick="location.href='{{ route('adm.member.member_point','num='.$num) }}'">관리</button>
-                        </div>
-                    </div>
-                    <div class="row">
-                    @php
-                        if($user_platform_type == '') $platform_type = '회원가입';
-                        else if($user_platform_type == 'kakao') $platform_type = '카카오';
-                        else if($user_platform_type == 'naver') $platform_type = '네이버';
-                    @endphp
-                        <div class="col">가입경로</div>
-                        <div class="col">
-                           {{ $platform_type }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">탈퇴일자</div>
-                        <div class="col">
-                            {{ $withdraw_date }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">탈퇴사유</div>
-                        <div class="col">
-                            {{ $withdraw_type }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">탈퇴내용</div>
-                        <div class="col">
-                            {{ $withdraw_content }}
-                        </div>
-                    </div>
-                    <div class="row">
-                    @php
-                        $blacklist_chk = '';
-                        $site_access_no_chk = '';
-                        if($blacklist == 'y') $blacklist_chk = 'checked';
-                        if($site_access_no == 'y') $site_access_no_chk = 'checked';
-                    @endphp
-                        <div class="col">블랙리스트</div>
-                        <div class="col">
-                            <p>평가단 블랙리스트는 체험단 이용이 불가하고 사이트 블랙리스트는 강제 탈퇴 후 사이트 로그인, 재가입 이 불가 합니다</p>
-                            <div class="dp">
-                                <label>
-                                    <input type="checkbox" name="blacklist" id="blacklist" value="y" {{ $blacklist_chk }}>평가단 블랙리스트
-                                </label>
-                            </div>
-                            <div class="dp">
-                                <label>
-                                    <input type="checkbox" name="site_access_no" id="site_access_no" value="y" {{ $site_access_no_chk }}>사이트 블랙리스트
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
                 </div>
 
             </form>
