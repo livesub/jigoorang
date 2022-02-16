@@ -9,46 +9,6 @@ header('Pragma: public');
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<<<<<<< HEAD
-    <meta charset='utf-8'>
-    <meta http-equiv="Content-Security-Policy" content="upgrade-insecure-requests">
-    <title>ADIMISTRATOR</title>
-</head>
-<body>
-
-<script src='//code.jquery.com/jquery-3.3.1.min.js'></script>
-
-    <table>
-        <tr>
-            <td>
-            @if(auth()->user())
-            <a href='{{ route('logout.destroy') }}'>LOGOUT</a>
-            @endif
-            </td>
-        </tr>
-    </table>
-
-    <table border="1">
-        <tr>
-            <td>상단 메뉴 또는 타이틀 등등</td>
-        </tr>
-    </table>
-    <table border="1">
-        <tr>
-            <td>
-                <table>
-                    <tr>
-                        <td><a href="{{ route('adm.member.index') }}">회원 관리</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="{{ route('adm.banner.index', 1) }}">상단 배너 이미지 관리</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="{{ route('adm.banner.index', 2) }}">하단 배너 이미지 관리</a></td>
-                    </tr>
-
-                    @if(auth()->user()->user_level < 2) <!-- 총관리자만 보는 메뉴 -->
-=======
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, minimum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -128,7 +88,6 @@ header('Pragma: public');
         })(jQuery);
         //# sourceURL=pen.js
     </script>
->>>>>>> 4d7d866f2c6abbaab61e92be1159483c308dbff3
 
 </head>
 <body>
