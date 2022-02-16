@@ -364,7 +364,7 @@ class MemberlistController extends Controller
             return view('adm.memberregi',[
                 'title_ment'            => '등록',
                 'mode'                  => 'regi',
-                'num'                   => $num,
+                'num'                   => '',
                 'user_id'               => '',
                 'user_name'             => '',
                 'user_pw'               => '',
@@ -548,18 +548,4 @@ Auth::attempt($credentials) 응 통해 비교 했다가 비교 했던 아이디�
         }
         return redirect()->route('adm.member.index')->with('alert_messages', $Messages::$adm_mem_chk['mem_chk']['out_ok']);
     }
-
-    public function member_point(Request $request)
-    {
-        $CustomUtils = new CustomUtils;
-
-        $id = $request->input('num');
-
-        return view('adm.member.member_point', [
-        ]);
-
-
-dd("ponit");
-    }
-
 }

@@ -4,14 +4,13 @@
                                 @if(count($review_saves_shop_infos) > 0)
                                     @foreach($review_saves_shop_infos as $review_saves_shop_info)
                                         @php
+var_dump("KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
                                             $image = '';
                                             $cart_info = DB::table('shopcarts')->where('id', $review_saves_shop_info->cart_id)->first();
                                             $item_info = DB::table('shopitems')->where([['item_code', $cart_info->item_code], ['sca_id', $review_saves_shop_info->sca_id]])->first();
                                             $order_info = DB::table('shoporders')->select('created_at')->where('order_id', $cart_info->od_id)->first();
 
                                             $image = $CustomUtils->get_item_image($item_info->item_code, 3);
-                                            if($image == "") $image = asset("img/no_img.jpg");
-
                                             $dd = substr($order_info->created_at, 0, 10);
 
                                             //평가 멘트/점수 표현과 이미지 처리를 같이 for 로 처리
@@ -32,11 +31,6 @@
                                             $review_save_imgs_shop_infos = array();
                                             if($review_save_imgs_shop_cnt > 0) $review_save_imgs_shop_infos = $review_save_shop_imgs->get();
 
-                                            if(strpos($cart_info->sct_option, " / ") !== false) {
-                                                $item_options = $cart_info->sct_option;
-                                            } else {
-                                                $item_options = "";
-                                            }
                                         @endphp
 
                                 <div class="cot_body pd-00">
@@ -49,7 +43,7 @@
                                         @endif
 
                                         <p>{{ $cart_info->item_name }}</p>
-                                        <p>{{ $item_options }}</p>
+                                        <p>{{ $cart_info->sct_option }}</p>
                                     </div>
 
                                   <div class="cot_review mt-20 mb-20">

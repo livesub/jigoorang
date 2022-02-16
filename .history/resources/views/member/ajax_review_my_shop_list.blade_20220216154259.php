@@ -10,8 +10,6 @@
                                             $order_info = DB::table('shoporders')->select('created_at')->where('order_id', $cart_info->od_id)->first();
 
                                             $image = $CustomUtils->get_item_image($item_info->item_code, 3);
-                                            if($image == "") $image = asset("img/no_img.jpg");
-
                                             $dd = substr($order_info->created_at, 0, 10);
 
                                             //평가 멘트/점수 표현과 이미지 처리를 같이 for 로 처리

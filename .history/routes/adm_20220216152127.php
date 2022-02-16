@@ -67,8 +67,8 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
     ]);
 
     Route::get('member/member_point', [  //포인트관리
-        'as' => 'adm.member.member_point',
-        'uses' => 'App\Http\Controllers\adm\member\MemberlistController@member_point',
+        'as' => 'adm.member.show',
+        'uses' => 'App\Http\Controllers\adm\member\MemberlistController@show',
     ]);
 
 /*** 관리자 회원 관련 끝 */

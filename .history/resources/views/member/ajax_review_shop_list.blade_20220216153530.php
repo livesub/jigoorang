@@ -6,11 +6,6 @@
                                                     if($image == "") $image = asset("img/no_img.jpg");
                                                     $kk = substr($order->regi_date, 0, 10);
                                                     //$review_temporary_yn = DB::table('review_saves')->where([['cart_id', $order->id], ['item_code', $order->item_code], ['user_id', Auth::user()->user_id], ['temporary_yn', 'n']])->count();
-                                                    if(strpos($order->sct_option, " / ") !== false) {
-                                                        $item_options = $order->sct_option;
-                                                    } else {
-                                                        $item_options = "";
-                                                    }
                                                 @endphp
 
                                                 {{-- @if($review_temporary_yn == 0) --}}
@@ -24,7 +19,7 @@
                                             <img src="{{ asset($image) }}" alt="">
                                             <div class="info">
                                                 <p>{{ $order->item_name }}</p>
-                                                <span>{{ $item_options }}</span>
+                                                <span>{{ $order->sct_option }}</span>
                                             </div>
 
                                             <button class="btn-sd" type="button" onclick="cart_review('{{ $order->id }}', '{{ $order->order_id }}', '{{ $order->item_code }}', '{{ substr($order->regi_date, 0, 10) }}')">{{ $btn_ment }}</button>

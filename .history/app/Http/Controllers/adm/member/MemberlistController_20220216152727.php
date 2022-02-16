@@ -554,11 +554,6 @@ Auth::attempt($credentials) 응 통해 비교 했다가 비교 했던 아이디�
         $CustomUtils = new CustomUtils;
 
         $id = $request->input('num');
-
-        return view('adm.member.member_point', [
-        ]);
-
-
 dd("ponit");
     }
 

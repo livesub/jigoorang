@@ -114,7 +114,7 @@
       회원 상태 : {{ $user_status }}
     </div>
     <div class='form-group'>
-      포인트 : {{ number_format($user_point) }}P <button type="button" class="btn blk-ln ht34" onclick="location.href='{{ route('adm.member.member_point','num='.$num) }}'">관리</button>
+      포인트 : {{ number_format($user_point) }}P <button type="button" class="btn blk-ln ht34" onclick="location.href='{{ route('adm.member.member_point') }}'">관리</button>
     </div>
 
     <div class='form-group'>

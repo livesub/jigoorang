@@ -555,7 +555,7 @@ Auth::attempt($credentials) 응 통해 비교 했다가 비교 했던 아이디�
 
         $id = $request->input('num');
 
-        return view('adm.member.member_point', [
+        return view('adm.member_point', [
         ]);
 
 
