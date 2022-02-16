@@ -43,7 +43,7 @@ class AdmController extends Controller
                     return redirect()->route('main.index');
                     exit;
                 }else{
-                    return redirect()->route('adm.dashboard.index');
+                    return redirect()->route('adm.member.index');
                 }
             }
         });
