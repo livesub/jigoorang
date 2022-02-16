@@ -172,43 +172,9 @@ header('Pragma: public');
     </div>
     <!-- 헤더 끝 -->
 
-    <div class="container">
+<div class="container">
     @yield('content')
-    </div>
-
-
-<!--
-    숨김 메뉴
-                    <tr>
-                        <td><a href="{{ route('adm.boardmanage.index') }}">게시판 관리</a></td>
-                    </tr>
-
-                    <tr>
-                        <td><br><br><br>게시판 리스트</td>
-                    </tr>
-                    @php
-                        $b_lists = DB::table('boardmanagers')->select('id', 'bm_tb_name', 'bm_tb_subject')->orderBy('id', 'desc')->get();
-                    @endphp
-
-                    @foreach($b_lists as $b_list)
-                    <tr>
-                        <td><a href="{{ route('adm.admboard.index',$b_list->bm_tb_name) }}"> - {{ $b_list->bm_tb_subject }}</a></td>
-                    </tr>
-                    @endforeach
-
-
-
-                    <tr>
-                        <td><br><a href="{{ route('adm.editor.delete') }}">에디터 불필요 파일 삭제</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="{{ route('adm.session_del.destroy') }}">세션 파일 일괄 삭제</a></td>
-                    </tr>
-                    <tr>
-                        <td><a href="{{ url('adm/clearcache') }}">캐시 파일 일괄 삭제</a></td>
-                    </tr>
--->
-
+</div>
 
 
     {{-- alert_messages Error --}}
