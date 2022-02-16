@@ -555,111 +555,16 @@ Auth::attempt($credentials) 응 통해 비교 했다가 비교 했던 아이디�
 
         $id = $request->input('num');
 
-        //$members = DB::table('users')->where([['user_level','>','2'], ['id', $id]])->first();
-        $members = DB::table('users')->where('id', $id)->first();
+        $members = DB::table('users')->where([['user_level','>','2'], ['id', $id]])->first();
 
         if($members == ""){
             return redirect()->route('adm.member.index')->with('alert_messages', '잘못된 경로 입니다.');
             exit;
         }
-
-        $page       = $request->input('page');
-        $pageScale  = 15;  //한페이지당 라인수
-        $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
-
-        if($page != "")
-        {
-            $start_num = $pageScale * ($page - 1);
-        }else{
-            $page = 1;
-            $start_num = 0;
-        }
-
-        $shoppoints = DB::table("shoppoints")->where("user_id", $members->user_id)->whereRaw("po_type not in ('7', '11', '10')");
-
-        $total_record   = 0;
-        $total_record   = $shoppoints->count(); //총 게시물 수
-        $total_page     = ceil($total_record / $pageScale);
-        $total_page     = $total_page == 0 ? 1 : $total_page;
-
-        $shoppoint_rows = $shoppoints->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
-
-        $tailarr = array();
-        $tailarr['num'] = $id;    //고정된 전달 파라메터가 있을때 사용
-
-        $PageSet        = new PageSet;
-        $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
-        $prevPage       = $PageSet->getPrevPage("이전");
-        $nextPage       = $PageSet->getNextPage("다음");
-        $pre10Page      = $PageSet->pre10("이전10");
-        $next10Page     = $PageSet->next10("다음10");
-        $preFirstPage   = $PageSet->preFirst("처음");
-        $nextLastPage   = $PageSet->nextLast("마지막");
-        $listPage       = $PageSet->getPageList();
-        $pnPage         = $preFirstPage.$prevPage.$listPage.$nextPage.$nextLastPage;
 
         return view('adm.member.member_point', [
             'members'   => $members,
             'num'       => $id,
-            'shoppoint_rows'    => $shoppoint_rows,
-            'pnPage'            => $pnPage,
-        ]);
-    }
-
-    public function member_use_point(Request $request)
-    {
-        $CustomUtils = new CustomUtils;
-
-        $id = $request->input('num');
-
-        //$members = DB::table('users')->where([['user_level','>','2'], ['id', $id]])->first();
-        $members = DB::table('users')->where('id', $id)->first();
-
-        if($members == ""){
-            return redirect()->route('adm.member.index')->with('alert_messages', '잘못된 경로 입니다.');
-            exit;
-        }
-
-        $page       = $request->input('page');
-        $pageScale  = 15;  //한페이지당 라인수
-        $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
-
-        if($page != "")
-        {
-            $start_num = $pageScale * ($page - 1);
-        }else{
-            $page = 1;
-            $start_num = 0;
-        }
-
-        $shoppoints = DB::table("shoppoints")->where("user_id", $members->user_id)->whereRaw("po_type in ('7', '11', '10')");
-
-        $total_record   = 0;
-        $total_record   = $shoppoints->count(); //총 게시물 수
-        $total_page     = ceil($total_record / $pageScale);
-        $total_page     = $total_page == 0 ? 1 : $total_page;
-
-        $shoppoint_rows = $shoppoints->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
-
-        $tailarr = array();
-        $tailarr['num'] = $id;    //고정된 전달 파라메터가 있을때 사용
-
-        $PageSet        = new PageSet;
-        $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
-        $prevPage       = $PageSet->getPrevPage("이전");
-        $nextPage       = $PageSet->getNextPage("다음");
-        $pre10Page      = $PageSet->pre10("이전10");
-        $next10Page     = $PageSet->next10("다음10");
-        $preFirstPage   = $PageSet->preFirst("처음");
-        $nextLastPage   = $PageSet->nextLast("마지막");
-        $listPage       = $PageSet->getPageList();
-        $pnPage         = $preFirstPage.$prevPage.$listPage.$nextPage.$nextLastPage;
-
-        return view('adm.member.member_use_point', [
-            'members'   => $members,
-            'num'       => $id,
-            'shoppoint_rows'    => $shoppoint_rows,
-            'pnPage'            => $pnPage,
         ]);
     }
 
@@ -668,26 +573,8 @@ Auth::attempt($credentials) 응 통해 비교 했다가 비교 했던 아이디�
         $CustomUtils = new CustomUtils;
 
         $id         = $request->input('num');
-        $give_point = $request->input('give_point');
-        $give_point_chk = $request->input('give_point_chk');
-
-        $members = DB::table('users')->where([['user_level','>','2'], ['id', $id]])->first();
-
-        if($members == ""){
-            return redirect()->route('adm.member.index')->with('alert_messages', '잘못된 경로 입니다.');
-            exit;
-        }
-
-        if($give_point_chk == 1){
-            $save_give_point = $give_point;
-            $CustomUtils->insert_point($members->user_id, $save_give_point, '지구랭 특별 적립', 17, '', '');
-        }else if($give_point_chk == 2){
-            $save_give_point = (-1) * $give_point;
-            $CustomUtils->insert_point($members->user_id, $save_give_point, '지구랭 특별 적립 취소', 18, '', '');
-        }
-
-        echo "ok";
-        exit;
+        $give_point = $request->input('num');
+var_dump($give_point);
     }
 
 

@@ -71,14 +71,9 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'uses' => 'App\Http\Controllers\adm\member\MemberlistController@member_point',
     ]);
 
-    Route::get('member/member_use_point', [  //포인트관리
-        'as' => 'adm.member.member_use_point',
-        'uses' => 'App\Http\Controllers\adm\member\MemberlistController@member_use_point',
-    ]);
-
-    Route::post('member/member_point_save', [  //포인트저장
-        'as' => 'adm.member.ajax_member_point_save',
-        'uses' => 'App\Http\Controllers\adm\member\MemberlistController@ajax_member_point_save',
+    Route::get('member/member_point_save', [  //포인트저장
+        'as' => 'adm.member.member_point_save',
+        'uses' => 'App\Http\Controllers\adm\member\MemberlistController@member_point_save',
     ]);
 /*** 관리자 회원 관련 끝 */
 

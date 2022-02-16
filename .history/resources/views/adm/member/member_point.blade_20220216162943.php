@@ -56,30 +56,52 @@
                     <!-- 포인트 내역 시작 -->
                     <div class="tap_menu mt50">
                         <div class="tap_head">
-                            <button type="button" class="acc" onclick="location.href='{{ route('adm.member.member_point','num='.$num) }}'">포인트 누적</button>
-                            <button type="button" onclick="location.href='{{ route('adm.member.member_use_point','num='.$num) }}'">포인트 사용</button>
+                            <button type="button" class="acc" onclick="location.href='../../page/member/point_save.html'">포인트 누적</button>
+                            <button type="button" onclick="location.href='../../page/member/point_spend.html'">포인트 사용</button>
                         </div>
                         <div class="tap_body">
-
-                            @foreach($shoppoint_rows as $shoppoint_row)
-                                @php
-                                    if($shoppoint_row->po_point < 0){
-                                        $point_type = "";
-                                        $disp_class = "acc";
-                                    }else{
-                                        $point_type = "+";
-                                        $disp_class = "";
-                                    }
-                                @endphp
                             <div class="list">
                                 <div class="p_history">
-                                    {{ $shoppoint_row->po_content }}
-                                    <span class="{{ $disp_class }}">{{ $point_type }}{{ number_format($shoppoint_row->po_point) }}P</span>
+                                    지구랭 특별 적립
+                                    <span>+100P</span>
                                 </div>
-                                {{ substr($shoppoint_row->created_at, 0, 10) }}
+                                2021.10.15
                             </div>
-                            @endforeach
-
+                            <div class="list">
+                                <div class="p_history">
+                                    지구랭 특별 적립 취소
+                                    <span class="acc">-100P</span>
+                                </div>
+                                2021.10.15
+                            </div>
+                            <div class="list">
+                                <div class="p_history">
+                                    상품 포토 리뷰 적립
+                                    <span>+100P</span>
+                                </div>
+                                2021.10.15
+                            </div>
+                            <div class="list">
+                                <div class="p_history">
+                                    상품 리뷰 적립
+                                    <span>+100P</span>
+                                </div>
+                                2021.10.15
+                            </div>
+                            <div class="list">
+                                <div class="p_history">
+                                    지구랭 특별 적립
+                                    <span>+100P</span>
+                                </div>
+                                2021.10.15
+                            </div>
+                            <div class="list">
+                                <div class="p_history">
+                                    회원가입 적립
+                                    <span>+100P</span>
+                                </div>
+                                2021.10.15
+                            </div>
                         </div>
                     </div>
                     <!-- 포인트 내역 끝 -->
@@ -87,7 +109,20 @@
                     <!-- 페이지네이션 시작 -->
                     <div class="paging_box">
                         <div class="paging">
-                            {!! $pnPage !!}
+                            <a class="wide">처음</a>
+                            <a class="wide">이전</a>
+                            <a class="on">1</a>
+                            <a>2</a>
+                            <a>3</a>
+                            <a>4</a>
+                            <a>5</a>
+                            <a>6</a>
+                            <a>7</a>
+                            <a>8</a>
+                            <a>9</a>
+                            <a>10</a>
+                            <a class="wide">다음</a>
+                            <a class="wide">마지막</a>
                         </div>
                     </div>
                     <!-- 페이지네이션 끝 -->
@@ -107,37 +142,31 @@
         else if(chk == 2) var ment = "회수";
 
         if($.trim($("#give_point").val()) == "" || $.trim($("#give_point").val()) == "0"){
-            alert(ment + " 할 포인트를 입력하세요");
-            $("#give_point").focus();
-            return false;
+
+            alert();
         }
 
-        if (confirm("포인트를 "+ ment +" 하시겠습니까?") == true){    //확인
-            $.ajax({
-                headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-                type : 'post',
-                url : '{{ route('adm.member.ajax_member_point_save') }}',
-                data : {
-                    'num'   : {{ $num }},
-                    'give_point'    : $.trim($("#give_point").val()),
-                    'give_point_chk': chk,
-                },
-                dataType : 'text',
-                success : function(result){
-    //alert(result);
-    //return false;
-                    if(result == "ok"){
-                        alert(ment + " 처리 되었습니다");
-                        location.reload();
-                    }
-                },
-                error: function(result){
-                    console.log(result);
-                },
-            });
-        }else{
-            return false;
-        }
+return false;
+        $.ajax({
+            headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+            type : 'post',
+            url : '{{ route('adm.member.ajax_member_point_save') }}',
+            data : {
+                'num'   : {{ $num }},
+
+            },
+            dataType : 'text',
+            success : function(result){
+alert(result);
+return false;
+                if(result == "ok"){
+                    alert(" 처리 되었습니다");
+                }
+            },
+            error: function(result){
+                console.log(result);
+            },
+        });
     }
 </script>
 

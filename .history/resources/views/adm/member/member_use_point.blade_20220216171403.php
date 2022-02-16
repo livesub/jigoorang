@@ -56,8 +56,8 @@
                     <!-- 포인트 내역 시작 -->
                     <div class="tap_menu mt50">
                         <div class="tap_head">
-                            <button type="button" class="acc" onclick="location.href='{{ route('adm.member.member_point','num='.$num) }}'">포인트 누적</button>
-                            <button type="button" onclick="location.href='{{ route('adm.member.member_use_point','num='.$num) }}'">포인트 사용</button>
+                            <button type="button" onclick="location.href='{{ route('adm.member.member_point','num='.$num) }}'">포인트 누적</button>
+                            <button type="button" class="acc" onclick="location.href='{{ route('adm.member.member_use_point','num='.$num) }}'">포인트 사용</button>
                         </div>
                         <div class="tap_body">
 
