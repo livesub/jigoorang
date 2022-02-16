@@ -19,7 +19,7 @@
                                             <img src="{{ asset($image) }}" alt="">
                                             <div class="info">
                                                 <p>{{ $order->item_name }}</p>
-                                                <span>{{ $order->sct_option }}</span>
+                                                <span>{{ $order->sct_option }}</>
                                             </div>
 
                                             <button class="btn-sd" type="button" onclick="cart_review('{{ $order->id }}', '{{ $order->order_id }}', '{{ $order->item_code }}', '{{ substr($order->regi_date, 0, 10) }}')">{{ $btn_ment }}</button>

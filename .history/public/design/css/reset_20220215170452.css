@@ -806,26 +806,18 @@ input:focus {
 
 /* font */
 
-.ft_sz {
-  font-size: 16px;
-}
-
-.ft-12 {
-  font-size: 12px;
-}
-
 .ft-13 {
+  fo
+}
+
+.txt-r {
+  text-align: right;
+}
+
+.md-p {
+  font-weight: 400;
   font-size: 13px;
 }
-
-.ft-15 {
-  font-size: 15px;
-}
-
-.ft-16 {
-  font-size: 16px;
-}
-
 
 .icon_od {
   background: url('../recources/icons/view_g@3x.png') no-repeat left;

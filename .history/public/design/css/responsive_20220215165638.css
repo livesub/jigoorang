@@ -1395,7 +1395,7 @@ background-size: cover;
     }
 
     .line_15 {
-        margin-top: 25px;
+        margin-top: px;
     }
     .hot-icon p{
         font-size: 15px;
@@ -1410,11 +1410,6 @@ background-size: cover;
     }
 
     .btn-50 {
-        height: 36px;
-        font-size: 13px;
-    }
-
-    .btn-50-bg {
         height: 36px;
         font-size: 13px;
     }
@@ -1738,10 +1733,6 @@ background-size: cover;
     }
     .title_area h2 {
         font-size: 16px;
-    }
-
-    .ft_sz {
-        font-size: 13px;
     }
 
 
@@ -3060,18 +3051,6 @@ background-size: cover;
         width: calc(100%) !important;
     }
 
-    /* 주문 배송 내역 상세 */
-    .eval .board.mypage_list .board_wrap .list.ev_rul .btn_re .re_li .dl-trk {
-        background: url(../recources/icons/arrow-option-01.png) no-repeat right;
-        width: 100%;
-        height: 100%;
-    }
-
-    .eval .board.mypage_list .board_wrap .list.ev_rul .btn_re .re_li .text {
-        font-size: 13px;
-        margin-right: 20px;
-        top: -7px;
-    }
 
     /* 취소/교환/반품 신청안내 */
 
@@ -5082,19 +5061,6 @@ background-size: cover;
     .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .pr_name {
         font-size: 13px;
         margin-left: 13px;
-    }
-
-
-    .eval .board.mypage_list .board_wrap .list.ev_rul .btn_re .re_li .text {
-        font-size: 11px;
-        margin-right: 20px;
-        top: 0px;
-    }
-
-    .eval .board.mypage_list .board_wrap .list.ev_rul .re_li {
-        display: inline-block;
-        font-size: 16px;
-        top: -17px;
     }
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .btn_re .re_li li:nth-child(1) span {
