@@ -77,7 +77,7 @@
 <script>
     function add_cate(){
         if($.trim($("#sca_name_kr").val()) == ""){
-            alert("카테고리명을 입력 하세요.");
+            alert("한글명을 입력 하세요.");
             $("#sca_name_kr").focus();
             return false;
         }

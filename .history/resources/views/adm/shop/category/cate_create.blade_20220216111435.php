@@ -64,6 +64,11 @@
                                     </label>
                                     <!-- 선택된 파일이 없습니다. -->
                                 </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
                            </div>
                         </div>
                     </div>
@@ -73,21 +78,6 @@
 
         </div>
         <!-- 컨텐츠 영역 끝 -->
-
-<script>
-    function add_cate(){
-        if($.trim($("#sca_name_kr").val()) == ""){
-            alert("카테고리명을 입력 하세요.");
-            $("#sca_name_kr").focus();
-            return false;
-        }
-
-        $("#cate_create_form").submit();
-    }
-</script>
-
-
-
 
 
 
