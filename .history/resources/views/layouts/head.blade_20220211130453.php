@@ -116,11 +116,7 @@
                         <a href="{{ route('ranking_list') }}">
                                 <li><b>지</b>구를 <b>구</b>하는 <b>랭</b>킹 </li>
                         </a>
-<<<<<<< HEAD
                         <a href="{{ route('shop.index') }}">
-=======
-                        <a href="{{ route('sitem') }}">
->>>>>>> d6463943cacfcc95825e53198564d214598d0666
                                 <li><b>지</b>구를 <b>구</b>하는 <b>쇼</b>핑 </li>
                         </a>
                         <a href="{{ route('notice') }}">
@@ -240,11 +236,7 @@
             <ul class="navi">
                 <li><a href="{{ route('company') }}">지구랭 소개</a></li>
                 <li><a href="{{ route('ranking_list') }}"><b>지</b>구를 <b>구</b>하는 <b>랭</b>킹</a></li>
-<<<<<<< HEAD
                 <li><a href="{{ route('shop.index') }}"><b>지</b>구를 <b>구</b>하는 <b>쇼</b>핑</a></li>
-=======
-                <li><a href="{{ route('sitem') }}"><b>지</b>구를 <b>구</b>하는 <b>쇼</b>핑</a></li>
->>>>>>> d6463943cacfcc95825e53198564d214598d0666
                 <li><a href="{{ route('notice') }}"><b>지</b>구를 <b>구</b>하는 기<b>록</b></a></li>
 
                 <li {!! $menu_exp !!}><a href="{{ route('exp.list') }}">정직한 평가단</a></li>

@@ -372,7 +372,7 @@ function new_ct_qty(num, sct_qty){
         var d_val = parseInt(el_qty.val());
 
         if(d_val > stock) {
-            alert("현재 재고수량보다 많은 수량을 주문하셨습니다.\n재고 수량내에서 주문부탁드려요.\n*추가 입고 요청은 [고객센터] – [1:1문의]를 이용해주세요");
+            alert("재고수량 보다 많은 수량을 구매할 수 없습니다.");
             el_qty.val(stock);
         }
     }

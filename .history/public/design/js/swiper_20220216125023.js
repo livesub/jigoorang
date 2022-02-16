@@ -108,7 +108,7 @@ var swiper = new Swiper(".saleSwiper", {
     1460: {
       slidesPerView: 6.5,
       spaceBetween: 10,
-      slidesOffsetBefore: 120,
+      slidesOffsetBefore: 250,
     },
     1600: {
       slidesPerView: 6.5,

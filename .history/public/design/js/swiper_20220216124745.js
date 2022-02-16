@@ -119,7 +119,7 @@ var swiper = new Swiper(".saleSwiper", {
     1800: {
       slidesPerView: 6.5,
       spaceBetween: 10,
-      slidesOffsetBefore: 270,
+      slidesOffsetBefore: 300,
     },
 
     1900: {
@@ -187,19 +187,20 @@ var swiper = new Swiper(".saleSwiper2", {
     1600: {
       slidesPerView: 6.5,
       spaceBetween: 10,
-      slidesOffsetBefore: 200,
+      slidesOffsetBefore:340,
     },
 
     1800: {
       slidesPerView: 6.5,
       spaceBetween: 10,
-      slidesOffsetBefore: 270,
+      slidesOffsetBefore: 340,
     },
     1900: {
       slidesPerView: 6.5,
       spaceBetween: 10,
-      slidesOffsetBefore: 315,
+      slidesOffsetBefore: 340,
     },
+    
   }
 });
 
