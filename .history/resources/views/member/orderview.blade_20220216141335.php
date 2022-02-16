@@ -182,7 +182,6 @@
     function new_pay_cancel(imp_uid, order_id, amount, od_deposit_name){
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-            //url : '{{ route('mypage.ajax_itemspaycancel') }}',
             url : '{{ route('ajax_itemspaycancel') }}',
             type : 'post',
             contentType : "application/json",

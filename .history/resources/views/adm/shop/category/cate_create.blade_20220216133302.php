@@ -96,7 +96,6 @@
             for(i = 0; i < flies.files.length; i++){
                 fileList += flies.files[i].name + '<br>';
             }
-alert(fileList);
             flies_name = document.getElementById('file_name');
             flies_name.innerHTML = fileList;
         });

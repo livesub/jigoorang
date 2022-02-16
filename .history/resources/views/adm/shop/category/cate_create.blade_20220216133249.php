@@ -90,13 +90,12 @@
 
 <script>
     window.onload = function(){
-        flies = document.getElementById('sca_img');
+        flies = document.getElementById('file');
         flies.addEventListener('change', function(){
             fileList = "";
             for(i = 0; i < flies.files.length; i++){
                 fileList += flies.files[i].name + '<br>';
             }
-alert(fileList);
             flies_name = document.getElementById('file_name');
             flies_name.innerHTML = fileList;
         });

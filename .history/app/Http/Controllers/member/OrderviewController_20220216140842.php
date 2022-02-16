@@ -112,7 +112,7 @@ class OrderviewController extends Controller
                     $join->on('a.item_code', '=', 'b.item_code');
                 })
             //->where('a.od_id',$s_cart_id)
-            ->where([['a.user_id', $order_info->user_id], ['a.sct_status','쇼핑'], ['a.sct_direct','0']])  //장바구니 사라짐 문제
+            ->where([['a.user_id', Auth::user()->user_id], ['a.sct_status','쇼핑'], ['a.sct_direct','0']])  //장바구니 사라짐 문제
             //->groupBy('a.item_code')
             ->orderBy('a.id')
             ->get();
@@ -129,35 +129,6 @@ class OrderviewController extends Controller
 
             foreach($all_cart_infos as $all_cart_info){
                 $item_info = DB::table('shopitems')->where('item_code', $all_cart_info->item_code)->first();
-
-                //상품 취소시 새로운 상품(기존 값으로) 으로 장바구니 담아 놓기
-                $data = array(
-                    'od_id'             => $tmp_cart_id,
-                    'user_id'           => $all_cart_info->user_id,
-                    'item_code'         => $all_cart_info->item_code,
-                    'item_name'         => addslashes($all_cart_info->item_name),
-                    'de_send_cost'      => $all_cart_info->de_send_cost, //기본 배송비
-                    'item_sc_price'     => $all_cart_info->item_sc_price,
-                    'sct_status'        => '쇼핑',
-                    'sct_history'       => '',
-                    'sct_price'         => $all_cart_info->sct_price,
-                    'sct_point'         => $all_cart_info->sct_point,
-                    'sct_point_use'     => 0,
-                    'sct_stock_use'     => 0,
-                    'sct_option'        => $all_cart_info->sct_option,
-                    'sct_qty'           => $all_cart_info->sct_qty,
-                    'sio_id'            => $all_cart_info->sio_id,
-                    'sio_type'          => $all_cart_info->sio_type,
-                    'sio_price'         => $all_cart_info->sio_price,
-                    'sct_ip'            => $all_cart_info->sct_ip,
-                    'sct_send_cost'     => $all_cart_info->sct_send_cost,
-                    'sct_direct'        => 0,
-                    'sct_select'        => 0,
-                    'sct_select_time'   => '',
-                );
-
-                $in_result = shopcarts::create($data);
-                $in_result->save();
 
                 //재고 늘리기
                 if($all_cart_info->sio_id){ //옵션 상품일때

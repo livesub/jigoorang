@@ -60,7 +60,7 @@
                                 <div class="btn_file">
                                     <label>
                                         파일선택
-                                        <input type="file" name="sca_img" id="sca_img" accept="image/*">
+                                        <input type="file"  name="sca_img" id="sca_img" accept="image/*">
                                     </label>
                                     <p id="file_name"></p>
                                     <!-- 선택된 파일이 없습니다. -->
@@ -90,13 +90,12 @@
 
 <script>
     window.onload = function(){
-        flies = document.getElementById('sca_img');
+        flies = document.getElementById('file');
         flies.addEventListener('change', function(){
             fileList = "";
             for(i = 0; i < flies.files.length; i++){
                 fileList += flies.files[i].name + '<br>';
             }
-alert(fileList);
             flies_name = document.getElementById('file_name');
             flies_name.innerHTML = fileList;
         });
