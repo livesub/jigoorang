@@ -87,7 +87,7 @@
                     <!-- 페이지네이션 시작 -->
                     <div class="paging_box">
                         <div class="paging">
-                            {!! $pnPage !!}
+                            {{ $pnPage }}
                         </div>
                     </div>
                     <!-- 페이지네이션 끝 -->
