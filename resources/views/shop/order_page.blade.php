@@ -107,7 +107,7 @@
                                                 {{ $item_options->sct_option }}
                                                 @endif
                                                 </li>
-                                                <li class="price_pd">상품금액 : {{ $CustomUtils->display_price(($cart_info->item_price + $item_options->sio_price)) }} X 주문수량 : {{ number_format($cart_info->sct_qty) }}개</li>
+                                                <li class="price_pd">{{ $CustomUtils->display_price(($cart_info->item_price + $item_options->sio_price)) }} X {{ number_format($cart_info->sct_qty) }}개</li>
                                             </ul>
                                         </div>
                                     </div>
@@ -266,7 +266,7 @@
 
 <input type="hidden" name="method" id="method" value="card">
 <input type="hidden" name="pg" id="pg" value="html5_inicis">
-<input type="hidden" name="user_point" id="user_point" value="{{ $CustomUtils->get_point_sum(Auth::user()->user_id) }}">
+<input type="hidden" name="user_point" id="user_point" value="{{ $user_point }}">
 <input type="hidden" name="imp_uid" id="imp_uid">
 <input type="hidden" name="apply_num" id="apply_num">   <!-- 카드 승인 번호 -->
 <input type="hidden" name="paid_amount" id="paid_amount">   <!-- 카드사에서 전달 받는 값(총 결제 금액) -->
@@ -287,9 +287,9 @@
 
                                         <ul class="oder_name wt-00 mb-20">
                                             <li>보유포인트</li>
-                                            <li>{{ number_format($CustomUtils->get_point_sum(Auth::user()->user_id)) }}P</li>
+                                            <li>{{ number_format($user_point) }}P</li>
                                         </ul>
-                                        @if($CustomUtils->get_point_sum(Auth::user()->user_id) > 0)
+                                        @if($user_point > 0)
                                         <ul class="oder_point">
                                             <li>사용포인트</li>
                                             <li>
@@ -397,7 +397,7 @@
                               </div>
                             </div>
 
-                            <div class="mt-20 cr_03">※ 결제 후, 부분 취소가 불가합니다.
+                            <div class="mt-20 cr_03 ft_sz">※ 결제 후, 부분 취소가 불가합니다.
                                 주문 내역을 잘 확인하신 후 결제 부탁드립니다.</div>
 
                             <div class="list_img_btn_area">
@@ -1145,12 +1145,12 @@ document.orderform.addEventListener("keydown", evt => {
         var od_send_cost2 = parseInt($("#od_send_cost2").val());    //도서 산간 배송비
         var tot_price_tmp = (tot_price + od_send_cost2) - 1000;   //카드 결제 최하 금액이 1000원 까지라 1000원 은 무조건 카드 결제 해야함
         $("#use_point").text(0);
-
+/*
         if(user_point <= 0){
             //alert('사용할 포인트가 부족 합니다');
             return false;
         }
-
+*/
         if(type == true){
             if(tot_price_tmp < user_point){
                 $("#od_temp_point").val(tot_price_tmp);
@@ -1165,9 +1165,22 @@ document.orderform.addEventListener("keydown", evt => {
             }
         }else{
             if(tot_price_tmp < od_temp_point){
-                $("#od_temp_point").val(tot_price_tmp);
-                $("#use_point").text(numberWithCommas(tot_price_tmp * -1) + 'P');
-                last_price(tot_price, od_send_cost2, tot_price_tmp);
+                if(user_point < od_temp_point){
+                    if(user_point >= tot_price_tmp){
+                        //보유포인트가 1000원 빠진 상품 포인트 보다 크거나 같으면
+                        $("#use_point").text(numberWithCommas(tot_price_tmp * -1) + 'P');
+                        var proc_use_point = tot_price_tmp;
+                    }else{
+                        $("#use_point").text(numberWithCommas(user_point * -1) + 'P');
+                        var proc_use_point = user_point;
+                    }
+                }else{
+                    $("#use_point").text(numberWithCommas(tot_price_tmp * -1) + 'P');
+                    var proc_use_point = tot_price_tmp;
+                }
+
+                $("#od_temp_point").val(proc_use_point);
+                last_price(tot_price, od_send_cost2, proc_use_point);
                 return false;
             }else{
                 if(user_point < od_temp_point){
