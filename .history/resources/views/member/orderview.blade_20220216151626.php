@@ -40,7 +40,7 @@
                             <div class="num">주문번호 <span class="ml-30">{{ $order->order_id }}</span></div>
 
                             <div class="btn_re point01">
-                                <ul class="re_li t-00">
+                                <ul class="re_li ">
                                     <li>
                                         @if($order->od_status == "입금" || $order->od_status == "준비")
 

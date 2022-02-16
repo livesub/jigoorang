@@ -450,7 +450,7 @@
 }
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_nm li:first-child button{
-   font-size: 18px;
+   font-size: 20px;
    color: #707070;
    text-align: center;
 }
@@ -1769,7 +1769,7 @@
 
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_tt {
-   width: calc(100% - 47%);
+   width: calc(100% - 44%);
    padding: 10px 0px 25px 15px;
 }
 
@@ -2292,13 +2292,9 @@
    padding: 2px;
  }
 
- .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_sub_tt {
-   height: 3.5em;
-}
-
 
  .eval .board .board_wrap .shop_goods .shop_goods_dt_r h3 {
-    padding: 20px 0 0px 0;
+    padding: 20px 20px 0px 0;
     font-size: 18px;
     font-family: "SBAggroM", "sans-serif";
  }
@@ -2804,7 +2800,7 @@
 }
 
 .eval .board .board_wrap .cart_list .cot_list .cot_body .cart_list_tt {
-   width: calc(100% - 44%);
+   width: calc(100% - 59%);
    padding: 10px 0px 10px 7px;
 }
 

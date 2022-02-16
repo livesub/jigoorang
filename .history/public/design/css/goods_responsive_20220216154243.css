@@ -450,7 +450,7 @@
 }
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_pr_op .dt_pr_op_nm li:first-child button{
-   font-size: 18px;
+   font-size: 20px;
    color: #707070;
    text-align: center;
 }
@@ -2294,6 +2294,7 @@
 
  .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_sub_tt {
    height: 3.5em;
+  
 }
 
 
