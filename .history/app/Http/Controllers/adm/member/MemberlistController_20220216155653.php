@@ -558,12 +558,14 @@ Auth::attempt($credentials) 응 통해 비교 했다가 비교 했던 아이디�
         $members = DB::table('users')->where([['user_level','>','2'], ['id', $id]])->first();
 
         if($members == ""){
-            return redirect()->route('adm.member.index')->with('alert_messages', '잘못된 경로 입니다.');
+            return redirect()->route('adm.member.index')->with('alert_messages', $Messages::$fatal_fail_ment['fatal_fail']['error']);
             exit;
         }
+var_dump($members);
+
+
 
         return view('adm.member.member_point', [
-            'members'   => $members,
         ]);
 
 
