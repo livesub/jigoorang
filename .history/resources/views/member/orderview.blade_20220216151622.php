@@ -40,7 +40,7 @@
                             <div class="num">주문번호 <span class="ml-30">{{ $order->order_id }}</span></div>
 
                             <div class="btn_re point01">
-                                <ul class="re_li t-00">
+                                <ul class="re_li top">
                                     <li>
                                         @if($order->od_status == "입금" || $order->od_status == "준비")
 
@@ -182,8 +182,7 @@
     function new_pay_cancel(imp_uid, order_id, amount, od_deposit_name){
         $.ajax({
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-            //url : '{{ route('mypage.ajax_itemspaycancel') }}',
-            url : '{{ route('ajax_itemspaycancel') }}',
+            url : '{{ route('mypage.ajax_itemspaycancel') }}',
             type : 'post',
             contentType : "application/json",
             data    : JSON.stringify({
