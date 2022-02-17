@@ -240,20 +240,6 @@ class MemberlistController extends Controller
             $user_name = trim($request->get('user_name'));
             $user_phone = trim($request->get('user_phone'));
             $user_level = $request->get('user_level');
-            $user_type = $request->get('user_type');
-
-            //탈퇴 관련 처리
-            if($user_type == "N") {
-                $type_change = "N";
-                $withdraw_type = "";
-                $withdraw_content = "";
-                $withdraw_date = "";
-            }else{
-                $type_change = "Y";
-                $withdraw_type = "관리자 탈퇴";
-                $withdraw_content = "관리자 탈퇴";
-                $withdraw_date = now();
-            }
 
             $user_id = $user_info->user_id;
 
@@ -300,10 +286,6 @@ class MemberlistController extends Controller
                     $user->user_birth = $user_birth;
                     $user->blacklist = $blacklist;
                     $user->site_access_no = $site_access_no;
-                    $user->user_type = $type_change;
-                    $user->withdraw_type = $withdraw_type;
-                    $user->withdraw_content = $withdraw_content;
-                    $user->withdraw_date = $withdraw_date;
                     $result_up = $user->save();
 
                     if(!$result_up)
@@ -340,10 +322,6 @@ class MemberlistController extends Controller
                 $user->user_birth = $user_birth;
                 $user->blacklist = $blacklist;
                 $user->site_access_no = $site_access_no;
-                $user->user_type = $type_change;
-                $user->withdraw_type = $withdraw_type;
-                $user->withdraw_content = $withdraw_content;
-                $user->withdraw_date = $withdraw_date;
                 $result_up = $user->save();
 
                 if(!$result_up)

@@ -9,11 +9,14 @@
         <!-- 타이틀 영역 -->
         <div class="top">
             <div class="title">
-                <h2>회원 {{ $title_ment }}</h2>
+                <h2>회원 {{ $title_ment }}}</h2>
                 <div class="button_box">
                     <button type='submit'>
                         {{ $title_ment }}
                     </button>
+                    @if ($mode != 'regi')
+                    <button style="margin-top:20px;" type="button" onclick="mem_out();">회원 탈퇴/가입 처리</button>
+                    @endif
                 </div>
             </div>
         </div>
@@ -26,7 +29,7 @@
                         <div class="col">아이디(이메일)</div>
                         <div class="col">
                         @if ($mode == 'regi')
-                            <input name='user_id' id='user_id' type='text' value='{{ old('user_id') }}' placeholder='{{ $user_id }}'>
+                            <input name='user_id' id='user_id' type='email' value='{{ old('user_id') }}' placeholder='{{ $user_id }}'>
                             @error('user_id')
                                 <br><span role='alert'>
                                     <strong>{{ $message }}</strong>
@@ -155,6 +158,7 @@
                             if($user_type == "N") $user_type_selected1 = "selected";
                             else $user_type_selected2 = "selected";
                         @endphp
+                            {{ $user_status }} 만들어야 함!!!!!
                             <select name="user_type" >
                                 <option value="N" {{ $user_type_selected1 }}>가입</option>
                                 <option value="Y" {{ $user_type_selected2 }}>탈퇴</option>
