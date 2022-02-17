@@ -60,7 +60,7 @@
                                 <div class="btn_file">
                                     <label>
                                         파일선택
-                                        <input type="file" name="sca_img" id="sca_img" accept="image/*" onchange="aa('sca_img')">
+                                        <input type="file" name="sca_img" id="sca_img" accept="image/*">
                                     </label>
                                     <p id="file_name"></p>
                                     <!-- 선택된 파일이 없습니다. -->
@@ -132,15 +132,8 @@ function getCmaFileView(obj,stype) {
 
 
 <script>
-  function aa(bb){
-        flies = document.getElementById(bb);
-        fileList = "";
-            for(i = 0; i < flies.files.length; i++){
-                fileList += flies.files[i].name + '<br>';
-            }
-alert(fileList);
-
-/*
+  function aa(){
+        flies = document.getElementById('sca_img');
         flies.addEventListener('change', function(){
             fileList = "";
             for(i = 0; i < flies.files.length; i++){
@@ -150,7 +143,6 @@ alert(fileList);
             flies_name = document.getElementById('file_name');
             flies_name.innerHTML = fileList;
         });
-*/
     }
 </script>
 
