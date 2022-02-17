@@ -353,16 +353,9 @@ class AdmShopCategoryController extends Controller
 
         $categorys_info = DB::table('shopcategorys')->where('sca_id', $sca_id)->first();   //카테고리 정보 가져 오기
 
-        $len = strlen($sca_id);
-
-        //타이틀 변경
-        if($len == 2) $title_ment = "대";
-        else if($len == 4) $title_ment = "소";
-
         return view('adm.shop.category.cate_modi',[
             'page'              => $page,
             'categorys_info'    => $categorys_info,
-            'title_ment'        => $title_ment,
         ]);
     }
 

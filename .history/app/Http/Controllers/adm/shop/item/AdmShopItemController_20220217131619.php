@@ -79,15 +79,6 @@ class AdmShopItemController extends Controller
             $search_sql = " AND a.sca_id = b.sca_id {$search_caid_sql} ";
         }
 
-        //기획전 구분 검색
-        //if($un_regi == "Y" && $item_special == "Y" && $item_special2 == "Y")
-        if($un_regi == "Y"){
-            $search_sql .= " AND a.sca_id = b.sca_id {$search_caid_sql} ";
-        }
-        var_dump("un_regi===> ".$un_regi);
-        var_dump("item_special===> ".$item_special);
-        var_dump("item_special2===> ".$item_special2);
-        var_dump("item_new_arrival===> ".$item_new_arrival);
 
 
 

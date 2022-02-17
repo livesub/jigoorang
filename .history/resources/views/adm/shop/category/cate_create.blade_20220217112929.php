@@ -62,7 +62,7 @@
                                         파일선택
                                         <input type="file" name="sca_img" id="sca_img" accept="image/*" onchange="file_name('sca_img')">
                                     </label>
-                                    <span id="sca_img_name"></span>
+                                    <p id="file_name"></p>
                                     <!-- 선택된 파일이 없습니다. -->
                                 </div>
                            </div>
@@ -88,15 +88,16 @@
 </script>
 
 <script>
-    function file_name(id_val){
-        flies = document.getElementById(id_val);
+  function file_name(id_val){
+    flies = document.getElementById(id_val);
 
-        fileList = "";
-        for(i = 0; i < flies.files.length; i++){
-            fileList += flies.files[i].name;
-        }
-        flies_name = document.getElementById(id_val+'_name');
-        flies_name.innerHTML = fileList;
+    fileList = "";
+    for(i = 0; i < flies.files.length; i++){
+        fileList += flies.files[i].name;
+    }
+    flies_name = document.getElementById('file_name');
+    flies_name.innerHTML = fileList;
+alert(fileList);
     }
 </script>
 

@@ -62,7 +62,7 @@
                         <div class="col">출력순서</div>
                         <div class="col">
                             <p>*숫자만 입력하세요. 숫자가 낮을수록 먼저 출력 됩니다.</p>
-                            <input type="text" name="sca_rank" id="sca_rank" maxlength="3" size="3" value="{{ $categorys_info->sca_rank }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align:right;">
+                            <input type="number" name="sca_rank" id="sca_rank" maxlength="3" size="3" value="{{ $categorys_info->sca_rank }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                         </div>
                     </div>
                     <div class="row">
@@ -96,7 +96,7 @@
 <script>
     function add_cate(){
         if($.trim($("#sca_name_kr").val()) == ""){
-            alert("카테고리명을 입력 하세요.");
+            alert("한글명을 입력 하세요.");
             $("#sca_name_kr").focus();
             return false;
         }

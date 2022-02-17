@@ -857,6 +857,7 @@ $um_value='80/0.5/3'
         //상품에 등록 되어지는 포인트를 쓰지 않고(삭제되고) 환경 설정에 쓰는 포인트 적립율로 바꾼다
         //$item_point = floor(($item_price * ($item->item_point / 100) / $trunc)) * $trunc;
         $setting_info = DB::table('shopsettings')->first();
+
         $item_point = floor(($item_price * ($setting_info->tot_item_point / 100) / $trunc)) * $trunc;
         return $item_point;
     }

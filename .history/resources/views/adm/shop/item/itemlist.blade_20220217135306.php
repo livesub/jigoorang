@@ -42,7 +42,7 @@
                                 <option>미등록</option>
                                 <option>기획전1</option>
                                 <option>기획전2</option>
-                                <option>New Arrivals</option>
+                                <option>new asd</option>
                             </select>
 
 

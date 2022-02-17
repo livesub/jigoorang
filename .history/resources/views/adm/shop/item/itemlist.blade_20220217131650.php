@@ -37,16 +37,6 @@
                         </li>
                         <li>기획전 구분(작업 해야 함)</li>
                         <li>
-                            <select>
-                                <option>전체</option>
-                                <option>미등록</option>
-                                <option>기획전1</option>
-                                <option>기획전2</option>
-                                <option>New Arrivals</option>
-                            </select>
-
-
-
                             <label>
                                 <input type="checkbox" name="un_regi" value="Y" checked="checked">기획전 미등록 상품
                             </label>

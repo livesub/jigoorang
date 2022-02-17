@@ -28,7 +28,7 @@
                                         $len = strlen($search_selectbox->sca_id) / 2 - 1;
                                         $nbsp = '';
                                         for ($i=0; $i<$len; $i++) $nbsp .= '└ ';
-                                        if($search_selectbox->sca_id === $ca_id) $cate_selected = "selected";
+                                        if($search_selectbox->sca_id == $ca_id) $cate_selected = "selected";
                                         else $cate_selected = "";
                                     @endphp
                                     <option value="{{ $search_selectbox->sca_id }}" {{ $cate_selected }}>{!! $nbsp !!}{{ $search_selectbox->sca_name_kr }}</option>
@@ -37,27 +37,17 @@
                         </li>
                         <li>기획전 구분(작업 해야 함)</li>
                         <li>
-                            <select>
-                                <option>전체</option>
-                                <option>미등록</option>
-                                <option>기획전1</option>
-                                <option>기획전2</option>
-                                <option>New Arrivals</option>
-                            </select>
-
-
-
                             <label>
-                                <input type="checkbox" name="un_regi" value="Y" checked="checked">기획전 미등록 상품
+                                <input type="checkbox" id="" checked="checked">기획전 미등록 상품
                             </label>
                             <label>
-                                <input type="checkbox" name="item_special" value="Y" checked="checked">기획전1
+                                <input type="checkbox" id="" checked="checked">기획전1
                             </label>
                             <label>
-                                <input type="checkbox" name="item_special2" value="Y" checked="checked">기획전2
+                                <input type="checkbox" id="" checked="checked">기획전2
                             </label>
                             <label>
-                                <input type="checkbox" name="item_new_arrival" value="Y" checked="checked">New Arrivals
+                                <input type="checkbox" id="" checked="checked">New Arrivals
                             </label>
                         </li>
                         <li>상품</li>

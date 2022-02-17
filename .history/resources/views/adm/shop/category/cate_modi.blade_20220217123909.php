@@ -62,7 +62,7 @@
                         <div class="col">출력순서</div>
                         <div class="col">
                             <p>*숫자만 입력하세요. 숫자가 낮을수록 먼저 출력 됩니다.</p>
-                            <input type="text" name="sca_rank" id="sca_rank" maxlength="3" size="3" value="{{ $categorys_info->sca_rank }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align:right;">
+                            <input type="number" name="sca_rank" id="sca_rank" maxlength="3" size="3" value="{{ $categorys_info->sca_rank }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                         </div>
                     </div>
                     <div class="row">
@@ -76,12 +76,12 @@
                                         <input type="file" name="sca_img" id="sca_img" accept="image/*" onchange="file_name('sca_img')">
                                     </label>
                                     <span id="sca_img_name"></span>
-                                    <p><a href="javascript:file_down('{{ $categorys_info->id }}');">{{ $categorys_info->sca_img_ori_file_name }}</a></p>
+                                    <p>sdvvsd</p>
                                     <!-- 선택된 파일이 없습니다. -->
                                 </div>
                                 <div class="file">
                                     <label>
-                                        <input type="checkbox" name="file_chk" id="file_chk" value='1'>수정, 삭제, 새로등록시 체크
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
                                     </label>
                                 </div>
                            </div>
@@ -96,7 +96,7 @@
 <script>
     function add_cate(){
         if($.trim($("#sca_name_kr").val()) == ""){
-            alert("카테고리명을 입력 하세요.");
+            alert("한글명을 입력 하세요.");
             $("#sca_name_kr").focus();
             return false;
         }

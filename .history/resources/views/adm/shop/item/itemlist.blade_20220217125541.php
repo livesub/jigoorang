@@ -15,69 +15,54 @@
 
         <!-- 컨텐츠 영역 시작 -->
         <div class="contents_area cate">
+
+            <form>
+
                 <!-- 검색창 시작 -->
                 <div class="box_search">
-                <form name="search_form" id="search_form" method="get" action="{{ route('shop.item.index') }}">
                     <ul>
                         <li>카테고리 선택</li>
                         <li>
-                            <select name="ca_id" id="ca_id">
+                            <select>
                                 <option value="">전체</option>
                                 @foreach($search_selectboxs as $search_selectbox)
                                     @php
                                         $len = strlen($search_selectbox->sca_id) / 2 - 1;
                                         $nbsp = '';
                                         for ($i=0; $i<$len; $i++) $nbsp .= '└ ';
-                                        if($search_selectbox->sca_id === $ca_id) $cate_selected = "selected";
+                                        if($search_selectbox->sca_id == $ca_id) $cate_selected = "selected";
                                         else $cate_selected = "";
                                     @endphp
+
                                     <option value="{{ $search_selectbox->sca_id }}" {{ $cate_selected }}>{!! $nbsp !!}{{ $search_selectbox->sca_name_kr }}</option>
                                 @endforeach
                             </select>
                         </li>
-                        <li>기획전 구분(작업 해야 함)</li>
+                        <li>기획전 구분</li>
                         <li>
-                            <select>
-                                <option>전체</option>
-                                <option>미등록</option>
-                                <option>기획전1</option>
-                                <option>기획전2</option>
-                                <option>New Arrivals</option>
-                            </select>
-
-
-
                             <label>
-                                <input type="checkbox" name="un_regi" value="Y" checked="checked">기획전 미등록 상품
+                                <input type="checkbox" id="" checked="checked">기획전 미등록 상품
                             </label>
                             <label>
-                                <input type="checkbox" name="item_special" value="Y" checked="checked">기획전1
+                                <input type="checkbox" id="" checked="checked">기획전1
                             </label>
                             <label>
-                                <input type="checkbox" name="item_special2" value="Y" checked="checked">기획전2
+                                <input type="checkbox" id="" checked="checked">기획전2
                             </label>
                             <label>
-                                <input type="checkbox" name="item_new_arrival" value="Y" checked="checked">New Arrivals
+                                <input type="checkbox" id="" checked="checked">New Arrivals
                             </label>
                         </li>
                         <li>상품</li>
                         <li>
-                            <select name="item_search" id="item_search">
-                            @php
-                                if($item_search == "item_name" || $item_search == "") $item_name_selected = "selected";
-                                else $item_name_selected = "";
-
-                                if($item_search == "item_code") $item_code_selected = "selected";
-                                else $item_code_selected = "";
-                            @endphp
-                                <option value="item_name" {{ $item_name_selected }}>상품명</option>
-                                <option value="item_code" {{ $item_code_selected }}>상품코드</option>
+                            <select>
+                                <option>상품명</option>
+                                <option>상품코드</option>
                             </select>
-                            <input type="text"  name="keyword" id="keyword" value="{{ $keyword }}" placeholder="">
+                            <input type="text" name="" placeholder="">
                         </li>
                     </ul>
-                    <button type="submit">검색</button>
-                </form>
+                    <button type="button" onclick="">검색</button>
                 </div>
                 <!-- 검색창 끝-->
 
