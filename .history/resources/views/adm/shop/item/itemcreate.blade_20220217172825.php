@@ -905,7 +905,7 @@
         var item_content = $("#item_content").val();
 
         if($("#last_choice_ca_id").val() == ""){
-            alert("카테고리를 선택 하세요.");
+            alert("단계를 선택 하세요.");
             $("#caa_id").focus();
             return false;
         }
