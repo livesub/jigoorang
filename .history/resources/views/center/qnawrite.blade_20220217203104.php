@@ -259,7 +259,7 @@
         }
 
         $("#order_id").val(order_id);
-        detilclosemodal_001();
+        detilclosemodal_001()
     }
 </script>
 
