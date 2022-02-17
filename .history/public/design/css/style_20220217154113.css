@@ -2953,7 +2953,7 @@ input::placeholder {
     display: inline-block;
     width: 55%;
     height: 48px;
-    border: 2px solid #ddd;
+    border: 1px solid #ddd;
     font-family: "Spoqa Han Sans Neo", "sans-serif";
 }
 

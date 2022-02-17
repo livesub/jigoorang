@@ -5025,7 +5025,7 @@ background-size: cover;
     .eval .board.mypage_list .board_wrap .list.ev_rul.inner.od .pr_body .pt_name .oder_point li:nth-child(2) button {
         width: 27%;
         font-size: 13px;
-        top: 0px;
+        top: -1px;
     }
 
     .eval .board.mypage_list .board_wrap .terms .hide_con {
