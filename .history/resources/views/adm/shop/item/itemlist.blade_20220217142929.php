@@ -37,16 +37,16 @@
                         </li>
                         <li>기획전 구분(작업 해야 함)</li>
                         <li>
-                            <select name="special" id="special">
-                                <option value="all">전체</option>
-                                <option value="noregi">미등록</option>
-                                <option value="item_special">기획전1</option>
-                                <option value="item_special2">기획전2</option>
-                                <option value="item_new_arrival">New Arrivals</option>
+                            <select>
+                                <option>전체</option>
+                                <option>미등록</option>
+                                <option>기획전1</option>
+                                <option>기획전2</option>
+                                <option>New Arrivals</option>
                             </select>
 
 
-<!--
+
                             <label>
                                 <input type="checkbox" name="un_regi" value="Y" checked="checked">기획전 미등록 상품
                             </label>
@@ -59,7 +59,6 @@
                             <label>
                                 <input type="checkbox" name="item_new_arrival" value="Y" checked="checked">New Arrivals
                             </label>
--->
                         </li>
                         <li>상품</li>
                         <li>

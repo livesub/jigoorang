@@ -66,7 +66,7 @@ class AdmShopItemController extends Controller
         if(!is_null($ca_id)){
             $search_caid_sql = " AND a.sca_id like '{$ca_id}%' ";
         }
-
+var_dump($search_caid_sql);
         $search_sql = "";
         if($item_search != ""){
             //$search_sql = " AND a.sca_id = b.sca_id {$search_caid_sql} AND a.sca_id LIKE '{$cate_search}%' AND a.{$item_search} LIKE '%{$keyword}%' ";
@@ -76,7 +76,7 @@ class AdmShopItemController extends Controller
             $search_sql = " AND a.sca_id = b.sca_id {$search_caid_sql} ";
         }
 
-        //if($special == )
+
 
 
 

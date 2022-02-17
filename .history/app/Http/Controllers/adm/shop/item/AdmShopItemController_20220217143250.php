@@ -61,6 +61,8 @@ class AdmShopItemController extends Controller
         $item_search    = $request->input('item_search');
         $keyword        = $request->input('keyword');
         $special        = $request->input('special');
+var_dump("special===> ".$special);
+
 
         $search_caid_sql = "";
         if(!is_null($ca_id)){
@@ -76,7 +78,7 @@ class AdmShopItemController extends Controller
             $search_sql = " AND a.sca_id = b.sca_id {$search_caid_sql} ";
         }
 
-        //if($special == )
+
 
 
 
