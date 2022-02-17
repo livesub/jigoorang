@@ -359,7 +359,7 @@
                                                 <input type="radio" name="cp_item" id="rd_3" onclick="pay_type('naverpay','naverpay');">
                                                 <label for="rd_3">네이버 페이</label>
                                             </li>
-                                        </ul>!-->
+                                        </ul>
 
                                         <ul class="radio pdb-10">
                                             <li>

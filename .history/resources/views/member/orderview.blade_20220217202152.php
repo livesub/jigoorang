@@ -124,7 +124,7 @@
                                 <button type="button" class="btn-30-sol" onclick="return_item('{{ $order->order_id }}', '{{ $cart->id }}');">교환</button>
                                 @else
                                     @if($cart->return_process == "N")
-                                <button type="button" class="btn-30-sol trd">교환요청중</button>
+                                <button type="button" class="btn-30-sol-oder">교환요청중</button>
                                     @elseif($cart->return_process == "T")
                                 <button type="button" class="btn-30-sol">교환불가</button>
                                     @else
