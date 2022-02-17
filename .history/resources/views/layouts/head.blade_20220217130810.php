@@ -247,7 +247,7 @@
         <div class="btm">
             <ul class="navi">
                 <li {!! $menu_company !!}><a href="{{ route('company') }}">지구랭 소개</a></li>
-                <li {!! $menu_ranking !!} {!! $menu_ranking_view !!}><a href="javascript:alert('22 년 2 월 OPEN  예정');"><b>지</b>구를 <b>구</b>하는 <b>랭</b>킹</a></li>
+                <li {!! $menu_ranking !!}><a href="javascript:alert('22 년 2 월 OPEN  예정');"><b>지</b>구를 <b>구</b>하는 <b>랭</b>킹</a></li>
                 <li {!! $menu_shop !!}><a href="javascript:alert('22 년 2 월 OPEN  예정');"><b>지</b>구를 <b>구</b>하는 <b>쇼</b>핑</a></li>
                 <li {!! $menu_notice !!}><a href="{{ route('notice') }}"><b>지</b>구를 <b>구</b>하는 기<b>록</b></a></li>
 

@@ -60,14 +60,14 @@
                             </ul>
                         </div>
                         <div class="refund_info_tt">
-                            <h4> 취소/교환/반품의 포인트 및 대금 환급 안내 </h4>
+                            <p> 취소/교환/반품의 포인트 및 대금 환급 안내 </p>
                             <ul class="refund_s_tt">
                                 <li>취소/교환/반품 시, 구매로 지급되었던 포인트는 환수됩니다.</li>
                                 <li>취소/교환/반품 시, 결제로 사용한 포인트가 있을 경우 원복됩니다.</li>
                                 <li>주문 취소한 대금은 카드사 사정에 따라 환불 접수일로부터 영업일 기준 3~7일 정도 소요됩니다.</li>
                             </ul>
                         </div>
-                        {{-- <div class="refund_info_tt">
+                        <div class="refund_info_tt">
                             <p>[교환/반품이 불가능한 경우]</p>
                             <ul class="refund_s_tt">
                                 <li>단순변심 및 주문실수로 인한 교환, 반품의 경우, 상품 수령일로부터 7일 이내에 교환,반품을 접수하셔야 하며 이 경우 왕복 배송비는 고객 부담입니다</li>
@@ -84,7 +84,7 @@
                             <ul class="refund_s_tt">
                                 <li>단순변심 및 주문실수로 인한 교환, 반품의 경우, 상품 수령일로부터 7일 이내에 교환,반품을 접수하셔야 하며 이 경우 왕복 배송비는 고객 부담입니다</li>
                             </ul>
-                        </div> --}}
+                        </div>
 
                       <div class="btn">
                         <a href="{{ route('customer_center') }}"><button class="btn-50-bg">1:1 문의</button></div>

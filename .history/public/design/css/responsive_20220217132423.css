@@ -411,6 +411,7 @@ background-size: cover;
     padding-top: 30px;
 }
 
+.main-container .mbox_100 .project
 
 .main-container .mbox_100 .sale {
     padding: 0 0 30px 21px;
@@ -476,14 +477,6 @@ background-size: cover;
 
 .main-container .mbox_100 .main-project-title .main-project-left {
     margin: 0 20px 0 0;
-}
-
-.main-container .mbox_100 .project {
-    margin-top: 0px;
-}
-
-.main-container .mbox_1280 .project {
-    margin-top: 0px;
 }
 
 .main-container .mbox_1280 .slide_btn_1 {
@@ -1853,7 +1846,6 @@ background-size: cover;
         display: inline-block;
         font-size: 15px;
         font-weight: 600;
-        margin-right: 5px;
     }
 
     .main-container .mbox_100 .swiper-slide .main-project-left .sale-price {
@@ -1973,7 +1965,6 @@ background-size: cover;
         display: inline-block;
         font-size: 15px;
         font-weight: 600;
-        margin-right: 5px;
     }
 
     .main-container .mbox_1280 .swiper-slide .main-project-left .sale-price {

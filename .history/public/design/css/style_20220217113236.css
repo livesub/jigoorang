@@ -541,7 +541,6 @@ h5 {
 
 .main-container .mbox_100 .project {
     font-size: 0.7rem;
-    margin-top: 16px;
 }
 
 
@@ -840,7 +839,6 @@ h5 {
     float: right;
     font-size: 22px;
     font-weight: 600;
-    height: 30px;
 }
 
 .main-container .mbox_1280 .main-project-bottom p {
@@ -877,7 +875,6 @@ h5 {
 .main-container .mbox_1280 .project {
     font-size: 0.7rem;
     /* margin: 0 10px 10px 0; */
-    margin-top: 16px;
 }
 
 .main-container .mbox_1280 .slide_btn_2 {
