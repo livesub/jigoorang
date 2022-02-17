@@ -357,7 +357,7 @@
             <div class="con_01">
                 <div class="title">CONTACT US</div>
                 <ul>
-                    <li>대표전화 : {{ $company_tel }}</li>
+                    {{-- <li>대표전화 : {{ $company_tel }}</li> --}}
                     <li>{{ $company_zip }} {{ $company_addr }}</li>
                     <li>이메일 : {{ $company_info_email }}</li>
                 </ul>
