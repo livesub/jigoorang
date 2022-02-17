@@ -35,7 +35,7 @@
                                 @endforeach
                             </select>
                         </li>
-                        <li>기획전 구분</li>
+                        <li>기획전 구분(작업 해야 함)</li>
                         <li>
                             @php
                                 $selected1 = "";
@@ -184,10 +184,6 @@
 
                                 if($item_info->item_manufacture == "") $item_manufacture = "";
                                 else $item_manufacture = "[".$item_info->item_manufacture."] ";
-
-                                //재고 수량이 10개 이하로 떨어질시 배경색 바꿈
-                                $bg_change = "";
-                                if($item_info->item_stock_qty <= 10) $bg_change = "change";
                             @endphp
                             <tr>
                                 <td><input type="checkbox" class="mg00" name="chk_id[]" value="{{ $item_info->id }}" id="chk_id_{{ $item_info->id }}"></td>
@@ -198,7 +194,7 @@
                                     </div>
                                 </td>
                                 <td>{{ $item_info->item_code }}</td>
-                                <td class="prod_name {{ $bg_change }}">
+                                <td class="prod_name change">
                                     <div>
                                         <div>
                                             <img src="{{ $item_img_disp }}">
@@ -222,7 +218,20 @@
                     <!-- 페이지네이션 시작 -->
                     <div class="paging_box">
                         <div class="paging">
-                            {!! $pnPage !!}
+                            <a class="wide">처음</a>
+                            <a class="wide">이전</a>
+                            <a class="on">1</a>
+                            <a>2</a>
+                            <a>3</a>
+                            <a>4</a>
+                            <a>5</a>
+                            <a>6</a>
+                            <a>7</a>
+                            <a>8</a>
+                            <a>9</a>
+                            <a>10</a>
+                            <a class="wide">다음</a>
+                            <a class="wide">마지막</a>
                         </div>
                     </div>
                     <!-- 페이지네이션 끝 -->
@@ -274,7 +283,6 @@
     <input type="hidden" name="page" id="page" value="{{ $page }}">
     <input type="hidden" name="item_search" id="item_search" value="{{ $item_search }}">
     <input type="hidden" name="keyword" id="keyword" value="{{ $keyword }}">
-    <input type="hidden" name="special" id="special" value="{{ $special }}">
 </form>
 
 <script>

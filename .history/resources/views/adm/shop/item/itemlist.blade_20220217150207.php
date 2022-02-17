@@ -35,7 +35,7 @@
                                 @endforeach
                             </select>
                         </li>
-                        <li>기획전 구분</li>
+                        <li>기획전 구분(작업 해야 함)</li>
                         <li>
                             @php
                                 $selected1 = "";
@@ -181,13 +181,6 @@
                                 if($item_info->item_new_arrival == "1") {
                                     $item_new_arrival_ment = "등록";
                                 }
-
-                                if($item_info->item_manufacture == "") $item_manufacture = "";
-                                else $item_manufacture = "[".$item_info->item_manufacture."] ";
-
-                                //재고 수량이 10개 이하로 떨어질시 배경색 바꿈
-                                $bg_change = "";
-                                if($item_info->item_stock_qty <= 10) $bg_change = "change";
                             @endphp
                             <tr>
                                 <td><input type="checkbox" class="mg00" name="chk_id[]" value="{{ $item_info->id }}" id="chk_id_{{ $item_info->id }}"></td>
@@ -197,32 +190,152 @@
                                         {{ $ca_name_hap }}
                                     </div>
                                 </td>
-                                <td>{{ $item_info->item_code }}</td>
-                                <td class="prod_name {{ $bg_change }}">
+                                <td>sitem_1234512345</td>
+                                <td class="prod_name">
                                     <div>
                                         <div>
-                                            <img src="{{ $item_img_disp }}">
+                                            <img src="../../img/img_prod_01.png">
                                         </div>
                                         <div>
-                                            {{ $item_manufacture }}{{ stripslashes($item_info->item_name) }}
+                                            [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{ $item_type1_ment }}</td>
-                                <td>{{ $item_special_ment }}</td>
-                                <td>{{ $item_special_ment2 }}</td>
-                                <td>{{ $item_new_arrival_ment }}</td>
-                                <td><button type="button" class="btn-sm-ln" onclick="item_modi('{{ $item_info->id }}','{{ $item_info->sca_id }}');">수정</button></td>
+                                <td>SALE</td>
+                                <td></td>
+                                <td></td>
+                                <td>등록</td>
+                                <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/product_rgst.html'">수정</button></td>
                             </tr>
                             @endforeach
 
+
+<!--
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>9</td>
+                                <td class="cate_name">
+                                    <div>
+                                        욕실
+                                        <div>└ 페이셜 클렌징바</div>
+                                    </div>
+                                </td>
+                                <td>sitem_1234512345</td>
+                                <td class="prod_name change">
+                                    <div>
+                                        <div>
+                                            <img src="../../img/img_prod_01.png">
+                                        </div>
+                                        <div>
+                                            [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>HOT</td>
+                                <td>등록</td>
+                                <td></td>
+                                <td></td>
+                                <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/product_rgst.html'">수정</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>8</td>
+                                <td class="cate_name">
+                                    <div>
+                                        욕실
+                                        <div>└ 페이셜 클렌징바</div>
+                                    </div>
+                                </td>
+                                <td>sitem_1234512345</td>
+                                <td class="prod_name">
+                                    <div>
+                                        <div>
+                                            <img src="../../img/img_prod_01.png">
+                                        </div>
+                                        <div>
+                                            [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>NEW</td>
+                                <td></td>
+                                <td>등록</td>
+                                <td>등록</td>
+                                <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/product_rgst.html'">수정</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>7</td>
+                                <td class="cate_name">
+                                    <div>
+                                        욕실
+                                        <div>└ 페이셜 클렌징바</div>
+                                    </div>
+                                </td>
+                                <td>sitem_1234512345</td>
+                                <td class="prod_name">
+                                    <div>
+                                        <div>
+                                            <img src="../../img/img_prod_01.png">
+                                        </div>
+                                        <div>
+                                            [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>BIG SALE</td>
+                                <td>등록</td>
+                                <td>등록</td>
+                                <td>등록</td>
+                                <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/product_rgst.html'">수정</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>6</td>
+                                <td class="cate_name">
+                                    <div>
+                                        욕실
+                                        <div>└ 페이셜 클렌징바</div>
+                                    </div>
+                                </td>
+                                <td>sitem_1234512345</td>
+                                <td class="prod_name">
+                                    <div>
+                                        <div>
+                                            <img src="../../img/img_prod_01.png">
+                                        </div>
+                                        <div>
+                                            [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫친환경칫솔 친환경칫솔친환경칫솔친환경칫
+                                        </div>
+                                    </div>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/product_rgst.html'">수정</button></td>
+                            </tr>
+-->
                         </tbody>
                     </table>
 
                     <!-- 페이지네이션 시작 -->
                     <div class="paging_box">
                         <div class="paging">
-                            {!! $pnPage !!}
+                            <a class="wide">처음</a>
+                            <a class="wide">이전</a>
+                            <a class="on">1</a>
+                            <a>2</a>
+                            <a>3</a>
+                            <a>4</a>
+                            <a>5</a>
+                            <a>6</a>
+                            <a>7</a>
+                            <a>8</a>
+                            <a>9</a>
+                            <a>10</a>
+                            <a class="wide">다음</a>
+                            <a class="wide">마지막</a>
                         </div>
                     </div>
                     <!-- 페이지네이션 끝 -->
@@ -274,7 +387,6 @@
     <input type="hidden" name="page" id="page" value="{{ $page }}">
     <input type="hidden" name="item_search" id="item_search" value="{{ $item_search }}">
     <input type="hidden" name="keyword" id="keyword" value="{{ $keyword }}">
-    <input type="hidden" name="special" id="special" value="{{ $special }}">
 </form>
 
 <script>

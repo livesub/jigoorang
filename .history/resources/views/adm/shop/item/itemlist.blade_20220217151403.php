@@ -274,7 +274,6 @@
     <input type="hidden" name="page" id="page" value="{{ $page }}">
     <input type="hidden" name="item_search" id="item_search" value="{{ $item_search }}">
     <input type="hidden" name="keyword" id="keyword" value="{{ $keyword }}">
-    <input type="hidden" name="special" id="special" value="{{ $special }}">
 </form>
 
 <script>

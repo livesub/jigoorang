@@ -35,7 +35,7 @@
                                 @endforeach
                             </select>
                         </li>
-                        <li>기획전 구분</li>
+                        <li>기획전 구분(작업 해야 함)</li>
                         <li>
                             @php
                                 $selected1 = "";
@@ -111,118 +111,156 @@
                             </tr>
                         </thead>
                         <tbody>
-
-                        @foreach($item_infos as $item_info)
-                            @php
-                                //단계명 가져 오기
-                                $cut_hap = "";
-                                $item_ca_name = "";
-                                $ca_name_hap = "";
-                                $ca_id_len = 0;
-
-                                for($i = 0; $i < 10; $i += 2)
-                                {
-                                    $sign = "";
-                                    $ca_id_len = strlen($item_info->sca_id) - 2;
-                                    $tmp_cut = substr($item_info->sca_id, $i, 2);
-                                    if($tmp_cut != ""){
-                                        $cut_hap = $cut_hap.$tmp_cut;
-                                        $item_ca_name = DB::table('shopcategorys')->select('sca_name_kr', 'sca_name_en')->where('sca_id',$cut_hap)->first();
-
-                                        if($ca_id_len > $i){
-                                            $sign = " > ";
-                                        }
-
-                                        if($item_ca_name->sca_name_kr != ""){
-                                            $ca_name_hap .= $item_ca_name->sca_name_kr.$sign;
-                                        }
-                                    }
-                                }
-
-                                //이미지 처리
-                                if($item_info->item_img1 == "") {
-                                    $item_img_disp = asset("img/no_img.jpg");
-                                }else{
-                                    $item_img_cut = explode("@@",$item_info->item_img1);
-                                    $item_img_disp = "/data/shopitem/".$item_img_cut[3];
-                                }
-
-                                //상품유형 등록 여부
-                                $item_type1_ment = '';
-                                switch($item_info->item_type1) {
-                                    case 1:
-                                        $item_type1_ment = 'NEW';
-                                        break;
-                                    case 2:
-                                        $item_type1_ment = 'SALE';
-                                        break;
-                                    case 3:
-                                        $item_type1_ment = 'BIG SALE';
-                                        break;
-                                    case 4:
-                                        $item_type1_ment = 'HOT';
-                                        break;
-                                    default:
-                                        break;
-                                }
-
-                                //기획전1 등록 여부
-                                $item_special_ment = "";
-                                if($item_info->item_special == "1") {
-                                    $item_special_ment = "등록";
-                                }
-                                //기획전2 등록 여부
-                                $item_special_ment2 = "";
-                                if($item_info->item_special2 == "1") {
-                                    $item_special_ment2 = "등록";
-                                }
-                                //new_arrival
-                                $item_new_arrival_ment = "";
-                                if($item_info->item_new_arrival == "1") {
-                                    $item_new_arrival_ment = "등록";
-                                }
-
-                                if($item_info->item_manufacture == "") $item_manufacture = "";
-                                else $item_manufacture = "[".$item_info->item_manufacture."] ";
-
-                                //재고 수량이 10개 이하로 떨어질시 배경색 바꿈
-                                $bg_change = "";
-                                if($item_info->item_stock_qty <= 10) $bg_change = "change";
-                            @endphp
                             <tr>
-                                <td><input type="checkbox" class="mg00" name="chk_id[]" value="{{ $item_info->id }}" id="chk_id_{{ $item_info->id }}"></td>
-                                <td>{{ $virtual_num-- }}</td>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>10</td>
                                 <td class="cate_name">
                                     <div>
-                                        {{ $ca_name_hap }}
+                                        욕실
+                                        <div>└ 페이셜 클렌징바</div>
                                     </div>
                                 </td>
-                                <td>{{ $item_info->item_code }}</td>
-                                <td class="prod_name {{ $bg_change }}">
+                                <td>sitem_1234512345</td>
+                                <td class="prod_name">
                                     <div>
                                         <div>
-                                            <img src="{{ $item_img_disp }}">
+                                            <img src="../../img/img_prod_01.png">
                                         </div>
                                         <div>
-                                            {{ $item_manufacture }}{{ stripslashes($item_info->item_name) }}
+                                            [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{ $item_type1_ment }}</td>
-                                <td>{{ $item_special_ment }}</td>
-                                <td>{{ $item_special_ment2 }}</td>
-                                <td>{{ $item_new_arrival_ment }}</td>
-                                <td><button type="button" class="btn-sm-ln" onclick="item_modi('{{ $item_info->id }}','{{ $item_info->sca_id }}');">수정</button></td>
+                                <td>SALE</td>
+                                <td></td>
+                                <td></td>
+                                <td>등록</td>
+                                <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/product_rgst.html'">수정</button></td>
                             </tr>
-                            @endforeach
-
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>9</td>
+                                <td class="cate_name">
+                                    <div>
+                                        욕실
+                                        <div>└ 페이셜 클렌징바</div>
+                                    </div>
+                                </td>
+                                <td>sitem_1234512345</td>
+                                <td class="prod_name change">
+                                    <div>
+                                        <div>
+                                            <img src="../../img/img_prod_01.png">
+                                        </div>
+                                        <div>
+                                            [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>HOT</td>
+                                <td>등록</td>
+                                <td></td>
+                                <td></td>
+                                <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/product_rgst.html'">수정</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>8</td>
+                                <td class="cate_name">
+                                    <div>
+                                        욕실
+                                        <div>└ 페이셜 클렌징바</div>
+                                    </div>
+                                </td>
+                                <td>sitem_1234512345</td>
+                                <td class="prod_name">
+                                    <div>
+                                        <div>
+                                            <img src="../../img/img_prod_01.png">
+                                        </div>
+                                        <div>
+                                            [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>NEW</td>
+                                <td></td>
+                                <td>등록</td>
+                                <td>등록</td>
+                                <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/product_rgst.html'">수정</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>7</td>
+                                <td class="cate_name">
+                                    <div>
+                                        욕실
+                                        <div>└ 페이셜 클렌징바</div>
+                                    </div>
+                                </td>
+                                <td>sitem_1234512345</td>
+                                <td class="prod_name">
+                                    <div>
+                                        <div>
+                                            <img src="../../img/img_prod_01.png">
+                                        </div>
+                                        <div>
+                                            [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>BIG SALE</td>
+                                <td>등록</td>
+                                <td>등록</td>
+                                <td>등록</td>
+                                <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/product_rgst.html'">수정</button></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>6</td>
+                                <td class="cate_name">
+                                    <div>
+                                        욕실
+                                        <div>└ 페이셜 클렌징바</div>
+                                    </div>
+                                </td>
+                                <td>sitem_1234512345</td>
+                                <td class="prod_name">
+                                    <div>
+                                        <div>
+                                            <img src="../../img/img_prod_01.png">
+                                        </div>
+                                        <div>
+                                            [대나무샵]친환경칫솔 친환경칫솔친환경칫솔친환경칫친환경칫솔 친환경칫솔친환경칫솔친환경칫
+                                        </div>
+                                    </div>
+                                </td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/product/product_rgst.html'">수정</button></td>
+                            </tr>
                         </tbody>
                     </table>
 
                     <!-- 페이지네이션 시작 -->
                     <div class="paging_box">
                         <div class="paging">
-                            {!! $pnPage !!}
+                            <a class="wide">처음</a>
+                            <a class="wide">이전</a>
+                            <a class="on">1</a>
+                            <a>2</a>
+                            <a>3</a>
+                            <a>4</a>
+                            <a>5</a>
+                            <a>6</a>
+                            <a>7</a>
+                            <a>8</a>
+                            <a>9</a>
+                            <a>10</a>
+                            <a class="wide">다음</a>
+                            <a class="wide">마지막</a>
                         </div>
                     </div>
                     <!-- 페이지네이션 끝 -->
@@ -274,7 +312,6 @@
     <input type="hidden" name="page" id="page" value="{{ $page }}">
     <input type="hidden" name="item_search" id="item_search" value="{{ $item_search }}">
     <input type="hidden" name="keyword" id="keyword" value="{{ $keyword }}">
-    <input type="hidden" name="special" id="special" value="{{ $special }}">
 </form>
 
 <script>

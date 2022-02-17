@@ -42,7 +42,7 @@ class AdmShopItemController extends Controller
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
         $page       = $request->input('page');
-        $pageScale  = 10;  //한페이지당 라인수
+        $pageScale  = 2;  //한페이지당 라인수
         $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")

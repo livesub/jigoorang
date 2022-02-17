@@ -42,7 +42,7 @@ class AdmShopItemController extends Controller
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
         $page       = $request->input('page');
-        $pageScale  = 10;  //한페이지당 라인수
+        $pageScale  = 15;  //한페이지당 라인수
         $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")
@@ -103,7 +103,6 @@ class AdmShopItemController extends Controller
         $tailarr['ca_id'] = $ca_id;    //고정된 전달 파라메터가 있을때 사용
         $tailarr['item_search'] = $item_search;
         $tailarr['keyword'] = $keyword;
-        $tailarr['special'] = $special;
 
         $PageSet        = new PageSet;
         $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");

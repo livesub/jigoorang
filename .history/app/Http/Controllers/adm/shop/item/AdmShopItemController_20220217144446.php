@@ -42,7 +42,7 @@ class AdmShopItemController extends Controller
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
         $page       = $request->input('page');
-        $pageScale  = 10;  //한페이지당 라인수
+        $pageScale  = 15;  //한페이지당 라인수
         $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")
@@ -79,13 +79,10 @@ class AdmShopItemController extends Controller
         if($special == "noregi"){
             //미등록일때
             $search_sql .= " AND (a.item_special = 0 and a.item_special2 = 0 and a.item_new_arrival = 0) ";
-        }elseif($special == "item_special"){
-            $search_sql .= " AND a.item_special = 1 ";
-        }elseif($special == "item_special2"){
-            $search_sql .= " AND a.item_special2 = 1 ";
-        }elseif($special == "item_new_arrival"){
-            $search_sql .= " AND a.item_new_arrival = 1 ";
         }
+
+var_dump($search_sql);
+
 
         $total_tmp = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' {$search_sql} ");
         $total_cnt = $total_tmp[0]->cnt;
@@ -103,7 +100,6 @@ class AdmShopItemController extends Controller
         $tailarr['ca_id'] = $ca_id;    //고정된 전달 파라메터가 있을때 사용
         $tailarr['item_search'] = $item_search;
         $tailarr['keyword'] = $keyword;
-        $tailarr['special'] = $special;
 
         $PageSet        = new PageSet;
         $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
@@ -114,7 +110,7 @@ class AdmShopItemController extends Controller
         $preFirstPage   = $PageSet->preFirst("처음");
         $nextLastPage   = $PageSet->nextLast("마지막");
         $listPage       = $PageSet->getPageList();
-        $pnPage         = $preFirstPage.$prevPage.$listPage.$nextPage.$nextLastPage;
+        $pnPage         = $prevPage.$listPage.$nextPage;
 
         $setting_info = CustomUtils::setting_infos();
         if($setting_info == false){
@@ -131,7 +127,6 @@ class AdmShopItemController extends Controller
             'keyword'           => $keyword,
             'search_selectboxs' => $search_selectboxs,
             'de_ment_change'    => stripslashes($setting_info->de_ment_change),
-            'special'           => $special,
         ]);
     }
 
