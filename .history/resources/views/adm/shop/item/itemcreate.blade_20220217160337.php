@@ -48,16 +48,20 @@
                                 <li id="cate2" style="display:none">
                                     <li>소분류</li>
                                     <li>
-<!--
                                     @if($ca_id && strlen($ca_id) >= 4)
                                         <select size="10" name="ca_id" id="caa_id2" class="cid" >
                                         @foreach($two_step_infos as $two_step_info)
-                                            <option value="{{ $two_step_info->sca_id }}">└ {{ $two_step_info->sca_name_kr }}</option>
+                                            <option value="{{ $two_step_info->sca_id }}">└ {{ $two_step_info->sca_name_kr }}5555555555555</option>
                                         @endforeach
                                         </select>
-
-                                    @endif
+<!--
+                                        <select>
+                                            <option>선택하세요</option>
+                                            <option>└ 치약</option>
+                                            <option>└ 샴푸바</option>
+                                        </select>
 -->
+                                    @endif
                                     </li>
                                 </li>
                             </ul>

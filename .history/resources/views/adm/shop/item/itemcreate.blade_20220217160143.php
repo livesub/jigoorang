@@ -48,16 +48,20 @@
                                 <li id="cate2" style="display:none">
                                     <li>소분류</li>
                                     <li>
-<!--
                                     @if($ca_id && strlen($ca_id) >= 4)
                                         <select size="10" name="ca_id" id="caa_id2" class="cid" >
                                         @foreach($two_step_infos as $two_step_info)
-                                            <option value="{{ $two_step_info->sca_id }}">└ {{ $two_step_info->sca_name_kr }}</option>
+                                            <option value="{{ $two_step_info->sca_id }}">└ {{ $two_step_info->sca_name_kr }}5555555555555</option>
                                         @endforeach
                                         </select>
-
-                                    @endif
+<!--
+                                        <select>
+                                            <option>선택하세요</option>
+                                            <option>└ 치약</option>
+                                            <option>└ 샴푸바</option>
+                                        </select>
 -->
+                                    @endif
                                     </li>
                                 </li>
                             </ul>
@@ -596,6 +600,421 @@
 
 
 
+
+
+
+
+
+
+<table>
+    <tr>
+        <td><h4>쇼핑몰 상품 등록</h4></td>
+    </tr>
+</table>
+
+<form name="item_form" id="item_form" method="post" action="{{ route('shop.item.createsave') }}" enctype='multipart/form-data'>
+{!! csrf_field() !!}
+<input type="hidden" name="sca_id" id="sca_id">
+<input type="hidden" name="sca_name_kr" id="sca_name_kr">
+<input type="hidden" name="length" id="length">
+<input type="hidden" name="last_choice_ca_id" id="last_choice_ca_id">
+<input type="hidden" name="item_code" id="item_code" value="{{ $item_code }}">
+<input type="hidden" name="item_use" id="item_use" value="1">
+<input type="hidden" name="item_point" id="item_point" value="{{ $item_point }}">
+
+<table border=1 width="900px;">
+    <tr>
+        <td colspan=5>
+            카테고리 선택
+        </td>
+    </tr>
+    <tr>
+        <td >
+            <table>
+                <tr>
+                    <td>
+                        <table id="cate1">
+                        <tr>
+                            <td>
+                                <select size="10" name="ca_id" id="caa_id" class="cid" >
+                                @foreach($one_step_infos as $one_step_info)
+                                    <option value="{{ $one_step_info->sca_id }}">{{ $one_step_info->sca_name_kr }}</option>
+                                @endforeach
+                                </select>
+                            </td>
+                        <tr>
+                        </table>
+                    </td>
+
+
+                    <td>
+                        <table id="cate2" style="display:none">
+                        <tr>
+                            @if($ca_id && strlen($ca_id) >= 4)
+                            <td>
+                                <select size="10" name="ca_id" id="caa_id2" class="cid" >
+                                @foreach($two_step_infos as $two_step_info)
+                                    <option value="{{ $two_step_info->sca_id }}">{{ $two_step_info->sca_name_kr }}</option>
+                                @endforeach
+                                </select>
+                            </td>
+                            @endif
+                        <tr>
+                        </table>
+
+                    </td>
+
+                    <td>
+
+                        <table id="cate3" style="display:none">
+                        <tr>
+                            @if($ca_id && strlen($ca_id) >= 6)
+                            <td>
+                                <select size="10" name="ca_id" id="caa_id3" class="cid" >
+                                @foreach($three_step_infos as $three_step_info)
+                                    <option value="{{ $three_step_info->sca_id }}">{{ $three_step_info->sca_name_kr }}</option>
+                                @endforeach
+                                </select>
+                            </td>
+                            @endif
+                        <tr>
+                        </table>
+
+                    </td>
+
+                    <td>
+                        <table id="cate4" style="display:none">
+                        <tr>
+                            @if($ca_id && strlen($ca_id) >= 8)
+                            <td>
+                                <select size="10" name="ca_id" id="caa_id4" class="cid" >
+                                @foreach($four_step_infos as $four_step_info)
+                                    <option value="{{ $four_step_info->sca_id }}">{{ $four_step_info->sca_name_kr }}</option>
+                                @endforeach
+                                </select>
+                            </td>
+                            @endif
+                        <tr>
+                        </table>
+                    </td>
+
+
+                    <td>
+                        <table id="cate5" style="display:none">
+                        <tr>
+                            @if($ca_id && strlen($ca_id) >= 10)
+                            <td>
+                                <select size="10" name="ca_id" id="caa_id5" class="cid" >
+                                @foreach($five_step_infos as $five_step_info)
+                                    <option value="{{ $five_step_info->sca_id }}">{{ $five_step_info->sca_name_kr }}</option>
+                                @endforeach
+                                </select>
+                            </td>
+                            @endif
+                        <tr>
+                        </table>
+                    </td>
+
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+
+
+<table border=1 style="width:950px">
+    <tr>
+        <td>상품코드</td>
+        <td>{{ $item_code }}</td>
+    </tr>
+    <tr>
+        <td>상품명</td>
+        <td><input type="text" name="item_name" id="item_name" value="{{ old('item_name') }}"></td>
+    </tr>
+    <tr>
+        <td>상품소개문구</td>
+        <td><input type="text" name="item_basic" id="item_basic" value="{{ old('item_basic') }}"></td>
+    </tr>
+    <tr>
+        <td>출력여부</td>
+        <td>
+            <input type="radio" name="item_display" id="item_display_yes" value="Y" checked>출력
+            <input type="radio" name="item_display" id="item_display_no" value="N">출력안함
+        </td>
+    </tr>
+    <tr>
+        <td>출력순서</td>
+        <td><input type="text" name="item_rank" id="item_rank" maxlength="4" size="4" value="9999" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"><br>※ 숫자만 입력 하세요. 숫자가 낮을 수록 먼저 출력 됩니다.</td>
+    </tr>
+    <tr>
+        <td>상품 유형</td>
+        <td>
+            <span class="frm_info">메인화면에 유형별로 출력할때 사용합니다.<br>이곳에 체크하게되면 상품리스트에서 유형별로 정렬할때 체크된 상품이 가장 먼저 출력됩니다.</span><br>
+            <input type="radio" name="item_type1" value="1"  id="item_type1">NEW
+            <input type="radio" name="item_type1" value="2"  id="item_type2">SALE
+            <input type="radio" name="item_type1" value="3"  id="item_type3">BIG SALE
+            <input type="radio" name="item_type1" value="4"  id="item_type4">HOT
+            <button type="button" onclick="redio_release()">해제</button>
+<!--
+            <input type="checkbox" name="item_type2" value="1"  id="item_type2">
+            <label for="item_type2">BIG SALE </label>
+            <input type="checkbox" name="item_type3" value="1"  id="item_type3">
+            <label for="item_type3">HOT </label>
+-->
+        </td>
+    </tr>
+    <tr>
+        <td>기획전1</td>
+        <td>
+            <input type="checkbox" name="item_special" value="1" id="item_special" >
+        </td>
+    </tr>
+    <tr>
+        <td>기획전2</td>
+        <td>
+            <input type="checkbox" name="item_special2" value="1" id="item_special2" >
+        </td>
+    </tr>
+
+    <tr>
+        <td>New Arrival</td>
+        <td>
+            <input type="checkbox" name="item_new_arrival" value="1" id="item_new_arrival" >
+        </td>
+    </tr>
+    <tr>
+        <td>제조사(브랜드)</td>
+        <td>입력하지 않으면 상품상세페이지에 출력하지 않습니다. <br>
+            <input type="text" name="item_manufacture" id="item_manufacture" value="{{ old('item_manufacture') }}">
+        </td>
+    </tr>
+<!--
+    <tr>
+        <td>원산지</td>
+        <td>입력하지 않으면 상품상세페이지에 출력하지 않습니다. <br>
+            <input type="text" name="item_origin" id="item_origin" value="{{ old('item_origin') }}">
+        </td>
+    </tr>
+
+    <tr>
+        <td>브랜드</td>
+        <td>입력하지 않으면 상품상세페이지에 출력하지 않습니다. <br>
+            <input type="text" name="item_brand" id="item_brand" value="{{ old('item_brand') }}">
+        </td>
+    </tr>
+
+    <tr>
+        <td>모델</td>
+        <td>입력하지 않으면 상품상세페이지에 출력하지 않습니다. <br>
+            <input type="text" name="item_model" id="item_model" value="{{ old('item_model') }}">
+        </td>
+    </tr>
+
+    <tr>
+        <td>전화문의</td>
+        <td>상품 금액 대신 전화문의로 표시됩니다. <br>
+            <input type="checkbox" name="item_tel_inq" value="1" id="item_tel_inq" > 예
+        </td>
+    </tr>
+
+    <tr>
+        <td>판매가능</td>
+        <td>잠시 판매를 중단하거나 재고가 없을 경우에 체크를 해제해 놓으면 출력되지 않으며, 주문도 받지 않습니다. <br>
+            <input type="checkbox" name="item_use" value="1" id="item_use" checked> 예
+        </td>
+    </tr>
+-->
+    <tr>
+        <td>상품내용</td>
+        <td>
+            <textarea type="text" name="item_content" id="item_content" style="width:100%">{{ old('item_content') }}</textarea>
+        </td>
+    </tr>
+
+
+    <tr>
+        <td>성분</td>
+        <td>
+            <textarea type="text" name="item_content2" id="item_content2" style="width:100%">{{ old('item_content2') }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>포장</td>
+        <td>
+            <textarea type="text" name="item_content3" id="item_content3" style="width:100%">{{ old('item_content3') }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>분리배출</td>
+        <td>
+            <textarea type="text" name="item_content4" id="item_content4" style="width:100%">{{ old('item_content4') }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>사회적 가치</td>
+        <td>
+            <textarea type="text" name="item_content5" id="item_content5" style="width:100%">{{ old('item_content5') }}</textarea>
+        </td>
+    </tr>
+
+    <tr>
+        <td>판매가격</td>
+        <td><input type="text" name="item_price" id="item_price" value="{{ old('item_price') }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원</td>
+    </tr>
+
+    <tr>
+        <td>시중가격</td>
+        <td>입력하지 않으면 상품상세페이지에 출력하지 않습니다.<br>
+            <input type="text" name="item_cust_price" id="item_cust_price" value="{{ old('item_cust_price') }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">원
+        </td>
+    </tr>
+
+    <tr>
+        <td>적립금 제공 여부</td>
+        <td>
+            <input type="radio" name="item_give_point" value="Y" checked>적립금 제공
+            <input type="radio" name="item_give_point" value="N">적립금 제공 안함
+        </td>
+    </tr>
+
+    <tr>
+        <td>상품품절</td>
+        <td>잠시 판매를 중단하거나 재고가 없을 경우에 체크해 놓으면 품절상품으로 표시됩니다.<br>
+            <input type="checkbox" name="item_soldout" value="1" id="item_soldout" > 예
+        </td>
+    </tr>
+
+    <tr>
+        <td>재고수량</td>
+        <td>주문관리에서 상품별 상태 변경에 따라 자동으로 재고를 가감합니다. <br>재고는 규격/색상별이 아닌, 상품별로만 관리됩니다.<br>재고수량을 0으로 설정하시면 품절상품으로 표시됩니다.<br>
+            <input type="text" name="item_stock_qty" value="99999" id="item_stock_qty" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 개
+        </td>
+    </tr>
+
+    <tr>
+        <td>상품선택옵션</td>
+        <td>옵션항목은 콤마(,) 로 구분하여 여러개를 입력할 수 있습니다.<br> 옷을 예로 들어 [옵션1 : 사이즈 , 옵션1 항목 : XXL,XL,L,M,S] , [옵션2 : 색상 , 옵션2 항목 : 빨,파,노]<br><strong>옵션명과 옵션항목에 따옴표(', ")는 입력할 수 없습니다.</strong><br>
+            <table border=1>
+                <tr>
+                    <td>
+                        <table>
+                            <tr>
+                                <td>옵션1
+                                    <input type="text" name="opt1_subject" value="" id="opt1_subject" size="15">
+                                </td>
+                                <td>옵션1 항목
+                                    <input type="text" name="opt1" value="" id="opt1" size="50">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>옵션2
+                                    <input type="text" name="opt2_subject" value="" id="opt2_subject" size="15">
+                                </td>
+                                <td>옵션2 항목
+                                    <input type="text" name="opt2" value="" id="opt2" size="50">
+                                </td>
+                            </tr>
+<!--
+                            <tr>
+                                <td>옵션3
+                                    <input type="text" name="opt3_subject" value="" id="opt3_subject" size="15">
+                                </td>
+                                <td>옵션3 항목
+                                    <input type="text" name="opt3" value="" id="opt3" size="50">
+                                </td>
+                            </tr>
+-->
+                            <tr>
+                                <td colspan="2"><button type="button" id="option_table_create">옵션목록생성</button></td>
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+
+                <tr id="sit_option_frm">
+                    <!-- 옵션 조합 리스트 나오는 곳 -->
+                </tr>
+            </table>
+        </td>
+    </tr>
+<!--
+    <tr>
+        <td>상품추가옵션</td>
+        <td>옵션항목은 콤마(,) 로 구분하여 여러개를 입력할 수 있습니다. <br>스마트폰을 예로 들어 [추가1 : 추가구성상품 , 추가1 항목 : 액정보호필름,케이스,충전기]<br>
+        <strong>옵션명과 옵션항목에 따옴표(', ")는 입력할 수 없습니다.</strong><br>
+            <table border=1>
+                <tr id="sit_supply_frm">
+                    <td>
+                        <table>
+                            <tr>
+                                <td>추가1
+                                    <input type="text" name="spl_subject[]" id="spl_subject_" value="" size="15">
+                                </td>
+                                <td>추가1 항목
+                                    <input type="text" name="spl[]" id="spl_item_" value="" size="40">
+                                </td>
+                                @php
+                                    $i = 0;
+                                @endphp
+
+                                @if($i > 0)
+                                <td>
+                                    <button type="button" id="del_supply_row">삭제</button>
+                                </td>
+                                @endif
+                            </tr>
+
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button type="button" id="add_supply_row">옵션추가</button></td>
+                </tr>
+                <tr>
+                    <td colspan="2"><button type="button" id="supply_table_create">옵션목록생성</button></td>
+                </tr>
+
+                <tr id="sit_option_addfrm">
+                    추가 옵션 조합 리스트 나오는 곳
+                </tr>
+            </table>
+        </td>
+    </tr>
+-->
+    <tr>
+        <td>상품 추가 배송비</td>
+        <td>
+            <input type="text" name="item_sc_price" value="0" id="item_sc_price" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');"> 원
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan=2><b>상품 이미지 사이즈 : 600 X 520</b></td>
+    </tr>
+    @for($i = 1; $i <=10; $i++)
+    <tr>
+        <td>상품 이미지{{ $i }}</td>
+        <td>
+            <input type="file" name="item_img{{ $i }}" id="item_img{{ $i }}">
+            @error('item_img'.$i)
+                <strong>{{ $message }}</strong>
+            @enderror
+        </td>
+    </tr>
+    @endfor
+
+
+    <tr colspan="2">
+        <td><button type="button" onclick="submitContents();">저장</button></td>
+    </tr>
+
+</table>
+</form>
 
 <script>
     function redio_release(){
