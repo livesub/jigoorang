@@ -7,7 +7,7 @@
 
 
  <!-- 상품 내역 모달 시작 -->
- <div class="modal_001 modal fade">
+ <div class="modal_00 modal fade">
   <div class="modal-background" onclick="detilclosemodal_001()"></div>
   <div class="modal-container">
       <div class="modal-container-body">
@@ -87,7 +87,7 @@
       </div>
 
       <div class="btn btn_2ea">
-          <button class="modal_btn01" onclick="detilclosemodal_001()">
+          <button class="modal_btn01" onclick="detilopenmodal_001()">
               취소
           </button>
           <button
@@ -178,7 +178,7 @@
                               </ul>
 
                             @php
-                                if(count($order_infos) > 0) $onclick_chk = "detilopenmodal_001();";
+                                if(count($order_infos) > 0) $onclick_chk = "addressopenmodal_001();";
                                 else $onclick_chk = "javascript:alert('주문 상품이 없습니다');";
                             @endphp
                               <ul class="tab-03">

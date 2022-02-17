@@ -178,7 +178,7 @@
                               </ul>
 
                             @php
-                                if(count($order_infos) > 0) $onclick_chk = "detilopenmodal_001();";
+                                if(count($order_infos) > 0) $onclick_chk = "addressopenmodal_001();";
                                 else $onclick_chk = "javascript:alert('주문 상품이 없습니다');";
                             @endphp
                               <ul class="tab-03">
