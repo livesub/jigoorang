@@ -39,7 +39,7 @@
                             <div class="btn_re point01">
                                 <ul class="re_li">
                                     <span class="text">배송 현황은 택배사 홈페이지에서 확인 부탁드립니다.</span>
-                                    <li class="dl-trk">
+                                    <li class="dl-trk"><!--<a href="{{ $order_info->od_delivery_url }}" target="_blank"-->
                                       <a href="{{ $order_info->od_delivery_url }}" target="_blank"><span>배송조회</span></a>
                                     </li>
                                 </ul>
