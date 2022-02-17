@@ -188,7 +188,7 @@
     }
 
     .eval .board .board_wrap .goods .sale-price {
-        font-weight: 400;
+        font-weight: 600;
         text-decoration: line-through;
         font-size: 17px;
         margin-top: 3px;

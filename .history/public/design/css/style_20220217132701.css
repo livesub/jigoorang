@@ -459,6 +459,7 @@ h5 {
     display: inline-block;
     font-size: 22px;
     font-weight: 600;
+    margin-right: 5px;
 }
 
 .main-container .mbox_100 .swiper-slide .main-project-left .sale-price {

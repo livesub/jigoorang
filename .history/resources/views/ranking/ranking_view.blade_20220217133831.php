@@ -49,7 +49,7 @@
                                 @endphp
                             @endforeach
                             </ul>
-                                <div class="swiper-button-prev01"></div>
+                                <div class="swiper-button-next01"></div>
                                 <div class="swiper-button-next01"></div>
                         </div>
                     </div>
