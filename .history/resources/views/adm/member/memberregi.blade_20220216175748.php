@@ -2,31 +2,32 @@
 
 @section('content')
 
-        <form action='{{ route('adm.member.regi.store') }}' method='POST' enctype='multipart/form-data' role='form' class='form__auth'>
-            {!! csrf_field() !!}
-            <input type="hidden" name="mode" id="mode" value="{{ $mode }}">
-            <input type="hidden" name="num" id="num" value="{{ $num }}">
+
         <!-- 타이틀 영역 -->
         <div class="top">
             <div class="title">
-                <h2>회원 {{ $title_ment }}</h2>
+                <h2>회원 등록</h2>
                 <div class="button_box">
-                    <button type='submit'>
-                        {{ $title_ment }}
-                    </button>
+                    <button type="button" onclick="location.href='../../page/member/member.html'">등록</button>
                 </div>
             </div>
         </div>
 
         <!-- 컨텐츠 영역 시작 -->
         <div class="contents_area member">
+
+            <form action='{{ route('adm.member.regi.store') }}' method='POST' enctype='multipart/form-data' role='form' class='form__auth'>
+                {!! csrf_field() !!}
+                <input type="hidden" name="mode" id="mode" value="{{ $mode }}">
+                <input type="hidden" name="num" id="num" value="{{ $num }}">
+
                 <div class="box_cont">
 
                     <div class="row">
                         <div class="col">아이디(이메일)</div>
                         <div class="col">
                         @if ($mode == 'regi')
-                            <input name='user_id' id='user_id' type='text' value='{{ old('user_id') }}' placeholder='{{ $user_id }}'>
+                            <input name='user_id' id='user_id' type='email' value='{{ old('user_id') }}' placeholder='{{ $user_id }}'>
                             @error('user_id')
                                 <br><span role='alert'>
                                     <strong>{{ $message }}</strong>
@@ -149,15 +150,10 @@
                     <div class="row">
                         <div class="col">상태</div>
                         <div class="col">
-                        @php
-                            $user_type_selected1 = "";
-                            $user_type_selected2 = "";
-                            if($user_type == "N") $user_type_selected1 = "selected";
-                            else $user_type_selected2 = "selected";
-                        @endphp
-                            <select name="user_type" >
-                                <option value="N" {{ $user_type_selected1 }}>가입</option>
-                                <option value="Y" {{ $user_type_selected2 }}>탈퇴</option>
+                            {{ $user_status }} 만들어야 함!!!!!
+                            <select>
+                                <option>가입</option>
+                                <option>탈퇴</option>
                             </select>
                         </div>
                     </div>
@@ -222,139 +218,10 @@
                     @endif
                 </div>
 
+            </form>
 
         </div>
         <!-- 컨텐츠 영역 끝 -->
-            </form>
-
-
-
-<form action="{{ route('adm.member.out') }}" name="mem_out_form" id="mem_out_form" method="POST">
-{!! csrf_field() !!}
-    <input type="hidden" name="chk_id[]" id="chk_id" value="{{ $num }}">
-</form>
-
-<script>
-  function pw_change()
-  {
-    if($('#user_pw').val() == '')
-    {
-      alert('{{ $alert_pw }}');
-      $('#user_pw').focus();
-      return false;
-    }
-
-    if($('#user_pw_confirmation').val() == '')
-    {
-      alert('{{ $alert_pw_confirmation }}');
-      $('#user_pw_confirmation').focus();
-      return false;
-    }
-
-    if($('#user_pw').val().length < 6 || $('#user_pw').val().length > 16)
-    {
-      alert('비밀번호는 6자 이상 16이하로 입력 하세요.');
-      $('#user_pw').focus();
-      return false;
-    }
-
-    if($('#user_pw_confirmation').val().length < 6 || $('#user_pw_confirmation').val().length > 16)
-    {
-      alert('비밀번호는 6자 이상 16이하로 입력 하세요.');
-      $('#user_pw_confirmation').focus();
-      return false;
-    }
-
-    if($('#user_pw').val() != $('#user_pw_confirmation').val())
-    {
-      alert('{{ $user_pw_same }}');
-      $('#user_pw_confirmation').focus();
-      return false;
-    }
-//alert($('input[name=_token]').val());
-    $.ajax({
-          headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-          type: 'post',
-          url: '{{ route('adm.member.pw_change') }}',
-          dataType: 'json',
-          data: {
-            'user_pw' : $('#user_pw').val(),
-            'user_pw_confirmation' : $('#user_pw_confirmation').val(),
-            'num' : $('#num').val()
-          },
-          success: function(data) {
-            //console.log(data);
-            if(data.status == 'false'){
-              alert(data.status_ment);
-            }else{
-              alert(data.status_ment);
-              location.href = "{{ route('adm.member.index') }}";
-            }
-          },
-          error: function(data) {
-            //console.log("error==> " + data);
-            //초기화
-            $(document).find('[name=user_pw]').val('');
-            $(document).find('[name=user_pw_confirmation]').val('');
-            $('#reset_user_pw').remove();
-            $('#reset_user_pw_confirmation').remove();
-
-            $.each(data.responseJSON.errors,function(field_name,error){
-              $(document).find("[name='+field_name+']").after("<span class='text-strong textdanger' id='reset_'+field_name>' +error+ '</span>");
-            })
-          }
-    });
-  }
-</script>
-
-<script>
-  function img_del(){
-    if (confirm("회원 이미지를 삭제하시겠습니까??") == true){    //확인
-      $.ajax({
-            headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
-            type: 'post',
-            url: '{{ route('adm.member.imgdel') }}',
-            dataType: 'json',
-            data: {
-              'num' : $('#num').val()
-            },
-            success: function(data) {
-              console.log(data);
-              if(data.status == 'false'){
-                alert(data.status_ment);
-              }else{
-                alert(data.status_ment);
-                location.href = '/adm';
-              }
-            },
-            error: function(data) {
-              console.log("error==> " + data);
-              //초기화
-              $(document).find('[name=user_pw]').val('');
-              $(document).find('[name=user_pw_confirmation]').val('');
-              $('#reset_user_pw').remove();
-              $('#reset_user_pw_confirmation').remove();
-
-              $.each(data.responseJSON.errors,function(field_name,error){
-                $(document).find("[name='+field_name+']").after("<span class='text-strong textdanger' id='reset_'+field_name>' +error+ '</span>");
-              })
-            }
-      });
-    }else{   //취소
-        return;
-    }
-  }
-</script>
-
-<script>
-    function mem_out(){
-        if (confirm("탈퇴 회원은 가입 처리 되며, 가입자는 탈퇴 처리 됩니다.\n회원 정보는 삭제 되지 않습니다.\n선택 하신 회원을 탈퇴/가입 하시겠습니까?") == true){    //확인
-          document.mem_out_form.submit();
-        }else{
-            return;
-        }
-    }
-</script>
 
 
 

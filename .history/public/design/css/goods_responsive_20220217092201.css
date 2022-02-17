@@ -107,7 +107,7 @@
         background: url("../recources/imgs/invalid-name@3x.png") no-repeat;
         background-size: 100% auto;
         background-position: center;
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: #fff;
         border-radius: 150px;
         opacity: 1;
     }
@@ -1226,7 +1226,7 @@
         background: url("../recources/imgs/invalid-name@3x.png") no-repeat;
         background-size: 100% auto;
         background-position: center;
-        background-color: rgba(0, 0, 0, 0.4);
+        background-color: #fff;
         border-radius: 150px;
         opacity: 0.9;
         margin-right: 4px;
@@ -2112,7 +2112,7 @@
          background: url("../recources/imgs/invalid-name@3x.png") no-repeat;
          background-size: 100% auto;
          background-position: center;
-         background-color: rgba(0, 0, 0, 0.4);
+         background-color: #fff;
          border-radius: 150px;
          opacity: 0.9;
          transform: scaleX(-1);

@@ -67,7 +67,7 @@ var swiper = new Swiper(".bastSwiper", {
 var swiper = new Swiper(".saleSwiper", {
   slidesPerView: 5.5,
   spaceBetween: 0,
-  slidesPerGroup: 2,
+  slidesPerGroup: 4,
   grabCursor: true,
   // pagination: {
   //   el: ".swiper-pagination",
@@ -83,31 +83,26 @@ var swiper = new Swiper(".saleSwiper", {
       slidesPerView: 2.1,
       spaceBetween: 5,
       slidesOffsetBefore: 0,
-      slidesPerGroup: 2,
     },
     360: {
       slidesPerView: 2.1,
       spaceBetween: 7,
       slidesOffsetBefore: 0,
-      slidesPerGroup: 2,
     },
     480: {
       slidesPerView: 3.5,
       spaceBetween: 10,
       slidesOffsetBefore: 0,
-      slidesPerGroup: 2,
     },
     980: {
       slidesPerView: 3.5,
       spaceBetween: 10,
       slidesOffsetBefore: 0,
-      slidesPerGroup: 2,
     },
     1024: {
       slidesPerView: 4.5,
       spaceBetween: 10,
       slidesOffsetBefore: 0,
-      slidesPerGroup: 2,
     },
     1200: {
       slidesPerView: 5.3,
@@ -143,7 +138,7 @@ var swiper = new Swiper(".saleSwiper", {
 var swiper = new Swiper(".saleSwiper2", {
   slidesPerView: 5.3,
   spaceBetween: 0,
-  slidesPerGroup: 2,
+  slidesPerGroup: 4,
   grabCursor: true,
   // pagination: {
   //   el: ".swiper-pagination",
@@ -162,31 +157,26 @@ var swiper = new Swiper(".saleSwiper2", {
       slidesPerView: 2.1,
       spaceBetween: 5,
       slidesOffsetBefore: 0,
-      slidesPerGroup: 2,
     },
     360: {
       slidesPerView: 2.1,
       spaceBetween: 7,
       slidesOffsetBefore: 0,
-      slidesPerGroup: 2,
     },
     480: {
       slidesPerView: 3.5,
       spaceBetween: 10,
       slidesOffsetBefore: 0,
-      slidesPerGroup: 2,
     },
     980: {
       slidesPerView: 3.5,
       spaceBetween: 10,
       slidesOffsetBefore: 0,
-      slidesPerGroup: 2,
     },
     1024: {
       slidesPerView: 4.5,
       spaceBetween: 10,
       slidesOffsetBefore: 0,
-      slidesPerGroup: 2,
     },
     1200: {
       slidesPerView: 5.3,
@@ -220,7 +210,7 @@ var swiper = new Swiper(".saleSwiper2", {
 var swiper = new Swiper(".saleSwiper3", {
   slidesPerView: 4,
   spaceBetween: 0,
-  slidesPerGroup: 2,
+  slidesPerGroup: 4,
   grabCursor: true,
   // pagination: {
   //   el: ".swiper-pagination",
@@ -235,22 +225,18 @@ var swiper = new Swiper(".saleSwiper3", {
     290: {
       slidesPerView: 2.1,
       spaceBetween: 5,
-      slidesPerGroup: 2,
     },
     360: {
       slidesPerView: 2.1,
       spaceBetween: 7,
-      slidesPerGroup: 2,
     },
     480: {
       slidesPerView: 3.5,
       spaceBetween: 10,
-      slidesPerGroup: 2,
     },
     1024: {
       slidesPerView: 4,
       spaceBetween: 10,
-      slidesPerGroup: 2,
     },
   }
 });

@@ -2,31 +2,32 @@
 
 @section('content')
 
-        <form action='{{ route('adm.member.regi.store') }}' method='POST' enctype='multipart/form-data' role='form' class='form__auth'>
-            {!! csrf_field() !!}
-            <input type="hidden" name="mode" id="mode" value="{{ $mode }}">
-            <input type="hidden" name="num" id="num" value="{{ $num }}">
+
         <!-- 타이틀 영역 -->
         <div class="top">
             <div class="title">
-                <h2>회원 {{ $title_ment }}</h2>
+                <h2>회원 등록</h2>
                 <div class="button_box">
-                    <button type='submit'>
-                        {{ $title_ment }}
-                    </button>
+                    <button type="button" onclick="location.href='../../page/member/member.html'">등록</button>
                 </div>
             </div>
         </div>
 
         <!-- 컨텐츠 영역 시작 -->
         <div class="contents_area member">
+
+            <form action='{{ route('adm.member.regi.store') }}' method='POST' enctype='multipart/form-data' role='form' class='form__auth'>
+                {!! csrf_field() !!}
+                <input type="hidden" name="mode" id="mode" value="{{ $mode }}">
+                <input type="hidden" name="num" id="num" value="{{ $num }}">
+
                 <div class="box_cont">
 
                     <div class="row">
                         <div class="col">아이디(이메일)</div>
                         <div class="col">
                         @if ($mode == 'regi')
-                            <input name='user_id' id='user_id' type='text' value='{{ old('user_id') }}' placeholder='{{ $user_id }}'>
+                            <input name='user_id' id='user_id' type='email' value='{{ old('user_id') }}' placeholder='{{ $user_id }}'>
                             @error('user_id')
                                 <br><span role='alert'>
                                     <strong>{{ $message }}</strong>
@@ -149,15 +150,10 @@
                     <div class="row">
                         <div class="col">상태</div>
                         <div class="col">
-                        @php
-                            $user_type_selected1 = "";
-                            $user_type_selected2 = "";
-                            if($user_type == "N") $user_type_selected1 = "selected";
-                            else $user_type_selected2 = "selected";
-                        @endphp
-                            <select name="user_type" >
-                                <option value="N" {{ $user_type_selected1 }}>가입</option>
-                                <option value="Y" {{ $user_type_selected2 }}>탈퇴</option>
+                            {{ $user_status }} 만들어야 함!!!!!
+                            <select>
+                                <option>가입</option>
+                                <option>탈퇴</option>
                             </select>
                         </div>
                     </div>
@@ -222,10 +218,10 @@
                     @endif
                 </div>
 
+            </form>
 
         </div>
         <!-- 컨텐츠 영역 끝 -->
-            </form>
 
 
 
@@ -288,7 +284,7 @@
               alert(data.status_ment);
             }else{
               alert(data.status_ment);
-              location.href = "{{ route('adm.member.index') }}";
+              location.href = '/adm';
             }
           },
           error: function(data) {
@@ -355,7 +351,6 @@
         }
     }
 </script>
-
 
 
 

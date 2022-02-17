@@ -67,7 +67,7 @@ var swiper = new Swiper(".bastSwiper", {
 var swiper = new Swiper(".saleSwiper", {
   slidesPerView: 5.5,
   spaceBetween: 0,
-  slidesPerGroup: 2,
+  slidesPerGroup: 4,
   grabCursor: true,
   // pagination: {
   //   el: ".swiper-pagination",

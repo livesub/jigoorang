@@ -26,7 +26,7 @@
                         <div class="col">아이디(이메일)</div>
                         <div class="col">
                         @if ($mode == 'regi')
-                            <input name='user_id' id='user_id' type='text' value='{{ old('user_id') }}' placeholder='{{ $user_id }}'>
+                            <input name='user_id' id='user_id' type='email' value='{{ old('user_id') }}' placeholder='{{ $user_id }}'>
                             @error('user_id')
                                 <br><span role='alert'>
                                     <strong>{{ $message }}</strong>
