@@ -279,34 +279,30 @@
                                     <div class="title">
                                         옵션1 명칭 입력
                                     </div>
-                                    <input class="wd500" type="text" name="opt1_subject" value="" id="opt1_subject">
+                                    <input class="wd500" type="text" name="" placeholder="">
                                 </li>
                                 <li>
                                     <div class="title">
                                         옵션1 항목
                                     </div>
-                                    <input class="wd500" type="text" name="opt1" value="" id="opt1" size="50">
+                                    <input class="wd500" type="text" name="" placeholder="">
                                 </li>
                             </ul>
-
-
                             <ul class="opt">
                                 <li>
                                     <div class="title">
                                         옵션2 명칭 입력
                                     </div>
-                                    <input class="wd500" type="text" name="opt2_subject" value="" id="opt2_subject">
+                                    <input class="wd500" type="text" name="" placeholder="">
                                 </li>
                                 <li>
                                     <div class="title">
                                         옵션2 항목
                                     </div>
-                                    <input class="wd500" type="text" name="opt2" value="" id="opt2">
+                                    <input class="wd500" type="text" name="" placeholder="">
                                 </li>
                             </ul>
-
-
-                            <button type="button" class="btn blk mt20 mb20" id="option_table_create">옵션 목록 생성</button>
+                            <button type="button" class="btn blk mt20 mb20" onclick="">옵션 목록 생성</button>
                             <!-- 옵션 목록 시작 -->
                             <div class="opt_list">
                                 <div class="title">옵션 목록</div>

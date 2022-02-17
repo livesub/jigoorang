@@ -301,7 +301,7 @@
                                     <div class="title">
                                         옵션2 항목
                                     </div>
-                                    <input class="wd500" type="text" name="opt2" value="" id="opt2">
+                                    <input class="wd500" type="text" name="opt2" value="" id="opt2" size="50">
                                 </li>
                             </ul>
 

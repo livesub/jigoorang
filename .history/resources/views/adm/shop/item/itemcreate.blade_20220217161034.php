@@ -74,21 +74,21 @@
                     <div class="row">
                         <div class="col">제조사</div>
                         <div class="col">
-                            <input type="text" name="item_manufacture" id="item_manufacture" value="{{ old('item_manufacture') }}" placeholder="">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">상품명</div>
                         <div class="col">
                             <p>30자 내외로 입력하세요</p>
-                            <input class="wd500" type="text" name="item_name" id="item_name" value="{{ old('item_name') }}" placeholder="">
+                            <input class="wd500" type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">상품 소개 문구</div>
                         <div class="col">
                             <p>100자 내외로 입력하세요</p>
-                            <input class="wd500" type="text" name="item_basic" id="item_basic" value="{{ old('item_basic') }}" placeholder="">
+                            <input class="wd500" type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
@@ -96,10 +96,10 @@
                         <div class="col">
                             <div class="prt">
                                 <label>
-                                    <input type="radio" name="item_display" id="item_display_yes" value="Y" checked="checked" > 출력
+                                    <input type="radio" id="" name="print" checked="checked" > 출력
                                 </label>
                                 <label>
-                                    <input type="radio" name="item_display" id="item_display_no" value="N"> 미출력
+                                    <input type="radio" id="" name="print" > 미출력
                                 </label>
                             </div>
                         </div>
@@ -108,7 +108,7 @@
                         <div class="col">출력순서</div>
                         <div class="col">
                             <p>*숫자만 입력하세요. 숫자가 낮을수록 먼저 출력 됩니다.</p>
-                            <input type="text" name="item_rank" id="item_rank" maxlength="4" size="4" value="9999" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" placeholder="" style="text-align:right;">
+                            <input type="number" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
@@ -116,19 +116,19 @@
                         <div class="col">
                             <div class="prt">
                                 <label>
-                                    <input type="radio" name="item_type1" value="0" id="item_type0"> 없음
+                                    <input type="radio" id="" name="evt" checked="checked" > 없음
                                 </label>
                                 <label>
-                                    <input type="radio" name="item_type1" value="1" id="item_type1"> NEW
+                                    <input type="radio" id="" name="evt" > NEW
                                 </label>
                                 <label>
-                                    <input type="radio" name="item_type1" value="2" id="item_type2"> SALE
+                                    <input type="radio" id="" name="evt" > SALE
                                 </label>
                                 <label>
-                                    <input type="radio" name="item_type1" value="3" id="item_type3"> BIG SALE
+                                    <input type="radio" id="" name="evt" > BIG SALE
                                 </label>
                                 <label>
-                                    <input type="radio" name="item_type1" value="4"  id="item_type4"> HOT
+                                    <input type="radio" id="" name="evt" > HOT
                                 </label>
                             </div>
                         </div>
@@ -138,7 +138,7 @@
                         <div class="col">
                             <div class="dp">
                                 <label>
-                                    <input type="checkbox" name="item_special" value="1" id="item_special">체크시 메인 기획전1 영역에 노출합니다.
+                                    <input type="checkbox" id="">체크시 메인 기획전1 영역에 노출합니다.
                                 </label>
                            </div>
                         </div>
@@ -148,7 +148,7 @@
                         <div class="col">
                             <div class="dp">
                                 <label>
-                                    <input type="checkbox" name="item_special2" value="1" id="item_special2">체크시 메인 기획전2 영역에 노출합니다.
+                                    <input type="checkbox" id="">체크시 메인 기획전2 영역에 노출합니다.
                                 </label>
                            </div>
                         </div>
@@ -158,7 +158,7 @@
                         <div class="col">
                             <div class="dp">
                                 <label>
-                                    <input type="checkbox" name="item_new_arrival" value="1" id="item_new_arrival">체크시 메인 New Arrivals 영역에 노출합니다.
+                                    <input type="checkbox" id="">체크시 메인 New Arrivals 영역에 노출합니다.
                                 </label>
                            </div>
                         </div>
@@ -172,7 +172,7 @@
                         <div class="col">
                             <p class="t_mint">권장 이미지 사이즈  : 가로 1200px / 세로 : 자유</p>
                             <div class="sm_editor">
-                                <textarea type="text" name="item_content" id="item_content" style="width:100%">{{ old('item_content') }}</textarea>
+                                <!-- 스마트에디터영역 -->
                             </div>
                         </div>
                     </div>
@@ -181,7 +181,7 @@
                         <div class="col">
                             <p class="t_mint">권장 이미지 사이즈  : 가로 1200px / 세로 : 자유</p>
                             <div class="sm_editor">
-                                <textarea type="text" name="item_content2" id="item_content2" style="width:100%">{{ old('item_content2') }}</textarea>
+                                <!-- 스마트에디터영역 -->
                             </div>
                         </div>
                     </div>
@@ -190,7 +190,7 @@
                         <div class="col">
                             <p class="t_mint">권장 이미지 사이즈  : 가로 1200px / 세로 : 자유</p>
                             <div class="sm_editor">
-                                <textarea type="text" name="item_content3" id="item_content3" style="width:100%">{{ old('item_content3') }}</textarea>
+                                <!-- 스마트에디터영역 -->
                             </div>
                         </div>
                     </div>
@@ -199,7 +199,7 @@
                         <div class="col">
                             <p class="t_mint">권장 이미지 사이즈  : 가로 1200px / 세로 : 자유</p>
                             <div class="sm_editor">
-                                <textarea type="text" name="item_content4" id="item_content4" style="width:100%">{{ old('item_content4') }}</textarea>
+                                <!-- 스마트에디터영역 -->
                             </div>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
                         <div class="col">
                             <p class="t_mint">권장 이미지 사이즈  : 가로 1200px / 세로 : 자유</p>
                             <div class="sm_editor">
-                                <textarea type="text" name="item_content5" id="item_content5" style="width:100%">{{ old('item_content5') }}</textarea>
+                                <!-- 스마트에디터영역 -->
                             </div>
                         </div>
                     </div>
@@ -220,7 +220,7 @@
                         <div class="col">판매가</div>
                         <div class="col">
                             <div class="price">
-                                <input type="text" name="item_price" id="item_price" value="{{ old('item_price') }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align:right;"> 원
+                                <input type="number" name="" placeholder=""> 원
                             </div>
                         </div>
                     </div>
@@ -229,30 +229,26 @@
                         <div class="col">
                             <div class="price">
                                 <p>미입력시 상세페이지에서 미표기 됩니다</p>
-                                <input type="text" name="item_cust_price" id="item_cust_price" value="{{ old('item_cust_price') }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align:right;"> 원
+                                <input type="number" name="" placeholder=""> 원
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">적립금 제공 여부</div>
+                    <!-- 적립금 설정은 설정 페이지에서 일괄 설정 (혹시 몰라 남겨둠)-->
+                    <!-- <div class="row">
+                        <div class="col">적립금</div>
                         <div class="col">
                             <div class="price">
-                                <label>
-                                    <input type="radio" name="item_give_point" value="Y" checked>적립금 제공
-                                </label>
-
-                                <label>
-                                    <input type="radio" name="item_give_point" value="N">적립금 제공 안함
-                                </label>
+                                <p>0일 경우 적립금이 제공되지 않습니다</p>
+                                <input type="number" name="" placeholder=""> %
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="col">상품품절</div>
                         <div class="col">
                             <p class="t_mint">판매를 중단하거나 재고가 없을 경우 체크하여 품절 표기 하세요</p>
                             <label>
-                                <input type="checkbox" name="item_soldout" value="1" id="item_soldout">품절처리
+                                <input type="checkbox" id="">품절처리
                             </label>
                         </div>
                     </div>
@@ -260,7 +256,7 @@
                         <div class="col">재고 수량</div>
                         <div class="col">
                             <div class="price">
-                                <input type="text" name="item_stock_qty" value="99999" id="item_stock_qty" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align:right;"> 개
+                                <input type="number" name="" placeholder=""> 개
                             </div>
                         </div>
                     </div>
@@ -279,34 +275,30 @@
                                     <div class="title">
                                         옵션1 명칭 입력
                                     </div>
-                                    <input class="wd500" type="text" name="opt1_subject" value="" id="opt1_subject">
+                                    <input class="wd500" type="text" name="" placeholder="">
                                 </li>
                                 <li>
                                     <div class="title">
                                         옵션1 항목
                                     </div>
-                                    <input class="wd500" type="text" name="opt1" value="" id="opt1" size="50">
+                                    <input class="wd500" type="text" name="" placeholder="">
                                 </li>
                             </ul>
-
-
                             <ul class="opt">
                                 <li>
                                     <div class="title">
                                         옵션2 명칭 입력
                                     </div>
-                                    <input class="wd500" type="text" name="opt2_subject" value="" id="opt2_subject">
+                                    <input class="wd500" type="text" name="" placeholder="">
                                 </li>
                                 <li>
                                     <div class="title">
                                         옵션2 항목
                                     </div>
-                                    <input class="wd500" type="text" name="opt2" value="" id="opt2">
+                                    <input class="wd500" type="text" name="" placeholder="">
                                 </li>
                             </ul>
-
-
-                            <button type="button" class="btn blk mt20 mb20" id="option_table_create">옵션 목록 생성</button>
+                            <button type="button" class="btn blk mt20 mb20" onclick="">옵션 목록 생성</button>
                             <!-- 옵션 목록 시작 -->
                             <div class="opt_list">
                                 <div class="title">옵션 목록</div>
@@ -677,6 +669,90 @@
                 });
             }
 		});
+
+		$(document).on("click", "#caa_id3", function() {
+			var cate_is = $('#caa_id3').val();
+
+            if(cate_is != null){
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+                    url: '{{ route('shop.cate.ajax_select') }}',
+                    type: 'post',
+                    dataType: 'text',
+                    data: {
+                        ca_id   : $('#caa_id3').val(),
+                        length  : $('#caa_id3').val().length,
+                    },
+                    success: function(result) {
+                        var data = JSON.parse(result);
+                        if(data.success == 0) {
+                            console.log(data.msg);
+                        }else{
+                            $('#last_choice_ca_id').val(data.ca_id);
+                            $('#cate4').css('display', 'block');
+                            $('#cate4').html(data.data);
+                            $('#cate5').html('');
+                        }
+                    }
+                });
+            }
+		});
+
+		$(document).on("click", "#caa_id4", function() {
+			var cate_is = $('#caa_id4').val();
+
+            if(cate_is != null){
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+                    url: '{{ route('shop.cate.ajax_select') }}',
+                    type: 'post',
+                    dataType: 'text',
+                    data: {
+                        ca_id   : $('#caa_id4').val(),
+                        length  : $('#caa_id4').val().length,
+                    },
+                    success: function(result) {
+                        var data = JSON.parse(result);
+                        if(data.success == 0) {
+                            console.log(data.msg);
+                        }else{
+                            $('#last_choice_ca_id').val(data.ca_id);
+                            $('#cate5').css('display', 'block');
+                            $('#cate5').html(data.data);
+                        }
+                    }
+                });
+            }
+		});
+
+		$(document).on("click", "#caa_id5", function() {
+            var cate_is = $('#caa_id5').val();
+
+            if(cate_is != null){
+                $.ajax({
+                    headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+                    url: '{{ route('shop.cate.ajax_select') }}',
+                    type: 'post',
+                    dataType: 'text',
+                    data: {
+                        ca_id   : $('#caa_id5').val(),
+                        length  : $('#caa_id5').val().length,
+                    },
+                    success: function(result) {
+                        var data = JSON.parse(result);
+    //alert(data.ca_id);
+                        if(data.success == 0) {
+                            console.log(data.msg);
+                        }else{
+                            $('#last_choice_ca_id').val(data.ca_id);
+                            //$('#cate5').css('display', 'block');
+                            //$('#cate5').html(data.data);
+                        }
+                    }
+                });
+            }
+		});
+
     });
 </script>
 

@@ -190,7 +190,7 @@
                         <div class="col">
                             <p class="t_mint">권장 이미지 사이즈  : 가로 1200px / 세로 : 자유</p>
                             <div class="sm_editor">
-                                <textarea type="text" name="item_content3" id="item_content3" style="width:100%">{{ old('item_content3') }}</textarea>
+                                <!-- 스마트에디터영역 -->
                             </div>
                         </div>
                     </div>
@@ -199,7 +199,7 @@
                         <div class="col">
                             <p class="t_mint">권장 이미지 사이즈  : 가로 1200px / 세로 : 자유</p>
                             <div class="sm_editor">
-                                <textarea type="text" name="item_content4" id="item_content4" style="width:100%">{{ old('item_content4') }}</textarea>
+                                <!-- 스마트에디터영역 -->
                             </div>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
                         <div class="col">
                             <p class="t_mint">권장 이미지 사이즈  : 가로 1200px / 세로 : 자유</p>
                             <div class="sm_editor">
-                                <textarea type="text" name="item_content5" id="item_content5" style="width:100%">{{ old('item_content5') }}</textarea>
+                                <!-- 스마트에디터영역 -->
                             </div>
                         </div>
                     </div>
@@ -220,7 +220,7 @@
                         <div class="col">판매가</div>
                         <div class="col">
                             <div class="price">
-                                <input type="text" name="item_price" id="item_price" value="{{ old('item_price') }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align:right;"> 원
+                                <input type="number" name="" placeholder=""> 원
                             </div>
                         </div>
                     </div>
@@ -229,30 +229,26 @@
                         <div class="col">
                             <div class="price">
                                 <p>미입력시 상세페이지에서 미표기 됩니다</p>
-                                <input type="text" name="item_cust_price" id="item_cust_price" value="{{ old('item_cust_price') }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align:right;"> 원
+                                <input type="number" name="" placeholder=""> 원
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col">적립금 제공 여부</div>
+                    <!-- 적립금 설정은 설정 페이지에서 일괄 설정 (혹시 몰라 남겨둠)-->
+                    <!-- <div class="row">
+                        <div class="col">적립금</div>
                         <div class="col">
                             <div class="price">
-                                <label>
-                                    <input type="radio" name="item_give_point" value="Y" checked>적립금 제공
-                                </label>
-
-                                <label>
-                                    <input type="radio" name="item_give_point" value="N">적립금 제공 안함
-                                </label>
+                                <p>0일 경우 적립금이 제공되지 않습니다</p>
+                                <input type="number" name="" placeholder=""> %
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row">
                         <div class="col">상품품절</div>
                         <div class="col">
                             <p class="t_mint">판매를 중단하거나 재고가 없을 경우 체크하여 품절 표기 하세요</p>
                             <label>
-                                <input type="checkbox" name="item_soldout" value="1" id="item_soldout">품절처리
+                                <input type="checkbox" id="">품절처리
                             </label>
                         </div>
                     </div>
@@ -260,7 +256,7 @@
                         <div class="col">재고 수량</div>
                         <div class="col">
                             <div class="price">
-                                <input type="text" name="item_stock_qty" value="99999" id="item_stock_qty" size="8" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align:right;"> 개
+                                <input type="number" name="" placeholder=""> 개
                             </div>
                         </div>
                     </div>
@@ -279,34 +275,30 @@
                                     <div class="title">
                                         옵션1 명칭 입력
                                     </div>
-                                    <input class="wd500" type="text" name="opt1_subject" value="" id="opt1_subject">
+                                    <input class="wd500" type="text" name="" placeholder="">
                                 </li>
                                 <li>
                                     <div class="title">
                                         옵션1 항목
                                     </div>
-                                    <input class="wd500" type="text" name="opt1" value="" id="opt1" size="50">
+                                    <input class="wd500" type="text" name="" placeholder="">
                                 </li>
                             </ul>
-
-
                             <ul class="opt">
                                 <li>
                                     <div class="title">
                                         옵션2 명칭 입력
                                     </div>
-                                    <input class="wd500" type="text" name="opt2_subject" value="" id="opt2_subject">
+                                    <input class="wd500" type="text" name="" placeholder="">
                                 </li>
                                 <li>
                                     <div class="title">
                                         옵션2 항목
                                     </div>
-                                    <input class="wd500" type="text" name="opt2" value="" id="opt2">
+                                    <input class="wd500" type="text" name="" placeholder="">
                                 </li>
                             </ul>
-
-
-                            <button type="button" class="btn blk mt20 mb20" id="option_table_create">옵션 목록 생성</button>
+                            <button type="button" class="btn blk mt20 mb20" onclick="">옵션 목록 생성</button>
                             <!-- 옵션 목록 시작 -->
                             <div class="opt_list">
                                 <div class="title">옵션 목록</div>
