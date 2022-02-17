@@ -360,7 +360,7 @@
                     {{-- <li>대표전화 : {{ $company_tel }}</li> --}}
                     <li>{{ $company_zip }} {{ $company_addr }}</li>
                     <li>이메일 : {{ $company_info_email }}</li>
-                    <li>고객센터 : 02-3656-2929</li>
+                    <li>이메일 : {{ $company_info_email }}</li>
                 </ul>
             </div>
             <div class="logo_f"></div>
