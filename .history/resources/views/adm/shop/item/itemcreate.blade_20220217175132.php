@@ -4,7 +4,7 @@
 
 
 <!-- smarteditor2 사용 -->
-<script type="text/javascript" src="{{ asset('/smarteditor2/js/HuskyEZCreator.js') }}" charset="utf-8"></script>
+<script type="text/javascript" src="/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <!-- smarteditor2 사용 -->
 
         <!-- 타이틀 영역 -->

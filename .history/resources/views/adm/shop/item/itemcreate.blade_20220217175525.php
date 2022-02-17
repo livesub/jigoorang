@@ -896,6 +896,8 @@
 
 <script>
     function submitContents(elClickedObj) {
+alert(document.getElementById("item_content").value);
+return false;
         oEditors.getById["item_content"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
         oEditors2.getById["item_content2"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
         oEditors3.getById["item_content3"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.

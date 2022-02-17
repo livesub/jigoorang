@@ -460,6 +460,7 @@
                         </div>
                     </div>
                 </div>
+<button type="button" onclick="submitContents();">등록<!-- 수정 --></button>
             </form>
         </div>
         <!-- 컨텐츠 영역 끝 -->

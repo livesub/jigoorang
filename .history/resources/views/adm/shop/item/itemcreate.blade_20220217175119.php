@@ -4,10 +4,19 @@
 
 
 <!-- smarteditor2 사용 -->
-<script type="text/javascript" src="{{ asset('/smarteditor2/js/HuskyEZCreator.js') }}" charset="utf-8"></script>
+<script type="text/javascript" src="/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <!-- smarteditor2 사용 -->
 
         <!-- 타이틀 영역 -->
+            <form name="item_form" id="item_form" method="post" action="{{ route('shop.item.createsave') }}" enctype='multipart/form-data'>
+            {!! csrf_field() !!}
+            <input type="hidden" name="sca_id" id="sca_id">
+            <input type="hidden" name="sca_name_kr" id="sca_name_kr">
+            <input type="hidden" name="length" id="length">
+            <input type="hidden" name="last_choice_ca_id" id="last_choice_ca_id">
+            <input type="hidden" name="item_code" id="item_code" value="{{ $item_code }}">
+            <input type="hidden" name="item_use" id="item_use" value="1">
+            <input type="hidden" name="item_point" id="item_point" value="{{ $item_point }}">
         <div class="top">
             <div class="title">
                 <h2>상품 등록</h2>
@@ -19,15 +28,7 @@
 
         <!-- 컨텐츠 영역 시작 -->
         <div class="contents_area cate">
-            <form name="item_form" id="item_form" method="post" action="{{ route('shop.item.createsave') }}" enctype='multipart/form-data'>
-            {!! csrf_field() !!}
-            <input type="hidden" name="sca_id" id="sca_id">
-            <input type="hidden" name="sca_name_kr" id="sca_name_kr">
-            <input type="hidden" name="length" id="length">
-            <input type="hidden" name="last_choice_ca_id" id="last_choice_ca_id">
-            <input type="hidden" name="item_code" id="item_code" value="{{ $item_code }}">
-            <input type="hidden" name="item_use" id="item_use" value="1">
-            <input type="hidden" name="item_point" id="item_point" value="{{ $item_point }}">
+
 
                 <h3 class="line">카테고리 선택</h3>
                 <div class="box_cont">

@@ -897,6 +897,8 @@
 <script>
     function submitContents(elClickedObj) {
         oEditors.getById["item_content"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
+alert(document.getElementById("item_content").value);
+return false;
         oEditors2.getById["item_content2"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
         oEditors3.getById["item_content3"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
         oEditors4.getById["item_content4"].exec("UPDATE_CONTENTS_FIELD", []);	// 에디터의 내용이 textarea에 적용됩니다.
@@ -936,18 +938,7 @@
     }
 </script>
 
-<script>
-    function file_name(id_val){
-        flies = document.getElementById(id_val);
 
-        fileList = "";
-        for(i = 0; i < flies.files.length; i++){
-            fileList += flies.files[i].name;
-        }
-        flies_name = document.getElementById(id_val+'_name');
-        flies_name.innerHTML = fileList;
-    }
-</script>
 
 
 
