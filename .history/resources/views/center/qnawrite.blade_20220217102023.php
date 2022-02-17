@@ -24,7 +24,7 @@
               <div class="modal-cot mt-10">
                   <div class="modal-cot-tt">
                       <div class="md-cot-inp">
-                          <input type="radio" name="order_id" id="m_rd_{{ $order_info->order_id }}" value="{{ $order_info->order_id }}">
+                          <input type="radio" name="order_id" id="m_rd_{{ $order_info->order_id }}" value="{{ $order_info->order_id }}" onclick="order_choice('{{ $order_info->order_id }}')">
                           <label for="m_rd_{{ $order_info->order_id }}"></label>
                       </div>
                       <div>
@@ -90,7 +90,8 @@
               취소
           </button>
           <button
-              class="modal_btn02" onclick="order_choice()">
+              class="modal_btn02"
+              onclick="">
               확인
           </button>
       </div>
@@ -176,19 +177,17 @@
                                 </li>
                               </ul>
 
-                            @php
-                                if(count($order_infos) > 0) $onclick_chk = "addressopenmodal_001();";
-                                else $onclick_chk = "javascript:alert('주문 상품이 없습니다');";
-                            @endphp
+                            @if(count($order_infos) > 0)
                               <ul class="tab-03">
                                     <li>
                                         <p>주문번호</p>
                                         <span>
-                                            <input type="text" name="order_id" id="order_id" value="" readonly>
-                                            <button type="button" class="btn-10" onclick="{{ $onclick_chk }}">구매상품 선택</button>
+                                            <input type="text" value="order_id" disabled>
+                                            <button type="button" class="btn-10" onclick='addressopenmodal_001()'>구매상품 선택</button>
                                         </span>
                                     </li>
                               </ul>
+                            @endif
 
                               <ul class="tab-04">
                                 <li>
@@ -249,16 +248,8 @@
 
 
 <script>
-    function order_choice(){
-        var order_id = $(':radio[name="order_id"]:checked').val();
-
-        if(order_id == undefined){
-            alert('구매상품을 선택해주세요');
-            return false;
-        }
-
-        $("#order_id").val(order_id);
-        addressclosemodal_001();
+    function order_choice(order_id){
+alert(order_id);
     }
 </script>
 

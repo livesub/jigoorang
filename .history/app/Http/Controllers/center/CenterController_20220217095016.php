@@ -29,11 +29,11 @@ class CenterController extends Controller
     {
         $CustomUtils = new CustomUtils;
 
-        $order_infos = DB::table('shoporders')->where('user_id', Auth::user()->user_id)->orderby('id', 'desc')->get();
+        $order_cnt = DB::table('shoporders')->where('user_id', Auth::user()->user_id)->orderby('id', 'desc')->count;
+
 
         return view('center.qnawrite',[
-            'CustomUtils'   => $CustomUtils,
-            'order_infos'   => $order_infos,
+            'CustomUtils'       => $CustomUtils,
         ]);
     }
 

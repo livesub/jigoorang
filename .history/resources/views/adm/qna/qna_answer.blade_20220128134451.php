@@ -35,14 +35,6 @@
         <td>문의 글</td>
         <td>{{ stripslashes($qna_info->qna_content) }}</td>
     </tr>
-
-    @if($qna_info->order_id != 0)
-    <tr>
-        <td>주문번호</td>
-        <td><a href="{{ route('orderdetail','order_id='.$qna_info->order_id) }}">{{ $qna_info->order_id }}</a></td>
-    </tr>
-    @endif
-
     <tr>
         <td>답변 글</td>
         <td><textarea name="qna_answer" id="qna_answer">{{ $qna_info->qna_answer }}</textarea></td>

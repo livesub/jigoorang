@@ -33,7 +33,7 @@ class CenterController extends Controller
 
         return view('center.qnawrite',[
             'CustomUtils'   => $CustomUtils,
-            'order_infos'   => $order_infos,
+            'order_infos'   => $order_infos
         ]);
     }
 

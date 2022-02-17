@@ -39,7 +39,7 @@
     @if($qna_info->order_id != 0)
     <tr>
         <td>주문번호</td>
-        <td><a href="{{ route('orderdetail','order_id='.$qna_info->order_id) }}">{{ $qna_info->order_id }}</a></td>
+        <td><a href="">{{ $qna_info->order_id }}</a></td>
     </tr>
     @endif
 

@@ -101,12 +101,11 @@ class QnaController extends Controller
         $qna_subject    = addslashes($request->input('qna_subject'));
         $qna_content    = $request->input('qna_content');
         $order_id       = $request->input('order_id');
-
+dd($order_id);
         $data = array(
             'qna_cate'      => $qna_cate,
             'user_id'       => Auth::user()->user_id,
             'user_name'     => Auth::user()->user_name,
-            'order_id'      => $order_id,
             'qna_subject'   => $qna_subject,
             'qna_content'   => $qna_content,
         );

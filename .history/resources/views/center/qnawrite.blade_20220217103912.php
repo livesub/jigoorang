@@ -184,7 +184,7 @@
                                     <li>
                                         <p>주문번호</p>
                                         <span>
-                                            <input type="text" name="order_id" id="order_id" value="" readonly>
+                                            <input type="text" name="order_id" id="order_id" value="" disabled>
                                             <button type="button" class="btn-10" onclick="{{ $onclick_chk }}">구매상품 선택</button>
                                         </span>
                                     </li>

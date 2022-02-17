@@ -17,70 +17,130 @@
           </div>
 
           <div class="scroll">
-            @foreach($order_infos as $order_info)
-                @php
-                    $carts = DB::table('shopcarts')->where([['user_id', Auth::user()->user_id], ['od_id', $order_info->order_id]])->get();
-                @endphp
+
               <div class="modal-cot mt-10">
                   <div class="modal-cot-tt">
                       <div class="md-cot-inp">
-                          <input type="radio" name="order_id" id="m_rd_{{ $order_info->order_id }}" value="{{ $order_info->order_id }}">
-                          <label for="m_rd_{{ $order_info->order_id }}"></label>
+                          <input type="radio" name="m_rd" id="m_rd_1" checked="checked">
+                          <label for="m_rd_1"></label>
                       </div>
                       <div>
                           <ul>
-                              <li class="cr_04">{{ substr($order_info->created_at, 0, 10) }} </li>
+                              <li class="cr_04">2021.10.11 </li>
                           </ul>
                           <ul class="prd_num">
                               <li>주문번호</li>
-                              <li>{{ $order_info->order_id }}</li>
+                              <li>20211201345-00001</li>
                           </ul>
                       </div>
                   </div>
 
 
-                @foreach($carts as $cart)
-                    @php
-                        $item_infos = DB::table('shopitems')->where('item_code', $cart->item_code)->first();
-                        $image = $CustomUtils->get_item_image($cart->item_code, 3);
-                        if($image == "") $image = asset("img/no_img.jpg");
-
-                        //제조사
-                        $item = DB::table('shopitems')->where('item_code', $cart->item_code)->first();
-                        if($item->item_manufacture == "") $item_manufacture = "";
-                        else $item_manufacture = "[".$item->item_manufacture."] ";
-
-                        //제목
-                        $item_name = $item_manufacture.stripslashes($cart->item_name);
-
-                        if(strpos($cart->sct_option, " / ") !== false) {
-                            $item_options = $cart->sct_option;
-                        } else {
-                            $item_options = "";
-                        }
-                    @endphp
                   <div class="modal-inner">
+
                       <ul class="modal-cot-img">
                           <li>
-                            <img src="{{ $image }}" alt="">
+                            <img src="{{ asset('/design/recources/imgs/sample_img.png') }}" alt="">
                           </li>
                       </ul>
 
                       <ul class="modal-cot-pd">
                          <h5>
-                          {{ $item_name }}
+                          [대나무숲] 요즘 인싸들만 쓴다는 아이템 000칫솔
+                          [대나무숲] 요즘 인싸들만 쓴다는 아이템 000칫솔
                          </h5>
                          <ul class="pd_tt">
-                              <li class="cr_04">{{ $item_options }}</li>
-                              <li class="pd_pr">{{ number_format($cart->sct_price + $cart->sio_price) }}원 X <span class="ml-10">{{ number_format($cart->sct_qty_cancel) }}개</span></li>
+                              <li class="cr_04">소형 / 파랑</li>
+                              <li class="pd_pr">6,000원  <span class="ml-10">1개</span></li>
                           </ul>
                       </ul>
+
                   </div>
-                @endforeach
 
                   <div class="sol-g-b mt-20 block"></div>
               </div>
-            @endforeach
+
+              <div class="modal-cot mt-10">
+                  <div class="modal-cot-tt">
+                      <div class="md-cot-inp">
+                          <input type="radio" name="m_rd" id="m_rd_2">
+                          <label for="m_rd_2"></label>
+                      </div>
+                      <div>
+                          <ul>
+                              <li class="cr_04">2021.10.11 </li>
+                          </ul>
+                          <ul class="prd_num">
+                              <li>주문번호</li>
+                              <li>20211201345-00001</li>
+                          </ul>
+                      </div>
+                  </div>
+
+
+                  <div class="modal-inner">
+
+                      <ul class="modal-cot-img">
+                          <li><img src="{{ asset('/design/recources/imgs/sample_img.png') }}" alt=""></li>
+                      </ul>
+
+                      <ul class="modal-cot-pd">
+                         <h5>
+                          [대나무숲] 요즘 인싸들만 쓴다는 아이템 000칫솔
+                          [대나무숲] 요즘 인싸들만 쓴다는 아이템 000칫솔
+                         </h5>
+                         <ul class="pd_tt">
+                              <li class="cr_04">소형 / 파랑</li>
+                              <li class="pd_pr">6,000원  <span class="ml-10">1개</span></li>
+                          </ul>
+                      </ul>
+
+                  </div>
+
+                  <div class="sol-g-b mt-20 block"></div>
+              </div>
+
+
+              <div class="modal-cot mt-10">
+                  <div class="modal-cot-tt">
+                      <div class="md-cot-inp">
+                          <input type="radio" name="m_rd" id="m_rd_2">
+                          <label for="m_rd_2"></label>
+                      </div>
+                      <div>
+                          <ul>
+                              <li class="cr_04">2021.10.11 </li>
+                          </ul>
+                          <ul class="prd_num">
+                              <li>주문번호</li>
+                              <li>20211201345-00001</li>
+                          </ul>
+                      </div>
+                  </div>
+
+
+                  <div class="modal-inner">
+
+                      <ul class="modal-cot-img">
+                          <li><img src="{{ asset('/design/recources/imgs/sample_img.png') }}" alt=""></li>
+                      </ul>
+
+                      <ul class="modal-cot-pd">
+                         <h5>
+                          [대나무숲] 요즘 인싸들만 쓴다는 아이템 000칫솔
+                          [대나무숲] 요즘 인싸들만 쓴다는 아이템 000칫솔
+                         </h5>
+                         <ul class="pd_tt">
+                              <li class="cr_04">소형 / 파랑</li>
+                              <li class="pd_pr">6,000원  <span class="ml-10">1개</span></li>
+                          </ul>
+                      </ul>
+
+                  </div>
+
+                  <div class="sol-g-b mt-20 block"></div>
+              </div>
+
 
           </div>
       </div>
@@ -90,7 +150,8 @@
               취소
           </button>
           <button
-              class="modal_btn02" onclick="order_choice()">
+              class="modal_btn02"
+              onclick="">
               확인
           </button>
       </div>
@@ -175,20 +236,17 @@
                                     <input type="text" name="qna_subject" id="qna_subject" placeholder="제목을 입력하세요(50자 이내)">
                                 </li>
                               </ul>
-
-                            @php
-                                if(count($order_infos) > 0) $onclick_chk = "addressopenmodal_001();";
-                                else $onclick_chk = "javascript:alert('주문 상품이 없습니다');";
-                            @endphp
+                            @if(count($order_infos) > 0)
                               <ul class="tab-03">
                                     <li>
                                         <p>주문번호</p>
                                         <span>
-                                            <input type="text" name="order_id" id="order_id" value="" readonly>
-                                            <button type="button" class="btn-10" onclick="{{ $onclick_chk }}">구매상품 선택</button>
+                                            <input type="text" value="0000000" disabled>
+                                            <button type="button" class="btn-10" onclick='addressopenmodal_001()'>구매상품 선택</button>
                                         </span>
                                     </li>
                               </ul>
+                            @endif
 
                               <ul class="tab-04">
                                 <li>
@@ -246,23 +304,6 @@
         $("#qna_form").submit();
     }
 </script>
-
-
-<script>
-    function order_choice(){
-        var order_id = $(':radio[name="order_id"]:checked').val();
-
-        if(order_id == undefined){
-            alert('구매상품을 선택해주세요');
-            return false;
-        }
-
-        $("#order_id").val(order_id);
-        addressclosemodal_001();
-    }
-</script>
-
-
 
 <script src="{{ asset('/design/js/tabar.js') }}"></script>
 

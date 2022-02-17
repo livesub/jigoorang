@@ -54,9 +54,8 @@
                     <div class="list view">
                         <div class="body view">
 
-                            @if($qna_info->order_id != 0)
-                            <div class="ordernumber"><p onclick="location.href='{{ route('mypage.orderview_detail', 'order_id='.$qna_info->order_id) }}'">주문번호 {{ $qna_info->order_id }}</p></div>
-                            @endif
+                            <div class="ordernumber"><p>주문번호 000000000000</p></div>
+
                             <div class="view_text">
                               {{ $qna_info->qna_content }}
                             </div>

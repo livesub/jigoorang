@@ -177,14 +177,14 @@
                               </ul>
 
                             @php
-                                if(count($order_infos) > 0) $onclick_chk = "addressopenmodal_001();";
+                                if(count($order_infos) < 0) $onclick_chk = "addressopenmodal_001();";
                                 else $onclick_chk = "javascript:alert('주문 상품이 없습니다');";
                             @endphp
                               <ul class="tab-03">
                                     <li>
                                         <p>주문번호</p>
                                         <span>
-                                            <input type="text" name="order_id" id="order_id" value="" readonly>
+                                            <input type="text" name="order_id" id="order_id" value="" disabled>
                                             <button type="button" class="btn-10" onclick="{{ $onclick_chk }}">구매상품 선택</button>
                                         </span>
                                     </li>
@@ -251,12 +251,11 @@
 <script>
     function order_choice(){
         var order_id = $(':radio[name="order_id"]:checked').val();
-
-        if(order_id == undefined){
+        if(order_id == ""){
             alert('구매상품을 선택해주세요');
             return false;
         }
-
+alert("sasdvsvsv");
         $("#order_id").val(order_id);
         addressclosemodal_001();
     }
