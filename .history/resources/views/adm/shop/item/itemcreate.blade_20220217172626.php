@@ -456,13 +456,156 @@
                                 </div>
                             </div>
                             @endfor
-
+<!--
+                           <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                           </div>
+                           <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                           </div>
+                           <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                           </div>
+                           <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                            </div>
+-->
                         </div>
                     </div>
                 </div>
             </form>
         </div>
         <!-- 컨텐츠 영역 끝 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script>
@@ -905,7 +1048,7 @@
         var item_content = $("#item_content").val();
 
         if($("#last_choice_ca_id").val() == ""){
-            alert("카테고리를 선택 하세요.");
+            alert("단계를 선택 하세요.");
             $("#caa_id").focus();
             return false;
         }

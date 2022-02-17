@@ -617,8 +617,8 @@ class AdmShopItemController extends Controller
                                 <input type="checkbox" class="mg00"  name="opt_chk[]" id="opt_chk_'.$i.'" value="1">
                             </td>
                             <td class="opt_title opt1-cell" id="opt1-cell"><div>'.$opt_1.$opt_2_exp.$opt_3_exp.'</div></td>
-                            <td><input type="text" name="opt_price[]" value="'.$opt_price.'" id="opt_price_'.$i.'" size="9" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
-                            <td><input type="text" name="opt_stock_qty[]" value="'.$opt_stock_qty.'" id="opt_stock_qty_'.$i.'" size="5" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
+                            <td><input type="text" name="opt_price[]" value="'.$opt_price.'" id="opt_price_'.$i.'" size="9" style="text-align:right;"></td>
+                            <td><input type="text" name="opt_stock_qty[]" value="'.$opt_stock_qty.'" id="opt_stock_qty_'.$i.'" size="5" style="text-align:right;"></td>
                             <td>
                                 <select name="opt_use[]" id="opt_use_'.$i.'">
                                     <option value="1">사용함</option>
@@ -636,11 +636,9 @@ class AdmShopItemController extends Controller
         } // for
 
         $display .= '
-                    </tbody>
-                </table>
-            </div>
+
             <div class="title mt20">옵션 값 일괄 적용</div>
-            <button type="button" class="btn blk-ln mb10" id="opt_value_apply">일괄 적용</button>
+            <button type="button" class="btn blk-ln mb10" onclick="">일괄 적용</button>
             <div class="board">
                 <table class="option2">
                     <colgroup>
@@ -650,28 +648,54 @@ class AdmShopItemController extends Controller
                     </colgroup>
                     <tbody>
                         <tr>
-                            <td><input type="checkbox" class="mg00 opt_com_chk" name="opt_com_price_chk" value="1" id="opt_com_price_chk"></td>
+                            <td><input type="checkbox" class="mg00" name="opt_com_price_chk" value="1" id="opt_com_price_chk"></td>
                             <td class="title">추가 금액</td>
-                            <td><input type="text" name="opt_com_price" value="0" id="opt_com_price" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
+                            <td><input type="text" name="opt_com_price" value="0" id="opt_com_price" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,"");"></td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" class="mg00 opt_com_chk" name="opt_com_stock_chk" value="1" id="opt_com_stock_chk"></td>
+                            <td><input type="checkbox" class="mg00" name="opt_com_stock_chk" value="1" id="opt_com_stock_chk"></td>
                             <td class="title">재고 수량</td>
-                            <td><input type="text" name="opt_com_stock" value="0" id="opt_com_stock" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
+                            <td><input type="text" name="opt_com_stock" value="0" id="opt_com_stock" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,"");"></td>
                         </tr>
                         <tr>
-                            <td><input type="checkbox" class="mg00 opt_com_chk" name="opt_com_use_chk" value="1" id="opt_com_use_chk"></td>
+                            <td><input type="checkbox" class="mg00" id=""></td>
                             <td class="title">사용 여부</td>
                             <td>
-                                <select name="opt_com_use" id="opt_com_use">
-                                    <option value="1">사용함</option>
-                                    <option value="0">사용안함</option>
+                                <select>
+                                    <option>사용</option>
+                                    <option>미사용</option>
                                 </select>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+
+
+
+
+                            <tr>
+                                <td><input type="button" value="선택삭제" id="sel_option_delete"></td>
+                            </tr>
+                            <tr>
+                                <td colspan="5">
+                                    전체 옵션의 추가금액, 재고 및 사용여부를 일괄 적용할 수 있습니다. <br>단, 체크된 수정항목만 일괄 적용됩니다.<br>
+                                    추가금액 <input type="checkbox" name="opt_com_price_chk" value="1" id="opt_com_price_chk" class="opt_com_chk">
+                                    <input type="text" name="opt_com_price" value="0" id="opt_com_price" class="frm_input" size="5">
+
+                                    재고수량 <input type="checkbox" name="opt_com_stock_chk" value="1" id="opt_com_stock_chk" class="opt_com_chk">
+                                    <input type="text" name="opt_com_stock" value="0" id="opt_com_stock" class="frm_input" size="5">
+
+                                    사용여부 <input type="checkbox" name="opt_com_use_chk" value="1" id="opt_com_use_chk" class="opt_com_chk">
+                                    <select name="opt_com_use" id="opt_com_use">
+                                        <option value="1">사용함</option>
+                                        <option value="0">사용안함</option>
+                                    </select>
+                                    <button type="button" id="opt_value_apply" class="btn_frmline">일괄적용</button>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
         ';
 
         echo $display;

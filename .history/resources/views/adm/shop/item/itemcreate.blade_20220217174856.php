@@ -171,18 +171,18 @@
                         <div class="col">상품상세 정보</div>
                         <div class="col">
                             <p class="t_mint">권장 이미지 사이즈  : 가로 1200px / 세로 : 자유</p>
-                            <div class="sm_editor">
+
                                 <textarea type="text" name="item_content" id="item_content" style="width:100%">{{ old('item_content') }}</textarea>
-                            </div>
+
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">성분</div>
                         <div class="col">
                             <p class="t_mint">권장 이미지 사이즈  : 가로 1200px / 세로 : 자유</p>
-                            <div class="sm_editor">
+
                                 <textarea type="text" name="item_content2" id="item_content2" style="width:100%">{{ old('item_content2') }}</textarea>
-                            </div>
+
                         </div>
                     </div>
                     <div class="row">

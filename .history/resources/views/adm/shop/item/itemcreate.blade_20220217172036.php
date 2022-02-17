@@ -442,27 +442,170 @@
                     <div class="row">
                         <div class="col">이미지 선택</div>
                         <div class="col">
-                            @for($i = 1; $i <=10; $i++)
                             <div class="file_att">
-                                @if($i == 1)
                                 <p class="t_mint">본 이미지가 목록 이미지로 등록됩니다</p>
-                                @endif
                                 <div class="btn_file">
                                     <label>
                                         파일첨부
-                                        <input type="file" name="item_img{{ $i }}" id="item_img{{ $i }}" accept="image/*" onchange="file_name('item_img{{ $i }}')">
+                                        <input type="file" id="" accept="image/*">
                                     </label>
-                                    <span id="item_img{{ $i }}_name"></span>
+                                    asdfasdf.png
+                                    <!-- 선택된 파일이 없습니다. -->
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                           </div>
+                           <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                           </div>
+                           <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                           </div>
+                           <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                           </div>
+                           <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
                                 </div>
                             </div>
-                            @endfor
-
+                            <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="file_att">
+                                <div class="btn_file">
+                                    <label>
+                                        파일첨부
+                                        <input type="file" id="" accept="image/*">
+                                    </label>
+                                    선택된 파일이 없습니다.
+                                </div>
+                                <div class="file">
+                                    <label>
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </form>
         </div>
         <!-- 컨텐츠 영역 끝 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 <script>
@@ -905,7 +1048,7 @@
         var item_content = $("#item_content").val();
 
         if($("#last_choice_ca_id").val() == ""){
-            alert("카테고리를 선택 하세요.");
+            alert("단계를 선택 하세요.");
             $("#caa_id").focus();
             return false;
         }
@@ -933,19 +1076,6 @@
         } catch(e) {}
 
         $("#item_form").submit();
-    }
-</script>
-
-<script>
-    function file_name(id_val){
-        flies = document.getElementById(id_val);
-
-        fileList = "";
-        for(i = 0; i < flies.files.length; i++){
-            fileList += flies.files[i].name;
-        }
-        flies_name = document.getElementById(id_val+'_name');
-        flies_name.innerHTML = fileList;
     }
 </script>
 
