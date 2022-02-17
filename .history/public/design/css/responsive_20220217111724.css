@@ -2535,8 +2535,7 @@ background-size: cover;
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-03 li span .btn-10 {
         width: 27%;
-        font-size: 13px;
-        top: 1px;
+        font
     }
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-04 textarea {
@@ -4719,7 +4718,7 @@ background-size: cover;
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-03 li span .btn-10 {
         width: calc(100% - 70%) !important;
-        top: 1px;
+        top: 2px;
     }
 
     .eval .board.mypage_list .board_wrap .tab_menu .cont_area .cont .tab-04 li p {
