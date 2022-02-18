@@ -652,12 +652,12 @@ class AdmShopItemController extends Controller
                         <tr>
                             <td><input type="checkbox" class="mg00 opt_com_chk" name="opt_com_price_chk" value="1" id="opt_com_price_chk"></td>
                             <td class="title">추가 금액</td>
-                            <td><input type="text" name="opt_com_price" value="0" id="opt_com_price" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
+                            <td><input type="text" name="opt_com_price" placeholder="0" id="opt_com_price" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" class="mg00 opt_com_chk" name="opt_com_stock_chk" value="1" id="opt_com_stock_chk"></td>
                             <td class="title">재고 수량</td>
-                            <td><input type="text" name="opt_com_stock" value="0" id="opt_com_stock" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
+                            <td><input type="text" name="opt_com_stock" placeholder="0" id="opt_com_stock" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" class="mg00 opt_com_chk" name="opt_com_use_chk" value="1" id="opt_com_use_chk"></td>

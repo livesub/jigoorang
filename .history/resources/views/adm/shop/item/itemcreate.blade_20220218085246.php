@@ -386,6 +386,9 @@
                         }else{
                             $('#last_choice_ca_id').val(data.ca_id);
                             $('#cate2').css('display', 'block');
+                            var html = "";
+                            html = "<li>소분류</li><li>";
+                            html += data.data;
                             $('#cate2').html(data.data);
                             $('#cate3').html('');
                             $('#cate4').html('');

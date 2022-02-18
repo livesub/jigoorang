@@ -617,8 +617,8 @@ class AdmShopItemController extends Controller
                                 <input type="checkbox" class="mg00"  name="opt_chk[]" id="opt_chk_'.$i.'" value="1">
                             </td>
                             <td class="opt_title opt1-cell" id="opt1-cell"><div>'.$opt_1.$opt_2_exp.$opt_3_exp.'</div></td>
-                            <td><input type="text" name="opt_price[]" value="'.$opt_price.'" id="opt_price_'.$i.'" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
-                            <td><input type="text" name="opt_stock_qty[]" value="'.$opt_stock_qty.'" id="opt_stock_qty_'.$i.'" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
+                            <td><input type="text" name="opt_price[]" value="'.$opt_price.'" id="opt_price_'.$i.'" size="9" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
+                            <td><input type="text" name="opt_stock_qty[]" value="'.$opt_stock_qty.'" id="opt_stock_qty_'.$i.'" size="5" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
                             <td>
                                 <select name="opt_use[]" id="opt_use_'.$i.'">
                                     <option value="1">사용함</option>
@@ -988,10 +988,10 @@ class AdmShopItemController extends Controller
                     <td colspan="5">
                         전체 옵션의 추가금액, 재고/통보수량 및 사용여부를 일괄 적용할 수 있습니다. <br>단, 체크된 수정항목만 일괄 적용됩니다.<br>
                         추가금액 <input type="checkbox" name="opt_com_price_chk" value="1" id="opt_com_price_chk" class="opt_com_chk">
-                        <input type="text" name="opt_com_price" value="0" id="opt_com_price" class="frm_input" size="5">
+                        <input type="text" name="opt_com_price" value="0" id="opt_com_price">
 
                         재고수량 <input type="checkbox" name="opt_com_stock_chk" value="1" id="opt_com_stock_chk" class="opt_com_chk">
-                        <input type="text" name="opt_com_stock" value="0" id="opt_com_stock" class="frm_input" size="5">
+                        <input type="text" name="opt_com_stock" value="0" id="opt_com_stock">
 
                         사용여부 <input type="checkbox" name="opt_com_use_chk" value="1" id="opt_com_use_chk" class="opt_com_chk">
                         <select name="opt_com_use" id="opt_com_use">

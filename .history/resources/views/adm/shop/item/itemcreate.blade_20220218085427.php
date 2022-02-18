@@ -46,8 +46,7 @@
                                 </li>
 
                                 <li id="cate2" style="display:none">
-                                    <li>소분류</li>
-                                    <li>
+
 <!--
                                     @if($ca_id && strlen($ca_id) >= 4)
                                         <select size="10" name="ca_id" id="caa_id2" class="cid" >
@@ -58,7 +57,7 @@
 
                                     @endif
 -->
-                                    </li>
+
                                 </li>
                             </ul>
                         </div>
@@ -386,7 +385,11 @@
                         }else{
                             $('#last_choice_ca_id').val(data.ca_id);
                             $('#cate2').css('display', 'block');
-                            $('#cate2').html(data.data);
+                            var html = "";
+                            html = "<li>소분류</li><li>";
+                            html += data.data;
+                            html += "</li>";
+                            $('#cate2').html(html);
                             $('#cate3').html('');
                             $('#cate4').html('');
                             $('#cate5').html('');

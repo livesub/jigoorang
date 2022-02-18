@@ -47,7 +47,7 @@
 
                                 <li id="cate2" style="display:none">
                                     <li>소분류</li>
-                                    <li>
+                                    <li id="cate2">
 <!--
                                     @if($ca_id && strlen($ca_id) >= 4)
                                         <select size="10" name="ca_id" id="caa_id2" class="cid" >

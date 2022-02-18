@@ -45,7 +45,7 @@
                                     </li>
                                 </li>
 
-                                <li id="cate2" style="display:none">
+                                <li id="4" style="display:none">
                                     <li>소분류</li>
                                     <li>
 <!--

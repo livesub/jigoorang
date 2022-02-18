@@ -618,7 +618,7 @@ class AdmShopItemController extends Controller
                             </td>
                             <td class="opt_title opt1-cell" id="opt1-cell"><div>'.$opt_1.$opt_2_exp.$opt_3_exp.'</div></td>
                             <td><input type="text" name="opt_price[]" value="'.$opt_price.'" id="opt_price_'.$i.'" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
-                            <td><input type="text" name="opt_stock_qty[]" value="'.$opt_stock_qty.'" id="opt_stock_qty_'.$i.'" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
+                            <td>11111<input type="text" name="opt_stock_qty[]" value="'.$opt_stock_qty.'" id="opt_stock_qty_'.$i.'" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
                             <td>
                                 <select name="opt_use[]" id="opt_use_'.$i.'">
                                     <option value="1">사용함</option>
@@ -652,12 +652,12 @@ class AdmShopItemController extends Controller
                         <tr>
                             <td><input type="checkbox" class="mg00 opt_com_chk" name="opt_com_price_chk" value="1" id="opt_com_price_chk"></td>
                             <td class="title">추가 금액</td>
-                            <td><input type="text" name="opt_com_price" value="0" id="opt_com_price" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
+                            <td><input type="text" name="opt_com_price" placeholder="0" id="opt_com_price" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" class="mg00 opt_com_chk" name="opt_com_stock_chk" value="1" id="opt_com_stock_chk"></td>
                             <td class="title">재고 수량</td>
-                            <td><input type="text" name="opt_com_stock" value="0" id="opt_com_stock" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
+                            <td><input type="text" name="opt_com_stock" placeholder="0" id="opt_com_stock" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
                         </tr>
                         <tr>
                             <td><input type="checkbox" class="mg00 opt_com_chk" name="opt_com_use_chk" value="1" id="opt_com_use_chk"></td>
