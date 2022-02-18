@@ -970,7 +970,7 @@ class AdmShopItemController extends Controller
                         <input type="hidden" name="opt_id[]" value="'.$opt_id.'">
                         <input type="checkbox" class="mg00"  name="opt_chk[]" id="opt_chk_'.$i.'" value="1">
                     </td>
-                    <td class="opt_title opt-cell" id="opt-cell"><div>'.$opt_1.$opt_2_exp.$opt_3_exp.'</div></td>
+                    <td class="opt_title opt1-cell" id="opt1-cell"><div>'.$opt_1.$opt_2_exp.$opt_3_exp.'</div></td>
                     <td><input type="text" name="opt_price[]" value="'.$opt_price.'" id="opt_price_'.$i.'" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
                     <td><input type="text" name="opt_stock_qty[]" value="'.$opt_stock_qty.'" id="opt_stock_qty_'.$i.'" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
                     <td>

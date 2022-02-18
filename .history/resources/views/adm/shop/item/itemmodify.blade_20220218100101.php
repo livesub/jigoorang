@@ -588,14 +588,11 @@
                                         <input type="file" name="item_img{{ $i }}" id="item_img{{ $i }}" accept="image/*" onchange="file_name('item_img{{ $i }}')">
                                     </label>
                                     <span id="item_img{{ $i }}_name"></span>
-                                    @php
-                                        $item_ori_img = "item_ori_img$i";
-                                    @endphp
-                                    <p><a href="javascript:file_down('{{ $item_info->id }}','{{ $item_info->sca_id }}','{{ $i }}');">{{ $item_info->$item_ori_img }}</a></p>
+                                    <p></p>
                                 </div>
                                 <div class="file">
                                     <label>
-                                        <input type="checkbox" name="file_chk{{ $i }}" id="file_chk{{ $i }}" value='1'>수정, 삭제, 새로등록시 체크
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
                                     </label>
                                 </div>
                             </div>
@@ -607,6 +604,7 @@
             </form>
         </div>
         <!-- 컨텐츠 영역 끝 -->
+
 
 <script>
     function redio_release(){
@@ -682,7 +680,6 @@
 		});
     });
 </script>
-
 
 <script type="text/javascript">
     var oEditors = [];
@@ -762,15 +759,281 @@
 </script>
 
 <script>
-    function file_down(id, ca_id, file_num)
-    {
-        $("#num").val(id);
-        $("#ca_id").val(ca_id);
-        $("#file_num").val(file_num);
-        $("#item_form").attr("action", "{{ route('shop.item.downloadfile') }}");
-        $("#item_form").submit();
-    }
+    $(function() {  //상품 옵션 관련
+        $("#option_table_create").click(function() {
+            var it_id = $.trim($("input[name=it_id]").val());
+            var opt1_subject = $.trim($("#opt1_subject").val());
+            var opt2_subject = $.trim($("#opt2_subject").val());
+            var opt3_subject = $.trim($("#opt3_subject").val());
+            var opt1 = $.trim($("#opt1").val());
+            var opt2 = $.trim($("#opt2").val());
+            var opt3 = $.trim($("#opt3").val());
+            var $option_table = $("#sit_option_frm");
+
+            if(!opt1_subject || !opt1) {
+                alert("옵션명과 옵션항목을 입력해 주십시오.");
+                return false;
+            }
+
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+                url: '{{ route('shop.item.ajax_itemoption') }}',
+                type: 'post',
+                dataType: 'html',
+                data: {
+                    opt1_subject    : opt1_subject,
+                    opt2_subject    : opt2_subject,
+                    opt3_subject    : opt3_subject,
+                    opt1            : opt1,
+                    opt2            : opt2,
+                    opt3            : opt3,
+                },
+                success: function(data) {
+                    if($.trim(data) == 'No'){
+                        alert('옵션1과 옵션1 항목을 입력해 주십시오.');
+                        return false;
+                    }else{
+                        $option_table.empty().html(data);
+                    }
+                },error: function(data) {
+                        console.log(data);
+                }
+            });
+
+            // 모두선택('현재 DIV 속성 때문에 작동이 잘 안됨 차후 퍼블 작업시 상태 봄')
+            $(document).on("click", "input[name=opt_chk_all]", function() {
+                if($(this).is(":checked")) {
+                    $("input[name='opt_chk[]']").attr("checked", true);
+                } else {
+                    $("input[name='opt_chk[]']").attr("checked", false);
+                }
+            });
+
+            // 선택삭제
+            $(document).on("click", "#sel_option_delete", function() {
+                var $el = $("input[name='opt_chk[]']:checked");
+                if($el.length < 1) {
+                    alert("삭제하려는 옵션을 하나 이상 선택해 주십시오.");
+                    return false;
+                }
+
+                $el.closest("tr").remove();
+            });
+
+            // 일괄적용
+            $(document).on("click", "#opt_value_apply", function() {
+                if($(".opt_com_chk:checked").length < 1) {
+                    alert("일괄 수정할 항목을 하나이상 체크해 주십시오.");
+                    return false;
+                }
+
+                var opt_price = $.trim($("#opt_com_price").val());
+                var opt_stock = $.trim($("#opt_com_stock").val());
+                var opt_noti = $.trim($("#opt_com_noti").val());
+                var opt_use = $("#opt_com_use").val();
+                var $el = $("input[name='opt_chk[]']:checked");
+
+                // 체크된 옵션이 있으면 체크된 것만 적용
+                if($el.length > 0) {
+                    var $tr;
+                    $el.each(function() {
+                        $tr = $(this).closest("tr");
+
+                        if($("#opt_com_price_chk").is(":checked"))
+                            $tr.find("input[name='opt_price[]']").val(opt_price);
+
+                        if($("#opt_com_stock_chk").is(":checked"))
+                            $tr.find("input[name='opt_stock_qty[]']").val(opt_stock);
+
+                        if($("#opt_com_noti_chk").is(":checked"))
+                            $tr.find("input[name='opt_noti_qty[]']").val(opt_noti);
+
+                        if($("#opt_com_use_chk").is(":checked"))
+                            $tr.find("select[name='opt_use[]']").val(opt_use);
+                    });
+                } else {
+                    if($("#opt_com_price_chk").is(":checked"))
+                        $("input[name='opt_price[]']").val(opt_price);
+
+                    if($("#opt_com_stock_chk").is(":checked"))
+                        $("input[name='opt_stock_qty[]']").val(opt_stock);
+
+                    if($("#opt_com_noti_chk").is(":checked"))
+                        $("input[name='opt_noti_qty[]']").val(opt_noti);
+
+                    if($("#opt_com_use_chk").is(":checked"))
+                        $("select[name='opt_use[]']").val(opt_use);
+                }
+            });
+        });
+    });
 </script>
+
+<script>
+    $(function() {  //추가 옵션 관련
+        //추가 옵션 입력필드추가
+        $("#add_supply_row").click(function() {
+            var $el = $("#sit_supply_frm tr:last");
+            var fld = "<tr>\n";
+            fld += "<th scope=\"row\">\n";
+            fld += "<label for=\"\">추가</label>\n";
+            fld += "<input type=\"text\" name=\"spl_subject[]\" value=\"\" size=\"15\">\n";
+            fld += "</th>\n";
+            fld += "<td>\n";
+            fld += "<label for=\"\"><b>추가 항목</b></label>\n";
+            fld += "<input type=\"text\" name=\"spl[]\" value=\"\" size=\"40\">\n";
+            fld += "<button type=\"button\" id=\"del_supply_row\" >삭제</button>\n";
+            fld += "</td>\n";
+            fld += "</tr>";
+
+            $el.after(fld);
+
+            supply_sequence();
+        });
+
+        function supply_sequence()
+        {
+            var $tr = $("#sit_supply_frm tr");
+            var seq;
+            var th_label, td_label;
+
+            $tr.each(function(index) {
+                seq = index + 1;
+                $(this).find("th label").attr("for", "spl_subject_"+seq).text("추가"+seq);
+                $(this).find("th input").attr("id", "spl_subject_"+seq);
+                $(this).find("td label").attr("for", "spl_item_"+seq);
+                $(this).find("td label b").text("추가"+seq+" 항목");
+                $(this).find("td input").attr("id", "spl_item_"+seq);
+            });
+        }
+
+        // 입력필드삭제
+        $(document).on("click", "#del_supply_row", function() {
+            $(this).closest("tr").remove();
+
+            supply_sequence();
+        });
+
+        // 옵션목록생성
+        $("#supply_table_create").click(function() {
+            var it_id = $.trim($("input[name=it_id]").val());
+            var subject = new Array();
+            var supply = new Array();
+            var subj, spl;
+            var count = 0;
+            var $el_subj = $("input[name='spl_subject[]']");
+            var $el_spl = $("input[name='spl[]']");
+            var $supply_table = $("#sit_option_addfrm");
+
+            $el_subj.each(function(index) {
+                subj = $.trim($(this).val());
+                spl = $.trim($el_spl.eq(index).val());
+
+                if(subj && spl) {
+                    subject.push(subj);
+                    supply.push(spl);
+                    count++;
+                }
+            });
+
+            if(!count) {
+                alert("추가옵션명과 추가옵션항목을 입력해 주십시오.");
+                return false;
+            }
+
+            $.ajax({
+                headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
+                url: '{{ route('shop.item.ajax_itemsupply') }}',
+                type: 'post',
+                dataType: 'html',
+                data: {
+                    'it_id'         : it_id,
+                    'subject[]'     : subject,
+                    'supply[]'      : supply,
+                },
+
+                success: function(data) {
+                    if($.trim(data) == 'No'){
+                        alert('추가옵션명과 추가옵션항목을 입력해 주십시오.');
+                        return false;
+                    }else{
+                        $supply_table.empty().html(data);
+                    }
+                },error: function(data) {
+                        console.log(data);
+                }
+            });
+        });
+
+        // 모두선택
+        $(document).on("click", "input[name=spl_chk_all]", function() {
+            if($(this).is(":checked")) {
+                $("input[name='spl_chk[]']").attr("checked", true);
+            } else {
+                $("input[name='spl_chk[]']").attr("checked", false);
+            }
+        });
+
+        // 선택삭제
+        $(document).on("click", "#sel_supply_delete", function() {
+            var $el = $("input[name='spl_chk[]']:checked");
+            if($el.length < 1) {
+                alert("삭제하려는 옵션을 하나 이상 선택해 주십시오.");
+                return false;
+            }
+
+            $el.closest("tr").remove();
+        });
+
+        // 일괄적용
+        $(document).on("click", "#spl_value_apply", function() {
+            if($(".spl_com_chk:checked").length < 1) {
+                alert("일괄 수정할 항목을 하나이상 체크해 주십시오.");
+                return false;
+            }
+
+            var spl_price = $.trim($("#spl_com_price").val());
+            var spl_stock = $.trim($("#spl_com_stock").val());
+            var spl_noti = $.trim($("#spl_com_noti").val());
+            var spl_use = $("#spl_com_use").val();
+            var $el = $("input[name='spl_chk[]']:checked");
+
+            // 체크된 옵션이 있으면 체크된 것만 적용
+            if($el.length > 0) {
+                var $tr;
+                $el.each(function() {
+                    $tr = $(this).closest("tr");
+
+                    if($("#spl_com_price_chk").is(":checked"))
+                        $tr.find("input[name='spl_price[]']").val(spl_price);
+
+                    if($("#spl_com_stock_chk").is(":checked"))
+                        $tr.find("input[name='spl_stock_qty[]']").val(spl_stock);
+
+                    if($("#spl_com_noti_chk").is(":checked"))
+                        $tr.find("input[name='spl_noti_qty[]']").val(spl_noti);
+
+                    if($("#spl_com_use_chk").is(":checked"))
+                        $tr.find("select[name='spl_use[]']").val(spl_use);
+                });
+            } else {
+                if($("#spl_com_price_chk").is(":checked"))
+                    $("input[name='spl_price[]']").val(spl_price);
+
+                if($("#spl_com_stock_chk").is(":checked"))
+                    $("input[name='spl_stock_qty[]']").val(spl_stock);
+
+                if($("#spl_com_noti_chk").is(":checked"))
+                    $("input[name='spl_noti_qty[]']").val(spl_noti);
+
+                if($("#spl_com_use_chk").is(":checked"))
+                    $("select[name='spl_use[]']").val(spl_use);
+            }
+        });
+    });
+</script>
+
+
 
 <script>
     function submitContents(elClickedObj) {
@@ -785,13 +1048,21 @@
         if($("#last_choice_ca_id").val() == ""){
             alert("카테고리를 선택 하세요.");
             $("#caa_id").focus();
-            return;
+            return false;
         }
 
         if($.trim($("#item_name").val()) == ""){
             alert("상품명을 입력하세요.");
             $("#item_name").focus();
-            return;
+            return false;
+        }
+
+        var point = parseInt($("#item_point").val());
+
+        if(point > 99) {
+            alert("포인트 비율을 0과 99 사이의 값으로 입력해 주십시오.");
+            $("#item_point").focus();
+            return false;
         }
 
         if( item_content == ""  || item_content == null || item_content == '&nbsp;' || item_content == '<p>&nbsp;</p>')  {
@@ -801,11 +1072,10 @@
         }try {
             elClickedObj.form.submit();
         } catch(e) {}
-        $("#item_form").attr("action", "{{ route('shop.item.modifysave') }}");
+
         $("#item_form").submit();
     }
 </script>
-
 
 <script>
     function file_name(id_val){

@@ -87,7 +87,7 @@ class AdmShopItemController extends Controller
             $search_sql .= " AND a.item_new_arrival = 1 ";
         }
 
-        $total_tmp = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' {$search_sql} ");
+        $total_tmp = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' {$search_sql} ");
         $total_cnt = $total_tmp[0]->cnt;
 
         $total_record   = 0;
@@ -95,7 +95,7 @@ class AdmShopItemController extends Controller
         $total_page     = ceil($total_record / $pageScale);
         $total_page     = $total_page == 0 ? 1 : $total_page;
 
-        $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_del = 'N' {$search_sql} order by a.id DESC, a.item_rank ASC limit {$start_num}, {$pageScale} ");
+        $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' {$search_sql} order by a.id DESC, a.item_rank ASC limit {$start_num}, {$pageScale} ");
 
         $virtual_num = $total_record - $pageScale * ($page - 1);
 
@@ -914,27 +914,15 @@ class AdmShopItemController extends Controller
         $itemoption_infos = DB::table('shopitemoptions')->where([['item_code', $item_code],['sio_type','0']])->orderby('id', 'asc')->get();
 
         $display = '
-        <div class="title">옵션 목록</div>
-        <button type="button" class="btn blk-ln mb10" id="sel_option_delete">선택 삭제</button>
-        <div class="board">
-            <table class="option">
-                <colgroup>
-                    <col style="width: 40px;">
-                    <col style="width: auto;">
-                    <col style="width: 200px;">
-                    <col style="width: 200px;">
-                    <col style="width: 200px;">
-                </colgroup>
-                <thead>
+            <td>
+                <table>
                     <tr>
-                        <th><input type="checkbox" name="opt_chk_all" value="1" id="opt_chk_all"></th>
-                        <th>옵션명</th>
-                        <th>추가금액</th>
-                        <th>재고수량</th>
-                        <th>사용여부</th>
+                        <td><input type="checkbox" name="opt_chk_all" value="1" id="opt_chk_all"></td>
+                        <td>옵션명1111111111111</td>
+                        <td>추가금액</td>
+                        <td>재고수량</td>
+                        <td>사용여부</td>
                     </tr>
-                </thead>
-                <tbody>
         ';
 
         $i = 0;
@@ -968,12 +956,19 @@ class AdmShopItemController extends Controller
                 <tr>
                     <td class="td_chk">
                         <input type="hidden" name="opt_id[]" value="'.$opt_id.'">
-                        <input type="checkbox" class="mg00"  name="opt_chk[]" id="opt_chk_'.$i.'" value="1">
+                        <input type="checkbox" name="opt_chk[]" id="opt_chk_'.$i.'" value="1">
                     </td>
-                    <td class="opt_title opt-cell" id="opt-cell"><div>'.$opt_1.$opt_2_exp.$opt_3_exp.'</div></td>
-                    <td><input type="text" name="opt_price[]" value="'.$opt_price.'" id="opt_price_'.$i.'" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
-                    <td><input type="text" name="opt_stock_qty[]" value="'.$opt_stock_qty.'" id="opt_stock_qty_'.$i.'" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
-                    <td>
+                    <td class="opt-cell">'.$opt_1.$opt_2_exp.$opt_3_exp.'</td>
+                    <td class="td_numsmall">
+                        <label for="opt_price_'.$i.'" class="sound_only"></label>
+                        <input type="text" name="opt_price[]" value="'.$opt_price.'" id="opt_price_'.$i.'" size="9">
+                    </td>
+                    <td class="td_num">
+                        <label for="opt_stock_qty_'.$i.'" class="sound_only"></label>
+                        <input type="text" name="opt_stock_qty[]" value="'.$opt_stock_qty.'" id="opt_stock_qty_'.$i.'" size="5">
+                    </td>
+                    <td class="td_mng">
+                        <label for="opt_use_'.$i.'" class="sound_only"></label>
                         <select name="opt_use[]" id="opt_use_'.$i.'">
                             <option value="1" '.$opt_use1.'>사용함</option>
                             <option value="0" '.$opt_use0.'>사용안함</option>
@@ -986,42 +981,28 @@ class AdmShopItemController extends Controller
         }
 
         $display .= '
-                        </tbody>
-                    </table>
-                </div>
-                <div class="title mt20">옵션 값 일괄 적용</div>
-                <button type="button" class="btn blk-ln mb10" id="opt_value_apply">일괄 적용</button>
-                <div class="board">
-                    <table class="option2">
-                        <colgroup>
-                            <col style="width: 40px;">
-                            <col style="width: auto;">
-                            <col style="width: 200px;">
-                        </colgroup>
-                        <tbody>
-                            <tr>
-                                <td><input type="checkbox" class="mg00 opt_com_chk" name="opt_com_price_chk" value="1" id="opt_com_price_chk"></td>
-                                <td class="title">추가 금액</td>
-                                <td><input type="text" name="opt_com_price" value="0" id="opt_com_price" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="mg00 opt_com_chk" name="opt_com_stock_chk" value="1" id="opt_com_stock_chk"></td>
-                                <td class="title">재고 수량</td>
-                                <td><input type="text" name="opt_com_stock" value="0" id="opt_com_stock" style="text-align:right" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
-                            </tr>
-                            <tr>
-                                <td><input type="checkbox" class="mg00 opt_com_chk" name="opt_com_use_chk" value="1" id="opt_com_use_chk"></td>
-                                <td class="title">사용 여부</td>
-                                <td>
-                                    <select name="opt_com_use" id="opt_com_use">
-                                        <option value="1">사용함</option>
-                                        <option value="0">사용안함</option>
-                                    </select>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <tr>
+                    <td><input type="button" value="선택삭제" id="sel_option_delete"></td>
+                </tr>
+                <tr>
+                    <td colspan="5">
+                        전체 옵션의 추가금액, 재고/통보수량 및 사용여부를 일괄 적용할 수 있습니다. <br>단, 체크된 수정항목만 일괄 적용됩니다.<br>
+                        추가금액 <input type="checkbox" name="opt_com_price_chk" value="1" id="opt_com_price_chk" class="opt_com_chk">
+                        <input type="text" name="opt_com_price" value="0" id="opt_com_price" class="frm_input" size="5">
+
+                        재고수량 <input type="checkbox" name="opt_com_stock_chk" value="1" id="opt_com_stock_chk" class="opt_com_chk">
+                        <input type="text" name="opt_com_stock" value="0" id="opt_com_stock" class="frm_input" size="5">
+
+                        사용여부 <input type="checkbox" name="opt_com_use_chk" value="1" id="opt_com_use_chk" class="opt_com_chk">
+                        <select name="opt_com_use" id="opt_com_use">
+                            <option value="1">사용함</option>
+                            <option value="0">사용안함</option>
+                        </select>
+                        <button type="button" id="opt_value_apply" class="btn_frmline">일괄적용</button>
+                    </td>
+                </tr>
+            </table>
+        </td>
         ';
 
         echo $display;
