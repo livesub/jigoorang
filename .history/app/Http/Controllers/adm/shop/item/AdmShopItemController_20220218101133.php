@@ -87,7 +87,7 @@ class AdmShopItemController extends Controller
             $search_sql .= " AND a.item_new_arrival = 1 ";
         }
 
-        $total_tmp = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' {$search_sql} ");
+        $total_tmp = DB::select("select count(*) as cnt from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' {$search_sql} ");
         $total_cnt = $total_tmp[0]->cnt;
 
         $total_record   = 0;
@@ -95,7 +95,7 @@ class AdmShopItemController extends Controller
         $total_page     = ceil($total_record / $pageScale);
         $total_page     = $total_page == 0 ? 1 : $total_page;
 
-        $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_del = 'N' {$search_sql} order by a.id DESC, a.item_rank ASC limit {$start_num}, {$pageScale} ");
+        $item_infos = DB::select("select a.*, b.sca_id from shopitems a, shopcategorys b where a.item_del = 'N' AND a.item_display = 'Y' {$search_sql} order by a.id DESC, a.item_rank ASC limit {$start_num}, {$pageScale} ");
 
         $virtual_num = $total_record - $pageScale * ($page - 1);
 
@@ -970,7 +970,7 @@ class AdmShopItemController extends Controller
                         <input type="hidden" name="opt_id[]" value="'.$opt_id.'">
                         <input type="checkbox" class="mg00"  name="opt_chk[]" id="opt_chk_'.$i.'" value="1">
                     </td>
-                    <td class="opt_title opt-cell" id="opt-cell"><div>'.$opt_1.$opt_2_exp.$opt_3_exp.'</div></td>
+                    <td class="opt_title opt1-cell" id="opt1-cell"><div>'.$opt_1.$opt_2_exp.$opt_3_exp.'</div></td>
                     <td><input type="text" name="opt_price[]" value="'.$opt_price.'" id="opt_price_'.$i.'" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
                     <td><input type="text" name="opt_stock_qty[]" value="'.$opt_stock_qty.'" id="opt_stock_qty_'.$i.'" style="text-align:right;" onKeyup="this.value=this.value.replace(/[^0-9]/g,\'\');"></td>
                     <td>

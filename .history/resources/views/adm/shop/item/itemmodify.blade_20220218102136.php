@@ -439,7 +439,7 @@
             if(opt3 && $.inArray(opt3, arr_opt3) == -1)
                 arr_opt3.push(opt3);
         });
-
+alert(arr_opt1.join());
         $("input[name=opt1]").val(arr_opt1.join());
         $("input[name=opt2]").val(arr_opt2.join());
         $("input[name=opt3]").val(arr_opt3.join());
