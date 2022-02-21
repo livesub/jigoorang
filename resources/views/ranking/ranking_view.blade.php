@@ -203,7 +203,7 @@
                                             if($item_info->item_manufacture == "") $item_manufacture = "";
                                             else $item_manufacture = "[".$item_info->item_manufacture."] ";
                                         @endphp
-                                                        <a href="{{ route('sitemdetail') }}?item_code={{ $item_info->item_code }}"><h4>{{ $item_manufacture }}{{ stripslashes($item_info->item_name) }}</h4></a>
+                                                        <a href="{{ route('sitemdetail') }}?item_code={{ $item_info->item_code }}"><h4>{{ $item_manufacture }} {{ stripslashes($item_info->item_name) }}</h4></a>
                                                     </li>
                                                 </a>
                                             </ul>
@@ -223,7 +223,7 @@
                                                 <li class="pct"></li>
                                             @endif
                                                 <li>
-                                                    <span class="price">{{ $CustomUtils->display_price($item_info->item_price, $item_info->item_tel_inq) }}</span>
+                                                    <span class="price mr-10">{{ $CustomUtils->display_price($item_info->item_price, $item_info->item_tel_inq) }}</span>
                                             @if($item_info->item_cust_price != 0)
                                                     <span class="sale-price">{{ $CustomUtils->display_price($item_info->item_cust_price) }}</span>
                                             @else
