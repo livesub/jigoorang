@@ -584,9 +584,9 @@ td.bn_btm_mo div img {
 .box_cont .row .col100 li select {width: 200px; height: 100px; background: none;}
 
 .box_cont .row .col100 li select{
-     -ms-overflow-style: none;
+     -ms-overflow-style: none; 
      padding: 0;
-    }
+    } 
 .box_cont .row .col100 li select::-webkit-scrollbar{ display:none; }
 
 
