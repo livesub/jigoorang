@@ -225,7 +225,7 @@
                                                 <li>
                                                     <span class="price mr-10">{{ $CustomUtils->display_price($item_info->item_price, $item_info->item_tel_inq) }}</span>
                                             @if($item_info->item_cust_price != 0)
-                                                @if($item_info->item_cust_price == $item_info->item_price)
+                                                @if($item_info->item_cust_price == $item_info->item_price){
                                                     <span class="sale-price"></span>
                                                 @else
                                                     <span class="sale-price ml-10">{{ $CustomUtils->display_price($item_info->item_cust_price) }}</span>

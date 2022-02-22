@@ -331,11 +331,7 @@
                                     <span class="main-project-left">
                                         <p class="price">{{ $CustomUtils->display_price($special_two->item_price, $special_two->item_tel_inq) }}</p>
                                         @if($special_two->item_cust_price != 0)
-                                            @if($special_two->item_cust_price == $special_two->item_price)
-                                                <p class="sale-price"></p>
-                                            @else
-                                                <p class="sale-price ml-10">{{ $CustomUtils->display_price($special_two->item_cust_price) }}</p>
-                                            @endif
+                                        <p class="sale-price ml-10">{{ $CustomUtils->display_price($special_two->item_cust_price) }}</p>
                                         @else
                                         <p class="sale-price"></p>
                                         @endif
@@ -455,11 +451,7 @@
                                     <span class="main-project-left">
                                         <p class="price">{{ $CustomUtils->display_price($new_arrival->item_price, $new_arrival->item_tel_inq) }}</p>
                                 @if($new_arrival->item_cust_price != 0)
-                                    @if($new_arrival->item_cust_price == $new_arrival->item_price)
-                                        <p class="sale-price"></p>
-                                    @else
                                         <p class="sale-price ml-10">{{ $CustomUtils->display_price($new_arrival->item_cust_price) }}</p>
-                                    @endif
                                 @else
                                         <p class="sale-price"></p>
                                 @endif

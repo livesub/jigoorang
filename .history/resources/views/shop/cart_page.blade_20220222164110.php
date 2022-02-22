@@ -131,7 +131,7 @@
                                                 <li class="price">{{ $CustomUtils->display_price($cart_info->item_price + $item_options->sio_price) }}</li>
 
                                                 @if($cart_info->item_cust_price > 0)
-                                                    @if($item_info->item_cust_price == $item_info->item_price)
+                                                    @if($item_info->item_cust_price == $item_info->item_price){
                                                         <li class="sale-price"></li>
                                                     @else
                                                         <li class="sale-price">{{ $CustomUtils->display_price($cart_info->item_cust_price) }}</li>
