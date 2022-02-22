@@ -1434,11 +1434,7 @@ background-size: cover;
         font-family: "Spoqa Han Sans Neo", "sans-serif";
     }
 
-
-      .sale-price.ml-10 {
-        margin-left: 0;
-    }
-
+   
 
 
     /* 메인 팝업 */
@@ -3404,7 +3400,7 @@ background-size: cover;
         font-size: 15px;
         margin-top: 3px;
         height: 21px;
-    }
+      }
 
     .sale-price {
           top: 1px;

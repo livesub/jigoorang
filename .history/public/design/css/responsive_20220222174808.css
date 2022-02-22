@@ -1434,6 +1434,16 @@ background-size: cover;
         font-family: "Spoqa Han Sans Neo", "sans-serif";
     }
 
+    .pct {
+        font-weight: 600;
+        font-size: 15px;
+        margin-top: 3px;
+        height: 25px;
+      }
+
+      .sale-price {
+          top: 0;
+      }
 
       .sale-price.ml-10 {
         margin-left: 0;
@@ -3404,7 +3414,7 @@ background-size: cover;
         font-size: 15px;
         margin-top: 3px;
         height: 21px;
-    }
+      }
 
     .sale-price {
           top: 1px;

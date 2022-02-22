@@ -1434,11 +1434,12 @@ background-size: cover;
         font-family: "Spoqa Han Sans Neo", "sans-serif";
     }
 
-
-      .sale-price.ml-10 {
-        margin-left: 0;
-    }
-
+    .pct {
+        font-weight: 600;
+        font-size: 15px;
+        margin-top: 3px;
+        height: 25px;
+      }
 
 
     /* 메인 팝업 */
@@ -3162,12 +3163,7 @@ background-size: cover;
 
 
     /* 랭킹 리스트 */
-    .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_01 .pr_title .pdt-07  {
-        padding-top: 0;
-    }
-    .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_01 .rk_num .sale-price {
-        top:0;
-    }
+
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_01 .rk_num{
         padding: 39px;
@@ -3241,8 +3237,8 @@ background-size: cover;
     }
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .pr_img img {
-        width: 164px;
-        height: 161px;
+        width: 120px;
+        height: 105px;
     }
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .pr_title {
@@ -3398,22 +3394,6 @@ background-size: cover;
     p{
         font-size: 13px;
     }
-
-    .pct {
-        font-weight: 600;
-        font-size: 15px;
-        margin-top: 3px;
-        height: 21px;
-    }
-
-    .sale-price {
-          top: 1px;
-      }
-
-    .sale-price.ml-10 {
-        margin-left: 0;
-    }
-
 
     button.btn-full {
         font-size: 13px;
