@@ -12537,11 +12537,13 @@ nhn.husky.SE2M_Accessibility = jindo.$Class({
 	},
 
 	$ON_FOCUS_TOOLBAR_AREA : function(){
+/*
 		this.oButton = jindo.$$.getSingle("BUTTON.se2_font_family", this.elAppContainer);
 		if(this.oButton && !this.oButton.disabled){	// [SMARTEDITORSUS-1369] IE9이하에서 disabled 요소에 포커스를 주면 오류 발생
 			window.focus();
 			this.oButton.focus();
 		}
+*/
 	},
 
 	$ON_OPEN_HELP_POPUP : function() {
