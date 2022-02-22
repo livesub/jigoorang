@@ -229,8 +229,8 @@ class AdmShopItemController extends Controller
         $output = "";
         if($num_rows > 0){
             if($length == '2'){
-                $output = '<li>소분류</li> <select name="ca_id" id="caa_id2"class="cid"  >';
-                $output .= '<option value="none">선택하세요</option>';
+               // $output = '<select name="ca_id" id="caa_id2"class="cid"  >';
+                //$output .= '<option value="none">선택하세요</option>';
             }elseif($length == '4'){
                 $output = '<select name="ca_id" size="10" id="caa_id3"class="cid" >';
             }elseif($length == '6'){

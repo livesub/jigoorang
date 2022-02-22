@@ -45,7 +45,23 @@
                                         </select>
                                     </li>
                                 </li>
-                                <li id="cate2"></li>
+
+                                <li>
+                                    <ul id="cate2_tt" style="display: none">
+                                        <li>소분류</li>    
+                                        <li id="cate2">
+                                                <!--    @if($ca_id && strlen($ca_id) >= 4)
+                                                    <li>
+                                                        <select name="ca_id" id="caa_id2" class="cid">
+                                                        @foreach($two_step_infos as $two_step_info)
+                                                            <option value="{{ $two_step_info->sca_id }}">└ {{ $two_step_info->sca_name_kr }}</option>
+                                                        @endforeach
+                                                        </select>
+                                                    </li>
+                                                    @endif-->
+                                        </li>
+                                    </ul>
+                                </li>
                             </ul>
                         </div>
                     </div>
