@@ -282,6 +282,7 @@
     function openmodal_001() {
         openModal();
         document.querySelector('.modal.modal_001').classList.add('in');
+        $('body').css("overflow", "hidden");
     }
     function closemodal_001(){
         closeModal();

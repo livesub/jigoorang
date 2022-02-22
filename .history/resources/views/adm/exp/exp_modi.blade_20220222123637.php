@@ -282,21 +282,21 @@
     function openmodal_001() {
         openModal();
         document.querySelector('.modal.modal_001').classList.add('in');
+        $('body').css("overflow", "hidden");
     }
     function closemodal_001(){
         closeModal();
         document.querySelector('.modal.modal_001').classList.remove('in');
+        $('body').css("overflow", "scroll");
     }
     function openmodal_002() {
         openModal();
         document.querySelector('.modal.modal_002').classList.add('in');
         open_pop();
-        $('body').css("overflow", "hidden");
     }
     function closemodal_002(){
         closeModal();
         document.querySelector('.modal.modal_002').classList.remove('in');
-        $('body').css("overflow", "scroll");
     }
     function openmodal_003() {
         openModal();

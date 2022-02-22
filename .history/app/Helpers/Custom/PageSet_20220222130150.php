@@ -129,7 +129,7 @@ class PageSet extends Controller
 		if($this->block < $this->totalBlock) {
 			$mPage = $this->lastPage + 1;
 			//$pShowPage .= "&nbsp;<a href='$_SERVER[PHP_SELF]?$this->perinfo&page=$mPage&$this->tails'>[다음 $this->blockScale]</a>";
-			$pShowPage .= "<a href='?$this->perinfo&$this->tails&page=$mPage'>$img</a>";
+			$pShowPage .= "&nbsp;<a href='?$this->perinfo&$this->tails&page=$mPage'>$img</a>";
 		} else {
 			//$pShowPage .= "&nbsp;[다음 $this->blockScale]";
 			$pShowPage .= $img;
@@ -157,7 +157,7 @@ class PageSet extends Controller
         $mPage = $this->totalPage;
 		if($this->block < $this->totalBlock) {
 			//$pShowPage .= "&nbsp;<a href='$_SERVER[PHP_SELF]?$this->perinfo&page=$mPage&$this->tails'>[다음 $this->blockScale]</a>";
-			$pShowPage .= "<a href='?$this->perinfo&page=$mPage&$this->tails' class='wide'>$img</a>";
+			$pShowPage .= "&nbsp;<a href='?$this->perinfo&page=$mPage&$this->tails' class='wide'>$img</a>";
 		} else {
 			//$pShowPage .= "&nbsp;[다음 $this->blockScale]";
 			//$pShowPage .= $img;

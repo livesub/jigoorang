@@ -21,11 +21,11 @@ input[type="number"]::-webkit-outer-spin-button, input[type="number"]::-webkit-i
     -webkit-appearance: none;
     margin: 0;
 }
-/*
+
 input[type=file] {
     display: none;
 }
-*/
+
 input::placeholder { /* placeholder 스타일 지정 */
     position: relative;
     top: 1px;
@@ -552,7 +552,7 @@ td.bn_btm_mo div img {
     width: 100%;
     margin: 0 auto;
     text-align: center;
-    justify-content: center;
+    j
 }
 .paging_box .paging a {
     width: 40px;
@@ -1345,11 +1345,11 @@ td.bn_btm_mo div img {
     margin-top: 40px;
     overflow-y: scroll;
     height: 500px;
-    -ms-overflow-style: none;
+    -ms-overflow-style: none; 
 }
-
+ 
 .modal_002 .board::-webkit-scrollbar{
-     display:none;
+     display:none; 
 }
 
 .modal_002 .board thead {
