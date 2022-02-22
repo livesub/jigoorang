@@ -145,6 +145,7 @@
 //alert(result);
 //return false;
                 if(result == "ok"){
+                    //location.href = "{{ route('shop.sendcost.index') }}";
                     location.href = "{{ route('shop.sendcost.index', 'page='.$page) }}";
                 }
             },

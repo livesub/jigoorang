@@ -7,7 +7,7 @@
             <div class="title">
                 <h2>추가 배송비 관리</h2>
                 <div class="button_box">
-                    <button type="button" id="btn" onclick="sendcost_regi();">등록</button>
+                    <button type="button" onclick="sendcost_regi();">등록</button>
                     <button type="button" class="gray" onclick="choice_del()">선택 삭제</button>
                 </div>
             </div>
@@ -97,7 +97,7 @@
                 <!-- 페이지네이션 시작 -->
                 <div class="paging_box">
                     <div class="paging">
-                        {!! $pnPage !!}
+                        {{ $pnPage }}
                     </div>
                 </div>
                 <!-- 페이지네이션 끝 -->
@@ -145,7 +145,7 @@
 //alert(result);
 //return false;
                 if(result == "ok"){
-                    location.href = "{{ route('shop.sendcost.index', 'page='.$page) }}";
+                    location.href = "{{ route('shop.sendcost.index') }}";
                 }
             },
             error: function(result){

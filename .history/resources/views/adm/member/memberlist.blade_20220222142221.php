@@ -39,7 +39,6 @@
                     $tmp4 = '';
                     $tmp5 = '';
                     $tmp6 = '';
-                    $tmp7 = '';
                     $tmp10 = '';
                     $tmp11 = '';
 
@@ -61,7 +60,7 @@
                                 <option value="" {{ $tmp }}>전체</option>
                                 <option value="N" {{ $tmp2 }}>회원</option>
                                 <option value="Y" {{ $tmp3 }}>탈퇴회원</option>
-                                <option value="blacklist" {{ $tmp10 }}>평가단블랙리스트회원</option>
+                                <option value="blacklist" {{ $tmp10 }}>체험단블랙리스트회원</option>
                                 <option value="site_no" {{ $tmp11 }}>사이트블랙리스트</option>
                             </select>
 
@@ -81,8 +80,6 @@
 
                 <!-- 보드 시작 -->
                 <div class="board">
-                    <form name="memlist" id="memlist" method="post" action="{{ route('adm.member.out') }}">
-                        {!! csrf_field() !!}
                     <!-- 회원 리스트 시작 -->
                     <table class="member_table">
                         <colgroup>
@@ -100,7 +97,7 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th><input type="checkbox" class="mg00" id="chkall" onclick="if (this.checked) all_checked(true); else all_checked(false);"></th>
+                                <th><input type="checkbox" class="mg00" id=""></th>
                                 <th>번호</th>
                                 <th>이름</th>
                                 <th>아이디</th>
@@ -115,48 +112,94 @@
                         </thead>
                         <!-- 리스트 시작 -->
                         <tbody>
-                        @foreach($members as $member)
-                            @php
-                                $user_type = "";
-                                if($member->user_type == 'Y') $user_type = '탈퇴';
-                                else $user_type = '가입';
-
-                                $blacklist_chk = '';
-                                if($member->blacklist == 'y') $blacklist_chk = '평가단블랙리스트';
-
-                                $site_access_no_chk = '';
-                                if($member->site_access_no == 'y') $site_access_no_chk = '사이트블랙리스트';
-
-
-                                if($member->user_platform_type == '') $platform_type = '회원가입';
-                                else if($member->user_platform_type == 'kakao') $platform_type = '카카오';
-                                else if($member->user_platform_type == 'naver') $platform_type = '네이버';
-                            @endphp
                             <tr>
-                                <td><input type="checkbox" class="mg00" name="chk_id[]" value="{{ $member->id }}" id="chk_id_{{ $member->id }}"></td>
-                                <td>{{ $virtual_num-- }}</td>
-                                <td><a href="javascript:mem_regi('modi',{{ $member->id }});">{{ $member->user_name }}</a></td>
-                                <td>{{ $member->user_id }}</td>
-                                <td>{{ $member->created_at }}</td>
-                                <td>{{ $member->user_phone }}</td>
-                                <td>{{ $platform_type }}</td>
-                                <td>{{ number_format($member->user_point) }}P</td>
-                                <td>{{ $user_type }}</td>
-                                <td>{{ $blacklist_chk }}</td>
-                                <td>{{ $site_access_no_chk }}</td>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>10</td>
+                                <td><a href="../../page/member/member_detail.html">지구랭</a></td>
+                                <td>g9g9g9@g9r.com</td>
+                                <td>2021-11-01 13:13:12</td>
+                                <td>01021543265</td>
+                                <td>회원가입</td>
+                                <td>5,000</td>
+                                <td>가입</td>
+                                <td>X</td>
+                                <td>X</td>
                             </tr>
-                            @endforeach($members as $member)
-
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>10</td>
+                                <td><a href="../../page/member/member_detail.html">지구랭</a></td>
+                                <td>g9g9g9@g9r.com</td>
+                                <td>2021-11-01 13:13:12</td>
+                                <td>01021543265</td>
+                                <td>회원가입</td>
+                                <td>5,000</td>
+                                <td>가입</td>
+                                <td>X</td>
+                                <td>X</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>10</td>
+                                <td><a href="../../page/member/member_detail.html">지구랭</a></td>
+                                <td>g9g9g9@g9r.com</td>
+                                <td>2021-11-01 13:13:12</td>
+                                <td>01021543265</td>
+                                <td>카카오</td>
+                                <td>5,000</td>
+                                <td>가입</td>
+                                <td>X</td>
+                                <td>X</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>10</td>
+                                <td><a href="../../page/member/member_detail.html">지구랭</a></td>
+                                <td>g9g9g9@g9r.com</td>
+                                <td>2021-11-01 13:13:12</td>
+                                <td>01021543265</td>
+                                <td>네이버</td>
+                                <td>5,000</td>
+                                <td>가입</td>
+                                <td>X</td>
+                                <td>X</td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" class="mg00" id=""></td>
+                                <td>10</td>
+                                <td><a href="../../page/member/member_detail.html">지구랭</a></td>
+                                <td>g9g9g9@g9r.com</td>
+                                <td>2021-11-01 13:13:12</td>
+                                <td>01021543265</td>
+                                <td>회원가입</td>
+                                <td>5,000</td>
+                                <td>탈퇴</td>
+                                <td>X</td>
+                                <td>Y</td>
+                            </tr>
                         </tbody>
                         <!-- 리스트 끝 -->
-                </form>
+
                     </table>
                     <!-- 리뷰 리스트 끝 -->
 
                     <!-- 페이지네이션 시작 -->
                     <div class="paging_box">
                         <div class="paging">
-                            {!! $pnPage !!}
+                            <a class="wide">처음</a>
+                            <a class="wide">이전</a>
+                            <a class="on">1</a>
+                            <a>2</a>
+                            <a>3</a>
+                            <a>4</a>
+                            <a>5</a>
+                            <a>6</a>
+                            <a>7</a>
+                            <a>8</a>
+                            <a>9</a>
+                            <a>10</a>
+                            <a class="wide">다음</a>
+                            <a class="wide">마지막</a>
                         </div>
                     </div>
                     <!-- 페이지네이션 끝 -->

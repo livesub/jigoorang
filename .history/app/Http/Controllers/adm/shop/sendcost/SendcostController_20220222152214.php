@@ -33,7 +33,7 @@ class SendcostController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index()
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
@@ -63,6 +63,7 @@ class SendcostController extends Controller
         $tailarr = array();
         //$tailarr['user_type'] = $user_type;
 
+
         $PageSet        = new PageSet;
         $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
         $prevPage       = $PageSet->getPrevPage("이전");
@@ -73,12 +74,8 @@ class SendcostController extends Controller
         $nextLastPage   = $PageSet->nextLast("마지막");
         $listPage       = $PageSet->getPageList();
         $pnPage         = $preFirstPage.$prevPage.$listPage.$nextPage.$nextLastPage;
-
         return view('adm.shop.sendcost.sendcostlist',[
             'sendcosts' => $sendcost_rows,
-            'pnPage'    => $pnPage,
-            'page'      => $page,
-            'virtual_num'   => $virtual_num,
         ]);
     }
 

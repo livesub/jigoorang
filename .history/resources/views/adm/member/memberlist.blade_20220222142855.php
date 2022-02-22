@@ -61,7 +61,7 @@
                                 <option value="" {{ $tmp }}>전체</option>
                                 <option value="N" {{ $tmp2 }}>회원</option>
                                 <option value="Y" {{ $tmp3 }}>탈퇴회원</option>
-                                <option value="blacklist" {{ $tmp10 }}>평가단블랙리스트회원</option>
+                                <option value="blacklist" {{ $tmp10 }}>체험단블랙리스트회원</option>
                                 <option value="site_no" {{ $tmp11 }}>사이트블랙리스트</option>
                             </select>
 
@@ -122,10 +122,10 @@
                                 else $user_type = '가입';
 
                                 $blacklist_chk = '';
-                                if($member->blacklist == 'y') $blacklist_chk = '평가단블랙리스트';
+                                if($member->blacklist == 'y') $blacklist_chk = '블랙리스트';
 
                                 $site_access_no_chk = '';
-                                if($member->site_access_no == 'y') $site_access_no_chk = '사이트블랙리스트';
+                                if($member->site_access_no == 'y') $site_access_no_chk = '사이트 접근 불가';
 
 
                                 if($member->user_platform_type == '') $platform_type = '회원가입';

@@ -16,11 +16,7 @@
         <!-- 컨텐츠 영역 시작 -->
         <div class="contents_area setting">
 
-            <form name="set_form" id="set_form" method="post" action="{{ route('shop.setting.savesetting') }}">
-                {!! csrf_field() !!}
-                <input type="hidden" name="id" id="id" value="{{ $id }}">
-                <input type="hidden" name="company_use_point" value="1">
-                <input type="hidden" name="company_bank_use" value="0">
+            <form>
 
                 <h3 class="line">사업자 정보</h3>
                 <div class="box_cont">
@@ -131,7 +127,7 @@
                     <div class="row">
                         <div class="col">포토리뷰작성 지급 포인트</div>
                         <div class="col">
-                            <input type="number" name="photo_point" value="{{ $photo_point }}" id="photo_point"> P
+                            <input type="number" name="" placeholder="" value="200"> P
                         </div>
                     </div>
                 </div>
@@ -142,63 +138,17 @@
                         <div class="col">기획전 1</div>
                         <div class="col">
                             <p>15자 이내</p>
-                            <input type="text" name="de_ment_change" value="{{ $de_ment_change }}" id="de_ment_change">
+                            <input type="text" name="" placeholder="" value="연말 할인 기획전">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">기획전 2</div>
                         <div class="col">
                             <p>15자 이내</p>
-                            <input type="text" name="de_ment_change2" value="{{ $de_ment_change2 }}" id="de_ment_change2">
+                            <input type="text" name="" placeholder="" value="연말 할인 기획전2">
                         </div>
                     </div>
                 </div>
-
-                <h3 class="line">배송 업체 정보</h3>
-                <div class="box_cont">
-                    <div class="row">
-                        <div class="col">배송업체명</div>
-                        <div class="col">
-                            <input type="text" name="send_company_name" value="{{ $send_company_name }}">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">배송업체전화번호</div>
-                        <div class="col">
-                            <input type="text" name="send_company_tel" value="{{ $send_company_tel }}">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">배송조회 URL</div>
-                        <div class="col">
-                            <input type="text" name="send_company_url" value="{{ $send_company_url }}">
-                        </div>
-                    </div>
-                </div>
-
-
-                @if(Auth::user()->user_level < 3)
-                <h3 class="line">쇼핑몰 상품이미지 리사이징 설정</h3>
-                <div class="box_cont">
-                    <div class="row">
-                        <div class="col">WIDTH</div>
-                        <div class="col">
-                            <p>(리사이징될 파일 넓이 - '%%'구분자사용) 예) 600%%290%%160%%110</p>
-                            <input type="text" name="shop_img_width" value="{{ $shop_img_width }}" id="shop_img_width">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">HEIGHT</div>
-                        <div class="col">
-                            <p>(리사이징될 파일 높이 - '%%'구분자사용) 예) 520%%250%%140%%96</p>
-                            <input type="text" name="shop_img_height" value="{{ $shop_img_height }}" id="shop_img_height">
-                        </div>
-                    </div>
-                </div>
-                @else
-                <input type="hidden" name="shop_img_width" value="{{ $shop_img_width }}">
-                <input type="hidden" name="shop_img_height" value="{{ $shop_img_height }}">
-                @endif
 
             </form>
 

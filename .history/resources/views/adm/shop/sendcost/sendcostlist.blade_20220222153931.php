@@ -145,7 +145,8 @@
 //alert(result);
 //return false;
                 if(result == "ok"){
-                    location.href = "{{ route('shop.sendcost.index', 'page='.$page) }}";
+location.href='{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_ca_id.'&sub_cate='.$sub_cate.'&orderby_type=low_price') }}'
+                    location.href = '{{ route('shop.sendcost.index','page='.$page) }}';
                 }
             },
             error: function(result){

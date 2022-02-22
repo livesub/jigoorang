@@ -33,7 +33,7 @@ class SendcostController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index()
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
@@ -77,7 +77,6 @@ class SendcostController extends Controller
         return view('adm.shop.sendcost.sendcostlist',[
             'sendcosts' => $sendcost_rows,
             'pnPage'    => $pnPage,
-            'page'      => $page,
             'virtual_num'   => $virtual_num,
         ]);
     }

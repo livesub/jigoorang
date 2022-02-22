@@ -7,8 +7,8 @@
             <div class="title">
                 <h2>추가 배송비 관리</h2>
                 <div class="button_box">
-                    <button type="button" id="btn" onclick="sendcost_regi();">등록</button>
-                    <button type="button" class="gray" onclick="choice_del()">선택 삭제</button>
+                    <button type="button" onclick="">등록</button>
+                    <button type="button" class="gray" onclick="">선택 삭제</button>
                 </div>
             </div>
         </div>
@@ -16,37 +16,34 @@
         <!-- 컨텐츠 영역 시작 -->
         <div class="contents_area setting">
 
-            <form name="send_form" id="send_form" method="post" action="">
-                {!! csrf_field() !!}
-                <input type="hidden" name="act" id="act">
-                <input type="hidden" name="num" id="num">
+            <form>
 
                 <h3 class="line">추가 배송비 지역 추가</h3>
                 <div class="box_cont">
                     <div class="row">
                         <div class="col">지역명</div>
                         <div class="col">
-                            <input type="text" name="sc_name" id="sc_name">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">우편번호 시작</div>
                         <div class="col">
                             <p>예)01239</p>
-                            <input class="aln_left" type="text" name="sc_zip1" id="sc_zip1" size=5 maxlength="5">
+                            <input class="aln_left" type="number" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">우편번호 끝</div>
                         <div class="col">
                             <p>예)01239</p>
-                            <input class="aln_left" type="text" name="sc_zip2" id="sc_zip2" size=5 maxlength="5">
+                            <input class="aln_left" type="number" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">추가 배송비</div>
                         <div class="col">
-                            <input type="text" name="sc_price" id="sc_price" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align:right;"> 원
+                            <input type="number" name="" placeholder=""> 원
                         </div>
                     </div>
                 </div>
@@ -63,7 +60,7 @@
                     </colgroup>
                     <thead>
                         <tr>
-                            <th><input type="checkbox" class="mg00" name="chkall" value="1" id="chkall" onclick="check_all(this.form)"></th>
+                            <th><input type="checkbox" class="mg00" id=""></th>
                             <th>번호</th>
                             <th>지역명</th>
                             <th>우편번호</th>
@@ -72,32 +69,86 @@
                         </tr>
                     </thead>
                     <tbody>
-
-                    @php
-                        $i = 0;
-                    @endphp
-                    @foreach($sendcosts as $sendcost)
                         <tr>
-                            <td><input type="checkbox" class="mg00" id="chk_{{ $i }}" name="chk[]" value="{{ $sendcost->id }}"></td>
-                            <td>{{ $virtual_num-- }}</td>
-                            <td class="add">{{ $sendcost->sc_name }}</td>
-                            <td>{{ $sendcost->sc_zip1 }} ~ {{ $sendcost->sc_zip2 }}</td>
-                            <td>{{ number_format($sendcost->sc_price) }}</td>
+                            <td><input type="checkbox" class="mg00" id=""></td>
+                            <td>10</td>
+                            <td class="add">인천광역시 강화군</td>
+                            <td>12345 ~ 12399</td>
+                            <td>3,000</td>
                             <td>
-                                <button type="button" class="btn-sm-ln" onclick="sendcost_modi({{ $sendcost->id }});">수정</button>
+                                <button type="button" class="btn-sm-ln" onclick="">수정</button>
                             </td>
                         </tr>
-                    @php
-                        $i++;
-                    @endphp
-                    @endforeach
+                        <tr>
+                            <td><input type="checkbox" class="mg00" id=""></td>
+                            <td>10</td>
+                            <td class="add">인천광역시 강화군</td>
+                            <td>12345 ~ 12399</td>
+                            <td>3,000</td>
+                            <td>
+                                <button type="button" class="btn-sm-ln" onclick="">수정</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="mg00" id=""></td>
+                            <td>10</td>
+                            <td class="add">인천광역시 강화군</td>
+                            <td>12345 ~ 12399</td>
+                            <td>3,000</td>
+                            <td>
+                                <button type="button" class="btn-sm-ln" onclick="">수정</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="mg00" id=""></td>
+                            <td>10</td>
+                            <td class="add">인천광역시 강화군</td>
+                            <td>12345 ~ 12399</td>
+                            <td>3,000</td>
+                            <td>
+                                <button type="button" class="btn-sm-ln" onclick="">수정</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="mg00" id=""></td>
+                            <td>10</td>
+                            <td class="add">인천광역시 강화군</td>
+                            <td>12345 ~ 12399</td>
+                            <td>3,000</td>
+                            <td>
+                                <button type="button" class="btn-sm-ln" onclick="">수정</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="mg00" id=""></td>
+                            <td>10</td>
+                            <td class="add">인천광역시 강화군</td>
+                            <td>12345 ~ 12399</td>
+                            <td>3,000</td>
+                            <td>
+                                <button type="button" class="btn-sm-ln" onclick="">수정</button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
                 <!-- 페이지네이션 시작 -->
                 <div class="paging_box">
                     <div class="paging">
-                        {!! $pnPage !!}
+                        <a class="wide">처음</a>
+                        <a class="wide">이전</a>
+                        <a class="on">1</a>
+                        <a>2</a>
+                        <a>3</a>
+                        <a>4</a>
+                        <a>5</a>
+                        <a>6</a>
+                        <a>7</a>
+                        <a>8</a>
+                        <a>9</a>
+                        <a>10</a>
+                        <a class="wide">다음</a>
+                        <a class="wide">마지막</a>
                     </div>
                 </div>
                 <!-- 페이지네이션 끝 -->
@@ -145,7 +196,7 @@
 //alert(result);
 //return false;
                 if(result == "ok"){
-                    location.href = "{{ route('shop.sendcost.index', 'page='.$page) }}";
+                    location.href = "{{ route('shop.sendcost.index') }}";
                 }
             },
             error: function(result){

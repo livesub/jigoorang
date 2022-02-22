@@ -39,7 +39,7 @@ class SendcostController extends Controller
 
         $page       = $request->input('page');
 
-        $pageScale  = 10;  //한페이지당 라인수
+        $pageScale  = 1;  //한페이지당 라인수
         $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")
@@ -77,7 +77,6 @@ class SendcostController extends Controller
         return view('adm.shop.sendcost.sendcostlist',[
             'sendcosts' => $sendcost_rows,
             'pnPage'    => $pnPage,
-            'page'      => $page,
             'virtual_num'   => $virtual_num,
         ]);
     }

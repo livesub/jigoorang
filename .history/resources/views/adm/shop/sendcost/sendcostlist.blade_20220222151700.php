@@ -7,7 +7,7 @@
             <div class="title">
                 <h2>추가 배송비 관리</h2>
                 <div class="button_box">
-                    <button type="button" id="btn" onclick="sendcost_regi();">등록</button>
+                    <button type="button" onclick="sendcost_regi();">등록</button>
                     <button type="button" class="gray" onclick="choice_del()">선택 삭제</button>
                 </div>
             </div>
@@ -63,7 +63,7 @@
                     </colgroup>
                     <thead>
                         <tr>
-                            <th><input type="checkbox" class="mg00" name="chkall" value="1" id="chkall" onclick="check_all(this.form)"></th>
+                            <th><input type="checkbox" class="mg00" id=""></th>
                             <th>번호</th>
                             <th>지역명</th>
                             <th>우편번호</th>
@@ -72,32 +72,86 @@
                         </tr>
                     </thead>
                     <tbody>
-
-                    @php
-                        $i = 0;
-                    @endphp
-                    @foreach($sendcosts as $sendcost)
                         <tr>
-                            <td><input type="checkbox" class="mg00" id="chk_{{ $i }}" name="chk[]" value="{{ $sendcost->id }}"></td>
-                            <td>{{ $virtual_num-- }}</td>
-                            <td class="add">{{ $sendcost->sc_name }}</td>
-                            <td>{{ $sendcost->sc_zip1 }} ~ {{ $sendcost->sc_zip2 }}</td>
-                            <td>{{ number_format($sendcost->sc_price) }}</td>
+                            <td><input type="checkbox" class="mg00" id=""></td>
+                            <td>10</td>
+                            <td class="add">인천광역시 강화군</td>
+                            <td>12345 ~ 12399</td>
+                            <td>3,000</td>
                             <td>
-                                <button type="button" class="btn-sm-ln" onclick="sendcost_modi({{ $sendcost->id }});">수정</button>
+                                <button type="button" class="btn-sm-ln" onclick="">수정</button>
                             </td>
                         </tr>
-                    @php
-                        $i++;
-                    @endphp
-                    @endforeach
+                        <tr>
+                            <td><input type="checkbox" class="mg00" id=""></td>
+                            <td>10</td>
+                            <td class="add">인천광역시 강화군</td>
+                            <td>12345 ~ 12399</td>
+                            <td>3,000</td>
+                            <td>
+                                <button type="button" class="btn-sm-ln" onclick="">수정</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="mg00" id=""></td>
+                            <td>10</td>
+                            <td class="add">인천광역시 강화군</td>
+                            <td>12345 ~ 12399</td>
+                            <td>3,000</td>
+                            <td>
+                                <button type="button" class="btn-sm-ln" onclick="">수정</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="mg00" id=""></td>
+                            <td>10</td>
+                            <td class="add">인천광역시 강화군</td>
+                            <td>12345 ~ 12399</td>
+                            <td>3,000</td>
+                            <td>
+                                <button type="button" class="btn-sm-ln" onclick="">수정</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="mg00" id=""></td>
+                            <td>10</td>
+                            <td class="add">인천광역시 강화군</td>
+                            <td>12345 ~ 12399</td>
+                            <td>3,000</td>
+                            <td>
+                                <button type="button" class="btn-sm-ln" onclick="">수정</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><input type="checkbox" class="mg00" id=""></td>
+                            <td>10</td>
+                            <td class="add">인천광역시 강화군</td>
+                            <td>12345 ~ 12399</td>
+                            <td>3,000</td>
+                            <td>
+                                <button type="button" class="btn-sm-ln" onclick="">수정</button>
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
 
                 <!-- 페이지네이션 시작 -->
                 <div class="paging_box">
                     <div class="paging">
-                        {!! $pnPage !!}
+                        <a class="wide">처음</a>
+                        <a class="wide">이전</a>
+                        <a class="on">1</a>
+                        <a>2</a>
+                        <a>3</a>
+                        <a>4</a>
+                        <a>5</a>
+                        <a>6</a>
+                        <a>7</a>
+                        <a>8</a>
+                        <a>9</a>
+                        <a>10</a>
+                        <a class="wide">다음</a>
+                        <a class="wide">마지막</a>
                     </div>
                 </div>
                 <!-- 페이지네이션 끝 -->
@@ -145,7 +199,7 @@
 //alert(result);
 //return false;
                 if(result == "ok"){
-                    location.href = "{{ route('shop.sendcost.index', 'page='.$page) }}";
+                    location.href = "{{ route('shop.sendcost.index') }}";
                 }
             },
             error: function(result){

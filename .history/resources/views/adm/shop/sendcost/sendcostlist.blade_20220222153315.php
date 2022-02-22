@@ -145,7 +145,7 @@
 //alert(result);
 //return false;
                 if(result == "ok"){
-                    location.href = "{{ route('shop.sendcost.index', 'page='.$page) }}";
+                    location.href = "{{ route('shop.sendcost.index') }}";
                 }
             },
             error: function(result){
@@ -224,6 +224,7 @@
                 $("#sc_price").val(json.sc_price);
                 $("#send_form").attr("action", "{{ route('shop.sendcost.ajax_regi_sendcost') }}");
                 $("#btn").html('수정');
+                location.href = "{{ route('shop.sendcost.index', 'page=$page') }}";
             },
             error: function(result){
                 console.log(result);

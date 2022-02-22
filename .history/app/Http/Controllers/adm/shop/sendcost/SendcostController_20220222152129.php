@@ -33,7 +33,7 @@ class SendcostController extends Controller
         $this->middleware('auth');
     }
 
-    public function index(Request $request)
+    public function index()
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
 
@@ -57,28 +57,11 @@ class SendcostController extends Controller
         $total_page     = ceil($total_record / $pageScale);
         $total_page     = $total_page == 0 ? 1 : $total_page;
 
-        $sendcost_rows = $sendcosts->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
-        $virtual_num = $total_record - $pageScale * ($page - 1);
+        $member_rows = $sendcosts->orderby('id', 'DESC')->offset($start_num)->limit($pageScale)->get();
 
-        $tailarr = array();
-        //$tailarr['user_type'] = $user_type;
-
-        $PageSet        = new PageSet;
-        $showPage       = $PageSet->pageSet($total_page, $page, $pageScale, $blockScale, $total_record, $tailarr,"");
-        $prevPage       = $PageSet->getPrevPage("이전");
-        $nextPage       = $PageSet->getNextPage("다음");
-        $pre10Page      = $PageSet->pre10("이전10");
-        $next10Page     = $PageSet->next10("다음10");
-        $preFirstPage   = $PageSet->preFirst("처음");
-        $nextLastPage   = $PageSet->nextLast("마지막");
-        $listPage       = $PageSet->getPageList();
-        $pnPage         = $preFirstPage.$prevPage.$listPage.$nextPage.$nextLastPage;
-
+        //$sendcosts = DB::table('sendcosts')->orderby('id','desc')->get();
         return view('adm.shop.sendcost.sendcostlist',[
-            'sendcosts' => $sendcost_rows,
-            'pnPage'    => $pnPage,
-            'page'      => $page,
-            'virtual_num'   => $virtual_num,
+            'sendcosts' => $sendcosts,
         ]);
     }
 

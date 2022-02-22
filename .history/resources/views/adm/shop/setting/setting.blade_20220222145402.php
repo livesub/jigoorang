@@ -16,11 +16,7 @@
         <!-- 컨텐츠 영역 시작 -->
         <div class="contents_area setting">
 
-            <form name="set_form" id="set_form" method="post" action="{{ route('shop.setting.savesetting') }}">
-                {!! csrf_field() !!}
-                <input type="hidden" name="id" id="id" value="{{ $id }}">
-                <input type="hidden" name="company_use_point" value="1">
-                <input type="hidden" name="company_bank_use" value="0">
+            <form>
 
                 <h3 class="line">사업자 정보</h3>
                 <div class="box_cont">
@@ -177,7 +173,7 @@
                 </div>
 
 
-                @if(Auth::user()->user_level < 3)
+
                 <h3 class="line">쇼핑몰 상품이미지 리사이징 설정</h3>
                 <div class="box_cont">
                     <div class="row">
@@ -195,10 +191,7 @@
                         </div>
                     </div>
                 </div>
-                @else
-                <input type="hidden" name="shop_img_width" value="{{ $shop_img_width }}">
-                <input type="hidden" name="shop_img_height" value="{{ $shop_img_height }}">
-                @endif
+
 
             </form>
 

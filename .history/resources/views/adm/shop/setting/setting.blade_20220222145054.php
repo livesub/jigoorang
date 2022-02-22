@@ -16,11 +16,7 @@
         <!-- 컨텐츠 영역 시작 -->
         <div class="contents_area setting">
 
-            <form name="set_form" id="set_form" method="post" action="{{ route('shop.setting.savesetting') }}">
-                {!! csrf_field() !!}
-                <input type="hidden" name="id" id="id" value="{{ $id }}">
-                <input type="hidden" name="company_use_point" value="1">
-                <input type="hidden" name="company_bank_use" value="0">
+            <form>
 
                 <h3 class="line">사업자 정보</h3>
                 <div class="box_cont">
@@ -171,34 +167,11 @@
                     <div class="row">
                         <div class="col">배송조회 URL</div>
                         <div class="col">
-                            <input type="text" name="send_company_url" value="{{ $send_company_url }}">
+                            <input type="text" name="send_company_tel" value="{{ $send_company_tel }}">
                         </div>
                     </div>
                 </div>
 
-
-                @if(Auth::user()->user_level < 3)
-                <h3 class="line">쇼핑몰 상품이미지 리사이징 설정</h3>
-                <div class="box_cont">
-                    <div class="row">
-                        <div class="col">WIDTH</div>
-                        <div class="col">
-                            <p>(리사이징될 파일 넓이 - '%%'구분자사용) 예) 600%%290%%160%%110</p>
-                            <input type="text" name="shop_img_width" value="{{ $shop_img_width }}" id="shop_img_width">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">HEIGHT</div>
-                        <div class="col">
-                            <p>(리사이징될 파일 높이 - '%%'구분자사용) 예) 520%%250%%140%%96</p>
-                            <input type="text" name="shop_img_height" value="{{ $shop_img_height }}" id="shop_img_height">
-                        </div>
-                    </div>
-                </div>
-                @else
-                <input type="hidden" name="shop_img_width" value="{{ $shop_img_width }}">
-                <input type="hidden" name="shop_img_height" value="{{ $shop_img_height }}">
-                @endif
 
             </form>
 

@@ -47,7 +47,7 @@ class MemberlistController extends Controller
         $user_type2 = $request->input('user_type2');
         $keyword    = $request->input('keyword');
 
-        $pageScale  = 10;  //한페이지당 라인수
+        $pageScale  = 15;  //한페이지당 라인수
         $blockScale = 10; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")

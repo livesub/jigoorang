@@ -77,7 +77,6 @@ class SendcostController extends Controller
         return view('adm.shop.sendcost.sendcostlist',[
             'sendcosts' => $sendcost_rows,
             'pnPage'    => $pnPage,
-            'page'      => $page,
             'virtual_num'   => $virtual_num,
         ]);
     }
