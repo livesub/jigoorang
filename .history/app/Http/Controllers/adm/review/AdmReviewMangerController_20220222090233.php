@@ -455,16 +455,16 @@ class AdmReviewMangerController extends Controller
         }
 
         $review_save_rows = $review_save_list->orderby('id', 'DESC')->get();
+dd($review_save_rows);
+var_dump("user_keyword====> ".$user_keyword);
 
         $now_date = date('Ymd', time());
         $file_name = "리뷰관리".$now_date.".xls";
-/*
+
         header( "Content-type: application/vnd.ms-excel" );
         header( "Content-type: application/vnd.ms-excel; charset=utf-8");
         header( "Content-Disposition: attachment; filename = $file_name" );
         header( "Content-Description: PHP4 Generated Data" );
-*/
-
 
 
     }

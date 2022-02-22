@@ -110,7 +110,7 @@
                                 <option value="user_name" {{ $user_selected1 }}>이름</option>
                                 <option value="user_id" {{ $user_selected2 }}>아이디</option>
                             </select>
-                            <input type="text" name="user_keyword" value="{{ $user_keyword }}">
+                            <input type="text" name="user_keyword">
                         </li>
                     </ul>
                     <button type="submit">검색</button>
@@ -123,7 +123,7 @@
                     <!-- 상단 버튼영역 시작 -->
                     <div class="btn_area">
                         <div class="right">
-                            <button type="button" class="btn-ln" onclick="excel_down();">엑셀다운로드</button>
+                            <button type="button" class="btn-ln" onclick="">엑셀다운로드</button>
                         </div>
                     </div>
                     <!-- 상단 버튼영역 끝 -->
@@ -435,10 +435,6 @@ $("#block_1").show();
     }
 </script>
 
-<script>
-    function excel_down(){
-        location.href = "{{ route('adm.review.review_excel_down') }}?{!! $page_move !!}";
-    }
-</script>
+
 
 @endsection

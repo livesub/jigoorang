@@ -110,7 +110,7 @@
                                 <option value="user_name" {{ $user_selected1 }}>이름</option>
                                 <option value="user_id" {{ $user_selected2 }}>아이디</option>
                             </select>
-                            <input type="text" name="user_keyword" value="{{ $user_keyword }}">
+                            <input type="text" name="user_keyword">
                         </li>
                     </ul>
                     <button type="submit">검색</button>
@@ -437,7 +437,7 @@ $("#block_1").show();
 
 <script>
     function excel_down(){
-        location.href = "{{ route('adm.review.review_excel_down') }}?{!! $page_move !!}";
+        location.href = "{{ route('adm.review.review_excel_down') }}?{!! $sort_page_move !!}&order_sort={{ $order_sort }}&return_proc={{ $return_proc }}";
     }
 </script>
 

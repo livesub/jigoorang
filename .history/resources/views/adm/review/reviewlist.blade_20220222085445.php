@@ -110,7 +110,7 @@
                                 <option value="user_name" {{ $user_selected1 }}>이름</option>
                                 <option value="user_id" {{ $user_selected2 }}>아이디</option>
                             </select>
-                            <input type="text" name="user_keyword" value="{{ $user_keyword }}">
+                            <input type="text" name="user_keyword">
                         </li>
                     </ul>
                     <button type="submit">검색</button>

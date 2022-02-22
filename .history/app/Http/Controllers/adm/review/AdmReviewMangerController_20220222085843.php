@@ -50,7 +50,7 @@ class AdmReviewMangerController extends Controller
         $review_blind   = $request->input('review_blind');
         $user_info      = $request->input('user_info');
         $user_keyword   = $request->input('user_keyword');
-
+var_dump("user_keyword=====> ".$user_keyword);
         //페이지 이동 배열 만들기
         //$page_move = "page=".$page."&seach_1=".$seach_1."&seach_2=".$seach_2."&seach_3=".$seach_3."&search_name=".$search_name."&ca_id=".$ca_id;
         $page_move = "page=".$page."&search_name=".$search_name."&ca_id=".$ca_id."&item_code=".$item_code."&review_type=".$review_type."&review_blind=".$review_blind."&user_info=".$user_info."&user_keyword=".$user_keyword;
@@ -65,7 +65,6 @@ class AdmReviewMangerController extends Controller
             $page = 1;
             $start_num = 0;
         }
-
         $exp_selects = DB::table('exp_list')->orderBy('id', 'desc')->get(); //체험단 리스트 검색
 
         $review_save_list = DB::table('review_saves');
@@ -430,42 +429,7 @@ class AdmReviewMangerController extends Controller
         $user_info      = $request->input('user_info');
         $user_keyword   = $request->input('user_keyword');
 
-        $review_save_list = DB::table('review_saves');
-
-        if($ca_id != ""){
-            $review_save_list = $review_save_list->where('sca_id', $ca_id);
-        }
-
-        if($item_code != ""){
-            $review_save_list = $review_save_list->where('item_code', $item_code);
-        }
-
-        if($review_type == "shop" || $review_type == "exp"){
-            if($review_type == "shop") $review_save_list = $review_save_list->where('order_id', '!=', '0');
-            else if($review_type == "exp") $review_save_list = $review_save_list->where('exp_id', '!=', '0');
-        }
-
-        if($review_blind == "N" || $review_type == "Y"){
-            if($review_blind == "N") $review_save_list = $review_save_list->where('review_blind', 'N');
-            else if($review_blind == "Y") $review_save_list = $review_save_list->where('review_blind', 'Y');
-        }
-
-        if($user_keyword != ""){
-            $review_save_list = $review_save_list->where($user_info, 'like', '%'.$user_keyword.'%');
-        }
-
-        $review_save_rows = $review_save_list->orderby('id', 'DESC')->get();
-
-        $now_date = date('Ymd', time());
-        $file_name = "리뷰관리".$now_date.".xls";
-/*
-        header( "Content-type: application/vnd.ms-excel" );
-        header( "Content-type: application/vnd.ms-excel; charset=utf-8");
-        header( "Content-Disposition: attachment; filename = $file_name" );
-        header( "Content-Description: PHP4 Generated Data" );
-*/
-
-
+var_dump("user_keyword====> ".$user_keyword);
 
     }
 

@@ -493,9 +493,9 @@ Route::group(['middleware' => 'is.admin'], function () {    //미들웨어로 �
         'uses' => 'App\Http\Controllers\adm\review\AdmReviewMangerController@review_modi_save',
     ]);
 
-    Route::get('review_excel_down', [
-        'as' => 'adm.review.review_excel_down',
-        'uses' => 'App\Http\Controllers\adm\review\AdmReviewMangerController@review_excel_down',
+    Route::post('review_excel_down', [
+        'as' => 'adm.review.review_modi_save',
+        'uses' => 'App\Http\Controllers\adm\review\AdmReviewMangerController@review_modi_save',
     ]);
 
 /*** 관리자 1:1 문의 관리 */

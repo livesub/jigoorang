@@ -465,8 +465,6 @@ class AdmReviewMangerController extends Controller
         header( "Content-Description: PHP4 Generated Data" );
 */
 
-
-
     }
 
 

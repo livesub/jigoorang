@@ -430,42 +430,7 @@ class AdmReviewMangerController extends Controller
         $user_info      = $request->input('user_info');
         $user_keyword   = $request->input('user_keyword');
 
-        $review_save_list = DB::table('review_saves');
-
-        if($ca_id != ""){
-            $review_save_list = $review_save_list->where('sca_id', $ca_id);
-        }
-
-        if($item_code != ""){
-            $review_save_list = $review_save_list->where('item_code', $item_code);
-        }
-
-        if($review_type == "shop" || $review_type == "exp"){
-            if($review_type == "shop") $review_save_list = $review_save_list->where('order_id', '!=', '0');
-            else if($review_type == "exp") $review_save_list = $review_save_list->where('exp_id', '!=', '0');
-        }
-
-        if($review_blind == "N" || $review_type == "Y"){
-            if($review_blind == "N") $review_save_list = $review_save_list->where('review_blind', 'N');
-            else if($review_blind == "Y") $review_save_list = $review_save_list->where('review_blind', 'Y');
-        }
-
-        if($user_keyword != ""){
-            $review_save_list = $review_save_list->where($user_info, 'like', '%'.$user_keyword.'%');
-        }
-
-        $review_save_rows = $review_save_list->orderby('id', 'DESC')->get();
-
-        $now_date = date('Ymd', time());
-        $file_name = "리뷰관리".$now_date.".xls";
-/*
-        header( "Content-type: application/vnd.ms-excel" );
-        header( "Content-type: application/vnd.ms-excel; charset=utf-8");
-        header( "Content-Disposition: attachment; filename = $file_name" );
-        header( "Content-Description: PHP4 Generated Data" );
-*/
-
-
+var_dump("user_keyword====> ".$user_keyword);
 
     }
 

@@ -17,7 +17,7 @@ class CreateQnasTable extends Migration
             $table->id()->comment('순번');
             $table->string('qna_cate')->comment('문의 카테고리');
             $table->string('qna_subject')->comment('글제목');
-            $table->bigInteger('order_id')->nullable()->comment('주문서번호');
+            $table->bigInteger('order_id')->comment('주문서번호');
             $table->string('user_id')->comment('아이디');
             $table->string('user_name')->comment('이름');
             $table->text('qna_content')->comment('내용');
