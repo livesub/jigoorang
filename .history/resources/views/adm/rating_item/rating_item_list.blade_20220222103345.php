@@ -86,12 +86,12 @@
                             @endphp
                             <tr>
                                 <td>{{ $cate_info->sca_name_kr }}</td>
-                                <td>{{ $rating_item->item_name1 }}</td>
-                                <td>{{ $rating_item->item_name2 }}</td>
-                                <td>{{ $rating_item->item_name3 }}</td>
-                                <td>{{ $rating_item->item_name4 }}</td>
-                                <td>{{ $rating_item->item_name5 }}</td>
-                                <td><button type="button" class="btn-sm-ln" onclick="location.href='{{ route('admRating.modi_view', $rating_item->id) }}'">수정</button></td>
+                                <td>향기로 말하는 치약의 점수는???</td>
+                                <td>컬러</td>
+                                <td>가격</td>
+                                <td>가성비</td>
+                                <td>종합점수</td>
+                                <td><button type="button" class="btn-sm-ln" onclick="location.href='../../page/review/review_item_rgst.html'">수정</button></td>
                             </tr>
                             @endforeach
                         </tbody>
@@ -101,7 +101,20 @@
                     <!-- 페이지네이션 시작 -->
                     <div class="paging_box">
                         <div class="paging">
-                            {!! $pnPage !!}
+                            <a class="wide">처음</a>
+                            <a class="wide">이전</a>
+                            <a class="on">1</a>
+                            <a>2</a>
+                            <a>3</a>
+                            <a>4</a>
+                            <a>5</a>
+                            <a>6</a>
+                            <a>7</a>
+                            <a>8</a>
+                            <a>9</a>
+                            <a>10</a>
+                            <a class="wide">다음</a>
+                            <a class="wide">마지막</a>
                         </div>
                     </div>
                     <!-- 페이지네이션 끝 -->

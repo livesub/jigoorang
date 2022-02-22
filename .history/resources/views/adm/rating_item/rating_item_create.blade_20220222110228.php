@@ -22,22 +22,54 @@
                         <div class="col">카테고리 선택</div>
                         <div class="col">
                             <div class="cate_sel">
-                            <ul>
-                                <li id="cate1">
-                                    <select name="ca_id" id="caa_id" class="cid" >
+
+<!--
+                        <td>
+                            <table id="cate1">
+                            <tr>
+                                <td>
+                                    <select size="10" name="ca_id" id="caa_id" class="cid" >
                                     @foreach($one_step_infos as $one_step_info)
                                         <option value="{{ $one_step_info->sca_id }}">{{ $one_step_info->sca_name_kr }}</option>
                                     @endforeach
                                     </select>
-                                </li>
+                                </td>
+                            <tr>
+                            </table>
+                        </td>
 
-                                <li id="cate2" style="display:none">
-                                    <select name="ca_id" id="caa_id2" class="cid" >
+
+                        <td>
+                            <table id="cate2" style="display:none">
+                            <tr>
+                                @if($ca_id && strlen($ca_id) >= 4)
+                                <td>
+                                    <select size="10" name="ca_id" id="caa_id2" class="cid" >
                                     @foreach($two_step_infos as $two_step_info)
                                         <option value="{{ $two_step_info->sca_id }}">{{ $two_step_info->sca_name_kr }}</option>
                                     @endforeach
                                     </select>
-                                </li>
+                                </td>
+                                @endif
+                            <tr>
+                            </table>
+
+                        </td>
+-->
+
+                            <ul>
+                                <select name="ca_id" id="caa_id" class="cid" id="cate1">
+                                @foreach($one_step_infos as $one_step_info)
+                                    <option value="{{ $one_step_info->sca_id }}">{{ $one_step_info->sca_name_kr }}</option>
+                                @endforeach
+                                </select>
+                            </ul>
+                            <ul>
+                                <select name="ca_id" id="caa_id2" class="cid" >
+                                @foreach($two_step_infos as $two_step_info)
+                                    <option value="{{ $two_step_info->sca_id }}">{{ $two_step_info->sca_name_kr }}</option>
+                                @endforeach
+                                </select>
                             </ul>
                             </div>
                         </div>
@@ -46,35 +78,35 @@
                         <div class="col">정량평가 항목1</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name1" name="item_name1" value="{{ old('item_name1') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목2</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name2" name="item_name2" value="{{ old('item_name2') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목3</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name3" name="item_name3" value="{{ old('item_name3') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목4</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name4" name="item_name4" value="{{ old('item_name4') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목5</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name5" name="item_name5" value="{{ old('item_name5') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                 </div>

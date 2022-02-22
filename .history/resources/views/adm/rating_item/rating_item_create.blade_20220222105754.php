@@ -22,23 +22,17 @@
                         <div class="col">카테고리 선택</div>
                         <div class="col">
                             <div class="cate_sel">
-                            <ul>
-                                <li id="cate1">
-                                    <select name="ca_id" id="caa_id" class="cid" >
-                                    @foreach($one_step_infos as $one_step_info)
-                                        <option value="{{ $one_step_info->sca_id }}">{{ $one_step_info->sca_name_kr }}</option>
-                                    @endforeach
-                                    </select>
-                                </li>
+                                <select name="ca_id" id="caa_id" class="cid" >
+                                @foreach($one_step_infos as $one_step_info)
+                                    <option value="{{ $one_step_info->sca_id }}">{{ $one_step_info->sca_name_kr }}</option>
+                                @endforeach
+                                </select>
 
-                                <li id="cate2" style="display:none">
-                                    <select name="ca_id" id="caa_id2" class="cid" >
-                                    @foreach($two_step_infos as $two_step_info)
-                                        <option value="{{ $two_step_info->sca_id }}">{{ $two_step_info->sca_name_kr }}</option>
-                                    @endforeach
-                                    </select>
-                                </li>
-                            </ul>
+                                <select name="ca_id" id="caa_id2" class="cid" >
+                                @foreach($two_step_infos as $two_step_info)
+                                    <option value="{{ $two_step_info->sca_id }}">{{ $two_step_info->sca_name_kr }}</option>
+                                @endforeach
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -46,35 +40,35 @@
                         <div class="col">정량평가 항목1</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name1" name="item_name1" value="{{ old('item_name1') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목2</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name2" name="item_name2" value="{{ old('item_name2') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목3</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name3" name="item_name3" value="{{ old('item_name3') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목4</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name4" name="item_name4" value="{{ old('item_name4') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목5</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name5" name="item_name5" value="{{ old('item_name5') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                 </div>
@@ -89,7 +83,6 @@
     $(document).ready(function() {
         $(document).on("click", "#caa_id", function() {
 			var cate_is = $('#caa_id').val();
-
             if(cate_is != null){
                 $.ajax({
                     headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
@@ -101,8 +94,9 @@
                         'length'  : $('#caa_id').val().length,
                     },
                     success: function(result) {
+alert(result);
+return false;
                         var data = JSON.parse(result);
-    //alert(data.ca_name_kr);
                         if(data.success == 0) {
                             console.log(data.msg);
                         }else{

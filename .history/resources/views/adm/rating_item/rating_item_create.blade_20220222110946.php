@@ -53,28 +53,28 @@
                         <div class="col">정량평가 항목2</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name2" name="item_name2" value="{{ old('item_name2') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목3</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name3" name="item_name3" value="{{ old('item_name3') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목4</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name4" name="item_name4" value="{{ old('item_name4') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목5</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name5" name="item_name5" value="{{ old('item_name5') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                 </div>

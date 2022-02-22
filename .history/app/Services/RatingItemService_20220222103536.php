@@ -37,9 +37,12 @@ class RatingItemService
         if($page != "" || $page != null)
         {
             $start_num = $pageScale * ($page - 1);
+
         }else{
+
             $page = 1;
             $start_num = 0;
+
         }
 
         //검색 처리
@@ -83,7 +86,7 @@ class RatingItemService
         $preFirstPage   = $PageSet->preFirst("처음");
         $nextLastPage   = $PageSet->nextLast("마지막");
         $listPage       = $PageSet->getPageList();
-        $pnPage         = $preFirstPage.$prevPage.$listPage.$nextPage.$nextLastPage;
+        $pnPage         = $prevPage.$listPage.$nextPage;
 
         return view('adm.rating_item.rating_item_list',[
             'rating_items_rows' => $rating_items_rows,

@@ -1,90 +1,123 @@
 @extends('layouts.admhead')
 
 @section('content')
-
-    <form action="{{ route('admRating.create') }}" method="post" onsubmit="return form_check()">
+<form action="{{ route('admRating.create') }}" method="post" onsubmit="return form_check()">
     {!! csrf_field() !!}
     <input type="hidden" name="last_choice_ca_id" id="last_choice_ca_id">
-        <!-- 타이틀 영역 -->
-        <div class="top">
-            <div class="title">
-                <h2>정량평가 항목 입력</h2>
-                <div class="button_box">
-                    <button type="button" onclick="location.href='../../page/review/review_item.html'">등록<!-- 수정 --></button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 컨텐츠 영역 시작 -->
-        <div class="contents_area review">
-                <div class="box_cont">
-                    <div class="row">
-                        <div class="col">카테고리 선택</div>
-                        <div class="col">
-                            <div class="cate_sel">
-                            <ul>
-                                <li id="cate1">
-                                    <select name="ca_id" id="caa_id" class="cid" >
+    <table border=1 width="900px;">
+    <tr>
+            <td colspan=5>
+                카테고리 선택
+                @error('last_choice_ca_id')
+                    <span class='invalid-feedback' role='alert'>
+                        <strong>{{ $message }}</strong>
+                    </span>
+                @enderror
+            </td>
+        </tr>
+        <tr>
+            <td >
+                <table>
+                    <tr>
+                        <td>
+                            <table id="cate1">
+                            <tr>
+                                <td>
+                                    <select size="10" name="ca_id" id="caa_id" class="cid" >
                                     @foreach($one_step_infos as $one_step_info)
                                         <option value="{{ $one_step_info->sca_id }}">{{ $one_step_info->sca_name_kr }}</option>
                                     @endforeach
                                     </select>
-                                </li>
+                                </td>
+                            <tr>
+                            </table>
+                        </td>
 
-                                <li id="cate2" style="display:none">
-                                    <select name="ca_id" id="caa_id2" class="cid" >
+
+                        <td>
+                            <table id="cate2" style="display:none">
+                            <tr>
+                                @if($ca_id && strlen($ca_id) >= 4)
+                                <td>
+                                    <select size="10" name="ca_id" id="caa_id2" class="cid" >
                                     @foreach($two_step_infos as $two_step_info)
                                         <option value="{{ $two_step_info->sca_id }}">{{ $two_step_info->sca_name_kr }}</option>
                                     @endforeach
                                     </select>
-                                </li>
-                            </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">정량평가 항목1</div>
-                        <div class="col">
-                            <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name1" name="item_name1" value="{{ old('item_name1') }}">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">정량평가 항목2</div>
-                        <div class="col">
-                            <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name2" name="item_name2" value="{{ old('item_name2') }}">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">정량평가 항목3</div>
-                        <div class="col">
-                            <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name3" name="item_name3" value="{{ old('item_name3') }}">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">정량평가 항목4</div>
-                        <div class="col">
-                            <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name4" name="item_name4" value="{{ old('item_name4') }}">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">정량평가 항목5</div>
-                        <div class="col">
-                            <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name5" name="item_name5" value="{{ old('item_name5') }}">
-                        </div>
-                    </div>
-                </div>
-        </div>
-    </form>
-        <!-- 컨텐츠 영역 끝 -->
+                                </td>
+                                @endif
+                            <tr>
+                            </table>
 
+                        </td>
 
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td>
 
+                    <label for="item_name1">
+                        정량 평가 항목 내용 1
+                    </label>
+                    <input type="text" id="item_name1" name="item_name1" value="{{ old('item_name1') }}">
+                    @error('item_name1')
+                        <span class='invalid-feedback' role='alert'>
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <br>
+                    <label for="item_name2">
+                        정량 평가 항목 내용 2
+                    </label>
+                    <input type="text" id="item_name2" name="item_name2" value="{{ old('item_name2') }}">
+                    @error('item_name2')
+                        <span class='invalid-feedback' role='alert'>
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <br>
+                    <label for="item_name3">
+                        정량 평가 항목 내용 3
+                    </label>
+                    <input type="text" id="item_name3" name="item_name3" value="{{ old('item_name3') }}">
+                    @error('item_name3')
+                        <span class='invalid-feedback' role='alert'>
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <br>
+                    <label for="item_name4">
+                        정량 평가 항목 내용 4
+                    </label>
+                    <input type="text" id="item_name4" name="item_name4" value="{{ old('item_name4') }}">
+                    @error('item_name4')
+                        <span class='invalid-feedback' role='alert'>
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <br>
+                    <label for="item_name5">
+                        정량 평가 항목 내용 5
+                    </label>
+                    <input type="text" id="item_name5" name="item_name5" value="{{ old('item_name5') }}">
+                    @error('item_name5')
+                        <span class='invalid-feedback' role='alert'>
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                    <br>
 
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <button type="submit">저장</button>
+            </td>
+        </tr>
+    </table>
+</form>
 <script>
     $(document).ready(function() {
         $(document).on("click", "#caa_id", function() {

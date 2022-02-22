@@ -2,9 +2,7 @@
 
 @section('content')
 
-    <form action="{{ route('admRating.create') }}" method="post" onsubmit="return form_check()">
-    {!! csrf_field() !!}
-    <input type="hidden" name="last_choice_ca_id" id="last_choice_ca_id">
+
         <!-- 타이틀 영역 -->
         <div class="top">
             <div class="title">
@@ -17,28 +15,22 @@
 
         <!-- 컨텐츠 영역 시작 -->
         <div class="contents_area review">
+
+            <form>
+
                 <div class="box_cont">
                     <div class="row">
                         <div class="col">카테고리 선택</div>
                         <div class="col">
                             <div class="cate_sel">
-                            <ul>
-                                <li id="cate1">
-                                    <select name="ca_id" id="caa_id" class="cid" >
-                                    @foreach($one_step_infos as $one_step_info)
-                                        <option value="{{ $one_step_info->sca_id }}">{{ $one_step_info->sca_name_kr }}</option>
-                                    @endforeach
-                                    </select>
-                                </li>
-
-                                <li id="cate2" style="display:none">
-                                    <select name="ca_id" id="caa_id2" class="cid" >
-                                    @foreach($two_step_infos as $two_step_info)
-                                        <option value="{{ $two_step_info->sca_id }}">{{ $two_step_info->sca_name_kr }}</option>
-                                    @endforeach
-                                    </select>
-                                </li>
-                            </ul>
+                                <select>
+                                    <option>욕실</option>
+                                </select>
+                                <select>
+                                    <option>선택하세요</option>
+                                    <option>└ 치약</option>
+                                    <option>└ 샴푸바</option>
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -46,40 +38,42 @@
                         <div class="col">정량평가 항목1</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name1" name="item_name1" value="{{ old('item_name1') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목2</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name2" name="item_name2" value="{{ old('item_name2') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목3</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name3" name="item_name3" value="{{ old('item_name3') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목4</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name4" name="item_name4" value="{{ old('item_name4') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목5</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name5" name="item_name5" value="{{ old('item_name5') }}">
+                            <input type="text" name="" placeholder="">
                         </div>
                     </div>
                 </div>
+
+            </form>
+
         </div>
-    </form>
         <!-- 컨텐츠 영역 끝 -->
 
 

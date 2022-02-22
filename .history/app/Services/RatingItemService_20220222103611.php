@@ -37,9 +37,12 @@ class RatingItemService
         if($page != "" || $page != null)
         {
             $start_num = $pageScale * ($page - 1);
+
         }else{
+
             $page = 1;
             $start_num = 0;
+
         }
 
         //검색 처리
