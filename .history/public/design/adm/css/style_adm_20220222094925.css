@@ -1308,7 +1308,7 @@ td.bn_btm_mo div img {
 }
 .modal_002 .board {
     margin-top: 40px;
-    overflow-y: scroll;
+    overflow: scroll;
     height: 500px;
     -ms-overflow-style: none; 
 }
@@ -1320,7 +1320,7 @@ td.bn_btm_mo div img {
 .modal_002 .board thead {
     position: sticky;
     top: -1px;
-    z-index: 10;
+    z-index: 999999999999;
 }
 .modal_002 select {
     width: 150px !important;

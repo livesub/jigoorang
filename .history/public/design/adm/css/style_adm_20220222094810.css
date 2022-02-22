@@ -1308,14 +1308,10 @@ td.bn_btm_mo div img {
 }
 .modal_002 .board {
     margin-top: 40px;
-    overflow-y: scroll;
+    overflow: scroll;
     height: 500px;
-    -ms-overflow-style: none; 
 }
- 
-.modal_002 .board::-webkit-scrollbar{
-     display:none; 
-}
+.box{ -ms-overflow-style: none; } .box::-webkit-scrollbar{ display:none; }
 
 .modal_002 .board thead {
     position: sticky;
