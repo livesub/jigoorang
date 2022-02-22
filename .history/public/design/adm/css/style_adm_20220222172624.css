@@ -608,7 +608,6 @@ td.bn_btm_mo div img {
 .box_cont .row .col100 li p {
     display: inline-block;
     line-height: 36px;
-    margin-right: 10px;
 }
 
 .box_cont .row .col100 li:nth-child(odd) { margin-right: 10px; }

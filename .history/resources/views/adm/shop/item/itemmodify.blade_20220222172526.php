@@ -60,7 +60,7 @@
                                         <li class="none">
                                 
                                             @if($ca_id && strlen($ca_id) >= 4)
-                                                    <p>소분류</p>
+                                                    <li>소분류</li>
                                                     <select  name="ca_id" id="caa_id2" class="cid" >
                                                     @foreach($two_step_infos as $two_step_info)
                                                         @php

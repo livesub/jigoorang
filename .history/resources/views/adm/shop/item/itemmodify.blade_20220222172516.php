@@ -56,6 +56,7 @@
                                 
                                 <li>
                                     <ul id="cate2_tt">
+                                        {{-- <li class="none">소분류</li> --}}
                                         <li id="cate2" style="display: none;"></li>
                                         <li class="none">
                                 

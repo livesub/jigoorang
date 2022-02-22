@@ -56,11 +56,11 @@
                                 
                                 <li>
                                     <ul id="cate2_tt">
+                                        <li class="none">소분류</li>
                                         <li id="cate2" style="display: none;"></li>
                                         <li class="none">
-                                
+
                                             @if($ca_id && strlen($ca_id) >= 4)
-                                                    <p>소분류</p>
                                                     <select  name="ca_id" id="caa_id2" class="cid" >
                                                     @foreach($two_step_infos as $two_step_info)
                                                         @php
@@ -618,6 +618,10 @@
 </script>
 
 <script>
+    
+</script>
+
+<script>
 	$(document).ready(function() {
         $(document).on("click", "#caa_id", function() {
 			var cate_is = $('#caa_id').val();
@@ -639,7 +643,7 @@
                             console.log(data.msg);
                         }else{
                             $('#last_choice_ca_id').val(data.ca_id);
-                            $('#cate2').css('display', 'inline-block');
+                            $('#cate2').css('display', 'flex');
                             $('#cate2_tt').css('display', 'inline-block');
                             $('.none').css('display', 'none');
                             $('#cate2').html(data.data);

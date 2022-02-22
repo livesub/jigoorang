@@ -2,6 +2,13 @@ div.inlineblock {
     display: inline-block;
 }
 
+.none {
+    display: none;
+}
+
+.block {
+    
+}
 /* form */
 input[type=text], input[type=number], input[type=password] {
     width: 250px;
@@ -599,18 +606,10 @@ td.bn_btm_mo div img {
 .box_cont .row .col100 {
     width: 100%;
 }
-
 .box_cont .row .col100 li {
     display: inline-block;
     line-height: 36px;
 }
-
-.box_cont .row .col100 li p {
-    display: inline-block;
-    line-height: 36px;
-    margin-right: 10px;
-}
-
 .box_cont .row .col100 li:nth-child(odd) { margin-right: 10px; }
 .box_cont .row .col100 li:nth-child(even) { margin-right: 30px;}
 .box_cont .row .col100 li select {width: 200px;     
