@@ -619,8 +619,6 @@ function price_calculate()
 
     if(total >= de_send_cost_free){
         $("#add_cost").hide();
-    }else{
-        $("#add_cost").show();
     }
 }
 

@@ -601,7 +601,7 @@ function price_calculate()
     var $el_type = $("input[name^=sio_type]");
     var de_send_cost_free = $("#de_send_cost_free").val();
     var price, type, qty, total = 0;
-
+alert(de_send_cost_free);
     $el_prc.each(function(index) {
         price = parseInt($(this).val());
         qty = parseInt($el_qty.eq(index).val());
@@ -612,16 +612,10 @@ function price_calculate()
             total += price * qty;
         }
     });
-
+alert(total);
     $("#sit_tot_price").empty().html(number_format(String(total))+"원");
 
     $("#sit_tot_price").trigger("price_calculate", [total]);
-
-    if(total >= de_send_cost_free){
-        $("#add_cost").hide();
-    }else{
-        $("#add_cost").show();
-    }
 }
 
 //바뀐 장바구니 가격계산

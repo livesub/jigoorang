@@ -591,6 +591,7 @@ function same_option_check(val)
 // 가격계산
 function price_calculate()
 {
+alert("svssdvsd");
     var item_price = parseInt($("input#item_price").val());
 
     if(isNaN(item_price))
@@ -599,7 +600,6 @@ function price_calculate()
     var $el_prc = $("input.sio_price");
     var $el_qty = $("input[name^=ct_qty]");
     var $el_type = $("input[name^=sio_type]");
-    var de_send_cost_free = $("#de_send_cost_free").val();
     var price, type, qty, total = 0;
 
     $el_prc.each(function(index) {
@@ -616,12 +616,6 @@ function price_calculate()
     $("#sit_tot_price").empty().html(number_format(String(total))+"원");
 
     $("#sit_tot_price").trigger("price_calculate", [total]);
-
-    if(total >= de_send_cost_free){
-        $("#add_cost").hide();
-    }else{
-        $("#add_cost").show();
-    }
 }
 
 //바뀐 장바구니 가격계산

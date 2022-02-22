@@ -176,7 +176,7 @@ class ItemController extends Controller
     public function sitemdetail(Request $request)
     {
         $Messages = CustomUtils::language_pack(session()->get('multi_lang'));
-
+dd("svsvsvsd");
         $item_code          = $request->input('item_code');
 
         $item_info = DB::select("select a.*, b.sca_display from shopitems a, shopcategorys b where a.item_code = '$item_code' and a.sca_id = b.sca_id ");
@@ -298,7 +298,6 @@ class ItemController extends Controller
             exit;
         }
 
-
         return view('shop.item_detail',[
             "item_info"         => $item_info[0],
             "big_img_disp"      => $big_img_disp,
@@ -309,7 +308,6 @@ class ItemController extends Controller
             "de_send_cost"      => $use_point->de_send_cost,
             "use_point_disp"    => $use_point_disp,
             "tot_item_point"    => $use_point->tot_item_point,
-            "de_send_cost_free" => $use_point->de_send_cost_free,
             "sc_method_disp"    => $sc_method_disp,
             "point"             => $item_info[0]->item_point,
             "is_orderable"      => $is_orderable,   //재고가 있는지 파악 여부

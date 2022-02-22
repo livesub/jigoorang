@@ -90,7 +90,6 @@
                                 <input type="hidden" name="ajax_option_url" id="ajax_option_url" value="{{ route('ajax_option_change') }}">
                                 <input type="hidden" name="sw_direct" id="sw_direct">
                                 <input type="hidden" name="url" id="url">
-                                <input type="hidden" name="de_send_cost_free" id="de_send_cost_free" value="{{ $de_send_cost_free }}">
 
                                 <div class="shop_goods_dt_r">
                                    @if($item_info->item_type1 != 0)
@@ -187,7 +186,7 @@
                                             <li><h4>총 상품금액</h4></li>
                                             <li class="cr_02" id="sit_tot_price"></li>
                                         </ul>
-                                        <ul class="dt_dev" id="add_cost">
+                                        <ul class="dt_dev">
                                             <li>배송비</li>
                                             <li>
                                                 <span>{{ number_format($de_send_cost) }}원</span>

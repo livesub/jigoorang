@@ -187,7 +187,7 @@
                                             <li><h4>총 상품금액</h4></li>
                                             <li class="cr_02" id="sit_tot_price"></li>
                                         </ul>
-                                        <ul class="dt_dev" id="add_cost">
+                                        <ul class="dt_dev">
                                             <li>배송비</li>
                                             <li>
                                                 <span>{{ number_format($de_send_cost) }}원</span>

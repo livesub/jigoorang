@@ -298,7 +298,6 @@ class ItemController extends Controller
             exit;
         }
 
-
         return view('shop.item_detail',[
             "item_info"         => $item_info[0],
             "big_img_disp"      => $big_img_disp,
@@ -309,7 +308,6 @@ class ItemController extends Controller
             "de_send_cost"      => $use_point->de_send_cost,
             "use_point_disp"    => $use_point_disp,
             "tot_item_point"    => $use_point->tot_item_point,
-            "de_send_cost_free" => $use_point->de_send_cost_free,
             "sc_method_disp"    => $sc_method_disp,
             "point"             => $item_info[0]->item_point,
             "is_orderable"      => $is_orderable,   //재고가 있는지 파악 여부
