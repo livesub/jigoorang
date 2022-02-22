@@ -286,6 +286,7 @@ class AdmReviewMangerController extends Controller
             'review_save_imgs'  => $review_save_imgs,
             'num'               => $id,
             'page_move'         => $page_move,
+            'rating_item_info'  => $rating_item_info,
         ]);
     }
 

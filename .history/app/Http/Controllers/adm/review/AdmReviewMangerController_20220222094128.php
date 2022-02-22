@@ -458,12 +458,12 @@ class AdmReviewMangerController extends Controller
 
         $now_date = date('Ymd', time());
         $file_name = "리뷰관리".$now_date.".xls";
-
+/*
         header( "Content-type: application/vnd.ms-excel" );
         header( "Content-type: application/vnd.ms-excel; charset=utf-8");
         header( "Content-Disposition: attachment; filename = $file_name" );
         header( "Content-Description: PHP4 Generated Data" );
-
+*/
         $dsp_html = '
             <table>
                 <tr style="background-color:#ddd;">
@@ -537,7 +537,7 @@ class AdmReviewMangerController extends Controller
                     <td>'.$review_save_row->review_content.'</td>
                     <td>'.$review_save_row->created_at.'</td>
                     <td>'.$temporary_yn_ment.'</td>
-                    <td>'.$blind_ment.'</td>
+                    <td>블라인드처리여부</td>
                 <tr>
             ';
 
@@ -549,6 +549,7 @@ class AdmReviewMangerController extends Controller
         ';
         echo "<meta content=\"application/vnd.ms-excel; charset=UTF-8\" name=\"Content-type\"> ";
         echo $dsp_html;
+
     }
 
 

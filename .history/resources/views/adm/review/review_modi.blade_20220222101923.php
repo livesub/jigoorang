@@ -97,7 +97,6 @@
 
 
                         @for($i = count($review_save_imgs)+1; $i <= 5; $i++)
-                        <div class="file_att">
                             <div class="btn_file">
                                 <label>
                                     파일선택
@@ -108,7 +107,7 @@
                             </div>
                             <div class="file">
                                 <label>
-                                    <input type="checkbox" name="file_chk_{{ $i }}" id="file_chk_{{ $i }}" value='1'>수정, 삭제, 새로등록시 체크
+                                    <input type="checkbox" name="file_chk_{{ $k }}" id="file_chk_{{ $k }}" value='1'>수정, 삭제, 새로등록시 체크
                                 </label>
                             </div>
                         </div>

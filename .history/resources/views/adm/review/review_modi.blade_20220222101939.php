@@ -97,7 +97,6 @@
 
 
                         @for($i = count($review_save_imgs)+1; $i <= 5; $i++)
-                        <div class="file_att">
                             <div class="btn_file">
                                 <label>
                                     파일선택

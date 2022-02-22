@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="file">
                                     <label>
-                                        <input type="checkbox" name="file_chk_{{ $k }}" id="file_chk_{{ $k }}" value='1'>수정, 삭제, 새로등록시 체크
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
                                     </label>
                                 </div>
                            </div>
@@ -94,25 +94,6 @@
                                 $k++;
                             @endphp
                         @endforeach
-
-
-                        @for($i = count($review_save_imgs)+1; $i <= 5; $i++)
-                        <div class="file_att">
-                            <div class="btn_file">
-                                <label>
-                                    파일선택
-                                    <input type="file" name="review_img_{{ $i }}" id="review_img{{ $i }}" accept="image/*" onchange="file_name('review_img{{ $k }}')">
-                                </label>
-                                <span id="review_img{{ $i }}_name"></span>
-                                <!-- 선택된 파일이 없습니다. -->
-                            </div>
-                            <div class="file">
-                                <label>
-                                    <input type="checkbox" name="file_chk_{{ $i }}" id="file_chk_{{ $i }}" value='1'>수정, 삭제, 새로등록시 체크
-                                </label>
-                            </div>
-                        </div>
-                        @endfor
 
                         </div>
                     </div>
@@ -135,6 +116,7 @@
 
 <script>
     function file_name(id_val){
+alert(id_val);
         flies = document.getElementById(id_val);
 
         fileList = "";

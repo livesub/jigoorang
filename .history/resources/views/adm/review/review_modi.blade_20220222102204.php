@@ -86,7 +86,7 @@
                                 </div>
                                 <div class="file">
                                     <label>
-                                        <input type="checkbox" name="file_chk_{{ $k }}" id="file_chk_{{ $k }}" value='1'>수정, 삭제, 새로등록시 체크
+                                        <input type="checkbox" name="file_chk_{{ $k }}" id="file_chk_{{ $k }}" value='1'>수정, 삭제, 새로등록시 체크<br>
                                     </label>
                                 </div>
                            </div>

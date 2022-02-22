@@ -458,20 +458,19 @@ class AdmReviewMangerController extends Controller
 
         $now_date = date('Ymd', time());
         $file_name = "리뷰관리".$now_date.".xls";
-
+/*
         header( "Content-type: application/vnd.ms-excel" );
         header( "Content-type: application/vnd.ms-excel; charset=utf-8");
         header( "Content-Disposition: attachment; filename = $file_name" );
         header( "Content-Description: PHP4 Generated Data" );
-
+*/
         $dsp_html = '
             <table>
-                <tr style="background-color:#ddd;">
+                <tr style="background-color:#ddd;padding:10px;">
                     <td>번호</td>
                     <td>아이디</td>
                     <td>이름</td>
-                    <td>상품명</td>
-                    <td>체험단명</td>
+                    <td>상품명/체험단명</td>
                     <td>정량평가</td>
                     <td>리뷰</td>
                     <td>작성일자</td>
@@ -480,68 +479,20 @@ class AdmReviewMangerController extends Controller
                 <tr>
         ';
 
-        $rows_cnt = count($review_save_rows);
         foreach($review_save_rows as $review_save_row){
-            $score_tmp = '';
-            $dip_name = '';
-            $tmp = '';
-            $kk = 0;
-
-            $exp_info = DB::table('exp_list')->select('title')->where('id', $review_save_row->exp_id)->first(); //체험단명 찾기
-
-            if(is_null($exp_info)){
-                $title_ment = '';
-            }else{
-                $title_ment = stripslashes($exp_info->title);
-            }
-
-            $item_info = DB::table('shopitems')->where('item_code', $review_save_row->item_code)->first(); //상품명 찾기
-            $rating_item_info = DB::table('rating_item')->where('sca_id', $review_save_row->sca_id)->first();
-
-
-            if($review_save_row->review_blind == "Y") $blind_ment = '블라인드';
-            else $blind_ment = '';
-
-            if($item_info->item_manufacture == "") $item_manufacture = "";
-            else $item_manufacture = "[".$item_info->item_manufacture."] ";
-
-            //임시저장여부
-            if($review_save_row->temporary_yn == "y") $temporary_yn_ment = "임시저장";
-            else $temporary_yn_ment = "저장";
-
             $dsp_html .= '
                 <tr>
-                    <td>'.$rows_cnt.'</td>
-                    <td>'.$review_save_row->user_id.'</td>
-                    <td>'.$review_save_row->user_name.'</td>
-                    <td>'.$item_manufacture.stripslashes($item_info->item_name).'</td>
-                    <td>'.$title_ment.'</td>
-                    <td>
-                        <table>
-            ';
-
-            for($i = 1; $i <= 5; $i++){
-                $tmp = "item_name".$i;
-                $score_tmp = "score".$i;
-                $dsp_html .= '
-                            <tr>
-                                <td>'.$rating_item_info->$tmp.'</td>
-                                <td>'.number_format($review_save_row->$score_tmp, 2).'</td>
-                            </tr>
-                ';
-            }
-
-            $dsp_html .= '
-                        </table>
-                    </td>
-                    <td>'.$review_save_row->review_content.'</td>
-                    <td>'.$review_save_row->created_at.'</td>
-                    <td>'.$temporary_yn_ment.'</td>
-                    <td>'.$blind_ment.'</td>
+                    <td>번호</td>
+                    <td>아이디</td>
+                    <td>이름</td>
+                    <td>상품명/체험단명</td>
+                    <td>정량평가</td>
+                    <td>리뷰</td>
+                    <td>작성일자</td>
+                    <td>임시저장여부</td>
+                    <td>블라인드처리여부</td>
                 <tr>
             ';
-
-            $rows_cnt--;
         }
 
         $dsp_html .= '
@@ -549,6 +500,7 @@ class AdmReviewMangerController extends Controller
         ';
         echo "<meta content=\"application/vnd.ms-excel; charset=UTF-8\" name=\"Content-type\"> ";
         echo $dsp_html;
+
     }
 
 

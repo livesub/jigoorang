@@ -74,19 +74,18 @@
                             @endphp
 
                             <div class="file_att">
+                                <p class="t_mint">이미지 사이즈 230*230(460*460)</p>
                                 <div class="btn_file">
-                                    <input type="hidden" name="review_id_{{ $k }}" value="{{ $review_save_img->id }}">
                                     <label>
                                         파일선택
-                                        <input type="file" name="review_img_{{ $k }}" id="review_img{{ $k }}" accept="image/*" onchange="file_name('review_img{{ $k }}')">
+                                        <input type="file" id="" accept="image/*">
                                     </label>
-                                    <span id="review_img{{ $k }}_name"></span>
-                                    <p><img src="{{ asset('/data/review/'.$img_src) }}"></p>
+                                    asdfasdf.png
                                     <!-- 선택된 파일이 없습니다. -->
                                 </div>
                                 <div class="file">
                                     <label>
-                                        <input type="checkbox" name="file_chk_{{ $k }}" id="file_chk_{{ $k }}" value='1'>수정, 삭제, 새로등록시 체크
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
                                     </label>
                                 </div>
                            </div>
@@ -94,25 +93,6 @@
                                 $k++;
                             @endphp
                         @endforeach
-
-
-                        @for($i = count($review_save_imgs)+1; $i <= 5; $i++)
-                        <div class="file_att">
-                            <div class="btn_file">
-                                <label>
-                                    파일선택
-                                    <input type="file" name="review_img_{{ $i }}" id="review_img{{ $i }}" accept="image/*" onchange="file_name('review_img{{ $k }}')">
-                                </label>
-                                <span id="review_img{{ $i }}_name"></span>
-                                <!-- 선택된 파일이 없습니다. -->
-                            </div>
-                            <div class="file">
-                                <label>
-                                    <input type="checkbox" name="file_chk_{{ $i }}" id="file_chk_{{ $i }}" value='1'>수정, 삭제, 새로등록시 체크
-                                </label>
-                            </div>
-                        </div>
-                        @endfor
 
                         </div>
                     </div>
@@ -133,17 +113,5 @@
     }
 </script>
 
-<script>
-    function file_name(id_val){
-        flies = document.getElementById(id_val);
-
-        fileList = "";
-        for(i = 0; i < flies.files.length; i++){
-            fileList += flies.files[i].name;
-        }
-        flies_name = document.getElementById(id_val+'_name');
-        flies_name.innerHTML = fileList;
-    }
-</script>
 
 @endsection
