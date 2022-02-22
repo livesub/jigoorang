@@ -37,14 +37,14 @@
                                 </li>
 
                                 <li id="cate2" style="display:none">
-                                @if($ca_id && strlen($ca_id) >= 4)
+                               
                                     <select name="ca_id" id="caa_id2" class="cid" >
                                     @foreach($two_step_infos as $two_step_info)
                                         @php
                                             if($two_str_cut == $two_step_info->sca_id) $two_selected = "selected";
                                             else $two_selected = "";
                                         @endphp
-                    
+                                       
                                         <option value="{{ $two_step_info->sca_id }}" {{ $two_selected  }}>{{ $two_step_info->sca_name_kr }}</option>
                                     @endforeach
                                     </select>
