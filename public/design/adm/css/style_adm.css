@@ -549,10 +549,9 @@ td.bn_btm_mo div img {
 }
 .paging_box .paging {
     display: flex;
-    width: 100%;
+    width: 650px;
     margin: 0 auto;
     text-align: center;
-    justify-content: center;
 }
 .paging_box .paging a {
     width: 40px;
