@@ -11,9 +11,9 @@
         <!-- 타이틀 영역 -->
         <div class="top">
             <div class="title">
-                <h2>지구록 수정</h2>
+                <h2>지구록 작성</h2>
                 <div class="button_box">
-                    <button type="button" onclick="submitContents();">수정<!-- 수정 --></button>
+                    <button type="button" onclick="location.href='../../page/contents/jigoorok.html'">등록<!-- 수정 --></button>
                 </div>
             </div>
         </div>
@@ -21,25 +21,21 @@
         <!-- 컨텐츠 영역 시작 -->
         <div class="contents_area cont">
 
-            <form name="n_create_form" id="n_create_form" method="post" action="{{ route('adm.notice_modify_save') }}" enctype="multipart/form-data">
-                {!! csrf_field() !!}
-                <input type="hidden" name="num" id="num" value="{{ $notice_info->id }}">
-                <input type="hidden" name="page" id="page" value="{{ $page }}">
-
+            <form>
                 <div class="box_cont">
 
                     <div class="row">
                         <div class="col">제목(필수)</div>
                         <div class="col">
                             <p>50자 이내로 입력하세요</p>
-                            <input class="wd800" type="text" name="n_subject" id="n_subject" value="{{ stripslashes($notice_info->n_subject) }}">
+                            <input class="wd800" type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">설명글</div>
                         <div class="col">
                             <p>80자 이내로 입력하세요</p>
-                            <input class="wd800" type="text" name="n_explain" id="n_explain" value="{{ stripslashes($notice_info->n_explain) }}">
+                            <input class="wd800" type="text" name="" placeholder="">
                         </div>
                     </div>
                     <div class="row">
@@ -50,18 +46,16 @@
                                 <div class="btn_file">
                                     <label>
                                         파일첨부
-                                        <input type="file" name="n_img" id="n_img" accept="image/*" onchange="file_name('n_img')">
+                                        <input type="file" id="" accept="image/*">
                                     </label>
-                                    <span id="n_img_name"></span>
-                                    <p>{{ $notice_info->n_img_name }}</p>
+                                    asdfasdf.png
+                                    <!-- 선택된 파일이 없습니다. -->
                                 </div>
-
                                 <div class="file">
                                     <label>
-                                        <input type="checkbox" name="file_chk1" id="file_chk1" value='1'>수정, 삭제, 새로등록시 체크
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
                                     </label>
                                 </div>
-
                            </div>
                         </div>
                     </div>
@@ -70,7 +64,7 @@
                         <div class="col">
                             <p class="t_mint">권장 이미지 사이즈  : 가로 1200px / 세로 : 자유</p>
                             <div class="sm_editor">
-                                <textarea type="text" name="n_content" id="n_content" style="width:100%">{{ $notice_info->n_content }}</textarea>
+                                <!-- 스마트에디터영역 -->
                             </div>
                         </div>
                     </div>
@@ -118,13 +112,13 @@
             $("#n_explain").focus();
             return false;
         }
-/*
+
         if($("#n_img").val() == ""){
             alert("목록 이미지를 등록해 주세요");
             $("#n_img").focus();
             return false;
         }
-*/
+
         if( n_content == ""  || n_content == null || n_content == '&nbsp;' || n_content == '<p>&nbsp;</p>')  {
              alert("상세 내용을 입력해 주세요");
              oEditors.getById["n_content"].exec("FOCUS"); //포커싱
@@ -138,18 +132,7 @@
 </script>
 
 
-<script>
-    function file_name(id_val){
-        flies = document.getElementById(id_val);
 
-        fileList = "";
-        for(i = 0; i < flies.files.length; i++){
-            fileList += flies.files[i].name;
-        }
-        flies_name = document.getElementById(id_val+'_name');
-        flies_name.innerHTML = fileList;
-    }
-</script>
 
 
 

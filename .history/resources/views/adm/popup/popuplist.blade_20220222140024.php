@@ -79,12 +79,12 @@
                                 </td>
                                 <td>{{ $target_ment }}</td>
                                 <td>{{ $pop_display }}</td>
-                                <td>{{ $pop_info->created_at }}</td>
+                                <td>2022-01-01 13:13:13</td>
                                 <td>
-                                    <button type="button" class="btn-sm-ln" onclick="pop_modi('{{ $pop_info->id }}')">수정</button>
+                                    <button type="button" class="btn-sm-ln" onclick="location.href='../../page/contents/pop_rgst.html'">수정</button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn-sm-ln" onclick="pop_del('{{ $pop_info->id }}')">삭제</button>
+                                    <button type="button" class="btn-sm-ln" onclick="">삭제</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -95,7 +95,20 @@
                     <!-- 페이지네이션 시작 -->
                     <div class="paging_box">
                         <div class="paging">
-                            {!! $pnPage !!}
+                            <a class="wide">처음</a>
+                            <a class="wide">이전</a>
+                            <a class="on">1</a>
+                            <a>2</a>
+                            <a>3</a>
+                            <a>4</a>
+                            <a>5</a>
+                            <a>6</a>
+                            <a>7</a>
+                            <a>8</a>
+                            <a>9</a>
+                            <a>10</a>
+                            <a class="wide">다음</a>
+                            <a class="wide">마지막</a>
                         </div>
                     </div>
                     <!-- 페이지네이션 끝 -->

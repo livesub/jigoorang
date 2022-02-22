@@ -41,32 +41,31 @@
                         <tbody>
                         @foreach($notices as $notice)
                         @php
-                            $n_img = "";
                             $n_img_cut = explode("@@", $notice->n_img);
                             if($n_img_cut[2] == ""){
                                 $n_img = asset("img/no_img.jpg");
                             }else{
-                                $n_img = asset('/data/notice/'.$n_img_cut[2]);
+
                             }
                         @endphp
                             <tr>
                                 <td>{{ $virtual_num-- }}</td>
                                 <td class="thumb">
-                                    <img src="{{ $n_img }}">
+                                    <img src="{{ asset('/data/notice/'.$n_img[2]) }}">
                                 </td>
                                 <td class="title">
                                     <div>
-                                        {{ stripslashes($notice->n_subject) }}
+                                        친환경 메이커 지구랭을 소개합니다
                                     </div>
                                 </td>
                                 <td class="usertxt">
-                                    {{ stripslashes($notice->n_explain) }}
+                                    일이삼사오륙칠팔구십 일이삼사오륙칠팔구십 일이삼사오륙칠팔구십 일이삼사오륙칠팔구십 일이삼사오륙칠팔구십 일이삼사오륙칠팔구십 일이삼사오륙칠팔구십 일이삼사오륙칠팔구십 일이삼사오륙칠팔구십 일이삼사오륙칠팔구십
                                 </td>
                                 <td>
-                                    <button type="button" class="btn-sm-ln" onclick="noti_modi('{{ $notice->id }}')">수정</button>
+                                    <button type="button" class="btn-sm-ln" onclick="location.href='../../page/contents/jigoorok_rgst.html'">수정</button>
                                 </td>
                                 <td>
-                                    <button type="button" class="btn-sm-ln" onclick="noti_del('{{ $notice->id }}')">삭제</button>
+                                    <button type="button" class="btn-sm-ln" onclick="">삭제</button>
                                 </td>
                             </tr>
                         @endforeach
@@ -77,7 +76,20 @@
                     <!-- 페이지네이션 시작 -->
                     <div class="paging_box">
                         <div class="paging">
-                            {!! $pnPage !!}
+                            <a class="wide">처음</a>
+                            <a class="wide">이전</a>
+                            <a class="on">1</a>
+                            <a>2</a>
+                            <a>3</a>
+                            <a>4</a>
+                            <a>5</a>
+                            <a>6</a>
+                            <a>7</a>
+                            <a>8</a>
+                            <a>9</a>
+                            <a>10</a>
+                            <a class="wide">다음</a>
+                            <a class="wide">마지막</a>
                         </div>
                     </div>
                     <!-- 페이지네이션 끝 -->
@@ -95,6 +107,8 @@
     <input type="hidden" name="num" id="num" value="">
     <input type="hidden" name="page" id="page" value="{{ $page }}">
 </form>
+
+
 
 <script>
     function noti_modi(num){

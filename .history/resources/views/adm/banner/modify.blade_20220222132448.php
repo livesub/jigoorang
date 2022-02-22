@@ -117,11 +117,13 @@
                                     <span id="b_mobile_img_name"></span>
                                     <p>{{ $banner_info->b_mobile_ori_img }}</p>
                                 </div>
+<!--
                                 <div class="file">
                                     <label>
-                                        <input type="checkbox" name="file_chk2" id="file_chk2" value='1'>수정, 삭제, 새로등록시 체크
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
                                     </label>
                                 </div>
+-->
                            </div>
                         </div>
                     </div>
@@ -138,7 +140,7 @@
             $("#b_name").focus();
             return false;
         }
-/*
+
         if($("#b_pc_img").val() == ""){
             alert("pc 이미지를 등록 하세요.");
             $("#b_pc_img").focus();
@@ -150,7 +152,7 @@
             $("#b_mobile_img").focus();
             return false;
         }
-*/
+
         $("#b_form").submit();
     }
 </script>

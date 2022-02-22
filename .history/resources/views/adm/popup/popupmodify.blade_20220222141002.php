@@ -108,20 +108,11 @@ smarteditor2 사용 -->
                         <div class="col">출력여부</div>
                         <div class="col">
                             <div class="prt">
-                            @php
-                                if($popup_info->pop_display == "Y"){
-                                    $pop_display_yes = "checked";
-                                    $pop_display_no = "";
-                                }else{
-                                    $pop_display_yes = "";
-                                    $pop_display_no = "checked";
-                                }
-                            @endphp
                                 <label>
-                                    <input type="radio" name="pop_display" id="pop_display_yes" value="Y" {{ $pop_display_yes }}> 출력
+                                    <input type="radio" name="pop_display" id="pop_display_yes" value="Y" checked> 출력
                                 </label>
                                 <label>
-                                    <input type="radio" name="pop_display" id="pop_display_no" value="N" {{ $pop_display_no }}> 미출력
+                                    <input type="radio" name="pop_display" id="pop_display_no" value="N"> 미출력
                                 </label>
                             </div>
                         </div>
@@ -211,34 +202,31 @@ smarteditor2 사용 -->
 
 
 <script>
-    function pop_modi(elClickedObj){
-/*
-        oEditors.getById["pop_content"].exec("UPDATE_CONTENTS_FIELD", []);
-        var pop_content = $("#pop_content").val();
-*/
+    function pop_create(elClickedObj){
+//        oEditors.getById["pop_content"].exec("UPDATE_CONTENTS_FIELD", []);
+//        var pop_content = $("#pop_content").val();
+
         if($.trim($("#pop_subject").val()) == ""){
             alert("제목을 입력 하세요.");
             $("#pop_subject").focus();
             return false;
         }
-/*
+
         if($("#pop_img").val() == ""){
             alert("팝업이미지를 첨부 하세요.");
             $("#pop_img").focus();
             return false;
         }
-*/
 /*
         if( pop_content == ""  || pop_content == null || pop_content == '&nbsp;' || pop_content == '<p>&nbsp;</p>')  {
              alert("내용을 입력하세요.");
              oEditors.getById["pop_content"].exec("FOCUS"); //포커싱
              return;
         }try {
-            $("#pop_modi_form").submit();
+            $("#pop_create_form").submit();
         } catch(e) {}
 */
-
-        $("#pop_modi_form").submit();
+        $("#pop_create_form").submit();
     }
 </script>
 

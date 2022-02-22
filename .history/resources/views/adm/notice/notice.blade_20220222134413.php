@@ -96,6 +96,8 @@
     <input type="hidden" name="page" id="page" value="{{ $page }}">
 </form>
 
+
+
 <script>
     function noti_modi(num){
         $("#num").val(num);

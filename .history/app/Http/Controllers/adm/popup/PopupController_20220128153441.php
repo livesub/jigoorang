@@ -72,7 +72,7 @@ class PopupController extends Controller
         $preFirstPage   = $PageSet->preFirst("처음");
         $nextLastPage   = $PageSet->nextLast("마지막");
         $listPage       = $PageSet->getPageList();
-        $pnPage         = $preFirstPage.$prevPage.$listPage.$nextPage.$nextLastPage;
+        $pnPage         = $prevPage.$listPage.$nextPage;
 
         return view('adm.popup.popuplist',[
             "pop_infos"     => $pop_rows,

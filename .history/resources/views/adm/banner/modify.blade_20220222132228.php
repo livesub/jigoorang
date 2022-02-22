@@ -65,20 +65,11 @@
                         <div class="col">타겟</div>
                         <div class="col">
                             <div class="prt">
-                            @php
-                                if($banner_info->b_target == 'N'){
-                                    $b_target_no_chk = "checked";
-                                    $b_target_yes_chk = "";
-                                }else{
-                                    $b_target_no_chk = "";
-                                    $b_target_yes_chk = "checked";
-                                }
-                            @endphp
                                 <label>
-                                    <input type="radio" name="b_target" id="b_target_no" value="N" {{ $b_target_no_chk }}> 현재창
+                                    <input type="radio" name="b_target" id="b_target_no" value="N" checked> 현재창
                                 </label>
                                 <label>
-                                    <input type="radio" name="b_target" id="b_target_yes" value="Y" {{ $b_target_yes_chk }}> 새창
+                                    <input type="radio" name="b_target" id="b_target_yes" value="Y"> 새창
                                 </label>
                             </div>
                         </div>
@@ -94,13 +85,15 @@
                                         <input type="file" name="b_pc_img" id="b_pc_img" accept="image/*" onchange="file_name('b_pc_img')">
                                     </label>
                                     <span id="b_pc_img_name"></span>
-                                    <p>{{ $banner_info->b_pc_ori_img }}</p>
+                                    <!-- 선택된 파일이 없습니다. -->
                                 </div>
+<!--
                                 <div class="file">
                                     <label>
-                                        <input type="checkbox" name="file_chk1" id="file_chk1" value='1'>수정, 삭제, 새로등록시 체크
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
                                     </label>
                                 </div>
+-->
                            </div>
                         </div>
                     </div>
@@ -115,13 +108,15 @@
                                         <input type="file" name="b_mobile_img" id="b_mobile_img" accept="image/*" onchange="file_name('b_mobile_img')">
                                     </label>
                                     <span id="b_mobile_img_name"></span>
-                                    <p>{{ $banner_info->b_mobile_ori_img }}</p>
+                                    <!-- 선택된 파일이 없습니다. -->
                                 </div>
+<!--
                                 <div class="file">
                                     <label>
-                                        <input type="checkbox" name="file_chk2" id="file_chk2" value='1'>수정, 삭제, 새로등록시 체크
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
                                     </label>
                                 </div>
+-->
                            </div>
                         </div>
                     </div>
@@ -138,7 +133,7 @@
             $("#b_name").focus();
             return false;
         }
-/*
+
         if($("#b_pc_img").val() == ""){
             alert("pc 이미지를 등록 하세요.");
             $("#b_pc_img").focus();
@@ -150,7 +145,7 @@
             $("#b_mobile_img").focus();
             return false;
         }
-*/
+
         $("#b_form").submit();
     }
 </script>

@@ -55,13 +55,13 @@
                                     <span id="n_img_name"></span>
                                     <p>{{ $notice_info->n_img_name }}</p>
                                 </div>
-
+<!--
                                 <div class="file">
                                     <label>
-                                        <input type="checkbox" name="file_chk1" id="file_chk1" value='1'>수정, 삭제, 새로등록시 체크
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
                                     </label>
                                 </div>
-
+-->
                            </div>
                         </div>
                     </div>
@@ -70,7 +70,7 @@
                         <div class="col">
                             <p class="t_mint">권장 이미지 사이즈  : 가로 1200px / 세로 : 자유</p>
                             <div class="sm_editor">
-                                <textarea type="text" name="n_content" id="n_content" style="width:100%">{{ $notice_info->n_content }}</textarea>
+                                <textarea type="text" name="n_content" id="n_content" style="width:100%"></textarea>
                             </div>
                         </div>
                     </div>
@@ -118,13 +118,13 @@
             $("#n_explain").focus();
             return false;
         }
-/*
+
         if($("#n_img").val() == ""){
             alert("목록 이미지를 등록해 주세요");
             $("#n_img").focus();
             return false;
         }
-*/
+
         if( n_content == ""  || n_content == null || n_content == '&nbsp;' || n_content == '<p>&nbsp;</p>')  {
              alert("상세 내용을 입력해 주세요");
              oEditors.getById["n_content"].exec("FOCUS"); //포커싱

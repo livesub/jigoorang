@@ -66,40 +66,31 @@ smarteditor2 사용 -->
                                     <p>{{ $popup_info->pop_img_name }}</p>
                                     <!-- 선택된 파일이 없습니다. -->
                                 </div>
-
+<!--
                                 <div class="file">
                                     <label>
-                                        <input type="checkbox" name="file_chk1" id="file_chk1" value='1'>수정, 삭제, 새로등록시 체크
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
                                     </label>
                                 </div>
-
+-->
                            </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">경로</div>
                         <div class="col">
-                            <input class="wd500" type="text" name="pop_url" id="pop_url" value="{{ $popup_info->pop_url }}">
+                            <input class="wd500" type="text" name="pop_url" id="pop_url">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">타겟</div>
                         <div class="col">
                             <div class="prt">
-                            @php
-                                if($popup_info->pop_target == 'N'){
-                                    $pop_target_no_chk = "checked";
-                                    $pop_target_yes_chk = "";
-                                }else{
-                                    $pop_target_no_chk = "";
-                                    $pop_target_yes_chk = "checked";
-                                }
-                            @endphp
                                 <label>
-                                    <input type="radio" name="pop_target" id="pop_target_no" value="N" {{ $pop_target_no_chk }}> 현재
+                                    <input type="radio" name="pop_target" id="pop_target_no" value="N" checked> 현재
                                 </label>
                                 <label>
-                                    <input type="radio" name="pop_target" id="pop_target_yes" value="Y" {{ $pop_target_yes_chk }}> 새창
+                                    <input type="radio" name="pop_target" id="pop_target_yes" value="Y"> 새창
                                 </label>
                             </div>
                         </div>
@@ -108,20 +99,11 @@ smarteditor2 사용 -->
                         <div class="col">출력여부</div>
                         <div class="col">
                             <div class="prt">
-                            @php
-                                if($popup_info->pop_display == "Y"){
-                                    $pop_display_yes = "checked";
-                                    $pop_display_no = "";
-                                }else{
-                                    $pop_display_yes = "";
-                                    $pop_display_no = "checked";
-                                }
-                            @endphp
                                 <label>
-                                    <input type="radio" name="pop_display" id="pop_display_yes" value="Y" {{ $pop_display_yes }}> 출력
+                                    <input type="radio" name="pop_display" id="pop_display_yes" value="Y" checked> 출력
                                 </label>
                                 <label>
-                                    <input type="radio" name="pop_display" id="pop_display_no" value="N" {{ $pop_display_no }}> 미출력
+                                    <input type="radio" name="pop_display" id="pop_display_no" value="N"> 미출력
                                 </label>
                             </div>
                         </div>
@@ -211,34 +193,31 @@ smarteditor2 사용 -->
 
 
 <script>
-    function pop_modi(elClickedObj){
-/*
-        oEditors.getById["pop_content"].exec("UPDATE_CONTENTS_FIELD", []);
-        var pop_content = $("#pop_content").val();
-*/
+    function pop_create(elClickedObj){
+//        oEditors.getById["pop_content"].exec("UPDATE_CONTENTS_FIELD", []);
+//        var pop_content = $("#pop_content").val();
+
         if($.trim($("#pop_subject").val()) == ""){
             alert("제목을 입력 하세요.");
             $("#pop_subject").focus();
             return false;
         }
-/*
+
         if($("#pop_img").val() == ""){
             alert("팝업이미지를 첨부 하세요.");
             $("#pop_img").focus();
             return false;
         }
-*/
 /*
         if( pop_content == ""  || pop_content == null || pop_content == '&nbsp;' || pop_content == '<p>&nbsp;</p>')  {
              alert("내용을 입력하세요.");
              oEditors.getById["pop_content"].exec("FOCUS"); //포커싱
              return;
         }try {
-            $("#pop_modi_form").submit();
+            $("#pop_create_form").submit();
         } catch(e) {}
 */
-
-        $("#pop_modi_form").submit();
+        $("#pop_create_form").submit();
     }
 </script>
 

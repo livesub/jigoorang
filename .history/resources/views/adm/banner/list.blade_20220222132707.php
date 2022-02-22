@@ -96,7 +96,7 @@
                                 <td class="bn_mo">
                                     <div><img src="{{ $b_mobile_img_disp }}"></div>
                                 </td>
-                                <td>{{ $b_display_ment }}</td>
+                                <td>출력</td>
                                 <td><button class="btn-sm-ln" type="button" onclick="b_modi('{{ $banner->id }}', {{ $page }});">수정</button></td>
                             </tr>
                             @endforeach

@@ -6,7 +6,6 @@
 <link rel="stylesheet" href="{{ asset('/datepicker/dist/css/datepicker.min.css') }}">
 <script src="{{ asset('/datepicker/dist/js/datepicker.min.js') }}"></script>
 <script src="{{ asset('/datepicker/dist/js/i18n/datepicker.ko.js') }}"></script>
-<!--
 <style>
     * {
         margin: 0;
@@ -17,100 +16,66 @@
         float: left;
     }
 </style>
--->
 <!-- datepicker -->
 
 <!-- smarteditor2 사용
 <script type="text/javascript" src="{{ asset('/smarteditor2/js/HuskyEZCreator.js') }}" charset="utf-8"></script>
 smarteditor2 사용 -->
 
+<table>
+    <tr>
+        <td><h4>팝업 관리 등록</h4></td>
+    </tr>
+</table>
 
-
-        <!-- 타이틀 영역 -->
-        <div class="top">
-            <div class="title">
-                <h2>팝업 등록</h2>
-                <div class="button_box">
-                    <button type="button" onclick="pop_create()">등록<!-- 수정 --></button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 컨텐츠 영역 시작 -->
-        <div class="contents_area cont">
-
-            <form name="pop_create_form" id="pop_create_form" method="post" action="{{ route('adm.pop.createsave') }}" enctype="multipart/form-data">
-                {!! csrf_field() !!}
-
-                <div class="box_cont">
-                    <div class="row">
-                        <div class="col">제목(필수)</div>
-                        <div class="col">
-                            <p>20자 이내로 입력하세요</p>
-                            <input type="text" name="pop_subject" id="pop_subject">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">이미지(필수)</div>
-                        <div class="col">
-                            <div class="file_att">
-                                <p class="t_mint">이미지 사이즈 360*180(720*360)</p>
-                                <div class="btn_file">
-                                    <label>
-                                        파일첨부
-                                        <input type="file" name="pop_img" id="pop_img" accept="image/*" onchange="file_name('pop_img')">
-                                    </label>
-                                    <span id="pop_img_name"></span>
-                                    <!-- 선택된 파일이 없습니다. -->
-                                </div>
+<table border=1>
+<form name="pop_create_form" id="pop_create_form" method="post" action="{{ route('adm.pop.createsave') }}" enctype="multipart/form-data">
+{!! csrf_field() !!}
 <!--
-                                <div class="file">
-                                    <label>
-                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
-                                    </label>
-                                </div>
+    <tr>
+        <td>시간</td>
+        <td><input type="text" name="pop_disable_hours" id="pop_disable_hours" size="3" value="24">시간
+        <br>※고객이 다시 보지 않음을 선택할 시 몇 시간동안 팝업레이어를 보여주지 않을지 설정합니다.</td>
+    </tr>
 -->
-                           </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">경로</div>
-                        <div class="col">
-                            <input class="wd500" type="text" name="pop_url" id="pop_url">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">타겟</div>
-                        <div class="col">
-                            <div class="prt">
-                                <label>
-                                    <input type="radio" name="pop_target" id="pop_target_no" value="N" checked> 현재
-                                </label>
-                                <label>
-                                    <input type="radio" name="pop_target" id="pop_target_yes" value="Y"> 새창
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col">출력여부</div>
-                        <div class="col">
-                            <div class="prt">
-                                <label>
-                                    <input type="radio" name="pop_display" id="pop_display_yes" value="Y" checked> 출력
-                                </label>
-                                <label>
-                                    <input type="radio" name="pop_display" id="pop_display_no" value="N"> 미출력
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <tr>
+        <td>팝업 제목</td>
+        <td><input type="text" name="pop_subject" id="pop_subject"></td>
+    </tr>
+    <tr>
+        <td>팝업이미지(필수)</td>
+        <td><input type="file" name="pop_img" id="pop_img"></td>
+    </tr>
+    <tr>
+        <td>경로</td>
+        <td>
+            <input type="text" name="pop_url" id="pop_url">
+        </td>
+    </tr>
 
-            </form>
+    <tr>
+        <td>타겟</td>
+        <td>
+            <input type="radio" name="pop_target" id="pop_target_no" value="N" checked>현재창
+            <input type="radio" name="pop_target" id="pop_target_yes" value="Y">새창
+        </td>
+    </tr>
 
-        </div>
-        <!-- 컨텐츠 영역 끝 -->
+
+    <tr>
+        <td>출력 유무</td>
+        <td>
+            <input type="radio" name="pop_display" id="pop_display_yes" value="Y" checked>출력
+            <input type="radio" name="pop_display" id="pop_display_no" value="N">출력안함
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2">
+            <button type="button" onclick="pop_create()">저장</button>
+        </td>
+    </tr>
+</form>
+</table>
 
 
 <script>
@@ -218,19 +183,6 @@ smarteditor2 사용 -->
     }
 </script>
 
-
-<script>
-    function file_name(id_val){
-        flies = document.getElementById(id_val);
-
-        fileList = "";
-        for(i = 0; i < flies.files.length; i++){
-            fileList += flies.files[i].name;
-        }
-        flies_name = document.getElementById(id_val+'_name');
-        flies_name.innerHTML = fileList;
-    }
-</script>
 
 
 
