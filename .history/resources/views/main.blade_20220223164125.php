@@ -476,12 +476,10 @@
                                     @endphp
                                     @if($disp_discount_rate != 0)
                                         <p class="pct_ft">{{ $disp_discount_rate }}%</p>
+                                    @endif
                                     @else
                                         <p class="pct_list"></p>
                                     @endif
-                                @else
-                                        <p class="pct_list"></p>
-                                @endif
                                     </span>
                                     <div class="project" id="shop_project2_{{ $new_arrival->id }}">
                                         <div class="stars-outer">
