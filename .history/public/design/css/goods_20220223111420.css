@@ -624,9 +624,7 @@
     margin-bottom: 10px;
 }
 
-.eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_sel .sel_op{
-    padding-bottom: 10px;
-}
+.eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_sel
 
 .eval .board .board_wrap .shop_goods .shop_goods_dt_r .dt_sel select {
     width: 100%;
