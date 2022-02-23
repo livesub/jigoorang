@@ -230,12 +230,11 @@
                                         $disp_discount_rate = round($discount_rate);    //반올림
                                     @endphp
                                     @if($disp_discount_rate != 0)
-				    <p>{{ $disp_discount_rate }}%</p>
-				    @else
- <p class="pct_list"></p>
+                                    <p>{{ $disp_discount_rate }}%</p>
+                                    @else
+                                    <p class="pct_list"></p>
                                     @endif
-				    @else
-
+				@else
                                     <p class="pct_list"></p>
                                 @endif
                                 </span>
