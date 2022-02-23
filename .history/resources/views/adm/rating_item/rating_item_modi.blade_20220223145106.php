@@ -48,7 +48,7 @@
                                                     else $two_selected = "";
                                                 @endphp
                             
-                                                <option value="{{ $two_step_info->sca_id }}" {{ $two_selected  }}> └ {{ $two_step_info->sca_name_kr }}</option>
+                                                <option value="{{ $two_step_info->sca_id }}" {{ $two_selected  }}>{{ $two_step_info->sca_name_kr }}</option>
                                             @endforeach
                                             </select>
                                         @endif

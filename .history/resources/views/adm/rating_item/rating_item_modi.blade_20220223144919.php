@@ -36,25 +36,24 @@
                                     </select>
                                 </li>
 
-                                <li>
+                            <li>
                                     <ul id="cate2_tt">
-                                        <li id="cate2" style="display:block"></li>
-                                        <li class="none">
-                                        @if($ca_id && strlen($ca_id) >= 4)
-                                            <select name="ca_id" id="caa_id2" class="cid" >
-                                            @foreach($two_step_infos as $two_step_info)
-                                                @php
-                                                    if($two_str_cut == $two_step_info->sca_id) $two_selected = "selected";
-                                                    else $two_selected = "";
-                                                @endphp
-                            
-                                                <option value="{{ $two_step_info->sca_id }}" {{ $two_selected  }}> └ {{ $two_step_info->sca_name_kr }}</option>
-                                            @endforeach
-                                            </select>
-                                        @endif
-                                        </li>
-                                    </ul>
+                                <li id="cate2" style="display:block"></li>
+                                <li class="none">
+                                @if($ca_id && strlen($ca_id) >= 4)
+                                    <select name="ca_id" id="caa_id2" class="cid" >
+                                    @foreach($two_step_infos as $two_step_info)
+                                        @php
+                                            if($two_str_cut == $two_step_info->sca_id) $two_selected = "selected";
+                                            else $two_selected = "";
+                                        @endphp
+                    
+                                        <option value="{{ $two_step_info->sca_id }}" {{ $two_selected  }}>{{ $two_step_info->sca_name_kr }}</option>
+                                    @endforeach
+                                    </select>
+                                @endif
                                 </li>
+                                
                             </ul>
                             </div>
                         </div>
@@ -125,10 +124,8 @@
                         }else{
                             $('#last_choice_ca_id').val(data.ca_id);
                             $('#cate2').css('display', 'block');
-                            $('#cate2_tt').css('display', 'inline-block');
-                            $('.none').css('display', 'none');
-                            $('#cate2').html(data.data);
                             $('.ct_none').css('display', 'none');
+                            $('#cate2').html(data.data);
                             $('#cate3').html('');
                             $('#cate4').html('');
                             $('#cate5').html('');
