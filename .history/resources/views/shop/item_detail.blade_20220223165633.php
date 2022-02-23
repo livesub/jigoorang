@@ -153,7 +153,7 @@
                                         <ul class="dt_pr_st pr_add">
                                         @if($item_info->item_sc_price > 0)
                                             <li>추가 배송비</li>
-                                            <li>{{ number_format($item_info->item_sc_price) }}원</li>
+                                            <li>1000원</li>
                                         @endif
                                             <p class="cr_04">※ 도서산간지역 및 일부 제품의 경우 추가 배송비 발생</p>
                                         </ul>
