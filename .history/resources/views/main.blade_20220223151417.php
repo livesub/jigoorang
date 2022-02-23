@@ -123,6 +123,7 @@
 
                         <div class="swiper-slide">
                             <div class="sub-img">
+                            <!--ranking_view?sca_id=1020&sub_cate=8-->
                                 <a href="{{ route('ranking_view','sca_id='.$recommend_rank->sca_id) }}">
                                 <img src="{{ $rank_img_disp }}" class="slide-best" alt="">
                                 </a>
