@@ -1435,7 +1435,7 @@ background-size: cover;
     }
 
 
-    .sale-price.ml-10 {
+      .sale-price.ml-10 {
         margin-left: 0;
     }
 
@@ -1447,18 +1447,9 @@ background-size: cover;
     }
 
     .sale-price {
-          top: 4px;
-          font-size: 16px;
+          top: 1px;
       }
 
-    .price {
-        font-size: 20px;
-        font-weight: 600;
-    }
-    
-    .price.mr-10 {
-        margin-right: 5px;
-    }
 
 
     /* 메인 팝업 */
@@ -1896,10 +1887,10 @@ background-size: cover;
     }
 
     .main-container .mbox_100 .swiper-slide .main-project-left .sale-price.ml-10 {
-        margin: 3px 0;
+        margin: 0;
     }
     .main-container .mbox_1280 .swiper-slide .main-project-left .sale-price.ml-10 {
-        margin: 3px 0;
+        margin: 0;
     }
 
     .main-container .mbox_100 .main-project-title .main-project-left {
@@ -3224,7 +3215,6 @@ background-size: cover;
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_01 .pr_title ul {
         height: auto;
-        padding-bottom: 20px;
     }
 
     
