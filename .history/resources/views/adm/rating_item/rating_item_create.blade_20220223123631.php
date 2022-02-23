@@ -85,6 +85,9 @@
 
 
 <script>
+    $('.ct_2').css('display', 'none');
+</script>
+<script>
     $(document).ready(function() {
         $(document).on("click", "#caa_id", function() {
 			var cate_is = $('#caa_id').val();
@@ -108,7 +111,6 @@
                             $('#last_choice_ca_id').val(data.ca_id);
                             $('#cate2').css('display', 'block');
                             $('#cate2').html(data.data);
-                            $('.ct_none').css('display', 'none');
                             $('#cate3').html('');
                             $('#cate4').html('');
                             $('#cate5').html('');

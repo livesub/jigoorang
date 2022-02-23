@@ -760,8 +760,8 @@ td.bn_btm_mo div img {
     margin-right: 5px;
 }
 
-.box_cont .row .col .cate_sel .ct_none{
-    display: block;
+.box_cont .row .col .cate_sel select .ct_none{
+    display: ;
 }
 .box_cont .row .col .input_link input {
     width: 500px;
