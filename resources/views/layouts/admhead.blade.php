@@ -108,7 +108,7 @@ header('Pragma: public');
                         <a href="#none">상품관리</a>
                         <ul>
                             <li>
-                                <a href="{{ route('shop.cate.index') }}">카테고리관리</a>
+                                <a href="{{ route('shop.cate.index') }}">대분류/소분류 관리</a>
                             </li>
                             <li>
                                 <a href="{{ route('shop.item.index') }}">상품관리</a>
