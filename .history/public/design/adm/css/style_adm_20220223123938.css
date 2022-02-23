@@ -761,7 +761,7 @@ td.bn_btm_mo div img {
 }
 
 .box_cont .row .col .cate_sel .ct_none{
-    display: block;
+    display: none;
 }
 .box_cont .row .col .input_link input {
     width: 500px;

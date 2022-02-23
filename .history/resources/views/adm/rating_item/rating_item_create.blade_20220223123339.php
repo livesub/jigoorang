@@ -84,6 +84,7 @@
 
 
 
+
 <script>
     $(document).ready(function() {
         $(document).on("click", "#caa_id", function() {
@@ -107,8 +108,8 @@
                         }else{
                             $('#last_choice_ca_id').val(data.ca_id);
                             $('#cate2').css('display', 'block');
+                            $('.').css('display', 'block');
                             $('#cate2').html(data.data);
-                            $('.ct_none').css('display', 'none');
                             $('#cate3').html('');
                             $('#cate4').html('');
                             $('#cate5').html('');
