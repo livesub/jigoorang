@@ -48,7 +48,7 @@
                                                     else $two_selected = "";
                                                 @endphp
                             
-                                                <option value="{{ $two_step_info->sca_id }}" {{ $two_selected  }}> └ {{ $two_step_info->sca_name_kr }}</option>
+                                                <option value="{{ $two_step_info->sca_id }}" {{ $two_selected  }}>{{ $two_step_info->sca_name_kr }}</option>
                                             @endforeach
                                             </select>
                                         @endif
@@ -128,7 +128,6 @@
                             $('#cate2_tt').css('display', 'inline-block');
                             $('.none').css('display', 'none');
                             $('#cate2').html(data.data);
-                            $('.ct_none').css('display', 'none');
                             $('#cate3').html('');
                             $('#cate4').html('');
                             $('#cate5').html('');

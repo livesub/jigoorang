@@ -2,15 +2,15 @@
 
 @section('content')
 
-    <form action="{{ route('admRating.modi', $result->id) }}" method="post" onsubmit="return form_check()">
+    <form action="{{ route('admRating.create') }}" method="post" onsubmit="return form_check()">
     {!! csrf_field() !!}
-    <input type="hidden" name="last_choice_ca_id" id="last_choice_ca_id" value="{{ $result->sca_id }}">
+    <input type="hidden" name="last_choice_ca_id" id="last_choice_ca_id">
         <!-- 타이틀 영역 -->
         <div class="top">
             <div class="title">
-                <h2>정량평가 항목 수정</h2>
+                <h2>정량평가 항목 입력</h2>
                 <div class="button_box">
-                    <button type="submit">수정</button><!-- 수정 -->
+                    <button type="submit">등록<!-- 수정 --></button>
                 </div>
             </div>
         </div>
@@ -26,34 +26,17 @@
                                 <li id="cate1">
                                     <select name="ca_id" id="caa_id" class="cid" >
                                     @foreach($one_step_infos as $one_step_info)
-                                        @php
-                                            if($one_str_cut == $one_step_info->sca_id) $one_selected = "selected";
-                                            else $one_selected = "";
-                                        @endphp
-
-                                        <option value="{{ $one_step_info->sca_id }}" {{ $one_selected }}>{{ $one_step_info->sca_name_kr }}</option>
+                                        <option value="{{ $one_step_info->sca_id }}">{{ $one_step_info->sca_name_kr }}</option>
                                     @endforeach
                                     </select>
                                 </li>
 
-                                <li>
-                                    <ul id="cate2_tt">
-                                        <li id="cate2" style="display:block"></li>
-                                        <li class="none">
-                                        @if($ca_id && strlen($ca_id) >= 4)
-                                            <select name="ca_id" id="caa_id2" class="cid" >
-                                            @foreach($two_step_infos as $two_step_info)
-                                                @php
-                                                    if($two_str_cut == $two_step_info->sca_id) $two_selected = "selected";
-                                                    else $two_selected = "";
-                                                @endphp
-                            
-                                                <option value="{{ $two_step_info->sca_id }}" {{ $two_selected  }}> └ {{ $two_step_info->sca_name_kr }}</option>
-                                            @endforeach
-                                            </select>
-                                        @endif
-                                        </li>
-                                    </ul>
+                                <li id="cate2" style="display:none">
+                                    <select name="ca_id" id="caa_id2" class="cid" >
+                                    @foreach($two_step_infos as $two_step_info)
+                                        <option value="{{ $two_step_info->sca_id }}">{{ $two_step_info->sca_name_kr }}</option>
+                                    @endforeach
+                                    </select>
                                 </li>
                             </ul>
                             </div>
@@ -63,42 +46,41 @@
                         <div class="col">정량평가 항목1</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name1" name="item_name1" value="{{ $result->item_name1 }}">
+                            <input type="text" id="item_name1" name="item_name1" value="{{ old('item_name1') }}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목2</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name2" name="item_name2" value="{{ $result->item_name2 }}">
+                            <input type="text" id="item_name2" name="item_name2" value="{{ old('item_name2') }}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목3</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name3" name="item_name3" value="{{ $result->item_name3 }}">
+                            <input type="text" id="item_name3" name="item_name3" value="{{ old('item_name3') }}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목4</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name4" name="item_name4" value="{{ $result->item_name4 }}">
+                            <input type="text" id="item_name4" name="item_name4" value="{{ old('item_name4') }}">
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">정량평가 항목5</div>
                         <div class="col">
                             <p>15자 이내로 입력하세요</p>
-                            <input type="text" id="item_name5" name="item_name5" value="{{ $result->item_name5 }}">
+                            <input type="text" id="item_name5" name="item_name5" value="{{ old('item_name5') }}">
                         </div>
                     </div>
                 </div>
         </div>
     </form>
         <!-- 컨텐츠 영역 끝 -->
-
 
 
 
@@ -125,8 +107,6 @@
                         }else{
                             $('#last_choice_ca_id').val(data.ca_id);
                             $('#cate2').css('display', 'block');
-                            $('#cate2_tt').css('display', 'inline-block');
-                            $('.none').css('display', 'none');
                             $('#cate2').html(data.data);
                             $('.ct_none').css('display', 'none');
                             $('#cate3').html('');
@@ -172,6 +152,7 @@
             }
 		});
     });
+
     //예외처리 함수
     function form_check(){
 
@@ -181,13 +162,6 @@
         var item_name4 = $('#item_name4').val();
         var item_name5 = $('#item_name5').val();
         var last_choice_ca_id = $("#last_choice_ca_id").val();
-
-        //5개 다 체크
-        if((item_name1 == "" || item_name1 == null) || (item_name2 == "" || item_name2 == null) || (item_name3 == "" || item_name3 == null) ||
-        (item_name4 == "" || item_name4 == null) || (item_name5 == "" || item_name5 == null)){
-            alert('모든 항목을 입력하셔야 합니다.');
-            return false;
-        }
 
         //카테고리를 선택안했을 경우
         if(last_choice_ca_id == "" || last_choice_ca_id == null){
@@ -202,9 +176,14 @@
             return false;
         }
 
+        //5개 다 체크
+        if((item_name1 == "" || item_name1 == null) || (item_name2 == "" || item_name2 == null) || (item_name3 == "" || item_name3 == null) ||
+        (item_name4 == "" || item_name4 == null) || (item_name5 == "" || item_name5 == null)){
+            alert('모든 항목을 입력하셔야 합니다.');
+            return false;
+        }
+
         return true;
     }
 </script>
-
-
 @endsection
