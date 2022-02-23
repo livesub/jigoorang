@@ -669,7 +669,7 @@ function hap_price(){
             var el_prc = $('input[id="sio_price['+k+']"]'); //옵션 추가 금액
             var el_qty = $('input[name="qty_ct_tmp['+k+']"]');  //수량
             var sc_price = $('input[id="item_sc_price['+k+']"]').val();  //각 상품 배송비
-
+alert(item_price);
             ajax_cart_qty_modify(cart_id, el_qty); //수량 변경에 따른 DB 장바구니 수량 변경
 
             total += (item_price + parseInt(el_prc.val())) * parseInt(el_qty.val());
@@ -700,7 +700,6 @@ function hap_price(){
     $("#total_cust_price").html(number_format(String(sale_price * -1))+"원");
     $("#hap_total").html(number_format(String(hap_total))+"원");
     $("#baesongbi").html(number_format(String(baesongbi))+"원");
-    $("#basic_price").html(number_format(String(total))+"원");
 }
 
 // php chr() 대응

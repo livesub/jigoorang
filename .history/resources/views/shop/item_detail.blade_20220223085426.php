@@ -146,13 +146,13 @@
 
                                         <ul class="dt_pr_st">
                                             <li>배송비</li>
-                                            <li>{{ number_format($de_send_cost) }}원({{ number_format($de_send_cost_free) }}원 이상 구매시 무료배송)</li>
+                                            <li>{{ number_format($de_send_cost) }}원(도서산간일 경우 추가 배송비 발생)</li>
                                         </ul>
                                     </div>
 
                                     @if($option_item)
                                     <div class="dt_sel">
-                                    {!! $option_item !!}
+                                    {!! $option_item !!}1111111111
                                     </div>
                                     @endif
 
@@ -627,11 +627,7 @@
                     }
 
                     if(json.message == "cart_page"){
-                        if (confirm("장바구니에 상품을 담았습니다.\n장바구니로 이동하시겠습니까?’") == true){    //확인
-                            location.href = "{{ route('cartlist') }}";
-                        }else{   //취소
-                            location.reload();
-                        }
+                        location.href = "{{ route('cartlist') }}";
                     }
                 },
                 error: function(result){

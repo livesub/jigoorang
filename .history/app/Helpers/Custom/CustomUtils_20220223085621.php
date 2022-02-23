@@ -909,7 +909,7 @@ $um_value='80/0.5/3'
                         //$str .= '<th><label for="it_option_'.$seq.'" class="label-title">'.$subj[$i].'</label></th>'.PHP_EOL;
                     }
 
-                    $select = "<p class='sel_op'>".$subj[$i].'</p><select id="it_option_'.$seq.'" class="it_option"'.$disabled.'>'.PHP_EOL;
+                    $select = '<select id="it_option_'.$seq.'" class="it_option"'.$disabled.'>'.PHP_EOL;
 
                     $first_option_title = $is_first_option_title ? $subj[$i] : '옵션을 선택하세요';
 

@@ -630,7 +630,7 @@
                         if (confirm("장바구니에 상품을 담았습니다.\n장바구니로 이동하시겠습니까?’") == true){    //확인
                             location.href = "{{ route('cartlist') }}";
                         }else{   //취소
-                            location.reload();
+                            Location.reload();
                         }
                     }
                 },

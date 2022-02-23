@@ -192,7 +192,7 @@
                         <div class="ct_tot">
                             <ul>
                                 <li>정가금액</li>
-                                <li id="basic_price"></li>
+                                <li id="total_price"></li>
                             </ul>
                             <ul>
                                 <li>할인받은금액</li>

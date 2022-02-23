@@ -191,16 +191,12 @@
 
                         <div class="ct_tot">
                             <ul>
-                                <li>정가금액</li>
-                                <li id="basic_price"></li>
-                            </ul>
-                            <ul>
-                                <li>할인받은금액</li>
-                                <li id="total_cust_price"></li>
-                            </ul>
-                            <ul>
                                 <li>총 상품금액</li>
                                 <li id="total_price"></li>
+                            </ul>
+                            <ul>
+                                <li>할인예정금액</li>
+                                <li id="total_cust_price"></li>
                             </ul>
                             <ul>
                                 <li>배송비</li>

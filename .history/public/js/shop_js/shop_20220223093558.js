@@ -642,6 +642,7 @@ function new_price_calculate(num)
 
     $("#sit_tot_price_"+num).html(number_format(String(total))+"원");
     $("#sit_tot_price_m_"+num).html(number_format(String(total))+"원");
+    $("#basic_price").html(number_format(String(total))+"원");
 
     hap_price();
 }
@@ -674,7 +675,7 @@ function hap_price(){
 
             total += (item_price + parseInt(el_prc.val())) * parseInt(el_qty.val());
             sc_price_total += sc_price * el_qty.val();
-
+alert(total);
             if(item_cust_price != 0) principal += (item_price + parseInt(el_prc.val())) * parseInt(el_qty.val());  //추가 금액을 뺀 금액
             total_cust_price += item_cust_price * parseInt(el_qty.val());
         }
@@ -700,7 +701,6 @@ function hap_price(){
     $("#total_cust_price").html(number_format(String(sale_price * -1))+"원");
     $("#hap_total").html(number_format(String(hap_total))+"원");
     $("#baesongbi").html(number_format(String(baesongbi))+"원");
-    $("#basic_price").html(number_format(String(total))+"원");
 }
 
 // php chr() 대응

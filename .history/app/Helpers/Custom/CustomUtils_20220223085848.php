@@ -866,7 +866,7 @@ $um_value='80/0.5/3'
     {
         if(!$item_code || !$subject) return false;
         $opts = DB::table('shopitemoptions')->where([['sio_type', 0],['item_code', $item_code],['sio_use','1']])->orderby('id', 'asc')->get();
-
+//        $item = DB::table('shopitems')->where()->first();
         if(count($opts) == 0) return false;
 
         $str = '';
@@ -909,7 +909,7 @@ $um_value='80/0.5/3'
                         //$str .= '<th><label for="it_option_'.$seq.'" class="label-title">'.$subj[$i].'</label></th>'.PHP_EOL;
                     }
 
-                    $select = "<p class='sel_op'>".$subj[$i].'</p><select id="it_option_'.$seq.'" class="it_option"'.$disabled.'>'.PHP_EOL;
+                    $select = '<select id="it_option_'.$seq.'" class="it_option"'.$disabled.'>'.PHP_EOL;
 
                     $first_option_title = $is_first_option_title ? $subj[$i] : '옵션을 선택하세요';
 

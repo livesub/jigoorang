@@ -167,7 +167,7 @@
                                         <input type="hidden" id="item_price[{{ $num }}]" value="{{ $cart_info->item_price }}">
                                         <input type="hidden" id="item_cust_price[{{ $num }}]" value="{{ $cart_info->item_cust_price }}">
                                         <input type="hidden" id="item_sc_price[{{ $num }}]" value="{{ $cart_info->item_sc_price }}">
-                                            <li class="bold" id="sit_tot_price_{{ $num }}">{{ number_format($case_price) }}원</li>
+                                            <li class="bold" id="sit_tot_price_{{ $num }}">{{ number_format($case_price) }}1111111원</li>
                                             <li><button class="btn-sd" type="button" onclick="return form_check('each_buy', {{ $cart_info->id }});">구매하기</button></li>
                                             <li class="del"><span onclick="return dierctdelete({{ $cart_info->id }});">삭제</span></li>
                                         </ul>
