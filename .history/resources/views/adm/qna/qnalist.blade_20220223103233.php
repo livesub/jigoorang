@@ -82,8 +82,7 @@
                                 <option value="상품 관련" {{ $qna_cate_selected2 }}>상품 관련</option>
                                 <option value="배송 관련" {{ $qna_cate_selected3 }}>배송 관련</option>
                                 <option value="주문/결제 관련" {{ $qna_cate_selected4 }}>주문/결제 관련</option>
-                                <option value="취소/부분취소/반품 관련" {{ $qna_cate_selected5 }}>취소/부분취소/반품 관련</option>
-                                <option value="교환 관련" {{ $qna_cate_selected9 }}>교환 관련</option>
+                                <option value="취소/교환/반품 관련" {{ $qna_cate_selected5 }}>취소/교환/반품 관련</option>
                                 <option value="포인트 관련" {{ $qna_cate_selected6 }}>포인트 관련</option>
                                 <option value="평가단 관련" {{ $qna_cate_selected7 }}>평가단 관련</option>
                                 <option value="기타 문의" {{ $qna_cate_selected8 }}>기타 문의</option>

@@ -93,6 +93,70 @@
     <!-- 서브 컨테이너 끝 -->
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table border=1>
+    <tr>
+        <td>1:1 문의 쓰기</td>
+   </tr>
+</table>
+
+
+<table border=1>
+<form name="qna_form" id="qna_form" method="post" action="{{ route('mypage.qna_write_save') }}">
+{!! csrf_field() !!}
+    <tr>
+        <td>문의 카테고리 선택 </td>
+        <td>
+            <select name="qna_cate" id="qna_cate">
+                <option value="">선택하세요</option>
+                <option value="상품 관련">상품 관련</option>
+                <option value="배송 관련">배송 관련</option>
+                <option value="주문/결제 관련">주문/결제 관련</option>
+                <option value="취소/교환/반품 관련">취소/교환/반품 관련</option>
+                <option value="포인트 관련">포인트 관련</option>
+                <option value="기타 문의">기타 문의</option>
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <td>제목</td>
+        <td><input type="text" name="qna_subject" id="qna_subject"></td>
+    </tr>
+    <tr>
+        <td>내용</td>
+        <td><textarea name="qna_content" id="qna_content"></textarea></td>
+    </tr>
+    <tr>
+        <td><button type="button" onclick="qna_form_submit();">등록</button></td>
+    </tr>
+</form>
+</table>
+
+
+
 <script>
     function qna_form_submit(){
         if($("#qna_cate option:selected").val() == ""){
