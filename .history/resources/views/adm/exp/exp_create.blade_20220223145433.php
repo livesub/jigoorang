@@ -27,14 +27,14 @@
 <script type="text/javascript" src="/smarteditor2/js/HuskyEZCreator.js" charset="utf-8"></script>
 <!-- smarteditor2 사용 -->
 
-    <form method="post" action="{{ route('adm_exp_view_modi', $result_expList->id) }}" enctype='multipart/form-data' onsubmit="return check_submit()">
+    <form method="post" action="{{ route('adm_exp_view_save') }}" enctype='multipart/form-data' onsubmit="return check_submit()">
         {!! csrf_field() !!}
         <!-- 타이틀 영역 -->
         <div class="top">
             <div class="title">
-                <h2>평가단 수정</h2>
+                <h2>평가단 등록</h2>
                 <div class="button_box">
-                    <button type="submit">수정<!-- 수정 --></button>
+                    <button type="submit">등록<!-- 수정 --></button>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="col">제목</div>
                         <div class="col">
-                            <input class="wd800" type="text" id="exp_title" name="exp_title" value="{{ stripslashes($result_expList->title) }}">
+                            <input class="wd800" type="text" id="exp_title" name="exp_title" value="{{ old('exp_title') }}">
                         </div>
                     </div>
                     <div class="row">
@@ -53,24 +53,24 @@
                         <div class="col">
                             <div class="select_item">
                                 <div class="btn_slc" onclick="openmodal_002()">상품선택</div>
-                                <input type="hidden" id="exp_item_code" name="exp_item_code" value="{{ $result_expList->item_id }}">
-                                <input type="hidden" id="exp_item_name" name="exp_item_name" value="{{ $result_expList->item_name }}">
+                                <input type="hidden" id="exp_item_code" name="exp_item_code" value="">
+                                <input type="hidden" id="exp_item_name" name="exp_item_name" value="">
                                 <input type="hidden" id="item_id" name="item_id" value="">
-                                <div class="selected_prod" id="choice_name">선택한 상품명 : {{ $result_expList->item_name }}</div>
+                                <div class="selected_prod" id="choice_name"></div>
                             </div>
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">평가단 인원</div>
                         <div class="col">
-                            <input type="text" id="exp_limit_personnel" name="exp_limit_personnel" value="{{ $result_expList->exp_limit_personnel }}" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align:right;"> 명
+                            <input type="text" id="exp_limit_personnel" name="exp_limit_personnel" value="{{ old('exp_limit_personnel') }}" min="0" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');" style="text-align:right;"> 명
                         </div>
                     </div>
                     <div class="row">
                         <div class="col">모집기간</div>
                         <div class="col">
                             <div class="date">
-                                <input type="text" id="exp_date_start" name="exp_date_start" value="{{ $result_expList->exp_date_start }}" autocomplete="off"> ~ <input type="text" id="exp_date_end" name="exp_date_end" value="{{ $result_expList->exp_date_end }}" autocomplete="off">
+                                <input type="text" id="exp_date_start" name="exp_date_start" value="{{ old('exp_date_start') }}" autocomplete="off"> ~ <input type="text" id="exp_date_end" name="exp_date_end" value="{{ old('exp_date_end') }}" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -78,7 +78,7 @@
                         <div class="col">평가가능기간</div>
                         <div class="col">
                             <div class="date">
-                                <input type="text" id="exp_review_start" name="exp_review_start" value="{{ $result_expList->exp_review_start }}" autocomplete="off"> ~ <input type="text" id="exp_review_end" name="exp_review_end" value="{{ $result_expList->exp_review_end }}" autocomplete="off">
+                                <input type="text" id="exp_review_start" name="exp_review_start" value="{{ old('exp_review_start') }}" autocomplete="off"> ~ <input type="text" id="exp_review_end" name="exp_review_end" value="{{ old('exp_review_end') }}" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -86,7 +86,7 @@
                         <div class="col">선정자 발표일</div>
                         <div class="col">
                             <div class="date">
-                                <input type="text" id="exp_release_date" name="exp_release_date" value="{{ $result_expList->exp_release_date }}" autocomplete="off">
+                                <input type="text" id="exp_release_date" name="exp_release_date" value="{{ old('exp_release_date') }}">
                             </div>
                         </div>
                     </div>
@@ -101,16 +101,15 @@
                                         <input type="file" id="exp_main_image" name="exp_main_image" accept="image/*" onchange="file_name('exp_main_image')">
                                     </label>
                                     <span id="exp_main_image_name"></span>
-                                    <p>{{ $result_expList->main_image_ori_name }}</p>
                                     <!-- 선택된 파일이 없습니다. -->
                                 </div>
-
+<!--
                                 <div class="file">
                                     <label>
-                                        <input type="checkbox" name="file_chk" id="file_chk" value='1'>수정, 삭제, 새로등록시 체크
+                                        <input type="checkbox" id="">수정, 삭제, 새로등록시 체크
                                     </label>
                                 </div>
-
+-->
                            </div>
                         </div>
                     </div>
@@ -119,7 +118,7 @@
                         <div class="col">
                             <p class="t_mint">권장 이미지 사이즈  : 가로 1200px / 세로 : 자유</p>
                             <div class="sm_editor">
-                                <textarea type="text" name="exp_content" id="exp_content" style="width:100%">{{ $result_expList->exp_content }}</textarea>
+                                <textarea type="text" name="exp_content" id="exp_content" style="width:100%">{{ old('exp_content') }}</textarea>
                             </div>
                         </div>
                     </div>
@@ -222,12 +221,12 @@
             alert('선정자 발표일을 선택해주세요');
             return false;
         }
-/*
+
         if(exp_main_image == "" || exp_main_image == null){
             alert('메인 이미지를 선택해주세요');
             return false;
         }
-*/
+
         if(exp_content == ""  || exp_content == null || exp_content == '&nbsp;' || exp_content == '<p>&nbsp;</p>'){
             alert('상세내용을 입력해주세요');
             return false;
@@ -291,12 +290,10 @@
         openModal();
         document.querySelector('.modal.modal_002').classList.add('in');
         open_pop();
-        $('body').css("overflow", "hidden");
     }
     function closemodal_002(){
         closeModal();
         document.querySelector('.modal.modal_002').classList.remove('in');
-        $('body').css("overflow", "scroll");
     }
     function openmodal_003() {
         openModal();
