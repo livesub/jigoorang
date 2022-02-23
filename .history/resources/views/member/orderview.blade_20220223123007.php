@@ -96,10 +96,23 @@
                                 $item_options = "";
                             }
 
-                            //교환버튼 출력 시점(결제완료후 9일 지나면 send_complete_chk 자동 완료, 이후 21일이 지나면 안나오게 총 30일)
                             $now_date = date('Y-m-d H:i:s', time());
                             $day_30_tmp = strtotime($order->created_at." +21 days");    // 30기준이나 구매 완료 시점이 결제후 9일 이기에 21일 계산
                             $day_30 = date('Y-m-d H:i:s', $day_30_tmp);
+var_dump("created_at====> ".$order->created_at);
+var_dump("now_date====> ".$now_date);
+var_dump("day_30====> ".$day_30);
+                            if($now_date > $day_30){
+var_dump("들어옴!!");
+                            }
+
+
+/*
+                            //교환버튼 출력 시점(결제완료후 9일 지나면 send_complete_chk 자동 완료, 이후 21일이 지나면 안나오게 총 30일)
+                            if($order->send_complete_chk == "Y"){
+                                $timestamp = strtotime("Now");
+                            }
+*/
                         @endphp
                         <div class="pr_body od_v">
                             <div class="pr-t">
@@ -126,14 +139,13 @@
 
                             <div class="btn_2ea pdt-30">
                                 @if($cart->return_story == "")
-                                    {{-- 교환버튼 출력 시점(결제완료후 9일 지나면 send_complete_chk 자동 완료, 이후 21일이 지나면 안나오게 총 30일) --}}
-                                    @if($order->send_complete_chk == "Y")
-                                        @if($now_date > $day_30)
+
+
+
+
+
+
                                 <button type="button" class="btn-30-sol" onclick="return_item('{{ $order->order_id }}', '{{ $cart->id }}');">교환</button>
-                                        @endif
-                                    @else
-                                <button type="button" class="btn-30-sol" onclick="return_item('{{ $order->order_id }}', '{{ $cart->id }}');">교환</button>
-                                    @endif
                                 @else
                                     @if($cart->return_process == "N")
                                 <button type="button" class="btn-30-sol trd">교환요청중</button>

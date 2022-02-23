@@ -189,7 +189,6 @@
                         </div>
 
                         <div class="ct_tot">
-                            @if($cart_info->item_cust_price > 0)
                             <ul>
                                 <li>정가금액</li>
                                 <li id="basic_price"></li>
@@ -198,7 +197,6 @@
                                 <li>할인받은금액</li>
                                 <li id="total_cust_price"></li>
                             </ul>
-                            @endif
                             <ul>
                                 <li>총 상품금액</li>
                                 <li id="total_price"></li>

@@ -90,7 +90,9 @@ class ItemController extends Controller
                         $item_sql = $item_sql->whereRaw("a.sca_id like '{$ca_id}%'");
                     }
                     $item_sql = $item_sql->where([['a.item_del', 'N'], ['a.item_display','Y']]);
+
                     $item_sql = $item_sql->groupBy('a.item_code')->orderBy('total', 'desc');
+
                     $item_cnt = $item_sql->get();
 
                     $item_sql = $item_sql->offset($start_num)->limit($pageScale)->get();

@@ -131,8 +131,6 @@
                                         @if($now_date > $day_30)
                                 <button type="button" class="btn-30-sol" onclick="return_item('{{ $order->order_id }}', '{{ $cart->id }}');">교환</button>
                                         @endif
-                                    @else
-                                <button type="button" class="btn-30-sol" onclick="return_item('{{ $order->order_id }}', '{{ $cart->id }}');">교환</button>
                                     @endif
                                 @else
                                     @if($cart->return_process == "N")

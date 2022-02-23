@@ -129,6 +129,10 @@
                                                 @endif
 
                                                 <li class="price">{{ $CustomUtils->display_price($cart_info->item_price + $item_options->sio_price) }}</li>
+@php
+    var_dump("item_cust_price===> ".$cart_info->item_cust_price);
+var_dump("item_price===> ".$cart_info->item_cust_price);
+@endphp
                                                 @if($cart_info->item_cust_price > 0)
                                                     @if($cart_info->item_cust_price == ($cart_info->item_price + $item_options->sio_price))
                                                         <li class="sale-price"></li>
@@ -189,7 +193,6 @@
                         </div>
 
                         <div class="ct_tot">
-                            @if($cart_info->item_cust_price > 0)
                             <ul>
                                 <li>정가금액</li>
                                 <li id="basic_price"></li>
@@ -198,7 +201,6 @@
                                 <li>할인받은금액</li>
                                 <li id="total_cust_price"></li>
                             </ul>
-                            @endif
                             <ul>
                                 <li>총 상품금액</li>
                                 <li id="total_price"></li>

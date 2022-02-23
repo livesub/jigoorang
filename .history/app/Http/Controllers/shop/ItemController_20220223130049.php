@@ -78,6 +78,7 @@ class ItemController extends Controller
                     $item_infos= $item_sql->offset($start_num)->limit($pageScale)->get();
                     break;
                 case 'sale':
+var_dump("111111111111");
                     //$orderby_add = "'total', 'desc'";
                     $item_sql = DB::table('shopitems as a')
                     ->select('a.*', DB::raw('count(b.item_code) as total'))
@@ -89,8 +90,8 @@ class ItemController extends Controller
                     }else{
                         $item_sql = $item_sql->whereRaw("a.sca_id like '{$ca_id}%'");
                     }
-                    $item_sql = $item_sql->where([['a.item_del', 'N'], ['a.item_display','Y']]);
                     $item_sql = $item_sql->groupBy('a.item_code')->orderBy('total', 'desc');
+
                     $item_cnt = $item_sql->get();
 
                     $item_sql = $item_sql->offset($start_num)->limit($pageScale)->get();
