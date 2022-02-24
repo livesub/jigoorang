@@ -1423,7 +1423,6 @@ document.orderform.addEventListener("keydown", evt => {
             headers: {'X-CSRF-TOKEN': $('input[name=_token]').val()},
             url : '{{ route('ajax_ordertemp') }}',
             method: "POST",
-            async: false,
             data: {
                 'order_id'          : '{{ $order_id }}',
                 'od_id'             : '{{ $s_cart_id }}',
