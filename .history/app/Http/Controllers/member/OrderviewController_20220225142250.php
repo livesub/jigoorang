@@ -53,9 +53,9 @@ class OrderviewController extends Controller
             $od_id = $CustomUtils->get_session("od_id");
 
             $payment = new OrderController();
-            $or_request = $order_id;
-            $or_request = $od_id;
-            $payment->orderpayment($or_request);
+            $request = $order_id;
+            $request = $od_id;
+            $payment->orderpayment($request);
         }
         //모바일 결제시 이동 제어 끝
 
