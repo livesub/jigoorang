@@ -625,10 +625,9 @@ class OrderController extends Controller
         //$cancel_result = Iamport::cancelPayment($imp_uid, $cancel_request_amount, $reason); //실제 취소 이루어 지는 부분
         $aa = Iamport::getPayment($imp_uid);
 
-//        $arr = new ArrayObject($aa);
-        //$arr->setFlags(ArrayObject::ARRAY_AS_PROPS); // 위에서 세번째줄이 배열의 key를 객체의 property로 사용가능하게 해주는 역할을 한다.
-        //var_dump($aa);
-        var_dump($aa->data->__get('card_name'));
+        $arr = new ArrayObject($aa);
+        $arr->setFlags(ArrayObject::ARRAY_AS_PROPS); // 위에서 세번째줄이 배열의 key를 객체의 property로 사용가능하게 해주는 역할을 한다.
+        echo $arr->total;
 
         //var_dump($aa);
 
@@ -637,7 +636,7 @@ class OrderController extends Controller
         //$bb = json_decode($aa, true);
         //$arr = (array) $aa;
         //$kk = Response->$aa);
-//print_r($aa);
+print_r($aa);
 
 exit;
         //예외 처리

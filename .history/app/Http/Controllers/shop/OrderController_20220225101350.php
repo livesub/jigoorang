@@ -624,22 +624,7 @@ class OrderController extends Controller
 
         //$cancel_result = Iamport::cancelPayment($imp_uid, $cancel_request_amount, $reason); //실제 취소 이루어 지는 부분
         $aa = Iamport::getPayment($imp_uid);
-
-//        $arr = new ArrayObject($aa);
-        //$arr->setFlags(ArrayObject::ARRAY_AS_PROPS); // 위에서 세번째줄이 배열의 key를 객체의 property로 사용가능하게 해주는 역할을 한다.
-        //var_dump($aa);
-        var_dump($aa->data->__get('card_name'));
-
-        //var_dump($aa);
-
-        //$aa = (array) $aa;
-        //$aa = json_encode($aa);
-        //$bb = json_decode($aa, true);
-        //$arr = (array) $aa;
-        //$kk = Response->$aa);
-//print_r($aa);
-
-exit;
+dd($aa->card_number);
         //예외 처리
         if($imp_apply_num == "" || $imp_apply_num == "0" || $imp_paid_amount == "" || $imp_paid_amount == "0" || $imp_merchant_uid == "" || $imp_merchant_uid == "0" || $imp_uid == "" || $imp_uid == "0"){
             return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.-3');

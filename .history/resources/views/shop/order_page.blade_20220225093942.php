@@ -1440,8 +1440,6 @@ document.orderform.addEventListener("keydown", evt => {
                 'item_give_point'   : '{{ $item_give_point }}',
 
                 'pg'   : $("#od_send_cost2").val(),
-                'method'   : $("#method").val(),
-
             },
             success : function(data){
 //alert(data);
