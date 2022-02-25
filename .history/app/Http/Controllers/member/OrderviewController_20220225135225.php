@@ -25,7 +25,6 @@ use App\Models\shopitemoptions;
 use App\Models\shopitems;
 use App\Models\shopcarts;    //장바구니 모델 정의
 use Iamport;
-use App\Http\Controllers\shop\OrderController;
 
 class OrderviewController extends Controller
 {
@@ -36,28 +35,23 @@ class OrderviewController extends Controller
 
     public function orderview(Request $request)
     {
-        session_start();
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
-        //모바일 결제시 이동 제어 시작
+        //모바일 결제 실패시 이동 제어 시작
         //m_redirect_url 설정시 실패던 성공이던 원하는 페이지로 이동 되기에 여기서 제어
         if($request->imp_success == 'false'){
             if($request->sw_direct != ""){
+                //$_SERVER["HTTP_REFERER"];
                 return redirect()->route('orderform','sw_direct=1');
             }else{
                 return redirect()->route('orderform');
             }
         }else if($request->imp_success == 'true'){
-            $order_id = $CustomUtils->get_session("order_id");
-            $od_id = $CustomUtils->get_session("od_id");
-
-            $payment = new OrderController();
-            $request = $order_id;
-            $request = $od_id;
-            $payment->orderpayment($request);
+            $od_id
+dd($request);
         }
-        //모바일 결제시 이동 제어 끝
+        //모바일 결제 실패시 이동 제어 끝
 
         $page       = $request->input('page');
         $pageScale  = 2;  //한페이지당 라인수

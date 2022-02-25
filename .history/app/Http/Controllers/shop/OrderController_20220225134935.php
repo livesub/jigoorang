@@ -140,6 +140,9 @@ class OrderController extends Controller
             $parameter = "";
         }
 
+        $CustomUtils->set_session("order_id", $order_id);
+        $CustomUtils->set_session("od_id", $s_cart_id);
+
         return view('shop.order_page',[
             's_cart_id'         => $s_cart_id,
             'cart_infos'        => $cart_infos,
@@ -458,9 +461,6 @@ class OrderController extends Controller
 
     public function ajax_ordertemp(Request $request)
     {
-        session_start();
-        $CustomUtils = new CustomUtils;
-
         //결제전 검증을 위한 임시 테이블 저장
         $order_id           = $request->input('order_id');
         $od_id              = $request->input('od_id');
@@ -491,7 +491,7 @@ class OrderController extends Controller
         //20220204일 결제 금액 - 사용 포인트 * 환경 설정 적립률로 바꿈 !!!!
         //$tot_item_point     = (int)$request->input('tot_item_point');
 
-        $ordertemp_cnt = DB::table('shopordertemps')->where([['od_id', $od_id], ['user_id', Auth::user()->user_id]])->count();
+        $ordertemp_cnt = DB::table('shopordertemps')->where([['od_id',$od_id], ['user_id', Auth::user()->user_id]])->count();
 
         //주문금액 배송비 무료 정책 추가(211112)
         if($od_cart_price >= $de_send_cost_free){
@@ -511,9 +511,6 @@ class OrderController extends Controller
         }else{
             $tot_item_point = 0;
         }
-
-        $CustomUtils->set_session("order_id", $order_id);
-        $CustomUtils->set_session("od_id", $od_id);
 
         if($ordertemp_cnt == 0){
             $create_result = shopordertemps::create([
@@ -608,20 +605,12 @@ class OrderController extends Controller
     //결제 하기
     public function orderpayment(Request $request)
     {
-        session_start();
-
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
         //변수 받기
         $order_id           = $request->input('order_id');
         $od_id              = $request->input('od_id');
-
-        $sess_order_id = $CustomUtils->get_session("order_id");
-        if($sess_order_id != ""){
-            $CustomUtils->set_session("order_id", "");
-            $CustomUtils->set_session("od_id", "");
-        }
 
         $od_deposit_name    = Auth::user()->user_name;
 /*
