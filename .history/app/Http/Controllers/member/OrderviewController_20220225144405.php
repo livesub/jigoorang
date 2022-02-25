@@ -61,7 +61,7 @@ class OrderviewController extends Controller
         //모바일 결제시 이동 제어 끝
 
         $page       = $request->input('page');
-        $pageScale  = 5;  //한페이지당 라인수
+        $pageScale  = 2;  //한페이지당 라인수
         $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")

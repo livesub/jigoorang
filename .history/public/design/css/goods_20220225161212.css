@@ -84,6 +84,9 @@
     display: inline-flex;
 }
 
+.eval .board .board_wrap .scrollmenu .swiper-wrapper {
+    transform: translate3d(0,0,0); !im
+}
 
 .eval .board .board_wrap .scrollmenu .swiper-wrapper li {
     /* display: inline-block; */
@@ -122,7 +125,9 @@
         }
 } */
 
-
+/* .eval .board .board_wrap .scrollmenu .swiper-wrapper.submenu_h a {
+    width: 100%;
+} */
 
 .eval .board .board_wrap .scrollmenu .swiper {
     width: 100%;
@@ -148,7 +153,7 @@
 .eval .board .board_wrap .scrollmenu .swiper-button-prev {
     float: left;
     bottom: 86px;
-    /* margin-left: 10px; */
+    margin-left: 10px;
 }
 
 .eval .board .board_wrap .scrollmenu .swiper-button-prev {

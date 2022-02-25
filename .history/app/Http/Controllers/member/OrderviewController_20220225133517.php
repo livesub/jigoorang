@@ -25,7 +25,6 @@ use App\Models\shopitemoptions;
 use App\Models\shopitems;
 use App\Models\shopcarts;    //장바구니 모델 정의
 use Iamport;
-use App\Http\Controllers\shop\OrderController;
 
 class OrderviewController extends Controller
 {
@@ -34,34 +33,31 @@ class OrderviewController extends Controller
         $this->middleware('auth');
     }
 
-    public function orderview(Request $request)
-    {
-        session_start();
-        $CustomUtils = new CustomUtils;
-        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
-
-        //모바일 결제시 이동 제어 시작
+    public function orderview(Request $request){
+        //모바일 결제 실패시 이동 제어 시작
         //m_redirect_url 설정시 실패던 성공이던 원하는 페이지로 이동 되기에 여기서 제어
         if($request->imp_success == 'false'){
             if($request->sw_direct != ""){
+                //$_SERVER["HTTP_REFERER"];
                 return redirect()->route('orderform','sw_direct=1');
             }else{
                 return redirect()->route('orderform');
             }
         }else if($request->imp_success == 'true'){
-            $order_id = $CustomUtils->get_session("order_id");
-            $od_id = $CustomUtils->get_session("od_id");
-
-            $payment = new OrderController();
-
-            $request['order_id'] = $order_id;
-            $request['od_id'] = $od_id;
-            $payment->orderpayment($request);
+var_dump($request->order_id);            
+var_dump($request->od_id);            
+exit;
         }
-        //모바일 결제시 이동 제어 끝
+
+        
+        //모바일 결제 실패시 이동 제어 끝
+
+        //r관리자 배송 상태에 따라 추가 변경 해 줘야 함@!!!!
+        $CustomUtils = new CustomUtils;
+        $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
         $page       = $request->input('page');
-        $pageScale  = 5;  //한페이지당 라인수
+        $pageScale  = 2;  //한페이지당 라인수
         $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")

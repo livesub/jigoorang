@@ -51,17 +51,26 @@ class OrderviewController extends Controller
         }else if($request->imp_success == 'true'){
             $order_id = $CustomUtils->get_session("order_id");
             $od_id = $CustomUtils->get_session("od_id");
-
+/*
             $payment = new OrderController();
 
             $request['order_id'] = $order_id;
             $request['od_id'] = $od_id;
             $payment->orderpayment($request);
+*/
+$url = 'https://ysnzp.ddns.net:10443';
+
+$ch = curl_init($url);
+curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+$result = curl_exec($ch);
+if(curl_errno($ch)){
+    echo 'Request Error:' . curl_error($ch);
+}            
         }
         //모바일 결제시 이동 제어 끝
 
         $page       = $request->input('page');
-        $pageScale  = 5;  //한페이지당 라인수
+        $pageScale  = 2;  //한페이지당 라인수
         $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")

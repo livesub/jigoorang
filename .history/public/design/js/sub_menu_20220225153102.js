@@ -4,13 +4,8 @@ var swiper3 = new Swiper(".submenu", {
     slidesPerView: 10,
     spaceBetween: 0,
 
-    watchOverflow : true,
-
-    observer: true,	// 추가
-    observeParents: true,	// 추가
-
-    // observer: true, 
-    // observeParents: true,
+    observer: true, 
+    observeParents: true,
 
     navigation: {
         nextEl: '.swiper-button-next',
@@ -55,10 +50,12 @@ var swiper3 = new Swiper(".submenu", {
 
 
 var swiper4 = new Swiper(".submenu_sol", {
+    //initialSlide: $("#tt").val(),
+    // freeMode : false,
+    // slideToClickedSlide : $("#tt").val(),
     watchOverflow : true,
     slidesPerView: 'auto',
-    observer: true,	// 추가
-    observeParents: true,	// 추가
+    //centerInsufficientSlides: true,
     spaceBetween: 0,
     navigation: {
         nextEl: '.swiper-button-next01',
@@ -100,5 +97,5 @@ var swiper4 = new Swiper(".submenu_sol", {
 
 
 function sub_m_slide(num) {
-    swiper4.slideTo(num, 0, true)
+    swiper4.slideTo(num, 800, true)
 }

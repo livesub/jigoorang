@@ -5,7 +5,6 @@ var swiper3 = new Swiper(".submenu", {
     spaceBetween: 0,
 
     watchOverflow : true,
-
     observer: true,	// 추가
     observeParents: true,	// 추가
 
@@ -55,10 +54,14 @@ var swiper3 = new Swiper(".submenu", {
 
 
 var swiper4 = new Swiper(".submenu_sol", {
+    //initialSlide: $("#tt").val(),
+    // freeMode : false,
+    // slideToClickedSlide : $("#tt").val(),
     watchOverflow : true,
     slidesPerView: 'auto',
     observer: true,	// 추가
     observeParents: true,	// 추가
+    //centerInsufficientSlides: true,
     spaceBetween: 0,
     navigation: {
         nextEl: '.swiper-button-next01',

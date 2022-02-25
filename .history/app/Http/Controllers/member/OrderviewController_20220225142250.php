@@ -53,15 +53,14 @@ class OrderviewController extends Controller
             $od_id = $CustomUtils->get_session("od_id");
 
             $payment = new OrderController();
-
-            $request['order_id'] = $order_id;
-            $request['od_id'] = $od_id;
+            $request = $order_id;
+            $request = $od_id;
             $payment->orderpayment($request);
         }
         //모바일 결제시 이동 제어 끝
 
         $page       = $request->input('page');
-        $pageScale  = 5;  //한페이지당 라인수
+        $pageScale  = 2;  //한페이지당 라인수
         $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")
