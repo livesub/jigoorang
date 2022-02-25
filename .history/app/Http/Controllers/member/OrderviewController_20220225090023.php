@@ -44,8 +44,6 @@ class OrderviewController extends Controller
             }else{
                 return redirect()->route('orderform');
             }
-        }else if($request->imp_success == 'true'){
-dd("DDDDDDDDDDDDDDDDD");
         }
         //모바일 결제 실패시 이동 제어 끝
 

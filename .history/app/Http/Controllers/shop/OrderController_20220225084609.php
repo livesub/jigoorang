@@ -154,7 +154,6 @@ class OrderController extends Controller
             'cart_count'        => $cart_count,
             'address'           => $address,
             'user_point'        => $user_point,
-            'parameter'         => $parameter,
         ]);
     }
 

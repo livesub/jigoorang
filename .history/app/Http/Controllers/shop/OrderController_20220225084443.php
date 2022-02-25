@@ -45,12 +45,12 @@ class OrderController extends Controller
 
         $CustomUtils->set_session("ss_direct", $sw_direct);
 
-        $parameter = "";
         if($sw_direct){
             $tmp_cart_id = $CustomUtils->get_session('ss_cart_direct');
-            $parameter = "sw_direct=1";
+dd("11111");            
         }else{
             $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
+            dd("22222");            
         }
 
         if ($CustomUtils->get_cart_count($tmp_cart_id) == 0){
@@ -154,7 +154,6 @@ class OrderController extends Controller
             'cart_count'        => $cart_count,
             'address'           => $address,
             'user_point'        => $user_point,
-            'parameter'         => $parameter,
         ]);
     }
 

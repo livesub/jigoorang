@@ -35,20 +35,17 @@ class OrderviewController extends Controller
 
     public function orderview(Request $request){
 
-        //모바일 결제 실패시 이동 제어 시작
-        //m_redirect_url 설정시 실패던 성공이던 원하는 페이지로 이동 되기에 여기서 제어
         if($request->imp_success == 'false'){
+        //모바일 결제 실패시 이동 제어
+          
             if($request->sw_direct != ""){
                 //$_SERVER["HTTP_REFERER"];
                 return redirect()->route('orderform','sw_direct=1');
             }else{
                 return redirect()->route('orderform');
             }
-        }else if($request->imp_success == 'true'){
-dd("DDDDDDDDDDDDDDDDD");
         }
-        //모바일 결제 실패시 이동 제어 끝
-
+dd($request);         
         //r관리자 배송 상태에 따라 추가 변경 해 줘야 함@!!!!
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));

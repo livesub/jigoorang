@@ -1394,6 +1394,8 @@ document.orderform.addEventListener("keydown", evt => {
             m_redirect_url: "{{ route('mypage.orderview', $parameter) }}",
         }, function (rsp) { // callback
             if (rsp.success) {
+alert(rsp.imp_uid);                
+return false;
                 $("#imp_uid").val(rsp.imp_uid); //카드사에서 전달 받는 값(아임포트 코드)
                 $("#apply_num").val(rsp.apply_num); //카드사에서 전달 받는 값(카드 승인번호)
                 $("#paid_amount").val(rsp.paid_amount); //카드사에서 전달 받는 값(총 결제 금액)

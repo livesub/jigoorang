@@ -1391,9 +1391,11 @@ document.orderform.addEventListener("keydown", evt => {
             buyer_addr: "{{ Auth::user()->user_addr1 }}",
             buyer_postcode: "{{ Auth::user()->user_zip }}",
             //confirm_url : '{{ route('ajax_ordercomfirm') }}', //실제 서버에서 동작 함 나중에 바꿔 줘야함
-            m_redirect_url: "{{ route('mypage.orderview', $parameter) }}",
+            m_redirect_url: "{{ route('mypage.orderview','$parameter') }}",
         }, function (rsp) { // callback
             if (rsp.success) {
+alert(rsp.imp_uid);                
+return false;
                 $("#imp_uid").val(rsp.imp_uid); //카드사에서 전달 받는 값(아임포트 코드)
                 $("#apply_num").val(rsp.apply_num); //카드사에서 전달 받는 값(카드 승인번호)
                 $("#paid_amount").val(rsp.paid_amount); //카드사에서 전달 받는 값(총 결제 금액)
