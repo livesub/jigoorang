@@ -71,7 +71,7 @@
                                     $class_chk = '';
                                     if($sub_ca_id == $sub_cate_info->sca_id) $class_chk = ' class="active" ';
                                 @endphp
-                              <li id="sd_{{ $sub_cate_info->id }}" class="swiper-slide" onClick="location.href='{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_cate_info->sca_id.'&sub_cate='.$sub_cate_num) }}'">
+                              <li id="sd_{{ $sub_cate_info->id }}" class="swiper-slide" onClick="location.href='{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_cate_info->sca_id.'&sub_cate='.$sub_cate_num) }}'>
                               <span {!! $class_chk !!}>{{ $sub_cate_info->sca_name_kr }}</span></li>
                                 @php
                                     $sub_cate_num++;

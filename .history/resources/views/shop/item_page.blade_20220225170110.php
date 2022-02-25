@@ -38,7 +38,7 @@
                                         if($ca_id == $cate_info->sca_id) $ca_id_class = "bct_active";
                                     @endphp
                               
-                                <li class="sub_cate swiper-slide {{ $ca_id_class }}" onClick="location.href='{{ route('sitem','ca_id='.$cate_info->sca_id.'&cate='.$cate_num) }}'">{{ $cate_info->sca_name_kr }}</li>
+                                <li class="sub_cate swiper-slide {{ $ca_id_class }}">{{ $cate_info->sca_name_kr }}  <a href="{{ route('sitem','ca_id='.$cate_info->sca_id.'&cate='.$cate_num) }}" class=""></a></li>
                                 <!-- class="bct_active" 메뉴활성 -->
                                 
                                     @php
@@ -55,8 +55,8 @@
                     <div class="scrollmenu sub_sol">
                         <div class="swiper submenu_sol">
                             <ul class="swiper-wrapper submenu_innr">
-                              <li class="swiper-slide" onClick="location.href='{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id=all&sub_cate=0') }}'">
-                
+                              <li class="swiper-slide">
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id=all&sub_cate=0') }}">
                               @php
                                 $class_all = '';
                                 if($sub_ca_id == 'all' || $sub_ca_id == "")
@@ -64,15 +64,16 @@
                                 $sub_cate_num = 1;
                               @endphp
                               <span {!! $class_all !!}>전체</span> <!-- class="active" 클릭시 class 활성-->
-                              </li>
+                              </a></li>
 
                               @foreach($sub_cate_infos as $sub_cate_info)
                                 @php
                                     $class_chk = '';
                                     if($sub_ca_id == $sub_cate_info->sca_id) $class_chk = ' class="active" ';
                                 @endphp
-                              <li id="sd_{{ $sub_cate_info->id }}" class="swiper-slide" onClick="location.href='{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_cate_info->sca_id.'&sub_cate='.$sub_cate_num) }}'">
-                              <span {!! $class_chk !!}>{{ $sub_cate_info->sca_name_kr }}</span></li>
+                              <li id="sd_{{ $sub_cate_info->id }}" class="swiper-slide">
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_cate_info->sca_id.'&sub_cate='.$sub_cate_num) }}">
+                              <span {!! $class_chk !!}>{{ $sub_cate_info->sca_name_kr }}</span></a></li>
                                 @php
                                     $sub_cate_num++;
                                 @endphp

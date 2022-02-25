@@ -43,7 +43,7 @@
                                     if($rank_cate_info->sca_id == $sca_id) $sca_id_class = "active";
                                     else $sca_id_class = "";
                                 @endphp
-                              <li class="swiper-slide" onClick="location.href='{{ route('ranking_view','sca_id='.$rank_cate_info->sca_id.'&sub_cate='.$sub_cate_num) }}'"><span class="{{ $sca_id_class }}">{{ $rank_cate_info->sca_name_kr }}</span></li>
+                              <li class="swiper-slide" "><a href="{{ route('ranking_view','sca_id='.$rank_cate_info->sca_id.'&sub_cate='.$sub_cate_num) }}"><span class="{{ $sca_id_class }}">{{ $rank_cate_info->sca_name_kr }}</span></a></li>
                                 @php
                                     $sub_cate_num++;
                                 @endphp

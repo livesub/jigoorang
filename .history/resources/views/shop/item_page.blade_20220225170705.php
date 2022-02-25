@@ -56,7 +56,7 @@
                         <div class="swiper submenu_sol">
                             <ul class="swiper-wrapper submenu_innr">
                               <li class="swiper-slide" onClick="location.href='{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id=all&sub_cate=0') }}'">
-                
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id=all&sub_cate=0') }}">
                               @php
                                 $class_all = '';
                                 if($sub_ca_id == 'all' || $sub_ca_id == "")
@@ -64,15 +64,16 @@
                                 $sub_cate_num = 1;
                               @endphp
                               <span {!! $class_all !!}>전체</span> <!-- class="active" 클릭시 class 활성-->
-                              </li>
+                              </a></li>
 
                               @foreach($sub_cate_infos as $sub_cate_info)
                                 @php
                                     $class_chk = '';
                                     if($sub_ca_id == $sub_cate_info->sca_id) $class_chk = ' class="active" ';
                                 @endphp
-                              <li id="sd_{{ $sub_cate_info->id }}" class="swiper-slide" onClick="location.href='{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_cate_info->sca_id.'&sub_cate='.$sub_cate_num) }}'">
-                              <span {!! $class_chk !!}>{{ $sub_cate_info->sca_name_kr }}</span></li>
+                              <li id="sd_{{ $sub_cate_info->id }}" class="swiper-slide">
+                              <a href="{{ route('sitem','ca_id='.$ca_id.'&cate='.$cate.'&sub_ca_id='.$sub_cate_info->sca_id.'&sub_cate='.$sub_cate_num) }}">
+                              <span {!! $class_chk !!}>{{ $sub_cate_info->sca_name_kr }}</span></a></li>
                                 @php
                                     $sub_cate_num++;
                                 @endphp
