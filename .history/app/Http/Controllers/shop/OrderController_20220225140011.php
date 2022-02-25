@@ -514,7 +514,9 @@ class OrderController extends Controller
 
         $CustomUtils->set_session("order_id", $order_id);
         $CustomUtils->set_session("od_id", $od_id);
-
+var_dump("order_id====> ".$order_id);
+var_dump("od_id====> ".$od_id);
+exit;
         if($ordertemp_cnt == 0){
             $create_result = shopordertemps::create([
                 'order_id'          => $order_id,
@@ -608,20 +610,12 @@ class OrderController extends Controller
     //결제 하기
     public function orderpayment(Request $request)
     {
-        session_start();
-
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
         //변수 받기
         $order_id           = $request->input('order_id');
         $od_id              = $request->input('od_id');
-
-        $sess_order_id = $CustomUtils->get_session("order_id");
-        if($sess_order_id != ""){
-            $CustomUtils->set_session("order_id", "");
-            $CustomUtils->set_session("od_id", "");
-        }
 
         $od_deposit_name    = Auth::user()->user_name;
 /*

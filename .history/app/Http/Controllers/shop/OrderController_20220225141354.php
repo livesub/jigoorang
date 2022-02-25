@@ -619,9 +619,9 @@ class OrderController extends Controller
 
         $sess_order_id = $CustomUtils->get_session("order_id");
         if($sess_order_id != ""){
-            $CustomUtils->set_session("order_id", "");
-            $CustomUtils->set_session("od_id", "");
+dd("RRRRRRRRRRRRRR");
         }
+dd("EEEEEEEEEEEEEE");
 
         $od_deposit_name    = Auth::user()->user_name;
 /*
