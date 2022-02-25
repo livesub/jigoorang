@@ -314,7 +314,7 @@
                                             <li class="cr_06">{{ $CustomUtils->display_price($tot_sell_price) }}</li>
                                         </ul>
                                         <ul>
-                                          <li>배송비</li>
+                                          <li>배송비 <span>(50,000원 이상 구매 시 무료배송)</span></li>
                                           <li class="cr_06">{{ $CustomUtils->display_price($tot_sendcost) }}</li>
                                         </ul>
                                         <ul>
@@ -361,12 +361,12 @@
                                             </li>
                                         </ul>!-->
 
-                                        <ul class="radio pdb-10">
+                                       <!-- <ul class="radio pdb-10">
                                             <li>
                                                 <input type="radio" name="cp_item" id="rd_4" onclick="pay_type('kakaopay','kakaopay');">
                                                 <label for="rd_4">카카오페이</label>
                                             </li>
-                                        </ul>
+                                        </ul>-->
 
                                         <ul class="radio">
                                             <li>
