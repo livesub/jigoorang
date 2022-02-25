@@ -82,6 +82,8 @@
 
 .eval .board .board_wrap .scrollmenu .swiper-wrapper {
     display: inline-flex;
+    -webkit-backface-visibility:hidden; -webkit-transform:translateZ(0); -webkit-transform:translate3d(0, 0, 0);
+
 }
 
 
@@ -148,7 +150,7 @@
 .eval .board .board_wrap .scrollmenu .swiper-button-prev {
     float: left;
     bottom: 86px;
-    /* margin-left: 10px; */
+    margin-left: 10px;
 }
 
 .eval .board .board_wrap .scrollmenu .swiper-button-prev {

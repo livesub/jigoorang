@@ -52,16 +52,45 @@ class OrderviewController extends Controller
             $order_id = $CustomUtils->get_session("order_id");
             $od_id = $CustomUtils->get_session("od_id");
 
-            $payment = new OrderController();
+            //$payment = new OrderController();
 
-            $request['order_id'] = $order_id;
-            $request['od_id'] = $od_id;
-            $payment->orderpayment($request);
+            //$request['order_id'] = $order_id;
+            //$request['od_id'] = $od_id;
+            //$payment->orderpayment($request);
+
+
+            //다날 엑세스 토큰 발급
+            $getToken  = Http::withHeaders([
+                'Content-Type' => 'application/json'
+            ])->post('https://api.iamport.kr/users/getToken', [
+                'imp_key' => '7117087594091851',
+                'imp_secret' => 'f48276af52e388efce69d3b1341aa139b80d30f4b888769f40db828b65cd8dc92b4245ca084cbea1',
+            ]);
+            $getTokenJson = json_decode($getToken, true);
+            $access_token = $getTokenJson['response']['access_token'];
+
+
+
+/*            
+var_dump("AAAAAAAAAAAAA===> ".$request->imp_uid);
+
+            $imp_uid            = $request->imp_uid;
+
+            $iamport_order_info = Iamport::getPayment($imp_uid);
+
+            var_dump($iamport_order_info->data->__get('apply_num'));
+            exit;
+*/
+
+
+
+
+
         }
         //모바일 결제시 이동 제어 끝
 
         $page       = $request->input('page');
-        $pageScale  = 5;  //한페이지당 라인수
+        $pageScale  = 2;  //한페이지당 라인수
         $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")

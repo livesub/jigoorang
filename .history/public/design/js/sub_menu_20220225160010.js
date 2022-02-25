@@ -59,6 +59,7 @@ var swiper4 = new Swiper(".submenu_sol", {
     slidesPerView: 'auto',
     observer: true,	// 추가
     observeParents: true,	// 추가
+    //centerInsufficientSlides: true,
     spaceBetween: 0,
     navigation: {
         nextEl: '.swiper-button-next01',

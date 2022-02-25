@@ -5,12 +5,8 @@ var swiper3 = new Swiper(".submenu", {
     spaceBetween: 0,
 
     watchOverflow : true,
-
     observer: true,	// 추가
     observeParents: true,	// 추가
-
-    // observer: true, 
-    // observeParents: true,
 
     navigation: {
         nextEl: '.swiper-button-next',
@@ -48,10 +44,6 @@ var swiper3 = new Swiper(".submenu", {
     }
 });
 
-// window.onload=function sub_slide() {
-//     alert("1111");
-//     swiper3.slideTo(1)
-// }
 
 
 var swiper4 = new Swiper(".submenu_sol", {

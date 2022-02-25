@@ -48,10 +48,6 @@ var swiper3 = new Swiper(".submenu", {
     }
 });
 
-// window.onload=function sub_slide() {
-//     alert("1111");
-//     swiper3.slideTo(1)
-// }
 
 
 var swiper4 = new Swiper(".submenu_sol", {

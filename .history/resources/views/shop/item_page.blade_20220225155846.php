@@ -46,8 +46,8 @@
                                     @endphp
                                 @endforeach
                             </ul>
-                                {{-- <div class="swiper-button-prev"></div>
-                                <div class="swiper-button-next"></div> --}}
+                                <div class="swiper-button-prev"></div>
+                                <div class="swiper-button-next"></div>
                         </div>
                     </div>
 
@@ -348,9 +348,9 @@
 </script>
 
 <script>
-    window.onload=function sub_slide() { //대 카테고리
-        swiper3.slideTo('{{ $cate }}');
-    }
+    // window.onload=function sub_slide() { //대 카테고리
+    //     swiper3.slideTo('{{ $cate }}');
+    // }
 
     sub_m_slide('{{ $sub_cate }}'); // 서브 카테고리
 </script>

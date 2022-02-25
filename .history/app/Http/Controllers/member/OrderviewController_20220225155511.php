@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Auth;    //인증
 use App\Models\shopitemoptions;
 use App\Models\shopitems;
 use App\Models\shopcarts;    //장바구니 모델 정의
-use Iamport;
+use Alliv\Iamport;
 use App\Http\Controllers\shop\OrderController;
 
 class OrderviewController extends Controller
@@ -52,16 +52,35 @@ class OrderviewController extends Controller
             $order_id = $CustomUtils->get_session("order_id");
             $od_id = $CustomUtils->get_session("od_id");
 
-            $payment = new OrderController();
+            //$payment = new OrderController();
 
-            $request['order_id'] = $order_id;
-            $request['od_id'] = $od_id;
-            $payment->orderpayment($request);
+            //$request['order_id'] = $order_id;
+            //$request['od_id'] = $od_id;
+            //$payment->orderpayment($request);
+
+
+
+            $imp_uid            = $request->imp_uid;
+            $aa = new Iamport();
+            $aa->getPayment($imp_uid);
+            var_dump("AAAAAAAAAAAAA");
+exit;            
+
+            $iamport_order_info = Iamport::getPayment($imp_uid);
+
+            var_dump($iamport_order_info->data->__get('apply_num'));
+            exit;
+
+
+
+
+
+
         }
         //모바일 결제시 이동 제어 끝
 
         $page       = $request->input('page');
-        $pageScale  = 5;  //한페이지당 라인수
+        $pageScale  = 2;  //한페이지당 라인수
         $blockScale = 1; //출력할 블럭의 갯수(1,2,3,4... 갯수)
 
         if($page != "")
