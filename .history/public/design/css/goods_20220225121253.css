@@ -1465,8 +1465,7 @@
 }
 
 .eval .board .board_wrap .cart_list .ct_tot ul li:nth-child(1) span {
-    top: 7px;
-    font-size: 13px;
+    
 }
 .eval .board .board_wrap .cart_list .ct_tot ul li:nth-child(2) {
     float: right;
