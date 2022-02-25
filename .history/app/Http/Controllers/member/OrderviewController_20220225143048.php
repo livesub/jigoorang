@@ -40,6 +40,24 @@ class OrderviewController extends Controller
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
+
+        $order_id = $CustomUtils->get_session("order_id");
+        $od_id = $CustomUtils->get_session("od_id");
+
+        $payment = new OrderController();
+        $request->$order_id;
+        $request->$od_id;
+        $payment->orderpayment($request);
+exit;
+
+
+
+
+
+
+
+
+
         //모바일 결제시 이동 제어 시작
         //m_redirect_url 설정시 실패던 성공이던 원하는 페이지로 이동 되기에 여기서 제어
         if($request->imp_success == 'false'){
@@ -53,10 +71,9 @@ class OrderviewController extends Controller
             $od_id = $CustomUtils->get_session("od_id");
 
             $payment = new OrderController();
-
-            $request['order_id'] = $order_id;
-            $request['od_id'] = $od_id;
-            $payment->orderpayment($request);
+            $or_request = $order_id;
+            $or_request = $od_id;
+            $payment->orderpayment($or_request);
         }
         //모바일 결제시 이동 제어 끝
 
