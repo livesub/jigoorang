@@ -637,7 +637,8 @@ class OrderController extends Controller
         $od_cart_count      = $request->input('cart_count');
 */
         $ordertemp = DB::table('shopordertemps')->where([['order_id', $order_id], ['od_id', $od_id], ['user_id', Auth::user()->user_id]])->first();
-
+var_dump("RRRRRRRRRRRRRRR");
+exit;
         //예외 처리
         if(!$ordertemp){
             return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.-2');
