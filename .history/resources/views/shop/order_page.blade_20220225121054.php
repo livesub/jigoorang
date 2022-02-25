@@ -1391,7 +1391,7 @@ document.orderform.addEventListener("keydown", evt => {
             buyer_addr: "{{ Auth::user()->user_addr1 }}",
             buyer_postcode: "{{ Auth::user()->user_zip }}",
             //confirm_url : '{{ route('ajax_ordercomfirm') }}', //실제 서버에서 동작 함 나중에 바꿔 줘야함
-            m_redirect_url: "{{ route('mypage.orderview') }}?{!! $parameter !!}",
+            m_redirect_url: "{{ route('mypage.orderview', $parameter) }}",
         }, function (rsp) { // callback
             if (rsp.success) {
                 $("#imp_uid").val(rsp.imp_uid); //카드사에서 전달 받는 값(아임포트 코드)
@@ -1439,7 +1439,7 @@ document.orderform.addEventListener("keydown", evt => {
                 'tot_item_point'    : '{{ $tot_point }}',
                 'item_give_point'   : '{{ $item_give_point }}',
 
-                'pg'                : $("#pg").val(),
+                'pg'                : $("#od_send_cost2").val(),
                 'method'            : $("#method").val(),
                 'od_b_name'         : $("#od_b_name").val(),
                 'od_b_tel'          : $("#od_b_tel").val(),
@@ -1451,6 +1451,7 @@ document.orderform.addEventListener("keydown", evt => {
                 'od_b_addr_jibeon'  : $("#od_b_addr_jibeon").val(),
                 'od_memo'           : $("#od_memo").val(),
                 'cart_count'        : $("#cart_count").val(),
+
             },
             success : function(data){
 //alert(data);

@@ -45,8 +45,10 @@ class OrderController extends Controller
 
         $CustomUtils->set_session("ss_direct", $sw_direct);
 
+        $parameter = "";
         if($sw_direct){
             $tmp_cart_id = $CustomUtils->get_session('ss_cart_direct');
+            $parameter = "sw_direct=1";
         }else{
             $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
         }
@@ -130,14 +132,6 @@ class OrderController extends Controller
 
         //$cart_count = DB::table('shopcarts')->select('item_code')->where([['od_id',$tmp_cart_id], ['sct_select','1']])->distinct('item_code')->count(); //장바구니 상품 개수
         $cart_count = DB::table('shopcarts')->select('item_code')->where([['od_id',$tmp_cart_id], ['sct_select','1']])->count(); //장바구니 상품 개수
-
-        //모바일 결제를 위한 파라메터 만들기
-        $parameter = "";
-        if($sw_direct){
-            $parameter = "sw_direct=1&order_id=".$order_id."&od_id=".$s_cart_id;
-        }else{
-            $parameter = "order_id=".$order_id."&od_id=".$s_cart_id;
-        }
 
         return view('shop.order_page',[
             's_cart_id'         => $s_cart_id,
@@ -628,6 +622,7 @@ class OrderController extends Controller
             return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.-2');
             exit;
         }
+
 
         $ad_name            = $ordertemp->ad_name;
         $ad_tel             = $ordertemp->ad_tel;

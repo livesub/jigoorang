@@ -40,9 +40,6 @@ class shopordertemps extends Model
         'ad_addr1',
         'ad_addr2',
         'ad_addr3',
-        'ad_jibeon',
-        'od_memo',
-        'od_cart_count',
         'od_ip',
     ];
 

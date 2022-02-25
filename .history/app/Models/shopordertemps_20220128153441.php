@@ -32,17 +32,6 @@ class shopordertemps extends Model
         'od_receipt_point',
         'tot_item_point',
         'ad_zip1',
-        'od_pg',
-        'od_settle_case',
-        'ad_name',
-        'ad_tel',
-        'ad_hp',
-        'ad_addr1',
-        'ad_addr2',
-        'ad_addr3',
-        'ad_jibeon',
-        'od_memo',
-        'od_cart_count',
         'od_ip',
     ];
 

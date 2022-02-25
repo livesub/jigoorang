@@ -45,8 +45,10 @@ class OrderController extends Controller
 
         $CustomUtils->set_session("ss_direct", $sw_direct);
 
+        $parameter = "";
         if($sw_direct){
             $tmp_cart_id = $CustomUtils->get_session('ss_cart_direct');
+            $parameter = "sw_direct=1";
         }else{
             $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
         }
@@ -130,14 +132,6 @@ class OrderController extends Controller
 
         //$cart_count = DB::table('shopcarts')->select('item_code')->where([['od_id',$tmp_cart_id], ['sct_select','1']])->distinct('item_code')->count(); //장바구니 상품 개수
         $cart_count = DB::table('shopcarts')->select('item_code')->where([['od_id',$tmp_cart_id], ['sct_select','1']])->count(); //장바구니 상품 개수
-
-        //모바일 결제를 위한 파라메터 만들기
-        $parameter = "";
-        if($sw_direct){
-            $parameter = "sw_direct=1&order_id=".$order_id."&od_id=".$s_cart_id;
-        }else{
-            $parameter = "order_id=".$order_id."&od_id=".$s_cart_id;
-        }
 
         return view('shop.order_page',[
             's_cart_id'         => $s_cart_id,
@@ -607,9 +601,7 @@ class OrderController extends Controller
         //변수 받기
         $order_id           = $request->input('order_id');
         $od_id              = $request->input('od_id');
-
         $od_deposit_name    = Auth::user()->user_name;
-/*
         $ad_name            = $request->input('od_b_name');
         $ad_tel             = $request->input('od_b_tel');
         $ad_hp              = $request->input('od_b_hp');
@@ -620,7 +612,7 @@ class OrderController extends Controller
         $ad_jibeon          = $request->input('od_b_addr_jibeon');
         $od_memo            = $request->input('od_memo');
         $od_cart_count      = $request->input('cart_count');
-*/
+
         $ordertemp = DB::table('shopordertemps')->where([['order_id', $order_id], ['od_id', $od_id], ['user_id', Auth::user()->user_id]])->first();
 
         //예외 처리
@@ -628,17 +620,6 @@ class OrderController extends Controller
             return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.-2');
             exit;
         }
-
-        $ad_name            = $ordertemp->ad_name;
-        $ad_tel             = $ordertemp->ad_tel;
-        $ad_hp              = $ordertemp->ad_hp;
-        $ad_zip1            = $ordertemp->ad_zip1;
-        $ad_addr1           = $ordertemp->ad_addr1;
-        $ad_addr2           = $ordertemp->ad_addr2;
-        $ad_addr3           = $ordertemp->ad_addr3;
-        $ad_jibeon          = $ordertemp->ad_jibeon;
-        $od_memo            = $ordertemp->od_memo;
-        $od_cart_count      = $ordertemp->od_cart_count;
 
         $od_cart_price      = $ordertemp->od_cart_price;
         $de_send_cost       = $ordertemp->de_send_cost;

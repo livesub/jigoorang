@@ -51,6 +51,7 @@ class OrderController extends Controller
             $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
         }
 
+
         if ($CustomUtils->get_cart_count($tmp_cart_id) == 0){
             return redirect()->route('cartlist')->with('alert_messages', '장바구니가 비어 있습니다.');
             exit;
@@ -134,8 +135,10 @@ class OrderController extends Controller
         //모바일 결제를 위한 파라메터 만들기
         $parameter = "";
         if($sw_direct){
+            $tmp_cart_id = $CustomUtils->get_session('ss_cart_direct');
             $parameter = "sw_direct=1&order_id=".$order_id."&od_id=".$s_cart_id;
         }else{
+            $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
             $parameter = "order_id=".$order_id."&od_id=".$s_cart_id;
         }
 

@@ -45,8 +45,10 @@ class OrderController extends Controller
 
         $CustomUtils->set_session("ss_direct", $sw_direct);
 
+        $parameter = "";
         if($sw_direct){
             $tmp_cart_id = $CustomUtils->get_session('ss_cart_direct');
+            $parameter = "sw_direct=1";
         }else{
             $tmp_cart_id = $CustomUtils->get_session('ss_cart_id');
         }
@@ -130,14 +132,6 @@ class OrderController extends Controller
 
         //$cart_count = DB::table('shopcarts')->select('item_code')->where([['od_id',$tmp_cart_id], ['sct_select','1']])->distinct('item_code')->count(); //장바구니 상품 개수
         $cart_count = DB::table('shopcarts')->select('item_code')->where([['od_id',$tmp_cart_id], ['sct_select','1']])->count(); //장바구니 상품 개수
-
-        //모바일 결제를 위한 파라메터 만들기
-        $parameter = "";
-        if($sw_direct){
-            $parameter = "sw_direct=1&order_id=".$order_id."&od_id=".$s_cart_id;
-        }else{
-            $parameter = "order_id=".$order_id."&od_id=".$s_cart_id;
-        }
 
         return view('shop.order_page',[
             's_cart_id'         => $s_cart_id,
@@ -470,20 +464,6 @@ class OrderController extends Controller
         $od_b_zip           = $request->input('od_b_zip');
         $item_give_point    = $request->input('item_give_point');
 
-
-        $od_pg              = $request->input('pg');
-        $od_settle_case     = $request->input('method');
-        $ad_name            = $request->input('od_b_name');
-        $ad_tel             = $request->input('od_b_tel');
-        $ad_hp              = $request->input('od_b_hp');
-        //$ad_zip1            = $request->input('od_b_zip');
-        $ad_addr1           = $request->input('od_b_addr1');
-        $ad_addr2           = $request->input('od_b_addr2');
-        $ad_addr3           = $request->input('od_b_addr3');
-        $ad_jibeon          = $request->input('od_b_addr_jibeon');
-        $od_memo            = $request->input('od_memo');
-        $od_cart_count      = $request->input('cart_count');
-
         //20220204일 결제 금액 - 사용 포인트 * 환경 설정 적립률로 바꿈 !!!!
         //$tot_item_point     = (int)$request->input('tot_item_point');
 
@@ -523,18 +503,6 @@ class OrderController extends Controller
                 'tot_item_point'    => $tot_item_point,
                 'ad_zip1'           => $od_b_zip,
                 'od_ip'             => $_SERVER["REMOTE_ADDR"],
-
-                'od_pg'             => $od_pg,
-                'od_settle_case'    => $od_settle_case,
-                'ad_name'           => $ad_name,
-                'ad_tel'            => $ad_tel,
-                'ad_hp'             => $ad_hp,
-                'ad_addr1'          => $ad_addr1,
-                'ad_addr2'          => $ad_addr2,
-                'ad_addr3'          => $ad_addr3,
-                'ad_jibeon'         => $ad_jibeon,
-                'od_memo'           => $od_memo,
-                'od_cart_count'     => $od_cart_count,
             ])->exists();
         }else{
             $update_result = DB::table('shopordertemps')->where([['od_id', $od_id], ['user_id', Auth::user()->user_id]])->update([
@@ -549,18 +517,6 @@ class OrderController extends Controller
                 'tot_item_point'    => $tot_item_point,
                 'ad_zip1'           => $od_b_zip,
                 'od_ip'             => $_SERVER["REMOTE_ADDR"],
-
-                'od_pg'             => $od_pg,
-                'od_settle_case'    => $od_settle_case,
-                'ad_name'           => $ad_name,
-                'ad_tel'            => $ad_tel,
-                'ad_hp'             => $ad_hp,
-                'ad_addr1'          => $ad_addr1,
-                'ad_addr2'          => $ad_addr2,
-                'ad_addr3'          => $ad_addr3,
-                'ad_jibeon'         => $ad_jibeon,
-                'od_memo'           => $od_memo,
-                'od_cart_count'     => $od_cart_count,
             ]);
         }
     }
@@ -604,12 +560,27 @@ class OrderController extends Controller
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
+        /*
+        //기본 배송지 처리
+        $ad_default         = $request->input('ad_default'); //기본 배송지 체크여부
+        $ad_subject         = $request->input('ad_subject'); //배송지명
+        $od_b_name          = $request->input('od_b_name');  //이름
+        $od_b_tel           = $request->input('od_b_tel');    //전화번호
+        $od_b_hp            = $request->input('od_b_hp');  //핸드폰
+        $od_b_zip           = $request->input('od_b_zip');    //우편번호
+        $od_b_addr1         = $request->input('od_b_addr1');    //주소
+        $od_b_addr2         = $request->input('od_b_addr2');    //상세주소
+        $od_b_addr3         = $request->input('od_b_addr3');    //참고항목
+        $od_b_addr_jibeon   = $request->input('od_b_addr_jibeon');    //지번(지번인지 도로명인지)
+
+        $CustomUtils->baesongji_process($ad_default, $ad_subject, $od_b_name, $od_b_tel, $od_b_hp, $od_b_zip, $od_b_addr1, $od_b_addr2, $od_b_addr3, $od_b_addr_jibeon);
+        //기본 배송지 처리 끝
+        */
+
         //변수 받기
         $order_id           = $request->input('order_id');
         $od_id              = $request->input('od_id');
-
         $od_deposit_name    = Auth::user()->user_name;
-/*
         $ad_name            = $request->input('od_b_name');
         $ad_tel             = $request->input('od_b_tel');
         $ad_hp              = $request->input('od_b_hp');
@@ -620,7 +591,7 @@ class OrderController extends Controller
         $ad_jibeon          = $request->input('od_b_addr_jibeon');
         $od_memo            = $request->input('od_memo');
         $od_cart_count      = $request->input('cart_count');
-*/
+
         $ordertemp = DB::table('shopordertemps')->where([['order_id', $order_id], ['od_id', $od_id], ['user_id', Auth::user()->user_id]])->first();
 
         //예외 처리
@@ -628,17 +599,6 @@ class OrderController extends Controller
             return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.-2');
             exit;
         }
-
-        $ad_name            = $ordertemp->ad_name;
-        $ad_tel             = $ordertemp->ad_tel;
-        $ad_hp              = $ordertemp->ad_hp;
-        $ad_zip1            = $ordertemp->ad_zip1;
-        $ad_addr1           = $ordertemp->ad_addr1;
-        $ad_addr2           = $ordertemp->ad_addr2;
-        $ad_addr3           = $ordertemp->ad_addr3;
-        $ad_jibeon          = $ordertemp->ad_jibeon;
-        $od_memo            = $ordertemp->od_memo;
-        $od_cart_count      = $ordertemp->od_cart_count;
 
         $od_cart_price      = $ordertemp->od_cart_price;
         $de_send_cost       = $ordertemp->de_send_cost;
@@ -650,23 +610,36 @@ class OrderController extends Controller
         $tot_item_point     = $ordertemp->tot_item_point;
         $od_receipt_time    = date('Y-m-d H:i:s', time());
         $od_status          = '입금';
-        $od_pg              = $ordertemp->od_pg;
-        $od_settle_case     = $ordertemp->od_settle_case;
-
-        //아임 포트 결제 정보를 다시 부른다.
+        $od_pg              = $request->input('pg');
+        $od_settle_case     = $request->input('method');
         $imp_uid            = $request->input('imp_uid');
-        $iamport_order_info = Iamport::getPayment($imp_uid);
-        //var_dump($iamport_order_info->data->__get('imp_uid')); 예제
-
-        $imp_apply_num      = $iamport_order_info->data->__get('apply_num'); //카드사에서 전달 받는 값(카드 승인번호)
-        $imp_paid_amount    = $iamport_order_info->data->__get('amount');  //카드사에서 받은 최종 결제 금액
-        $imp_merchant_uid   = $iamport_order_info->data->__get('merchant_uid');
-        $pg_provider        = $iamport_order_info->data->__get('pg_provider');   //결제승인/시도된 PG사
+        $imp_apply_num      = $request->input('apply_num'); //카드사에서 전달 받는 값(카드 승인번호)
+        $imp_paid_amount    = $request->input('paid_amount');  //카드사에서 받은 최종 결제 금액
+        $imp_merchant_uid   = $request->input('imp_merchant_uid');
+        $pg_provider        = $request->input('pg_provider');   //결제승인/시도된 PG사
         $od_shop_memo       = '';
-        $imp_card_name      = $iamport_order_info->data->__get('card_name');   //카드사에서 전달 받는 값(카드사명칭)
-        $imp_card_quota     = $iamport_order_info->data->__get('card_quota');   //카드사에서 전달 받는 값(할부개월수)
-        $imp_card_number    = $iamport_order_info->data->__get('card_number');   //카드사에서 전달 받는 값(카드번호)
+        $imp_card_name      = $request->input('imp_card_name');   //카드사에서 전달 받는 값(카드사명칭)
+        $imp_card_quota     = $request->input('imp_card_quota');   //카드사에서 전달 받는 값(할부개월수)
+        $imp_card_number    = $request->input('imp_card_number');   //카드사에서 전달 받는 값(카드번호)
 
+        //$cancel_result = Iamport::cancelPayment($imp_uid, $cancel_request_amount, $reason); //실제 취소 이루어 지는 부분
+        $aa = Iamport::getPayment($imp_uid);
+
+//        $arr = new ArrayObject($aa);
+        //$arr->setFlags(ArrayObject::ARRAY_AS_PROPS); // 위에서 세번째줄이 배열의 key를 객체의 property로 사용가능하게 해주는 역할을 한다.
+        //var_dump($aa);
+        var_dump($aa->data->__get('merchant_uid'));
+
+        //var_dump($aa);
+
+        //$aa = (array) $aa;
+        //$aa = json_encode($aa);
+        //$bb = json_decode($aa, true);
+        //$arr = (array) $aa;
+        //$kk = Response->$aa);
+//print_r($aa);
+
+exit;
         //예외 처리
         if($imp_apply_num == "" || $imp_apply_num == "0" || $imp_paid_amount == "" || $imp_paid_amount == "0" || $imp_merchant_uid == "" || $imp_merchant_uid == "0" || $imp_uid == "" || $imp_uid == "0"){
             return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.-3');
