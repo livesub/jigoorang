@@ -39,7 +39,7 @@
                         </ul>
 
                         <div class="cont_area">
-                            @if(count($exp_infos) > 0)
+                            @if(count($notice_infos) > 0)
                             <div class="cont pd-00 mt-30">
 
                                 @foreach($exp_infos as $exp_info)
