@@ -80,10 +80,10 @@
     <!-- 탭바 시작 -->
     <div class="tabar">
         <ul>
-            <li onclick="location.href='/'"><span>홈</span></li>
-            <li onclick="javascript:alert('22 년 2 월 OPEN  예정');"><span>랭킹</span></li>
-            <li onclick="javascript:alert('22 년 2 월 OPEN  예정');"><span>쇼핑</span></li>
-            <li onclick="location.href='{{ route('notice') }}'"><span>소식</span></li>
+            <li><span href="/">홈</span></li>
+            <li><a href="javascript:alert('22 년 2 월 OPEN  예정');">랭킹</a></li>
+            <li><a href="javascript:alert('22 년 2 월 OPEN  예정');">쇼핑</a></li>
+            <li><a href="{{ route('notice') }}">소식</a></li>
         </ul>
     </div>
     <!-- 탭바 끝 -->
@@ -91,18 +91,19 @@
     <!-- 헤더 시작-->
     <div class="header">
         <div class="top">
-            <div class="logo" onclick="location.href='/'">
+            <div class="logo">
+                <a href="/"></a>
                 <h1>지구랭</h1>
             </div>
 
             <!-- 모바일 메뉴 시작 -->
             <div class="ham">
-                <div class="btn_ham" onclick="openNav()"><span class="name">햄버거</span></div>
+                <a class="btn_ham" onclick="openNav()"><span class="name">햄버거</span></a>
             </div>
 
             <div class="background"></div>
             <div id="Sidenav" class="sidenav">
-                <a class="closebtn" onclick="closeNav()">
+                <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">
                   <img src="{{ asset('/design/recources/icons/icon-cls.png') }}" alt="">
                 </a>
 

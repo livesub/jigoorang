@@ -206,9 +206,9 @@
                                             </li>
                                         </ul>
                                         <ul class="dt_dev" id="add_cost">
-                                            <li>추가배송비</li>
+                                            <li><p>추가배송비</p></li>
                                             <li>
-                                                <span class="cr_03">{{ $sc_method_disp }}</span>
+                                                <p>{{ $sc_method_disp }}</p>
                                             </li>
                                         </ul>
                                     </div>

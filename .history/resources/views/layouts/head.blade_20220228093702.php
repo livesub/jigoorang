@@ -143,11 +143,11 @@
             <!-- 수정껀 생길때 또 막음 -->
                 <ul class="menu">
                     <li class="search" onclick="openmodal_001()">
-                        <a>
+                        <span>
                             <span>검색</span>
                             <p class="block">검색</p>
                             <p class="none">검색</p>
-                        </a>
+                        </span>
                     </li>
 
                     @if(!auth()->user())
