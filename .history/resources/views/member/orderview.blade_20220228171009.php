@@ -90,7 +90,6 @@
                             //제목
                             $item_name = $item_manufacture.stripslashes($cart->item_name);
 
-                            $item_options = "";
                             $item_options = $CustomUtils->item_option_subject($item, $cart->sct_option);
 
 /*

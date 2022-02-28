@@ -90,16 +90,12 @@
                             //제목
                             $item_name = $item_manufacture.stripslashes($cart->item_name);
 
-                            $item_options = "";
-                            $item_options = $CustomUtils->item_option_subject($item, $cart->sct_option);
-
-/*
-                            if(strpos($cart->sct_option, " / ") !== false) {
+                            if(strpos($cart->sio_id, " / ") !== false) {
                                 $item_options = $cart->sct_option;
                             } else {
                                 $item_options = "";
                             }
-*/
+
                             //교환버튼 출력 시점(결제완료후 9일 지나면 send_complete_chk 자동 완료, 이후 21일이 지나면 안나오게 총 30일)
                             $now_date = date('Y-m-d H:i:s', time());
                             $day_30_tmp = strtotime($order->created_at." +21 days");    // 30기준이나 구매 완료 시점이 결제후 9일 이기에 21일 계산
