@@ -458,14 +458,14 @@ class AdmReviewMangerController extends Controller
 
         $now_date = date('Ymd', time());
         $file_name = "리뷰관리".$now_date.".xls";
-
+/*
         header( "Content-type: application/vnd.ms-excel" );
         header( "Content-type: application/vnd.ms-excel; charset=utf-8");
         header( "Content-Disposition: attachment; filename = $file_name" );
         header( "Content-Description: PHP4 Generated Data" );
-
+*/
         $dsp_html = '
-            <table border=1>
+            <table>
                 <tr style="background-color:#ddd;">
                     <td>번호</td>
                     <td>아이디</td>
@@ -477,7 +477,7 @@ class AdmReviewMangerController extends Controller
                     <td>작성일자</td>
                     <td>임시저장여부</td>
                     <td>블라인드처리여부</td>
-                </tr>
+                <tr>
         ';
 
         $rows_cnt = count($review_save_rows);
@@ -538,7 +538,7 @@ class AdmReviewMangerController extends Controller
                     <td>'.$review_save_row->created_at.'</td>
                     <td>'.$temporary_yn_ment.'</td>
                     <td>'.$blind_ment.'</td>
-                </tr>
+                <tr>
             ';
 
             $rows_cnt--;
@@ -547,7 +547,7 @@ class AdmReviewMangerController extends Controller
         $dsp_html .= '
         </table>
         ';
-        echo "<meta content=\"application/vnd.ms-excel; charset=UTF-8\" name=\"Content-type\"> ";
+        //echo "<meta content=\"application/vnd.ms-excel; charset=UTF-8\" name=\"Content-type\"> ";
         echo $dsp_html;
     }
 
