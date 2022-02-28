@@ -107,8 +107,7 @@ var_dump("kkk===> ".count($orders->get()));
         }
 
         $total_record   = 0;
-        //$total_record   = $orders->count(); //총 게시물 수
-        $total_record   = count($orders->get()); //총 게시물 수
+        $total_record   = $orders->count(); //총 게시물 수
 
         $total_page     = ceil($total_record / $pageScale);
         $total_page     = $total_page == 0 ? 1 : $total_page;
