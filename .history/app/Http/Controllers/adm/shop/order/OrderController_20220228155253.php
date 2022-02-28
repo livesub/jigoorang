@@ -65,11 +65,7 @@ class OrderController extends Controller
         if($od_status != "교환"){
             $orders = DB::table('shoporders')->where('od_status', $od_status);
         }else{
-<<<<<<< HEAD
-	    DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));");
-=======
             DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));");
->>>>>>> e1a3b0ebbfa9d6d789da0fed93b42ddee5f1bb37
             $orders = DB::table('shoporders as a')
             ->select('a.*', 'b.return_process')
             ->leftjoin('shopcarts as b', function($join) {
