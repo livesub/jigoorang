@@ -91,8 +91,8 @@
                                         $sendcost = $CustomUtils->new_get_item_sendcost($cart_info->id, $sum[0]->price, $sum[0]->qty, $s_cart_id);
 
                                         $item = DB::table('shopitems')->where('item_code', $cart_info->item_code)->first();
-                                        $item_options_name = "";
-                                        $item_options_name = $CustomUtils->item_option_subject($item, $cart_info->sct_option);
+dd($item);
+                                        $item_options = $CustomUtils->item_option_subject($item, $cart->sct_option);
                                     @endphp
                                 <div class="pr_body pd-00">
                                     <div class="pr-t pd-00">
@@ -108,7 +108,7 @@
                                                 </a>
                                                 <li>
                                                 {{-- @if($item_options->sio_price > 0) --}}
-                                                {{ $item_options_name }}
+                                                {{ $item_options }}
                                                 {{-- @endif --}}
                                                 </li>
                                                 <li class="price_pd">{{ $CustomUtils->display_price(($cart_info->item_price + $item_options->sio_price)) }} X {{ number_format($cart_info->sct_qty) }}개</li>
@@ -365,7 +365,7 @@
                                             </li>
                                         </ul>!-->
 
-                                       <!--<ul class="radio pdb-10">
+                                       <!-- <ul class="radio pdb-10">
                                             <li>
                                                 <input type="radio" name="cp_item" id="rd_4" onclick="pay_type('kakaopay','kakaopay');">
                                                 <label for="rd_4">카카오페이</label>

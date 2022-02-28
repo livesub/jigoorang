@@ -365,7 +365,7 @@
                                             </li>
                                         </ul>!-->
 
-                                       <!--<ul class="radio pdb-10">
+                                       <!-- <ul class="radio pdb-10">
                                             <li>
                                                 <input type="radio" name="cp_item" id="rd_4" onclick="pay_type('kakaopay','kakaopay');">
                                                 <label for="rd_4">카카오페이</label>
