@@ -41,7 +41,8 @@ Route::get('/home', [
 
 Route::get('/', [
     'as' => 'main.index',
-    'uses' => 'App\Http\Controllers\exp\expController@index',
+    //'uses' => 'App\Http\Controllers\exp\expController@index',
+    'uses' => 'App\Http\Controllers\MainController@index',
 ]);
 
 
