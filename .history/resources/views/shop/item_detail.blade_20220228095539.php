@@ -90,6 +90,7 @@
                                 <input type="hidden" name="ajax_option_url" id="ajax_option_url" value="{{ route('ajax_option_change') }}">
                                 <input type="hidden" name="sw_direct" id="sw_direct">
                                 <input type="hidden" name="url" id="url">
+                                <input type="hidden" name="de_send_cost_free" id="de_send_cost_free" value="{{ $de_send_cost_free }}">
 
                                 <div class="shop_goods_dt_r">
                                    @if($item_info->item_type1 != 0)
@@ -102,7 +103,7 @@
                                     <div class="dt_tt">
                                         @php
                                             if($item_info->item_manufacture == "") $item_manufacture = "";
-                                            else $item_manufacture = "[".$item_info->item_manufacture."]";
+                                            else $item_manufacture = "[".$item_info->item_manufacture."] ";
                                         @endphp
                                         <h3>{{ $item_manufacture }}{{ stripslashes($item_info->item_name) }}</h3>
                                         <div class="line_14-100-r"></div>
@@ -130,11 +131,11 @@
                                         </ul>
                                         @endif
 
-                                        @if($item_info->item_point != "0")
+                                        @if($item_info->item_give_point == "Y")
                                         <ul class="dt_pr_st">
                                             <li>적립금</li>
                                             <li onclick="" class="dt_not tooltip">
-                                                <span class="discount">{{ $item_info->item_point }}%<span>
+                                                <span class="discount">{{ $tot_item_point }}%<span>
                                                 <span class="tooltiptext">
                                                     <!-- <div class="del"></div> -->
                                                     최종 적립 금액은 할인, 적립금 사용액, 배송료를 제외한 금액을 기준으로 적립되며 옵션 가격, 수량에 따라 달라질 수 있습니다
@@ -145,7 +146,16 @@
 
                                         <ul class="dt_pr_st">
                                             <li>배송비</li>
-                                            <li>{{ number_format($de_send_cost) }}원(도서산간일 경우 추가 배송비 발생)</li>
+                                            <li>{{ number_format($de_send_cost) }}원({{ number_format($de_send_cost_free) }}원 이상 구매시 무료배송)
+                                            </li>
+                                        </ul>
+
+                                        <ul class="dt_pr_st pr_add">
+                                        @if($item_info->item_sc_price > 0)
+                                            <li>추가 배송비</li>
+                                            <li>{{ number_format($item_info->item_sc_price) }}원</li>
+                                        @endif
+                                            <p class="cr_04">※ 도서산간지역 및 일부 제품의 경우 추가 배송비 발생</p>
                                         </ul>
                                     </div>
 
@@ -165,9 +175,9 @@
                                                 <input type="hidden" name="sio_value[{{ $item_info->item_code }}][]" value="{{ $item_info->item_name }}">
                                                 <input type="hidden" class="sio_price" value="0">
                                                 <input type="hidden" class="sio_stock" value="{{ $item_info->item_stock_qty}}">
-                                                <button type="button">+</button>
-                                                    <input type="text" name="ct_qty[{{ $item_info->item_code }}][]" value="1" id="ct_qty_11" size="5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
                                                 <button type="button">-</button>
+                                                    <input type="text" name="ct_qty[{{ $item_info->item_code }}][]" value="1" id="ct_qty_11" size="5" onKeyup="this.value=this.value.replace(/[^0-9]/g,'');">
+                                                <button type="button">+</button>
                                             </li>
                                             <li class="mt-5">{{ $CustomUtils->display_price($item_info->item_price) }}</li>
                                         </ul>
@@ -186,13 +196,19 @@
                                             <li><h4>총 상품금액</h4></li>
                                             <li class="cr_02" id="sit_tot_price"></li>
                                         </ul>
-                                        <ul class="dt_dev">
+                                        <ul class="dt_dev" id="add_cost">
                                             <li>배송비</li>
                                             <li>
                                                 <span>{{ number_format($de_send_cost) }}원</span>
-                                                @if($item_info->item_sc_price > 0)
+                                                <!--@if($item_info->item_sc_price > 0)
                                                 <p>(추가배송비 {{ $sc_method_disp }})</p>
-                                                @endif
+                                                @endif-->
+                                            </li>
+                                        </ul>
+                                        <ul class="dt_dev" id="add_cost">
+                                            <li><p>추가배송비</li>
+                                            <li>
+                                                <p>{{ $sc_method_disp }}</p>
                                             </li>
                                         </ul>
                                     </div>
@@ -367,7 +383,7 @@
                                             @if($item_content2 != "")
 
                                             <div class="dt_s_con">
-                                                <p class="set_tt">진성분</p>
+                                                <p class="set_tt">전성분</p>
                                                 <div class="dt_s_con_tt">
                                                     {!! $item_info->item_content2 !!}
                                                 </div>
@@ -626,7 +642,11 @@
                     }
 
                     if(json.message == "cart_page"){
-                        location.href = "{{ route('cartlist') }}";
+                        if (confirm("장바구니에 상품을 담았습니다.\n장바구니로 이동하시겠습니까?’") == true){    //확인
+                            location.href = "{{ route('cartlist') }}";
+                        }else{   //취소
+                            location.reload();
+                        }
                     }
                 },
                 error: function(result){
