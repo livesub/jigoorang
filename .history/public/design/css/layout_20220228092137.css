@@ -370,7 +370,7 @@
 }
 .tabar ul li span {
   width: 100%;
-  top: 45px;
+  padding-top: 45px;
 }
 
 /* 출력별 */

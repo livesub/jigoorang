@@ -477,7 +477,7 @@ class AdmReviewMangerController extends Controller
                     <td>작성일자</td>
                     <td>임시저장여부</td>
                     <td>블라인드처리여부</td>
-                </tr>
+                <tr>
         ';
 
         $rows_cnt = count($review_save_rows);

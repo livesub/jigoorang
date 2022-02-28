@@ -200,19 +200,11 @@
                                             <li>배송비</li>
                                             <li>
                                                 <span>{{ number_format($de_send_cost) }}원</span>
-                                                <!--@if($item_info->item_sc_price > 0)
+                                                @if($item_info->item_sc_price > 0)
                                                 <p>(추가배송비 {{ $sc_method_disp }})</p>
                                                 @endif-->
                                             </li>
                                         </ul>
-                                        @if($item_info->item_sc_price > 0)
-                                        <ul class="dt_dev" id="add_cost1">
-                                            <li>추가배송비</li>
-                                            <li>
-                                                <span class="cr_03">{{ $sc_method_disp }}</span>
-                                            </li>
-                                        </ul>
-                                        @endif
                                     </div>
 
                                     <div class="dt_btn_4ea">

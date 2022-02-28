@@ -91,7 +91,8 @@
     <!-- 헤더 시작-->
     <div class="header">
         <div class="top">
-            <div class="logo" onclick="location.href='/'">
+            <div class="logo">
+                <a href="/"></a>
                 <h1>지구랭</h1>
             </div>
 
