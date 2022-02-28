@@ -103,9 +103,9 @@
                                                     </li>
                                                 </a>
                                                 <li>
-                                                {{-- @if($item_options->sio_price > 0) --}}
+                                                @if($item_options->sio_price > 0)
                                                 {{ $item_options->sct_option }}
-                                                {{-- @endif --}}
+                                                @endif
                                                 </li>
                                                 <li class="price_pd">{{ $CustomUtils->display_price(($cart_info->item_price + $item_options->sio_price)) }} X {{ number_format($cart_info->sct_qty) }}개</li>
                                             </ul>
@@ -361,7 +361,7 @@
                                             </li>
                                         </ul>!-->
 
-                                       <!--<ul class="radio pdb-10">
+                                       <!-- <ul class="radio pdb-10">
                                             <li>
                                                 <input type="radio" name="cp_item" id="rd_4" onclick="pay_type('kakaopay','kakaopay');">
                                                 <label for="rd_4">카카오페이</label>
