@@ -105,15 +105,14 @@
                         //제목
                         $item_name = $item_manufacture.stripslashes($cart->item_name);
 
-                        $item_options = "";
-                        $item_options = $CustomUtils->item_option_subject($item, $cart->sct_option);
-/*
+
+
                         if(strpos($cart->sct_option, " / ") !== false) {
                             $item_options = $cart->sct_option;
                         } else {
                             $item_options = "";
                         }
-*/
+
                         $pay_cancel_date = "";
                         if($order_info->pay_cancel_date != "") $pay_cancel_date = substr($order_info->pay_cancel_date, 0, 10);
                     @endphp

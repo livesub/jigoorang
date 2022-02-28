@@ -209,7 +209,7 @@
 
                                 <ul class="oder_name wt-00">
                                   <li>배송비</li>
-                                  <li>{{ number_format($send_cost) }}원</li>
+                                  <li>{{ number_format($send_cost) }}원111111111111111111</li>
                                 </ul>
 
                                 <ul class="oder_name wt-00">
