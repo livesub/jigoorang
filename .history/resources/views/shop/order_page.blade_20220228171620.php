@@ -103,9 +103,9 @@
                                                     </li>
                                                 </a>
                                                 <li>
-                                                {{-- @if($item_options->sio_price > 0) --}}
-                                                {{ $item_options->sct_option }}
-                                                {{-- @endif --}}
+                                                @if($item_options->sio_price > 0)
+                                                {{ $item_options->sct_option }}222222222222
+                                                @endif
                                                 </li>
                                                 <li class="price_pd">{{ $CustomUtils->display_price(($cart_info->item_price + $item_options->sio_price)) }} X {{ number_format($cart_info->sct_qty) }}개</li>
                                             </ul>
