@@ -82,8 +82,8 @@
     <div class="tabar">
         <ul>
             <li onclick="location.href='/'"><span>홈</span></li>
-            <li onclick="location.href='{{ route('ranking_list') }}'"><span>랭킹</span></li>
-            <li onclick="location.href='{{ route('shop.index') }}'"><span>쇼핑</span></li>
+            <li onclick="{{ route('ranking_list') }}"><span>랭킹</span></li>
+            <li onclick="{{ route('shop.index') }}"><span>쇼핑</span></li>
             <li onclick="location.href='{{ route('notice') }}'"><span>소식</span></li>
         </ul>
     </div>
