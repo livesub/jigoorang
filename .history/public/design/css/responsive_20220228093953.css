@@ -1587,7 +1587,8 @@ background-size: cover;
         width: 100%;
     }
 
-    .modal_sh .modal-dialog .modal-dialog-contents .search-wrap .search-inner .sh_terms {
+    .modal_sh .modal-dialog .modal-dialog-contents .
+    -wrap .search-inner .sh_terms {
         font-size: 14px;
         font-weight: bold;
         border-bottom: solid 2px #ddd;
@@ -3447,14 +3448,6 @@ background-size: cover;
 
 
     button.btn-full {
-        font-size: 13px;
-    }
-
-    button.btn-full-kakao {
-        font-size: 13px;
-    }
-
-    button.btn-full-naver {
         font-size: 13px;
     }
 

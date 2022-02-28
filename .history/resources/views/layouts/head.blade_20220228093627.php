@@ -92,6 +92,7 @@
     <div class="header">
         <div class="top">
             <div class="logo" onclick="location.href='/'">
+                <a href="/"></a>
                 <h1>지구랭</h1>
             </div>
 

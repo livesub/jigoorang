@@ -150,7 +150,7 @@
     .header .top .menu li {
         margin-right: 10px;
     }
-    .header .top .menu li a {
+    .header .top .menu li span {
         width: 30px;
         height: 30px;
     }
@@ -3447,14 +3447,6 @@ background-size: cover;
 
 
     button.btn-full {
-        font-size: 13px;
-    }
-
-    button.btn-full-kakao {
-        font-size: 13px;
-    }
-
-    button.btn-full-naver {
         font-size: 13px;
     }
 
