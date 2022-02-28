@@ -65,7 +65,6 @@ class OrderController extends Controller
         if($od_status != "교환"){
             $orders = DB::table('shoporders')->where('od_status', $od_status);
         }else{
-            DB::statement("SET sql_mode=(SELECT REPLACE(@@sql_mode,'ONLY_FULL_GROUP_BY',''));");
             $orders = DB::table('shoporders as a')
             ->select('a.*', 'b.return_process')
             ->leftjoin('shopcarts as b', function($join) {
@@ -81,7 +80,7 @@ class OrderController extends Controller
             }
 
             //$orders = $orders->distinct('a.order_id');
-            $orders = $orders->groupBy('a.order_id');
+            $orders = $orders->groupBy('b.order_id');
         }
 
         if ($search != "") {    //검색
@@ -108,7 +107,7 @@ class OrderController extends Controller
 
         $total_record   = 0;
         $total_record   = $orders->count(); //총 게시물 수
-
+var_dump("total_record====> ".$total_record);
         $total_page     = ceil($total_record / $pageScale);
         $total_page     = $total_page == 0 ? 1 : $total_page;
 
@@ -126,7 +125,7 @@ class OrderController extends Controller
         $tailarr['od_cancel_price']     = $od_cancel_price;
         $tailarr['od_refund_price']     = $od_refund_price;
         $tailarr['od_receipt_point']    = $od_receipt_point;
-        $tailarr['fr_date']             = $fr_date;
+        $tailarr['fr_date']             = $od_receipt_point;
         $tailarr['to_date']             = $to_date;
         $tailarr['return_proc']         = $return_proc;
         $tailarr['order_type']          = $order_type;
