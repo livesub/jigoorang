@@ -65,9 +65,7 @@
                             <li><input type="radio" name="withdraw_type" id="withdraw_type6" value="컨텐츠가 불만이에요" onclick="withdraw_type_chk(6)"> <label for="withdraw_type6">컨텐츠가 불만이에요</label></li>
                             <li><input type="radio" name="withdraw_type" id="withdraw_type7" value="UI/UX가 불편해요" onclick="withdraw_type_chk(7)"> <label for="withdraw_type7">UI/UX가 불편해요</label></li>
                             <li><input type="radio" name="withdraw_type" id="withdraw_type8" value="기타(직접입력)" onclick="withdraw_type_chk(8)"> <label for="withdraw_type8">기타(직접입력)</label></li>
-                            <li id="withdraw_con" style="display:none">
-                                <textarea id="withdraw_content" maxlength="500" placeholder="이유를 작성해 주세요."></textarea>
-                            </li>
+                            <textarea  id="withdraw_con" style="display:none" name="withdraw_content" id="withdraw_content" maxlength="500" placeholder="이유를 작성해 주세요."></textarea>
                           </ul>
                         </div>
                     </div>
@@ -111,13 +109,14 @@
         }
 
         if($('input[name=withdraw_type]:checked').val() == "기타(직접입력)"){
+alert($("#withdraw_content").val());
             if($.trim($("#withdraw_content").val()) == ""){
                 alert("사유를 작성해 주세요.");
                 $("#withdraw_content").focus();
                 return false;
             }
         }
-
+return false;
         if (confirm("정말 탈퇴 하시겠습니까?") == true){    //확인
             $("#withdraw_form").submit();
         }else{   //취소

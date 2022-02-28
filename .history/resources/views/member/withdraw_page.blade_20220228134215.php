@@ -117,7 +117,8 @@
                 return false;
             }
         }
-
+alert($("#withdraw_content").val());
+return false;
         if (confirm("정말 탈퇴 하시겠습니까?") == true){    //확인
             $("#withdraw_form").submit();
         }else{   //취소

@@ -258,6 +258,7 @@
                             </tr>
                         </thead>
                         <!-- 리스트 시작 -->
+
                         @foreach($orders as $order)
                         @php
                             $cart_infos = DB::table('shopcarts')->where('od_id', $order->order_id)->get();

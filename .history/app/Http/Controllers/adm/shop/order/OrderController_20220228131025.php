@@ -74,12 +74,13 @@ class OrderController extends Controller
             if($return_proc == "N"){
                 $orders = $orders->where([['a.exchange_item_chk', 'Y'], ['b.return_process','N']]);
             }elseif($return_proc == "Y"){
-                $orders = $orders->where([['a.exchange_item_chk', 'Y'], ['b.return_process','Y']]);
+var_dump("22222222222");
+                $orders = $orders->where([['a.exchange_item_chk', 'Y'], ['b.return_process','N']]);
             }else{
                 $orders = $orders->where('b.return_process','Y')->orwhere('b.return_process','N');
             }
 
-            //$orders = $orders->distinct('a.order_id');
+            $orders = $orders->distinct('a.order_id');
             $orders = $orders->groupBy('a.order_id');
         }
 
@@ -107,7 +108,6 @@ class OrderController extends Controller
 
         $total_record   = 0;
         $total_record   = $orders->count(); //총 게시물 수
-
         $total_page     = ceil($total_record / $pageScale);
         $total_page     = $total_page == 0 ? 1 : $total_page;
 

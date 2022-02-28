@@ -258,6 +258,9 @@
                             </tr>
                         </thead>
                         <!-- 리스트 시작 -->
+@php
+    var_dump("cnt-----<". count($orders));
+@endphp
                         @foreach($orders as $order)
                         @php
                             $cart_infos = DB::table('shopcarts')->where('od_id', $order->order_id)->get();

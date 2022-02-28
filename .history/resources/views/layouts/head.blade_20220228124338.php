@@ -40,7 +40,7 @@
     <meta property="og:image" content="{{ asset('/design/resources/logo.png') }}">
     <meta name="naver-site-verification" content="fb44216dac5adf92f534a7f19c86a31276e15416" />
     <meta name="robots" content="ALL">
-    <meta name = keywords" content="친환경제품추천, 친환경제품리뷰, 샴푸바추천, 설거지비누추천, 제로웨이스트">
+    <meta name = "keywords" content="친환경제품추천, 친환경제품리뷰, 샴푸바추천, 설거지비누추천, 제로웨이스트">
 
     <link rel="canonical" href="http://jigoorang.com/">
     <meta name="description" content="지구랭은 사용자들의 실사용 리뷰와 평가 점수를 통한 랭킹을 산출하여 지구를 위한 친환경 제품의 소비를 지향하는 플랫폼 입니다.">

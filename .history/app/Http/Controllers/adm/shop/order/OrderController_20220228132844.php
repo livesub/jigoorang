@@ -112,9 +112,9 @@ class OrderController extends Controller
         $total_page     = $total_page == 0 ? 1 : $total_page;
 
         if($order_sort == "" || $order_sort == "desc"){
-            $order_rows = $orders->orderby('id', 'desc')->offset($start_num)->limit($pageScale)->get();
+            $order_rows = $orders->orderby('a.id', 'desc')->offset($start_num)->limit($pageScale)->get();
         }else{
-            $order_rows = $orders->orderby('id', 'asc')->offset($start_num)->limit($pageScale)->get();
+            $order_rows = $orders->orderby('a.id', 'asc')->offset($start_num)->limit($pageScale)->get();
         }
 
         $tailarr = array();

@@ -69,17 +69,20 @@ class OrderController extends Controller
             ->select('a.*', 'b.return_process')
             ->leftjoin('shopcarts as b', function($join) {
                     $join->on('a.order_id', '=', 'b.od_id');
-                });
+                })
+            ->where('a.exchange_item_chk', 'N');
 
             if($return_proc == "N"){
-                $orders = $orders->where([['a.exchange_item_chk', 'Y'], ['b.return_process','N']]);
+var_dump("11111111111");
+                $orders = $orders->where('b.return_process','N');
             }elseif($return_proc == "Y"){
-                $orders = $orders->where([['a.exchange_item_chk', 'Y'], ['b.return_process','Y']]);
+var_dump("22222222222");
+                $orders = $orders->where('b.return_process','Y');
             }else{
-                $orders = $orders->where('b.return_process','Y')->orwhere('b.return_process','N');
+                $orders = $orders->where('b.return_process','Y');
             }
 
-            //$orders = $orders->distinct('a.order_id');
+            $orders = $orders->distinct('a.order_id');
             $orders = $orders->groupBy('a.order_id');
         }
 
@@ -107,7 +110,6 @@ class OrderController extends Controller
 
         $total_record   = 0;
         $total_record   = $orders->count(); //총 게시물 수
-
         $total_page     = ceil($total_record / $pageScale);
         $total_page     = $total_page == 0 ? 1 : $total_page;
 
@@ -156,7 +158,8 @@ class OrderController extends Controller
         ->leftjoin('shopcarts as b', function($join) {
                 $join->on('a.order_id', '=', 'b.od_id');
             })
-        ->where([['a.exchange_item_chk', 'Y'], ['b.return_process','N']])->count();
+        ->where('a.exchange_item_chk', 'N')
+        ->where('b.return_process','N')->count();
 
 /*
             $orders = DB::table('shoporders as a')

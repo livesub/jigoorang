@@ -74,12 +74,13 @@ class OrderController extends Controller
             if($return_proc == "N"){
                 $orders = $orders->where([['a.exchange_item_chk', 'Y'], ['b.return_process','N']]);
             }elseif($return_proc == "Y"){
+var_dump("22222222222");
                 $orders = $orders->where([['a.exchange_item_chk', 'Y'], ['b.return_process','Y']]);
             }else{
                 $orders = $orders->where('b.return_process','Y')->orwhere('b.return_process','N');
             }
 
-            //$orders = $orders->distinct('a.order_id');
+            $orders = $orders->distinct('a.order_id');
             $orders = $orders->groupBy('a.order_id');
         }
 

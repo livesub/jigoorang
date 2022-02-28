@@ -55,8 +55,7 @@ class OrderController extends Controller
         $return_proc        = $request->input('return_proc');
         $order_type         = $request->input('order_type');
 
-        if($return_proc == "") $return_proc = 'N';
-
+var_dump($return_proc);
         //배송 완료는 결제후 9일후에 자동으로 배송완료로 변환 해 준다
         $send_complete = $this->send_complete();
 
@@ -69,17 +68,16 @@ class OrderController extends Controller
             ->select('a.*', 'b.return_process')
             ->leftjoin('shopcarts as b', function($join) {
                     $join->on('a.order_id', '=', 'b.od_id');
-                });
+                })
+            ->where('a.exchange_item_chk', 'N');
 
             if($return_proc == "N"){
-                $orders = $orders->where([['a.exchange_item_chk', 'Y'], ['b.return_process','N']]);
+                $orders = $orders->where('b.return_process','N');
             }elseif($return_proc == "Y"){
-                $orders = $orders->where([['a.exchange_item_chk', 'Y'], ['b.return_process','Y']]);
-            }else{
-                $orders = $orders->where('b.return_process','Y')->orwhere('b.return_process','N');
+                $orders = $orders->where('b.return_process','Y');
             }
 
-            //$orders = $orders->distinct('a.order_id');
+            $orders = $orders->distinct('a.order_id');
             $orders = $orders->groupBy('a.order_id');
         }
 
@@ -107,7 +105,6 @@ class OrderController extends Controller
 
         $total_record   = 0;
         $total_record   = $orders->count(); //총 게시물 수
-
         $total_page     = ceil($total_record / $pageScale);
         $total_page     = $total_page == 0 ? 1 : $total_page;
 
@@ -149,26 +146,7 @@ class OrderController extends Controller
         $orders_cnt2 = DB::table('shoporders')->where('od_status', '준비')->count();    //준비 건
         $orders_cnt3 = DB::table('shoporders')->where('od_status', '배송')->count();    //배송 건
         $orders_cnt4 = DB::table('shoporders')->where('od_status', '완료')->count();    //완료 건
-
-
-        $orders_cnt5 = DB::table('shoporders as a')
-        ->select('a.*', 'b.return_process')
-        ->leftjoin('shopcarts as b', function($join) {
-                $join->on('a.order_id', '=', 'b.od_id');
-            })
-        ->where([['a.exchange_item_chk', 'Y'], ['b.return_process','N']])->count();
-
-/*
-            $orders = DB::table('shoporders as a')
-            ->select('a.*', 'b.return_process')
-            ->leftjoin('shopcarts as b', function($join) {
-                    $join->on('a.order_id', '=', 'b.od_id');
-                })
-            ->where('a.exchange_item_chk', 'N')
-            ->where('b.return_process','N');
-*/
-
-        //$orders_cnt5 = DB::table('shoporders')->where('exchange_item_chk', 'N')->count();    //교환 건
+        $orders_cnt5 = DB::table('shoporders')->where('exchange_item_chk', 'Y')->count();    //교환 건
         $orders_cnt6 = DB::table('shoporders')->where('od_status', '상품취소')->count();    //취소 건
 
         return view('adm.shop.order.orderlist',[

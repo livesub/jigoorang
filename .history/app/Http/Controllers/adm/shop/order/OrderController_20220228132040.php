@@ -74,6 +74,7 @@ class OrderController extends Controller
             if($return_proc == "N"){
                 $orders = $orders->where([['a.exchange_item_chk', 'Y'], ['b.return_process','N']]);
             }elseif($return_proc == "Y"){
+var_dump("22222222222");
                 $orders = $orders->where([['a.exchange_item_chk', 'Y'], ['b.return_process','Y']]);
             }else{
                 $orders = $orders->where('b.return_process','Y')->orwhere('b.return_process','N');
@@ -112,11 +113,11 @@ class OrderController extends Controller
         $total_page     = $total_page == 0 ? 1 : $total_page;
 
         if($order_sort == "" || $order_sort == "desc"){
-            $order_rows = $orders->orderby('id', 'desc')->offset($start_num)->limit($pageScale)->get();
+            $order_rows = $orders->orderby('a.id', 'desc')->offset($start_num)->limit($pageScale)->get();
         }else{
-            $order_rows = $orders->orderby('id', 'asc')->offset($start_num)->limit($pageScale)->get();
+            $order_rows = $orders->orderby('a.id', 'asc')->offset($start_num)->limit($pageScale)->get();
         }
-
+var_dump("RRRRRr====> ".count($order_rows));
         $tailarr = array();
         $tailarr['sel_field']           = $sel_field;
         $tailarr['search']              = $search;

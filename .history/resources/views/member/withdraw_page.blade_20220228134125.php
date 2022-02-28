@@ -111,13 +111,14 @@
         }
 
         if($('input[name=withdraw_type]:checked').val() == "기타(직접입력)"){
+alert($("#withdraw_content").val());
             if($.trim($("#withdraw_content").val()) == ""){
                 alert("사유를 작성해 주세요.");
                 $("#withdraw_content").focus();
                 return false;
             }
         }
-
+return false;
         if (confirm("정말 탈퇴 하시겠습니까?") == true){    //확인
             $("#withdraw_form").submit();
         }else{   //취소
