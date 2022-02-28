@@ -1195,16 +1195,6 @@ background-size: cover;
         color: #000;
     }
 
-    .eval .board.mypage_list .board_wrap .pd-40.terms {
-        padding: 40px 0;
-    }
-
-
-    .eval .board.mypage_list .board_wrap .notie01 {
-        margin-left: 0px;
-    }
-
-
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .pr_name .oder_name.col li:nth-child(1) {
         width: calc(100% - 74%) !important;
@@ -5132,7 +5122,7 @@ background-size: cover;
     }
 
     .eval .board.mypage_list .board_wrap .notie01 {
-        margin-left: 0px;
+        margin-left: 40px;
     }
 
     /* 주문 배송 내역 */

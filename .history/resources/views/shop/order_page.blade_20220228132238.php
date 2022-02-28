@@ -397,7 +397,7 @@
                               </div>
                             </div>
 
-                            <div class="mt-20 cr_03 ft_sz notie01">※ 결제 후, 부분 취소가 불가합니다.
+                            <div class="mt-20 cr_03 ft_sz notie">※ 결제 후, 부분 취소가 불가합니다.
                                 주문 내역을 잘 확인하신 후 결제 부탁드립니다.</div>
 
                             <div class="list_img_btn_area">
