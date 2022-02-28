@@ -83,7 +83,7 @@ class OrderController extends Controller
             //$orders = $orders->distinct('a.order_id');
             $orders = $orders->groupBy('a.order_id');
         }
-
+var_dump("kkk===> ".count($orders->get()));
         if ($search != "") {    //검색
             if ($sel_field != "") {
                 $orders->where($sel_field, 'like', '%'.$search.'%');
