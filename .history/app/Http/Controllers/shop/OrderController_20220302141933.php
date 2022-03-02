@@ -636,7 +636,8 @@ class OrderController extends Controller
         $od_memo            = $request->input('od_memo');
         $od_cart_count      = $request->input('cart_count');
 */
-        $ordertemp = DB::table('shopordertemps')->where([['order_id', $order_id], ['od_id', $od_id], ['user_id', Auth::user()->user_id]])->first();
+        //$ordertemp = DB::table('shopordertemps')->where([['order_id', $order_id], ['od_id', $od_id], ['user_id', Auth::user()->user_id]])->first();
+        $ordertemp = DB::table('shopordertemps')->where([['order_id', $order_id], ['user_id', Auth::user()->user_id]])->first();
 
         //예외 처리
         if(!$ordertemp){
