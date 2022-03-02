@@ -222,7 +222,7 @@
 
                                 <span class="goods_right">
                                 @if($item_info->item_cust_price != 0)
-                                    @php
+				@php
                                         //시중가격 값이 있을때 할인율 계산
                                         $discount = (int)$item_info->item_cust_price - (int)$item_info->item_price; //할인액
                                         $discount_rate = ($discount / (int)$item_info->item_cust_price) * 100;  //할인율
@@ -233,7 +233,7 @@
                                     @else
                                     <p class="pct_list"></p>
                                     @endif
-                                @else
+				@else
                                     <p class="pct_list"></p>
                                 @endif
                                 </span>

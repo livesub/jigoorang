@@ -18,13 +18,14 @@ use Illuminate\Http\Request;
 | routes are loaded by the RouteServiceProvider within a group which
 | contains the "web" middleware group. Now create something great!
 |
-*/
-//https 일때 사용
+
+
+ */
 /*
 if (App::environment('local')) {
     URL::forceScheme('https');
 }
-*/
+ */
 /*
 Route::get('/', [
     'as' => 'main.index',
@@ -35,7 +36,6 @@ Route::get('/home', [
     'as' => 'home.index',
     'uses' => 'App\Http\Controllers\MainController@index',
 ]);
-
 
 /** 체험단 미리 오픈을 위해 라우터 변경(나중에 위에로 변경)-211207 */
 
@@ -522,6 +522,8 @@ Route::post('/sendPwChange', [findIdPwController::class, 'sendPwChangeLink'])->n
 
 //시간이 제한된 라우트 제작
 Route::get('/sendPwChange/{code}', function (Request $request, $code) {
+
+
     if(!$request->hasValidSignature()){
         //기간이 지났을 경우의 처리 또는 없거나 -> 잉여 단축url 삭제
         //abort(401);
@@ -589,4 +591,9 @@ Route::fallback(function () {
 Route::get('avg_test', [
     'as' => 'avg_test',
     'uses' => 'App\Http\Controllers\ranking\RankingController@avg_test',
+]);
+
+Route::post('/orderpayment_webhook', [
+    'as' => 'orderpayment_webhook',
+    'uses' => 'App\Http\Controllers\shop\Orderpayment_webhookController@orderpayment_webhook',
 ]);

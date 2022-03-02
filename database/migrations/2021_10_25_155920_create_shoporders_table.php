@@ -47,7 +47,7 @@ class CreateShopordersTable extends Migration
             $table->string('od_pg')->comment('간편결제 방식');
             $table->string('od_tno')->comment('거래번호');
             $table->string('imp_uid')->comment('아임포트 코드');
-            $table->string('imp_apply_num')->comment('아임포트 승인번호');
+            $table->string('imp_apply_num')->nullable()->comment('아임포트 승인번호');
             $table->string('imp_card_name')->nullable()->comment('카드사에서 전달 받는 값(카드사명칭)');
             $table->string('imp_card_quota')->nullable()->comment('카드사에서 전달 받는 값(할부개월수)');
             $table->string('imp_card_number')->nullable()->comment('카드사에서 전달 받는 값(카드번호)');

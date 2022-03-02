@@ -207,7 +207,6 @@
         </div>
         <!-- 컨텐츠 영역 끝 -->
 
-
 <script>
     $("#exp_id").change(function(){
         location.href = "{{ route('adm.approve.index') }}?exp_id="+$(this).val();

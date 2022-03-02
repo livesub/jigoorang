@@ -64,7 +64,7 @@ class findIdPwService
             $url = URL::temporarySignedRoute('sendPwChangeLinkPro', now()->addMinutes(5), ['code' => base64_encode($user_info->id)]);
             //return URL::temporarySignedRoute('sendPwChangeLinkPro', now()->addMinutes(2), ['code' => Crypt::encryptString($user_info->id)]);
             //$result = $this->rand_code_save($url);
-
+	    
             $input['link'] = $url;
 
             $result = ShortLink::create($input)->exists();

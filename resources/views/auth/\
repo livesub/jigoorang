@@ -62,7 +62,7 @@
 
         if(user_phone_for_id != ""){
             $.ajax({
-                //아래 headers에 반드시 token을 추가해줘야 한다.!!!!!s
+                //아래 headers에 반드시 token을 추가해줘야 한다.!!!!!
                 headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                 type: 'post',
                 url: '{{ route('findId') }}',
@@ -70,13 +70,13 @@
                 data: { user_phone : user_phone_for_id },
 		success: function(result) {
 //alert(result);
-//return false;
+i//return false;
                     if(result != "" && result != null && result[0].result_code != null && result[0].result_code != "" && result !="kakao" && result != "naver"){
                         //alert('아이디는 '+result+'입니다');
                         alert("입력한 휴대폰 번호로 아이디가 발송되었습니다.");
                         //console.log(result[0]);
-		    }else if(result != null && result != "" && (result !="kakao" || result != "naver")){			    
-                        alert('고객님은 비밀번호 없이 '+result+'를 이용하여 로그인 가능합니다.');
+		    }else if(result != null && result != "" && (result !="kakao" || result != "naver")){
+                        alert('고객님은 비밀번호 없이 '+result+'를 이용하여 로그인 가능합니다.')
                     }else{
                         if (confirm("입력하신 전화번호로 가입된 정보가 없습니다.\n회원가입 페이지로 이동합니다.") == true){
                             location.href = "{{ route('join.create_agree') }}";
