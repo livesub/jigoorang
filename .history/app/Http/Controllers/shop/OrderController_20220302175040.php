@@ -765,7 +765,7 @@ $imp_apply_num= '12345678';
             }
         }
 
-        //return redirect()->route('mypage.orderview');
-        //exit;
+        return redirect()->route('mypage.orderview');
+        exit;
     }
 }

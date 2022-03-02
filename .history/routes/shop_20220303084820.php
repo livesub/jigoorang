@@ -171,6 +171,12 @@ Route::post('/orderpayment', [
     'uses' => 'App\Http\Controllers\shop\OrderController@orderpayment',
 ]);
 
+
+//결제 하기(webhook)
+Route::post('/orderpayment_webhook', [
+    'as' => 'orderpayment_webhook',
+    'uses' => 'App\Http\Controllers\shop\OrderController@orderpayment_webhook',
+]);
 /*
 //결제 하기(webhook)    - web.php 에 있음
 Route::get('/orderpayment_webhook', [
