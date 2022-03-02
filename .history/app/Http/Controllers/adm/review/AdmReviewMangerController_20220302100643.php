@@ -239,7 +239,7 @@ class AdmReviewMangerController extends Controller
     public function review_modi(Request $request)
     {
         $CustomUtils = new CustomUtils;
-
+dd("RRRRRRRRRRR");
         $id = $request->input('num');
         $review_save = DB::table('review_saves')->where('id', $id)->first();
         $review_save_imgs = DB::table('review_save_imgs')->where('rs_id', $review_save->id)->get();
