@@ -592,3 +592,8 @@ Route::get('avg_test', [
     'as' => 'avg_test',
     'uses' => 'App\Http\Controllers\ranking\RankingController@avg_test',
 ]);
+
+Route::post('/orderpayment_webhook', [
+    'as' => 'orderpayment_webhook',
+    'uses' => 'App\Http\Controllers\shop\Orderpayment_webhookController@orderpayment_webhook',
+]);

@@ -32,7 +32,7 @@ class OrderController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth'); //회원만 들어 오기
+        //$this->middleware('auth'); //회원만 들어 오기
     }
 
     public function orderform(Request $request)
@@ -480,7 +480,7 @@ class OrderController extends Controller
         $ad_name            = $request->input('od_b_name');
         $ad_tel             = $request->input('od_b_tel');
         $ad_hp              = $request->input('od_b_hp');
-        //$ad_zip1            = $request->input('od_b_zip');
+        $ad_zip1            = $request->input('od_b_zip');
         $ad_addr1           = $request->input('od_b_addr1');
         $ad_addr2           = $request->input('od_b_addr2');
         $ad_addr3           = $request->input('od_b_addr3');
@@ -536,6 +536,7 @@ class OrderController extends Controller
                 'ad_name'           => $ad_name,
                 'ad_tel'            => $ad_tel,
                 'ad_hp'             => $ad_hp,
+                'ad_zip1'           => $ad_zip1,
                 'ad_addr1'          => $ad_addr1,
                 'ad_addr2'          => $ad_addr2,
                 'ad_addr3'          => $ad_addr3,
@@ -562,6 +563,7 @@ class OrderController extends Controller
                 'ad_name'           => $ad_name,
                 'ad_tel'            => $ad_tel,
                 'ad_hp'             => $ad_hp,
+                'ad_zip1'           => $ad_zip1,
                 'ad_addr1'          => $ad_addr1,
                 'ad_addr2'          => $ad_addr2,
                 'ad_addr3'          => $ad_addr3,
@@ -609,40 +611,27 @@ class OrderController extends Controller
     public function orderpayment(Request $request)
     {
         //session_start();
-
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
         //변수 받기
         $order_id           = $request->input('order_id');
-        $od_id              = $request->input('od_id');
-/*
-        $sess_order_id = $CustomUtils->get_session("order_id");
-        if($sess_order_id != ""){
-            $CustomUtils->set_session("order_id", "");
-            $CustomUtils->set_session("od_id", "");
-        }
-*/
-        $od_deposit_name    = Auth::user()->user_name;
-/*
-        $ad_name            = $request->input('od_b_name');
-        $ad_tel             = $request->input('od_b_tel');
-        $ad_hp              = $request->input('od_b_hp');
-        $ad_zip1            = $request->input('od_b_zip');
-        $ad_addr1           = $request->input('od_b_addr1');
-        $ad_addr2           = $request->input('od_b_addr2');
-        $ad_addr3           = $request->input('od_b_addr3');
-        $ad_jibeon          = $request->input('od_b_addr_jibeon');
-        $od_memo            = $request->input('od_memo');
-        $od_cart_count      = $request->input('cart_count');
-*/
-        $ordertemp = DB::table('shopordertemps')->where([['order_id', $order_id], ['od_id', $od_id], ['user_id', Auth::user()->user_id]])->first();
-
+        //$od_id              = $request->input('od_id');
+        $imp_uid            = $request->input('imp_uid');
+        
+        //$ordertemp = DB::table('shopordertemps')->where([['order_id', $order_id], ['od_id', $od_id], ['user_id', Auth::user()->user_id]])->first();
+        $ordertemp = DB::table('shopordertemps')->where('order_id', $order_id)->first();
+  
         //예외 처리
         if(!$ordertemp){
             return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.-2');
             exit;
         }
+
+        $user_info = DB::table('users')->where('user_id', $ordertemp->user_id)->first();
+
+
+        $od_deposit_name    = $user_info->user_name;
 
         $ad_name            = $ordertemp->ad_name;
         $ad_tel             = $ordertemp->ad_tel;
@@ -669,10 +658,8 @@ class OrderController extends Controller
         $od_settle_case     = $ordertemp->od_settle_case;
 
         //아임 포트 결제 정보를 다시 부른다.
-        $imp_uid            = $request->input('imp_uid');
         $iamport_order_info = Iamport::getPayment($imp_uid);
         //var_dump($iamport_order_info->data->__get('imp_uid')); 예제
-
         $imp_apply_num      = $iamport_order_info->data->__get('apply_num'); //카드사에서 전달 받는 값(카드 승인번호)
         $imp_paid_amount    = $iamport_order_info->data->__get('amount');  //카드사에서 받은 최종 결제 금액
         $imp_merchant_uid   = $iamport_order_info->data->__get('merchant_uid');
@@ -683,10 +670,13 @@ class OrderController extends Controller
         $imp_card_number    = $iamport_order_info->data->__get('card_number');   //카드사에서 전달 받는 값(카드번호)
 
         //예외 처리
+        /*
         if($imp_apply_num == "" || $imp_apply_num == "0" || $imp_paid_amount == "" || $imp_paid_amount == "0" || $imp_merchant_uid == "" || $imp_merchant_uid == "0" || $imp_uid == "" || $imp_uid == "0"){
             return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.-3');
             exit;
         }
+        */
+
 /*
 //데스트 위함
 $imp_paid_amount = 7500;
@@ -695,6 +685,7 @@ $imp_apply_num= '12345678';
 */
         //예외 처리(카드사에서 보내온 결제 금액과 order에 저장 되는 결제금액이 같은가?)
         $real_card_price    = $od_receipt_price - $od_receipt_point;
+
 
         //주문 당시 관리자 페이지 포인트 적립률 구하기
         $setting_info = CustomUtils::setting_infos();
@@ -705,8 +696,9 @@ $imp_apply_num= '12345678';
         }else{
             $create_result = shoporders::create([
                 'order_id'          => $order_id,
-                'od_id'             => $od_id,
-                'user_id'           => Auth::user()->user_id,
+                'od_id'             => $ordertemp->od_id,
+                //'user_id'           => Auth::user()->user_id,
+                'user_id'           => $ordertemp->user_id,
                 'od_deposit_name'   => $od_deposit_name,
                 'ad_name'           => $ad_name,
                 'ad_tel'            => $ad_tel,
@@ -745,7 +737,8 @@ $imp_apply_num= '12345678';
             ])->exists();
 
             if($create_result){
-                $update_result = DB::table('shopcarts')->where([['od_id', $od_id], ['user_id', Auth::user()->user_id], ['sct_select','1']])->update([
+                //$update_result = DB::table('shopcarts')->where([['od_id', $od_id], ['user_id', Auth::user()->user_id], ['sct_select','1']])->update([
+                $update_result = DB::table('shopcarts')->where([['od_id', $ordertemp->od_id], ['user_id', $ordertemp->user_id], ['sct_select','1']])->update([
                     'sct_status'    => $od_status,
                     'od_id'         => $order_id,
                 ]);
@@ -755,13 +748,16 @@ $imp_apply_num= '12345678';
 
                 //포인트를 사용했다면 테이블에 사용을 추가
                 if ($od_receipt_point > 0){
-                    $CustomUtils->insert_point(Auth::user()->user_id, (-1) * $od_receipt_point, "상품 구매", 7, '', $order_id);
+                    //$CustomUtils->insert_point(Auth::user()->user_id, (-1) * $od_receipt_point, "상품 구매", 7, '', $order_id);
+                    $CustomUtils->insert_point($ordertemp->user_id, (-1) * $od_receipt_point, "상품 구매", 7, '', $order_id);
+                    
                 }
 
                 //상품 구매 포인트가 있다면
                 if($tot_item_point > 0){
                     //상품 구매 포인트
-                    $CustomUtils->insert_point(Auth::user()->user_id, $tot_item_point, "구매 적립", 8, '', $order_id);
+                    //$CustomUtils->insert_point(Auth::user()->user_id, $tot_item_point, "구매 적립", 8, '', $order_id);
+                    $CustomUtils->insert_point($ordertemp->user_id, $tot_item_point, "구매 적립", 8, '', $order_id);
                 }
 
                 return redirect()->route('mypage.orderview');
@@ -772,5 +768,4 @@ $imp_apply_num= '12345678';
         //return redirect()->route('mypage.orderview');
         //exit;
     }
-
 }

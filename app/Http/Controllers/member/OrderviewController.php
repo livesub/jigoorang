@@ -36,12 +36,21 @@ class OrderviewController extends Controller
 
     public function orderview(Request $request)
     {
-        session_start();
+        //session_start();
         $CustomUtils = new CustomUtils;
         $Messages = $CustomUtils->language_pack(session()->get('multi_lang'));
 
         //모바일 결제시 이동 제어 시작
         //m_redirect_url 설정시 실패던 성공이던 원하는 페이지로 이동 되기에 여기서 제어
+        if($request->imp_success == 'false'){
+            if($request->sw_direct != ""){
+                return redirect()->route('orderform','sw_direct=1');
+            }else{
+                return redirect()->route('orderform');
+            }
+        }
+
+        /*
         if($request->imp_success == 'false'){
             if($request->sw_direct != ""){
                 return redirect()->route('orderform','sw_direct=1');
@@ -63,6 +72,7 @@ class OrderviewController extends Controller
                 }
             }
         }
+        */
         //모바일 결제시 이동 제어 끝
 
         $page       = $request->input('page');

@@ -1409,7 +1409,7 @@ document.orderform.addEventListener("keydown", evt => {
 
                 setCookie("order_01", "", "1");
 
-                $("#orderform").submit();
+                //$("#orderform").submit();
             } else {
                 // 결제 실패 시 로직,
                 alert("결제에 실패하였습니다.\n내용: " +  rsp.error_msg);

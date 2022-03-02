@@ -13,5 +13,7 @@ class VerifyCsrfToken extends Middleware
      */
     protected $except = [
         //
+        'https://jigoorang.com/orderpayment_webhook',
+        'http://jigoorang.com/orderpayment_webhook'
     ];
 }
