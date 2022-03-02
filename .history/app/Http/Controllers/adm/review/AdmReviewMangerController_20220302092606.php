@@ -83,7 +83,8 @@ class AdmReviewMangerController extends Controller
             else if($review_type == "exp") $review_save_list = $review_save_list->where('exp_id', '!=', '0');
         }
 
-        if($review_blind != "all"){
+        if($review_blind == "N" || $review_type == "Y"){
+var_dump("review_blind====> ".$review_blind);
             if($review_blind == "N") $review_save_list = $review_save_list->where('review_blind', 'N');
             else if($review_blind == "Y") $review_save_list = $review_save_list->where('review_blind', 'Y');
         }
@@ -445,7 +446,7 @@ class AdmReviewMangerController extends Controller
             else if($review_type == "exp") $review_save_list = $review_save_list->where('exp_id', '!=', '0');
         }
 
-        if($review_blind != "all"){
+        if($review_blind == "N" || $review_type == "Y"){
             if($review_blind == "N") $review_save_list = $review_save_list->where('review_blind', 'N');
             else if($review_blind == "Y") $review_save_list = $review_save_list->where('review_blind', 'Y');
         }

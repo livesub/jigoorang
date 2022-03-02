@@ -15,7 +15,7 @@ class CreateRatingItemTable extends Migration
     {
         Schema::create('rating_item', function (Blueprint $table) {
             $table->id();
-            $table->string('sca_id')->comment('카테고리 아이디');
+            $table->integer('sca_id')->comment('카테고리 아이디');
             $table->string('item_name1')->comment('정량 평가 항목 1');
             $table->string('item_name2')->comment('정량 평가 항목 2');
             $table->string('item_name3')->comment('정량 평가 항목 3');

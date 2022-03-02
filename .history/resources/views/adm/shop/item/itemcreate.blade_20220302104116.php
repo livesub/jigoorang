@@ -74,7 +74,7 @@
                         <div class="col">상품 소개 문구</div>
                         <div class="col">
                             <p>100자 내외로 입력하세요</p>
-                                <textarea name="item_basic" id="item_basic" style="border:solid 1px #ddd;width:500px;height:150px;padding:10px;" >{{ old('item_basic') }}</textarea>
+                                <textarea name="item_basic" id="item_basic" style="border:solid 2px #ddd;width:500px;" >{{ old('item_basic') }}</textarea>
                             <!-- <input class="wd500" type="text" name="item_basic" id="item_basic" value="{{ old('item_basic') }}" placeholder=""> -->
                         </div>
                     </div>
