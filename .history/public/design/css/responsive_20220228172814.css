@@ -5157,7 +5157,9 @@ background-size: cover;
         width: 100%;
         /* height: 25px; */
     }
-    
+    .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .pr_name li::ㅜ {
+
+    }
     .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .btn_2ea {
         padding: 10px 0 20px;
     }
