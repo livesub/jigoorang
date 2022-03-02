@@ -3106,7 +3106,7 @@ input::placeholder {
 /* 주문 배송 내역 */
 .eval .board.mypage_list .board_wrap .list.ev_rul.oder_view {
     width: 100%;
-    padding: 3px 40px 15px 20px;
+    padding: 3px 40px 15px 40px;
 }
 
 .eval .board.mypage_list .board_wrap .list .ev_rul.oder_view .date {
@@ -3170,13 +3170,13 @@ input::placeholder {
 .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body {
     width: 100%;
     display: flex;
-    padding: 20px;
+    padding: 10px;
 }
 
 .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .pr-t {
     width: 100%;
     display: flex;
-    /* padding: 10px; */
+    padding: 30px;
 }
 
 .eval .board.mypage_list .board_wrap .list.ev_rul .pr_body .pr_img {}
