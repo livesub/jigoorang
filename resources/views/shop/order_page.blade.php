@@ -1409,6 +1409,10 @@ document.orderform.addEventListener("keydown", evt => {
 
                 setCookie("order_01", "", "1");
 
+                setTimeout(function() {
+                    location.href="{{ route('mypage.orderview') }}";
+                }, 500);                
+
                 //$("#orderform").submit();
             } else {
                 // 결제 실패 시 로직,

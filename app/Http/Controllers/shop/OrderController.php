@@ -618,10 +618,10 @@ class OrderController extends Controller
         $order_id           = $request->input('order_id');
         //$od_id              = $request->input('od_id');
         $imp_uid            = $request->input('imp_uid');
-
+        
         //$ordertemp = DB::table('shopordertemps')->where([['order_id', $order_id], ['od_id', $od_id], ['user_id', Auth::user()->user_id]])->first();
         $ordertemp = DB::table('shopordertemps')->where('order_id', $order_id)->first();
-
+  
         //예외 처리
         if(!$ordertemp){
             return redirect()->route('cartlist')->with('alert_messages', '잠시 시스템 장애가 발생 하였습니다. 관리자에게 문의 하세요.-2');
@@ -750,7 +750,7 @@ $imp_apply_num= '12345678';
                 if ($od_receipt_point > 0){
                     //$CustomUtils->insert_point(Auth::user()->user_id, (-1) * $od_receipt_point, "상품 구매", 7, '', $order_id);
                     $CustomUtils->insert_point($ordertemp->user_id, (-1) * $od_receipt_point, "상품 구매", 7, '', $order_id);
-
+                    
                 }
 
                 //상품 구매 포인트가 있다면
