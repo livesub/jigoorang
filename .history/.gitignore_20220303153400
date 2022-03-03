@@ -6,6 +6,6 @@ node_modules
 /storage/
 config/app.php
 /public/.htaccess
-/app/Providers/AppServiceProvider.php
+app/Providers/AppServiceProvider.php
 /vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php
 /public/robots.txt
