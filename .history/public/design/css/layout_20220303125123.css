@@ -1,0 +1,475 @@
+/* default */
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+/* 스크롤바 */
+/* 
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8f8f8;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #3ec4ba;
+} */
+.wrap {
+  width: 100%;
+  padding-top: 220px;
+}
+.header {
+  display: block;
+  width: 100%;
+  background: #fff;
+  margin: 0 auto;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+}
+.main-container {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+.sub-container {
+  display: block;
+  width: 100%;
+  max-width: 1280px;
+  padding: 30px 40px 150px 40px;
+  margin: 0 auto;
+}
+.footer {
+  width: 100%;
+  background-color: #000;
+  color: #fff;
+  font-size: 15px;
+}
+
+/* header 시작 */
+.header .top {
+  display: block;
+  width: 100%;
+  height: 150px;
+  max-width: 1280px;
+  margin: 0 auto;
+  position: relative;
+  padding: 37px 0;
+}
+.header .top .logo {
+  width: 200px;
+  height: 76px;
+  margin: 0 auto;
+  background: url("../recources/logo.png") no-repeat top center;
+  background-size: 100%;
+}
+.header .top .logo h1 {
+  display: none;
+}
+.header .top .logo a {
+  width: 100%;
+  height: 100%;
+}
+
+/* 모바일 헤더 */
+
+.header .top .background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  opacity: 0.9;
+  z-index: 100;
+  display: none;
+}
+
+.header .top .sidenav {
+  height: 100%;
+  /* width: 80%; */
+  position: fixed;
+  z-index: 100;
+  top: 0;
+  left: 0;
+  background-color: #3ec4ba;
+  padding-top: 60px;
+  display: none;
+  transition: 0.5s;
+}
+
+.header .top .ham {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  display: none;
+}
+.header .top .ham .name {
+  display: none;
+}
+.header .top .ham .btn_ham {
+  width: 30px;
+  height: 30px;
+  background: url("../recources/icons/icon-ham.png") no-repeat;
+  background-size: 30px 30px;
+}
+.header .top .menu {
+  position: absolute;
+  right: 40px;
+  top: 50px;
+  width: 240px;
+  display: flex;
+}
+.header .top .menu li {
+  flex: 1;
+  margin-right: 10px;
+}
+.header .top .menu .search {
+  background: url("../recources/icons/icon-48-search.png") no-repeat top center;
+  background-size: 100%;
+}
+.header .top .menu .search p {
+  font-size: 11px;
+  width: 59px;
+  margin-top: 50px;
+  text-align: center;
+}
+.header .top .menu .cart {
+  background: url("../recources/icons/icon-48-cart.png") no-repeat top center;
+  background-size: 100%;
+}
+
+.header .top .menu .cart .block {
+  font-size: 11px;
+  width: 58px;
+  margin-top: 50px;
+  text-align: center;
+}
+
+.header .top .menu .conunt {
+  background-color: #f06b27;
+  width: 24px;
+  height: 24px;
+  border-radius: 40px;
+  position: absolute;
+  margin-left: 24px;
+  margin-top: 2px;
+  color: #fff;
+  text-align: center;
+  font-weight: bold;
+  padding: 0px;
+}
+
+.header .top .menu .conunt p {
+  font-size: 14px;
+  color: #fff;
+  margin-left: 8px;
+  margin-top: 2px;
+}
+
+.header .top .menu .my {
+  background: url("../recources/icons/icon-48-my.png") no-repeat top center;
+  background-size: 100%;
+}
+
+.header .top .menu .my p {
+  font-size: 11px;
+  width: 52px;
+  margin-top: 51px;
+  text-align: center;
+}
+
+.header .top .menu .login {
+  background: url("../recources/icons/icon-48-login.png") no-repeat top center;
+  background-size: 100%;
+}
+
+.header .top .menu .login p {
+  font-size: 11px;
+  width: 57px;
+  margin-top: 51px;
+  text-align: center;
+}
+
+.header .top .menu li a {
+  width: 48px;
+  height: 48px;
+}
+.header .top .menu li a span {
+  display: none;
+}
+
+/* 오픈전 메뉴 */
+.header .top .menu2 {
+  position: absolute;
+  right: 40px;
+  top: 50px;
+  width: 80px;
+  display: flex;
+}
+.header .top .menu2 li {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.header .top .menu2 .my {
+  background: url("../recources/icons/icon-48-my.png") no-repeat top center;
+  background-size: 100%;
+}
+.header .top .menu2 .login {
+  background: url("../recources/icons/icon-48-login.png") no-repeat top center;
+  background-size: 100%;
+}
+.header .top .menu2 .loginout {
+  background: url("../recources/icons/icon-s-48-logout.png") no-repeat top
+    center;
+  background-size: 100%;
+}
+.header .top .menu2 li a {
+  width: 48px;
+  height: 48px;
+}
+.header .top .menu2 li a span {
+  display: none;
+}
+
+.header .top .menu2 li a p {
+  font-size: 11px;
+  width: 52px;
+  margin-top: 50px;
+}
+
+.header .btm {
+  background: #3ec4ba;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+.header .btm .navi {
+  display: flex;
+  width: 1280px;
+  margin: 0 auto;
+}
+.header .btm .navi li {
+  flex: 1;
+  width: 16.66%;
+  height: 70px;
+  font-size: 20px;
+  text-align: center;
+  color: #fff;
+}
+.header .btm .navi li a {
+  font-family: "SBAggroL", "sans-serif";
+  line-height: 70px;
+}
+.header .btm .navi li a b {
+  font-family: "SBAggrol", "sans-serif";
+  color: #ffcd54;
+  line-height: 70px;
+}
+.header .btm .navi li.on {
+  color: #000;
+}
+.header .btm .navi li.off {
+  color: #fff;
+}
+/* header 끝 */
+
+/* 푸터 */
+.footer .head {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+  padding: 20px 40px;
+}
+.footer .head li {
+  display: inline-flex;
+  margin-right: 45px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+}
+.footer .bottom {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px;
+  font-size: 15px;
+  position: relative;
+}
+.footer .bottom .con_01 {
+  display: inline-block;
+  margin-right: 50px;
+}
+.footer .bottom .con_01 .title {
+  font-size: 18px;
+  font-weight: bold;
+}
+.footer .bottom .con_01 ul {
+  margin-top: 20px;
+}
+.footer .bottom .con_01 ul li {
+  line-height: 1.75em;
+}
+.footer .bottom .logo_f {
+  width: 92px;
+  height: 103px;
+  background: url("../recources/logo-2@4x.png");
+  position: absolute;
+  top: 80px;
+  right: 40px;
+  background-size: 92px auto;
+}
+.footer .bottom .copy {
+  margin-top: 25px;
+  color: #707070;
+}
+
+/* 탭바 */
+.tabar {
+  display: none;
+  width: 100%;
+  height: 70px;
+  background: #fff;
+  border-top: 1px solid #ddd;
+  position: fixed;
+  bottom: 0;
+  z-index: 11;
+}
+.tabar ul {
+  display: flex;
+}
+.tabar ul li {
+  flex: 1;
+  width: 25%;
+  height: 70px;
+  font-size: 12px;
+  text-align: center;
+}
+.tabar ul li:nth-child(1) {
+  background: url("../recources/icons/icon-s-30-home@3x.png") no-repeat;
+  background-size: 30px 30px;
+  background-position: center 10px;
+}
+.tabar ul li:nth-child(2) {
+  background: url("../recources/icons/icon-30-ranking.png") no-repeat;
+  background-size: 30px 30px;
+  background-position: center 10px;
+}
+.tabar ul li:nth-child(3) {
+  background: url("../recources/icons/icon-30-shopping.png") no-repeat;
+  background-size: 30px 30px;
+  background-position: center 10px;
+}
+.tabar ul li:nth-child(4) {
+  background: url("../recources/icons/icon-s-30-history@3x.png") no-repeat;
+  background-size: 30px 30px;
+  background-position: center 10px;
+}
+.tabar ul li span {
+  width: 100%;
+  top: 45px;
+}
+
+/* 출력별 */
+.stars-outer {
+  display: inline-block;
+  position: relative;
+  font-size: 16px;
+  margin-top: 4px;
+  /* font-family: "Font Awesome 5 free"; */
+  /* letter-spacing: 1px; */
+}
+
+.stars-outer::before {
+  content: "★ ★ ★ ★ ★";
+  font-weight: 900;
+  color: #cccccc;
+}
+
+.stars-inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 0;
+}
+
+.stars-inner::before {
+  content: "★ ★ ★ ★ ★";
+  /* content: "\f005 \f005 \f005 \f005 \f005"; */
+  color: #3ec4ba;
+  font-weight: 900;
+}
+
+.number {
+  font-size: 16px;
+  font-weight: 400;
+  color: #707070;
+  margin: 5px;
+  letter-spacing: -0.5px;
+}
+
+/* 상품 */
+.price {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.sale-price {
+  text-decoration: line-through;
+  font-size: 17px;
+  top: 4px;
+}
+
+.pct {
+  font-weight: 600;
+  font-size: 22px;
+  margin-top: 3px;
+  color: #f06b27;
+  height: 25px;
+}
+
+.pd_pr {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+
+#etc2{
+  -webkit-transition: height 0.2s ease-out;
+}
+
+
+#load {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  position: fixed;
+  display: block;
+  opacity: 0.4;
+  background: white;
+  z-index: 100;
+  text-align: center;
+}
+
+#load > img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 99;
+}
+
+#load > p {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  z-index: 99;
+  font-family: "SBAggroM";
+}
