@@ -48,6 +48,9 @@ class OrderviewController extends Controller
             }else{
                 return redirect()->route('orderform');
             }
+        }else if($request->imp_success == 'true'){
+            sleep(1);
+            return redirect()->route('mypage.orderview');
         }
 
         /*
