@@ -298,7 +298,7 @@
     <script src="{{ asset('/design/js/serch_modal.js') }}"></script>
 
 
-    <!--<div id="load">
+    <div id="load">
         <img src="{{ asset('/design/recources/icons/loder03.svg') }}" alt="loading">
         <p>로딩중...</p>
     </div>-->

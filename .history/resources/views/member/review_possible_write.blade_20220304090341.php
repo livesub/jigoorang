@@ -142,8 +142,8 @@
 
     <div id="load">
       <img src="{{ asset('/design/recources/icons/loder03.svg') }}" alt="loading">
-      <p>업로드중...</p>
-    </div>
+      <p>로딩중...</p>
+  </div>
 
 <script>
 	$('#review_content').on('keyup', function() {
