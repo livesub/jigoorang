@@ -160,7 +160,7 @@ function star_modi(num) {
 
     <div id="load">
         <img src="{{ asset('/design/recources/icons/loder03.svg') }}" alt="loading">
-        <p>업로드중...</p>
+        <p>로딩중...</p>
     </div>
 <script>
     var load_content = $("#review_content").val().length;

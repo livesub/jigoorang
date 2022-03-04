@@ -1,0 +1,11 @@
+public/data
+.env
+.env.example
+node_modules
+/public/storage
+/storage/
+config/app.php
+/public/.htaccess
+/app/Providers/AppServiceProvider.php
+/vendor/laravel/framework/src/Illuminate/Routing/UrlGenerator.php
+/public/robots.txt
