@@ -100,9 +100,9 @@
                                 $item_options = "";
                             }
 */
-                            //교환버튼 출력 시점(결제완료후 30일 지나면 안나오게)
+                            //교환버튼 출력 시점(결제완료후 9일 지나면 send_complete_chk 자동 완료, 이후 21일이 지나면 안나오게 총 30일)
                             $now_date = date('Y-m-d H:i:s', time());
-                            $day_30_tmp = strtotime($order->created_at." +30 days");
+                            $day_30_tmp = strtotime($order->created_at." +30 days");    // 30기준이나 구매 완료 시점이 결제후 9일 이기에 21일 계산
                             $day_30 = date('Y-m-d H:i:s', $day_30_tmp);
                         @endphp
                         <div class="pr_body od_v">
