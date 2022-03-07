@@ -61,7 +61,6 @@
     <link rel="stylesheet" href="{{ asset('/design/css/goods.css') }}"> <!-- 추가 css-->
     <link rel="stylesheet" href="{{ asset('/design/css/goods_responsive.css') }}">  <!-- 추가 css-->
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="{{ asset('/design/js/star.js') }}"></script>
@@ -74,7 +73,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha256.js"></script>
 <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
-
 
 
 
@@ -307,32 +305,10 @@
 
 
     <div id="scr_top">
-        <i class="fa-solid fa-angle-up"></i>
+        <p>TOP</p>
     </div>
 
-    <script>
-        const scrollTop = () => {
-            //스크롤버튼 숨기기 보이기
-            window.addEventListener('scroll', () => {
-                if (document.querySelector('html').scrollTop > 100) {
-                document.getElementById('scr_top').style.display = "block";
-                } else {
-                document.getElementById('scr_top').style.display = "none";
-                }
-            });
-
-            // 눌렀을때 위로 올라가기
-            document.getElementById('scr_top').addEventListener('click', () => {
-                window.scrollTo({
-                top: 0,
-                left: 0,
-                behavior: 'smooth'
-                });
-            })
-        };
-        
-        scrollTop();
-    </script>
+    
 
     {{-- 각 내용 뿌리기 --}}
     @yield('content')

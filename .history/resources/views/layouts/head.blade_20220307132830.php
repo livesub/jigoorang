@@ -307,7 +307,7 @@
 
 
     <div id="scr_top">
-        <i class="fa-solid fa-angle-up"></i>
+        <i class="fa-solid fa-up"></i>
     </div>
 
     <script>

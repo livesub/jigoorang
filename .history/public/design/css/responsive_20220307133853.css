@@ -288,19 +288,7 @@
         display: block;
     }
 
-    #scr_top {
-        width: 40px;
-        height: 40px;
-        position: fixed;
-        bottom: 70px;
-        z-index: 999999;
-        margin: 10px;
-    }
-
-    #scr_top i {
-        padding: 7px 11px;
-        font-size: 25px;
-    }
+    
 
     /* text */
     h2 {

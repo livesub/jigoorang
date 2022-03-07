@@ -130,18 +130,14 @@ h5 {
     border-radius: 100%;
     position: fixed;
     bottom: 0;
-    right: 0;
     z-index: 999999;
     background-color: #3ec4ba;
-    margin: 20px;
-    display: none;
+    text-align: right;
 }
 
-#scr_top i{
+#scr_top p{
    text-align: center;
-   padding: 12px 16px;
-   color: #fff;
-   font-size: 25px;
+   padding-top: 14px;
 }
 
 /* .show {

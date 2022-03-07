@@ -298,7 +298,9 @@
     }
 
     #scr_top i {
+        text-align: center;
         padding: 7px 11px;
+        color: #fff;
         font-size: 25px;
     }
 
