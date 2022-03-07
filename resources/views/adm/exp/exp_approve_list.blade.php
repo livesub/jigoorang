@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col">평가단 리스트</div>
                         <div class="col">
-                            <select name="exp_id" id="exp_id" class="wd800"
+                            <select name="exp_id" id="exp_id" class="wd800">
                                 @foreach($exp_lists as $exp_list)
                                 @php
                                     $exp_selected = '';
