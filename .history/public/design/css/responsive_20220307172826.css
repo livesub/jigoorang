@@ -1107,7 +1107,8 @@ background-size: cover;
 
 
     /* 랭킹 리스트 */
-    
+
+    .eval .board.mypage_list .board_wrap .rk_filter
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_01 .rk_num {
         padding: 61px 30px 30px 30px;
@@ -1115,10 +1116,6 @@ background-size: cover;
 
     .eval .board.mypage_list .board_wrap .list.ev_rul .wsl_lt .block_02.rk_list {
         margin-left: 115px;
-    }
-
-    .eval .board.mypage_list .board_wrap .rk_filter.mb-40 {
-        margin-bottom: 10px;
     }
 
     /* 주문하기 */

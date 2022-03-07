@@ -128,10 +128,10 @@
                                 산정될까요?
                             </a>
                         </div>
-
+ <span class="none">▲ 5가지 기준 중 궁금했던 항목을 선택해주세요.</span>
                     </div>
 
-                    <span class="none  mb-20 cr_04 ft-13">▲ 5가지 기준 중 궁금했던 항목을 선택해주세요.</span>
+                   
 
                     <!-- 랭킹 메뉴 끝 -->
                             @if(count($item_infos) > 0)

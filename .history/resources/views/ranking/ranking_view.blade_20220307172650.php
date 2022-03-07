@@ -92,7 +92,7 @@
                         </ul>
                     </div>
 
-                    <div class="rk_filter mb-40">
+                    <div class="rk_filter">
                         <div class="filter_sel none">
                             <select class="filter_innner" onchange="location.href='{{ route('ranking_view','sca_id='.$sca_id.'&sub_cate='.$sub_cate_num.'&item_name_num=') }}'+this.value">
                             @for($rating_num = 5; $rating_num >= 1; $rating_num--)
@@ -131,7 +131,7 @@
 
                     </div>
 
-                    <span class="none  mb-20 cr_04 ft-13">▲ 5가지 기준 중 궁금했던 항목을 선택해주세요.</span>
+                    <span class="none" >▲ 5가지 기준 중 궁금했던 항목을 선택해주세요.</span>
 
                     <!-- 랭킹 메뉴 끝 -->
                             @if(count($item_infos) > 0)
