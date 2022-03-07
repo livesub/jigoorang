@@ -153,7 +153,6 @@
                                 <!--
                                 <input type="checkbox" class="mg00" name="exp_id" id="exp_id" value="{{ $exp_app_id }}">
                                 -->
-                                <input type="checkbox" class="mg00" id="chkall" onclick="if (this.checked) all_checked(true); else all_checked(false);">
                                 </th>
                                 <th rowspan="2">번호</th>
                                 <th rowspan="2">아이디</th>
@@ -177,8 +176,7 @@
                         @endphp
                         <tbody>
                             <tr>
-                                <td rowspan="2">
-                                <input type="checkbox" class="mg00" name="chk[]" id="chk_{{ $exp_app_list->id }}" value="{{ $exp_app_list->id }}" onclick='checkbox_cnt();' {{ $checked }}></td>
+                                <td rowspan="2"><input type="checkbox" class="mg00" name="chk[]" id="chk_{{ $exp_app_list->id }}" value="{{ $exp_app_list->id }}" onclick='checkbox_cnt();' {{ $checked }}></td>
                                 <td>{{ $k }}</td>
                                 <td>{{ $exp_app_list->user_id }}</td>
                                 <td>{{ $exp_app_list->user_name }}</td>
@@ -215,13 +213,12 @@
 
 <script>
     function all_checked(sw) {
-        var f = document.exp_app_form;
+        var f = document.itemlist;
 
         for (var i=0; i<f.length; i++) {
-            if (f.elements[i].name == "chk[]")
+            if (f.elements[i].name == "chk_id[]")
                 f.elements[i].checked = sw;
         }
-        checkbox_cnt();
     }
 </script>
 

@@ -215,13 +215,12 @@
 
 <script>
     function all_checked(sw) {
-        var f = document.exp_app_form;
+        var f = document.itemlist;
 
         for (var i=0; i<f.length; i++) {
             if (f.elements[i].name == "chk[]")
                 f.elements[i].checked = sw;
         }
-        checkbox_cnt();
     }
 </script>
 

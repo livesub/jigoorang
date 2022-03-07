@@ -221,7 +221,6 @@
             if (f.elements[i].name == "chk[]")
                 f.elements[i].checked = sw;
         }
-        checkbox_cnt();
     }
 </script>
 

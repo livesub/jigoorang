@@ -178,7 +178,7 @@
                         <tbody>
                             <tr>
                                 <td rowspan="2">
-                                <input type="checkbox" class="mg00" name="chk[]" id="chk_{{ $exp_app_list->id }}" value="{{ $exp_app_list->id }}" onclick='checkbox_cnt();' {{ $checked }}></td>
+                                <input type="checkbox" class="mg00" name="chk[]" id="chk_{{ $exp_app_list->id }}" value="{{ $exp_app_list->id }}"  {{ $checked }}></td>
                                 <td>{{ $k }}</td>
                                 <td>{{ $exp_app_list->user_id }}</td>
                                 <td>{{ $exp_app_list->user_name }}</td>
@@ -215,13 +215,12 @@
 
 <script>
     function all_checked(sw) {
-        var f = document.exp_app_form;
+        var f = document.itemlist;
 
         for (var i=0; i<f.length; i++) {
             if (f.elements[i].name == "chk[]")
                 f.elements[i].checked = sw;
         }
-        checkbox_cnt();
     }
 </script>
 
