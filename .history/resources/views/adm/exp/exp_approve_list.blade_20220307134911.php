@@ -20,7 +20,7 @@
                     <div class="row">
                         <div class="col">평가단 리스트</div>
                         <div class="col">
-                            <select name="exp_id" id="exp_id" class="wd800">
+                            <select name="exp_id" id="exp_id" class="wd800"
                                 @foreach($exp_lists as $exp_list)
                                 @php
                                     $exp_selected = '';
@@ -149,11 +149,7 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th rowspan="2">
-                                <!--
-                                <input type="checkbox" class="mg00" name="exp_id" id="exp_id" value="{{ $exp_app_id }}">
-                                -->
-                                </th>
+                                <th rowspan="2"><input type="checkbox" class="mg00" name="exp_id" id="exp_id" value="{{ $exp_app_id }}"></th>
                                 <th rowspan="2">번호</th>
                                 <th rowspan="2">아이디</th>
                                 <th rowspan="2">이름</th>

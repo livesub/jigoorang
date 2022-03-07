@@ -149,7 +149,7 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th rowspan="2">
+                                <th rowspan="2"><input type="checkbox" class="mg00" id="chkall" onclick="if (this.checked) all_checked(true); else all_checked(false);">
                                 <!--
                                 <input type="checkbox" class="mg00" name="exp_id" id="exp_id" value="{{ $exp_app_id }}">
                                 -->

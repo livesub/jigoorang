@@ -137,7 +137,7 @@
                     <!-- 평가단 선정 리스트 시작 -->
                     <form name="exp_app_form" id="exp_app_form" method="post" action="" autocomplete="off">
                     {!! csrf_field() !!}
-                    <input type="hidden" name="exp_id" id="exp_id" value="{{ $exp_app_id }}">
+                    <input type="hidden" name="exp_id" id="exp_id2" value="{{ $exp_app_id }}">
                     <table class="ord_table">
                         <colgroup>
                             <col style="width: 40px;">
@@ -149,11 +149,7 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th rowspan="2">
-                                <!--
-                                <input type="checkbox" class="mg00" name="exp_id" id="exp_id" value="{{ $exp_app_id }}">
-                                -->
-                                </th>
+                                <th rowspan="2"><input type="checkbox" class="mg00" name="exp_id" id="exp_id" value="{{ $exp_app_id }}"></th>
                                 <th rowspan="2">번호</th>
                                 <th rowspan="2">아이디</th>
                                 <th rowspan="2">이름</th>
