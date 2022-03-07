@@ -137,7 +137,7 @@
                     <!-- 평가단 선정 리스트 시작 -->
                     <form name="exp_app_form" id="exp_app_form" method="post" action="" autocomplete="off">
                     {!! csrf_field() !!}
-                    <input type="hidden" name="exp_id" id="exp_id_1" value="{{ $exp_app_id }}">
+                    <input type="hidden" name="exp_id" id="exp_id" value="{{ $exp_app_id }}">
                     <table class="ord_table">
                         <colgroup>
                             <col style="width: 40px;">
@@ -213,6 +213,7 @@
 
 <script>
     $("#exp_id").change(function(){
+alert("FFFFFFFFFFFFF");
         location.href = "{{ route('adm.approve.index') }}?exp_id="+$(this).val();
     });
 </script>
