@@ -126,7 +126,7 @@
                                                         }
                                                     @endphp
                                                 <li class="price cr_07">
-                                                @if($disp_discount_rate != 0)
+                                                @if($disp_discount_rate > 0)
                                                 {{ $disp_discount_rate }}%
                                                 @endif
                                                 </li>

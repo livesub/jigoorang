@@ -126,10 +126,7 @@
                                                         }
                                                     @endphp
                                                 <li class="price cr_07">
-                                                @if($disp_discount_rate != 0)
-                                                {{ $disp_discount_rate }}%
-                                                @endif
-                                                </li>
+                                                {{ $disp_discount_rate }}%</li>
                                                 @endif
 
                                                 <li class="price">{{ $CustomUtils->display_price($cart_info->item_price + $item_options->sio_price) }}</li>
