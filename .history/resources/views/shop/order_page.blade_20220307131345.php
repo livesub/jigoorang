@@ -318,7 +318,7 @@
                                             <li class="cr_06">{{ $CustomUtils->display_price($tot_sell_price) }}</li>
                                         </ul>
                                         <ul>
-                                          <li>배송비 <span>({{ number_format($de_send_cost_free) }}원 이상 구매 시 무료배송)</span></li>
+                                          <li>배송비 <span>({{ $de_send_cost_free }}원 이상 구매 시 무료배송)</span></li>
                                           <li class="cr_06">{{ $CustomUtils->display_price($tot_sendcost) }}</li>
                                         </ul>
                                         <ul>
