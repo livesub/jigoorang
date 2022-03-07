@@ -291,14 +291,18 @@
     #scr_top {
         width: 40px;
         height: 40px;
+        border-radius: 100%;
         position: fixed;
         bottom: 70px;
+        right: 0px;
         z-index: 999999;
         margin: 10px;
     }
 
     #scr_top i {
+        text-align: center;
         padding: 7px 11px;
+        color: #fff;
         font-size: 25px;
     }
 

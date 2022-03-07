@@ -61,7 +61,6 @@
     <link rel="stylesheet" href="{{ asset('/design/css/goods.css') }}"> <!-- 추가 css-->
     <link rel="stylesheet" href="{{ asset('/design/css/goods_responsive.css') }}">  <!-- 추가 css-->
     <link rel="stylesheet"href="https://unpkg.com/swiper@7/swiper-bundle.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script src="{{ asset('/design/js/star.js') }}"></script>
@@ -74,7 +73,10 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/sha256.js"></script>
 <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script>
-
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css"
+/>
 
 
 
@@ -307,7 +309,7 @@
 
 
     <div id="scr_top">
-        <i class="fa-solid fa-angle-up"></i>
+        <i class="fa-solid fa-arrow-up-long"></i>
     </div>
 
     <script>
