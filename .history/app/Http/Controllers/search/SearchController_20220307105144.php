@@ -50,7 +50,7 @@ class SearchController extends Controller
                     ->leftjoin('shopcarts as b', function($join) {
                             $join->on('a.item_code', '=', 'b.item_code')->whereRaw('b.sct_status in (\'입금\', \'준비\', \'배송\', \'완료\')');
                         });
-                    $item_sql = $item_sql->where([['item_del', 'N'], ['item_display', 'Y']])->whereRaw("a.item_name like '%{$search_w}%'")->orwhere('a.item_manufacture', 'LIKE', "%$search_w%");;
+                    $item_sql = $item_sql->where([['item_del', 'N'], ['item_display', 'Y']])->whereRaw("a.item_name like '%{$search_w}%'");
                     $item_sql = $item_sql->groupBy('a.item_code')->orderBy('total', 'desc')->get();
                     $item_cnt = $item_sql->count();
                     break;
@@ -118,7 +118,7 @@ class SearchController extends Controller
             $start_num = 0;
         }
 
-        $item_sql = DB::table('shopitems')->where([['item_del', 'N'], ['item_display', 'Y'], ['item_name', 'LIKE', "%$search_w%"]])->orwhere('item_manufacture', 'LIKE', "%$search_w%");
+        $item_sql = DB::table('shopitems')->where([['item_del', 'N'], ['item_display', 'Y'], ['item_name', 'LIKE', "%$search_w%"]]);
 
         if($orderby_type != ""){
             switch ($orderby_type) {
@@ -133,7 +133,7 @@ class SearchController extends Controller
                     ->leftjoin('shopcarts as b', function($join) {
                             $join->on('a.item_code', '=', 'b.item_code')->whereRaw('b.sct_status in (\'입금\', \'준비\', \'배송\', \'완료\')');
                         });
-                    $item_sql = $item_sql->where([['item_del', 'N'], ['item_display', 'Y']])->whereRaw("a.item_name like '%{$search_w}%'")->orwhere('a.item_manufacture', 'LIKE', "%$search_w%");;
+                    $item_sql = $item_sql->where([['item_del', 'N'], ['item_display', 'Y']])->whereRaw("a.item_name like '%{$search_w}%'");
                     $item_sql = $item_sql->groupBy('a.item_code')->orderBy('total', 'desc');
                     $item_cnt_tmp = $item_sql->get();
                     $item_cnt = count($item_cnt_tmp);
@@ -229,7 +229,7 @@ class SearchController extends Controller
             $start_num = 0;
         }
 
-        $item_sql = DB::table('shopitems')->where([['item_del', 'N'], ['item_display', 'Y'], ['item_name', 'LIKE', "%$search_w%"]])->orwhere('item_manufacture', 'LIKE', "%$search_w%")->get();
+        $item_sql = DB::table('shopitems')->where([['item_del', 'N'], ['item_display', 'Y'], ['item_name', 'LIKE', "%$search_w%"]])->get();
 
         $notice_sql = DB::table('notices')->where('n_subject', 'LIKE', "%$search_w%");
         $notice_cnt = $notice_sql->count();
@@ -299,7 +299,7 @@ class SearchController extends Controller
             $start_num = 0;
         }
 
-        $item_sql = DB::table('shopitems')->where([['item_del', 'N'], ['item_display', 'Y'], ['item_name', 'LIKE', "%$search_w%"]])->orwhere('item_manufacture', 'LIKE', "%$search_w%")->get();
+        $item_sql = DB::table('shopitems')->where([['item_del', 'N'], ['item_display', 'Y'], ['item_name', 'LIKE', "%$search_w%"]])->get();
         $notice_sql = DB::table('notices')->where('n_subject', 'LIKE', "%$search_w%")->get();
 
         $date = date("Y-m-d", time());
@@ -345,4 +345,6 @@ class SearchController extends Controller
             'pnPage'        => $pnPage,
         ]);
     }
+
+
 }

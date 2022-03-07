@@ -197,7 +197,9 @@
                                 @if($cart_info->item_cust_price > 0)
                                 @php
                                     $sett = $CustomUtils->setting_infos();
+var_dump($sett->de_send_cost_free);
                                 @endphp
+
                             <ul>
                                 <li>정가금액</li>
                                 <li id="basic_price"></li>
@@ -213,7 +215,7 @@
                                 <li id="total_price"></li>
                             </ul>
                             <ul>
-                                <li>배송비 <span>({{ number_format($sett->de_send_cost_free) }}원 이상 구매 시 무료배송)</span></li>
+                                <li>배송비 <span>(50,000원 이상 구매 시 무료배송)</span></li>
                                 <li id="baesongbi"></li>
                             </ul>
                             <ul class="ct_tot_p">
